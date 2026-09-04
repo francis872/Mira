@@ -1,19 +1,14 @@
 using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text.Json;
 
 namespace MIRA.Api.IntegrationTests;
 
 public class CatalogosYSedesEndpointsTests(TestWebApplicationFactory factory) : IClassFixture<TestWebApplicationFactory>
 {
     [Fact]
-    public async Task CatalogosAndSedes_Flow_WorksWithAdminToken()
+    public async Task CatalogosAndSedes_Flow_WorksWithoutLogin()
     {
         var client = factory.CreateClient();
-        var token = await LoginAndGetToken(client);
-
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var crearCatalogo = await client.PostAsJsonAsync("/api/catalogos/ods", new { nombre = "ODS 7" });
         Assert.Equal(HttpStatusCode.Created, crearCatalogo.StatusCode);
@@ -34,25 +29,4 @@ public class CatalogosYSedesEndpointsTests(TestWebApplicationFactory factory) : 
         Assert.Equal(HttpStatusCode.NoContent, disable.StatusCode);
     }
 
-    [Fact]
-    public async Task ProtectedEndpoints_WithoutToken_ReturnUnauthorized()
-    {
-        var client = factory.CreateClient();
-
-        var response = await client.GetAsync("/api/sedes");
-        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-    }
-
-    private static async Task<string> LoginAndGetToken(HttpClient client)
-    {
-        var loginResponse = await client.PostAsJsonAsync("/api/auth/login", new
-        {
-            correo = "admin@mira.local",
-            password = "Admin123!"
-        });
-
-        loginResponse.EnsureSuccessStatusCode();
-        var json = await loginResponse.Content.ReadFromJsonAsync<JsonElement>();
-        return json.GetProperty("token").GetString() ?? string.Empty;
-    }
 }

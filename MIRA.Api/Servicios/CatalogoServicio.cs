@@ -20,6 +20,17 @@ public sealed class CatalogoServicio(ICatalogoRepositorio catalogoRepositorio) :
         return catalogoRepositorio.ListarAsync(normalizado, cancellationToken);
     }
 
+    public async Task<CatalogoItem> ObtenerPorIdAsync(string tipo, int id, CancellationToken cancellationToken)
+    {
+        if (id <= 0)
+        {
+            throw new ApiException("Id de catálogo inválido.");
+        }
+
+        var item = await catalogoRepositorio.ObtenerPorIdAsync(NormalizarTipo(tipo), id, cancellationToken);
+        return item ?? throw new ApiException("Registro no encontrado.", StatusCodes.Status404NotFound);
+    }
+
     public Task<CatalogoItem> CrearAsync(string tipo, string nombre, CancellationToken cancellationToken)
     {
         var normalizado = NormalizarTipo(tipo);
@@ -29,6 +40,31 @@ public sealed class CatalogoServicio(ICatalogoRepositorio catalogoRepositorio) :
         }
 
         return catalogoRepositorio.CrearAsync(normalizado, nombre.Trim(), cancellationToken);
+    }
+
+    public async Task<CatalogoItem> ActualizarAsync(string tipo, int id, string nombre, bool activo, CancellationToken cancellationToken)
+    {
+        if (id <= 0 || string.IsNullOrWhiteSpace(nombre))
+        {
+            throw new ApiException("Id y nombre son requeridos.");
+        }
+
+        var item = await catalogoRepositorio.ActualizarAsync(NormalizarTipo(tipo), id, nombre.Trim(), activo, cancellationToken);
+        return item ?? throw new ApiException("Registro no encontrado.", StatusCodes.Status404NotFound);
+    }
+
+    public async Task DesactivarAsync(string tipo, int id, CancellationToken cancellationToken)
+    {
+        if (id <= 0)
+        {
+            throw new ApiException("Id de catálogo inválido.");
+        }
+
+        var actualizado = await catalogoRepositorio.DesactivarAsync(NormalizarTipo(tipo), id, cancellationToken);
+        if (!actualizado)
+        {
+            throw new ApiException("Registro no encontrado.", StatusCodes.Status404NotFound);
+        }
     }
 
     private static string NormalizarTipo(string tipo)

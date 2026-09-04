@@ -14,3 +14,14 @@ public sealed class ActualizarSedeRequest
 
     public bool Activa { get; init; } = true;
 }
+
+public sealed class ActualizarSedeParcialRequest
+{
+    [MaxLength(120)]
+    public string? Nombre { get; init; }
+
+    [MaxLength(120)]
+    public string? Ciudad { get; init; }
+
+    public bool? Activa { get; init; }
+}

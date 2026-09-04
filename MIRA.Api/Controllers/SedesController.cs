@@ -1,13 +1,11 @@
 using MIRA.Api.Peticiones;
 using MIRA.Api.Servicios;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MIRA.Api.Controllers;
 
 [ApiController]
 [Route("api/sedes")]
-[Authorize]
 public sealed class SedesController(ISedeServicio sedeServicio) : ControllerBase
 {
     [HttpGet]
@@ -18,8 +16,11 @@ public sealed class SedesController(ISedeServicio sedeServicio) : ControllerBase
         return Ok(sedes);
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Obtener(int id, CancellationToken cancellationToken)
+        => Ok(await sedeServicio.ObtenerPorIdAsync(id, cancellationToken));
+
     [HttpPost]
-    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -36,7 +37,6 @@ public sealed class SedesController(ISedeServicio sedeServicio) : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -53,8 +53,20 @@ public sealed class SedesController(ISedeServicio sedeServicio) : ControllerBase
         return Ok(sede);
     }
 
+    [HttpPatch("{id:int}")]
+    public async Task<IActionResult> ActualizarParcial(int id, [FromBody] ActualizarSedeParcialRequest request, CancellationToken cancellationToken)
+    {
+        var actual = await sedeServicio.ObtenerPorIdAsync(id, cancellationToken);
+        var sede = await sedeServicio.ActualizarAsync(
+            id,
+            request.Nombre ?? actual.Nombre,
+            request.Ciudad ?? actual.Ciudad,
+            request.Activa ?? actual.Activa,
+            cancellationToken);
+        return Ok(sede);
+    }
+
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

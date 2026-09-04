@@ -10,15 +10,7 @@ This repository contains the initial architecture and development foundation for
 
 ## Current State
 
-Repository foundation plus initial runnable implementation.
-
-Current implemented code includes:
-- API health endpoint.
-- Authentication endpoint with JWT generation (`/api/auth/login`).
-- Sedes listing and creation endpoints (`/api/sedes`).
-- PostgreSQL repository integration using Npgsql.
-- Global exception middleware.
-- Local frontend preview served by Docker Compose.
+MIRA V1 - Catalogos: CRUD de las siete tablas sin FK saliente identificadas en el modelo real. La autenticacion, JWT, bcrypt y los modulos relacionados quedan fuera de esta version.
 
 ## Architecture
 
@@ -79,12 +71,12 @@ Specification precedes implementation.
 
 - main: stable versions only.
 - develop: integration branch.
-- v1-api-inicial: initial API implementation branch.
+- develop/v1-catalogos: V1 catalog implementation branch.
 
 ## Security Status
 
-Authentication, JWT, bcrypt and role authorization are intentionally not implemented in the repository foundation.
+Authentication, JWT, bcrypt and final authorization are intentionally excluded from V1.
 
 ## Project Status
 
-Initial repository architecture.
+The V1 scope and contracts are documented in `versiones/v1_catalogos/`.

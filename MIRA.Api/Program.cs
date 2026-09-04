@@ -16,9 +16,6 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseCors(MiraServiceCollectionExtensions.CorsPolicyName);
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "mira-api" }));
 

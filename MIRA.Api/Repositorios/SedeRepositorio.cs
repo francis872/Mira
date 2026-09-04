@@ -16,6 +16,7 @@ public sealed class SedeRepositorio(IDbConnectionFactory connectionFactory) : IS
         const string sql = """
             SELECT id, nombre, ciudad, activa
             FROM sedes
+            WHERE activa = TRUE
             ORDER BY nombre;
             """;
 

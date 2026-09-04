@@ -12,47 +12,12 @@ public sealed class TestWebApplicationFactory : WebApplicationFactory<Program>
     {
         builder.ConfigureServices(services =>
         {
-            services.RemoveAll<IUsuarioRepositorio>();
             services.RemoveAll<ISedeRepositorio>();
             services.RemoveAll<ICatalogoRepositorio>();
 
-            services.AddSingleton<IUsuarioRepositorio, UsuarioRepoMemoria>();
             services.AddSingleton<ISedeRepositorio, SedeRepoMemoria>();
             services.AddSingleton<ICatalogoRepositorio, CatalogoRepoMemoria>();
         });
-    }
-
-    private sealed class UsuarioRepoMemoria : IUsuarioRepositorio
-    {
-        private readonly Usuario _admin = new()
-        {
-            Id = 1,
-            Nombre = "Administrador MIRA",
-            Correo = "admin@mira.local",
-            PasswordHash = "Admin123!",
-            Roles = ["Administrador", "Docente"]
-        };
-
-        public Task<Usuario?> ObtenerPorCorreoAsync(string correo, CancellationToken cancellationToken)
-            => Task.FromResult<Usuario?>(_admin.Correo == correo ? _admin : null);
-
-        public Task<IReadOnlyList<string>> ObtenerRolesAsync(int usuarioId, CancellationToken cancellationToken)
-            => Task.FromResult<IReadOnlyList<string>>(_admin.Roles);
-
-        public Task<bool> AsignarRolAsync(int usuarioId, string rol, CancellationToken cancellationToken)
-        {
-            if (_admin.Roles.Contains(rol, StringComparer.OrdinalIgnoreCase))
-            {
-                return Task.FromResult(false);
-            }
-
-            var list = _admin.Roles.ToList();
-            list.Add(rol);
-            return Task.FromResult(true);
-        }
-
-        public Task<bool> RemoverRolAsync(int usuarioId, string rol, CancellationToken cancellationToken)
-            => Task.FromResult(_admin.Roles.Contains(rol, StringComparer.OrdinalIgnoreCase));
     }
 
     private sealed class SedeRepoMemoria : ISedeRepositorio
@@ -120,6 +85,36 @@ public sealed class TestWebApplicationFactory : WebApplicationFactory<Program>
             var item = new CatalogoItem { Id = nextId, Nombre = nombre, Activo = true };
             _store[tipo].Add(item);
             return Task.FromResult(item);
+        }
+
+        public Task<CatalogoItem?> ObtenerPorIdAsync(string tipo, int id, CancellationToken cancellationToken)
+            => Task.FromResult<CatalogoItem?>(_store[tipo].FirstOrDefault(x => x.Id == id));
+
+        public Task<CatalogoItem?> ActualizarAsync(string tipo, int id, string nombre, bool activo, CancellationToken cancellationToken)
+        {
+            var item = _store[tipo].FirstOrDefault(x => x.Id == id);
+            if (item is null)
+            {
+                return Task.FromResult<CatalogoItem?>(null);
+            }
+
+            var updated = new CatalogoItem { Id = id, Nombre = nombre, Activo = activo };
+            _store[tipo].Remove(item);
+            _store[tipo].Add(updated);
+            return Task.FromResult<CatalogoItem?>(updated);
+        }
+
+        public Task<bool> DesactivarAsync(string tipo, int id, CancellationToken cancellationToken)
+        {
+            var item = _store[tipo].FirstOrDefault(x => x.Id == id);
+            if (item is null)
+            {
+                return Task.FromResult(false);
+            }
+
+            _store[tipo].Remove(item);
+            _store[tipo].Add(new CatalogoItem { Id = item.Id, Nombre = item.Nombre, Activo = false });
+            return Task.FromResult(true);
         }
     }
 }

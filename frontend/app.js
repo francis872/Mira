@@ -45,29 +45,29 @@ class SedesService {
   }
 
   listar() {
-    return this.api.request("/api/publico/sedes");
+    return this.api.request("/api/sedes");
   }
 
   obtener(id) {
-    return this.api.request(`/api/publico/sedes/${id}`);
+    return this.api.request(`/api/sedes/${id}`);
   }
 
   crear(payload) {
-    return this.api.request("/api/publico/sedes", {
+    return this.api.request("/api/sedes", {
       method: "POST",
       body: JSON.stringify(payload)
     });
   }
 
   actualizar(id, payload) {
-    return this.api.request(`/api/publico/sedes/${id}`, {
+    return this.api.request(`/api/sedes/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload)
     });
   }
 
   eliminar(id) {
-    return this.api.request(`/api/publico/sedes/${id}`, {
+    return this.api.request(`/api/sedes/${id}`, {
       method: "DELETE"
     });
   }
@@ -79,11 +79,11 @@ class CatalogosService {
   }
 
   listar(tipo) {
-    return this.api.request(`/api/publico/catalogos/${tipo}`);
+    return this.api.request(`/api/catalogos/${tipo}`);
   }
 
   crear(tipo, payload) {
-    return this.api.request(`/api/publico/catalogos/${tipo}`, {
+    return this.api.request(`/api/catalogos/${tipo}`, {
       method: "POST",
       body: JSON.stringify(payload)
     });
@@ -100,7 +100,7 @@ class PublicoService {
   }
 
   resumen() {
-    return this.api.request("/api/publico/resumen");
+    return this.health();
   }
 }
 
