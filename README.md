@@ -10,9 +10,15 @@ This repository contains the initial architecture and development foundation for
 
 ## Current State
 
-Repository foundation / initial architecture.
+Repository foundation plus initial runnable implementation.
 
-No complete domain functionality has been implemented yet.
+Current implemented code includes:
+- API health endpoint.
+- Authentication endpoint with JWT generation (`/api/auth/login`).
+- Sedes listing and creation endpoints (`/api/sedes`).
+- PostgreSQL repository integration using Npgsql.
+- Global exception middleware.
+- Local frontend preview served by Docker Compose.
 
 ## Architecture
 
@@ -50,10 +56,13 @@ Specification precedes implementation.
 - versiones/: version-specific Spec Kits.
 - scripts/: utility script conventions.
 
-## Getting Started
+## Getting Started (Docker First)
 
 1. Clone the repository.
-2. Open MIRA.sln in Visual Studio.
+2. Copy `.env.example` to `.env`.
+3. Run `docker compose up -d --build`.
+4. Open API docs at `http://localhost:8080/swagger`.
+5. Open frontend preview at `http://localhost:5173`.
 
 ## Development Workflow
 

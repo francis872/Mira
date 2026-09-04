@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIRA v0.1 Local</title>
+  <style>
+    :root {
+      --bg: #f7f2e8;
+      --ink: #1a2d3a;
+      --card: #fffaf3;
+      --brand: #0f8b8d;
+      --accent: #e07a5f;
+      --ok: #1f9d55;
+      --danger: #c0392b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #fff7dc 0, transparent 35%),
+        radial-gradient(circle at 90% 80%, #d7f4ff 0, transparent 40%),
+        var(--bg);
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(980px, 92vw);
+      margin: 2rem auto;
+      display: grid;
+      gap: 1.2rem;
+    }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid #e9decf;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 10px 20px rgba(26,45,58,0.06);
+    }
+    h1 { margin: 0; font-size: 1.6rem; }
+    .muted { color: #5f6f79; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    label { font-weight: 600; font-size: .92rem; }
+    input {
+      width: 100%;
+      margin-top: .35rem;
+      padding: .65rem;
+      border-radius: 10px;
+      border: 1px solid #d6c7b2;
+      background: #fff;
+    }
+    button {
+      margin-top: .8rem;
+      background: linear-gradient(135deg, var(--brand), #126782);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: .7rem 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    pre {
+      background: #10212a;
+      color: #cceaf7;
+      padding: .8rem;
+      border-radius: 10px;
+      overflow: auto;
+    }
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: .2rem .6rem;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    .ok { background: #ddf7e6; color: var(--ok); }
+    .bad { background: #fde2df; color: var(--danger); }
+    @media (max-width: 800px) { .row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>MIRA v0.1 · Frontend Local</h1>
+      <p class="muted">Vista inicial conectada a la API en Docker Compose.</p>
+      <p>API: <strong>http://localhost:8080</strong> · Frontend: <strong>http://localhost:5173</strong></p>
+      <div id="health"></div>
+    </section>
+
+    <section class="card">
+      <h2>Login de Prueba</h2>
+      <p class="muted">Usuario semilla: admin@mira.local / Admin123!</p>
+      <div class="row">
+        <div>
+          <label for="correo">Correo</label>
+          <input id="correo" value="admin@mira.local" />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" type="password" value="Admin123!" />
+        </div>
+      </div>
+      <button id="btnLogin">Iniciar sesion</button>
+      <pre id="loginOut">Sin ejecutar.</pre>
+    </section>
+
+    <section class="card">
+      <h2>Sedes</h2>
+      <button id="btnSedes">Cargar sedes</button>
+      <pre id="sedesOut">Sin ejecutar.</pre>
+    </section>
+  </main>
+
+  <script>
+    const api = "http://localhost:8080";
+    let jwt = "";
+
+    async function cargarHealth() {
+      const box = document.getElementById("health");
+      try {
+        const res = await fetch(`${api}/health`);
+        const data = await res.json();
+        box.innerHTML = `<span class="pill ok">API OK</span> ${JSON.stringify(data)}`;
+      } catch (err) {
+        box.innerHTML = `<span class="pill bad">API no disponible</span> ${err}`;
+      }
+    }
+
+    document.getElementById("btnLogin").addEventListener("click", async () => {
+      const correo = document.getElementById("correo").value;
+      const password = document.getElementById("password").value;
+      const out = document.getElementById("loginOut");
+
+      try {
+        const res = await fetch(`${api}/api/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ correo, password })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          out.textContent = `Error ${res.status}: ${JSON.stringify(data, null, 2)}`;
+          return;
+        }
+
+        jwt = data.token;
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = String(err);
+      }
+    });
+
+    document.getElementById("btnSedes").addEventListener("click", async () => {
+      const out = document.getElementById("sedesOut");
+      try {
+        const res = await fetch(`${api}/api/sedes`, {
+          headers: jwt ? { "Authorization": `Bearer ${jwt}` } : {}
+        });
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = String(err);
+      }
+    });
+
+    cargarHealth();
+  </script>
+</body>
+</html>
