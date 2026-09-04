@@ -36,6 +36,35 @@ public sealed class SedeRepositorio(IDbConnectionFactory connectionFactory) : IS
         return sedes;
     }
 
+    public async Task<Sede?> ObtenerPorIdAsync(int id, CancellationToken cancellationToken)
+    {
+        await using var connection = connectionFactory.CreateConnection();
+        await connection.OpenAsync(cancellationToken);
+
+        const string sql = """
+            SELECT id, nombre, ciudad, activa
+            FROM sedes
+            WHERE id = @id;
+            """;
+
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("id", id);
+
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        if (!await reader.ReadAsync(cancellationToken))
+        {
+            return null;
+        }
+
+        return new Sede
+        {
+            Id = reader.GetInt32(0),
+            Nombre = reader.GetString(1),
+            Ciudad = reader.GetString(2),
+            Activa = reader.GetBoolean(3)
+        };
+    }
+
     public async Task<Sede> CrearAsync(string nombre, string ciudad, CancellationToken cancellationToken)
     {
         await using var connection = connectionFactory.CreateConnection();

@@ -9,6 +9,17 @@ public sealed class SedeServicio(ISedeRepositorio sedeRepositorio) : ISedeServic
     public Task<IReadOnlyList<Sede>> ListarAsync(CancellationToken cancellationToken)
         => sedeRepositorio.ListarAsync(cancellationToken);
 
+    public async Task<Sede> ObtenerPorIdAsync(int id, CancellationToken cancellationToken)
+    {
+        if (id <= 0)
+        {
+            throw new ApiException("Id de sede inválido.");
+        }
+
+        var sede = await sedeRepositorio.ObtenerPorIdAsync(id, cancellationToken);
+        return sede ?? throw new ApiException("Sede no encontrada.", StatusCodes.Status404NotFound);
+    }
+
     public async Task<Sede> CrearAsync(string nombre, string ciudad, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(ciudad))

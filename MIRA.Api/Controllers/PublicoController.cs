@@ -38,6 +38,15 @@ public sealed class PublicoController(
         return Ok(sedes);
     }
 
+    [HttpGet("sedes/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> ObtenerSede(int id, CancellationToken cancellationToken)
+    {
+        var sede = await sedeServicio.ObtenerPorIdAsync(id, cancellationToken);
+        return Ok(sede);
+    }
+
     [HttpPost("sedes")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -50,6 +59,30 @@ public sealed class PublicoController(
 
         var sede = await sedeServicio.CrearAsync(request.Nombre, request.Ciudad, cancellationToken);
         return Created($"/api/publico/sedes/{sede.Id}", sede);
+    }
+
+    [HttpPut("sedes/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> ActualizarSede(int id, [FromBody] ActualizarSedeRequest request, CancellationToken cancellationToken)
+    {
+        if (!ModelState.IsValid)
+        {
+            return ValidationProblem(ModelState);
+        }
+
+        var sede = await sedeServicio.ActualizarAsync(id, request.Nombre, request.Ciudad, request.Activa, cancellationToken);
+        return Ok(sede);
+    }
+
+    [HttpDelete("sedes/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> EliminarSede(int id, CancellationToken cancellationToken)
+    {
+        await sedeServicio.DesactivarAsync(id, cancellationToken);
+        return NoContent();
     }
 
     [HttpGet("catalogos/{tipo}")]

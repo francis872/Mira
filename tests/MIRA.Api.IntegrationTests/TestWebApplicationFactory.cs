@@ -64,6 +64,9 @@ public sealed class TestWebApplicationFactory : WebApplicationFactory<Program>
         public Task<IReadOnlyList<Sede>> ListarAsync(CancellationToken cancellationToken)
             => Task.FromResult<IReadOnlyList<Sede>>(_items.OrderBy(x => x.Nombre).ToList());
 
+        public Task<Sede?> ObtenerPorIdAsync(int id, CancellationToken cancellationToken)
+            => Task.FromResult<Sede?>(_items.FirstOrDefault(x => x.Id == id));
+
         public Task<Sede> CrearAsync(string nombre, string ciudad, CancellationToken cancellationToken)
         {
             var nextId = _items.Count == 0 ? 1 : _items.Max(x => x.Id) + 1;

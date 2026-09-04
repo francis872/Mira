@@ -3,43 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MIRA v0.1 Local</title>
+  <title>MIRA Plataforma Local</title>
   <style>
     :root {
-      --bg: #f7f2e8;
-      --ink: #1a2d3a;
-      --card: #fffaf3;
-      --brand: #0f8b8d;
-      --accent: #e07a5f;
+      --bg: #f2efe9;
+      --ink: #13222b;
+      --card: #fffdf9;
+      --line: #e6ddcf;
+      --brand: #0b6f77;
+      --brand-2: #155f95;
+      --accent: #d48342;
       --ok: #1f9d55;
       --danger: #c0392b;
+      --muted: #5e6f79;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Segoe UI", "Trebuchet MS", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 10% 10%, #fff7dc 0, transparent 35%),
-        radial-gradient(circle at 90% 80%, #d7f4ff 0, transparent 40%),
+        radial-gradient(circle at 10% 10%, #fff3d7 0, transparent 32%),
+        radial-gradient(circle at 88% 76%, #d6f2ff 0, transparent 36%),
         var(--bg);
       min-height: 100vh;
     }
-    .wrap {
-      width: min(980px, 92vw);
-      margin: 2rem auto;
+
+    .shell {
+      width: min(1220px, 94vw);
+      margin: 1.2rem auto;
       display: grid;
-      gap: 1.2rem;
+      grid-template-columns: 250px 1fr;
+      gap: 1rem;
     }
-    .hero, .card {
+
+    .card {
       background: var(--card);
-      border: 1px solid #e9decf;
-      border-radius: 16px;
-      padding: 1rem 1.2rem;
-      box-shadow: 0 10px 20px rgba(26,45,58,0.06);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(19, 34, 43, 0.06);
     }
-    h1 { margin: 0; font-size: 1.6rem; }
-    .muted { color: #5f6f79; }
+
+    .sidebar {
+      padding: .95rem;
+      position: sticky;
+      top: .9rem;
+      height: fit-content;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: .2px;
+    }
+
+    .brand-subtitle {
+      margin: .2rem 0 .8rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .menu {
+      display: grid;
+      gap: .4rem;
+      margin-top: .8rem;
+    }
+
+    .menu-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 10px;
+      padding: .55rem .7rem;
+      text-align: left;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .16s ease;
+    }
+
+    .menu-btn:hover {
+      border-color: #cfdcca;
+      transform: translateY(-1px);
+    }
+
+    .menu-btn.active {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    }
+
+    .content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .topbar {
+      padding: .95rem 1.05rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .8rem;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 1.32rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      margin: .15rem 0 0;
+      font-size: .92rem;
+    }
+
+    .user-chip {
+      display: inline-flex;
+      gap: .45rem;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: .35rem .7rem;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
     .pill {
       display: inline-block;
       border-radius: 999px;
@@ -47,16 +137,22 @@
       font-size: .82rem;
       font-weight: 700;
     }
+
     button {
-      margin-top: .6rem;
-      background: linear-gradient(135deg, var(--brand), #126782);
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
       color: white;
       border: none;
       border-radius: 10px;
-      padding: .6rem .9rem;
+      padding: .55rem .85rem;
       font-weight: 700;
       cursor: pointer;
     }
+
+    button[disabled] {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
     pre {
       background: #10212a;
       color: #cceaf7;
@@ -65,6 +161,7 @@
       overflow: auto;
       min-height: 90px;
     }
+
     input, select {
       width: 100%;
       margin-top: .4rem;
@@ -73,13 +170,87 @@
       border: 1px solid #d6c7b2;
       background: #fff;
     }
+
+    .module {
+      padding: 1rem 1.05rem;
+    }
+
+    .module h2 {
+      margin: 0 0 .25rem;
+      font-size: 1.05rem;
+    }
+
+    .section-gap {
+      margin-top: 1rem !important;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: .8rem;
     }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .8rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .8rem;
+    }
+    .actions button {
+      margin-top: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: .8rem;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #eadfce;
+      padding: .45rem;
+      text-align: left;
+      font-size: .92rem;
+    }
+    th {
+      background: #f3e8d8;
+    }
+
+    .actions-inline {
+      display: flex;
+      align-items: end;
+      gap: .6rem;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+
+    .text-btn {
+      background: transparent;
+      color: var(--brand-2);
+      border: 1px dashed #9cb6ce;
+    }
+
     @media (max-width: 800px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
       .grid {
+        grid-template-columns: 1fr;
+      }
+      .grid-4 {
         grid-template-columns: 1fr;
       }
     }
@@ -88,155 +259,137 @@
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <h1>MIRA v0.1 · Frontend Local</h1>
-      <p class="muted">Vista inicial conectada a la API en Docker Compose.</p>
-      <p>API: <strong>http://localhost:8080</strong> · Frontend: <strong>http://localhost:5173</strong></p>
-      <div id="health"></div>
-    </section>
-
-    <section class="card">
-      <h2>Funcionalidad Simple</h2>
-      <p class="muted">Sin login por ahora: consulta y registro básico conectado a PostgreSQL.</p>
-      <button id="btnResumen">Cargar resumen</button>
-      <pre id="resumenOut">Sin ejecutar.</pre>
-    </section>
-
-    <section class="card">
-      <h2>Sedes (BD)</h2>
-      <div class="grid">
-        <div>
-          <label for="sedeNombre">Nombre de sede</label>
-          <input id="sedeNombre" placeholder="Ej: Sede Norte" />
-        </div>
-        <div>
-          <label for="sedeCiudad">Ciudad</label>
-          <input id="sedeCiudad" placeholder="Ej: Medellin" />
-        </div>
+  <main class="shell">
+    <aside class="sidebar card">
+      <h2 class="brand-title">MIRA Plataforma</h2>
+      <p class="brand-subtitle">Workspace de operacion local</p>
+      <div class="menu">
+        <button class="menu-btn active" data-view="dashboard">Dashboard</button>
+        <button class="menu-btn" data-view="sedes">CRUD Sedes</button>
+        <button class="menu-btn" data-view="catalogos">Consultas Catalogos</button>
       </div>
-      <button id="btnCrearSede">Crear sede</button>
-      <button id="btnListarSedes">Consultar sedes</button>
-      <pre id="sedesOut">Sin ejecutar.</pre>
-    </section>
+    </aside>
 
-    <section class="card">
-      <h2>Catalogos (BD)</h2>
-      <div class="grid">
+    <section class="content">
+      <header class="topbar card">
         <div>
-          <label for="catalogoTipo">Tipo</label>
-          <select id="catalogoTipo">
-            <option value="areas-conocimiento">areas-conocimiento</option>
-            <option value="ods">ods</option>
-            <option value="aplicaciones">aplicaciones</option>
-            <option value="palabras-clave">palabras-clave</option>
-          </select>
+          <h1>Operacion local MIRA</h1>
+          <p class="muted">Usuario de prueba trabajando sobre API + PostgreSQL en Docker Compose.</p>
         </div>
         <div>
-          <label for="catalogoNombre">Nombre item</label>
-          <input id="catalogoNombre" placeholder="Ej: ODS 16" />
+          <span class="user-chip" id="userChip">Invitado</span>
         </div>
-      </div>
-      <button id="btnCrearCatalogo">Crear item</button>
-      <button id="btnListarCatalogo">Consultar catalogo</button>
-      <pre id="catalogosOut">Sin ejecutar.</pre>
+      </header>
+
+      <section class="module card" id="view-dashboard">
+        <h2>Ingreso de prueba</h2>
+        <p class="muted">Define un usuario de trabajo para la sesion local.</p>
+        <div class="grid">
+          <div>
+            <label for="demoUserName">Nombre de usuario</label>
+            <input id="demoUserName" placeholder="Ej: Usuario QA" />
+          </div>
+          <div>
+            <label for="demoUserRole">Rol de trabajo</label>
+            <select id="demoUserRole">
+              <option value="Analista">Analista</option>
+              <option value="Docente">Docente</option>
+              <option value="Administrador">Administrador</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions-inline">
+          <button id="btnDemoLogin">Entrar</button>
+          <button id="btnDemoLogout" class="text-btn">Salir</button>
+        </div>
+        <pre id="sessionOut">Sin ejecutar.</pre>
+
+        <h2 class="section-gap">Estado general</h2>
+        <p class="muted">Conectividad y resumen del backend.</p>
+        <p>API: <strong>http://localhost:8080</strong> · Frontend: <strong>http://localhost:5173</strong></p>
+        <div id="health"></div>
+        <div class="actions-inline">
+          <button id="btnResumen">Cargar resumen</button>
+        </div>
+        <pre id="resumenOut">Sin ejecutar.</pre>
+      </section>
+
+      <section class="module card hidden" id="view-sedes">
+        <h2>CRUD de Sedes</h2>
+        <p class="muted">Crea, consulta, actualiza y elimina (desactiva) sedes.</p>
+        <div class="grid-4">
+          <div>
+            <label for="sedeId">Id</label>
+            <input id="sedeId" placeholder="Ej: 1" />
+          </div>
+          <div>
+            <label for="sedeNombre">Nombre</label>
+            <input id="sedeNombre" placeholder="Ej: Sede Norte" />
+          </div>
+          <div>
+            <label for="sedeCiudad">Ciudad</label>
+            <input id="sedeCiudad" placeholder="Ej: Medellin" />
+          </div>
+          <div>
+            <label for="sedeActiva">Activa</label>
+            <select id="sedeActiva">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="btnCrearSede">Crear</button>
+          <button id="btnListarSedes">Listar</button>
+          <button id="btnBuscarSede">Buscar por Id</button>
+          <button id="btnActualizarSede">Actualizar</button>
+          <button id="btnEliminarSede">Eliminar</button>
+        </div>
+        <pre id="sedesOut">Sin ejecutar.</pre>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Ciudad</th>
+              <th>Activa</th>
+            </tr>
+          </thead>
+          <tbody id="sedesTableBody">
+            <tr>
+              <td colspan="4">Sin datos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="module card hidden" id="view-catalogos">
+        <h2>Consultas de Catalogos</h2>
+        <p class="muted">Consulta y crea items de catalogos base.</p>
+        <div class="grid">
+          <div>
+            <label for="catalogoTipo">Tipo</label>
+            <select id="catalogoTipo">
+              <option value="areas-conocimiento">areas-conocimiento</option>
+              <option value="ods">ods</option>
+              <option value="aplicaciones">aplicaciones</option>
+              <option value="palabras-clave">palabras-clave</option>
+            </select>
+          </div>
+          <div>
+            <label for="catalogoNombre">Nombre item</label>
+            <input id="catalogoNombre" placeholder="Ej: ODS 16" />
+          </div>
+        </div>
+        <div class="actions">
+          <button id="btnListarCatalogo">Consultar</button>
+          <button id="btnCrearCatalogo">Crear item</button>
+        </div>
+        <pre id="catalogosOut">Sin ejecutar.</pre>
+      </section>
     </section>
   </main>
 
-  <script>
-    const api = "http://localhost:8080";
-
-    async function cargarHealth() {
-      const box = document.getElementById("health");
-      try {
-        const res = await fetch(`${api}/health`);
-        const data = await res.json();
-        box.innerHTML = `<span class="pill ok">API OK</span> ${JSON.stringify(data)}`;
-      } catch (err) {
-        box.innerHTML = `<span class="pill bad">API no disponible</span> ${err}`;
-      }
-    }
-
-    document.getElementById("btnResumen").addEventListener("click", async () => {
-      const out = document.getElementById("resumenOut");
-      try {
-        const res = await fetch(`${api}/api/publico/resumen`);
-        const data = await res.json();
-        out.textContent = JSON.stringify(data, null, 2);
-      } catch (err) {
-        out.textContent = String(err);
-      }
-    });
-
-    document.getElementById("btnListarSedes").addEventListener("click", async () => {
-      const out = document.getElementById("sedesOut");
-      try {
-        const res = await fetch(`${api}/api/publico/sedes`);
-        const data = await res.json();
-        out.textContent = JSON.stringify(data, null, 2);
-      } catch (err) {
-        out.textContent = String(err);
-      }
-    });
-
-    document.getElementById("btnCrearSede").addEventListener("click", async () => {
-      const out = document.getElementById("sedesOut");
-      const nombre = document.getElementById("sedeNombre").value;
-      const ciudad = document.getElementById("sedeCiudad").value;
-
-      try {
-        const res = await fetch(`${api}/api/publico/sedes`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nombre, ciudad })
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          out.textContent = `Error ${res.status}: ${JSON.stringify(data, null, 2)}`;
-          return;
-        }
-
-        out.textContent = `Sede creada:\n${JSON.stringify(data, null, 2)}`;
-      } catch (err) {
-        out.textContent = String(err);
-      }
-    });
-
-    document.getElementById("btnListarCatalogo").addEventListener("click", async () => {
-      const out = document.getElementById("catalogosOut");
-      const tipo = document.getElementById("catalogoTipo").value;
-      try {
-        const res = await fetch(`${api}/api/publico/catalogos/${tipo}`);
-        const data = await res.json();
-        out.textContent = JSON.stringify(data, null, 2);
-      } catch (err) {
-        out.textContent = String(err);
-      }
-    });
-
-    document.getElementById("btnCrearCatalogo").addEventListener("click", async () => {
-      const out = document.getElementById("catalogosOut");
-      const tipo = document.getElementById("catalogoTipo").value;
-      const nombre = document.getElementById("catalogoNombre").value;
-      try {
-        const res = await fetch(`${api}/api/publico/catalogos/${tipo}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nombre })
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          out.textContent = `Error ${res.status}: ${JSON.stringify(data, null, 2)}`;
-          return;
-        }
-
-        out.textContent = `Item creado:\n${JSON.stringify(data, null, 2)}`;
-      } catch (err) {
-        out.textContent = String(err);
-      }
-    });
-
-    cargarHealth();
-  </script>
+  <script src="./app.js"></script>
 </body>
 </html>

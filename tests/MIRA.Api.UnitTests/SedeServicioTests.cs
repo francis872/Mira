@@ -35,6 +35,11 @@ public class SedeServicioTests
                 new Sede { Id = 1, Nombre = "Principal", Ciudad = "Medellin", Activa = true }
             ]);
 
+        public Task<Sede?> ObtenerPorIdAsync(int id, CancellationToken cancellationToken)
+            => Task.FromResult<Sede?>(id == 1
+                ? new Sede { Id = 1, Nombre = "Principal", Ciudad = "Medellin", Activa = true }
+                : null);
+
         public Task<Sede> CrearAsync(string nombre, string ciudad, CancellationToken cancellationToken)
             => Task.FromResult(new Sede { Id = 1, Nombre = nombre, Ciudad = ciudad, Activa = true });
 
