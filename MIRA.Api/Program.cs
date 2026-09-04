@@ -23,3 +23,7 @@ app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "mira-api" }));
 
 app.Run();
+
+public partial class Program
+{
+}

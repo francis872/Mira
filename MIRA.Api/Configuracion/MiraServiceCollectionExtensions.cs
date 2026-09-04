@@ -55,9 +55,11 @@ public static class MiraServiceCollectionExtensions
         services.AddScoped<IDbConnectionFactory, NpgsqlConnectionFactory>();
         services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
         services.AddScoped<ISedeRepositorio, SedeRepositorio>();
+        services.AddScoped<ICatalogoRepositorio, CatalogoRepositorio>();
 
         services.AddScoped<IAuthServicio, AuthServicio>();
         services.AddScoped<ISedeServicio, SedeServicio>();
+        services.AddScoped<ICatalogoServicio, CatalogoServicio>();
 
         return services;
     }

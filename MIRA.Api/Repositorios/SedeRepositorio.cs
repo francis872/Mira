@@ -62,4 +62,57 @@ public sealed class SedeRepositorio(IDbConnectionFactory connectionFactory) : IS
             Activa = reader.GetBoolean(3)
         };
     }
+
+    public async Task<Sede?> ActualizarAsync(int id, string nombre, string ciudad, bool activa, CancellationToken cancellationToken)
+    {
+        await using var connection = connectionFactory.CreateConnection();
+        await connection.OpenAsync(cancellationToken);
+
+        const string sql = """
+            UPDATE sedes
+            SET nombre = @nombre,
+                ciudad = @ciudad,
+                activa = @activa
+            WHERE id = @id
+            RETURNING id, nombre, ciudad, activa;
+            """;
+
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("id", id);
+        command.Parameters.AddWithValue("nombre", nombre);
+        command.Parameters.AddWithValue("ciudad", ciudad);
+        command.Parameters.AddWithValue("activa", activa);
+
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        if (!await reader.ReadAsync(cancellationToken))
+        {
+            return null;
+        }
+
+        return new Sede
+        {
+            Id = reader.GetInt32(0),
+            Nombre = reader.GetString(1),
+            Ciudad = reader.GetString(2),
+            Activa = reader.GetBoolean(3)
+        };
+    }
+
+    public async Task<bool> DesactivarAsync(int id, CancellationToken cancellationToken)
+    {
+        await using var connection = connectionFactory.CreateConnection();
+        await connection.OpenAsync(cancellationToken);
+
+        const string sql = """
+            UPDATE sedes
+            SET activa = FALSE
+            WHERE id = @id;
+            """;
+
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("id", id);
+
+        var rows = await command.ExecuteNonQueryAsync(cancellationToken);
+        return rows > 0;
+    }
 }

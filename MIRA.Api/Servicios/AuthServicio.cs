@@ -39,8 +39,40 @@ public sealed class AuthServicio(
             ExpiraEnUtc = expiration,
             Nombre = usuario.Nombre,
             Correo = usuario.Correo,
-            Rol = usuario.Rol
+            Roles = usuario.Roles
         };
+    }
+
+    public Task<IReadOnlyList<string>> ObtenerRolesAsync(int usuarioId, CancellationToken cancellationToken)
+        => usuarioRepositorio.ObtenerRolesAsync(usuarioId, cancellationToken);
+
+    public async Task AsignarRolAsync(int usuarioId, string rol, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(rol))
+        {
+            throw new ApiException("El rol es requerido.");
+        }
+
+        var created = await usuarioRepositorio.AsignarRolAsync(usuarioId, rol.Trim(), cancellationToken);
+        if (!created)
+        {
+            throw new ApiException("No fue posible asignar el rol. Verifica usuario y rol.", StatusCodes.Status404NotFound);
+        }
+    }
+
+    public async Task RemoverRolAsync(int usuarioId, string rol, CancellationToken cancellationToken)
+    {
+        var roles = await usuarioRepositorio.ObtenerRolesAsync(usuarioId, cancellationToken);
+        if (roles.Count <= 1 && roles.Contains(rol, StringComparer.OrdinalIgnoreCase))
+        {
+            throw new ApiException("El usuario debe conservar al menos un rol.");
+        }
+
+        var removed = await usuarioRepositorio.RemoverRolAsync(usuarioId, rol, cancellationToken);
+        if (!removed)
+        {
+            throw new ApiException("No fue posible remover el rol.", StatusCodes.Status404NotFound);
+        }
     }
 
     private bool EsPasswordValido(string passwordPlano, string passwordHash)
@@ -56,13 +88,13 @@ public sealed class AuthServicio(
 
     private string CrearToken(Modelos.Usuario usuario, DateTime expiration)
     {
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-            new Claim(ClaimTypes.Name, usuario.Nombre),
-            new Claim(ClaimTypes.Email, usuario.Correo),
-            new Claim(ClaimTypes.Role, usuario.Rol)
+            new(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+            new(ClaimTypes.Name, usuario.Nombre),
+            new(ClaimTypes.Email, usuario.Correo)
         };
+        claims.AddRange(usuario.Roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

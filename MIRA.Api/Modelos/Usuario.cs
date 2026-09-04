@@ -6,5 +6,5 @@ public sealed class Usuario
     public string Nombre { get; init; } = string.Empty;
     public string Correo { get; init; } = string.Empty;
     public string PasswordHash { get; init; } = string.Empty;
-    public string Rol { get; init; } = "Docente";
+    public IReadOnlyList<string> Roles { get; init; } = ["Docente"];
 }
