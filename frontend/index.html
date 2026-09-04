@@ -40,27 +40,20 @@
     }
     h1 { margin: 0; font-size: 1.6rem; }
     .muted { color: #5f6f79; }
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    label { font-weight: 600; font-size: .92rem; }
-    input {
-      width: 100%;
-      margin-top: .35rem;
-      padding: .65rem;
-      border-radius: 10px;
-      border: 1px solid #d6c7b2;
-      background: #fff;
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: .2rem .6rem;
+      font-size: .82rem;
+      font-weight: 700;
     }
     button {
-      margin-top: .8rem;
+      margin-top: .6rem;
       background: linear-gradient(135deg, var(--brand), #126782);
       color: white;
       border: none;
       border-radius: 10px;
-      padding: .7rem 1rem;
+      padding: .6rem .9rem;
       font-weight: 700;
       cursor: pointer;
     }
@@ -70,17 +63,28 @@
       padding: .8rem;
       border-radius: 10px;
       overflow: auto;
+      min-height: 90px;
     }
-    .pill {
-      display: inline-block;
-      border-radius: 999px;
-      padding: .2rem .6rem;
-      font-size: .82rem;
-      font-weight: 700;
+    input, select {
+      width: 100%;
+      margin-top: .4rem;
+      padding: .55rem;
+      border-radius: 8px;
+      border: 1px solid #d6c7b2;
+      background: #fff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .8rem;
+    }
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
     .ok { background: #ddf7e6; color: var(--ok); }
     .bad { background: #fde2df; color: var(--danger); }
-    @media (max-width: 800px) { .row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -93,32 +97,54 @@
     </section>
 
     <section class="card">
-      <h2>Login de Prueba</h2>
-      <p class="muted">Usuario semilla: admin@mira.local / Admin123!</p>
-      <div class="row">
-        <div>
-          <label for="correo">Correo</label>
-          <input id="correo" value="admin@mira.local" />
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input id="password" type="password" value="Admin123!" />
-        </div>
-      </div>
-      <button id="btnLogin">Iniciar sesion</button>
-      <pre id="loginOut">Sin ejecutar.</pre>
+      <h2>Funcionalidad Simple</h2>
+      <p class="muted">Sin login por ahora: consulta y registro básico conectado a PostgreSQL.</p>
+      <button id="btnResumen">Cargar resumen</button>
+      <pre id="resumenOut">Sin ejecutar.</pre>
     </section>
 
     <section class="card">
-      <h2>Sedes</h2>
-      <button id="btnSedes">Cargar sedes</button>
+      <h2>Sedes (BD)</h2>
+      <div class="grid">
+        <div>
+          <label for="sedeNombre">Nombre de sede</label>
+          <input id="sedeNombre" placeholder="Ej: Sede Norte" />
+        </div>
+        <div>
+          <label for="sedeCiudad">Ciudad</label>
+          <input id="sedeCiudad" placeholder="Ej: Medellin" />
+        </div>
+      </div>
+      <button id="btnCrearSede">Crear sede</button>
+      <button id="btnListarSedes">Consultar sedes</button>
       <pre id="sedesOut">Sin ejecutar.</pre>
+    </section>
+
+    <section class="card">
+      <h2>Catalogos (BD)</h2>
+      <div class="grid">
+        <div>
+          <label for="catalogoTipo">Tipo</label>
+          <select id="catalogoTipo">
+            <option value="areas-conocimiento">areas-conocimiento</option>
+            <option value="ods">ods</option>
+            <option value="aplicaciones">aplicaciones</option>
+            <option value="palabras-clave">palabras-clave</option>
+          </select>
+        </div>
+        <div>
+          <label for="catalogoNombre">Nombre item</label>
+          <input id="catalogoNombre" placeholder="Ej: ODS 16" />
+        </div>
+      </div>
+      <button id="btnCrearCatalogo">Crear item</button>
+      <button id="btnListarCatalogo">Consultar catalogo</button>
+      <pre id="catalogosOut">Sin ejecutar.</pre>
     </section>
   </main>
 
   <script>
     const api = "http://localhost:8080";
-    let jwt = "";
 
     async function cargarHealth() {
       const box = document.getElementById("health");
@@ -131,39 +157,80 @@
       }
     }
 
-    document.getElementById("btnLogin").addEventListener("click", async () => {
-      const correo = document.getElementById("correo").value;
-      const password = document.getElementById("password").value;
-      const out = document.getElementById("loginOut");
-
+    document.getElementById("btnResumen").addEventListener("click", async () => {
+      const out = document.getElementById("resumenOut");
       try {
-        const res = await fetch(`${api}/api/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ correo, password })
-        });
-
+        const res = await fetch(`${api}/api/publico/resumen`);
         const data = await res.json();
-        if (!res.ok) {
-          out.textContent = `Error ${res.status}: ${JSON.stringify(data, null, 2)}`;
-          return;
-        }
-
-        jwt = data.token;
         out.textContent = JSON.stringify(data, null, 2);
       } catch (err) {
         out.textContent = String(err);
       }
     });
 
-    document.getElementById("btnSedes").addEventListener("click", async () => {
+    document.getElementById("btnListarSedes").addEventListener("click", async () => {
       const out = document.getElementById("sedesOut");
       try {
-        const res = await fetch(`${api}/api/sedes`, {
-          headers: jwt ? { "Authorization": `Bearer ${jwt}` } : {}
-        });
+        const res = await fetch(`${api}/api/publico/sedes`);
         const data = await res.json();
         out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = String(err);
+      }
+    });
+
+    document.getElementById("btnCrearSede").addEventListener("click", async () => {
+      const out = document.getElementById("sedesOut");
+      const nombre = document.getElementById("sedeNombre").value;
+      const ciudad = document.getElementById("sedeCiudad").value;
+
+      try {
+        const res = await fetch(`${api}/api/publico/sedes`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre, ciudad })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          out.textContent = `Error ${res.status}: ${JSON.stringify(data, null, 2)}`;
+          return;
+        }
+
+        out.textContent = `Sede creada:\n${JSON.stringify(data, null, 2)}`;
+      } catch (err) {
+        out.textContent = String(err);
+      }
+    });
+
+    document.getElementById("btnListarCatalogo").addEventListener("click", async () => {
+      const out = document.getElementById("catalogosOut");
+      const tipo = document.getElementById("catalogoTipo").value;
+      try {
+        const res = await fetch(`${api}/api/publico/catalogos/${tipo}`);
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = String(err);
+      }
+    });
+
+    document.getElementById("btnCrearCatalogo").addEventListener("click", async () => {
+      const out = document.getElementById("catalogosOut");
+      const tipo = document.getElementById("catalogoTipo").value;
+      const nombre = document.getElementById("catalogoNombre").value;
+      try {
+        const res = await fetch(`${api}/api/publico/catalogos/${tipo}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          out.textContent = `Error ${res.status}: ${JSON.stringify(data, null, 2)}`;
+          return;
+        }
+
+        out.textContent = `Item creado:\n${JSON.stringify(data, null, 2)}`;
       } catch (err) {
         out.textContent = String(err);
       }
