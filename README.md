@@ -10,9 +10,7 @@ This repository contains the initial architecture and development foundation for
 
 ## Current State
 
-Repository foundation / initial architecture.
-
-No complete domain functionality has been implemented yet.
+MIRA V1 - Catalogos: CRUD de las siete tablas sin FK saliente identificadas en el modelo real. La autenticacion, JWT, bcrypt y los modulos relacionados quedan fuera de esta version.
 
 ## Architecture
 
@@ -50,10 +48,13 @@ Specification precedes implementation.
 - versiones/: version-specific Spec Kits.
 - scripts/: utility script conventions.
 
-## Getting Started
+## Getting Started (Docker First)
 
 1. Clone the repository.
-2. Open MIRA.sln in Visual Studio.
+2. Copy `.env.example` to `.env`.
+3. Run `docker compose up -d --build`.
+4. Open API docs at `http://localhost:8080/swagger`.
+5. Open frontend preview at `http://localhost:5173`.
 
 ## Development Workflow
 
@@ -70,12 +71,12 @@ Specification precedes implementation.
 
 - main: stable versions only.
 - develop: integration branch.
-- develop/v1-api-inicial: initial API implementation branch.
+- develop/v1-catalogos: V1 catalog implementation branch.
 
 ## Security Status
 
-Authentication, JWT, bcrypt and role authorization are intentionally not implemented in the repository foundation.
+Authentication, JWT, bcrypt and final authorization are intentionally excluded from V1.
 
 ## Project Status
 
-Initial repository architecture.
+The V1 scope and contracts are documented in `versiones/v1_catalogos/`.
