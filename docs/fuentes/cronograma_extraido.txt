@@ -1,0 +1,44 @@
+FUENTE: Cronograma Módulo de Investigación - Plataforma Académica .xlsx
+
+=== HOJAS ===
+HOJA: ITERACIÓNES(Proyectado)
+DIMENSIONES: None filas x None columnas
+Plan de Desarrollo   Sistema de gestión de investigación  / Plan de desarrollo Universidad San Buenaventura (ITERACIONES) |  |  |  |  |  | 12 de julio |  | 31 de julio |  | 15 de agosto |  | 29 de agosto |  | 12 de septiembre |  | 26 de septiembre |  | 10 de octubre |  | 24 de octubre |  | 7 de noviembre |  | 15 de noviembre | 
+ |  |  |  |  |  | SP3 |  | SP4 |  | SP5 |  | SP6 |  | SP7 |  | SP8 |  | SP9 |  | SP10 |  | SP11 |  | SP12 | 
+CRONOGRAMA DE ENTREGABLES |  |  |  |  | JULIO |  |  |  | AGOSTO |  |  |  | SEPTIEMBRE |  |  |  | OCTUBRE |  |  |  | NOVIEMBRE |  |  |  | HORAS reales
+No. | ENTREGABLES | RESPONSABLE |  | HORAS estimadas | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 
+1.0 | Plan de desarrollo de software | Juan José Grisales Sañudo |  | 6.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(G5:Y5)
+2.0 | Guía de interfaz grafica | Francisco Guisado López |  | 15.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F6:Y6)
+3.0 | Guía de gestión del cronograma | Juan José Grisales Sañudo |  | 4.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F7:Y7)
+4.0 | Análisis y gestión de riesgos  | Juan José Grisales Sañudo |  | 6.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F8:Y8)
+5.0 | Requisitos no funcionales | Francisco Guisado López |  | 4.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F9:Y9)
+6.0 | Product Backlog / HU + Tareas | Juan José Grisales Sañudo |  | 50.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F10:Y10)
+7.0 | Modelo de despliegue | Francisco Guisado López |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F11:Y11)
+8.0 | Glosario | Juan José Grisales Sañudo |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F12:Y12)
+9.0 | Modelo de clases / Modelo de Datos | Juan José Grisales Sañudo / Francisco Guisado López |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F13:Y13)
+10.0 | Documentación de la arquitectura SW | Francisco Guisado López |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F14:Y14) |  |  |  | 
+11.0 | Modelo de implementación | Francisco Guisado López |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F15:Y15)
+12.0 | Plan de pruebas | Juan José Grisales Sañudo |  | 40.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F16:Y16)
+13.0 | Manual de usuario | Francisco Guisado López |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F17:Y17)
+14.0 | Manual de instalación | Francisco Guisado López |  | 6.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F18:Y18)
+15.0 | Prototipo funcional Módulo Investigación | Juan José Grisales - Francisco Guisado |  | 112-300 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F19:Y19)
+ |  |  |  | Horas semanales totales | =SUM(F5:F19) | =SUM(G5:G19) | =SUM(H5:H19) | =SUM(I5:I19) | =SUM(J5:J19) | =SUM(K5:K19) | =SUM(L5:L19) | =SUM(M5:M19) | =SUM(N5:N19) | =SUM(O5:O19) | =SUM(P5:P19) | =SUM(Q5:Q19) | =SUM(R5:R19) | =SUM(S5:S19) | =SUM(T5:T19) | =SUM(U5:U19) | =SUM(V5:V19) | =SUM(W5:W19) | =SUM(X5:X19) | =SUM(Y5:Y19) | 
+ |  |  |  |  |  | SP3 |  | SP4 |  | sp5 |  | SP6 |  | SP7 |  | SP8 |  | SP9 |  | SP10 |  | SP11 |  | SP12 | 
+CRONOGRAMA DE ACTIVIDADES |  |  |  |  | JULIO |  |  |  | AGOSTO |  |  |  | SEPTIEMBRE |  |  |  | OCTUBRE |  |  |  | NOVIEMBRE |  |  | 
+No. | ACTIVIDADES | Responsables |  | Horas estimadas | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | 01 | 02 | 03 | 04 | Horas Reales
+1.0 | Asesorias y sprint review | Juan José Grisales - Francisco Guisado |  | 30.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F25:Y25)
+2.0 | Estudiar temas | Juan José Grisales - Francisco Guisado |  | 90.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F26:Y26)
+3.0 | weekly Scrum | Francisco Guisado López |  | 16.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F27:Y27)
+4.0 | Sprint Retrospective | Francisco Guisado López |  | 20.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F28:Y28)
+5.0 | Sprint Goal | Juan José Grisales Sañudo |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F29:Y29)
+6.0 | Burndown Chart | Francisco Guisado López |  | 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | =SUM(F30:Y30)
+ |  |  |  | Horas semanales totales | =SUM(F25:F30) | =SUM(G25:G30) | =SUM(H25:H30) | =SUM(I25:I30) | =SUM(J25:J30) | =SUM(K25:K30) | =SUM(L25:L30) | =SUM(M25:M30) | =SUM(N25:N30) | =SUM(O25:O30) | =SUM(P25:P30) | =SUM(Q25:Q30) | =SUM(R25:R30) | =SUM(S25:S30) | =SUM(T25:T30) | =SUM(U25:U30) | =SUM(V25:V30) | =SUM(W25:W30) | =SUM(X25:X30) | =SUM(Y25:Y30)
+ |  |  |  | Horas generales totales | =SUM(F32,F20) | =SUM(G32,G20) | =SUM(H32,H20) | 0.0 | =SUM(J32,J20) | =SUM(K32,K20) | =SUM(L32,L20) | =SUM(M32,M20) | =SUM(N32,N20) | =SUM(O32,O20) | =SUM(P32,P20) | =SUM(Q32,Q20) | =SUM(R32,R20) | =SUM(S32,S20) | =SUM(T32,T20) | =SUM(U32,U20) | =SUM(V32,V20) | =SUM(W32,W20) | =SUM(X32,X20) | =SUM(Y32,Y20) | 
+
+HOJA: RESPONSABLES
+DIMENSIONES: None filas x None columnas
+INICIALES | NOMBRE |  | 
+JG | Julián Gómez Posada |  | 
+IS | Isabela Sánchez Ramírez |  | 
+MG | Marlon Alonso García Meneses |  | 
+CC | CARLOS ARTURO CASTRO CASTRO |  | 
