@@ -70,7 +70,7 @@ Specification precedes implementation.
 
 - main: stable versions only.
 - develop: integration branch.
-- develop/v1-api-inicial: initial API implementation branch.
+- v1-api-inicial: initial API implementation branch.
 
 ## Security Status
 
