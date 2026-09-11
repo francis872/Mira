@@ -4,79 +4,82 @@ Módulo de Investigación para la Gestión de Proyectos Académicos
 
 Universidad de San Buenaventura Medellín
 
-## About MIRA
+## Estado
 
-This repository contains the initial architecture and development foundation for the MIRA academic research management module.
+MIRA V1 — Catálogos
 
-## Current State
+## Stack
 
-MIRA V1 - Catalogos: CRUD de las siete tablas sin FK saliente identificadas en el modelo real. La autenticacion, JWT, bcrypt y los modulos relacionados quedan fuera de esta version.
+- .NET 10
+- ASP.NET Core 10
+- PostgreSQL
+- SQL parametrizado con Npgsql
+- Docker / Docker Compose
+- Swagger/OpenAPI
 
-## Architecture
+## Arquitectura
 
-Controller
+Frontend
+→ Controller
 → Service
 → Repository
 → PostgreSQL
 
-- Controller: HTTP input/output only.
-- Service: business rules and application orchestration.
-- Repository: data access and SQL execution.
-- PostgreSQL: persistent data storage.
+## Ejecutar
 
-Repository is the only layer allowed to access PostgreSQL directly.
+```powershell
+git clone https://github.com/francis872/Mira.git
+cd Mira
+Copy-Item .env.example .env
+docker compose up -d --build
+```
 
-## Methodology
+## Swagger
 
-Spec-Driven Development (SDD).
+http://localhost:8080/swagger/index.html
 
-Specification precedes implementation.
+## Frontend
 
-## Technology
+http://localhost:5173
 
-- C#
-- ASP.NET Core Web API
-- PostgreSQL
-- Docker
-- Swagger/OpenAPI
+## Health
 
-## Repository Structure
+http://localhost:8080/health
 
-- MIRA.Api/: ASP.NET Core API project foundation.
-- database/: PostgreSQL initialization foundation and database notes.
-- docs/: permanent rules, architecture notes, and source-document references.
-- versiones/: version-specific Spec Kits.
-- scripts/: utility script conventions.
+## V1
 
-## Getting Started (Docker First)
+Recursos incluidos en el alcance actual:
 
-1. Clone the repository.
-2. Copy `.env.example` to `.env`.
-3. Run `docker compose up -d --build`.
-4. Open API docs at `http://localhost:8080/swagger`.
-5. Open frontend preview at `http://localhost:5173`.
+- sedes
+- areas-conocimiento
+- ods
+- areas-aplicacion
+- palabras-clave
 
-## Development Workflow
+El flujo de V1 se mantiene sin autenticación, JWT ni bcrypt, según la Spec Kit activa.
 
-1. Clone.
-2. Review docs/fuentes.
-3. Review Spec Kit.
-4. Complete/update specification.
-5. Implement.
-6. Build.
-7. Test.
-8. Commit.
+## Fuera de alcance
 
-## Branch Strategy
+- JWT
+- bcrypt
+- login
+- autenticación
+- roles finales
+- funciones futuras
 
-- main: stable versions only.
-- develop: integration branch.
-- develop/v1-catalogos: V1 catalog implementation branch.
+## Documentación
 
-## Security Status
+- Constitution: `docs/1_constitution.md`
+- Spec Kit V1: `versiones/v1_catalogos/`
+- Fuentes: `docs/fuentes/`
+- Auditorías: `docs/spec-code-audit.md`, `docs/arquitectura/solid-audit.md`
 
-Authentication, JWT, bcrypt and final authorization are intentionally excluded from V1.
+## Validación realizada
 
-## Project Status
-
-The V1 scope and contracts are documented in `versiones/v1_catalogos/`.
+- `dotnet restore`
+- `dotnet build`
+- `docker compose config`
+- `docker compose build`
+- `docker compose up -d`
+- visitas reales a Swagger, health y frontend
+- pruebas reales contra PostgreSQL local
