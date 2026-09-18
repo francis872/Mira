@@ -8,6 +8,14 @@ Universidad de San Buenaventura Medellín
 
 MIRA V1 — Catálogos
 
+### Estado actual
+
+- Infraestructura: operativa con Docker Compose.
+- PostgreSQL: modelo físico completo de investigación, con 19 tablas y sus relaciones.
+- API V1: sedes y catálogos según la Spec activa.
+- Dominio de investigación: modelo físico disponible; el backend REST para docentes, grupos, semilleros y líneas queda pendiente para versiones posteriores.
+- Las tablas futuras existentes en PostgreSQL no implican endpoints activos en V1.
+
 ## Stack
 
 - .NET 10
@@ -16,6 +24,8 @@ MIRA V1 — Catálogos
 - SQL parametrizado con Npgsql
 - Docker / Docker Compose
 - Swagger/OpenAPI
+- Frontend estático existente
+- SDD / Spec Kit
 
 ## Arquitectura
 

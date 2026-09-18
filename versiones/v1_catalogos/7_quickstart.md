@@ -15,7 +15,7 @@ URLs validadas:
 - Swagger: `http://localhost:8080/swagger/index.html`
 - Frontend: `http://localhost:5173`
 - Health: `http://localhost:8080/health`
-- PostgreSQL host: `localhost:5545` (según la configuración actual de Docker Compose)
+- PostgreSQL host: `localhost:5544` (según la configuración actual de Docker Compose)
 
 Ejemplos reales válidos:
 

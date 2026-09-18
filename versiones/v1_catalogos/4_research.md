@@ -6,7 +6,7 @@
 
 ## D2 - ASP.NET Core
 
-**Contexto:** el backend existente es C#. **Decision:** ASP.NET Core Web API sobre .NET 8. **Alternativas:** otro framework. **Justificacion:** continuidad y Swagger integrado. **Consecuencias:** requiere SDK/runtime .NET 8 en validacion.
+**Contexto:** el backend existente es C#. **Decision:** ASP.NET Core Web API sobre .NET 10. **Alternativas:** otro framework. **Justificacion:** continuidad y Swagger integrado. **Consecuencias:** requiere SDK/runtime .NET 10 en validacion.
 
 ## D3 - SQL explicito y parametrizado
 
@@ -47,3 +47,7 @@
 ## D12 - JWT y bcrypt diferidos
 
 **Contexto:** no pertenecen a V1. **Decision:** excluirlos del alcance activo. **Alternativas:** mantener login en esta version. **Justificacion:** SDD y YAGNI. **Consecuencias:** endpoints V1 no requieren autenticacion.
+
+## D13 - Identificadores enteros para la base viva
+
+**Contexto:** el modelo histórico v0.1 describe `usuarios.id` como UUID, pero la base local existente usa `SERIAL`/`INTEGER`. **Decision:** conservar `INTEGER` y no alterar PK existentes durante V1. **Justificacion:** compatibilidad con datos, FK y contratos actuales. **Consecuencias:** el módulo de investigación futuro deberá usar integer o presentar una migración de identidad formal antes de implementarse.

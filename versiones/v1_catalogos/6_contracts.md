@@ -4,7 +4,9 @@ Todos los endpoints son publicos en esta V1, sin login ni JWT. El prefijo comun 
 
 ## Recursos
 
-Los recursos son `usuarios`, `roles`, `sedes`, `areas-conocimiento`, `ods`, `areas-aplicacion` y `palabras-clave`.
+Los recursos expuestos son `sedes`, `areas-conocimiento`, `ods`, `aplicaciones` y `palabras-clave`.
+
+`usuarios`, `roles` y `usuario_roles` no tienen endpoints en V1. Se mantienen únicamente como tablas heredadas de la base inicial.
 
 Cada recurso expone:
 
@@ -21,7 +23,7 @@ No existe DELETE SQL fisico.
 
 `sedes`: `{ "nombre": "Sede Medellin", "ciudad": "Medellin", "activa": true }`.
 
-Los otros seis recursos usan `{ "nombre": "Valor", "activo": true }`, excepto `usuarios`, que queda documentado para consulta administrativa pero no activa autenticacion.
+Los otros cuatro recursos usan `{ "nombre": "Valor", "activo": true }`.
 
 ## Errores
 

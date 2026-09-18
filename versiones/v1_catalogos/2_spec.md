@@ -6,15 +6,13 @@ Implementar el CRUD de las tablas sin FK saliente identificadas en el modelo rea
 
 ## Alcance
 
-1. `usuarios`
-2. `roles`
-3. `sedes`
-4. `areas_conocimiento`
-5. `ods`
-6. `areas_aplicacion`
-7. `palabras_clave`
+1. `sedes`
+2. `areas_conocimiento`
+3. `ods`
+4. `areas_aplicacion`
+5. `palabras_clave`
 
-`usuario_roles` queda fuera porque tiene dos claves foraneas.
+`usuarios`, `roles` y `usuario_roles` permanecen únicamente como estructura heredada de la base inicial. No tienen endpoints ni seed en V1.
 
 ## Incluye
 
@@ -39,4 +37,4 @@ Cada tabla conserva su propio controller, service y repository.
 
 ## Requisitos funcionales
 
-Para cada una de las siete tablas se implementan RF-XX-01 listar activos, RF-XX-02 consultar por ID, RF-XX-03 crear, RF-XX-04 actualizar, RF-XX-05 actualizar parcialmente y RF-XX-06 desactivar logicamente.
+Para cada una de las cinco tablas expuestas se implementan RF-XX-01 listar activos, RF-XX-02 consultar por ID, RF-XX-03 crear, RF-XX-04 actualizar, RF-XX-05 actualizar parcialmente y RF-XX-06 desactivar logicamente.
