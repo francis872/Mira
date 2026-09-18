@@ -4,78 +4,92 @@ Módulo de Investigación para la Gestión de Proyectos Académicos
 
 Universidad de San Buenaventura Medellín
 
-## About MIRA
+## Estado
 
-This repository contains the initial architecture and development foundation for the MIRA academic research management module.
+MIRA V1 — Catálogos
 
-## Current State
+### Estado actual
 
-Repository foundation / initial architecture.
+- Infraestructura: operativa con Docker Compose.
+- PostgreSQL: modelo físico completo de investigación, con 19 tablas y sus relaciones.
+- API V1: sedes y catálogos según la Spec activa.
+- Dominio de investigación: modelo físico disponible; el backend REST para docentes, grupos, semilleros y líneas queda pendiente para versiones posteriores.
+- Las tablas futuras existentes en PostgreSQL no implican endpoints activos en V1.
 
-No complete domain functionality has been implemented yet.
+## Stack
 
-## Architecture
+- .NET 10
+- ASP.NET Core 10
+- PostgreSQL
+- SQL parametrizado con Npgsql
+- Docker / Docker Compose
+- Swagger/OpenAPI
+- Frontend estático existente
+- SDD / Spec Kit
 
-Controller
+## Arquitectura
+
+Frontend
+→ Controller
 → Service
 → Repository
 → PostgreSQL
 
-- Controller: HTTP input/output only.
-- Service: business rules and application orchestration.
-- Repository: data access and SQL execution.
-- PostgreSQL: persistent data storage.
+## Ejecutar
 
-Repository is the only layer allowed to access PostgreSQL directly.
+```powershell
+git clone https://github.com/francis872/Mira.git
+cd Mira
+Copy-Item .env.example .env
+docker compose up -d --build
+```
 
-## Methodology
+## Swagger
 
-Spec-Driven Development (SDD).
+http://localhost:8080/swagger/index.html
 
-Specification precedes implementation.
+## Frontend
 
-## Technology
+http://localhost:5173
 
-- C#
-- ASP.NET Core Web API
-- PostgreSQL
-- Docker
-- Swagger/OpenAPI
+## Health
 
-## Repository Structure
+http://localhost:8080/health
 
-- MIRA.Api/: ASP.NET Core API project foundation.
-- database/: PostgreSQL initialization foundation and database notes.
-- docs/: permanent rules, architecture notes, and source-document references.
-- versiones/: version-specific Spec Kits.
-- scripts/: utility script conventions.
+## V1
 
-## Getting Started
+Recursos incluidos en el alcance actual:
 
-1. Clone the repository.
-2. Open MIRA.sln in Visual Studio.
+- sedes
+- areas-conocimiento
+- ods
+- areas-aplicacion
+- palabras-clave
 
-## Development Workflow
+El flujo de V1 se mantiene sin autenticación, JWT ni bcrypt, según la Spec Kit activa.
 
-1. Clone.
-2. Review docs/fuentes.
-3. Review Spec Kit.
-4. Complete/update specification.
-5. Implement.
-6. Build.
-7. Test.
-8. Commit.
+## Fuera de alcance
 
-## Branch Strategy
+- JWT
+- bcrypt
+- login
+- autenticación
+- roles finales
+- funciones futuras
 
-- main: stable versions only.
-- develop: integration branch.
-- develop/v1-api-inicial: initial API implementation branch.
+## Documentación
 
-## Security Status
+- Constitution: `docs/1_constitution.md`
+- Spec Kit V1: `versiones/v1_catalogos/`
+- Fuentes: `docs/fuentes/`
+- Auditorías: `docs/spec-code-audit.md`, `docs/arquitectura/solid-audit.md`
 
-Authentication, JWT, bcrypt and role authorization are intentionally not implemented in the repository foundation.
+## Validación realizada
 
-## Project Status
-
-Initial repository architecture.
+- `dotnet restore`
+- `dotnet build`
+- `docker compose config`
+- `docker compose build`
+- `docker compose up -d`
+- visitas reales a Swagger, health y frontend
+- pruebas reales contra PostgreSQL local
