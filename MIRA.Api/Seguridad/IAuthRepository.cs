@@ -11,4 +11,5 @@ public interface IAuthRepository
  Task<string?> ConsultarAsync(long id);
  Task<string> ListarAsync();
  Task<bool> InactivarAsync(long id);
+ Task<string> BootstrapAdminAsync(string correo, string passwordHash);
 }

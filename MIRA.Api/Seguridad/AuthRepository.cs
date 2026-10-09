@@ -54,4 +54,11 @@ public sealed class AuthRepository : IAuthRepository
   using var db=_factory.CreateConnection();
   return await db.QuerySingleAsync<bool>("SELECT fn_usuario_inactivar(@id)",new{id});
  }
+ public async Task<string> BootstrapAdminAsync(string correo,string passwordHash)
+ {
+  using var db=_factory.CreateConnection();
+  return await db.QuerySingleAsync<string>(
+   "SELECT fn_usuario_bootstrap_admin(@correo,@hash)::text",
+   new {correo,hash=passwordHash});
+ }
 }

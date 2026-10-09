@@ -1,5 +1,5 @@
 using Dapper;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -9,7 +9,14 @@ using MIRA.Api.Servicios;
 using MIRA.Api.Seguridad;
 
 DefaultTypeMap.MatchNamesWithUnderscores = true;
-var builder = WebApplication.CreateBuilder(args);
+var bootstrapAdmin = args.Length == 1 && args[0] == "--bootstrap-admin";
+var builder = WebApplication.CreateBuilder(bootstrapAdmin ? [] : args);
+if (bootstrapAdmin)
+{
+    await AdminBootstrapper.RunAsync(builder.Configuration);
+    return;
+}
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -24,10 +31,8 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization", Type = SecuritySchemeType.Http, Scheme = "bearer",
         BearerFormat = "JWT", In = ParameterLocation.Header
     });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        { new OpenApiSecurityScheme {
-            Reference = new OpenApiReference { Type=ReferenceType.SecurityScheme, Id="Bearer" }
-          }, Array.Empty<string>() }
+    c.AddSecurityRequirement(document => new OpenApiSecurityRequirement {
+        [new OpenApiSecuritySchemeReference("Bearer", document, null)] = new List<string>()
     });
 });
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
@@ -44,6 +49,7 @@ builder.Services.AddScoped<ITerminoClaveService, TerminoClaveService>();
 builder.Services.AddScoped<IUniversidadService, UniversidadService>();
 builder.Services.AddScoped<ILineaInvestigacionService, LineaInvestigacionService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var key = builder.Configuration["Jwt:Secret"];
 if (string.IsNullOrWhiteSpace(key) || Encoding.UTF8.GetByteCount(key) < 32)
@@ -73,3 +79,5 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status="ok", timestamp=DateTime.UtcNow }));
 app.Run();
+
+public partial class Program { }

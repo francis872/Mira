@@ -83,3 +83,23 @@ BEGIN
  UPDATE usuario SET activo=FALSE WHERE id=p_id AND activo=TRUE;
  RETURN FOUND;
 END $$;
+
+CREATE OR REPLACE FUNCTION fn_usuario_bootstrap_admin(p_correo TEXT,p_hash TEXT)
+RETURNS JSONB LANGUAGE plpgsql AS $$
+DECLARE v_rol_id INTEGER;
+BEGIN
+ PERFORM pg_advisory_xact_lock(hashtext('mira-v2-first-admin'));
+ IF EXISTS (
+  SELECT 1 FROM usuario u
+  JOIN usuario_rol ur ON ur.usuario_id=u.id
+  JOIN rol r ON r.id=ur.rol_id
+  WHERE u.activo AND r.activo AND r.nombre='Administrador'
+ ) THEN
+  RAISE EXCEPTION 'El administrador inicial ya fue aprovisionado' USING ERRCODE='23505';
+ END IF;
+ SELECT id INTO v_rol_id FROM rol WHERE nombre='Administrador' AND activo;
+ IF v_rol_id IS NULL THEN
+  RAISE EXCEPTION 'No existe el rol Administrador activo' USING ERRCODE='23503';
+ END IF;
+ RETURN fn_usuario_crear(p_correo,p_hash,jsonb_build_array(v_rol_id));
+END $$;
