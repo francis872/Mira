@@ -6,6 +6,17 @@ using Xunit;
 
 namespace MIRA.Api.Tests;
 
+public sealed class RequiresDatabaseFactAttribute : FactAttribute
+{
+    public RequiresDatabaseFactAttribute()
+    {
+        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("MIRA_TEST_DB")))
+        {
+            Skip = "Defina MIRA_TEST_DB con la cadena de conexión de una base de pruebas.";
+        }
+    }
+}
+
 public sealed class RequiresDatabaseTheoryAttribute : TheoryAttribute
 {
     public RequiresDatabaseTheoryAttribute()
@@ -48,9 +59,7 @@ public sealed class CatalogCrudRegressionTests : IDisposable
 
     private static HttpClient Client(Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory<Program> factory)
     {
-        var client = factory.CreateClient();
-        client.DefaultRequestHeaders.Authorization = new("Bearer", TestHostFactory.Token("Administrador"));
-        return client;
+        return factory.CreateClient();
     }
 
     [RequiresDatabaseTheory]

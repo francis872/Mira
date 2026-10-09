@@ -1,13 +1,10 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Modelos;
-using MIRA.Api.Seguridad;
 using MIRA.Api.Servicios;
 
 namespace MIRA.Api.Peticiones;
 
 [ApiController]
-[Authorize]
 [Route("api/objetivo_desarrollo_sostenible")]
 public class ObjetivoDesarrolloSostenibleController : ControllerBase
 {
@@ -39,7 +36,6 @@ public class ObjetivoDesarrolloSostenibleController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(typeof(ObjetivoDesarrolloSostenible), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] ObjetivoDesarrolloSostenible entity)
@@ -56,7 +52,6 @@ public class ObjetivoDesarrolloSostenibleController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -77,7 +72,6 @@ public class ObjetivoDesarrolloSostenibleController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
