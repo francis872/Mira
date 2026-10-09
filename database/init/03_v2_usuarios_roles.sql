@@ -103,3 +103,28 @@ BEGIN
  END IF;
  RETURN fn_usuario_crear(p_correo,p_hash,jsonb_build_array(v_rol_id));
 END $$;
+
+-- Escrituras maestro-detalle como PROCEDURE (CALL). Atomicas: cualquier error revierte maestro y detalles.
+CREATE OR REPLACE PROCEDURE sp_usuario_crear(p_correo TEXT,p_hash TEXT,p_roles JSONB,INOUT p_resultado JSONB DEFAULT NULL)
+LANGUAGE plpgsql AS $$
+BEGIN
+ p_resultado := fn_usuario_crear(p_correo,p_hash,p_roles);
+END $$;
+
+CREATE OR REPLACE PROCEDURE sp_usuario_actualizar(p_id BIGINT,p_correo TEXT,p_roles JSONB,INOUT p_resultado JSONB DEFAULT NULL)
+LANGUAGE plpgsql AS $$
+BEGIN
+ p_resultado := fn_usuario_actualizar(p_id,p_correo,p_roles);
+END $$;
+
+CREATE OR REPLACE PROCEDURE sp_usuario_inactivar(p_id BIGINT,INOUT p_inactivado BOOLEAN DEFAULT NULL)
+LANGUAGE plpgsql AS $$
+BEGIN
+ p_inactivado := fn_usuario_inactivar(p_id);
+END $$;
+
+CREATE OR REPLACE PROCEDURE sp_usuario_bootstrap_admin(p_correo TEXT,p_hash TEXT,INOUT p_resultado JSONB DEFAULT NULL)
+LANGUAGE plpgsql AS $$
+BEGIN
+ p_resultado := fn_usuario_bootstrap_admin(p_correo,p_hash);
+END $$;

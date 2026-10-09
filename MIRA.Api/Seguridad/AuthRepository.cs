@@ -29,14 +29,14 @@ public sealed class AuthRepository : IAuthRepository
  {
   using var db=_factory.CreateConnection();
   return await db.QuerySingleAsync<string>(
-   "SELECT fn_usuario_crear(@correo,@hash,CAST(@roles AS jsonb))::text",
+   "CALL sp_usuario_crear(@correo,@hash,CAST(@roles AS jsonb),NULL::jsonb)",
    new {correo,hash,roles=System.Text.Json.JsonSerializer.Serialize(roles)});
  }
  public async Task<string?> ActualizarAsync(long id,string correo,int[] roles)
  {
   using var db=_factory.CreateConnection();
   return await db.QuerySingleAsync<string>(
-   "SELECT fn_usuario_actualizar(@id,@correo,CAST(@roles AS jsonb))::text",
+   "CALL sp_usuario_actualizar(@id,@correo,CAST(@roles AS jsonb),NULL::jsonb)",
    new{id,correo,roles=System.Text.Json.JsonSerializer.Serialize(roles)});
  }
  public async Task<string?> ConsultarAsync(long id)
@@ -52,13 +52,13 @@ public sealed class AuthRepository : IAuthRepository
  public async Task<bool> InactivarAsync(long id)
  {
   using var db=_factory.CreateConnection();
-  return await db.QuerySingleAsync<bool>("SELECT fn_usuario_inactivar(@id)",new{id});
+  return await db.QuerySingleAsync<bool>("CALL sp_usuario_inactivar(@id,NULL::boolean)",new{id});
  }
  public async Task<string> BootstrapAdminAsync(string correo,string passwordHash)
  {
   using var db=_factory.CreateConnection();
   return await db.QuerySingleAsync<string>(
-   "SELECT fn_usuario_bootstrap_admin(@correo,@hash)::text",
+   "CALL sp_usuario_bootstrap_admin(@correo,@hash,NULL::jsonb)",
    new {correo,hash=passwordHash});
  }
 }
