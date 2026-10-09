@@ -4,9 +4,8 @@ WORKDIR /src
 COPY MIRA.Api/MIRA.Api.csproj MIRA.Api/
 RUN dotnet restore MIRA.Api/MIRA.Api.csproj
 
-COPY . .
-RUN dotnet build MIRA.Api/MIRA.Api.csproj -c Release -o /app/build
-RUN dotnet publish MIRA.Api/MIRA.Api.csproj -c Release -o /app/publish /p:UseAppHost=false
+COPY MIRA.Api/ MIRA.Api/
+RUN dotnet publish MIRA.Api/MIRA.Api.csproj -c Release -o /app/publish --no-restore /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
