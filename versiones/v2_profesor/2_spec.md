@@ -20,3 +20,20 @@ La V2 conserva la Entrega 1 (API REST y frontend para seis catálogos) y amplía
 - Validar claves foráneas y roles del lado del servidor, no solo en frontend.
 - No construir relaciones maestro-detalle ficticias a partir de las seis tablas independientes de la Entrega 1: partir del modelo oficial de la siguiente entrega.
 - La V2 requiere pruebas de atomicidad, integridad, permisos, resultados JSON y regresión de V1.
+
+## Trazabilidad requisito → implementación → prueba
+| ID | Estado | Implementación | Evidencia (prueba ejecutada) |
+|---|---|---|---|
+| RF-V2-FK-01 | Cumplido para el único FK existente (`usuario_rol.rol_id`) | `frontend/templates/usuarios/form.html` (select cargado desde `GET /api/auth/roles`) | `test_user_form_uses_select_populated_from_api_not_typed_ids` |
+| RF-V2-MD-01 | Cumplido para usuario→roles | `sp_usuario_crear` (PROCEDURE) → `fn_usuario_crear` | `Create_InsertsMasterAndAllDetailsAtomically`, `Create_WithNonexistentRole_RollsBackTheMaster`, `test_user_creation_is_single_atomic_api_call_with_role_collection` |
+| RF-V2-MD-02 | Cumplido para usuario→roles | `sp_usuario_actualizar` | `Update_ReplacesDetailsAndMissingUserRaisesP0002`, `Update_WithInvalidRole_KeepsPreviousDetails` |
+| RF-V2-MD-03 | Cumplido para usuario→roles | `fn_usuario_consultar`, `fn_usuario_listar` (JSONB) sobre `vw_usuarios_roles` | `database/tests/v2_usuarios_roles.sql` |
+| RF-V2-MD-04 | Cumplido (borrado lógico) | `sp_usuario_inactivar` | `Deactivate_IsLogicalAndIdempotentlyReportsMissing` |
+| RF-V2-DB-01 | **Bloqueado**: sin modelo académico oficial no hay campos derivados que justifiquen triggers | — | — |
+| RF-V2-DB-02 | Parcial: solo `vw_usuarios_roles` | `database/init/03_v2_usuarios_roles.sql` | `database/tests/v2_usuarios_roles.sql` |
+| RF-V2-SEC-01 | Cumplido | `AuthService` (bcrypt, costo configurable) | `LoginVerifiesBcryptAndReturnsRoleClaims`, `UserCreationStoresBcryptHashInsteadOfPassword`; hash `$2a$12$` verificado en BD |
+| RF-V2-SEC-02 | Cumplido | `[Authorize]` + JWT Bearer | `AdminRoutes_RequireAuthentication`, `AuthenticatedUserWithoutAdminRole_ReceivesForbidden`, `ExpiredToken_ReturnsUnauthorized`, smoke HTTP real |
+| RF-V2-SEC-03 | Cumplido en API y Flask | `RolesAcceso`, `enforce_access` | `CatalogAuthorizationTests`, `test_read_only_role_can_list_but_not_write` |
+
+## Decisión de modelo canónico de usuarios
+En esta rama el modelo canónico es `usuario` / `rol` / `usuario_rol` (V2). El par `usuarios`/`roles` pertenece a otra línea de trabajo (`repair/v1-catalogos`) y no existe aquí; no se crean tablas duplicadas. Si ambas líneas se unifican deberá hacerse mediante una migración explícita aprobada.

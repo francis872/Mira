@@ -3,8 +3,15 @@
 ## Estado verificable de V1
 El archivo database/init/01_create_tables.sql define seis entidades independientes: area_conocimiento, objetivo_desarrollo_sostenible, area_aplicacion, termino_clave, universidad y linea_investigacion. Esta entrega no define FK ni pares maestro-detalle.
 
-## Pendiente antes de migrar
-Incorporar las tablas de la siguiente entrega desde el modelo oficial y completar para cada par:
+## Pares maestro–detalle identificados
+| Maestro | Detalle | PK maestro | FK detalle | Reglas de eliminación | Reglas de cálculo |
+|---|---|---|---|---|---|
+| `usuario` | `usuario_rol` | `usuario.id` (BIGINT) | `usuario_rol.usuario_id → usuario.id`; `usuario_rol.rol_id → rol.id` | Lógica (`usuario.activo`); sin `ON DELETE CASCADE` | Ninguna |
+
+Tipos reales: `usuario.id BIGINT`, `rol.id INTEGER`. Las tablas V1 (`area_conocimiento`, etc.) no tienen FK.
+
+## Pendiente antes de migrar el dominio académico
+Incorporar las tablas de la siguiente entrega desde el modelo oficial (**no disponible en el repositorio**) y completar para cada par:
 | Maestro | Detalle | PK maestro | FK detalle | Reglas de eliminación | Reglas de cálculo |
 |---|---|---|---|---|---|
 | Por identificar | Por identificar | Pendiente | Pendiente | Pendiente | Pendiente |

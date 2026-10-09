@@ -16,3 +16,5 @@ This document defines permanent repository rules. It does not contain version-sp
 12. Changes to functionality must first update the corresponding specification.
 13. A version is validated before being tagged/closed.
 14. The environment should be runnable with a simple documented command.
+15. Endpoints require authentication and role authorization unless the version contracts list them as public.
+16. Master-detail writes execute atomically in a single PostgreSQL routine; the API never splits them into independent writes.

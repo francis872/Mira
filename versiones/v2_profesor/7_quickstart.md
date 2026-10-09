@@ -13,4 +13,22 @@
 8. Validar respuestas 401 y 403 por separado y comprobar hash bcrypt.
 9. Ejecutar pruebas de regresión de V1 antes de solicitar merge.
 
-Los pasos 4-8 son criterios pendientes, no funcionalidades certificadas.
+Verificación ejecutada en esta rama (contra PostgreSQL 16 desechable, API y Flask reales):
+
+```powershell
+# Primer administrador (una sola vez; nada se guarda en archivos)
+$env:ConnectionStrings__PostgreSql = '<cadena>'
+$env:MIRA_BOOTSTRAP_ADMIN_EMAIL = 'admin@su-dominio'
+$env:MIRA_BOOTSTRAP_ADMIN_PASSWORD = '<≥12 caracteres, introducida por usted>'
+dotnet MIRA.Api.dll --bootstrap-admin   # un segundo intento falla con código 1
+Remove-Item Env:\MIRA_BOOTSTRAP_ADMIN_PASSWORD
+
+# Pruebas
+dotnet test MIRA.sln                      # 21 pruebas sin base de datos
+$env:MIRA_TEST_DB = '<base de pruebas inicializada con database/init>'
+dotnet test MIRA.sln                      # 28 pruebas incluyendo procedimientos (usa datos con prefijo sp-test- y los elimina)
+cd frontend; pip install -r requirements-dev.txt; pytest -q   # 13 pruebas
+```
+
+Smoke HTTP verificado: sin token 401; credenciales inválidas 401; token basura 401; Investigador en escritura 403; usuario duplicado 409; rol inexistente 400; usuario inexistente 404; alta válida 201.
+Pendientes: la base de pruebas SQL del dominio académico y la regresión manual en navegador de los 6 formularios V1.

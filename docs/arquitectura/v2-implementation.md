@@ -24,9 +24,7 @@
 - DELETE /api/auth/usuarios/{id} (Administrador) => borrado lógico.
 
 ## Limitaciones actuales y QA pendiente
-- No se ejecutó compilación .NET ni PostgreSQL en esta sesión; requiere entorno de integración.
-- El SDK/runtime originales son .NET 7, fuera de soporte. Migrar a un framework LTS coordinando las dependencias y Dockerfile.
-- El formulario Flask V1 usa una clave de sesión por defecto insegura si no se pasa SECRET_KEY: configurarla obligatoriamente en despliegue.
-- El contrato de roles está protegido; falta UI de login, roles y selectores.
-- Completar pruebas que provoquen error a mitad de creación y demuestren rollback, pruebas de roles 401/403, JWT expirado y concurrencia.
-- Para la V2 completa identificar maestro-detalle del dominio académico y añadir triggers derivados de reglas reales. No crear triggers decorativos.
+- Compilación y pruebas ejecutadas en .NET 10 (28 pruebas .NET, 13 Flask) y smoke E2E contra PostgreSQL 16 real; ver `versiones/v2_profesor/7_quickstart.md`.
+- El frontend Flask ya tiene login/logout, control por rol y administración de usuarios con selector de roles (superseded: el punto de "sin pantalla de login" de arriba ya no aplica). Provisión del primer administrador: `--bootstrap-admin`.
+- Pendiente: token CSRF por formulario, regresión manual en navegador de los 6 formularios V1, concurrencia.
+- Bloqueado: maestro-detalle del dominio académico y triggers derivados; requieren el modelo oficial de la Entrega 2. No crear triggers decorativos.
