@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                                            <form method="POST" action="{{ url_for('area_conocimiento_delete', id=item.id) }}" class="d-inline">
+                                            <form method="POST" action="{{ url_for('area_conocimiento_delete', id=item.id) }}" class="d-inline">{{ csrf_input() }}
                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="bi bi-trash me-1"></i> Eliminar
                                                 </button>

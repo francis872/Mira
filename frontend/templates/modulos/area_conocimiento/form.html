@@ -21,7 +21,7 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('area_conocimiento_update', id=item.id) if item and item.id else url_for('area_conocimiento_create') }}">
+                <form method="POST" action="{{ url_for('area_conocimiento_update', id=item.id) if item and item.id else url_for('area_conocimiento_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="gran_area" class="form-label fw-semibold">Gran Área <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="gran_area" name="gran_area" 

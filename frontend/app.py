@@ -1,10 +1,75 @@
+import hmac
 import os
+import secrets
 import requests
+from markupsafe import Markup
 from urllib.parse import quote
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY", "mira-secret-key-prod-local")
+_secret = os.getenv("SECRET_KEY", "")
+if not _secret or _secret.startswith("REPLACE"):
+    # La cookie firmada solo transporta el token CSRF y los mensajes flash; no hay autenticación.
+    _secret = secrets.token_hex(32)
+app.secret_key = _secret
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Strict",
+    SESSION_COOKIE_SECURE=os.getenv("SESSION_COOKIE_SECURE", "false").lower() == "true",
+)
+SWAGGER_URL = os.getenv("SWAGGER_URL", "http://localhost:8081/swagger")
+
+
+def _csrf_token():
+    token = session.get("csrf_token")
+    if not token:
+        token = secrets.token_urlsafe(32)
+        session["csrf_token"] = token
+    return token
+
+
+app.jinja_env.globals["csrf_input"] = lambda: Markup(
+    f'<input type="hidden" name="csrf_token" value="{_csrf_token()}">'
+)
+
+
+def _headers():
+    return {"Content-Type": "application/json"}
+
+
+def error_message(resp, default):
+    if resp is None:
+        return "Error de conexión."
+    try:
+        body = resp.json()
+    except ValueError:
+        return default
+    if isinstance(body, dict):
+        return body.get("mensaje") or body.get("title") or default
+    return default
+
+
+@app.context_processor
+def inject_globals():
+    return {"swagger_url": SWAGGER_URL}
+
+
+@app.errorhandler(400)
+def handle_bad_request(_error):
+    return render_template(
+        "error.html", status=400,
+        message="La solicitud fue rechazada: el token de seguridad es inválido o venció. Recargue la página e intente de nuevo.",
+    ), 400
+
+
+@app.before_request
+def verify_csrf():
+    if request.method == "POST":
+        sent = request.form.get("csrf_token", "")
+        expected = session.get("csrf_token", "")
+        if not expected or not hmac.compare_digest(sent, expected):
+            abort(400)
+    return None
 
 # URL base de la API REST de MIRA
 API_URL = os.getenv("API_URL", "http://localhost:8081/api").rstrip("/")
@@ -17,19 +82,50 @@ def api_call(method, path, json_data=None):
             method=method,
             url=url,
             json=json_data,
-            headers={"Content-Type": "application/json"},
+            headers=_headers(),
             timeout=8
         )
-        return response
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         return None
+    return response
 
 # =============================================================================
 # Dashboard Principal
 # =============================================================================
+CATALOGS = [
+    {"path": "area_conocimiento", "title": "Área de Conocimiento", "icon": "bi-book", "color": "danger",
+     "list": "area_conocimiento_list", "new": "area_conocimiento_new",
+     "text": "Clasificación académica por gran área, área específica y disciplina."},
+    {"path": "objetivo_desarrollo_sostenible", "title": "ODS", "icon": "bi-globe-americas", "color": "success",
+     "list": "ods_list", "new": "ods_new",
+     "text": "Objetivos de Desarrollo Sostenible con su categoría temática."},
+    {"path": "area_aplicacion", "title": "Área de Aplicación", "icon": "bi-cpu", "color": "primary",
+     "list": "area_aplicacion_list", "new": "area_aplicacion_new",
+     "text": "Sectores y ámbitos donde se aplican los resultados de investigación."},
+    {"path": "termino_clave", "title": "Término Clave", "icon": "bi-tags", "color": "warning",
+     "list": "termino_clave_list", "new": "termino_clave_new",
+     "text": "Palabras clave normalizadas en español e inglés."},
+    {"path": "universidad", "title": "Universidad", "icon": "bi-buildings", "color": "info",
+     "list": "universidad_list", "new": "universidad_new",
+     "text": "Instituciones de educación superior, tipo y ciudad sede."},
+    {"path": "linea_investigacion", "title": "Línea de Investigación", "icon": "bi-diagram-3", "color": "secondary",
+     "list": "linea_investigacion_list", "new": "linea_investigacion_new",
+     "text": "Líneas temáticas institucionales con su descripción."},
+]
+
+
+def _count(path):
+    resp = api_call("GET", path)
+    if resp is None or resp.status_code != 200:
+        return None
+    return len(resp.json())
+
+
 @app.route("/")
 def index():
-    return render_template("index.html")
+    catalogs = [{**c, "count": _count(c["path"])} for c in CATALOGS]
+    api_ok = all(c["count"] is not None for c in catalogs)
+    return render_template("index.html", catalogs=catalogs, api_ok=api_ok)
 
 # =============================================================================
 # Módulo 1: Área de Conocimiento
@@ -400,6 +496,7 @@ def linea_investigacion_delete(id):
     else:
         flash("No se pudo eliminar el registro.", "danger")
     return redirect(url_for("linea_investigacion_list"))
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))

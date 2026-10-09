@@ -1,0 +1,13 @@
+bin/
+obj/
+.git/
+.vs/
+.vscode/
+tests/
+frontend/
+database/
+docs/
+versiones/
+*.md
+.env
+.env.*
