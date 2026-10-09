@@ -10,15 +10,14 @@ This repository contains the initial architecture and development foundation for
 
 ## Current State
 
-MIRA V1 (seis catálogos) + V2 parcial (seguridad y usuarios/roles). Rama de trabajo: `feature/mira-v1-v2-integracion` (PR #4, borrador).
+MIRA V1 (seis catálogos) + V2 parcial (base relacional y rutinas almacenadas). **Sin inicio de sesión**: `http://localhost:5000` abre directamente el dashboard. Rama de trabajo: `feature/mira-v1-v2-integracion` (PR #4, borrador).
 
 | Área | Estado |
 |---|---|
-| V1: 6 catálogos (CRUD, borrado lógico, frontend Flask) | Implementado; ahora exige autenticación |
-| V2: login bcrypt, roles, 401/403 | Implementado y probado |
-| V2: administración de usuarios maestro–detalle (`CREATE PROCEDURE`) | Implementado y probado contra PostgreSQL real |
-| V2: modelo académico maestro–detalle oficial (Entrega 2) | **Bloqueado**: el modelo oficial no está en el repositorio |
-| Triggers / vistas del dominio académico | Pendiente del modelo oficial (solo existe `vw_usuarios_roles`) |
+| V1: 6 catálogos (CRUD, borrado lógico, frontend Flask, PostgreSQL real) | Implementado y probado, sin autenticación |
+| Inicio de sesión, JWT, bcrypt, roles, restricciones por sesión | **Fuera de alcance** (versión futura sin fecha). El código retirado sigue en el historial: etiqueta `auth-futuro-v2-261872f` |
+| V2: rutinas almacenadas `CREATE PROCEDURE` con JSONB, vista y atomicidad (`usuario`→`usuario_rol`) | Solo en PostgreSQL (migración 003 y `database/tests`); sin API ni pantalla |
+| V2: maestro–detalle académico, selectores de claves foráneas, triggers y vistas del dominio | **Pendiente**: el modelo relacional oficial de la Entrega 2 no está en el repositorio |
 
 ## Architecture
 
@@ -44,8 +43,7 @@ Specification precedes implementation.
 
 - C# / ASP.NET Core Web API sobre .NET 10 (LTS)
 - PostgreSQL 16 (Npgsql + Dapper, SQL parametrizado y procedimientos almacenados)
-- BCrypt.Net-Next (contraseñas) y token firmado de sesión (detalle interno)
-- Frontend Flask (sesión del lado del servidor)
+- Frontend Flask (Jinja, Bootstrap 5; token CSRF en los formularios)
 - Docker / Docker Compose
 - Swagger/OpenAPI
 
@@ -59,12 +57,27 @@ Specification precedes implementation.
 
 ## Getting Started
 
-1. Copiar `.env.example` a `.env` y reemplazar **todos** los secretos (`Jwt__Secret` de ≥ 32 bytes aleatorios, `SECRET_KEY`, contraseña de PostgreSQL). Nunca versionar `.env`.
-2. `docker compose up -d --build` (el SQL de `database/init` solo se ejecuta con un volumen nuevo; en uno existente aplicar `database/migrations/002-v2-usuarios-roles.sql`).
-3. Aprovisionar el primer administrador una sola vez (ver `versiones/v2_profesor/7_quickstart.md`).
-4. API: `http://localhost:8081/swagger`; frontend: `http://localhost:5000`.
+1. Copiar `.env.example` a `.env` y reemplazar la contraseña de PostgreSQL (`POSTGRES_PASSWORD`). Opcional: `SECRET_KEY` (firma la cookie del token CSRF), y los puertos si están ocupados (`POSTGRES_PORT=5544`, `API_PORT=8081`, `FRONTEND_PORT=5000`). Nunca versionar `.env`.
+2. `docker compose up -d --build`. Las migraciones de `database/migrations` se aplican solas al crear el volumen.
+3. Abrir `http://localhost:5000` (dashboard, sin login). API: `http://localhost:8081/api/...`; Swagger: `http://localhost:8081/swagger`; PostgreSQL: `localhost:5544`.
 
-Pruebas: `dotnet test MIRA.sln` (con `MIRA_TEST_DB` apuntando a una base de pruebas se ejecutan también las pruebas de procedimientos y la regresión CRUD de V1) y `pytest` en `frontend/` (`requirements-dev.txt`).
+Detener: `docker compose down` (conserva los datos). Reiniciar desde cero: `docker compose down -v` (**borra el volumen de este proyecto**).
+
+**Base de datos existente** (sin borrar datos): `docker compose exec mira-postgres sh /migrations/apply.sh`. Aplica solo las migraciones nuevas (`schema_migrations`) y es idempotente.
+
+**Sin Docker para la API** (por ejemplo, si no se puede descargar la imagen base de .NET): con PostgreSQL en marcha, `ConnectionStrings__PostgreSql="Host=localhost;Port=5544;Database=...;Username=...;Password=..."` y `dotnet run --project MIRA.Api` (puerto 8081 con `ASPNETCORE_URLS=http://localhost:8081`); frontend: `pip install -r frontend/requirements.txt`, `API_URL=http://127.0.0.1:8081/api` (mejor que `localhost`, que en Windows puede añadir ~2 s por petición al probar primero IPv6), `python frontend/app.py`.
+
+**Solución de problemas**
+- Puerto 5544/5432 ocupado (otro PostgreSQL local): cambiar `POSTGRES_PORT` en `.env`.
+- El dashboard muestra "no disponible": la API no responde o no alcanza PostgreSQL; revisar `docker compose logs mira-api`.
+- Error 400 "token de seguridad" al guardar: recargar el formulario (el token CSRF vence al reiniciar Flask sin `SECRET_KEY`).
+- `docker compose build` falla al resolver `mcr.microsoft.com`: es un problema de red/DNS del equipo; usar la ejecución local de la API descrita arriba.
+
+Pruebas:
+- `dotnet test MIRA.sln`: pruebas sin base de datos. Con `MIRA_TEST_DB` apuntando a una base de pruebas con las migraciones aplicadas se ejecuta también la regresión CRUD de los seis catálogos.
+- `pytest` en `frontend/` (`requirements-dev.txt`): pruebas del frontend con la API simulada.
+- E2E contra la plataforma en marcha: `MIRA_E2E_URL=http://localhost:5000 MIRA_E2E_API_URL=http://localhost:8081 pytest frontend/tests/e2e` (los datos de prueba llevan el prefijo `e2e-` y se inactivan).
+- SQL de rutinas almacenadas: `database/tests/v2_usuarios_roles.sql`.
 
 ## Development Workflow
 
@@ -85,12 +98,12 @@ Pruebas: `dotnet test MIRA.sln` (con `MIRA_TEST_DB` apuntando a una base de prue
 
 ## Security Status
 
-- Autenticación: usuario/contraseña con bcrypt (costo 12). La identidad viaja en un token firmado de 60 minutos; es una decisión técnica interna, no un requisito del profesor.
-- Autorización: lectura de catálogos para cualquier usuario autenticado; escritura solo `Administrador` y `Coordinador`; gestión de usuarios solo `Administrador`. Aplicada en la API y en Flask.
-- Respuestas: 401 sin token/credenciales/token vencido; 403 con rol insuficiente.
-- No hay autorregistro público ni contraseñas/hashes en el repositorio.
-- La cookie de sesión de Flask es `HttpOnly` y `SameSite=Strict`.
+- Alcance: **no hay autenticación ni autorización** en V1/V2; se reserva para una versión futura. La API y el frontend son abiertos y están pensados para ejecución local; no exponer a internet.
+- Medidas generales vigentes: validación de entradas en servicios, SQL parametrizado (Dapper/Npgsql), restricciones e integridad en PostgreSQL, borrado lógico, escape de HTML en Jinja y token CSRF en todos los POST del frontend.
+- La cookie de Flask solo guarda el token CSRF y los mensajes; es `HttpOnly` y `SameSite=Strict`.
+- No hay contraseñas ni secretos en el repositorio (`.env` está ignorado).
+- Las tablas `usuario`, `rol` y `usuario_rol` (migración 003) se conservan con sus datos; no se usan desde la aplicación.
 
 ## Project Status
 
-V1 + V2 parcial; ver `versiones/v2_profesor/8_tasks.md` para el detalle y los bloqueos.
+V1 + V2 parcial, sin inicio de sesión; ver `versiones/v2_profesor/8_tasks.md` para el detalle y los bloqueos.

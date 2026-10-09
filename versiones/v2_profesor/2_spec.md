@@ -3,55 +3,50 @@
 ## Alcance acumulativo
 La V2 conserva la Entrega 1 (API REST y frontend para seis catálogos) y amplía la solución conforme a las indicaciones del profesor. Los requisitos de este documento se implementan y verifican, no se consideran completados solo por estar documentados.
 
-## Requerimientos funcionales nuevos
+## Corrección de alcance (vigente)
+**Login, logout, JWT, tokens, bcrypt/gestión de contraseñas, registro de usuarios con credenciales, pantallas de inicio de sesión, redirecciones a `/login` y restricciones por sesión o rol NO forman parte de V1 ni de V2.** Quedan reservados para una versión futura sin fecha. La aplicación abre directamente en el dashboard y ningún módulo ni endpoint exige credenciales. El código anterior no se destruyó: sigue en el historial Git y la etiqueta `auth-futuro-v2-261872f` marca el último commit que lo contiene.
+
+Se mantienen las medidas generales de seguridad (validación de entradas, SQL parametrizado, integridad en PostgreSQL, token CSRF en formularios). No son autenticación.
+
+## Requerimientos funcionales de V2
 - **RF-V2-FK-01:** toda clave foránea seleccionable se presenta con un control de selección que muestra valores comprensibles; nunca se pide teclear el identificador.
 - **RF-V2-MD-01:** cada relación maestro-detalle identificada dispone de una operación atómica de alta mediante una rutina de PostgreSQL que inserta encabezado y todos los detalles. Quedan prohibidos INSERT separados desde la API para una misma operación de negocio.
 - **RF-V2-MD-02:** modificación de maestro y colección completa de detalles mediante rutina de PostgreSQL, con control transaccional.
 - **RF-V2-MD-03:** consulta individual y listado de maestro-detalle mediante rutinas de PostgreSQL; el resultado de datos compuestos se devuelve en JSONB.
-- **RF-V2-MD-04:** eliminación o inactivación mediante rutina de PostgreSQL. Se respetará el borrado lógico cuando la metodología de la asignatura lo exija; confirmar la regla por entidad antes de implementar.
-- **RF-V2-DB-01:** incorporar triggers únicamente donde existan invariantes, totales derivados o desnormalización controlada que los requieran.
-- **RF-V2-DB-02:** crear vistas justificadas por consultas recurrentes y requerimientos reales.
-- **RF-V2-SEC-01:** autenticar mediante usuario/correo y contraseña, guardando exclusivamente hashes bcrypt con factor de costo configurado y adecuado.
-- **RF-V2-SEC-02:** credenciales ausentes/inválidas => HTTP 401; identidad autenticada sin permisos => HTTP 403.
-- **RF-V2-SEC-03:** autorización basada en roles aplicada del lado del servidor. Evitar MD5/SHA1 como hashes de contraseña.
+- **RF-V2-MD-04:** eliminación o inactivación mediante rutina de PostgreSQL (borrado lógico cuando la metodología lo exija).
+- **RF-V2-DB-01:** triggers únicamente donde existan invariantes, totales derivados o desnormalización controlada que los requieran.
+- **RF-V2-DB-02:** vistas justificadas por consultas recurrentes y requerimientos reales.
 
 ## Calidad y trazabilidad
-- Mantener arquitectura Controller -> Service -> Repository -> PostgreSQL y principios SOLID.
-- Validar claves foráneas y roles del lado del servidor, no solo en frontend.
-- No construir relaciones maestro-detalle ficticias a partir de las seis tablas independientes de la Entrega 1: partir del modelo oficial de la siguiente entrega.
-- La V2 requiere pruebas de atomicidad, integridad, permisos, resultados JSON y regresión de V1.
+- Arquitectura Controller → Service → Repository → PostgreSQL y principios SOLID.
+- Validar claves foráneas del lado del servidor, no solo en el frontend.
+- No inventar entidades ni relaciones que no estén en el modelo oficial. No construir maestro-detalle ficticios a partir de las seis tablas independientes de la Entrega 1.
+- La interfaz refleja el estado real: no presenta como terminadas funciones académicas de V2 que dependen del modelo oficial.
 
 ## Clasificación de alcance
-Solo la columna "Obligatorio" proviene del profesor. Las decisiones técnicas del desarrollo no son requisitos académicos.
-
-| Componente | Clasificación | Nota |
+| Componente | Clasificación | Estado |
 |---|---|---|
-| V1: 6 catálogos con CRUD y borrado lógico, frontend Flask | Obligatorio | Prioridad 1; regresión automatizada |
-| Modelo relacional oficial de V2 y maestro–detalle | Obligatorio | **Pendiente: modelo no entregado** |
-| FK mediante selectores | Obligatorio | Hecho para `usuario_rol.rol_id` |
-| Procedimientos almacenados CRUD maestro–detalle, JSON/JSONB, atomicidad | Obligatorio | Hecho para usuario→roles |
-| Triggers de integridad y vistas necesarias | Obligatorio (donde existan datos derivados) | Pendiente del modelo oficial |
-| Autenticación usuario/contraseña, bcrypt, roles, HTTP 401 y 403 | Obligatorio | Hecho |
-| Token JWT firmado (60 min) | Necesario técnicamente: transporta la identidad entre Flask y la API | **No es un requisito del profesor.** Se mantiene en su forma mínima: un secreto, sin refresh ni revocación |
-| Comando `--bootstrap-admin` | Necesario técnicamente: sin un primer administrador nadie puede autenticarse | No hay autorregistro público |
-| Pantalla de administración de usuarios con filas de rol | Necesario técnicamente: es el único maestro–detalle real hoy y usa selectores | — |
-| Cookie de sesión Flask `HttpOnly` + `SameSite=Strict` | Necesario técnicamente | — |
-| Costo bcrypt, emisor y audiencia JWT configurables; verificación `Origin`; token CSRF; refresh/revocación de tokens; documento duplicado `v2-implementation.md` | Opcional / fuera de alcance | Retirados o no desarrollados |
+| V1: 6 catálogos con CRUD, borrado lógico y frontend Flask, sin login | Obligatorio | **Hecho**; regresión automatizada y E2E |
+| Dashboard con indicadores reales (conteos desde la API) | Obligatorio | Hecho |
+| Modelo relacional oficial de V2 y maestro–detalle académico | Obligatorio | **Pendiente: el modelo no está en el repositorio** |
+| FK mediante selectores | Obligatorio | Pendiente del modelo (no existen FK entre las tablas V1) |
+| Rutinas almacenadas CRUD maestro–detalle, JSONB, atomicidad | Obligatorio | Hecho en PostgreSQL para `usuario`→`usuario_rol` (migración 003), probado; sin pantalla porque implica credenciales |
+| Triggers de integridad y vistas del dominio | Obligatorio (donde existan datos derivados) | Pendiente del modelo oficial (solo existe `vw_usuarios_roles`) |
+| Migraciones controladas para bases nuevas y existentes | Necesario técnicamente | Hecho (`database/migrations`) |
+| Token CSRF + cookie `HttpOnly`/`SameSite=Strict` | Medida general de seguridad | Hecho; no identifica usuarios |
+| Autenticación, JWT, bcrypt, roles, 401/403 | **Fuera de alcance** | Retirado del árbol activo |
 
 ## Trazabilidad requisito → implementación → prueba
-| ID | Estado | Implementación | Evidencia (prueba ejecutada) |
+| ID | Estado | Implementación | Evidencia |
 |---|---|---|---|
-| RF-V2-FK-01 | Cumplido para el único FK existente (`usuario_rol.rol_id`) | `frontend/templates/usuarios/form.html` (select cargado desde `GET /api/auth/roles`) | `test_user_form_uses_select_populated_from_api_not_typed_ids` |
-| RF-V2-MD-01 | Cumplido para usuario→roles | `sp_usuario_crear` (PROCEDURE) → `fn_usuario_crear` | `Create_InsertsMasterAndAllDetailsAtomically`, `Create_WithNonexistentRole_RollsBackTheMaster`, `test_user_creation_is_single_atomic_api_call_with_role_collection` |
-| RF-V2-MD-02 | Cumplido para usuario→roles | `sp_usuario_actualizar` | `Update_ReplacesDetailsAndMissingUserRaisesP0002`, `Update_WithInvalidRole_KeepsPreviousDetails` |
-| RF-V2-MD-03 | Cumplido para usuario→roles | `fn_usuario_consultar`, `fn_usuario_listar` (JSONB) sobre `vw_usuarios_roles` | `database/tests/v2_usuarios_roles.sql` |
-| RF-V2-MD-04 | Cumplido (borrado lógico) | `sp_usuario_inactivar` | `Deactivate_IsLogicalAndIdempotentlyReportsMissing` |
-| RF-V2-DB-01 | **Bloqueado**: sin modelo académico oficial no hay campos derivados que justifiquen triggers | — | — |
-| RF-V2-DB-02 | Parcial: solo `vw_usuarios_roles` | `database/init/03_v2_usuarios_roles.sql` | `database/tests/v2_usuarios_roles.sql` |
-| RF-V2-SEC-01 | Cumplido | `AuthService` (bcrypt, costo configurable) | `LoginVerifiesBcryptAndReturnsRoleClaims`, `UserCreationStoresBcryptHashInsteadOfPassword`; hash `$2a$12$` verificado en BD |
-| RF-V2-SEC-02 | Cumplido | `[Authorize]` + token firmado | `AdminRoutes_RequireAuthentication`, `AuthenticatedUserWithoutAdminRole_ReceivesForbidden`, `ExpiredToken_ReturnsUnauthorized`, smoke HTTP real |
-| RF-V2-SEC-03 | Cumplido en API y Flask | `RolesAcceso`, `enforce_access` | `CatalogAuthorizationTests`, `test_read_only_role_can_list_but_not_write` |
-| V1 (regresión) | Cumplido | 6 controladores sin cambios funcionales; solo se añadió `[Authorize]` | `CatalogCrudRegressionTests` (19 pruebas contra PostgreSQL: crear, consultar, listar, actualizar, borrado lógico, 404, 400, 409) |
+| RF-V2-FK-01 | Pendiente del modelo oficial | — | — |
+| RF-V2-MD-01 | Cumplido en PostgreSQL para usuario→roles | `sp_usuario_crear` (PROCEDURE) → `fn_usuario_crear` | `database/tests/v2_usuarios_roles.sql` (alta atómica y rollback del maestro ante rol inexistente) |
+| RF-V2-MD-02 | Cumplido en PostgreSQL | `sp_usuario_actualizar` | ídem (reemplazo de detalles, rollback conserva los anteriores) |
+| RF-V2-MD-03 | Cumplido en PostgreSQL | `fn_usuario_consultar`, `fn_usuario_listar` (JSONB) sobre `vw_usuarios_roles` | ídem |
+| RF-V2-MD-04 | Cumplido (borrado lógico) | `sp_usuario_inactivar` | ídem |
+| RF-V2-DB-01 | **Bloqueado**: sin modelo académico no hay campos derivados | — | — |
+| RF-V2-DB-02 | Parcial: solo `vw_usuarios_roles` | `database/migrations/003_v2_usuarios_roles.sql` | `database/tests/v2_usuarios_roles.sql` |
+| V1 sin autenticación | Cumplido | Seis controladores sin `[Authorize]`; Flask sin login | `SinAutenticacionTests`, `CatalogCrudRegressionTests` (PostgreSQL real), `frontend/tests/test_app.py`, `frontend/tests/e2e` |
 
-## Decisión de modelo canónico de usuarios
-En esta rama el modelo canónico es `usuario` / `rol` / `usuario_rol` (V2). El par `usuarios`/`roles` pertenece a otra línea de trabajo (`repair/v1-catalogos`) y no existe aquí; no se crean tablas duplicadas. Si ambas líneas se unifican deberá hacerse mediante una migración explícita aprobada.
+## Decisión sobre las tablas de usuarios
+`usuario`, `rol` y `usuario_rol` se conservan intactas (con sus datos, si existen) para la versión futura. No se eliminan tablas con información; la aplicación no las usa.

@@ -16,23 +16,23 @@ Se sustituirán los nombres genéricos una vez identificado el modelo real. Los 
 La validación de entrada debe fallar antes de persistir o causar rollback.
 
 ## Contratos implementados (verificados)
-| Método y ruta | Acceso | Éxito | Errores |
-|---|---|---|---|
-| `POST /api/auth/login` | Público | 200 `{accessToken, tokenType, expiresAtUtc, roles}` | 401 |
-| `GET /api/auth/roles` | Administrador | 200 | 401, 403 |
-| `GET /api/auth/usuarios` y `/{id}` | Administrador | 200 | 401, 403, 404 |
-| `POST /api/auth/usuarios` `{correo, password(≥12), roles[]}` | Administrador | 201 + `Location` | 400, 401, 403, 409 |
-| `PUT /api/auth/usuarios/{id}` `{correo, roles[]}` | Administrador | 200 | 400, 401, 403, 404 |
-| `DELETE /api/auth/usuarios/{id}` | Administrador | 204 | 401, 403, 404 |
-| `GET /api/{catalogo}` y `/{id}` (6 catálogos V1) | Cualquier usuario autenticado | 200 | 401, 404 |
-| `POST/PUT/DELETE /api/{catalogo}` | Administrador o Coordinador | 201/200 | 400, 401, 403, 404 |
+Ninguna ruta exige credenciales ni token. Los errores usan `{"mensaje": "..."}`.
 
-Procedimientos PostgreSQL: `CALL sp_usuario_crear(correo, hash, roles jsonb, INOUT resultado jsonb)`, `sp_usuario_actualizar(id, correo, roles, INOUT resultado)`, `sp_usuario_inactivar(id, INOUT inactivado boolean)`, `sp_usuario_bootstrap_admin(correo, hash, INOUT resultado)`. SQLSTATE: `23505` duplicado, `23503`/`22023` datos o roles inválidos, `P0002` usuario inexistente.
+| Método y ruta | Éxito | Errores |
+|---|---|---|
+| `GET /health` | 200 | — |
+| `GET /api/{catálogo}` y `/{id}` (6 catálogos V1; `termino_clave` usa el término como clave) | 200 | 404 |
+| `POST /api/{catálogo}` | 201 + `Location` | 400 (validación), 409 (`termino_clave` duplicado) |
+| `PUT /api/{catálogo}/{id}` | 200 | 400, 404 |
+| `DELETE /api/{catálogo}/{id}` (borrado lógico) | 200 | 404 |
 
-Flask (cookie de sesión): `GET/POST /login`, `POST /logout`, `/usuarios` (solo Administrador).
+No existen `/api/auth/*`, `/login`, `/logout` ni `/usuarios` (404).
 
-## Seguridad
-- POST /api/auth/login: 200 si válido; 401 si credenciales inválidas.
-- Rutas protegidas: 401 sin identidad válida, 403 con identidad válida sin permiso.
-- Respuestas sin contraseñas, hashes, cadenas de conexión ni datos secretos.
-- El frontend llena FK con GET a catálogos permitidos, mostrando nombre y enviando ID.
+Procedimientos PostgreSQL disponibles solo en la base (sin ruta HTTP): `CALL sp_usuario_crear(correo, hash, roles jsonb, INOUT resultado jsonb)`, `sp_usuario_actualizar(id, correo, roles, INOUT resultado)`, `sp_usuario_inactivar(id, INOUT inactivado boolean)`, `sp_usuario_bootstrap_admin(correo, hash, INOUT resultado)`. SQLSTATE: `23505` duplicado, `23503`/`22023` datos o roles inválidos, `P0002` usuario inexistente. Prueba: `database/tests/v2_usuarios_roles.sql`.
+
+Flask: `GET /` (dashboard), `/{catálogo}`, `/{catálogo}/nuevo`, `POST /{catálogo}/crear`, `/{catálogo}/editar/{id}` (GET/POST), `POST /{catálogo}/eliminar/{id}`. Todo POST exige `csrf_token` (400 si falta o no coincide).
+
+## Seguridad (medidas generales)
+- Sin autenticación: reservada para una versión futura.
+- Validación de entrada y SQL parametrizado; respuestas sin cadenas de conexión ni datos secretos.
+- El frontend llenará las FK del dominio académico con GET a catálogos, mostrando nombre y enviando ID (pendiente del modelo oficial).
