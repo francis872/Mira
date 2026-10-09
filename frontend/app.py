@@ -1,39 +1,40 @@
+import hmac
 import os
 import secrets
-from datetime import timedelta
 import requests
+from markupsafe import Markup
 from urllib.parse import quote
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 
 app = Flask(__name__)
 _secret = os.getenv("SECRET_KEY", "")
 if not _secret or _secret.startswith("REPLACE"):
-    # Sin SECRET_KEY configurada las sesiones se invalidan en cada reinicio.
+    # La cookie firmada solo transporta el token CSRF y los mensajes flash; no hay autenticación.
     _secret = secrets.token_hex(32)
 app.secret_key = _secret
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Strict",
-    PERMANENT_SESSION_LIFETIME=timedelta(minutes=60),
+    SESSION_COOKIE_SECURE=os.getenv("SESSION_COOKIE_SECURE", "false").lower() == "true",
 )
-
-WRITE_ROLES = {"Administrador", "Coordinador"}
-ADMIN_ROLE = "Administrador"
-PUBLIC_ENDPOINTS = {"login", "static"}
+SWAGGER_URL = os.getenv("SWAGGER_URL", "http://localhost:8081/swagger")
 
 
-class ApiAuthError(Exception):
-    def __init__(self, status):
-        super().__init__(status)
-        self.status = status
+def _csrf_token():
+    token = session.get("csrf_token")
+    if not token:
+        token = secrets.token_urlsafe(32)
+        session["csrf_token"] = token
+    return token
+
+
+app.jinja_env.globals["csrf_input"] = lambda: Markup(
+    f'<input type="hidden" name="csrf_token" value="{_csrf_token()}">'
+)
 
 
 def _headers():
-    headers = {"Content-Type": "application/json"}
-    token = session.get("token")
-    if token:
-        headers["Authorization"] = f"Bearer {token}"
-    return headers
+    return {"Content-Type": "application/json"}
 
 
 def error_message(resp, default):
@@ -49,47 +50,25 @@ def error_message(resp, default):
 
 
 @app.context_processor
-def inject_identity():
-    roles = set(session.get("roles", []))
-    return {
-        "current_user": session.get("correo"),
-        "can_write": bool(roles & WRITE_ROLES),
-        "is_admin": ADMIN_ROLE in roles,
-    }
+def inject_globals():
+    return {"swagger_url": SWAGGER_URL}
 
 
-def _forbidden_page():
-    return render_template("error.html", status=403, message="No tiene permisos para realizar esta operación."), 403
-
-
-@app.errorhandler(ApiAuthError)
-def handle_api_auth_error(error):
-    if error.status == 401:
-        session.clear()
-        flash("Su sesión expiró o no es válida. Inicie sesión nuevamente.", "warning")
-        return redirect(url_for("login"))
-    return _forbidden_page()
-
-
-@app.errorhandler(403)
-def handle_forbidden(_error):
-    return _forbidden_page()
+@app.errorhandler(400)
+def handle_bad_request(_error):
+    return render_template(
+        "error.html", status=400,
+        message="La solicitud fue rechazada: el token de seguridad es inválido o venció. Recargue la página e intente de nuevo.",
+    ), 400
 
 
 @app.before_request
-def enforce_access():
-    if request.endpoint is None or request.endpoint in PUBLIC_ENDPOINTS:
-        return None
-    if not session.get("token"):
-        return redirect(url_for("login"))
-    roles = set(session.get("roles", []))
-    if request.endpoint.startswith("usuarios_"):
-        if ADMIN_ROLE not in roles:
-            abort(403)
-    elif not roles & WRITE_ROLES and request.endpoint != "logout" and (
-        request.method == "POST" or request.endpoint.endswith(("_new", "_edit"))
-    ):
-        abort(403)
+def verify_csrf():
+    if request.method == "POST":
+        sent = request.form.get("csrf_token", "")
+        expected = session.get("csrf_token", "")
+        if not expected or not hmac.compare_digest(sent, expected):
+            abort(400)
     return None
 
 # URL base de la API REST de MIRA
@@ -108,16 +87,45 @@ def api_call(method, path, json_data=None):
         )
     except requests.exceptions.RequestException:
         return None
-    if response.status_code in (401, 403) and path.strip("/") != "auth/login":
-        raise ApiAuthError(response.status_code)
     return response
 
 # =============================================================================
 # Dashboard Principal
 # =============================================================================
+CATALOGS = [
+    {"path": "area_conocimiento", "title": "Área de Conocimiento", "icon": "bi-book", "color": "danger",
+     "list": "area_conocimiento_list", "new": "area_conocimiento_new",
+     "text": "Clasificación académica por gran área, área específica y disciplina."},
+    {"path": "objetivo_desarrollo_sostenible", "title": "ODS", "icon": "bi-globe-americas", "color": "success",
+     "list": "ods_list", "new": "ods_new",
+     "text": "Objetivos de Desarrollo Sostenible con su categoría temática."},
+    {"path": "area_aplicacion", "title": "Área de Aplicación", "icon": "bi-cpu", "color": "primary",
+     "list": "area_aplicacion_list", "new": "area_aplicacion_new",
+     "text": "Sectores y ámbitos donde se aplican los resultados de investigación."},
+    {"path": "termino_clave", "title": "Término Clave", "icon": "bi-tags", "color": "warning",
+     "list": "termino_clave_list", "new": "termino_clave_new",
+     "text": "Palabras clave normalizadas en español e inglés."},
+    {"path": "universidad", "title": "Universidad", "icon": "bi-buildings", "color": "info",
+     "list": "universidad_list", "new": "universidad_new",
+     "text": "Instituciones de educación superior, tipo y ciudad sede."},
+    {"path": "linea_investigacion", "title": "Línea de Investigación", "icon": "bi-diagram-3", "color": "secondary",
+     "list": "linea_investigacion_list", "new": "linea_investigacion_new",
+     "text": "Líneas temáticas institucionales con su descripción."},
+]
+
+
+def _count(path):
+    resp = api_call("GET", path)
+    if resp is None or resp.status_code != 200:
+        return None
+    return len(resp.json())
+
+
 @app.route("/")
 def index():
-    return render_template("index.html")
+    catalogs = [{**c, "count": _count(c["path"])} for c in CATALOGS]
+    api_ok = all(c["count"] is not None for c in catalogs)
+    return render_template("index.html", catalogs=catalogs, api_ok=api_ok)
 
 # =============================================================================
 # Módulo 1: Área de Conocimiento
@@ -489,121 +497,6 @@ def linea_investigacion_delete(id):
         flash("No se pudo eliminar el registro.", "danger")
     return redirect(url_for("linea_investigacion_list"))
 
-# =============================================================================
-# Seguridad: sesión (login / logout)
-# =============================================================================
-def _roles_from_token_response(body):
-    roles = body.get("roles") or []
-    return [r for r in roles if isinstance(r, str)]
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "GET":
-        return render_template("login.html")
-    correo = request.form.get("correo", "").strip()
-    password = request.form.get("password", "")
-    resp = api_call("POST", "auth/login", {"correo": correo, "password": password})
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
-        return render_template("login.html"), 503
-    if resp.status_code != 200:
-        flash("Credenciales inválidas.", "danger")
-        return render_template("login.html"), 401
-    body = resp.json()
-    session.clear()
-    session.permanent = True
-    session["token"] = body.get("accessToken")
-    session["correo"] = correo.lower()
-    session["roles"] = _roles_from_token_response(body)
-    return redirect(url_for("index"))
-
-
-@app.route("/logout", methods=["POST"])
-def logout():
-    session.clear()
-    flash("Sesión cerrada.", "success")
-    return redirect(url_for("login"))
-
-# =============================================================================
-# Administración de usuarios y roles (maestro-detalle en una sola operación)
-# =============================================================================
-def _active_roles():
-    resp = api_call("GET", "auth/roles")
-    return resp.json() if resp is not None and resp.status_code == 200 else []
-
-
-def _role_ids_from_form():
-    ids = []
-    for raw in request.form.getlist("roles"):
-        if raw.isdigit() and int(raw) > 0 and int(raw) not in ids:
-            ids.append(int(raw))
-    return ids
-
-
-@app.route("/usuarios")
-def usuarios_list():
-    resp = api_call("GET", "auth/usuarios")
-    items = resp.json() if resp is not None and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
-    return render_template("usuarios/list.html", items=items)
-
-
-@app.route("/usuarios/nuevo")
-def usuarios_new():
-    return render_template("usuarios/form.html", item=None, roles_catalog=_active_roles(), selected=[])
-
-
-@app.route("/usuarios/crear", methods=["POST"])
-def usuarios_create():
-    selected = _role_ids_from_form()
-    payload = {
-        "correo": request.form.get("correo", "").strip(),
-        "password": request.form.get("password", ""),
-        "roles": selected,
-    }
-    resp = api_call("POST", "auth/usuarios", payload)
-    if resp is not None and resp.status_code == 201:
-        flash("Usuario creado exitosamente.", "success")
-        return redirect(url_for("usuarios_list"))
-    flash(f"Error: {error_message(resp, 'No se pudo crear el usuario.')}", "danger")
-    item = {"correo": payload["correo"]}
-    return render_template("usuarios/form.html", item=item, roles_catalog=_active_roles(), selected=selected), 400
-
-
-@app.route("/usuarios/editar/<int:id>")
-def usuarios_edit(id):
-    resp = api_call("GET", f"auth/usuarios/{id}")
-    if resp is not None and resp.status_code == 200:
-        item = resp.json()
-        selected = [r["id"] for r in item.get("roles", [])]
-        return render_template("usuarios/form.html", item=item, roles_catalog=_active_roles(), selected=selected)
-    flash("Usuario no encontrado.", "warning")
-    return redirect(url_for("usuarios_list"))
-
-
-@app.route("/usuarios/editar/<int:id>", methods=["POST"])
-def usuarios_update(id):
-    selected = _role_ids_from_form()
-    payload = {"correo": request.form.get("correo", "").strip(), "roles": selected}
-    resp = api_call("PUT", f"auth/usuarios/{id}", payload)
-    if resp is not None and resp.status_code == 200:
-        flash("Usuario actualizado exitosamente.", "success")
-        return redirect(url_for("usuarios_list"))
-    flash(f"Error: {error_message(resp, 'No se pudo actualizar el usuario.')}", "danger")
-    item = {"id": id, "correo": payload["correo"]}
-    return render_template("usuarios/form.html", item=item, roles_catalog=_active_roles(), selected=selected), 400
-
-
-@app.route("/usuarios/inactivar/<int:id>", methods=["POST"])
-def usuarios_deactivate(id):
-    resp = api_call("DELETE", f"auth/usuarios/{id}")
-    if resp is not None and resp.status_code == 204:
-        flash("Usuario inactivado.", "success")
-    else:
-        flash("No se pudo inactivar el usuario.", "danger")
-    return redirect(url_for("usuarios_list"))
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))

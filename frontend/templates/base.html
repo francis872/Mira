@@ -57,10 +57,6 @@
             background-color: #0f172a;
             color: #94a3b8;
         }
-        {% if current_user and not can_write %}
-        /* Solo oculta controles; el servidor y la API imponen el permiso real. */
-        a[href$="/nuevo"], th.text-end.pe-4, td.text-end.pe-4 { display: none !important; }
-        {% endif %}
     </style>
 </head>
 <body>
@@ -76,7 +72,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarMain">
-                {% if current_user %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('index') }}">
@@ -113,25 +108,9 @@
                             <i class="bi bi-diagram-3 me-1"></i> Líneas Investigación
                         </a>
                     </li>
-                    {% if is_admin %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('usuarios_list') }}">
-                            <i class="bi bi-people me-1"></i> Usuarios
-                        </a>
-                    </li>
-                    {% endif %}
                 </ul>
-                {% else %}
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-                {% endif %}
                 <div class="d-flex align-items-center gap-2">
-                    {% if current_user %}
-                    <span class="text-white-50 small"><i class="bi bi-person-circle me-1"></i>{{ current_user }}</span>
-                    <form method="POST" action="{{ url_for('logout') }}" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-outline-light"><i class="bi bi-box-arrow-right me-1"></i>Salir</button>
-                    </form>
-                    {% endif %}
-                    <a href="http://localhost:8081/swagger" target="_blank" class="btn btn-sm btn-outline-light d-flex align-items-center">
+                    <a href="{{ swagger_url }}" target="_blank" class="btn btn-sm btn-outline-light d-flex align-items-center">
                         <i class="bi bi-code-slash me-1"></i> Swagger API
                     </a>
                 </div>
