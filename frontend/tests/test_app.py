@@ -4,8 +4,18 @@ os.environ["SECRET_KEY"] = "test-secret-key-for-frontend-tests-only"
 os.environ["API_URL"] = "http://api.test/api"
 
 import pytest
+from flask.testing import FlaskClient
 
 import app as frontend
+
+CATALOG_ROUTES = [
+    "/area_conocimiento",
+    "/objetivo_desarrollo_sostenible",
+    "/area_aplicacion",
+    "/termino_clave",
+    "/universidad",
+    "/linea_investigacion",
+]
 
 
 class FakeResponse:
@@ -38,120 +48,126 @@ def calls(monkeypatch):
     return recorded
 
 
+class CsrfClient(FlaskClient):
+    """Envía el token CSRF de la cookie firmada salvo que se pida lo contrario."""
+
+    def open(self, *args, **kwargs):
+        skip = kwargs.pop("no_csrf", False)
+        if kwargs.get("method") == "POST" and not skip:
+            with self.session_transaction() as session:
+                token = session.setdefault("csrf_token", "csrf-test-token")
+            data = dict(kwargs.get("data") or {})
+            data.setdefault("csrf_token", token)
+            kwargs["data"] = data
+        return super().open(*args, **kwargs)
+
+
 @pytest.fixture
 def client():
     frontend.app.config["TESTING"] = True
+    frontend.app.test_client_class = CsrfClient
     with frontend.app.test_client() as test_client:
         yield test_client
 
 
-def sign_in(client, roles, token="jwt-token"):
-    with client.session_transaction() as session:
-        session["token"] = token
-        session["correo"] = "user@example.invalid"
-        session["roles"] = roles
+def test_dashboard_opens_directly_without_login(client, calls):
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "Bienvenido a MIRA" in response.get_data(as_text=True)
 
 
-def test_anonymous_user_is_redirected_to_login(client, calls):
-    response = client.get("/universidad")
-    assert response.status_code == 302
-    assert response.headers["Location"].endswith("/login")
-    assert calls == []
+@pytest.mark.parametrize("path", CATALOG_ROUTES)
+def test_catalog_pages_open_without_login(client, calls, path):
+    assert client.get(path).status_code == 200
+    assert client.get(path + "/nuevo").status_code == 200
 
 
-def test_login_success_stores_session_and_roles(client, calls):
-    calls.responses[("POST", "auth/login")] = FakeResponse(
-        200, {"accessToken": "abc", "tokenType": "Bearer", "roles": ["Coordinador"]}
-    )
-    response = client.post("/login", data={"correo": "Coord@Example.invalid", "password": "x" * 12})
-    assert response.status_code == 302
-    with client.session_transaction() as session:
-        assert session["token"] == "abc"
-        assert session["roles"] == ["Coordinador"]
-        assert session["correo"] == "coord@example.invalid"
+@pytest.mark.parametrize("path", ["/login", "/logout", "/usuarios", "/usuarios/nuevo"])
+def test_authentication_and_user_routes_do_not_exist(client, calls, path):
+    assert client.get(path).status_code == 404
+    assert client.post(path, no_csrf=True).status_code in (400, 404)
 
 
-def test_login_invalid_credentials_returns_401_without_session(client, calls):
-    calls.responses[("POST", "auth/login")] = FakeResponse(401, {"mensaje": "Credenciales inválidas."})
-    response = client.post("/login", data={"correo": "a@b.co", "password": "bad"})
-    assert response.status_code == 401
-    with client.session_transaction() as session:
-        assert "token" not in session
+def test_no_authentication_artifacts_are_sent_to_the_api(client, calls):
+    for path in CATALOG_ROUTES:
+        client.get(path)
+    client.get("/")
+    assert calls
+    assert all("Authorization" not in c["headers"] for c in calls)
+    assert not [c for c in calls if "auth" in c["url"]]
 
 
-def test_logout_clears_session(client, calls):
-    sign_in(client, ["Administrador"])
-    response = client.post("/logout")
-    assert response.status_code == 302
-    with client.session_transaction() as session:
-        assert "token" not in session
+def test_navigation_has_no_login_or_logout_controls(client, calls):
+    html = client.get("/").get_data(as_text=True)
+    assert "/login" not in html and "/logout" not in html and "Salir" not in html
 
 
-def test_read_only_role_can_list_but_not_write(client, calls):
-    sign_in(client, ["Investigador"])
-    assert client.get("/universidad").status_code == 200
-    assert client.get("/universidad/nuevo").status_code == 403
-    assert client.post("/universidad/crear", data={"nombre": "U"}).status_code == 403
-    assert client.post("/universidad/eliminar/1").status_code == 403
-    assert not [c for c in calls if c["method"] in ("POST", "PUT", "DELETE")]
-
-
-def test_non_admin_cannot_open_user_administration(client, calls):
-    sign_in(client, ["Coordinador"])
-    assert client.get("/usuarios").status_code == 403
-    assert client.post("/usuarios/crear", data={"correo": "a@b.co"}).status_code == 403
-    assert calls == []
-
-
-def test_coordinator_write_forwards_bearer_token(client, calls):
-    sign_in(client, ["Coordinador"], token="tok-123")
+def test_create_goes_to_the_api_without_token(client, calls):
     calls.responses[("POST", "universidad")] = FakeResponse(201, {"id": 1})
     response = client.post("/universidad/crear", data={"nombre": "U", "tipo": "Privada", "ciudad": "Medellín"})
     assert response.status_code == 302
-    assert calls[-1]["headers"]["Authorization"] == "Bearer tok-123"
+    sent = [c for c in calls if c["method"] == "POST"]
+    assert sent[-1]["json"] == {"nombre": "U", "tipo": "Privada", "ciudad": "Medellín"}
+    assert "Authorization" not in sent[-1]["headers"]
 
 
-def test_api_401_expires_session_and_redirects_to_login(client, calls):
-    sign_in(client, ["Administrador"])
-    calls.responses[("GET", "universidad")] = FakeResponse(401)
-    response = client.get("/universidad")
-    assert response.status_code == 302
-    assert response.headers["Location"].endswith("/login")
-    with client.session_transaction() as session:
-        assert "token" not in session
+def test_update_and_logical_delete_reach_the_api(client, calls):
+    calls.responses[("PUT", "universidad/3")] = FakeResponse(200, {"mensaje": "ok"})
+    calls.responses[("DELETE", "universidad/3")] = FakeResponse(200, {"mensaje": "ok"})
+    assert client.post("/universidad/editar/3", data={"nombre": "U2", "tipo": "Pública", "ciudad": "Bogotá"}).status_code == 302
+    assert client.post("/universidad/eliminar/3").status_code == 302
+    assert [c["method"] for c in calls if c["method"] != "GET"] == ["PUT", "DELETE"]
 
 
-def test_api_403_renders_forbidden_page(client, calls):
-    sign_in(client, ["Administrador"])
-    calls.responses[("GET", "universidad")] = FakeResponse(403)
-    assert client.get("/universidad").status_code == 403
+def test_api_validation_error_is_shown_to_the_user(client, calls):
+    calls.responses[("POST", "universidad")] = FakeResponse(400, {"mensaje": "El nombre es obligatorio."})
+    response = client.post("/universidad/crear", data={"nombre": "", "tipo": "", "ciudad": ""})
+    assert response.status_code == 200
+    assert "El nombre es obligatorio." in response.get_data(as_text=True)
 
 
-def test_user_form_uses_select_populated_from_api_not_typed_ids(client, calls):
-    sign_in(client, ["Administrador"])
-    calls.responses[("GET", "auth/roles")] = FakeResponse(200, [{"id": 1, "nombre": "Administrador"}, {"id": 2, "nombre": "Investigador"}])
-    html = client.get("/usuarios/nuevo").get_data(as_text=True)
-    assert '<select class="form-select" name="roles"' in html
-    assert "Investigador" in html
-    assert 'name="roles" type="number"' not in html and 'name="roles" type="text"' not in html
-
-
-def test_user_creation_is_single_atomic_api_call_with_role_collection(client, calls):
-    sign_in(client, ["Administrador"])
-    calls.responses[("POST", "auth/usuarios")] = FakeResponse(201, {"id": 9})
-    response = client.post(
-        "/usuarios/crear",
-        data={"correo": "new@example.invalid", "password": "p" * 12, "roles": ["1", "2", "2", "abc"]},
-    )
-    assert response.status_code == 302
-    writes = [c for c in calls if c["method"] in ("POST", "PUT", "DELETE")]
-    assert len(writes) == 1
-    assert writes[0]["json"]["roles"] == [1, 2]
-
-
-def test_failed_user_creation_shows_api_message(client, calls):
-    sign_in(client, ["Administrador"])
-    calls.responses[("POST", "auth/usuarios")] = FakeResponse(409, {"mensaje": "El correo ya está registrado."})
-    response = client.post("/usuarios/crear", data={"correo": "dup@example.invalid", "password": "p" * 12, "roles": ["1"]})
+def test_post_without_csrf_token_is_rejected_and_nothing_is_sent(client, calls):
+    response = client.post("/universidad/crear", data={"nombre": "U"}, no_csrf=True)
     assert response.status_code == 400
-    assert "El correo ya está registrado." in response.get_data(as_text=True)
+    assert calls == []
+
+
+def test_post_with_wrong_csrf_token_is_rejected(client, calls):
+    client.get("/universidad/nuevo")
+    response = client.post("/universidad/crear", data={"nombre": "U", "csrf_token": "forged"}, no_csrf=True)
+    assert response.status_code == 400
+    assert not [c for c in calls if c["method"] == "POST"]
+
+
+def test_every_rendered_form_embeds_the_csrf_token(client, calls):
+    for path in ("/universidad/nuevo", "/area_conocimiento/nuevo", "/termino_clave/nuevo", "/linea_investigacion/nuevo"):
+        assert 'name="csrf_token"' in client.get(path).get_data(as_text=True), path
+    calls.responses[("GET", "universidad")] = FakeResponse(200, [{"id": 1, "nombre": "U", "tipo": "Privada", "ciudad": "X", "activo": True}])
+    assert 'name="csrf_token"' in client.get("/universidad").get_data(as_text=True)
+
+
+def test_session_cookie_is_httponly_and_samesite_strict(client, calls):
+    cookie = client.get("/universidad/nuevo").headers.get("Set-Cookie", "")
+    assert "HttpOnly" in cookie
+    assert "SameSite=Strict" in cookie
+
+
+def test_dashboard_shows_real_counts_from_the_api(client, calls):
+    calls.responses[("GET", "universidad")] = FakeResponse(200, [{"id": 1}, {"id": 2}])
+    calls.responses[("GET", "area_aplicacion")] = FakeResponse(200, [])
+    html = client.get("/").get_data(as_text=True)
+    assert "Registros activos: <strong>2</strong>" in html
+    assert "Registros activos: <strong>0</strong>" in html
+
+
+def test_dashboard_reports_unavailable_data_instead_of_inventing_numbers(client, monkeypatch):
+    monkeypatch.setattr(frontend.requests, "request", lambda *a, **k: (_ for _ in ()).throw(frontend.requests.exceptions.ConnectionError()))
+    html = client.get("/").get_data(as_text=True)
+    assert "no disponible" in html
+    assert "<strong>0</strong>" not in html
+
+
+def test_dashboard_states_honestly_what_is_pending(client, calls):
+    html = client.get("/").get_data(as_text=True)
+    assert "Pendiente: requiere el modelo relacional oficial" in html
+    assert "Fuera de alcance (versión futura)" in html
