@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Modelos;
+using MIRA.Api.Seguridad;
 using MIRA.Api.Servicios;
 
 namespace MIRA.Api.Peticiones;
 
 [ApiController]
+[Authorize]
 [Route("api/termino_clave")]
 public class TerminoClaveController : ControllerBase
 {
@@ -36,6 +39,7 @@ public class TerminoClaveController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(typeof(TerminoClave), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -57,6 +61,7 @@ public class TerminoClaveController : ControllerBase
     }
 
     [HttpPut("{termino}")]
+    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -77,6 +82,7 @@ public class TerminoClaveController : ControllerBase
     }
 
     [HttpDelete("{termino}")]
+    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string termino)

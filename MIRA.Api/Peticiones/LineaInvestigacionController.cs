@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Modelos;
+using MIRA.Api.Seguridad;
 using MIRA.Api.Servicios;
 
 namespace MIRA.Api.Peticiones;
 
 [ApiController]
+[Authorize]
 [Route("api/linea_investigacion")]
 public class LineaInvestigacionController : ControllerBase
 {
@@ -36,6 +39,7 @@ public class LineaInvestigacionController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(typeof(LineaInvestigacion), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] LineaInvestigacion entity)
@@ -52,6 +56,7 @@ public class LineaInvestigacionController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -72,6 +77,7 @@ public class LineaInvestigacionController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = RolesAcceso.Escritura)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
