@@ -1,62 +1,75 @@
 using Dapper;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using MIRA.Api.Configuracion;
 using MIRA.Api.Repositorios;
 using MIRA.Api.Servicios;
+using MIRA.Api.Seguridad;
 
-// Habilitar mapeo automático de columnas con guiones bajos (snake_case) a propiedades PascalCase en Dapper
 DefaultTypeMap.MatchNamesWithUnderscores = true;
-
 var builder = WebApplication.CreateBuilder(args);
-
-// Configuración de controladores y Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
+    c.SwaggerDoc("v2", new OpenApiInfo
     {
         Title = "MIRA API",
-        Version = "v0.1",
-        Description = "Módulo de Investigación para la Gestión de Proyectos Académicos - USB Medellín (Entrega 1: Tablas Maestras Sin FK)"
+        Version = "v2",
+        Description = "MIRA - Catálogos V1 y módulo de autenticación/usuarios-roles V2"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
+        Name = "Authorization", Type = SecuritySchemeType.Http, Scheme = "bearer",
+        BearerFormat = "JWT", In = ParameterLocation.Header
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+        { new OpenApiSecurityScheme {
+            Reference = new OpenApiReference { Type=ReferenceType.SecurityScheme, Id="Bearer" }
+          }, Array.Empty<string>() }
     });
 });
-
-// Registro de factoría de conexiones a PostgreSQL
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-
-// Registro de Repositorios (Inyección de Dependencias)
 builder.Services.AddScoped<IAreaConocimientoRepository, AreaConocimientoRepository>();
 builder.Services.AddScoped<IObjetivoDesarrolloSostenibleRepository, ObjetivoDesarrolloSostenibleRepository>();
 builder.Services.AddScoped<IAreaAplicacionRepository, AreaAplicacionRepository>();
 builder.Services.AddScoped<ITerminoClaveRepository, TerminoClaveRepository>();
 builder.Services.AddScoped<IUniversidadRepository, UniversidadRepository>();
 builder.Services.AddScoped<ILineaInvestigacionRepository, LineaInvestigacionRepository>();
-
-// Registro de Servicios de Lógica de Negocio (Inyección de Dependencias)
 builder.Services.AddScoped<IAreaConocimientoService, AreaConocimientoService>();
 builder.Services.AddScoped<IObjetivoDesarrolloSostenibleService, ObjetivoDesarrolloSostenibleService>();
 builder.Services.AddScoped<IAreaAplicacionService, AreaAplicacionService>();
 builder.Services.AddScoped<ITerminoClaveService, TerminoClaveService>();
 builder.Services.AddScoped<IUniversidadService, UniversidadService>();
 builder.Services.AddScoped<ILineaInvestigacionService, LineaInvestigacionService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
+var key = builder.Configuration["Jwt:Secret"];
+if (string.IsNullOrWhiteSpace(key) || Encoding.UTF8.GetByteCount(key) < 32)
+    throw new InvalidOperationException("Configure Jwt:Secret mediante variable de entorno, con al menos 32 bytes.");
+var issuer = builder.Configuration["Jwt:Issuer"] ?? throw new InvalidOperationException("Configure Jwt:Issuer.");
+var audience = builder.Configuration["Jwt:Audience"] ?? throw new InvalidOperationException("Configure Jwt:Audience.");
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+        options.TokenValidationParameters = new TokenValidationParameters {
+            ValidateIssuer = true, ValidIssuer = issuer,
+            ValidateAudience = true, ValidAudience = audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(1)
+        };
+    });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
-
-// Habilitar Swagger en desarrollo y entorno local
-if (app.Environment.IsDevelopment())
-{
+if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MIRA API v0.1");
-    });
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "MIRA API v2"));
 }
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-app.MapGet("/health", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow }));
-
+app.MapGet("/health", () => Results.Ok(new { status="ok", timestamp=DateTime.UtcNow }));
 app.Run();
