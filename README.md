@@ -14,8 +14,8 @@ MIRA V1 (seis catálogos) + V2 parcial (seguridad y usuarios/roles). Rama de tra
 
 | Área | Estado |
 |---|---|
-| V1: 6 catálogos (CRUD, borrado lógico, frontend Flask) | Implementado; ahora protegido por JWT |
-| V2: login bcrypt + JWT, roles, 401/403 | Implementado y probado |
+| V1: 6 catálogos (CRUD, borrado lógico, frontend Flask) | Implementado; ahora exige autenticación |
+| V2: login bcrypt, roles, 401/403 | Implementado y probado |
 | V2: administración de usuarios maestro–detalle (`CREATE PROCEDURE`) | Implementado y probado contra PostgreSQL real |
 | V2: modelo académico maestro–detalle oficial (Entrega 2) | **Bloqueado**: el modelo oficial no está en el repositorio |
 | Triggers / vistas del dominio académico | Pendiente del modelo oficial (solo existe `vw_usuarios_roles`) |
@@ -44,7 +44,7 @@ Specification precedes implementation.
 
 - C# / ASP.NET Core Web API sobre .NET 10 (LTS)
 - PostgreSQL 16 (Npgsql + Dapper, SQL parametrizado y procedimientos almacenados)
-- BCrypt.Net-Next y JWT Bearer
+- BCrypt.Net-Next (contraseñas) y token firmado de sesión (detalle interno)
 - Frontend Flask (sesión del lado del servidor)
 - Docker / Docker Compose
 - Swagger/OpenAPI
@@ -64,7 +64,7 @@ Specification precedes implementation.
 3. Aprovisionar el primer administrador una sola vez (ver `versiones/v2_profesor/7_quickstart.md`).
 4. API: `http://localhost:8081/swagger`; frontend: `http://localhost:5000`.
 
-Pruebas: `dotnet test MIRA.sln` (con `MIRA_TEST_DB` apuntando a una base de pruebas se ejecutan también las pruebas de procedimientos) y `pytest` en `frontend/` (`requirements-dev.txt`).
+Pruebas: `dotnet test MIRA.sln` (con `MIRA_TEST_DB` apuntando a una base de pruebas se ejecutan también las pruebas de procedimientos y la regresión CRUD de V1) y `pytest` en `frontend/` (`requirements-dev.txt`).
 
 ## Development Workflow
 
@@ -85,11 +85,11 @@ Pruebas: `dotnet test MIRA.sln` (con `MIRA_TEST_DB` apuntando a una base de prue
 
 ## Security Status
 
-- Autenticación: contraseñas con bcrypt (costo configurable 10–14, 12 por defecto) y JWT con expiración de 60 minutos.
+- Autenticación: usuario/contraseña con bcrypt (costo 12). La identidad viaja en un token firmado de 60 minutos; es una decisión técnica interna, no un requisito del profesor.
 - Autorización: lectura de catálogos para cualquier usuario autenticado; escritura solo `Administrador` y `Coordinador`; gestión de usuarios solo `Administrador`. Aplicada en la API y en Flask.
 - Respuestas: 401 sin token/credenciales/token vencido; 403 con rol insuficiente.
 - No hay autorregistro público ni contraseñas/hashes en el repositorio.
-- Pendiente: token CSRF en formularios Flask (hoy: cookie `SameSite=Strict` + verificación de `Origin`/`Referer`).
+- La cookie de sesión de Flask es `HttpOnly` y `SameSite=Strict`.
 
 ## Project Status
 

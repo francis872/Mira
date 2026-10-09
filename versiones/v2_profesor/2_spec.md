@@ -21,6 +21,23 @@ La V2 conserva la Entrega 1 (API REST y frontend para seis catálogos) y amplía
 - No construir relaciones maestro-detalle ficticias a partir de las seis tablas independientes de la Entrega 1: partir del modelo oficial de la siguiente entrega.
 - La V2 requiere pruebas de atomicidad, integridad, permisos, resultados JSON y regresión de V1.
 
+## Clasificación de alcance
+Solo la columna "Obligatorio" proviene del profesor. Las decisiones técnicas del desarrollo no son requisitos académicos.
+
+| Componente | Clasificación | Nota |
+|---|---|---|
+| V1: 6 catálogos con CRUD y borrado lógico, frontend Flask | Obligatorio | Prioridad 1; regresión automatizada |
+| Modelo relacional oficial de V2 y maestro–detalle | Obligatorio | **Pendiente: modelo no entregado** |
+| FK mediante selectores | Obligatorio | Hecho para `usuario_rol.rol_id` |
+| Procedimientos almacenados CRUD maestro–detalle, JSON/JSONB, atomicidad | Obligatorio | Hecho para usuario→roles |
+| Triggers de integridad y vistas necesarias | Obligatorio (donde existan datos derivados) | Pendiente del modelo oficial |
+| Autenticación usuario/contraseña, bcrypt, roles, HTTP 401 y 403 | Obligatorio | Hecho |
+| Token JWT firmado (60 min) | Necesario técnicamente: transporta la identidad entre Flask y la API | **No es un requisito del profesor.** Se mantiene en su forma mínima: un secreto, sin refresh ni revocación |
+| Comando `--bootstrap-admin` | Necesario técnicamente: sin un primer administrador nadie puede autenticarse | No hay autorregistro público |
+| Pantalla de administración de usuarios con filas de rol | Necesario técnicamente: es el único maestro–detalle real hoy y usa selectores | — |
+| Cookie de sesión Flask `HttpOnly` + `SameSite=Strict` | Necesario técnicamente | — |
+| Costo bcrypt, emisor y audiencia JWT configurables; verificación `Origin`; token CSRF; refresh/revocación de tokens; documento duplicado `v2-implementation.md` | Opcional / fuera de alcance | Retirados o no desarrollados |
+
 ## Trazabilidad requisito → implementación → prueba
 | ID | Estado | Implementación | Evidencia (prueba ejecutada) |
 |---|---|---|---|
@@ -32,8 +49,9 @@ La V2 conserva la Entrega 1 (API REST y frontend para seis catálogos) y amplía
 | RF-V2-DB-01 | **Bloqueado**: sin modelo académico oficial no hay campos derivados que justifiquen triggers | — | — |
 | RF-V2-DB-02 | Parcial: solo `vw_usuarios_roles` | `database/init/03_v2_usuarios_roles.sql` | `database/tests/v2_usuarios_roles.sql` |
 | RF-V2-SEC-01 | Cumplido | `AuthService` (bcrypt, costo configurable) | `LoginVerifiesBcryptAndReturnsRoleClaims`, `UserCreationStoresBcryptHashInsteadOfPassword`; hash `$2a$12$` verificado en BD |
-| RF-V2-SEC-02 | Cumplido | `[Authorize]` + JWT Bearer | `AdminRoutes_RequireAuthentication`, `AuthenticatedUserWithoutAdminRole_ReceivesForbidden`, `ExpiredToken_ReturnsUnauthorized`, smoke HTTP real |
+| RF-V2-SEC-02 | Cumplido | `[Authorize]` + token firmado | `AdminRoutes_RequireAuthentication`, `AuthenticatedUserWithoutAdminRole_ReceivesForbidden`, `ExpiredToken_ReturnsUnauthorized`, smoke HTTP real |
 | RF-V2-SEC-03 | Cumplido en API y Flask | `RolesAcceso`, `enforce_access` | `CatalogAuthorizationTests`, `test_read_only_role_can_list_but_not_write` |
+| V1 (regresión) | Cumplido | 6 controladores sin cambios funcionales; solo se añadió `[Authorize]` | `CatalogCrudRegressionTests` (19 pruebas contra PostgreSQL: crear, consultar, listar, actualizar, borrado lógico, 404, 400, 409) |
 
 ## Decisión de modelo canónico de usuarios
 En esta rama el modelo canónico es `usuario` / `rol` / `usuario_rol` (V2). El par `usuarios`/`roles` pertenece a otra línea de trabajo (`repair/v1-catalogos`) y no existe aquí; no se crean tablas duplicadas. Si ambas líneas se unifican deberá hacerse mediante una migración explícita aprobada.

@@ -19,7 +19,7 @@
 | 5. Triggers y vistas | Pendiente (sin reglas derivadas identificadas) |
 | 6–7. Repositorios C# y selects de FK | Hecho para usuario→roles |
 | 8. Login bcrypt y roles 401/403 | Hecho |
-| 9. Pruebas V1+V2 | 28 pruebas .NET + 13 pruebas Flask + smoke E2E real |
+| 9. Pruebas V1+V2 | 47 pruebas .NET (26 requieren PostgreSQL) + 12 pruebas Flask |
 | Migración a .NET LTS | Hecho (.NET 10) |
 
 ## Política de cambios

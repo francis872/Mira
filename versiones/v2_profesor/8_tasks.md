@@ -12,10 +12,10 @@
 - [x] Adaptar repositorios/servicios/controladores de API (`AuthService`, catálogos protegidos).
 - [x] Selects de FK cargados desde API (roles). No existen otros FK.
 - [x] bcrypt, login y autorización por roles con 401/403 (API y Flask).
-- [x] Pruebas de regresión, transacciones, permisos y SQL: 28 .NET + 13 Flask + smoke E2E.
+- [x] Pruebas de regresión, transacciones, permisos y SQL: 47 .NET (con PostgreSQL) + 12 Flask + smoke E2E.
+- [x] Regresión automatizada de los 6 catálogos V1 contra PostgreSQL real.
 - [x] Aprovisionamiento seguro del primer administrador (`--bootstrap-admin`).
 - [x] Migración a .NET 10 LTS.
-- [ ] Token CSRF por formulario en Flask.
 - [ ] Regresión manual en navegador de los 6 formularios V1 con sesión.
 - [ ] Revisión y fusión del PR (no fusionar hasta cerrar los pendientes y recibir el modelo oficial).
 

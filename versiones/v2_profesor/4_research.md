@@ -13,7 +13,8 @@
 - **Reemplazo de detalles con DELETE + INSERT:** aceptable en `usuario_rol` porque la tabla puente no tiene identidad propia, auditoría ni hijos. No debe copiarse a detalles con identidad.
 - **Modelo canónico de usuarios:** `usuario`/`rol`/`usuario_rol` (V2); ver 2_spec.md.
 - **.NET 10 LTS:** migración desde .NET 7 (EOL); Swashbuckle 10 exige OpenAPI 2 (`OpenApiSecuritySchemeReference`).
-- **Sesión Flask:** el JWT se guarda en la cookie de sesión firmada (HttpOnly, `SameSite=Strict`, 60 min); 401 de la API cierra la sesión; 403 muestra página de acceso denegado. CSRF mediante verificación de `Origin`/`Referer`; el token CSRF por formulario queda pendiente.
+- **Autenticación (decisión técnica, no requisito):** el profesor exige usuario/contraseña, bcrypt, roles y 401/403; no exige JWT. Alternativas evaluadas: cookie de sesión de ASP.NET (obliga a compartir estado entre la API y Flask) y sesión guardada en la base (más tablas y código). Se conserva un JWT mínimo por ser lo más corto para una API separada del frontend: un secreto, expiración de 60 minutos, emisor/audiencia/costo bcrypt como constantes (`ParametrosSeguridad`). Sin refresh ni revocación.
+- **Sesión Flask:** el token se guarda en la cookie de sesión firmada (`HttpOnly`, `SameSite=Strict`, 60 min); un 401 de la API cierra la sesión; un 403 muestra la página de acceso denegado.
 - **Primer administrador:** `dotnet MIRA.Api.dll --bootstrap-admin` con `MIRA_BOOTSTRAP_ADMIN_EMAIL` y `MIRA_BOOTSTRAP_ADMIN_PASSWORD` en el entorno del proceso; solo funciona si no hay administrador activo (bloqueo `pg_advisory_xact_lock`).
 - **Entorno con poco disco:** `SatelliteResourceLanguages=en` reduce la salida de compilación.
 

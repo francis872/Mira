@@ -26,8 +26,8 @@ Remove-Item Env:\MIRA_BOOTSTRAP_ADMIN_PASSWORD
 # Pruebas
 dotnet test MIRA.sln                      # 21 pruebas sin base de datos
 $env:MIRA_TEST_DB = '<base de pruebas inicializada con database/init>'
-dotnet test MIRA.sln                      # 28 pruebas incluyendo procedimientos (usa datos con prefijo sp-test- y los elimina)
-cd frontend; pip install -r requirements-dev.txt; pytest -q   # 13 pruebas
+dotnet test MIRA.sln                      # 47 pruebas: + procedimientos y regresión CRUD de V1 (datos con prefijo zz-reg-/sp-test-, eliminados al terminar)
+cd frontend; pip install -r requirements-dev.txt; pytest -q   # 12 pruebas
 ```
 
 Smoke HTTP verificado: sin token 401; credenciales inválidas 401; token basura 401; Investigador en escritura 403; usuario duplicado 409; rol inexistente 400; usuario inexistente 404; alta válida 201.
