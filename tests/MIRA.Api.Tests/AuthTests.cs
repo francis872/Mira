@@ -2,33 +2,18 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http.Json;
 using System.Security.Claims;
-using System.Text;
-using Dapper;
-using MIRA.Api.Configuracion;
 using MIRA.Api.Seguridad;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
 namespace MIRA.Api.Tests;
 
 public sealed class AuthTests
 {
-    private const string JwtSecret = "integration-test-signing-key-never-deploy-this";
-
-    static AuthTests()
-    {
-        // Program.cs lee estos valores durante el arranque, antes de ConfigureAppConfiguration.
-        Environment.SetEnvironmentVariable("Jwt__Secret", JwtSecret);
-        Environment.SetEnvironmentVariable("Jwt__Issuer", "MIRA.Tests");
-        Environment.SetEnvironmentVariable("Jwt__Audience", "MIRA.Tests");
-        Environment.SetEnvironmentVariable("ConnectionStrings__PostgreSql", "Host=localhost;Database=unused;Username=unused;Password=unused");
-    }
+    private static string CrearToken(string role) => TestHostFactory.Token(role);
 
     [Fact]
     public async Task AdminRoutes_RequireAuthentication()
@@ -82,7 +67,7 @@ public sealed class AuthTests
     {
         var repository = new FakeAuthRepository
         {
-            User = new UsuarioAuth(8, "researcher@example.invalid", BCrypt.Net.BCrypt.HashPassword("CorrectPassword123!", 10), true),
+            User = new UsuarioAuth(8, "researcher@example.invalid", BCrypt.Net.BCrypt.HashPassword("CorrectPassword123!", 4), true),
             UserRoles = [new RolItem(2, "Investigador")]
         };
         var service = new AuthService(repository, CreateConfiguration());
@@ -109,44 +94,16 @@ public sealed class AuthTests
 
     private static WebApplicationFactory<Program> CreateFactory()
     {
-        return new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
+        return TestHostFactory.Create(services =>
         {
-            builder.UseEnvironment("Testing");
-            builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                ["Jwt:Secret"] = JwtSecret,
-                ["Jwt:Issuer"] = "MIRA.Tests",
-                ["Jwt:Audience"] = "MIRA.Tests"
-            }));
-            builder.ConfigureTestServices(services =>
-            {
-                services.RemoveAll<IAuthService>();
-                services.AddSingleton<IAuthService>(new FakeAuthService());
-            });
+            services.RemoveAll<IAuthService>();
+            services.AddSingleton<IAuthService>(new FakeAuthService());
         });
     }
 
     private static IConfiguration CreateConfiguration() => new ConfigurationBuilder()
-        .AddInMemoryCollection(new Dictionary<string, string?>
-        {
-            ["Jwt:Secret"] = JwtSecret,
-            ["Jwt:Issuer"] = "MIRA.Tests",
-            ["Jwt:Audience"] = "MIRA.Tests",
-            ["BCrypt:WorkFactor"] = "10"
-        })
+        .AddInMemoryCollection(new Dictionary<string, string?> { ["Jwt:Secret"] = TestHostFactory.JwtSecret })
         .Build();
-
-    private static string CrearToken(string role)
-    {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSecret));
-        var token = new JwtSecurityToken(
-            "MIRA.Tests",
-            "MIRA.Tests",
-            [new Claim(ClaimTypes.NameIdentifier, "test-user"), new Claim(ClaimTypes.Role, role)],
-            expires: DateTime.UtcNow.AddMinutes(5),
-            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
-        return new JwtSecurityTokenHandler().WriteToken(token);
-    }
 
     private sealed class FakeAuthService : IAuthService
     {

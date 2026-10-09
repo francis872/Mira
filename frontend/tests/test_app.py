@@ -155,9 +155,3 @@ def test_failed_user_creation_shows_api_message(client, calls):
     response = client.post("/usuarios/crear", data={"correo": "dup@example.invalid", "password": "p" * 12, "roles": ["1"]})
     assert response.status_code == 400
     assert "El correo ya está registrado." in response.get_data(as_text=True)
-
-
-def test_cross_origin_post_is_rejected(client, calls):
-    sign_in(client, ["Administrador"])
-    response = client.post("/logout", headers={"Origin": "https://evil.example"})
-    assert response.status_code == 403

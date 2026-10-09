@@ -23,11 +23,7 @@ public sealed class AuthService(IAuthRepository repository, IConfiguration confi
         var roles = await repository.RolesUsuarioAsync(user.Id);
         var signingKey = configuration["Jwt:Secret"]
             ?? throw new InvalidOperationException("Jwt:Secret no está configurado.");
-        var issuer = configuration["Jwt:Issuer"]
-            ?? throw new InvalidOperationException("Jwt:Issuer no está configurado.");
-        var audience = configuration["Jwt:Audience"]
-            ?? throw new InvalidOperationException("Jwt:Audience no está configurado.");
-        var expiresAt = DateTimeOffset.UtcNow.AddMinutes(60);
+        var expiresAt = DateTimeOffset.UtcNow.AddMinutes(ParametrosSeguridad.MinutosDeSesion);
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -36,8 +32,8 @@ public sealed class AuthService(IAuthRepository repository, IConfiguration confi
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role.Nombre)));
 
         var token = new JwtSecurityToken(
-            issuer,
-            audience,
+            ParametrosSeguridad.Emisor,
+            ParametrosSeguridad.Audiencia,
             claims,
             expires: expiresAt.UtcDateTime,
             signingCredentials: new SigningCredentials(
@@ -79,13 +75,7 @@ public sealed class AuthService(IAuthRepository repository, IConfiguration confi
 
         try
         {
-            var workFactor = configuration.GetValue("BCrypt:WorkFactor", 12);
-            if (workFactor is < 10 or > 14)
-            {
-                throw new InvalidOperationException("BCrypt:WorkFactor debe estar entre 10 y 14.");
-            }
-
-            var hash = BCrypt.Net.BCrypt.HashPassword(request.Password, workFactor);
+            var hash = BCrypt.Net.BCrypt.HashPassword(request.Password, ParametrosSeguridad.CostoBcrypt);
             var json = await repository.CrearAsync(request.Correo.Trim(), hash, request.Roles.Distinct().ToArray());
             return JsonSerializer.Deserialize<UsuarioAdminResponse>(json, JsonOptions)
                 ?? throw new InvalidOperationException("La rutina de creación devolvió una respuesta vacía.");

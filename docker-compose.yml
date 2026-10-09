@@ -31,8 +31,6 @@ services:
       ASPNETCORE_URLS: ${ASPNETCORE_URLS:-http://+:8080}
       ConnectionStrings__PostgreSql: ${ConnectionStrings__PostgreSql}
       Jwt__Secret: ${Jwt__Secret}
-      Jwt__Issuer: ${Jwt__Issuer:-MIRA.Api}
-      Jwt__Audience: ${Jwt__Audience:-MIRA.Client}
     ports:
       - "${API_PORT:-8081}:8080"
     depends_on:

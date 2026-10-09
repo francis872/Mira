@@ -17,14 +17,8 @@ public static class AdminBootstrapper
                 "Defina MIRA_BOOTSTRAP_ADMIN_EMAIL y una contraseña de al menos 12 caracteres en el entorno del proceso.");
         }
 
-        var workFactor = configuration.GetValue("BCrypt:WorkFactor", 12);
-        if (workFactor is < 10 or > 14)
-        {
-            throw new InvalidOperationException("BCrypt:WorkFactor debe estar entre 10 y 14.");
-        }
-
         var repository = new AuthRepository(new DbConnectionFactory(configuration));
-        var hash = BCrypt.Net.BCrypt.HashPassword(password, workFactor);
+        var hash = BCrypt.Net.BCrypt.HashPassword(password, ParametrosSeguridad.CostoBcrypt);
         try
         {
             await repository.BootstrapAdminAsync(normalizedEmail!, hash);

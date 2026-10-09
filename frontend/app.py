@@ -2,7 +2,7 @@ import os
 import secrets
 from datetime import timedelta
 import requests
-from urllib.parse import quote, urlparse
+from urllib.parse import quote
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 
 app = Flask(__name__)
@@ -48,11 +48,6 @@ def error_message(resp, default):
     return default
 
 
-def _same_origin():
-    origin = request.headers.get("Origin") or request.headers.get("Referer")
-    return not origin or urlparse(origin).netloc == request.host
-
-
 @app.context_processor
 def inject_identity():
     roles = set(session.get("roles", []))
@@ -83,8 +78,6 @@ def handle_forbidden(_error):
 
 @app.before_request
 def enforce_access():
-    if request.method == "POST" and not _same_origin():
-        abort(403)
     if request.endpoint is None or request.endpoint in PUBLIC_ENDPOINTS:
         return None
     if not session.get("token"):

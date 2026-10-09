@@ -54,13 +54,11 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 var key = builder.Configuration["Jwt:Secret"];
 if (string.IsNullOrWhiteSpace(key) || Encoding.UTF8.GetByteCount(key) < 32)
     throw new InvalidOperationException("Configure Jwt:Secret mediante variable de entorno, con al menos 32 bytes.");
-var issuer = builder.Configuration["Jwt:Issuer"] ?? throw new InvalidOperationException("Configure Jwt:Issuer.");
-var audience = builder.Configuration["Jwt:Audience"] ?? throw new InvalidOperationException("Configure Jwt:Audience.");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
         options.TokenValidationParameters = new TokenValidationParameters {
-            ValidateIssuer = true, ValidIssuer = issuer,
-            ValidateAudience = true, ValidAudience = audience,
+            ValidateIssuer = true, ValidIssuer = ParametrosSeguridad.Emisor,
+            ValidateAudience = true, ValidAudience = ParametrosSeguridad.Audiencia,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
             ValidateLifetime = true,
