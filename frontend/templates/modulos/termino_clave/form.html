@@ -21,7 +21,7 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('termino_clave_update', termino=item.termino) if not is_new else url_for('termino_clave_create') }}">
+                <form method="POST" action="{{ url_for('termino_clave_update', termino=item.termino) if not is_new else url_for('termino_clave_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="termino" class="form-label fw-semibold">
                             Término en Español (Llave Primaria) <span class="text-danger">*</span>

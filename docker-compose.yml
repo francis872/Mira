@@ -1,66 +1,56 @@
+name: mira-v2
+
 services:
   mira-postgres:
     image: postgres:16
-    container_name: mira-postgres
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD}
     ports:
       - "${POSTGRES_PORT:-5544}:5432"
     volumes:
       - mira_postgres_data:/var/lib/postgresql/data
-      - ./database/init:/docker-entrypoint-initdb.d
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+      - ./database/migrations:/migrations:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - mira-network
-
+    networks: [mira-network]
   mira-api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: mira-api
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
-      ASPNETCORE_URLS: ${ASPNETCORE_URLS:-http://+:8080}
-      ConnectionStrings__PostgreSql: ${ConnectionStrings__PostgreSql}
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__PostgreSql: Host=mira-postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
     ports:
       - "${API_PORT:-8081}:8080"
     depends_on:
       mira-postgres:
         condition: service_healthy
-    networks:
-      - mira-network
-
+    networks: [mira-network]
   mira-frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: mira-frontend
     restart: unless-stopped
     environment:
-      - API_URL=http://mira-api:8080/api
-      - PORT=5000
-    ports:
-      - "5000:5000"
-    depends_on:
-      - mira-api
-    networks:
-      - mira-network
-
+      API_URL: http://mira-api:8080/api
+      SWAGGER_URL: http://localhost:${API_PORT:-8081}/swagger
+      PORT: "5000"
+      SECRET_KEY: ${SECRET_KEY:-}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-false}
+    ports: ["${FRONTEND_PORT:-5000}:5000"]
+    depends_on: [mira-api]
+    networks: [mira-network]
 volumes:
   mira_postgres_data:
-
 networks:
   mira-network:
     driver: bridge

@@ -21,7 +21,7 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('linea_investigacion_update', id=item.id) if item and item.id else url_for('linea_investigacion_create') }}">
+                <form method="POST" action="{{ url_for('linea_investigacion_update', id=item.id) if item and item.id else url_for('linea_investigacion_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="nombre" class="form-label fw-semibold">Nombre de la Línea de Investigación <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="nombre" name="nombre" 
