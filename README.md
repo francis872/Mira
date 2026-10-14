@@ -67,6 +67,8 @@ Detener: `docker compose down` (conserva los datos). Reiniciar desde cero: `dock
 
 **Sin Docker para la API** (por ejemplo, si no se puede descargar la imagen base de .NET): con PostgreSQL en marcha, `ConnectionStrings__PostgreSql="Host=localhost;Port=5544;Database=...;Username=...;Password=..."` y `dotnet run --project MIRA.Api` (puerto 8081 con `ASPNETCORE_URLS=http://localhost:8081`); frontend: `pip install -r frontend/requirements.txt`, `API_URL=http://127.0.0.1:8081/api` (mejor que `localhost`, que en Windows puede añadir ~2 s por petición al probar primero IPv6), `python frontend/app.py`.
 
+**Arranque completo en Windows sin Docker:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1`. Crea una base PostgreSQL exclusiva y persistente, aplica las migraciones y arranca API y frontend en localhost. Requisitos, configuración y comando para detener: [scripts/README.md](scripts/README.md).
+
 **Solución de problemas**
 - Puerto 5544/5432 ocupado (otro PostgreSQL local): cambiar `POSTGRES_PORT` en `.env`.
 - El dashboard muestra "no disponible": la API no responde o no alcanza PostgreSQL; revisar `docker compose logs mira-api`.

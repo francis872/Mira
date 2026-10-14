@@ -10,6 +10,7 @@
 - [ ] Selects de FK del dominio académico y repositorios C# que llamen las rutinas. Pendiente del modelo oficial.
 - [x] **Retirar la autenticación del alcance activo** (rutas, JWT, bcrypt, pantallas, `--bootstrap-admin`, pruebas); historial y etiqueta `auth-futuro-v2-261872f` conservados; tablas `usuario/rol/usuario_rol` intactas.
 - [x] Plataforma localhost sin login: dashboard con conteos reales y seis módulos operativos.
+- [x] Arranque reproducible en Windows sin Docker (`scripts/start-local.ps1`), PostgreSQL exclusivo, migraciones controladas y parada con conservación de datos (`scripts/stop-local.ps1`). Verificado con 28 pruebas E2E, 24 pruebas .NET con PostgreSQL y 23 pruebas Flask.
 - [x] Pruebas actualizadas sin JWT ni credenciales (.NET, Flask, E2E).
 - [x] Regresión automatizada de los 6 catálogos V1 contra PostgreSQL real.
 - [x] Medidas generales de seguridad: validación, SQL parametrizado, CSRF en formularios.
