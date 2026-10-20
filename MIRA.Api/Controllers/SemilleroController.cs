@@ -1,22 +1,24 @@
+using Microsoft.AspNetCore.Authorization;
+namespace MIRA.Api.Peticiones;
+
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Modelos;
 using MIRA.Api.Servicios;
 
-namespace MIRA.Api.Peticiones;
-
 [ApiController]
-[Route("api/area_aplicacion")]
-public class AreaAplicacionController : ControllerBase
+[Route("api/semillero")]
+[Authorize]
+public class SemilleroController : ControllerBase
 {
-    private readonly IAreaAplicacionService _service;
+    private readonly ISemilleroService _service;
 
-    public AreaAplicacionController(IAreaAplicacionService service)
+    public SemilleroController(ISemilleroService service)
     {
         _service = service;
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<AreaAplicacion>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<Semillero>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         var result = await _service.GetAllActivosAsync();
@@ -24,21 +26,21 @@ public class AreaAplicacionController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    [ProducesResponseType(typeof(AreaAplicacion), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Semillero), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
         var item = await _service.GetByIdAsync(id);
         if (item == null)
-            return NotFound(new { mensaje = $"Área de aplicación con ID {id} no encontrada o inactiva." });
+            return NotFound(new { mensaje = $"Semillero con ID {id} no encontrado o inactivo." });
 
         return Ok(item);
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(AreaAplicacion), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(Semillero), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] AreaAplicacion entity)
+    public async Task<IActionResult> Create([FromBody] Semillero entity)
     {
         try
         {
@@ -47,7 +49,7 @@ public class AreaAplicacionController : ControllerBase
         }
         catch (ArgumentException ex)
         {
-            return BadRequest(new { mensaje = ex.Message });
+            return BadRequest(new { estado = 400, mensaje = ex.Message });
         }
     }
 
@@ -55,19 +57,19 @@ public class AreaAplicacionController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update(int id, [FromBody] AreaAplicacion entity)
+    public async Task<IActionResult> Update(int id, [FromBody] Semillero entity)
     {
         try
         {
             var updated = await _service.UpdateAsync(id, entity);
             if (!updated)
-                return NotFound(new { mensaje = $"Área de aplicación con ID {id} no encontrada para actualizar." });
+                return NotFound(new { mensaje = $"Semillero con ID {id} no encontrado para actualizar." });
 
-            return Ok(new { mensaje = "Área de aplicación actualizada exitosamente." });
+            return Ok(new { mensaje = "Semillero actualizado exitosamente." });
         }
         catch (ArgumentException ex)
         {
-            return BadRequest(new { mensaje = ex.Message });
+            return BadRequest(new { estado = 400, mensaje = ex.Message });
         }
     }
 
@@ -78,9 +80,8 @@ public class AreaAplicacionController : ControllerBase
     {
         var deleted = await _service.SoftDeleteAsync(id);
         if (!deleted)
-            return NotFound(new { mensaje = $"Área de aplicación con ID {id} no encontrada para eliminar." });
+            return NotFound(new { mensaje = $"Semillero con ID {id} no encontrado para eliminar." });
 
-        return Ok(new { mensaje = "Área de aplicación eliminada lógicamente." });
+        return Ok(new { mensaje = "Semillero desactivado exitosamente (borrado lógico)." });
     }
 }
-
