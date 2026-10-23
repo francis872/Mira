@@ -2,6 +2,27 @@
 
 Las especificaciones son documentos SDD mantenidos en `versiones/`; no se acredita una instalación de GitHub Spec Kit. IDs CAT/DASH/OPEN: `versiones/v0.1_api_inicial/2_spec.md`. IDs restantes: `versiones/v2_profesor/2_spec.md`. Esta matriz registra el alcance probado, no aprobación de documentos oficiales ausentes.
 
+## Cadena completa de la instrucción definitiva
+
+Prompt auténtico aplicable a todas las filas: `docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md`, secciones 3, 5, 7, 10 y 11. Historias: `versiones/v2_profesor/2_spec.md`; reglas por entidad: `docs/reglas-negocio-v2.md`.
+
+| Requisito → Historia | Controller → Service → Repository (MIRA.Api) | Rutinas de migración 004 | Interfaz (frontend) | Prueba |
+|---|---|---|---|---|
+| RF-MIRA-CAT-01 / RF-V2-SP-01 → HU-MIRA-CAT-01 | `Peticiones/AreaConocimientoController` → `Servicios/AreaConocimientoService` → `Repositorios/AreaConocimientoRepository` | `sp_{listar,consultar,crear,actualizar,eliminar}_area_conocimiento` | `app.py:area_conocimiento_*`, `templates/modulos/area_conocimiento/` | CRUD .NET y `test_catalog_create_update_inactivate_persist[area_conocimiento]` |
+| RF-MIRA-CAT-02 / RF-V2-SP-01 → HU-MIRA-CAT-02 | `ObjetivoDesarrolloSostenibleController` → `ObjetivoDesarrolloSostenibleService` → `ObjetivoDesarrolloSostenibleRepository` | mismo patrón `_objetivo_desarrollo_sostenible` | `app.py:ods_*`, `templates/modulos/objetivo_desarrollo_sostenible/` | CRUD .NET/HTTP parametrizado ODS |
+| RF-MIRA-CAT-03 / RF-V2-TR-01 → HU-MIRA-CAT-03 | `AreaAplicacionController` → `AreaAplicacionService` → `AreaAplicacionRepository` | patrón `_area_aplicacion`; trigger 005 `tr_area_aplicacion_normalizar` | `app.py:area_aplicacion_*`, `templates/modulos/area_aplicacion/` | SQL, `AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted`, formulario HTTP y Edge |
+| RF-MIRA-CAT-04 / RF-MIRA-TC-01 → HU-MIRA-CAT-04 | `TerminoClaveController` → `TerminoClaveService` → `TerminoClaveRepository` | patrón `_termino_clave` | `app.py:termino_clave_*`, `templates/modulos/termino_clave/` | CRUD y conflicto activo/inactivo/concurrente |
+| RF-MIRA-CAT-05 / RF-V2-SP-01 → HU-MIRA-CAT-05 | `UniversidadController` → `UniversidadService` → `UniversidadRepository` | patrón `_universidad` | `app.py:universidad_*`, `templates/modulos/universidad/` | CRUD .NET/HTTP universidad |
+| RF-MIRA-CAT-06 / RF-V2-SP-01 → HU-MIRA-CAT-06 | `LineaInvestigacionController` → `LineaInvestigacionService` → `LineaInvestigacionRepository` | patrón `_linea_investigacion` | `app.py:linea_investigacion_*`, `templates/modulos/linea_investigacion/` | CRUD .NET/HTTP línea |
+| RF-V2-HTTP-01 → HU-MIRA-ERR-01 | `Program.cs` y `Excepciones/ApiExceptionMiddleware.InvokeAsync` | Mapea SQLSTATE sin SQL adicional | `app.py:error_message` | `ErroresPersistenciaTests` (traducción y contrato JSON inválido) |
+| RF-V2-UI-01 → historias de catálogos | Sin cambio de contratos HTTP | Sin consultas nuevas | `static/mira.css`, `static/mira.js`, `includes/catalog_toolbar.html` | Flask/HTTP, `scripts/verify-browser.mjs`, capturas en `docs/evidencias/` |
+
+Métodos de los controladores: `GetAll`, `GetById` (`GetByTermino` en término), `Create`, `Update`, `Delete`. Métodos Service/Repository: `GetAllActivosAsync`, `GetByIdAsync` (`GetByTerminoAsync`), `CreateAsync`, `UpdateAsync`, `SoftDeleteAsync`. La prueba arquitectónica comprueba que las 30 llamadas no contienen CRUD directo; la regresión comprueba resultados contra PostgreSQL.
+
+Los criterios académicos aún bloqueados están en [criterios-v2.md](criterios-v2.md); no existe cadena de código para entidades académicas sin modelo oficial.
+
+## Requisitos acumulados
+
 | Requisito | Especificación | Código | Prueba | Estado |
 |---|---|---|---|---|
 | RF-MIRA-CAT-01 | V1, requisitos | `AreaConocimientoController`, `AreaConocimientoService`, `AreaConocimientoRepository`; `area_conocimiento_*` | `FullLifecycle_CreateReadListUpdateLogicalDelete`, `test_catalog_create_update_inactivate_persist[area_conocimiento]` | Verificado |

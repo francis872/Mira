@@ -22,6 +22,8 @@
     </a>
 </div>
 
+{% include "includes/catalog_toolbar.html" %}
+
 <div class="card card-custom">
     <div class="card-body p-0">
         <div class="table-responsive">
@@ -57,10 +59,10 @@
                             {% endif %}
                         </td>
                         <td class="text-end pe-4">
-                            <a href="{{ url_for('termino_clave_edit', termino=item.termino) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                            <a href="{{ url_for('termino_clave_edit', termino=item.termino) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ loop.index }}" title="Eliminar">
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ loop.index }}" title="Eliminar" aria-label="Retirar registro">
                                 <i class="bi bi-trash"></i>
                             </button>
 
@@ -72,7 +74,7 @@
                                             <h5 class="modal-title">
                                                 <i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Eliminación
                                             </h5>
-                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar confirmación"></button>
                                         </div>
                                         <div class="modal-body">
                                             <p class="mb-2">¿Estás seguro de que deseas eliminar el término clave:</p>

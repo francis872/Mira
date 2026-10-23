@@ -4,6 +4,8 @@
 Los scripts `database/migrations/001_v1_catalogos_tablas.sql` y `002_v1_catalogos_datos_iniciales.sql` definen seis entidades independientes: area_conocimiento, objetivo_desarrollo_sostenible, area_aplicacion, termino_clave, universidad y linea_investigacion. Esta entrega no define FK ni pares maestro-detalle entre ellas.
 
 ## Migraciones
+
+004 añade 30 funciones CRUD sobre las seis tablas sin cambiar su estructura ni borrar datos. 005 añade un trigger de normalización sobre el campo existente `area_aplicacion.nombre`; no añade columnas ni entidades. Tabla de rutinas/contratos en `6_contracts.md`.
 `database/migrations/NNN_*.sql` + `apply.sh` (registro en `schema_migrations`). En una base nueva Docker las aplica `database/init/00-migrar.sh`; en una existente: `docker compose exec mira-postgres sh /migrations/apply.sh`. Son idempotentes y aditivas: no borran tablas ni datos.
 
 ## Pares maestro–detalle identificados

@@ -15,6 +15,7 @@ MIRA V1 (seis catálogos) + V2 parcial (base relacional y rutinas almacenadas). 
 | Área | Estado |
 |---|---|
 | V1: 6 catálogos (CRUD, borrado lógico, frontend Flask, PostgreSQL real) | Implementado y probado, sin autenticación |
+| CRUD mediante rutinas y trigger demostrable | 30 funciones PostgreSQL en 004; trigger de normalización de área en 005; seis repositorios sin SQL CRUD directo |
 | Inicio de sesión, JWT, bcrypt, roles, restricciones por sesión | **Fuera de alcance** (versión futura sin fecha). El código retirado sigue en el historial: etiqueta `auth-futuro-v2-261872f` |
 | V2: rutinas almacenadas `CREATE PROCEDURE` con JSONB, vista y atomicidad (`usuario`→`usuario_rol`) | Solo en PostgreSQL (migración 003 y `database/tests`); sin API ni pantalla |
 | V2: maestro–detalle académico, selectores de claves foráneas, triggers y vistas del dominio | **Pendiente**: el modelo relacional oficial de la Entrega 2 no está en el repositorio |
@@ -86,6 +87,8 @@ Pruebas:
 Prompt de contexto para continuar el desarrollo con un asistente: [docs/PROMPT.md](docs/PROMPT.md).
 
 Colección de prompts: [índice](docs/prompts/README.md) y [prompt maestro MIRA V2](docs/prompts/PROMPT_MAESTRO_MIRA_V2.md), con el original de Backstage archivado como referencia.
+
+Instrucción vigente: [prompt maestro definitivo](docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md). Estado de aceptación: [matriz C01–C12](docs/criterios-v2.md), seis verificados y seis bloqueados por documentación académica ausente. [Reglas por entidad](docs/reglas-negocio-v2.md) y [capturas reales](docs/evidencias/README.md).
 
 Auditoría y sustentación: [auditoría](docs/auditoria-v2.md), [arquitectura](docs/arquitectura-v2.md), [trazabilidad](docs/trazabilidad-v2.md), [pruebas ejecutadas](docs/pruebas-v2.md), [guía de sustentación](docs/sustentacion-v2.md) y [pendientes](docs/pendientes-v2.md). La verificación actual acredita operación local de V1 y rutinas SQL V2; el dominio académico V2 sigue pendiente del modelo oficial.
 

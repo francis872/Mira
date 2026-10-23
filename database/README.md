@@ -6,8 +6,12 @@ PostgreSQL 16 assets for MIRA.
 
 - migrations/: ordered, idempotent SQL scripts (`NNN_name.sql`) and `apply.sh`, which records each applied script in `schema_migrations`.
   - 001: V1 catalog tables. 002: V1 initial data (inserted only when missing). 003: `usuario`/`rol`/`usuario_rol`, view and stored procedures (database-only; kept with its data for a future version).
+  - 004: 30 funciones CRUD, invocadas con SELECT por los seis repositorios. Listar/consultar/crear devuelven filas; actualizar/eliminar devuelven boolean.
+  - 005: trigger de normalización de `area_aplicacion.nombre`, sin columnas nuevas ni reescritura de datos existentes.
 - init/00-migrar.sh: runs `apply.sh` when the Docker container initializes an empty volume.
 - tests/: SQL tests for the stored procedures.
+
+`tests/v2_catalogos_rutinas.sql` comprueba inventario de funciones, trigger real, actualización e inactivación dentro de rollback. `tests/v2_usuarios_roles.sql` conserva las pruebas legadas de JSONB/atomicidad; no acredita interfaz académica V2. `scripts/verify-local.ps1` ejecuta ambos archivos en una base exclusiva.
 
 ## Existing database (no data loss)
 

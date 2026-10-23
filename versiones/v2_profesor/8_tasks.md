@@ -1,7 +1,17 @@
 # Tareas verificables V2
 
+- [x] Guardar íntegro el prompt definitivo auténtico y documentar su procedencia, sin atribuirlo a integrantes.
+- [x] Migración 004: 30 funciones, cinco por catálogo; seis repositorios C# solo invocan rutinas parametrizadas.
+- [x] Migración 005: trigger de normalización de área; pruebas SQL, API y formulario.
+- [x] Middleware SQLSTATE con respuestas seguras y validación de contrato en español; logs a consola.
+- [x] Búsqueda local, navegación activa, accesibilidad básica y estado de envío, sin ampliar alcance.
+- [x] Comprobación real en Edge de búsqueda, modales, alta, edición, retiro y menú móvil; capturas en `docs/evidencias/`.
+- [x] Matriz de doce criterios en `docs/criterios-v2.md` y reglas de negocio por entidad.
+- [x] Verificación final: 41 .NET, 42 Flask/arquitectura, 31 HTTP, dos SQL con rollback y 7 comprobaciones Edge. Persistencia comprobada tras reiniciar con nuevas rutinas.
+- [ ] Localizar modelo académico, VERSION_2 y estructura oficial de nueve documentos. El usuario no recuerda su ubicación.
+
 - [x] Auditar flujos reales y corregir mensajes HTTP 400/409, respuesta JSON inválida, CSRF no ASCII, longitud de textos y colisiones de términos activos/inactivos/concurrentes.
-- [x] Verificación automatizada en base exclusiva (`scripts/verify-local.ps1`): 31 .NET, 40 Flask, 30 E2E HTTP y SQL con rollback.
+- [x] Primera auditoría (histórico): 31 .NET, 40 Flask, 30 E2E HTTP y SQL con rollback.
 - [x] Comprobar persistencia tras reiniciar PostgreSQL, API y frontend.
 - [x] Documentar auditoría, arquitectura, trazabilidad, pruebas, sustentación y pendientes en `docs/*-v2.md`.
 

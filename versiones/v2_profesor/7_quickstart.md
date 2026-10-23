@@ -27,6 +27,8 @@ $env:API_URL = 'http://127.0.0.1:8081/api'; python frontend/app.py   # 127.0.0.1
 ## Pruebas
 
 Verificación local integrada con una base exclusiva de pruebas: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-local.ps1` (requiere plataforma iniciada y `.env.local`). Resultados actuales y límites: [docs/pruebas-v2.md](../../docs/pruebas-v2.md). Instrucciones completas: [scripts/README.md](../../scripts/README.md).
+
+El arranque aplica 004 (30 funciones CRUD) y 005 (trigger) sin borrar datos existentes. El verificador ejecuta todos los SQL de `database/tests`, las pruebas .NET con base exclusiva, Flask y la guardia de arquitectura, y los E2E HTTP. Verificación visual adicional: `node scripts/verify-browser.mjs`, con Edge/CDP preparado según scripts/README.md. Estado académico: [criterios-v2.md](../../docs/criterios-v2.md).
 ```powershell
 dotnet test MIRA.sln                      # sin base de datos: ejecuta las pruebas de "sin autenticación"; omite las que requieren PostgreSQL
 $env:MIRA_TEST_DB = 'Host=localhost;Port=5544;Database=<db de pruebas>;Username=<usuario>;Password=<clave>'

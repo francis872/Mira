@@ -31,8 +31,10 @@ try {
         & $psql @dbArgs -d $testDatabase --single-transaction -q -f $migration.FullName
         if ($LASTEXITCODE -ne 0) { throw "Fallo la migracion $($migration.Name)" }
     }
-    & $psql @dbArgs -d $testDatabase -f (Join-Path $repoRoot 'database/tests/v2_usuarios_roles.sql')
-    if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas SQL' }
+    foreach ($sqlTest in (Get-ChildItem (Join-Path $repoRoot 'database/tests') -Filter '*.sql' | Sort-Object Name)) {
+        & $psql @dbArgs -d $testDatabase -f $sqlTest.FullName
+        if ($LASTEXITCODE -ne 0) { throw "Fallo la prueba SQL $($sqlTest.Name)" }
+    }
     $connection = [System.Data.Common.DbConnectionStringBuilder]::new()
     $connection['Host'] = '127.0.0.1'
     $connection['Port'] = [int]$config['POSTGRES_PORT']
@@ -44,7 +46,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas .NET' }
     Push-Location (Join-Path $repoRoot 'frontend')
     try {
-        & python -m pytest tests/test_app.py -q
+        & python -m pytest tests/test_app.py tests/test_architecture.py -q
         if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas Flask' }
     } finally { Pop-Location }
     $webPort = if ($config['FRONTEND_PORT']) { $config['FRONTEND_PORT'] } else { '5000' }

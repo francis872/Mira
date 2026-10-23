@@ -38,3 +38,21 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-local.ps1
 La configuración se lee desde `.env.local`; `-ConfigFile` y `-PostgresBin` permiten cambiar el archivo y las herramientas. El script restaura las variables de entorno que modifica y no imprime secretos. Cada ejecución conserva una base adicional; su limpieza no está automatizada.
 
 Entorno comprobado y límites: [pruebas-v2.md](../docs/pruebas-v2.md). El equipo verificado usa PostgreSQL 17.9, .NET SDK 10.0.402 y Python 3.14. Docker no estuvo disponible. En Compose, los puertos publicados están limitados a `127.0.0.1`.
+
+## Verificación en navegador real
+
+Requiere MIRA iniciada, Node 24 (WebSocket y fetch incorporados) y Edge. Iniciar un perfil de pruebas independiente, oculto y con depuración limitada a loopback:
+
+```powershell
+$miraBrowserProfile = Join-Path (Get-Location) '.local\edge-audit'
+Start-Process -FilePath 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' -WindowStyle Hidden -ArgumentList "--headless=new --no-first-run --remote-debugging-address=127.0.0.1 --remote-debugging-port=9224 --user-data-dir=`"$miraBrowserProfile`" about:blank"
+node scripts/verify-browser.mjs
+```
+
+El verificador usa `MIRA_E2E_URL` (por defecto `http://127.0.0.1:5000`) y `MIRA_BROWSER_DEBUG_URL` (por defecto `http://127.0.0.1:9224`). Comprueba búsqueda, navegación, Bootstrap real, creación, edición, retiro y menú móvil, usando registros `e2e-browser-*`. Las capturas se guardan en `docs/evidencias/` y el resumen en `.local/browser-check.json`. El CDN debe estar disponible para Bootstrap. El verificador no utiliza el perfil personal del navegador.
+
+Para cerrar el navegador de pruebas sin afectar otras ventanas, enviar `Browser.close` por su conexión de depuración:
+
+```powershell
+node --input-type=module -e "const v=await (await fetch('http://127.0.0.1:9224/json/version')).json(); const w=new WebSocket(v.webSocketDebuggerUrl); w.onopen=()=>w.send(JSON.stringify({id:1,method:'Browser.close'}));"
+```

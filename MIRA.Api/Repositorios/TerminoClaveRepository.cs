@@ -17,31 +17,21 @@ public class TerminoClaveRepository : ITerminoClaveRepository
     public async Task<IEnumerable<TerminoClave>> GetAllActivosAsync()
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            SELECT termino, termino_ingles AS TerminoIngles, activo 
-            FROM termino_clave 
-            WHERE activo = TRUE 
-            ORDER BY termino;";
+        const string sql = "SELECT * FROM public.sp_listar_termino_clave();";
         return await connection.QueryAsync<TerminoClave>(sql);
     }
 
     public async Task<TerminoClave?> GetByTerminoAsync(string termino)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            SELECT termino, termino_ingles AS TerminoIngles, activo 
-            FROM termino_clave 
-            WHERE termino = @Termino AND activo = TRUE;";
+        const string sql = "SELECT * FROM public.sp_consultar_termino_clave(@Termino);";
         return await connection.QueryFirstOrDefaultAsync<TerminoClave>(sql, new { Termino = termino });
     }
 
     public async Task<TerminoClave> CreateAsync(TerminoClave entity)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            INSERT INTO termino_clave (termino, termino_ingles, activo) 
-            VALUES (@Termino, @TerminoIngles, @Activo) 
-            RETURNING termino, termino_ingles AS TerminoIngles, activo;";
+        const string sql = "SELECT * FROM public.sp_crear_termino_clave(@Termino, @TerminoIngles);";
         try
         {
             return await connection.QuerySingleAsync<TerminoClave>(sql, entity);
@@ -56,23 +46,17 @@ public class TerminoClaveRepository : ITerminoClaveRepository
     public async Task<bool> UpdateAsync(string termino, TerminoClave entity)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            UPDATE termino_clave 
-            SET termino_ingles = @TerminoIngles 
-            WHERE termino = @Termino AND activo = TRUE;";
-        var affected = await connection.ExecuteAsync(sql, new { entity.TerminoIngles, Termino = termino });
-        return affected > 0;
+        const string sql = "SELECT public.sp_actualizar_termino_clave(@Termino, @TerminoIngles);";
+        var affected = await connection.QuerySingleAsync<bool>(sql, new { entity.TerminoIngles, Termino = termino });
+        return affected;
     }
 
     public async Task<bool> SoftDeleteAsync(string termino)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            UPDATE termino_clave 
-            SET activo = FALSE 
-            WHERE termino = @Termino AND activo = TRUE;";
-        var affected = await connection.ExecuteAsync(sql, new { Termino = termino });
-        return affected > 0;
+        const string sql = "SELECT public.sp_eliminar_termino_clave(@Termino);";
+        var affected = await connection.QuerySingleAsync<bool>(sql, new { Termino = termino });
+        return affected;
     }
 }
 

@@ -139,6 +139,22 @@ public sealed class CatalogCrudRegressionTests : IDisposable
         Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync($"/api/termino_clave/{term}")).StatusCode);
     }
 
+    [RequiresDatabaseFact]
+    public async Task AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted()
+    {
+        using var factory = TestHostFactory.Create();
+        using var client = Client(factory);
+        var marker = Marker + Guid.NewGuid().ToString("N")[..10];
+        var response = await client.PostAsJsonAsync("/api/area_aplicacion", new { nombre = " \t" + marker + "\n " });
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        var body = await response.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal(marker, body.GetProperty("nombre").GetString());
+        await using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("MIRA_TEST_DB"));
+        await connection.OpenAsync();
+        await using var command = new NpgsqlCommand("SELECT count(*) FROM pg_trigger WHERE tgname = 'tr_area_aplicacion_normalizar' AND NOT tgisinternal AND tgenabled = 'O'", connection);
+        Assert.Equal(1L, (long)(await command.ExecuteScalarAsync())!);
+    }
+
     [RequiresDatabaseTheory]
     [MemberData(nameof(Catalogs))]
     public async Task OversizedText_ReturnsBadRequest_OnCreateAndUpdate(Catalog catalog)

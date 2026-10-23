@@ -1,5 +1,19 @@
 # Auditoría de MIRA V1 + V2 parcial
 
+## Revisión por el prompt definitivo
+
+El nuevo adjunto exige que Repository solo invoque rutinas. La revisión anterior aceptaba SQL directo parametrizado; ese criterio quedó sustituido explícitamente y se corrigieron los seis repositorios. Se añadieron 30 funciones (004), un trigger de normalización (005), traducción segura de errores y mejoras de interfaz. El detalle de C01–C12 está en [criterios-v2.md](criterios-v2.md), con reglas en [reglas-negocio-v2.md](reglas-negocio-v2.md).
+
+La regresión inicial volvió a ejecutar 31 .NET, 40 Flask y 30 HTTP antes de cambiar código. La verificación posterior y los controles de navegador se registran en [pruebas-v2.md](pruebas-v2.md). Las evidencias anteriores de este documento describen la primera auditoría y no sustituyen los resultados actuales.
+
+Hallazgos nuevos resueltos: SQL CRUD directo en seis repositorios; inexistencia de trigger demostrable para una regla disponible; errores internos sin traducción uniforme; dependencia del Event Log de Windows al registrar advertencias; ausencia de búsqueda local y estados de envío. La nueva normalización en trigger conserva la regla de recorte de espacios que ya aplicaba la aplicación.
+
+La búsqueda de documentos oficiales no encontró metodología, VERSION_2, mapa de versiones ni esquema académico. El usuario indicó que no recuerda su ubicación. Se conserva el modelo real y no se crean tablas de grupos, semilleros o docentes a partir de nombres de referencia.
+
+Nuevos archivos de implementación: `database/migrations/004_v2_catalogos_rutinas.sql`, `005_v2_area_aplicacion_trigger.sql`, `database/tests/v2_catalogos_rutinas.sql`, `MIRA.Api/Excepciones/ApiExceptionMiddleware.cs`, `tests/MIRA.Api.Tests/ErroresPersistenciaTests.cs`, `frontend/tests/test_architecture.py`, recursos `frontend/static/mira.*`, `frontend/templates/includes/catalog_toolbar.html`, `scripts/verify-browser.mjs`. Se actualizaron repositorios, servicio/formulario de área, base y seis listados, verificación local y Spec Kit existente. Prompts auténticos y capturas se conservan en `docs/prompts/` y `docs/evidencias/`.
+
+## Primera auditoría (referencia histórica)
+
 Fecha: 23 de octubre de 2026 (Colombia). Repositorio: `francis872/Mira`, rama `feature/mira-v1-v2-integracion`. Base de revisión: commit `00dc9da` y cambios de esta auditoría. Los resultados de ejecución están en [pruebas-v2.md](pruebas-v2.md).
 
 ## Alcance y método

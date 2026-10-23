@@ -4,6 +4,8 @@ Este prompt resume el contexto del repositorio para continuar el desarrollo con 
 
 Todos los prompts están en el [índice de prompts](prompts/README.md), incluido el [prompt maestro adaptado a MIRA V2](prompts/PROMPT_MAESTRO_MIRA_V2.md) y el original de Backstage conservado como referencia.
 
+Instrucción vigente: [prompt maestro definitivo MIRA V2](prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md). Todo CRUD debe pasar por rutinas PostgreSQL; la matriz de doce criterios está en [criterios-v2.md](criterios-v2.md). El texto breve siguiente es contexto, sujeto a esta instrucción y a las fuentes oficiales disponibles.
+
 La auditoría adaptada a MIRA está registrada en [auditoria-v2.md](auditoria-v2.md), con [trazabilidad](trazabilidad-v2.md), [pruebas](pruebas-v2.md) y [pendientes](pendientes-v2.md). Consulta esas evidencias antes de repetir verificaciones o declarar completa V2.
 
 ## Prompt para copiar
@@ -20,6 +22,7 @@ Antes de modificar archivos:
 Contexto de partida:
 - API C# / ASP.NET Core sobre .NET 10, PostgreSQL 16 con Npgsql y Dapper, frontend Flask con Jinja y Bootstrap 5.
 - Arquitectura obligatoria: Controller → Service → Repository → PostgreSQL. Solo Repository accede directamente a la base de datos.
+- Repository solo invoca rutinas parametrizadas; las cinco operaciones V1 están en la migración 004 y el trigger de normalización de áreas en la 005.
 - V1 implementa seis catálogos: áreas de aplicación, áreas de conocimiento, líneas de investigación, objetivos de desarrollo sostenible, términos clave y universidades. Conserva su CRUD, borrado lógico y conteos reales del dashboard.
 - V1 y V2 no incluyen autenticación ni autorización. El dashboard abre directamente, sin login. No agregues JWT, contraseñas, restricciones por sesión ni pantallas de usuarios como parte de estas versiones.
 - Conserva las validaciones, SQL parametrizado, integridad referencial, escape de HTML y protección CSRF en los formularios.

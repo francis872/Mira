@@ -9,6 +9,9 @@
 - Borrado físico vs lógico presenta contradicción en notas orales del curso; seguir metodología escrita aplicable y verificar antes de migrar.
 
 ## Decisiones tomadas en la implementación
+- **CRUD de seis catálogos mediante FUNCTION:** 004 define `sp_listar/consultar/crear/actualizar/eliminar_<tabla>` invocadas por SELECT con parámetros. No se usa CALL ni `CommandType.StoredProcedure` para estas funciones. Se preservan los procedimientos CALL legados de 003 por compatibilidad; no se renombra su contrato.
+- **Trigger sin columnas inventadas:** 005 centraliza el recorte de espacios de área de aplicación, anteriormente realizado por Flask/Service. Validación semántica permanece en Service y el trigger protege también otras escrituras a esa tabla. Las pruebas comparan habilitado/deshabilitado dentro de rollback.
+- **Errores y logging:** middleware traduce SQLSTATE pertinentes, respuestas españolas sin información interna y logs a consola. Windows Event Log no está disponible para cuentas restringidas; su fallo fue reproducido y se elimina esa dependencia operativa, sin suprimir el registro de errores.
 - **PROCEDURE vs FUNCTION:** las escrituras (`sp_usuario_crear/actualizar/inactivar/bootstrap_admin`) son `CREATE PROCEDURE` invocados con `CALL`; devuelven el JSONB mediante parámetros `INOUT`. Delegan en funciones `fn_usuario_*` y todo se ejecuta en una sola transacción. Las lecturas son funciones (`SELECT`).
 - **Reemplazo de detalles con DELETE + INSERT:** aceptable en `usuario_rol` porque la tabla puente no tiene identidad propia, auditoría ni hijos. No debe copiarse a detalles con identidad.
 - **Modelo canónico de usuarios:** `usuario`/`rol`/`usuario_rol` (V2); ver 2_spec.md.

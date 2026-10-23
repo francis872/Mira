@@ -36,10 +36,34 @@ Flask recibe formularios, valida CSRF y consume HTTP JSON. ASP.NET Core recibe e
 
 ## Pruebas y limitaciones para declarar
 
-La auditoría ejecutó 31 pruebas .NET con PostgreSQL real, 40 Flask y 30 E2E HTTP; las rutinas SQL pasaron con rollback. Se comprobó persistencia después de reiniciar los tres servicios. Los detalles están en [pruebas-v2.md](pruebas-v2.md).
+La verificación final ejecutó 41 pruebas .NET con PostgreSQL real, 42 Flask/arquitectura y 31 E2E HTTP; ambos archivos SQL pasaron con rollback. Edge real superó siete comprobaciones de navegación, búsqueda, modales, formularios y menú móvil, sin excepciones JavaScript capturadas. Se comprobó persistencia después de reiniciar los tres servicios con las migraciones nuevas. Los detalles están en [pruebas-v2.md](pruebas-v2.md).
 
 No declarar que están implementados maestro-detalle académicos, selectores FK o triggers del dominio. No presentar las tablas de usuarios como una autenticación disponible. La interfaz mantiene identidad MIRA; no incluye mapas, inteligencia geoespacial ni SOI. No afirmar despliegue, operación productiva, accesibilidad completa o ausencia de vulnerabilidades. Docker no está disponible en el entorno utilizado.
 
 ## Criterio de cierre
 
 La sustentación puede demostrar los seis catálogos y las rutinas SQL existentes. La entrega V2 completa requiere incorporar el modelo oficial, actualizar contratos y especificaciones, implementar el dominio pendiente y volver a verificarlo. Operatividad local, preparación de despliegue y producción son estados distintos.
+
+## Respuestas concretas para la sustentación
+
+| Pregunta | Ruta y comportamiento demostrable |
+|---|---|
+| 1. ¿Dónde está GET? | `MIRA.Api/Peticiones/UniversidadController.cs:GetAll/GetById` → Service → `UniversidadRepository.GetAllActivosAsync/GetByIdAsync` → `sp_listar_universidad/sp_consultar_universidad` de 004. |
+| 2. ¿Dónde está POST? | `UniversidadController.Create` → `UniversidadService.CreateAsync` → `UniversidadRepository.CreateAsync` → `sp_crear_universidad`. Devuelve 201 y fila persistida. |
+| 3. ¿Dónde se ejecuta el borrado? | `UniversidadController.Delete` → `SoftDeleteAsync` → `sp_eliminar_universidad`, que hace UPDATE de activo en PostgreSQL. |
+| 4. ¿Dónde están las reglas? | `MIRA.Api/Servicios/*Service.cs`, atributos en `Modelos/`, restricciones 001 y trigger 005. [Reglas por entidad](reglas-negocio-v2.md). |
+| 5. ¿Cómo se comprueban FK? | PostgreSQL comprueba las legadas en 003; no hay FK en los seis catálogos. La validación y UI académicas aún no existen por falta del esquema. |
+| 6. ¿Dónde están las rutinas? | 004 contiene las 30 funciones CRUD; 003 contiene funciones/procedimientos legados. |
+| 7. ¿Dónde se invocan? | Cada método de `MIRA.Api/Repositorios/*Repository.cs` usa Dapper y `SELECT public.sp_*` o `SELECT * FROM public.sp_*`; nunca CRUD directo sobre tablas. |
+| 8. ¿Qué maestro y detalle académico funcionan? | Ninguno todavía. `usuario`→roles solo funciona en SQL y no acredita la entrega académica. C02/C09 bloqueados. |
+| 9. ¿Cómo se agregan varios renglones? | No hay formulario académico de renglones. `sp_usuario_crear` acepta JSONB solo como evidencia legada de base de datos. No demostrarlo como pantalla inexistente. |
+| 10. ¿Cómo se garantiza atomicidad? | Rutina PostgreSQL y transacción; `database/tests/v2_usuarios_roles.sql` comprueba fallos sin estado parcial. Para dominio académico faltan esquema y operación definida. |
+| 11. ¿Dónde está el trigger? | 005: `tr_area_aplicacion_normalizar` → `fn_area_aplicacion_normalizar`; enviar nombre con espacios desde `/area_aplicacion/nuevo` o edición y observar el nombre persistido sin espacios. API y Flask no recortan ese valor. |
+| 12. ¿Qué sucede ante violación de integridad? | `ApiExceptionMiddleware.InvokeAsync` traduce 23503/23505 a 409 español sin detalles internos; la prueba técnica usa excepciones controladas. Falta una FK académica real para demostrar C07 completo. |
+| 13. ¿Por qué 409 y no 500? | Se reconoce un conflicto de datos mediante SQLSTATE; 500 se reserva para errores inesperados. `ErroresPersistenciaTests` comprueba ambos casos y que no se filtre información. |
+| 14. ¿Qué hace frontend? | `frontend/app.py` protege POST con CSRF, arma JSON, llama API y muestra resultado. `static/mira.js` agrega búsqueda, navegación activa y estado de envío; no escribe en PostgreSQL. |
+| 15. ¿Cómo se relaciona con Spec Kit? | `versiones/v2_profesor/2_spec.md` define requisitos e historias antes de implementar; `6_contracts.md` define llamadas, `8_tasks.md` estado, y `docs/trazabilidad-v2.md` enlaza toda la cadena. |
+| 16. ¿Qué prompts se utilizaron? | `docs/prompts/README.md` conserva procedencia; nuevo adjunto en `PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md`. No se atribuyen prompts inventados a estudiantes. |
+| 17. ¿Cómo ejecutar pruebas? | `scripts/verify-local.ps1`, ambos SQL y `scripts/verify-browser.mjs`, según `scripts/README.md`; resultados actuales en `docs/pruebas-v2.md`. |
+
+La matriz de [doce criterios](criterios-v2.md) tiene seis verificados y seis bloqueados. Capturas reales: [escritorio](evidencias/mira-v2-desktop.png) y [móvil](evidencias/mira-v2-mobile.png). Son evidencia visual del recorrido descrito, no un reemplazo de las pruebas.

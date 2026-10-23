@@ -1,5 +1,33 @@
 # Pruebas ejecutadas en la auditoría MIRA
 
+## Ejecución del prompt definitivo (actual)
+
+Regresión antes de modificar persistencia: **31 .NET, 40 Flask y 30 E2E HTTP aprobadas**, base exclusiva `mira_audit_20261023140939_4908`.
+
+Verificación final mediante `scripts/verify-local.ps1`, con migraciones 001–005 y base exclusiva `mira_audit_20261023142533_15620`:
+
+| Comprobación | Resultado |
+|---|---|
+| Build Release al arrancar | 0 advertencias, 0 errores |
+| .NET con PostgreSQL real | **41 aprobadas, 0 fallidas, 0 omitidas** |
+| Flask y guardia arquitectónica | **42 aprobadas** |
+| E2E HTTP Flask → API → PostgreSQL | **31 aprobadas** |
+| SQL `v2_catalogos_rutinas.sql` | Inventario de 30 funciones, trigger habilitado/deshabilitado, INSERT/UPDATE, vacío e inactivación: DO exitoso y rollback |
+| SQL `v2_usuarios_roles.sql` | Dos DO exitosos y rollback; evidencia legada separada del dominio académico |
+| Navegador real Edge con CDP, `node scripts/verify-browser.mjs` | **7 comprobaciones**, sin excepciones JavaScript capturadas |
+| Persistencia después de reiniciar PostgreSQL/API/Flask con nuevas rutinas | Misma fila e ID recuperados; registro `audit-routines-*` inactivado al terminar |
+| Migraciones tras segundo arranque | Omitidas por registro existente; datos conservados |
+
+La prueba de arquitectura confirma 30 invocaciones en seis repositorios y ausencia de Dapper/Npgsql/SQL en Controller/Service. La integración confirma comportamiento real de esas llamadas. La prueba de trigger compara el resultado con el disparador habilitado y deshabilitado dentro de una transacción exclusiva: no se atribuye a un trigger una transformación hecha en la API.
+
+El navegador verificó navegación activa, búsqueda sin coincidencias, apertura/cancelación de modal, alta/edición/retiro desde formularios reales, normalización visible y menú móvil a 390px sin desbordamiento. Capturas en [evidencias](evidencias/README.md). La primera ejecución de la comprobación de navegador intentó cerrar durante la transición de Bootstrap y agotó el tiempo; se corrigió la espera del verificador y se ejecutó nuevamente con éxito. No se presentó ese intento como aprobado.
+
+Las nuevas pruebas detectaron que el proveedor predeterminado Event Log falla en la cuenta restringida al registrar una advertencia. Se corrigió la API para registrar a consola, capturada por los scripts locales. Las 41 pruebas finales incluyen siete escenarios de excepción segura y dos de contrato JSON inválido en español.
+
+SQLSTATE se prueba técnicamente con excepciones controladas en el host HTTP; no se afirma integración de una FK académica inexistente. PostgreSQL 16 no se probó: no está disponible `C:\Program Files\PostgreSQL\16\bin\psql.exe` y Docker no está instalado. El entorno real sigue siendo PostgreSQL 17.9. Tampoco se afirma escaneo CVE, carga o accesibilidad exhaustiva. Los resultados de la sección siguiente son históricos.
+
+## Primera auditoría (histórico)
+
 Fecha: 23 de octubre de 2026, Colombia. Entorno observado: Windows, Python 3.14, .NET SDK 10.0.402, PostgreSQL 17.9. Dependencias: Flask 3.1.3, Werkzeug 3.1.9, requests 2.32.5, python-dotenv 1.2.2, pytest 9.1.1. Las versiones declaradas se alinearon con este entorno.
 
 ## Resultados obtenidos

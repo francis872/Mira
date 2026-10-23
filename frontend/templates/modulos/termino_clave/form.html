@@ -24,13 +24,13 @@
                 <form method="POST" action="{{ url_for('termino_clave_update', termino=item.termino) if not is_new else url_for('termino_clave_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="termino" class="form-label fw-semibold">
-                            Término en Español (Llave Primaria) <span class="text-danger">*</span>
+                            Término en español <span class="text-danger">*</span>
                         </label>
                         <input type="text" class="form-control" id="termino" name="termino" 
                                value="{{ item.termino if item else '' }}" placeholder="Ej. Inteligencia Artificial" 
                                {{ 'readonly class="form-control bg-light"' if not is_new else 'required' }}>
                         {% if not is_new %}
-                            <small class="text-muted"><i class="bi bi-lock-fill me-1"></i>La llave primaria textual no se puede modificar.</small>
+                            <small class="text-muted"><i class="bi bi-lock-fill me-1"></i>El término identifica el registro y no se puede cambiar.</small>
                         {% endif %}
                     </div>
 

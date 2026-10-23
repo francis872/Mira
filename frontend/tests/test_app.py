@@ -211,3 +211,9 @@ def test_unicode_csrf_is_rejected_without_api_call(client, calls):
     response = client.post("/universidad/crear", data={"csrf_token": "ñ-invalid"})
     assert response.status_code == 400
     assert calls == []
+
+
+def test_area_form_sends_original_value_for_database_normalization(client, calls):
+    calls.responses[("POST", "area_aplicacion")] = FakeResponse(201, {"id": 9, "nombre": "Nombre"})
+    assert client.post('/area_aplicacion/crear', data={'nombre': '  Nombre  '}).status_code == 302
+    assert calls[-1]['json']['nombre'] == '  Nombre  '

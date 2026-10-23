@@ -1,0 +1,22 @@
+# Matriz C01–C12 de MIRA V2
+
+Fuente: [prompt definitivo auténtico del usuario](prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md), sección 16. Se aplican sus doce criterios como requisitos de trabajo. El archivo oficial `VERSION_2.md` y la rúbrica original no se localizaron; no se afirma haberlos contrastado. Fecha: 23 de octubre de 2026.
+
+| Criterio | Estado | Requisito e implementación | Prueba y resultado | Bloqueo/límite |
+|---|---|---|---|---|
+| C01 CRUD V1 desde interfaz | Verificado | RF-MIRA-CAT-01–06; seis módulos en `frontend/app.py`, controladores, servicios y repositorios | `test_catalog_create_update_inactivate_persist` para seis catálogos; suite HTTP aprobada. Recorrido adicional real en Edge de área de aplicación | No constituye CRUD de entidades V2 |
+| C02 CRUD V2 desde interfaz | Bloqueado | Tablas académicas FK/puente aún sin modelo oficial | No hay prueba ni pantalla académica V2 | Faltan columnas, claves, cardinalidades y reglas; no reutilizar usuarios como sustituto |
+| C03 Cinco operaciones por rutinas | Verificado | RF-V2-SP-01; 30 funciones en migración 004; seis `*Repository.cs` solo invocan `public.sp_*` | Regresión .NET con PostgreSQL, inventario SQL de 30 funciones y `test_catalog_repositories_only_call_stored_routines` aprobados | Verificación de todos los CRUD actualmente implementados; entidades académicas pendientes en C02 |
+| C04 Trigger demostrable | Verificado | RF-V2-TR-01; migración 005, `fn_area_aplicacion_normalizar`, `tr_area_aplicacion_normalizar` | SQL compara trigger habilitado/deshabilitado; API devuelve nombre normalizado; formulario HTTP y Edge crean/editan con espacios y muestran resultado persistido | Normalización de regla existente; no es conteo de detalles ni trigger académico derivado |
+| C05 FK en desplegables API | Bloqueado | RF-V2-FK-01; sin tablas académicas aprobadas | No se declara aprobada ninguna prueba | Faltan modelo y catálogos de referencia; V1 no tiene FK |
+| C06 FK opcionales admiten null | Bloqueado | Contratos académicos por definir | Sin prueba de FK opcional académica | No se conoce qué referencias permiten null; descripción/término inglés opcionales no acreditan este criterio |
+| C07 Integridad referencial 409 en español | Bloqueado | RF-V2-HTTP-01; middleware traduce 23503/23505 a 409 | `ErroresPersistenciaTests` aprueba traducción y ausencia de datos sensibles con excepciones controladas | Traducción técnica verificada, pero falta flujo real con FK académica y su prueba HTTP. No equiparar el doble con integración real |
+| C08 Puentes: asignar, retirar y conflicto | Bloqueado | Asociaciones académicas no definidas | Sin prueba de interfaz V2 | `usuario_rol` solo prueba rutinas SQL legadas; no acredita este criterio |
+| C09 Maestro y renglones en una pantalla | Bloqueado | RF-V2-MD-01–04; referencias del prompt: universidad→grupo, grupo→semillero, línea→docente | Sin pantalla académica que pueda probarse; atomicidad de usuarios sí se prueba por separado | Falta esquema específico; no crear campos o detalles supuestos |
+| C10 Borrado lógico filtra retirados | Verificado | RF-MIRA-CAT-01–06; `sp_eliminar_*` actualiza activo y lecturas filtran | Ciclos .NET/HTTP aprobados y fila conservada en base; retiro desde modal Edge | Reglas de retiro académico pendientes de modelo |
+| C11 Lenguaje comprensible | Verificado | RF-V2-UI-01/RF-MIRA-ERR-01; mensajes españoles, búsqueda, estados y confirmaciones; errores internos ocultos | Pruebas Flask, API y siete comprobaciones reales en Edge; capturas en `docs/evidencias/` | No es una certificación exhaustiva de accesibilidad |
+| C12 Regresión V1 completa | Verificado | Preservación de los seis contratos y datos | Antes: 31 .NET, 40 Flask, 30 HTTP. Después: 41 .NET, 42 Flask/arquitectura, 31 HTTP; SQL aprobado | Entorno local PostgreSQL 17.9; PostgreSQL 16 no ejecutado |
+
+**Resultado: seis criterios verificados y seis bloqueados. V2 no está completa.** Estados parciales se explican dentro de la evidencia de cada fila, sin marcar como verificado un criterio que depende de una entidad ausente.
+
+La búsqueda recorrió el repositorio excluyendo artefactos `.git`, `.local`, `.vs`, `bin`, `obj` y cachés. No encontró `0_METODOLOGIA.md`, `VERSION_2.md`, `0_mapa_versiones.md`, `modulo_*.md` ni `proyecto_completo.md`. `docs/fuentes/` sigue sin modelo oficial. El usuario indicó que no recuerda su ubicación. No se buscó indiscriminadamente en archivos personales ajenos al proyecto.

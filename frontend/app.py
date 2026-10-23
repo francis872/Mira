@@ -286,7 +286,7 @@ def area_aplicacion_new():
 @app.route("/area_aplicacion/crear", methods=["POST"])
 def area_aplicacion_create():
     payload = {
-        "nombre": request.form.get("nombre", "").strip()
+        "nombre": request.form.get("nombre", "")
     }
     resp = api_call("POST", "area_aplicacion", payload)
     if resp is not None and resp.status_code == 201:
@@ -308,7 +308,7 @@ def area_aplicacion_edit(id):
 def area_aplicacion_update(id):
     payload = {
         "id": id,
-        "nombre": request.form.get("nombre", "").strip()
+        "nombre": request.form.get("nombre", "")
     }
     resp = api_call("PUT", f"area_aplicacion/{id}", payload)
     if resp is not None and resp.status_code == 200:

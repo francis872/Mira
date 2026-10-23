@@ -1,5 +1,7 @@
 # PROMPT MAESTRO — MIRA V2
 
+Versión anterior de trabajo. La instrucción vigente es el [prompt maestro definitivo auténtico](PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md), que exige rutinas para todo CRUD y la matriz de doce criterios. Se conserva esta adaptación para trazabilidad, sin atribuirla al usuario como texto original.
+
 ## Auditoría integral, implementación funcional, estabilización y preparación para sustentación
 
 Adaptado al repositorio MIRA a partir del prompt adjuntado por el usuario. El [original de Backstage](referencias/PROMPT_MAESTRO_BACKSTAGE_V2.md) se conserva como referencia histórica. Este documento es una instrucción de trabajo reutilizable, no una declaración de funcionalidades terminadas ni un sustituto del modelo oficial.

@@ -172,6 +172,21 @@ def test_oversized_form_preserves_data_and_explains_limit(browser):
     assert value not in Browser().get("/area_aplicacion").text
 
 
+def test_area_form_uses_trigger_and_displays_persisted_value(browser):
+    marker = 'e2e-trigger-' + uuid.uuid4().hex[:10]
+    response = browser.post('/area_aplicacion/crear', {'nombre': '  ' + marker + '  '}, '/area_aplicacion/nuevo')
+    assert response.status_code == 302
+    row = row_for(Browser().get('/area_aplicacion').text, marker)
+    assert row and ('  ' + marker + '  ') not in row
+    key = re.search(r'/area_aplicacion/editar/(\d+)', row).group(1)
+    try:
+        assert browser.post('/area_aplicacion/editar/' + key, {'nombre': '  ' + marker + '-edit  '}, '/area_aplicacion/editar/' + key).status_code == 302
+        row = row_for(Browser().get('/area_aplicacion').text, marker)
+        assert marker + '-edit' in row and ('  ' + marker + '-edit  ') not in row
+    finally:
+        browser.post('/area_aplicacion/eliminar/' + key, {}, '/area_aplicacion')
+
+
 # Medidas generales de seguridad
 def test_post_without_csrf_token_is_rejected(browser):
     response = browser.post("/universidad/crear", {"nombre": "e2e-csrf", "tipo": "x", "ciudad": "y"}, "/universidad/nuevo", with_token=False)
