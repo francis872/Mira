@@ -1,7 +1,10 @@
 <div class="catalog-toolbar">
-    <label for="catalog-search" class="form-label fw-semibold">Buscar en el listado</label>
-    <input id="catalog-search" type="search" class="form-control catalog-search"
-           placeholder="Escribe un nombre o descripción" aria-describedby="catalog-results">
-    <p id="catalog-results" class="small text-muted mb-0 mt-2" role="status" aria-live="polite">La búsqueda filtra los registros cargados.</p>
-    <p id="catalog-no-results" class="small mb-0 mt-2" hidden>No hay coincidencias. Prueba con otro texto.</p>
+    <div class="catalog-search-field">
+        <label for="catalog-search">Buscar en el listado</label>
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <input id="catalog-search" type="search" class="form-control catalog-search"
+               placeholder="Nombre, descripción o palabra clave…" aria-describedby="catalog-results">
+    </div>
+    <p id="catalog-results" class="catalog-summary" role="status" aria-live="polite">La búsqueda filtra los registros cargados.</p>
+    <p id="catalog-no-results" class="catalog-summary w-100" hidden>No hay coincidencias. Prueba con otro texto.</p>
 </div>

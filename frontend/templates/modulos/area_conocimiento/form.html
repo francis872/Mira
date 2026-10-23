@@ -11,9 +11,9 @@
     </ol>
 </nav>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center form-layout">
     <div class="col-md-8 col-lg-6">
-        <div class="card card-custom">
+        <div class="card card-custom form-card">
             <div class="card-header bg-white py-3 border-bottom">
                 <h4 class="card-title fw-bold mb-0 text-dark">
                     <i class="bi {{ 'bi-pencil-square text-primary' if item and item.id else 'bi-plus-circle-fill text-danger' }} me-2"></i>
@@ -21,22 +21,23 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('area_conocimiento_update', id=item.id) if item and item.id else url_for('area_conocimiento_create') }}">{{ csrf_input() }}
+                <p class="form-intro" id="required-note">Completa los campos marcados con <span aria-label="obligatorio">*</span>.</p>
+                <form aria-describedby="required-note" method="POST" action="{{ url_for('area_conocimiento_update', id=item.id) if item and item.id else url_for('area_conocimiento_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="gran_area" class="form-label fw-semibold">Gran Área <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="gran_area" name="gran_area" 
+                        <input type="text" class="form-control" id="gran_area" name="gran_area" maxlength="150"
                                value="{{ item.granArea if item else '' }}" placeholder="Ej. Ingeniería y Tecnología" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="area" class="form-label fw-semibold">Área Específica <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="area" name="area" 
+                        <input type="text" class="form-control" id="area" name="area" maxlength="150"
                                value="{{ item.area if item else '' }}" placeholder="Ej. Ingeniería de Sistemas" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="disciplina" class="form-label fw-semibold">Disciplina Académica <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="disciplina" name="disciplina" 
+                        <input type="text" class="form-control" id="disciplina" name="disciplina" maxlength="150"
                                value="{{ item.disciplina if item else '' }}" placeholder="Ej. Ingeniería de Software" required>
                     </div>
 

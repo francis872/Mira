@@ -51,6 +51,8 @@ node scripts/verify-browser.mjs
 
 El verificador usa `MIRA_E2E_URL` (por defecto `http://127.0.0.1:5000`) y `MIRA_BROWSER_DEBUG_URL` (por defecto `http://127.0.0.1:9224`). Comprueba búsqueda, navegación, Bootstrap real, creación, edición, retiro y menú móvil, usando registros `e2e-browser-*`. Las capturas se guardan en `docs/evidencias/` y el resumen en `.local/browser-check.json`. El CDN debe estar disponible para Bootstrap. El verificador no utiliza el perfil personal del navegador.
 
+La versión actual añade apertura/cierre del menú móvil, desplegable por teclado y 52 combinaciones de inicio/listado/formulario con anchos 390, 768, 1024 y 1440 px. Comprueba que no haya desbordamiento del documento ni superposición con la barra lateral y captura también el formulario de universidad. En total informa diez comprobaciones agrupadas; no las confunde con las pruebas de la API o con una auditoría exhaustiva de accesibilidad.
+
 Para cerrar el navegador de pruebas sin afectar otras ventanas, enviar `Browser.close` por su conexión de depuración:
 
 ```powershell

@@ -11,9 +11,9 @@
     </ol>
 </nav>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center form-layout">
     <div class="col-md-8 col-lg-6">
-        <div class="card card-custom">
+        <div class="card card-custom form-card">
             <div class="card-header bg-white py-3 border-bottom">
                 <h4 class="card-title fw-bold mb-0 text-dark">
                     <i class="bi {{ 'bi-pencil-square text-primary' if item and item.id else 'bi-plus-circle-fill text-primary' }} me-2"></i>
@@ -21,10 +21,11 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('area_aplicacion_update', id=item.id) if item and item.id else url_for('area_aplicacion_create') }}">{{ csrf_input() }}
+                <p class="form-intro" id="required-note">Completa los campos marcados con <span aria-label="obligatorio">*</span>.</p>
+                <form aria-describedby="required-note" method="POST" action="{{ url_for('area_aplicacion_update', id=item.id) if item and item.id else url_for('area_aplicacion_create') }}">{{ csrf_input() }}
                     <div class="mb-4">
                         <label for="nombre" class="form-label fw-semibold">Nombre del Área de Aplicación <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="200"
                                value="{{ item.nombre if item else '' }}" placeholder="Ej. Salud Digital y Telemedicina" required>
                     </div>
 

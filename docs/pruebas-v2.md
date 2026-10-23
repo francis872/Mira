@@ -1,5 +1,11 @@
 # Pruebas ejecutadas en la auditoría MIRA
 
+## Rediseño y publicación autorizados (actualización)
+
+Con el nuevo diseño se volvió a ejecutar `scripts/verify-local.ps1`: **41 .NET, 42 Flask/arquitectura, 31 E2E HTTP**, ambos SQL con rollback y cero fallos; base `mira_audit_20261023144423_9628`. Se ejecutó además el verificador Edge ampliado: **10 comprobaciones, 52 combinaciones de página/ancho, cero excepciones JavaScript capturadas**. La comprobación de teclado envía una pulsación Enter completa por CDP y espera el resultado del desplegable nativo.
+
+El detalle del rediseño, capturas, archivos y autorización de GitHub está en [diseno-v2.md](diseno-v2.md). El usuario confirmó que la publicación solicitada es el código en el repositorio, no un despliegue público. Las ejecuciones siguientes documentan etapas anteriores de la misma implementación.
+
 ## Ejecución del prompt definitivo (actual)
 
 Regresión antes de modificar persistencia: **31 .NET, 40 Flask y 30 E2E HTTP aprobadas**, base exclusiva `mira_audit_20261023140939_4908`.

@@ -11,9 +11,9 @@
     </ol>
 </nav>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center form-layout">
     <div class="col-md-8 col-lg-6">
-        <div class="card card-custom">
+        <div class="card card-custom form-card">
             <div class="card-header bg-white py-3 border-bottom">
                 <h4 class="card-title fw-bold mb-0 text-dark">
                     <i class="bi {{ 'bi-pencil-square text-primary' if not is_new else 'bi-plus-circle-fill text-warning' }} me-2"></i>
@@ -21,14 +21,15 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('termino_clave_update', termino=item.termino) if not is_new else url_for('termino_clave_create') }}">{{ csrf_input() }}
+                <p class="form-intro" id="required-note">Completa los campos marcados con <span aria-label="obligatorio">*</span>.</p>
+                <form aria-describedby="required-note" method="POST" action="{{ url_for('termino_clave_update', termino=item.termino) if not is_new else url_for('termino_clave_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="termino" class="form-label fw-semibold">
                             Término en español <span class="text-danger">*</span>
                         </label>
-                        <input type="text" class="form-control" id="termino" name="termino" 
-                               value="{{ item.termino if item else '' }}" placeholder="Ej. Inteligencia Artificial" 
-                               {{ 'readonly class="form-control bg-light"' if not is_new else 'required' }}>
+                        <input type="text" class="form-control" id="termino" name="termino" maxlength="150"
+                               value="{{ item.termino if item else '' }}" placeholder="Ej. Inteligencia Artificial"
+                               {{ 'readonly' if not is_new else 'required' }}>
                         {% if not is_new %}
                             <small class="text-muted"><i class="bi bi-lock-fill me-1"></i>El término identifica el registro y no se puede cambiar.</small>
                         {% endif %}
@@ -36,7 +37,7 @@
 
                     <div class="mb-4">
                         <label for="termino_ingles" class="form-label fw-semibold">Equivalente en Inglés</label>
-                        <input type="text" class="form-control" id="termino_ingles" name="termino_ingles" 
+                        <input type="text" class="form-control" id="termino_ingles" name="termino_ingles" maxlength="150"
                                value="{{ item.terminoIngles if item and item.terminoIngles else '' }}" placeholder="Ej. Artificial Intelligence">
                     </div>
 

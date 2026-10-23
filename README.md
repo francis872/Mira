@@ -90,6 +90,8 @@ Colección de prompts: [índice](docs/prompts/README.md) y [prompt maestro MIRA 
 
 Instrucción vigente: [prompt maestro definitivo](docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md). Estado de aceptación: [matriz C01–C12](docs/criterios-v2.md), seis verificados y seis bloqueados por documentación académica ausente. [Reglas por entidad](docs/reglas-negocio-v2.md) y [capturas reales](docs/evidencias/README.md).
 
+Diseño actualizado: navegación lateral, dashboard y formularios uniformes, búsqueda y adaptación móvil. [Cambios visuales y verificación](docs/diseno-v2.md). El código está en la rama de trabajo; la aplicación se ejecuta localmente según las instrucciones anteriores.
+
 Auditoría y sustentación: [auditoría](docs/auditoria-v2.md), [arquitectura](docs/arquitectura-v2.md), [trazabilidad](docs/trazabilidad-v2.md), [pruebas ejecutadas](docs/pruebas-v2.md), [guía de sustentación](docs/sustentacion-v2.md) y [pendientes](docs/pendientes-v2.md). La verificación actual acredita operación local de V1 y rutinas SQL V2; el dominio académico V2 sigue pendiente del modelo oficial.
 
 1. Clone.

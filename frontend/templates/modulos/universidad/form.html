@@ -11,9 +11,9 @@
     </ol>
 </nav>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center form-layout">
     <div class="col-md-8 col-lg-6">
-        <div class="card card-custom">
+        <div class="card card-custom form-card">
             <div class="card-header bg-white py-3 border-bottom">
                 <h4 class="card-title fw-bold mb-0 text-dark">
                     <i class="bi {{ 'bi-pencil-square text-primary' if item and item.id else 'bi-plus-circle-fill text-info' }} me-2"></i>
@@ -21,16 +21,17 @@
                 </h4>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('universidad_update', id=item.id) if item and item.id else url_for('universidad_create') }}">{{ csrf_input() }}
+                <p class="form-intro" id="required-note">Completa los campos marcados con <span aria-label="obligatorio">*</span>.</p>
+                <form aria-describedby="required-note" method="POST" action="{{ url_for('universidad_update', id=item.id) if item and item.id else url_for('universidad_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="nombre" class="form-label fw-semibold">Nombre de la Universidad <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="200"
                                value="{{ item.nombre if item else '' }}" placeholder="Ej. Universidad de San Buenaventura" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="tipo" class="form-label fw-semibold">Tipo de Institución <span class="text-danger">*</span></label>
-                        <select class="form-select" id="tipo" name="tipo" required>
+                        <select class="form-select" id="tipo" name="tipo" maxlength="100" required>
                             <option value="" disabled {{ 'selected' if not item or not item.tipo else '' }}>Selecciona un tipo...</option>
                             <option value="Privada" {{ 'selected' if item and item.tipo == 'Privada' else '' }}>Privada</option>
                             <option value="Pública" {{ 'selected' if item and item.tipo == 'Pública' else '' }}>Pública</option>
@@ -39,7 +40,7 @@
 
                     <div class="mb-4">
                         <label for="ciudad" class="form-label fw-semibold">Ciudad Sede <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="ciudad" name="ciudad" 
+                        <input type="text" class="form-control" id="ciudad" name="ciudad" maxlength="100"
                                value="{{ item.ciudad if item else '' }}" placeholder="Ej. Medellín" required>
                     </div>
 

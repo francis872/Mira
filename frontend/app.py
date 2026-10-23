@@ -57,7 +57,9 @@ def error_message(resp, default):
 
 @app.context_processor
 def inject_globals():
-    return {"swagger_url": SWAGGER_URL}
+    section = request.path.strip("/").split("/", 1)[0]
+    current_catalog = next((catalog for catalog in CATALOGS if catalog["path"] == section), None)
+    return {"swagger_url": SWAGGER_URL, "current_catalog": current_catalog}
 
 
 @app.errorhandler(400)

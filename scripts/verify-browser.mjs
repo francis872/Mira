@@ -96,8 +96,37 @@ assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'
 await evaluate("document.querySelector('.navbar-toggler').click()");
 await until("document.querySelector('#navbarMain').classList.contains('show')");
 results.push('Viewport movil de 390px sin desbordamiento y menu desplegable funcional');
+await until("!document.querySelector('#navbarMain').classList.contains('collapsing')");
+await evaluate("document.querySelector('.navbar-toggler').click()");
+await until("!document.querySelector('#navbarMain').classList.contains('show') && !document.querySelector('#navbarMain').classList.contains('collapsing')");
+results.push('Menu movil se cierra y devuelve espacio al contenido');
 capture = await send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: true});
 await writeFile('docs/evidencias/mira-v2-mobile.png', Buffer.from(capture.data, 'base64'));
+
+const catalogs = ['area_aplicacion', 'area_conocimiento', 'linea_investigacion', 'objetivo_desarrollo_sostenible', 'termino_clave', 'universidad'];
+const routes = ['/', ...catalogs.flatMap(catalog => ['/' + catalog, '/' + catalog + '/nuevo'])];
+for (const width of [390, 768, 1024, 1440]) {
+    await send('Emulation.setDeviceMetricsOverride', {width, height: 1000, deviceScaleFactor: 1, mobile: width < 768});
+    for (const path of routes) {
+        await go(path);
+        assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true, `${path} en ${width}px`);
+        if (width >= 992) {
+            assert.ok(await evaluate("document.querySelector('.mira-sidebar').getBoundingClientRect().right <= document.querySelector('.mira-workspace').getBoundingClientRect().left + 1"), 'Barra lateral sin superponer el contenido');
+        }
+    }
+}
+results.push('52 combinaciones de pagina y viewport verificadas sin desbordamiento ni superposicion lateral');
+await go('/universidad/nuevo');
+capture = await send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: true});
+await writeFile('docs/evidencias/mira-v2-form.png', Buffer.from(capture.data, 'base64'));
+await go('/');
+await send('Page.bringToFront');
+await evaluate("document.querySelector('.project-status summary').focus()");
+await send('Input.dispatchKeyEvent', {type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, text: '\r', unmodifiedText: '\r'});
+await send('Input.dispatchKeyEvent', {type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13});
+await until("document.querySelector('.project-status').open");
+assert.equal(await evaluate("document.querySelector('.project-status').open"), true);
+results.push('Estado del proyecto desplegable accesible mediante teclado');
 assert.deepEqual(errors, []);
 await writeFile('.local/browser-check.json', JSON.stringify({results, errors}, null, 2));
 console.log(JSON.stringify({checks: results.length, results, errors}, null, 2));

@@ -36,6 +36,8 @@ La atomicidad legada usuario→roles pasa sus pruebas SQL; no se expone en panta
 
 Se añadieron búsqueda local con estado de coincidencias, página activa, enlace para saltar al contenido, nombres accesibles en controles, estado de procesamiento y prevención de reenvío, estilos coherentes y adaptación móvil. Se conservan Bootstrap, los conteos reales y la identidad MIRA. No se añadió login ni analítica de otra versión. [Capturas reales](evidencias/README.md).
 
+La mejora posterior autorizada incorpora navegación lateral, encabezado contextual, nuevas tarjetas, estilos de formularios y confirmaciones más claras. Se verificó nuevamente con 41/42/31 pruebas, diez comprobaciones Edge y 52 combinaciones de página/ancho. [Rediseño y actualización GitHub](diseno-v2.md).
+
 ## 9. Pruebas
 
 Antes: 31 .NET, 40 Flask y 30 HTTP. Después: **41 .NET, 42 Flask/arquitectura, 31 HTTP**, dos archivos SQL con rollback y **7 comprobaciones Edge**. La suite final no tuvo fallos ni omisiones .NET. Se comprobó persistencia tras reiniciar los tres servicios y repetición del arranque sin reaplicar migraciones. [Registro, entorno y límites](pruebas-v2.md).

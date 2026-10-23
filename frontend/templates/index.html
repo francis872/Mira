@@ -3,55 +3,61 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<div class="p-4 p-md-5 rounded-3 bg-white shadow-sm border-start border-5 border-danger mb-4">
-    <h1 class="display-6 fw-bold text-dark mb-2">Bienvenido a MIRA</h1>
-    <p class="lead text-secondary mb-3">
-        Módulo de Investigación para la Gestión de Proyectos Académicos — Universidad de San Buenaventura Medellín.
-    </p>
-    <div class="d-flex flex-wrap gap-2">
-        {% if api_ok %}
-        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2"><i class="bi bi-plug me-1"></i>API conectada</span>
-        {% else %}
-        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2"><i class="bi bi-exclamation-triangle me-1"></i>API no disponible para algunos módulos</span>
-        {% endif %}
-        <span class="badge bg-secondary-subtle text-secondary border px-3 py-2"><i class="bi bi-shield-check me-1"></i>Borrado lógico</span>
+<section class="dashboard-hero" aria-labelledby="dashboard-title">
+    <div class="hero-copy">
+        <span class="section-eyebrow">TU ESPACIO DE TRABAJO</span>
+        <h1 id="dashboard-title">Bienvenido a MIRA</h1>
+        <p>Organiza la información que acompaña tus proyectos de investigación.</p>
+        <div class="hero-status">
+            {% if api_ok %}
+            <span class="connection-pill"><span class="status-dot"></span>Datos disponibles</span>
+            {% else %}
+            <span class="connection-pill connection-warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Algunos datos no están disponibles</span>
+            {% endif %}
+            <span class="hero-institution">Universidad de San Buenaventura Medellín</span>
+        </div>
     </div>
-</div>
+    <div class="hero-symbol" aria-hidden="true"><i class="bi bi-journal-bookmark"></i><span>MIRA / V2</span></div>
+</section>
 
-<h2 class="h5 fw-bold mb-3 text-secondary"><i class="bi bi-grid-fill me-2"></i>Catálogos de V1</h2>
-<div class="row g-4 mb-4">
+<div class="section-heading">
+    <div><h2>Catálogos académicos</h2><p>Consulta, actualiza y organiza la información de cada catálogo.</p></div>
+    <span class="module-label">6 catálogos</span>
+</div>
+<div class="row g-4 mb-4 dashboard-catalogs">
     {% for c in catalogs %}
-    <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+    <div class="col-md-6 col-xl-4">
+        <article class="card h-100 card-custom catalog-card">
             <div class="card-body d-flex flex-column">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-{{ c.color }}-subtle rounded-circle me-3"><i class="bi {{ c.icon }} fs-4"></i></div>
-                    <div>
-                        <h3 class="h5 card-title fw-bold mb-0">{{ c.title }}</h3>
-                        <small class="text-muted">
-                            {% if c.count is none %}Registros activos: no disponible
-                            {% else %}Registros activos: <strong>{{ c.count }}</strong>{% endif %}
-                        </small>
-                    </div>
+                <div class="catalog-card-heading">
+                    <div class="catalog-icon bg-{{ c.color }}-subtle text-{{ c.color }}"><i class="bi {{ c.icon }}" aria-hidden="true"></i></div>
+                    <span class="catalog-number">{{ '%02d' | format(loop.index) }}</span>
                 </div>
-                <p class="card-text text-secondary small flex-grow-1">{{ c.text }}</p>
-                <div class="d-flex gap-2 mt-3 pt-3 border-top">
-                    <a href="{{ url_for(c.list) }}" class="btn btn-outline-{{ c.color }} btn-sm flex-grow-1"><i class="bi bi-list-ul me-1"></i>Ver listado</a>
-                    <a href="{{ url_for(c.new) }}" class="btn btn-{{ c.color }} btn-sm" title="Nuevo registro"><i class="bi bi-plus-lg"></i></a>
+                <div class="catalog-card-title">
+                    <h3>{{ c.title }}</h3>
+                    <small class="catalog-count">
+                        {% if c.count is none %}Registros activos: no disponible
+                        {% else %}Registros activos: <strong>{{ c.count }}</strong>{% endif %}
+                    </small>
+                </div>
+                <p class="catalog-description flex-grow-1">{{ c.text }}</p>
+                <div class="catalog-card-actions">
+                    <a href="{{ url_for(c.list) }}" class="catalog-open">Ver listado <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+                    <a href="{{ url_for(c.new) }}" class="catalog-add" aria-label="Crear registro: {{ c.title }}"><i class="bi bi-plus-lg" aria-hidden="true"></i> Nuevo</a>
                 </div>
             </div>
-        </div>
+        </article>
     </div>
     {% endfor %}
 </div>
 
-<h2 class="h5 fw-bold mb-3 text-secondary"><i class="bi bi-clipboard-check me-2"></i>Estado del proyecto</h2>
-<div class="card card-custom bg-white mb-4">
+<details class="project-status" id="estado-proyecto">
+    <summary><span><i class="bi bi-info-circle" aria-hidden="true"></i> Estado del proyecto</span><span class="project-stage">V2 en desarrollo <i class="bi bi-chevron-down" aria-hidden="true"></i></span></summary>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between"><span>V1 — seis catálogos (consultar, crear, modificar, inactivar)</span><span class="badge bg-success">Operativo</span></li>
-        <li class="list-group-item d-flex justify-content-between"><span>V2 — rutinas almacenadas, vista y atomicidad en PostgreSQL (usuario→roles, sin pantalla)</span><span class="badge bg-secondary">Solo base de datos</span></li>
-        <li class="list-group-item d-flex justify-content-between"><span>V2 — maestro–detalle del dominio académico, selectores de claves foráneas, triggers y vistas</span><span class="badge bg-warning text-dark">Pendiente: requiere el modelo relacional oficial de la Entrega 2</span></li>
-        <li class="list-group-item d-flex justify-content-between"><span>Inicio de sesión y control de acceso</span><span class="badge bg-light text-dark border">Fuera de alcance (versión futura)</span></li>
+        <li class="list-group-item"><span>V1 — seis catálogos (consultar, crear, modificar, inactivar)</span><span class="badge bg-success-subtle text-success">Operativo</span></li>
+        <li class="list-group-item"><span>V2 — rutinas y atomicidad usuario→roles</span><span class="badge bg-secondary-subtle text-secondary">Solo base de datos</span></li>
+        <li class="list-group-item"><span>V2 — maestro–detalle y relaciones académicas</span><span class="badge bg-warning-subtle text-dark">Pendiente: requiere el modelo relacional oficial de la Entrega 2</span></li>
+        <li class="list-group-item"><span>Inicio de sesión y control de acceso</span><span class="badge bg-light text-dark border">Fuera de alcance (versión futura)</span></li>
     </ul>
-</div>
+</details>
 {% endblock %}
