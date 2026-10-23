@@ -2,6 +2,8 @@
 
 Este prompt resume el contexto del repositorio para continuar el desarrollo con un asistente de programación. No reemplaza los documentos oficiales ni el Spec Kit. Verifica el estado actual del código antes de actuar.
 
+Todos los prompts están en el [índice de prompts](prompts/README.md), incluido el [prompt maestro adaptado a MIRA V2](prompts/PROMPT_MAESTRO_MIRA_V2.md) y el original de Backstage conservado como referencia.
+
 La auditoría adaptada a MIRA está registrada en [auditoria-v2.md](auditoria-v2.md), con [trazabilidad](trazabilidad-v2.md), [pruebas](pruebas-v2.md) y [pendientes](pendientes-v2.md). Consulta esas evidencias antes de repetir verificaciones o declarar completa V2.
 
 ## Prompt para copiar
