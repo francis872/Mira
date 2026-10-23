@@ -39,7 +39,19 @@ La configuración se lee desde `.env.local`; `-ConfigFile` y `-PostgresBin` perm
 
 Entorno comprobado y límites: [pruebas-v2.md](../docs/pruebas-v2.md). El equipo verificado usa PostgreSQL 17.9, .NET SDK 10.0.402 y Python 3.14. Docker no estuvo disponible. En Compose, los puertos publicados están limitados a `127.0.0.1`.
 
-## Verificación en navegador real
+## Verificación de toda la plataforma en PostgreSQL 16
+
+Con herramientas PostgreSQL 16 locales (los binarios de esta ejecución están en `.local/postgresql16/pgsql/bin`) y las dependencias .NET/Python preparadas:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-postgres16.ps1
+```
+
+El script crea una instancia independiente en `.local/pg16-validation/postgres`, una base de plataforma y otra exclusiva para SQL/.NET. Compila y publica el código actual de la API en Debug, en una ruta propia que no bloquea el Release habitual, y arranca Flask en puertos de pruebas 8082/5001, con PostgreSQL en 5547. Todos escuchan en loopback. Ejecuta `verify-local.ps1` con esa configuración y detiene solo sus procesos en `finally`. Conserva los datos y no convierte ni abre el directorio PostgreSQL 17 habitual.
+
+`-PostgresBin`, `-DatabasePort`, `-ApiPort` y `-FrontendPort` permiten ajustar rutas/puertos. Un puerto ocupado produce error sin detener procesos ajenos. Las credenciales exclusivas y los logs quedan ignorados bajo `.local`. Paquete utilizado, resultados y límites: [verificacion-postgres16.md](../docs/verificacion-postgres16.md).
+
+## Navegador real: preparación y ejecución
 
 Requiere MIRA iniciada, Node 24 (WebSocket y fetch incorporados) y Edge. Iniciar un perfil de pruebas independiente, oculto y con depuración limitada a loopback:
 

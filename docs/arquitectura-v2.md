@@ -58,6 +58,8 @@ La 005 añade `tr_area_aplicacion_normalizar`, BEFORE INSERT/UPDATE OF nombre, q
 
 Windows local: PostgreSQL 17.9 dedicado bajo `.local/postgres`, API .NET 10 y Flask en procesos ocultos, escuchando en loopback. Docker declara PostgreSQL 16, .NET 10 y Python 3.11; esa combinación no se ejecutó en esta auditoría. No se debe equiparar el resultado de PostgreSQL 17 local con una prueba de PostgreSQL 16.
 
+Posteriormente se ejecutó PostgreSQL 16.15 con API/Flask de pruebas propios mediante `scripts/verify-postgres16.ps1`, en `.local/pg16-validation/` y puertos 5547/8082/5001. La plataforma habitual no se convirtió ni se detuvo. La suite completa pasó también en 16; esta comprobación independiente no equivale a probar Docker o Python 3.11. [Evidencia](verificacion-postgres16.md).
+
 Configuración y secretos provienen de `.env.local` o `.env`, ignorados por Git. PID y logs locales viven en `.local/`. `/health` es una comprobación de vida de la API: no consulta la base. El arranque local comprueba además `/api/universidad` y el dashboard.
 
 ## Decisiones registradas

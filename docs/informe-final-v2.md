@@ -48,9 +48,9 @@ Verificados: C01, C03, C04, C10, C11 y C12. Bloqueados: C02, C05, C06, C07, C08 
 
 ## 11. Pendientes reales
 
-No se localizaron `VERSION_2.md`, metodología, mapa oficial, módulos, proyecto completo ni esquema académico. El usuario no recuerda su ubicación. La estructura oficial de nueve documentos y prompts personales de integrantes tampoco se aportaron; no se inventaron nombres, autores ni evidencias.
+Se recuperaron del historial el plan, historias y cronograma, preservados en `docs/fuentes/historicos/`. No se localizaron `VERSION_2.md`, metodología del curso, mapa oficial, módulos, proyecto completo ni esquema académico vigente. El usuario indicó utilizar únicamente el modelo oficial, descartando un modelo provisional. La estructura oficial de nueve documentos y prompts personales de integrantes tampoco se aportaron; no se inventaron nombres, autores ni evidencias.
 
-PostgreSQL 16 no se ejecutó: falta su ejecutable psql en la ruta revisada y Docker no está disponible. Se verificó sobre PostgreSQL 17.9. Tampoco se certifica producción, carga, escaneo CVE o accesibilidad exhaustiva. [Pendientes completos](pendientes-v2.md).
+La limitación inicial de PostgreSQL 16 quedó resuelta: se ejecutó una plataforma independiente sobre 16.15, con 41/42/31 pruebas y ambos SQL aprobados en dos ejecuciones; [detalle](verificacion-postgres16.md). Se conservó la plataforma habitual sobre 17.9. Docker no está disponible. No se certifica producción, carga, escaneo CVE o accesibilidad exhaustiva. [Pendientes completos](pendientes-v2.md).
 
 ## 12. Ejecución reproducible
 

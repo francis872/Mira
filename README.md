@@ -70,6 +70,8 @@ Detener: `docker compose down` (conserva los datos). Reiniciar desde cero: `dock
 
 **Arranque completo en Windows sin Docker:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1`. Crea una base PostgreSQL exclusiva y persistente, aplica las migraciones y arranca API y frontend en localhost. Requisitos, configuración y comando para detener: [scripts/README.md](scripts/README.md).
 
+**Verificación independiente en PostgreSQL 16:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-postgres16.ps1`. Probada con motor 16.15, API y frontend de pruebas separados de la plataforma habitual: [resultados y requisitos](docs/verificacion-postgres16.md). Las fuentes históricas recuperadas están en [docs/fuentes/historicos](docs/fuentes/historicos/README.md); aún falta el esquema oficial vigente de Entrega 2.
+
 **Solución de problemas**
 - Puerto 5544/5432 ocupado (otro PostgreSQL local): cambiar `POSTGRES_PORT` en `.env`.
 - El dashboard muestra "no disponible": la API no responde o no alcanza PostgreSQL; revisar `docker compose logs mira-api`.

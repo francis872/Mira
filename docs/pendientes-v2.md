@@ -4,12 +4,14 @@ Estado tras la auditoría del 23 de octubre de 2026. La plataforma local está a
 
 Actualización por el prompt definitivo: los seis catálogos ya usan 30 funciones PostgreSQL y existe un trigger de normalización real. Navegación, búsqueda, alta/edición/retiro en modal y menú móvil se comprobaron en Edge. Siguen pendientes el modelo académico, las FK/puentes y maestro-detalle de dominio; ver [criterios-v2.md](criterios-v2.md): seis criterios verificados y seis bloqueados.
 
+Última revisión: se recuperaron fuentes históricas auténticas desde Git y se verificó toda la plataforma actual sobre PostgreSQL 16.15 (41/42/31 pruebas, SQL y cierre de procesos). La anterior carencia del motor 16 está resuelta para pruebas locales. El usuario rechazó un modelo provisional y pidió usar solo el oficial; la migración histórica diferente no se adopta como sustituto.
+
 | Prioridad | Pendiente | Motivo y siguiente paso |
 |---|---|---|
-| P1 | Modelo relacional oficial de la Entrega 2 | Bloqueo externo: `docs/fuentes/` contiene únicamente instrucciones. Se necesitan entidades, PK/FK, cardinalidades, reglas y criterios del profesor. |
+| P1 | Modelo relacional oficial de la Entrega 2 | Se restauraron plan, historias y cronograma en `docs/fuentes/historicos/`, pero no el esquema vigente. Faltan entidades, PK/FK, cardinalidades, nulabilidad y reglas del profesor. |
 | P1 | Maestro-detalle académico, repositorios de rutinas, selectores FK, vistas y triggers justificados | Dependen del modelo anterior. No sustituirlos por relaciones ficticias entre catálogos independientes. |
 | P2 | Auditoría exhaustiva de accesibilidad y navegadores | Edge real ya verificó siete controles, incluidos modales y viewport 390px. Falta revisión completa por teclado, lector de pantalla y otros navegadores. Bootstrap/iconos dependen de CDN. |
-| P2 | Docker y paridad PostgreSQL 16 / Python 3.11 | CLI Docker ausente. Instalar/habilitar Docker y ejecutar configuración, build, migraciones y pruebas con ese entorno. La auditoría local usó PostgreSQL 17.9 y Python 3.14. |
+| P2 | Docker y Python 3.11 | PostgreSQL 16.15 ya fue probado con la API y frontend reales, de forma independiente. CLI Docker ausente y Python 3.11 sin probar; falta validar esa combinación de imágenes. |
 | P2 | Auditoría actual de dependencias y secretos históricos | Se verificaron versiones instaladas y que solo `.env.example` está versionado como archivo de entorno. No se ejecutó escaneo CVE ni del historial completo. No afirmar ausencia de vulnerabilidades. |
 | P2 | Casos de frontera de claves textuales | Verificar términos con separadores de ruta, porcentajes y otros caracteres reservados. Las rutas actuales usan la clave en el segmento URL; los casos aprobados no cubren todo Unicode ni todo carácter reservado. |
 | P2 | Completitud de documentación histórica V1 | La especificación V1 fue actualizada retrospectivamente; los demás archivos del kit inicial aún pueden contener plantillas. No presentarlos como requisitos oficiales aprobados. |

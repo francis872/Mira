@@ -1,5 +1,13 @@
 # Auditoría de MIRA V1 + V2 parcial
 
+## Recuperación histórica y PostgreSQL 16
+
+Se amplió la revisión a objetos Git, ramas locales/remotas y búsquedas del repositorio. La afirmación anterior de ausencia de documentos describía la rama activa: **el historial sí contenía plan, historias y cronograma**, recuperados sin modificar sus bytes en `docs/fuentes/historicos/`. [Procedencia y diferencias](fuentes/historicos/README.md).
+
+El código histórico de `880ac75` contiene un modelo con sedes y docentes ligados a usuarios que difiere del actual y de las relaciones citadas en el prompt de Entrega 2. No es prueba suficiente del esquema oficial vigente y no se aplicó. El usuario eligió usar únicamente el modelo oficial en lugar de un modelo provisional.
+
+Se resolvió además la limitación del motor de pruebas: PostgreSQL 16.15 se ejecutó en una instancia separada, con API y Flask propios; 41/42/31 pruebas y ambos SQL pasaron en ejecuciones repetidas, incluida compilación del código actual de la API. La plataforma habitual siguió funcionando y los procesos de pruebas se cerraron. [Evidencia PostgreSQL 16](verificacion-postgres16.md). Los bloqueos académicos no cambian.
+
 ## Revisión por el prompt definitivo
 
 El nuevo adjunto exige que Repository solo invoque rutinas. La revisión anterior aceptaba SQL directo parametrizado; ese criterio quedó sustituido explícitamente y se corrigieron los seis repositorios. Se añadieron 30 funciones (004), un trigger de normalización (005), traducción segura de errores y mejoras de interfaz. El detalle de C01–C12 está en [criterios-v2.md](criterios-v2.md), con reglas en [reglas-negocio-v2.md](reglas-negocio-v2.md).

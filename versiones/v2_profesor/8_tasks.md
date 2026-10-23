@@ -1,5 +1,9 @@
 # Tareas verificables V2
 
+- [x] Recuperar plan, historias y cronograma auténticos del historial, con trazabilidad de blobs, en `docs/fuentes/historicos/`.
+- [x] Ejecutar PostgreSQL 16.15 con API/frontend independientes: 41 .NET, 42 Flask/arquitectura, 31 HTTP y ambos SQL aprobados; repetibilidad y cierre de procesos comprobados.
+- [ ] Implementar el dominio académico únicamente cuando se aporte su esquema oficial. El usuario descartó expresamente diseñar un modelo provisional; la recuperación histórica no resuelve esa diferencia.
+
 - [x] Guardar íntegro el prompt definitivo auténtico y documentar su procedencia, sin atribuirlo a integrantes.
 - [x] Migración 004: 30 funciones, cinco por catálogo; seis repositorios C# solo invocan rutinas parametrizadas.
 - [x] Migración 005: trigger de normalización de área; pruebas SQL, API y formulario.

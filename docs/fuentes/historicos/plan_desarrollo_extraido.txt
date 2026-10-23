@@ -1,0 +1,248 @@
+FUENTE: Plan de desarrollo Módulo de Investigación - Plataforma Académica (1).docx
+
+=== PÁRRAFOS ===
+[1] (normal) Módulo de Investigación para la Gestión de Proyectos Académicos
+[2] (normal) Universidad San Buenaventura Medellín
+[4] (normal) Versión 1.0
+[7] (normal) Historial de Revisiones
+[10] (normal) Tabla de Contenidos
+[13] (normal) Plan de Desarrollo de Software
+[14] (Heading 1) Introducción
+[15] (normal) El presente trabajo sobre el diseño e implementación del Módulo de Investigación en la Universidad de San Buenaventura Medellín ha sido preparado como parte de la estrategia de gestión y centralización de proyectos académicos. Este documento ofrece una visión general del software propuesto para estructurar, hacer seguimiento y administrar de manera efectiva las entregas, formatos y tablas del proceso investigativo institucional.
+[16] (normal) El proyecto responde a la necesidad de sistematizar los procesos de investigación, facilitando el control de las entregas y la organización de la información base. Se propone un enfoque basado en la digitalización y estandarización del módulo actual, permitiendo desarrollar herramientas y plataformas para la recolección, validación y análisis objetivo de los proyectos de investigación.
+[17] (normal) Este documento detalla el proceso de transformación digital del Módulo de Investigación, delineando las fases esenciales para su implementación y proporcionando una visión global del proyecto. La estructura contempla la identificación de roles, la definición de actividades clave y la generación de artefactos necesarios para asegurar una gestión rigurosa y precisa, contribuyendo a la mejora continua y al cumplimiento de los estándares de calidad institucional.
+[18] (Heading 2) Propósito
+[19] (normal) El propósito del Plan de Desarrollo de Software es establecer un punto de partida claro para la construcción del software, proporcionando la información necesaria para la gestión y control del proyecto, y describiendo el enfoque que se adoptará para el desarrollo del software. Los usuarios del Plan de Desarrollo del Software son:
+[20] (normal) El jefe del proyecto: lo utiliza para organizar la agenda y necesidades de recursos, y para realizar su seguimiento.
+[21] (normal) Los miembros del equipo de desarrollo: lo usan para entender lo que deben hacer, cuándo deben hacerlo y qué otras actividades dependen de ello.
+[22] (normal) Los compañeros del semillero o personas interesadas: utilizarán este documento como una herramienta para conocer de primera mano y de manera eficaz los pormenores del proyecto. Además, en algunos casos, podrá servir como referencia para futuros cambios o implementaciones en sus propios proyectos.
+[24] (Heading 2) Alcance
+[25] (normal) El Plan de Desarrollo del Software describe que el proyecto abarca el diseño e implementación del Módulo de Investigación en la Universidad de San Buenaventura Medellín. Este sistema digital permitirá gestionar, estructurar y hacer seguimiento integral a los proyectos de investigación académica, incluyendo sus tablas de datos, entregas de avance y plantillas base. El desarrollo se realizará por iteraciones, elaborando documentos llamados entregables, así como un producto de software que cumplirá con los requisitos funcionales y no funcionales. El proyecto comprenderá la captura de requisitos mediante consultas con las partes interesadas, el desarrollo de una documentación de visión preliminar y la planificación de iteraciones para la implementación del sistema. Durante el proceso, se desarrollarán herramientas y plataformas que faciliten una gestión transparente y organizada de la investigación, garantizando la calidad y conformidad con los estándares institucionales.
+[26] (Heading 2) Resumen
+[27] (normal) Después de esta introducción, el resto del documento está organizado en las siguientes secciones:
+[28] (normal) Vista General del Proyecto: describe el propósito, alcance y objetivos del proyecto, estableciendo los artefactos que se producirán y utilizarán durante el proyecto.
+[29] (normal) Organización del Proyecto: describe la estructura organizacional del equipo de desarrollo.
+[30] (normal) Gestión del Proceso: explica los costos y planificación estimada, define las fases e hitos del proyecto y describe cómo se realizará su seguimiento.
+[31] (normal) Planes y Guías de aplicación: Vista global del proceso de desarrollo de software, incluyendo métodos, herramientas y técnicas que se utilizarán.
+[32] (normal) En resumen, el plan de desarrollo de software contiene: una descripción del proyecto con los alcances más significativos, una descripción de la metodología empleada, una descripción de los entregables y un cronograma.
+[33] (Heading 1) Vista General del Proyecto
+[34] (Heading 2) Propósito, Alcance y Objetivos
+[35] (normal) El propósito principal de este proyecto es diseñar e implementar el Módulo de Investigación en la Universidad de San Buenaventura Medellín. Además, se planea desarrollar una plataforma centralizada que facilite la interacción entre investigadores, estudiantes y docentes, proporcionando una interfaz efectiva para el seguimiento de entregas y el intercambio de información clave. A continuación, se describirán las secciones que integrará la aplicación:
+[36] (normal) Sección de usuarios y roles
+[37] (normal) Corresponde al conjunto de recursos que permite el registro e ingreso de usuarios al portal. Esta sección proporciona herramientas para gestionar las cuentas de usuario y asignar roles específicos (estudiante, investigador, revisor, administrador), determinando así los permisos y niveles de acceso dentro de la aplicación.
+[38] (normal) Sección gestión de desempeño
+[39] (normal) Esta sección se encarga de supervisar, evaluar y mejorar el desarrollo de los proyectos dentro del portal educativo. Incluye diversas funcionalidades orientadas a apoyar la gestión y seguimiento investigativo, tales como:
+[40] (normal) Proyectos: Facilita la creación, seguimiento y gestión de proyectos asignados a los investigadores y estudiantes, permitiendo la monitorización del progreso y el cumplimiento de los objetivos establecidos.
+[41] (normal) Análisis organizacional: Proporciona herramientas para evaluar la estructura académica de los proyectos, identificar áreas de mejora y desarrollar estrategias para optimizar la eficiencia y efectividad del equipo de investigación.
+[42] (normal) Evaluación de competencias: Permite la evaluación de las habilidades y competencias de los investigadores y estudiantes en función de criterios predeterminados, ayudando a identificar fortalezas y áreas de desarrollo.
+[43] (normal) Construcción de propósitos: Ayuda a establecer y gestionar objetivos claros y alcanzables para las entregas del módulo, alineando sus metas individuales con los objetivos institucionales.
+[44] (normal) Factores claves de éxito: Define y analiza los factores críticos que contribuyen al éxito de la investigación y de los colaboradores, facilitando el enfoque en las áreas más importantes para el desarrollo del módulo.
+[45] (normal) Dashboard: Proporciona una vista integral y en tiempo real de los indicadores del estado de las entregas y tablas, mostrando métricas clave, tendencias y resultados a través de gráficos y visualizaciones interactivas, facilitando la toma de decisiones informada.
+[47] (normal) Sección gestión del desarrollo
+[49] (normal) Esta sección está dedicada a apoyar el crecimiento y el desarrollo continuo de los usuarios a través de recursos educativos y herramientas interactivas. Incluye las siguientes funcionalidades clave:
+[51] (normal) Reportes: Proporciona informes detallados sobre el progreso de los usuarios en las entregas, formatos y otras actividades educativas.
+[52] (normal) Cursos: Ofrece acceso a una amplia variedad de capacitaciones diseñadas para desarrollar habilidades específicas y conocimientos en diversas áreas temáticas de investigación. Los cursos pueden incluir contenido multimedia, evaluaciones interactivas y certificaciones al completarse satisfactoriamente.
+[53] (normal) Podcasts: Permite a los usuarios escuchar programas educativos y discusiones sobre temas relevantes en formato de audio. Los podcasts pueden ser una herramienta efectiva para el aprendizaje pasivo y el acceso a información actualizada en cualquier momento y lugar.
+[54] (normal) Videos: Brinda acceso a material educativo en formato de vídeo, que puede incluir conferencias, tutoriales, demostraciones prácticas y documentales relacionados con el ámbito investigativo y profesional de los usuarios.
+[57] (normal) Sección gestión de reportes
+[59] (normal) La sección de gestión de reportes ofrece herramientas para generar, visualizar y analizar informes detallados sobre métricas, datos y actividades del sistema, permitiendo a los usuarios gestionar y obtener una visión completa del rendimiento y estadísticas clave.
+[61] (Heading 2) Suposiciones y Restricciones
+[62] (normal) Las suposiciones y restricciones respecto del sistema, y que se derivan directamente a una investigación con un usuario real:
+[64] (normal) El lenguaje utilizado será… No definido aún
+[65] (normal) El sistema operativo será Windows
+[66] (normal) El motor de base de datos será Oracle
+[67] (normal) Protección a los datos personales
+[68] (normal) Se utilizará Scrum como marco de trabajo, siendo este un método ágil ampliamente empleado en el desarrollo de software.
+[69] (normal) La lista de suposiciones y restricciones se incrementará durante el desarrollo del proyecto.
+[71] (Heading 2) Entregables y actividades del proyecto
+[72] (normal) Todos los documentos y actividades están sujetos a modificaciones durante el proceso de desarrollo del proyecto. Mientras trabajamos en cada fase, los entregables buscan alcanzar un nivel de estabilidad para garantizar un avance consistente. Solo al finalizar el proyecto se consolidarán las versiones finales de los documentos y productos entregables. Las actividades del proyecto deben estar alineadas con los entregables previstos, asegurando que cada tarea contribuya de manera efectiva a la producción y revisión de estos resultados. Iniciaremos con los entregables y las actividades clave asociadas a cada fase del proyecto:
+[77] (normal) Entregables:
+[79] (normal) Plan de desarrollo de software
+[80] (normal) Este documento habla del proyecto y sus distintos entregables. También se encontrarán el cronograma del proyecto y sus distintas fases, además de definir la metodología utilizada. El plan de desarrollo (o plan de fases) debe contener las fechas esperadas para los hitos principales, cuándo se tendrá la arquitectura, cuándo estará la primera versión beta, etcétera. Estas fechas coinciden, generalmente, con el final de las fases. También debería tener una previsión de las necesidades de personal y medios, así como fechas de hitos menores, sólo si se conocen. Este plan debe obtenerse temprano en la fase de inicio y no debe ir más allá de una o dos páginas. Debe actualizarse siempre que sea necesario.
+[82] (normal) Análisis y gestión de riesgos
+[83] (normal) Este producto contiene la lista de riesgos propiamente dicha. Para cada uno hay que indicar: su magnitud, una descripción, su impacto (donde afecta), indicadores para monitorizar, una estrategia para mitigarlo y el plan de contingencia por si el riesgo se hace real.
+[85] (normal) Historias de usuario
+[86] (normal) Las historias de usuario son descripciones breves y simples de una funcionalidad deseada del sistema, escritas desde la perspectiva del usuario final. Su propósito es capturar lo que el usuario quiere lograr con el software y generalmente siguen un formato específico: "Como [tipo de usuario], quiero [acción] para [beneficio/valor]." Estas descripciones informales son esenciales en metodologías ágiles como Scrum, ayudando a definir y priorizar las tareas de desarrollo, y se utilizan para capturar los requisitos del usuario y comunicar las necesidades del software a los equipos de desarrollo.
+[87] (normal) Las historias de usuario suelen seguir una estructura sencilla: Como [rol del usuario], quiero [acción deseada], para lograr [beneficio]. Por ejemplo, una historia de usuario para un sitio web de comercio electrónico podría ser: Como cliente, quiero poder buscar productos por categoría, para poder encontrar fácilmente los productos que busco.
+[92] (normal) ¿Qué contiene una historia de usuario?
+[94] (normal) Una historia de usuario bien escrita debe contener los siguientes elementos:
+[96] (normal) Rol del usuario: El tipo de usuario que realizará la acción.
+[97] (normal) Acción deseada: La acción que el usuario quiere realizar.
+[98] (normal) Beneficio: El beneficio que el usuario obtendrá al realizar la acción.
+[100] (normal) Además de estos elementos esenciales, las historias de usuario pueden incluir información adicional, como:
+[102] (normal) Criterios de aceptación: Los criterios deben cumplirse para que la historia se considere completa.
+[103] (normal) Prioridad: La importancia de la historia para el usuario y el negocio.
+[104] (normal) Estimación del esfuerzo: El tiempo y el esfuerzo que se estima que llevará implementar la historia.
+[106] (normal) ¿Cuáles son los beneficios de usar historias de usuario?
+[108] (normal) Las historias de usuario tienen muchos beneficios, incluyendo:
+[110] (normal) Mejoran la comprensión del usuario: Al centrarse en las necesidades del usuario, las historias de usuario ayudan a los equipos de desarrollo a comprender mejor lo que quieren los usuarios del software.
+[111] (normal) Promueven la colaboración: Las historias de usuario son una forma eficaz de comunicar los requisitos del software entre los usuarios, los desarrolladores y otras partes interesadas.
+[112] (normal) Aportan flexibilidad: Las historias de usuario se pueden cambiar y actualizar fácilmente a medida que evolucionan los requisitos del software.
+[113] (normal) Fomentan la entrega de valor: Las historias de usuario se suelen priorizar en función de su valor para el usuario, lo que ayuda a garantizar que el software se entregue en función de las necesidades más importantes del usuario.
+[115] (normal) ¿Cómo se escriben historias de usuario?
+[117] (normal) Existen muchas formas de escribir las historias de usuarios, pero el modelo que será utilizado será este:
+[119] (normal) Utilizar un lenguaje sencillo: Las historias de usuario deben estar escritas en un lenguaje que los usuarios y los desarrolladores puedan entender.
+[120] (normal) ser específico: Las historias de usuario deben ser específicas y describir claramente la acción deseada y el beneficio.
+[121] (normal) Centrarse en el valor para el usuario: Las historias de usuario deben centrarse en el valor que el software aportará al usuario.
+[122] (normal) Ser flexible: Las historias de usuario se pueden cambiar y actualizar fácilmente a medida que evolucionan los requisitos del software.
+[124] (normal) Requisitos no funcionales
+[125] (normal) Un requisito no funcional o atributo de calidad es, en la ingeniería de sistemas y la ingeniería de software, un requisito que especifica criterios que pueden usarse para juzgar la operación de un sistema en lugar de sus comportamientos específicos, ya que estos corresponden a los requisitos funcionales.
+[127] (normal) Los requisitos no funcionales de software (RNFS), también conocidos como requisitos de calidad o atributos del sistema, son características y criterios que describen cómo debe ser el rendimiento, la seguridad, la usabilidad y otros aspectos de un sistema o software más allá de su funcionalidad básica. Estos requisitos son esenciales para garantizar que el software sea de alta calidad y satisfaga las necesidades de los usuarios.
+[129] (normal) ¿Por qué son importantes los requisitos no funcionales?
+[131] (normal) Los RNFS son importantes por varias razones:
+[133] (normal) Garantizan la calidad del software: Ayudan a asegurar que el software sea confiable, seguro, usable y eficiente.
+[134] (normal) Satisfacen las necesidades del usuario: Aseguran que el software cumpla con las expectativas de los usuarios.
+[135] (normal) Reducen los costos: Ayudan a identificar y prevenir problemas antes de que se conviertan en costosos errores.
+[136] (normal) Mejoran la competitividad: Un software que cumple con los RNFS es más competitivo en el mercado.
+[138] (normal) ¿Cuáles son los tipos de requisitos no funcionales?
+[140] (normal) Existen muchos tipos de RNFS, pero algunos de los más comunes son:
+[142] (normal) Rendimiento: El software debe ser rápido, receptivo y eficiente.
+[143] (normal) Seguridad: El software debe protegerse contra accesos no autorizados, datos corruptos y otras amenazas.
+[144] (normal) Usabilidad: El software debe ser fácil de usar, aprender y entender.
+[145] (normal) Escalabilidad: El software debe poder adaptarse a un mayor número de usuarios o datos.
+[146] (normal) Mantenibilidad: El software debe ser fácil de modificar y actualizar.
+[147] (normal) Portabilidad: El software debe poder ejecutarse en diferentes plataformas o dispositivos.
+[148] (normal) Confiabilidad: El software debe ser confiable y funcionar sin errores.
+[149] (normal) Disponibilidad: El software debe estar disponible para los usuarios cuando lo necesiten.
+[151] (normal) ¿Cómo se definen los requisitos no funcionales?
+[152] (normal) Los RNFS se definen típicamente durante la fase de recopilación de requisitos del proceso de desarrollo de software. Esto implica entrevistar a los usuarios, analizar los casos de uso y consultar con otras partes interesadas.
+[154] (normal) Los RNFS deben ser medibles y verificables, para que se pueda evaluar si el software cumple con ellos. Por ejemplo, un requisito no funcional de rendimiento podría especificar que el software debe cargarse en menos de dos segundos.
+[156] (normal) ¿Cómo se implementan los requisitos no funcionales?
+[158] (normal) Los RNFS se implementan a lo largo del proceso de desarrollo de software. Los desarrolladores deben tener en cuenta los RNFS al diseñar, codificar y probar el software.
+[160] (normal) Herramientas y técnicas para la gestión de requisitos no funcionales. Existen varias herramientas y técnicas que pueden ayudar a gestionar los RNFS, como:
+[162] (normal) Documentos de requisitos no funcionales: Estos documentos describen los RNFS para el sistema o software.
+[163] (normal) Herramientas de modelado: Estas herramientas pueden utilizarse para crear modelos de los RNFS.
+[164] (normal) Herramientas de análisis: Estas herramientas pueden utilizarse para analizar los RNFS e identificar posibles problemas.
+[165] (normal) Herramientas de seguimiento: Estas herramientas pueden utilizarse para realizar un seguimiento del progreso de la implementación de los RNFS.
+[168] (normal) Product Backlog y Sprint Backlog:
+[169] (normal) Que es Product Backlog:
+[170] (normal) Una lista priorizada de todos los requisitos y funcionalidades deseadas para el producto. Incluye historias de usuario, mejoras, correcciones de errores y cualquier otro trabajo que el equipo deba completar.
+[171] (normal) Que es Sprint Backlog:
+[172] (normal) Un subconjunto del Product Backlog que el equipo se compromete a completar durante un Sprint. Contiene las historias de usuario y las tareas necesarias para cumplir con los objetivos del Sprint.
+[174] (normal) Prototipo funcional (Incremento del Producto):
+[175] (normal) Una versión funcional del producto desarrollada durante el Sprint. Debe ser un incremento potencialmente entregable y cumplir con la "Definición de Terminado" del equipo.
+[178] (normal) Product Increment (al final de cada Sprint (metodologia)):
+[179] (normal) Una versión del producto con todas las funcionalidades desarrolladas hasta el momento. Este incremento debe ser completamente funcional y haber pasado todas las pruebas necesarias.
+[181] (normal) Modelo de despliegue
+[182] (normal) Este modelo muestra el despliegue y la configuración de tipos de nodos del sistema, en los cuales se hará el despliegue de los componentes.
+[184] (normal) Glosario
+[185] (normal) Es una sección que recopila el vocabulario específico del dominio del sistema o proyecto en cuestión. Incluye términos y definiciones que son cruciales para entender el proyecto y asegurar una comunicación clara entre todos los miembros del equipo y los interesados. Dependiendo del proyecto, estos términos pueden ser altamente especializados y técnicos, reflejando el lenguaje particular del sector o la tecnología utilizada.
+[187] (normal) Además, el glosario puede servir como un diccionario informal para definir tipos de datos, conceptos clave y abreviaturas que se usan en el proyecto. Esto ayuda a estandarizar el entendimiento de términos y facilita la capacitación de nuevos miembros del equipo. Tener un glosario bien definido asegura que todos los participantes estén alineados en cuanto al significado de los términos y reduce el riesgo de malentendidos durante el desarrollo del proyecto
+[190] (normal) Modelo de clases
+[191] (normal) Una plantilla para crear objetos e implementar un comportamiento en un sistema. En UML, una clase representa un objeto o un conjunto de objetos que comparten una estructura y un comportamiento comunes. Se representan con un rectángulo que incluye filas del nombre de la clase, sus atributos y sus operaciones. Al dibujar una clase en un diagrama de clases, sólo se debe cumplimentar la fila superior. Las otras son opcionales y se usan si deseas agregar más detalles.
+[193] (normal) Documentación de la arquitectura SW
+[194] (normal) La documentación de la arquitectura de software proporciona una descripción detallada de la estructura y los componentes del sistema. Este documento es fundamental para entender cómo se organiza el software y cómo interactúan sus diferentes partes. Incluye información sobre:
+[195] (normal) Visión General de la Arquitectura: Una explicación general de la arquitectura del sistema, incluyendo la estructura de alto nivel y los objetivos principales que busca alcanzar.
+[196] (normal) Componentes del Sistema: Descripción de los componentes principales del software, como módulos, servicios, y subsistemas. Se detallan sus responsabilidades, interfaces, y cómo se comunican entre sí.
+[197] (normal) Diagrama de Arquitectura: Representaciones gráficas que ilustran la estructura del sistema, mostrando cómo los componentes se interrelacionan y cómo se organizan.
+[198] (normal) Patrones de Diseño: Cualquier patrón de diseño específico utilizado en la arquitectura, como los Microservicios, y cómo se implementa en el sistema.
+[199] (normal) Decisiones de Diseño: Explicación de las decisiones clave que se tomaron durante el diseño de la arquitectura, incluyendo las razones detrás de esas decisiones y cómo afectan al sistema.
+[200] (normal) Consideraciones de Escalabilidad y Rendimiento: Cómo la arquitectura está diseñada para manejar el crecimiento y garantizar un rendimiento óptimo, incluyendo estrategias para escalabilidad, balanceo de carga, y optimización.
+[203] (normal) Modelo de implementación más contenido Como subirlo para que ejecute
+[204] (normal) Consiste en una visión general de lo que tiene que ser implementado, y un apartado para cada iteración con los componentes y subsistemas a implementar durante esa iteración, así como del resultado software (builds) que se han de obtener y el testeo que se ha de realizar sobre ellos.
+[206] (normal) Plan de despliegue
+[207] (normal) Los planes de despliegue definen los segmentos y las tareas relacionadas con los segmentos que dirigen los despliegues. Las fases en un reléase se derivan del ciclo de vida. Los segmentos de una fase se derivan del plan de despliegue. Cuando crea un despliegue, selecciona un plan de despliegue de los planes asociados al Release. El plan que elija determina los segmentos y las tareas inicialmente disponibles para el despliegue. Puede añadir o suprimir segmentos y tareas incluso después de que el despliegue se haya iniciado. Los cambios que realice a un plan durante un despliegue pasan a formar parte del plan en sí mismo. También puede trabajar directamente en un plan de despliegue fuera de cualquier despliegue.
+[209] (normal) Manual de usuario:
+[210] (normal) Un manual de usuario, también conocido como guía de usuario, es un documento que proporciona instrucciones sobre cómo utilizar un producto, servicio o sistema específico. Está escrito en un lenguaje sencillo y ofrece instrucciones paso a paso para realizar diversas tareas.
+[212] (normal) El objetivo principal de un manual de usuario es ayudar a los usuarios a comprender y utilizar el producto o servicio de manera eficaz, así como para solucionar problemas comunes que puedan surgir.
+[214] (normal) Los manuales de usuario suelen incluir información sobre:
+[216] (normal) La instalación del producto o servicio
+[217] (normal) Las características y funcionalidades del producto o servicio
+[218] (normal) Cómo utilizar el producto o servicio para realizar tareas específicas
+[219] (normal) Cómo solucionar problemas comunes
+[220] (normal) Información de contacto para obtener asistencia
+[222] (normal) Manual de instalación:
+[223] (normal) Un manual de instalación de software es una guía detallada que describe cómo instalar un programa de software en un ordenador. Está escrito en un lenguaje sencillo y ofrece instrucciones paso a paso para completar el proceso de instalación.
+[224] (normal) El objetivo principal de un manual de instalación de software es ayudar a los usuarios a instalar el software correctamente y sin problemas.
+[225] (normal) Los manuales de instalación de software suelen incluir información sobre:
+[227] (normal) Preparación para la instalación:
+[228] (normal) Requisitos del sistema: El software necesita un determinado conjunto de hardware y software para funcionar correctamente. El manual de instalación debe enumerar los requisitos del sistema para que los usuarios puedan asegurarse de que su ordenador cumple con ellos antes de empezar la instalación.
+[229] (normal) Descarga del software: El software suele descargarse desde Internet o desde un dispositivo externo. El manual de instalación debe proporcionar instrucciones sobre cómo descargar el software.
+[230] (normal) Desinstalación de software anterior: Si ya está instalado un software similar en el ordenador, puede que desinstalarse antes de instalarlo. El manual de instalación debe proporcionar instrucciones sobre cómo desinstalar el software anterior.
+[232] (normal) Proceso de instalación:
+[234] (normal) Ejecución del programa de instalación: Una vez descargado el software, hay que ejecutar el programa de instalación. El manual de instalación debe proporcionar instrucciones sobre cómo hacerlo.
+[235] (normal) Selección de opciones de instalación: El programa de instalación suele ofrecer varias opciones de instalación. El manual de instalación debe explicar las diferentes opciones y cómo seleccionar la mejor para el usuario.
+[236] (normal) Introducción de información: El programa de instalación puede solicitar al usuario que introduzca información, como una clave de licencia o un nombre de usuario y contraseña. El manual de instalación debe proporcionar instrucciones sobre cómo introducir esta información.
+[237] (normal) Finalización de la instalación: Una vez completadas todas las opciones de instalación, el programa de instalación finalizará el proceso. El manual de instalación debe proporcionar instrucciones sobre cómo finalizar la instalación.
+[239] (normal) Verificación de la instalación:
+[241] (normal) Inicio del software: Una vez finalizada la instalación, el usuario debería poder iniciar el software. El manual de instalación debe proporcionar instrucciones sobre cómo hacerlo.
+[242] (normal) Prueba del software: El usuario debe probar el software para asegurarse de que funciona correctamente. El manual de instalación puede proporcionar instrucciones sobre cómo probar el software.
+[243] (normal) Solución de problemas: Si el usuario encuentra algún problema durante la instalación o el uso del software, el manual de instalación debe proporcionar instrucciones sobre cómo solucionarlo.
+[245] (Heading 2) Evolución del Plan de Desarrollo del Software
+[246] (normal) El Plan de Desarrollo del Software se revisará semanalmente para verificar el cumplimiento en las actividades y se definió en la fase de inicio.
+[248] (normal) Actividades :
+[250] (normal) Asesorías y sprint Review:
+[251] (normal) Asesorías: Son sesiones en las que el equipo de desarrollo recibe orientación y apoyo de expertos. Estas reuniones pueden realizarse en cualquier momento del Sprint y están diseñadas para resolver dudas, recibir feedback temprano y asegurar que el trabajo del equipo esté alineado con las expectativas del proyecto. Las asesorías son esenciales para mantener la calidad y dirección del trabajo, ayudando al equipo a tomar decisiones informadas y evitar posibles desviaciones.
+[253] (normal) Sprint Review: Es una reunión que se lleva a cabo al final de cada Sprint. Durante la Sprint Review, el equipo presenta el incremento del producto que han desarrollado a los interesados y stakeholders. Se discuten los avances logrados, se recibe retroalimentación y se establecen los próximos pasos. Esta reunión es crucial para evaluar el progreso del proyecto, ajustar la dirección según las necesidades del cliente, y asegurar que el equipo sigue en el camino correcto hacia el cumplimiento de los objetivos del producto.
+[255] (normal) Estudiar temas:
+[256] (normal) Implica dedicar tiempo y esfuerzo para profundizar en ciertos temas o áreas de conocimiento. Es un proceso que puede incluir la lectura de materiales, la investigación, la toma de apuntes y la discusión con otros para comprender mejor el contenido. Estudiar temas es clave para adquirir nuevas habilidades, reforzar conocimientos previos y prepararse para aplicaciones prácticas en un proyecto o tarea específica.
+[258] (normal) Weekly scrum:
+[259] (normal) El Weekly Scrum es una reunión semanal breve en la que el equipo se reúne para revisar el progreso de la semana, discutir cualquier obstáculo que haya surgido y planificar las tareas para la semana siguiente. Es un momento clave para asegurarse de que todos estén en la misma página, ajustar planes según sea necesario y mantener el enfoque en los objetivos del proyecto. Esta reunión ayuda a alinear esfuerzos, resolver problemas de manera oportuna y garantizar que el equipo continúe avanzando de manera efectiva.
+[262] (normal) Sprint Retrospective:
+[263] (normal) La Sprint Retrospective es una reunión del equipo Scrum donde se reflexiona sobre el Sprint que acaba de terminar. Es un espacio para que el equipo hable sobre lo que salió bien, lo que podría haberse hecho mejor, y para identificar áreas de mejora para el próximo Sprint. Es una oportunidad para aprender, ajustar y seguir mejorando en cada ciclo de trabajo.
+[265] (normal) Sprint Goal:
+[266] (normal) El Sprint Goal es la meta principal que el equipo se propone alcanzar al final del Sprint. Es una declaración sencilla pero poderosa que define lo que se quiere lograr y mantiene a todos enfocados en la misma dirección. Es como una brújula que guía las decisiones diarias y asegura que el equipo se mantenga alineado con el propósito del Sprint. Al final, es la referencia para evaluar si el Sprint fue un éxito o no.
+[268] (Heading 1) Organización del Proyecto
+[269] (Heading 2) Participantes en el Proyecto
+[270] (normal) Juan José Grisales Sañudo 
+	Francisco Guisado lopez
+[271] (normal) Carlos Arturo Castro Castro
+[272] (Heading 2) Interfaces Externas
+[273] (normal) El equipo de desarrollo interactuará activamente con los participantes del proyecto para especificación y validación de lo que pueda ser generado.
+[275] (Heading 2) Roles y Responsabilidades
+[276] (normal) A continuación, se describen las responsabilidades de cada puesto en el equipo de desarrollo durante las fases de Inicio y Elaboración, según sus roles.
+[280] (Heading 1) Gestión del Proceso
+[282] (Heading 2) Estimaciones del Proyecto
+[283] (normal) El proyecto adopta la metodología SDD (Spec-Driven Development) junto con la estructura de Spec Kit. A diferencia de los enfoques tradicionales o ágiles basados en código iterativo (como Scrum), SDD invierte la prioridad: la especificación es la fuente primaria de verdad y el código es únicamente su implementación. Primero se define exactamente QUÉ construir, CÓMO y con qué criterios de aceptación medibles, y posteriormente se procede a la codificación (ejecutada directamente por el equipo o asistida por Inteligencia Artificial).
+[284] (normal) Las características fundamentales de esta gestión son:
+[285] (normal) Especificación previa a la implementación: Ninguna línea de código se escribe sin estar respaldada por un documento del Spec Kit.
+[286] (normal) Gobernanza por Versiones: El proyecto se organiza en versiones cerradas (v1, v2, etc.). Una versión cerrada y etiquetada (tag) no se reabre; los ajustes van a la siguiente versión.
+[287] (normal) Autocontención: El conjunto de documentos del Spec Kit contiene la información suficiente para construir o reconstruir la versión desde cero.
+[288] (normal) Criterios de Aceptación Medibles y Verificables: Todo requisito o endpoint cuenta con criterios explícitos de aprobación pasibles de prueba (p. ej. mediante smoke tests o respuestas HTTP exactas).
+[290] (normal) i. Estructura del Spec Kit del Proyecto
+[292] (normal) La gestión documental del proceso de software se organiza mediante 8 documentos numerados:
+[296] (normal) Nota: La constitución (1_constitution.md) es única y permanente para todo el ciclo de vida del software. Los documentos 2 al 8 se redactan de forma independiente para cada versión dentro del directorio versiones/vN_nombre/.
+[297] (Heading 2) ii. Plan de las Fases y Ciclo de Vida de una Versión 
+
+		Flujo del proceso SDD: 
+			[1. Redacción de Spec Kit (Docs 2-8)] 
+			[2. Ejecución Fases de Tareas (8_tasks.md)] 
+			[3. Validación por Smoke Test (7_quickstart.md)] 
+			[4. Cumplimiento de Criterios de Aceptación (2_spec.md)] 
+			[5. Commit + Tag de Versión (vN)]
+[302] (normal) Tabla de Fases del Proyecto:
+[306] (normal) iii. Reglas de Juego del Proceso
+[308] (normal) La Spec manda sobre el código: Si el código ejecuta una función no especificada en el Spec Kit, sobra. Si la Spec define un requisito no presente en el código, está incompleto.
+[309] (normal) Principio YAGNI (You Aren't Gonna Need It): Ninguna versión construye o anticipa componentes de versiones futuras. Cada versión limita su desarrollo estricto a su especificación correspondiente.
+[310] (normal) Cierre Inmutable: Una vez etiquetada una versión (tag), no se realizan modificaciones directas sobre ella. Cualquier corrección o ajuste pasa a ser "deuda de spec" y se resuelve en la especificación de la siguiente versión.
+[311] (normal) Autocontención: El Spec Kit debe permitir reconstruir el software completo sin requerir revisión del código previo ni explicaciones verbales.
+[312] (normal) iv. Seguimiento y Control del Proyecto
+[313] (normal) Seguimiento de Tareas: Se realiza mediante el documento 8_tasks.md, donde el estado de cada tarea y fase es auditado contra comandos de verificación. No se avanza a una fase siguiente si existen tareas en estado no verificado (en rojo).
+[314] (normal) Control de Cambios: Cualquier modificación técnica o funcional debe reflejarse primero en la documentación del Spec Kit correspondiente (documento 4_research.md para decisiones o 2_spec.md para requisitos) antes de modificar el código fuente.
+[315] (normal) Control de Calidad: La calidad del sistema se garantiza al validar con 7_quickstart.md que las respuestas HTTP, el comportamiento de base de datos y los criterios de aceptación coincidan de manera exacta con los contratos expuestos en 6_contracts.md.
+[317] (Heading 1) Referencias
+[318] (normal) [1] Spec-Driven Development Consortium, «Spec-Driven Development (SDD) & Spec Kit Specification Standard (v1.0)», Software Architecture & Engineering Manuals, Febrero 2025.
+[319] (normal) [2] IEEE Computer Society, «IEEE Std 1058-1998: IEEE Standard for Software Project Management Plans», Institute of Electrical and Electronics Engineers, Diciembre 1998.
+[320] (normal) [3] Docker Inc., «Docker Containerization and Architecture Guide», Docker Documentation, Marzo 2024.
+
+=== TABLAS ===
+TABLA 1
+Fecha | Versión | Descripción | Autor | Revisor
+20/08/2026 | 1.0 | Primera versión del plan de desarrollo para el Módulo de Investigación USB-Medellín | Juan José Grisales Sañudo y Francisco Guisado lopez | Carlos Arturo Castro Castro
+
+TABLA 2
+Puesto | Responsabilidad
+Jefe de Proyecto | El jefe del proyecto estará encargado de planificar, coordinar y dirigir el proyecto. / Planificar para asegurar la finalización del proyecto en el plazo adecuado sin dejar actividades a realizar de forma improvisada. / Coordinar para que las acciones y/o actividades de los implicados trabajen en pro de cumplir el objetivo. / Y Controlar para hacer seguimiento a lo planificado y así apuntar a un resultado de calidad.
+Programador | "Construcción de prototipos. Colaboración en la elaboración de las pruebas funcionales, modelo de datos y en las validaciones con el usuario". Elaborará las especificaciones del software y supervisión del arranque de la aplicación.
+Tester | "Gestión de requisitos, gestión de configuración y cambios, elaboración del modelo de datos, preparación de las pruebas funcionales, elaboración de la documentación. Elaborar modelos de implementación y despliegue". El tester deberá estar presente en todas las etapas del proceso, colaborando y así asegurar la máxima calidad del producto.
+
+TABLA 3
+Documento | Propósito / Pregunta que responde | Contenido principal
+1_constitution.md | ¿Qué reglas NUNCA se negocian? | Artículos permanentes e inmutables para todas las versiones (capas, SQL parametrizado, sin ORM, "un solo comando", cierre por tags).
+2_spec.md | ¿QUÉ se construye y cómo se valida? | Propósito, alcance (lo que incluye y NO incluye), requisitos funcionales y criterios de aceptación medibles.
+3_plan.md | ¿CÓMO: stack, estructura y diseño? | Inventario de archivos (nuevos y existentes que crecen), estructura de carpetas y diseño de capas.
+4_research.md | ¿POR QUÉ así y no de otra forma? | Registro de decisiones técnicas numeradas (D1, D2…), alternativas descartadas y su justificación.
+5_data_model.md | ¿Qué datos hay y cuáles son sus fronteras? | Tablas, columnas, llaves, datos semilla y reglas de responsabilidad (qué ejecuta la BD y qué tiene prohibido la API).
+6_contracts.md | ¿Cuáles son los contratos exactos de la API? | Endpoints detallados: verbos, URLs, bodies de ejemplo y todos los códigos de respuesta JSON esperados.
+7_quickstart.md | ¿Cómo se ejecuta y valida rápidamente? | Comando de despliegue/arranque y smoke test (lista de comandos curl con sus valores esperados).
+8_tasks.md | ¿En qué ORDEN se construye? | Fases de construcción en orden secuencial con tareas y sus criterios de verificación ("Verificar:").

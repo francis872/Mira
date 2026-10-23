@@ -46,14 +46,14 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas .NET' }
     Push-Location (Join-Path $repoRoot 'frontend')
     try {
-        & python -m pytest tests/test_app.py tests/test_architecture.py -q
+        & python -m pytest tests/test_app.py tests/test_architecture.py -q -p no:cacheprovider
         if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas Flask' }
     } finally { Pop-Location }
     $webPort = if ($config['FRONTEND_PORT']) { $config['FRONTEND_PORT'] } else { '5000' }
     $apiPort = if ($config['API_PORT']) { $config['API_PORT'] } else { '8081' }
     $env:MIRA_E2E_URL = "http://127.0.0.1:$webPort"
     $env:MIRA_E2E_API_URL = "http://127.0.0.1:$apiPort"
-    & python -m pytest frontend/tests/e2e -q
+    & python -m pytest frontend/tests/e2e -q -p no:cacheprovider
     if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas E2E' }
     Write-Output "Verificacion completa. Base de pruebas conservada: $testDatabase"
 } finally {

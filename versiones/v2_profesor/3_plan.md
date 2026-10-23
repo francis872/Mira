@@ -21,6 +21,8 @@ Autenticación y autorización no forman parte del plan (ver 2_spec.md, "Correcc
 | 6. Repositorios C# de V1 | Seis repositorios adaptados a 30 funciones PostgreSQL de la migración 004 |
 | 7. Repositorios y selects de FK académicos | Bloqueados por el modelo oficial |
 | 8. Pruebas V1+V2 | Final: 41 .NET con PostgreSQL real, 42 Flask/arquitectura, 31 E2E HTTP, SQL con rollback y 7 comprobaciones Edge. Evidencias en `docs/pruebas-v2.md`. |
+| Paridad de motor 16 | Verificada: PostgreSQL 16.15 con API/Flask propios, 41/42/31 pruebas y ambos SQL aprobados en dos ejecuciones; `scripts/verify-postgres16.ps1` |
+| Recuperación documental | Plan, historias y cronograma restaurados desde Git; esquema oficial V2 aún ausente. Usuario exige usar únicamente el modelo oficial. |
 | Migración a .NET LTS | Hecho (.NET 10) |
 | Plataforma localhost sin login | Hecho: frontend :5000, API :8081, PostgreSQL :5544 |
 

@@ -1,5 +1,11 @@
 # Pruebas ejecutadas en la auditoría MIRA
 
+## PostgreSQL 16 y recuperación de fuentes (actualización vigente)
+
+Se ejecutó la plataforma completa de pruebas en **PostgreSQL 16.15**, con API y Flask propios en 8082/5001, separados de la plataforma habitual. `scripts/verify-postgres16.ps1` aplicó migraciones 001–005 y ejecutó **41 .NET, 42 Flask/arquitectura, 31 HTTP y ambos SQL con rollback**, sin fallos. Las repeticiones confirmaron los mismos resultados, reutilización de la instancia y cierre de procesos. La ejecución final compiló la API actual en Debug y usó la base exclusiva `mira_audit_20261023151053_26140`.
+
+Los puertos 5547/8082/5001 quedaron libres al terminar; la plataforma habitual respondió HTTP 200. [Detalle y reproducción](verificacion-postgres16.md). La falta de PostgreSQL 16 indicada en etapas anteriores queda resuelta para esta verificación local; Docker y Python 3.11 no se probaron. Las nuevas entidades académicas siguen sin implementarse porque el usuario indicó usar únicamente el esquema oficial, aún no localizado.
+
 ## Rediseño y publicación autorizados (actualización)
 
 Con el nuevo diseño se volvió a ejecutar `scripts/verify-local.ps1`: **41 .NET, 42 Flask/arquitectura, 31 E2E HTTP**, ambos SQL con rollback y cero fallos; base `mira_audit_20261023144423_9628`. Se ejecutó además el verificador Edge ampliado: **10 comprobaciones, 52 combinaciones de página/ancho, cero excepciones JavaScript capturadas**. La comprobación de teclado envía una pulsación Enter completa por CDP y espera el resultado del desplegable nativo.
