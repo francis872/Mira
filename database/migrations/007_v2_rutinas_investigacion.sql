@@ -463,4 +463,3 @@ UPDATE public.semilleros SET activo=FALSE, deleted_at=CURRENT_TIMESTAMP
 WHERE grupo_id=v_id AND activo AND NOT (id=ANY(v_kept));
 RETURN public.sp_consultar_v2_ficha_grupo(v_id);
 END; $$;
-

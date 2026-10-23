@@ -142,7 +142,7 @@ WHERE grupo_id=v_id AND activo AND NOT (id=ANY(v_kept));
 RETURN public.sp_consultar_v2_ficha_grupo(v_id);
 END; $$;
 ''')
-    return '\n\n'.join(sql) + '\n'
+    return '\n\n'.join(sql).rstrip() + '\n'
 
 
 if __name__ == '__main__':
