@@ -78,6 +78,9 @@ try {
         & $psql @dbArgs -d $database --single-transaction -q -f $migration.FullName -c "INSERT INTO schema_migrations(nombre) VALUES ('$($migration.Name)')"
         if ($LASTEXITCODE -ne 0) { throw "Fallo la migracion $($migration.Name)" }
     }
+    # Fixture identity exists only in this new, isolated test database. There is no login or user API.
+    & $psql @dbArgs -d $database -q -c "INSERT INTO usuarios(nombre,correo,password_hash) VALUES ('Persona de prueba automatizada','pg16-audit@invalid.test','NO_ES_UNA_CREDENCIAL')"
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudo preparar la persona exclusiva de pruebas' }
     $apiOutput = Join-Path $runtime 'api'
     # Compilar el codigo actual en Debug no bloquea los binarios Release de la plataforma habitual.
     & dotnet publish (Join-Path $repoRoot 'MIRA.Api/MIRA.Api.csproj') -c Debug --no-restore -o $apiOutput --verbosity minimal

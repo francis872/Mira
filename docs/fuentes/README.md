@@ -1,18 +1,8 @@
-# Documentos Fuente del Proyecto
+# Documentos fuente del proyecto
 
-Este directorio está reservado para los documentos oficiales fuente del proyecto.
+- [SQL oficial confirmado por el usuario](sql/README.md): `01-init.sql` y `002-complete-research-model.sql`, recuperados sin modificar desde `repair/v1-catalogos`, commit `880ac75`.
+- [Plan, historias y cronograma históricos](historicos/README.md), conservados con sus blobs originales.
 
-Se recuperaron del historial los documentos de plan, historias y cronograma, junto con sus extracciones de texto, en [historicos/](historicos/README.md). La procedencia y los blobs originales están registrados allí. Son documentos históricos; aún falta el modelo relacional oficial específico de la Entrega 2 y su mapa de versiones. No aplicar el esquema de una rama antigua como sustituto del modelo vigente.
+El usuario confirmó expresamente ambos SQL el 23 de octubre de 2026 después de indicar que el modelo estaba en el repositorio. Esta confirmación corrige la incertidumbre documentada en la auditoría anterior. La incorporación aditiva está en la migración 006 y las rutinas en 007. No se deducen nuevas columnas ni FK opcionales.
 
-Ejemplos esperados:
-
-- Plan de Desarrollo de Software
-- Historias de Usuario
-- Cronograma del Proyecto
-- Documentación de base de datos/modelo (si aplica)
-
-## Regla de uso
-
-Antes de cambiar especificaciones o implementar funcionalidad de dominio, se deben revisar estos documentos.
-
-No inventar ni reemplazar requisitos oficiales con supuestos.
+Siguen sin localizarse `VERSION_2.md`, el mapa de versiones y los nombres oficiales de los nueve documentos del curso. Los prompts auténticos están en `docs/prompts/`; no se alteran para hacerlos coincidir retrospectivamente con la implementación.

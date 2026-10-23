@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% from 'investigacion/_campos.html' import campos, valor %}
+{% block title %}{{ spec.title }}{% endblock %}
+{% block content %}
+<a class="d-inline-block mb-3" href="{{ url_for('investigacion.home') }}"><i class="bi bi-arrow-left" aria-hidden="true"></i> Investigación</a>
+<div class="section-heading"><div><h1>{{ spec.title }}</h1><p>Seleccione dos registros para asignar su relación.</p></div></div>
+<section class="card card-custom mb-4"><div class="card-body p-4"><h2 class="h5 mb-3">Asignar asociación</h2><form method="POST">{{ csrf_input() }}{{ campos(spec,item,options) }}<button class="btn btn-primary mt-3" type="submit" {{ 'disabled' if not loaded }}>Asignar</button></form></div></section>
+<section class="card card-custom"><div class="card-body"><h2 class="h5 mb-3">Asociaciones existentes</h2><div class="table-responsive"><table class="table align-middle"><thead><tr>{% for f in spec.fields %}<th scope="col">{{ f.label }}</th>{% endfor %}<th scope="col">Acciones</th></tr></thead><tbody>
+{% for row in items %}<tr>{% for f in spec.fields %}<td>{{ valor(row,f,maps) }}</td>{% endfor %}<td><form method="POST" action="{{ url_for('investigacion.remove_association',resource=resource,left=row[spec.fields[0].name],right=row[spec.fields[1].name]) }}">{{ csrf_input() }}<button class="btn btn-sm btn-outline-danger" type="submit">Retirar asociación</button></form></td></tr>{% else %}<tr><td colspan="3" class="text-muted py-4">{{ 'Todavía no hay asociaciones.' if loaded else 'Las asociaciones no están disponibles.' }}</td></tr>{% endfor %}
+</tbody></table></div></div></section>
+{% endblock %}

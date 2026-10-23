@@ -20,6 +20,7 @@
     <div class="hero-symbol" aria-hidden="true"><i class="bi bi-journal-bookmark"></i><span>MIRA / V2</span></div>
 </section>
 
+<section class="card card-custom mb-4"><div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3"><div><h2 class="h4">Gestión de investigación</h2><p class="mb-0 text-muted">Sedes, docentes, grupos, semilleros y asociaciones de líneas.</p></div><a class="btn btn-primary" href="{{ url_for('investigacion.home') }}">Abrir investigación <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div></section>
 <div class="section-heading">
     <div><h2>Catálogos académicos</h2><p>Consulta, actualiza y organiza la información de cada catálogo.</p></div>
     <span class="module-label">6 catálogos</span>
@@ -56,7 +57,7 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><span>V1 — seis catálogos (consultar, crear, modificar, inactivar)</span><span class="badge bg-success-subtle text-success">Operativo</span></li>
         <li class="list-group-item"><span>V2 — rutinas y atomicidad usuario→roles</span><span class="badge bg-secondary-subtle text-secondary">Solo base de datos</span></li>
-        <li class="list-group-item"><span>V2 — maestro–detalle y relaciones académicas</span><span class="badge bg-warning-subtle text-dark">Pendiente: requiere el modelo relacional oficial de la Entrega 2</span></li>
+        <li class="list-group-item"><span>V2 — maestro–detalle y relaciones académicas</span><a href="{{ url_for('investigacion.home') }}" class="badge bg-success-subtle text-success">Consultar módulos</a></li>
         <li class="list-group-item"><span>Inicio de sesión y control de acceso</span><span class="badge bg-light text-dark border">Fuera de alcance (versión futura)</span></li>
     </ul>
 </details>

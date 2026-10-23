@@ -1,3 +1,31 @@
+# Pruebas vigentes: modelo oficial integrado
+
+23 de octubre de 2026. Suite final sobre **PostgreSQL 16.15**, instancia/API/Flask aisladas: `mira_pg16_20261023153150_28080`; base SQL/.NET `mira_audit_20261023153202_28080`.
+
+| Comprobación | Resultado |
+|---|---|
+| Build API y solución | 0 errores, 0 advertencias |
+| Migraciones 001–007 | Aplicadas en bases nuevas y 006/007 después en plataforma existente |
+| SQL | Cuatro archivos aprobados con rollback: catálogos, usuarios legados, investigación y comparación contra fuente |
+| .NET | **47 aprobadas, 0 fallidas, 0 omitidas** |
+| Flask/arquitectura | **63 aprobadas** |
+| HTTP Flask→API→PostgreSQL 16 | **46 aprobadas, sin omisiones** |
+| Edge en plataforma habitual PostgreSQL 17.9 | **14 controles, 72 combinaciones página/ancho, cero excepciones JavaScript** |
+| Columnas/nulabilidad/PK/FK/UNIQUE/CHECK/índices oficiales | 19 tablas fuente reconstruidas en esquema aislado: sin diferencias |
+| Actualización plataforma habitual | Respaldo `.local/before-official-model-20261023153312.dump`, aplicación aditiva y reinicio correctos |
+
+El SQL prueba fallo tardío en alta y actualización atómica, conservación completa del estado anterior, inactivación de detalles omitidos, rechazo de padre inactivo por trigger, puentes, FK y duplicados. .NET recorre las cinco operaciones de once recursos y los cinco puentes; HTTP usa formularios para todos, incluida persona exclusiva de la base de prueba para docentes. No se crea esa persona en la plataforma habitual.
+
+La primera ejecución ampliada pasó 47/63/45; la final añadió comparación del esquema y el formulario independiente de semillero, y pasó 47/63/46. Edge creó sede/grupo/dos semilleros/línea, editó/retiró renglones y asignó/duplicó/retiró un puente. Captura de ficha inspeccionada visualmente. Datos de navegador retirados al terminar.
+
+El primer intento de conectar Edge se adelantó a su arranque y recibió ECONNREFUSED; al estar disponible, el recorrido completo pasó. No se presenta el intento fallido como prueba aprobada. El navegador aislado se cerró al finalizar.
+
+Los puertos de pruebas se liberaron y las bases se conservaron. Docker/Python 3.11, carga, CVE y accesibilidad exhaustiva no se probaron. C06 sigue bloqueado por modelo sin FK opcionales. [Matriz](criterios-v2.md) · [Reproducción](../versiones/v2_profesor/7_quickstart.md).
+
+## Registro histórico de etapas anteriores
+
+Los bloqueos y resultados siguientes corresponden a etapas anteriores a la confirmación del SQL. El estado vigente es el indicado arriba y en la matriz actual.
+
 # Pruebas ejecutadas en la auditoría MIRA
 
 ## PostgreSQL 16 y recuperación de fuentes (actualización vigente)

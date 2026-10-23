@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% from 'investigacion/_campos.html' import campos %}
+{% block title %}{{ spec.title }}{% endblock %}
+{% block content %}
+<a class="d-inline-block mb-3" href="{{ url_for('investigacion.listing',resource=resource) }}"><i class="bi bi-arrow-left" aria-hidden="true"></i> Volver al listado</a>
+<section class="card card-custom"><div class="card-body p-4">
+<h1 class="h3 mb-2">{{ 'Editar registro' if item.get('id') else 'Nuevo registro' }} · {{ spec.title }}</h1>
+<p class="text-muted mb-4">Los campos marcados con * son obligatorios.</p>
+<form method="POST">{{ csrf_input() }}
+{{ campos(spec,item,options) }}
+<div class="d-flex gap-2 mt-4"><button class="btn btn-primary" type="submit" {{ 'disabled' if not loaded }}>Guardar</button><a class="btn btn-outline-secondary" href="{{ url_for('investigacion.listing',resource=resource) }}">Cancelar</a></div>
+</form>
+</div></section>
+{% endblock %}

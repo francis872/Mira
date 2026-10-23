@@ -29,4 +29,4 @@ Se inspeccionaron las [capturas reales](evidencias/README.md) de escritorio, mó
 
 La implementación pendiente del prompt definitivo se registró primero en `1828a76` (`feat: integrar rutinas PostgreSQL y verificacion de MIRA V2`). El rediseño se registra en un commit posterior de la misma rama; ambos se suben al remoto autorizado. No se fusiona `main` ni se cambia el alcance académico bloqueado.
 
-MIRA continúa funcionando localmente en `http://localhost:5000`. La actualización del repositorio no constituye hosting de Flask, ASP.NET Core o PostgreSQL. V2 académica completa mantiene seis criterios bloqueados por el modelo oficial ausente; [matriz de aceptación](criterios-v2.md).
+MIRA continúa funcionando localmente en `http://localhost:5000`. La actualización del repositorio no constituye hosting de Flask, ASP.NET Core o PostgreSQL. El modelo oficial fue posteriormente confirmado e integrado; once criterios están verificados y C06 necesita aclaración porque el SQL carece de FK opcionales; [matriz de aceptación](criterios-v2.md).

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% from 'investigacion/_campos.html' import valor %}
+{% block title %}{{ spec.title }}{% endblock %}
+{% block content %}
+<a class="d-inline-block mb-3" href="{{ url_for('investigacion.home') }}"><i class="bi bi-arrow-left" aria-hidden="true"></i> Investigación</a>
+<div class="section-heading"><div><h1>{{ spec.title }}</h1><p>Consulta y administra los registros disponibles.</p></div><a class="btn btn-primary" href="{{ url_for('investigacion.new',resource=resource) }}"><i class="bi bi-plus-lg" aria-hidden="true"></i> Nuevo registro</a></div>
+<section class="card card-custom"><div class="card-body">
+{% if items %}
+<label class="form-label" for="catalog-search">Buscar en este listado</label><input id="catalog-search" type="search" class="form-control mb-2" placeholder="Escriba para buscar"><p id="catalog-results" class="small text-muted" aria-live="polite"></p>
+<div class="table-responsive"><table class="table align-middle"><thead><tr>{% for f in spec.fields %}<th scope="col">{{ f.label }}</th>{% endfor %}<th scope="col">Acciones</th></tr></thead><tbody>
+{% for row in items %}<tr>{% for f in spec.fields %}<td>{{ valor(row,f,maps) }}</td>{% endfor %}<td class="text-nowrap">
+<a class="btn btn-sm btn-outline-primary" href="{{ url_for('investigacion.edit',resource=resource,record_id=row.id) }}">{{ 'Abrir ficha' if resource == 'grupos_investigacion' else 'Editar' }}</a>
+<button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#retirar-{{ row.id }}">Retirar</button>
+</td></tr>{% endfor %}
+</tbody></table></div><p id="catalog-no-results" hidden>No se encontraron coincidencias.</p>
+{% else %}<div class="py-4 text-center text-muted"><i class="bi bi-inbox fs-2" aria-hidden="true"></i><p class="mt-2">{{ 'Todavía no hay registros. Cree el primero para comenzar.' if loaded else 'Los datos no están disponibles. Recargue la página.' }}</p></div>{% endif %}
+</div></section>
+{% for row in items %}<div class="modal fade" id="retirar-{{ row.id }}" tabindex="-1" aria-labelledby="titulo-{{ row.id }}" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5" id="titulo-{{ row.id }}">Retirar registro</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body">¿Desea retirar este registro de {{ spec.title|lower }}?{% if resource in ['docentes','semillero_tutores'] %} Se eliminará permanentemente{% if resource == 'docentes' %}, junto con sus participaciones asociadas{% endif %}.{% endif %}</div><div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button><form method="POST" action="{{ url_for('investigacion.remove',resource=resource,record_id=row.id) }}">{{ csrf_input() }}<button type="submit" class="btn btn-danger">Confirmar retiro</button></form></div></div></div></div>{% endfor %}
+{% endblock %}

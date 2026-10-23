@@ -1,0 +1,32 @@
+{% macro campos(spec, item, options) %}
+<div class="row g-3">
+{% for f in spec.fields %}
+<div class="{{ 'col-12' if f.kind == 'textarea' else 'col-md-6' }}">
+    <label class="form-label" for="field-{{ f.name }}">{{ f.label }}{% if not f.optional %} <span class="text-danger" aria-label="obligatorio">*</span>{% endif %}</label>
+    {% if f.source or f.options %}
+    <select class="form-select" id="field-{{ f.name }}" name="{{ f.name }}" {{ 'required' if not f.optional }}>
+        <option value="">{{ 'Sin especificar' if f.optional else 'Seleccione una opción' }}</option>
+        {% if f.source %}
+            {% for key, text in options.get(f.name, []) %}<option value="{{ key }}" {{ 'selected' if item.get(f.name)|string == key|string }}>{{ text }}</option>{% endfor %}
+        {% else %}
+            {% for choice in f.options %}<option value="{{ choice }}" {{ 'selected' if item.get(f.name) == choice }}>{{ choice }}</option>{% endfor %}
+        {% endif %}
+    </select>
+    {% if f.source and not options.get(f.name) %}
+        <p class="form-text text-warning-emphasis">No hay opciones disponibles. {% if f.source == 'referencias/usuarios' %}Primero deben estar cargadas las personas de la institución.{% else %}Registre una referencia activa antes de continuar.{% endif %}</p>
+    {% elif f.source and item.get(f.name) and item.get(f.name) not in options.get(f.name, [])|map(attribute=0)|list %}
+        <p class="form-text text-warning-emphasis">La referencia anterior ya no está disponible. Seleccione una opción activa.</p>
+    {% endif %}
+    {% elif f.kind == 'textarea' %}
+    <textarea class="form-control" id="field-{{ f.name }}" name="{{ f.name }}" rows="3" {{ 'required' if not f.optional }}>{{ item.get(f.name) or '' }}</textarea>
+    {% else %}
+    <input class="form-control" id="field-{{ f.name }}" type="{{ f.kind }}" name="{{ f.name }}" value="{{ item.get(f.name) or '' }}" {% if f.maximum %}maxlength="{{ f.maximum }}"{% endif %} {{ 'required' if not f.optional }}>
+    {% endif %}
+</div>
+{% endfor %}
+</div>
+{% endmacro %}
+
+{% macro valor(row, f, maps) %}
+{% if f.source %}{{ maps.get(f.name, {}).get(row.get(f.name), 'Referencia retirada #' ~ row.get(f.name)) }}{% else %}{{ row.get(f.name) or '—' }}{% endif %}
+{% endmacro %}

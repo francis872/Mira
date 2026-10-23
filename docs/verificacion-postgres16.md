@@ -1,3 +1,24 @@
+# PostgreSQL 16: verificación vigente del dominio oficial
+
+Después de la confirmación del SQL se volvió a ejecutar `scripts/verify-postgres16.ps1` con migraciones **001–007**. Base plataforma `mira_pg16_20261023153150_28080`, base SQL/.NET `mira_audit_20261023153202_28080`: **47 .NET, 63 Flask/arquitectura, 46 HTTP y cuatro SQL aprobados**, sin fallos ni omisiones. El código actual se compila en Debug; no se usa un binario anterior.
+
+Se reconstruyó el SQL original en un esquema aislado y se compararon las 19 tablas, claves, restricciones e índices sin diferencias. Las pruebas verifican once recursos, cinco puentes, referencias/duplicados, trigger original y rollback real del maestro-detalle. El runner carga una persona sintética solo en su base exclusiva para probar docentes; no crea usuarios en la plataforma habitual. Sus procesos se cerraron y sus bases se conservaron.
+
+| Los seis puntos solicitados | Estado vigente |
+|---|---|
+| 1. Modelo, VERSION_2 y rúbrica | SQL localizado y confirmado; VERSION_2 y rúbrica siguen sin localizar |
+| 2. Tablas y pantallas V2 | 19 tablas oficiales, once recursos con CRUD y cinco asociaciones |
+| 3. Desplegables y null | Selectores reales y null en campos opcionales; no existe FK opcional en el modelo, C06 necesita aclaración |
+| 4. Puentes e integridad | Cinco puentes, asignación/retiro y 409 comprobados |
+| 5. Maestro-detalle | Ficha grupo→semilleros con varios renglones, edición/retiro y rollback |
+| 6. PostgreSQL 16 | Verificación completa del código actual sobre 16.15 |
+
+Reproducción y procedencia de binarios se conservan abajo. [Matriz actual](criterios-v2.md).
+
+## Registro histórico de etapas anteriores
+
+Los bloqueos y resultados siguientes corresponden a etapas anteriores a la confirmación del SQL. El estado vigente es el indicado arriba y en la matriz actual.
+
 # Verificación real en PostgreSQL 16
 
 23 de octubre de 2026. Se levantó una plataforma de pruebas completa e independiente sobre **PostgreSQL 16.15**, sin convertir la base PostgreSQL 17 existente ni detener la plataforma habitual.

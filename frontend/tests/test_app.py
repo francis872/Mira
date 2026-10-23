@@ -173,7 +173,7 @@ def test_dashboard_reports_unavailable_data_instead_of_inventing_numbers(client,
 
 def test_dashboard_states_honestly_what_is_pending(client, calls):
     html = client.get("/").get_data(as_text=True)
-    assert "Pendiente: requiere el modelo relacional oficial" in html
+    assert "/investigacion" in html
     assert "Fuera de alcance (versión futura)" in html
 
 

@@ -10,7 +10,7 @@ This repository contains the initial architecture and development foundation for
 
 ## Current State
 
-MIRA V1 (seis catálogos) + V2 parcial (base relacional y rutinas almacenadas). **Sin inicio de sesión**: `http://localhost:5000` abre directamente el dashboard. Rama de trabajo: `feature/mira-v1-v2-integracion` (PR #4, borrador).
+MIRA V1 (seis catálogos) + dominio académico V2 integrado con el SQL confirmado por el usuario. **Sin inicio de sesión**: `http://localhost:5000` abre el dashboard; [Investigación](http://localhost:5000/investigacion) contiene los nuevos módulos. Rama de trabajo: `feature/mira-v1-v2-integracion`.
 
 | Área | Estado |
 |---|---|
@@ -18,7 +18,9 @@ MIRA V1 (seis catálogos) + V2 parcial (base relacional y rutinas almacenadas). 
 | CRUD mediante rutinas y trigger demostrable | 30 funciones PostgreSQL en 004; trigger de normalización de área en 005; seis repositorios sin SQL CRUD directo |
 | Inicio de sesión, JWT, bcrypt, roles, restricciones por sesión | **Fuera de alcance** (versión futura sin fecha). El código retirado sigue en el historial: etiqueta `auth-futuro-v2-261872f` |
 | V2: rutinas almacenadas `CREATE PROCEDURE` con JSONB, vista y atomicidad (`usuario`→`usuario_rol`) | Solo en PostgreSQL (migración 003 y `database/tests`); sin API ni pantalla |
-| V2: maestro–detalle académico, selectores de claves foráneas, triggers y vistas del dominio | **Pendiente**: el modelo relacional oficial de la Entrega 2 no está en el repositorio |
+| V2: once recursos, cinco asociaciones y ficha grupo→semilleros | Operativos; 19 tablas del SQL oficial confirmado, selectores reales y guardado atómico. [Fuente exacta](docs/fuentes/sql/README.md) |
+| Verificación actual en PostgreSQL 16.15 | 47 .NET, 63 Flask/arquitectura, 46 HTTP y cuatro SQL aprobados; 14 controles Edge, 72 combinaciones de página/ancho |
+| Aceptación académica | 11/12 criterios verificados; C06 necesita aclaración porque el SQL confirmado no contiene FK opcionales |
 
 ## Architecture
 
@@ -70,7 +72,7 @@ Detener: `docker compose down` (conserva los datos). Reiniciar desde cero: `dock
 
 **Arranque completo en Windows sin Docker:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1`. Crea una base PostgreSQL exclusiva y persistente, aplica las migraciones y arranca API y frontend en localhost. Requisitos, configuración y comando para detener: [scripts/README.md](scripts/README.md).
 
-**Verificación independiente en PostgreSQL 16:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-postgres16.ps1`. Probada con motor 16.15, API y frontend de pruebas separados de la plataforma habitual: [resultados y requisitos](docs/verificacion-postgres16.md). Las fuentes históricas recuperadas están en [docs/fuentes/historicos](docs/fuentes/historicos/README.md); aún falta el esquema oficial vigente de Entrega 2.
+**Verificación independiente en PostgreSQL 16:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-postgres16.ps1`. Probada con motor 16.15, API y frontend separados: [resultados](docs/verificacion-postgres16.md). El SQL oficial está recuperado en [docs/fuentes/sql](docs/fuentes/sql/README.md) desde `repair/v1-catalogos`. El selector docente necesita personas institucionales reales previamente cargadas; no hay CRUD de credenciales ni identidades de ejemplo en la plataforma habitual.
 
 **Solución de problemas**
 - Puerto 5544/5432 ocupado (otro PostgreSQL local): cambiar `POSTGRES_PORT` en `.env`.
@@ -90,11 +92,11 @@ Prompt de contexto para continuar el desarrollo con un asistente: [docs/PROMPT.m
 
 Colección de prompts: [índice](docs/prompts/README.md) y [prompt maestro MIRA V2](docs/prompts/PROMPT_MAESTRO_MIRA_V2.md), con el original de Backstage archivado como referencia.
 
-Instrucción vigente: [prompt maestro definitivo](docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md). Estado de aceptación: [matriz C01–C12](docs/criterios-v2.md), seis verificados y seis bloqueados por documentación académica ausente. [Reglas por entidad](docs/reglas-negocio-v2.md) y [capturas reales](docs/evidencias/README.md).
+Instrucción vigente: [prompt maestro definitivo](docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md). [Matriz C01–C12](docs/criterios-v2.md): once verificados y C06 pendiente de aclaración de aplicabilidad. [Reglas por entidad](docs/reglas-negocio-v2.md) y [capturas reales](docs/evidencias/README.md).
 
 Diseño actualizado: navegación lateral, dashboard y formularios uniformes, búsqueda y adaptación móvil. [Cambios visuales y verificación](docs/diseno-v2.md). El código está en la rama de trabajo; la aplicación se ejecuta localmente según las instrucciones anteriores.
 
-Auditoría y sustentación: [auditoría](docs/auditoria-v2.md), [arquitectura](docs/arquitectura-v2.md), [trazabilidad](docs/trazabilidad-v2.md), [pruebas ejecutadas](docs/pruebas-v2.md), [guía de sustentación](docs/sustentacion-v2.md) y [pendientes](docs/pendientes-v2.md). La verificación actual acredita operación local de V1 y rutinas SQL V2; el dominio académico V2 sigue pendiente del modelo oficial.
+Auditoría y sustentación: [auditoría](docs/auditoria-v2.md), [arquitectura](docs/arquitectura-v2.md), [trazabilidad](docs/trazabilidad-v2.md), [pruebas ejecutadas](docs/pruebas-v2.md), [guía de sustentación](docs/sustentacion-v2.md) y [pendientes](docs/pendientes-v2.md). El dominio oficial está integrado; no se certifica aceptación del curso sin resolver la discrepancia C06 y los documentos de versión aún ausentes.
 
 1. Clone.
 2. Review docs/fuentes.

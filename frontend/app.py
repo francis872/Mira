@@ -82,7 +82,7 @@ def verify_csrf():
 # URL base de la API REST de MIRA
 API_URL = os.getenv("API_URL", "http://localhost:8081/api").rstrip("/")
 
-def api_call(method, path, json_data=None):
+def api_call(method, path, json_data=None, expect_list=None):
     """Función auxiliar para realizar llamadas seguras a la API REST."""
     url = f"{API_URL}/{path.lstrip('/')}"
     try:
@@ -101,7 +101,7 @@ def api_call(method, path, json_data=None):
         except ValueError:
             app.logger.warning("La API devolvió una respuesta sin JSON válido.")
             return None
-        is_list = method == "GET" and "/" not in path.strip("/")
+        is_list = expect_list if expect_list is not None else method == "GET" and "/" not in path.strip("/")
         if not isinstance(body, list if is_list else dict) or (is_list and any(not isinstance(item, dict) for item in body)):
             app.logger.warning("La API devolvió una estructura de datos incompatible.")
             return None
@@ -510,6 +510,9 @@ def linea_investigacion_delete(id):
         flash("No se pudo eliminar el registro.", "danger")
     return redirect(url_for("linea_investigacion_list"))
 
+
+from investigacion import register_investigacion
+register_investigacion(app, api_call, error_message)
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))

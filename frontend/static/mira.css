@@ -192,3 +192,7 @@ main.container { max-width: 1440px; padding: 12px 40px 24px; margin: 24px auto !
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+/* Research sheets keep editable detail rows usable on narrow screens. */
+.detail-table td:first-child { min-width: 220px; }
+.detail-table td:nth-child(2) { min-width: 260px; }
+.mira-sidebar .sidebar-inner { overflow-y: auto; }

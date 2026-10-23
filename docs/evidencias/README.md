@@ -1,11 +1,12 @@
-# Evidencia visual de MIRA V2
+# Evidencia visual real
 
-Capturas reales obtenidas con Edge headless sobre la plataforma local después de aplicar migraciones 004/005 y el rediseño autorizado, el 23 de octubre de 2026:
+Capturas obtenidas con Edge headless/CDP sobre la plataforma local, 23 de octubre de 2026. Son páginas completas, no maquetas:
 
-- [Dashboard de escritorio, viewport 1440 × 1000](mira-v2-desktop.png).
-- [Área de aplicación y menú móvil, viewport 390 × 844](mira-v2-mobile.png).
-- [Formulario de universidad, viewport 1440 × 1000](mira-v2-form.png).
+- [Inicio en escritorio](mira-v2-desktop.png).
+- [Catálogo en móvil](mira-v2-mobile.png).
+- [Formulario V1](mira-v2-form.png).
+- [Ficha de grupo con dos semilleros](mira-v2-grupo-semilleros.png).
 
-Se capturó la página completa, por lo que la altura del archivo puede superar la del viewport. No son imágenes generadas ni maquetas. Muestran datos reales almacenados localmente y las semillas del proyecto. Los registros `e2e-browser-*` de la comprobación se retiraron mediante el formulario antes de capturar.
+El verificador `scripts/verify-browser.mjs` pasó 14 controles, 72 combinaciones de página/ancho y cero excepciones JavaScript. Comprueba V1, menú, teclado, nueva sede, selector de sede API, creación de dos semilleros, edición/retiro, asignación/duplicado/retiro del puente grupo–línea y diseño móvil de investigación. Los registros `e2e-browser-*` se retiran al terminar, incluidos los detalles; la captura de ficha documenta el estado previo a su retiro.
 
-`scripts/verify-browser.mjs` comprueba diez aspectos con CDP y APIs incorporadas de Node 24, incluido el ciclo real de formularios, teclado y 52 combinaciones de página/viewport. El menú móvil se abre y cierra en la prueba; la captura muestra el contenido después de cerrarlo. No requiere instalar Playwright o Selenium. Es una comprobación adicional a las 31 pruebas HTTP. Dependencias y reproducción: [scripts/README.md](../../scripts/README.md). Resultados y alcance: [diseño](../diseno-v2.md) y [pruebas](../pruebas-v2.md).
+La ficha fue inspeccionada visualmente: controles de renglón visibles, edición accesible, tabla desplazable en móvil y acciones legibles. Complementa las pruebas SQL/.NET/Flask/HTTP; no certifica accesibilidad exhaustiva. [Resultados](../pruebas-v2.md).

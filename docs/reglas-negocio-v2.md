@@ -17,4 +17,22 @@ Los atributos `StringLength` están en `MIRA.Api/Modelos/`. La validación HTTP 
 
 La normalización de área cambió de ubicación, no de objetivo: el frontend y Service transmiten el texto original, PostgreSQL lo recorta y `RETURNING *` devuelve la fila final. Se prueba nombre vacío, espacios, creación y actualización; el trigger no añade campos ni cambia datos antiguos automáticamente.
 
-Los seis catálogos no contienen FK. No hay regla implementada de retiro de universidad con grupos ni de línea con docentes porque faltan sus tablas oficiales. Las rutinas legadas usuario→roles validan referencias en PostgreSQL pero no son parte del CRUD académico expuesto.
+Los seis catálogos V1 no contienen FK. El modelo oficial confirmado define grupos con sede y semilleros con grupo; no define universidad→grupo ni línea→docente. Las rutinas legadas usuario→roles se conservan y no son el CRUD académico expuesto.
+
+## Dominio del SQL confirmado
+
+Campos/tipos/límites: `Modelos/RecursosInvestigacion.cs`; validación: `InvestigacionService.Validar`; restricciones originales: 006. Strings se recortan y vacíos opcionales se convierten a null; FK siempre es entero positivo y NOT NULL. Todas las referencias se seleccionan desde API. Errores FK/UNIQUE devuelven 409; validación/CHECK/fecha/longitud, 400. No hay cambios de estructura para satisfacer C06.
+
+| Entidad | Reglas y retiro |
+|---|---|
+| sedes | Nombre/ciudad obligatorios, 120 caracteres; activa: retiro lógico |
+| docentes | usuario_id único/obligatorio; CvLAC http(s) opcional; escalafón opcional; categoría null o Senior/Asociado/Junior/Sin Categoría; updated_at se actualiza en rutina; sin estado: retiro físico, cascadas originales |
+| grupos_investigacion | Sede obligatoria, GrupLAC http(s) obligatorio (500), categoría opcional (100); sin campo nombre; retiro activo/deleted_at |
+| semilleros | Grupo obligatorio/activo según trigger, nombre obligatorio (200), descripción opcional; retiro activo/deleted_at |
+| lineas_investigacion | Código único (50), nombre (200), descripción opcional; retiro activo/deleted_at; independiente de línea singular V1 |
+| grupo_docentes | Grupo/docente, rol cerrado y fecha_inicio obligatorios; fecha_fin null o posterior; índice impide dos líderes activos sin fecha_fin; retiro activo |
+| semillero_tutores | Semillero/docente, rol cerrado y periodo; índice único de persona/rol/periodo usa COALESCE para fecha_fin null; sin estado: retiro físico |
+| areas_conocimiento, ods, areas_aplicacion, palabras_clave | Nombre único/obligatorio (160), retiro activo; catálogos plurales del modelo |
+| Cinco puentes | Pareja PK obligatoria y FK reales; duplicados 409; retiro físico de la relación; no edición de pareja |
+
+Se conservan exactamente las restricciones del SQL, incluida la semántica original de UNIQUE con fecha_fin nullable en grupo_docentes; no se añade una restricción distinta. La ficha valida forma y fechas, rechaza id de otro grupo o inactivo y revierte todo ante error. No se impone una prohibición nueva de retirar maestros con detalles: el borrado lógico no ejecuta ON DELETE CASCADE y las lecturas de hijos conservan la semántica oficial.

@@ -73,7 +73,7 @@ def test_root_opens_the_dashboard_directly(browser):
     for title in ("Área de Conocimiento", "ODS", "Área de Aplicación", "Término Clave", "Universidad", "Línea de Investigación"):
         assert title in response.text
     assert re.search(r"Registros activos: <strong>\d+</strong>", response.text)
-    assert "Pendiente: requiere el modelo relacional oficial" in response.text
+    assert "/investigacion" in response.text
 
 
 @pytest.mark.parametrize("path", ["/login", "/logout", "/usuarios"])

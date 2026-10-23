@@ -46,7 +46,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas .NET' }
     Push-Location (Join-Path $repoRoot 'frontend')
     try {
-        & python -m pytest tests/test_app.py tests/test_architecture.py -q -p no:cacheprovider
+        & python -m pytest tests/test_app.py tests/test_architecture.py tests/test_investigacion.py -q -p no:cacheprovider
         if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas Flask' }
     } finally { Pop-Location }
     $webPort = if ($config['FRONTEND_PORT']) { $config['FRONTEND_PORT'] } else { '5000' }

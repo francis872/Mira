@@ -1,37 +1,21 @@
-# Tareas verificables V2
+# Tareas V2
 
-- [x] Recuperar plan, historias y cronograma auténticos del historial, con trazabilidad de blobs, en `docs/fuentes/historicos/`.
-- [x] Ejecutar PostgreSQL 16.15 con API/frontend independientes: 41 .NET, 42 Flask/arquitectura, 31 HTTP y ambos SQL aprobados; repetibilidad y cierre de procesos comprobados.
-- [ ] Implementar el dominio académico únicamente cuando se aporte su esquema oficial. El usuario descartó expresamente diseñar un modelo provisional; la recuperación histórica no resuelve esa diferencia.
+- [x] Mantener seis catálogos y contratos V1 sin login.
+- [x] Recuperar SQL exacto de la rama indicada y obtener confirmación del usuario.
+- [x] Documentar integración antes de implementarla.
+- [x] Añadir las 19 tablas del modelo oficial sin reemplazar V1.
+- [x] Comparar columnas, tipos, nulabilidad, restricciones e índices contra la fuente.
+- [x] Once recursos con cinco operaciones por funciones almacenadas y capas C#.
+- [x] Cinco asociaciones con asignación/retiro, duplicados 409 y FK reales.
+- [x] Selectores API con etiquetas, estados vacíos y fallos de carga.
+- [x] Ficha grupo→semilleros: varios renglones, edición/retiro y escritura atómica.
+- [x] Trigger oficial comprobado con grupo inactivo y error comprensible.
+- [x] PostgreSQL 16: 47 .NET, 63 Flask/arquitectura, 46 HTTP y cuatro SQL.
+- [x] Edge: 14 controles y 72 combinaciones de página/ancho.
+- [x] Respaldo local y migraciones 006/007 aplicadas sin eliminar datos V1.
+- [x] Documentar personas reales como precondición de registro docente, sin identidades ficticias.
+- [ ] Confirmar aplicabilidad C06: ninguna FK nullable en el SQL oficial.
+- [ ] Obtener VERSION_2.md, rúbrica y nombres de nueve documentos del curso.
+- [ ] Validar Docker/Python 3.11, accesibilidad exhaustiva y operación productiva si se solicitan.
 
-- [x] Guardar íntegro el prompt definitivo auténtico y documentar su procedencia, sin atribuirlo a integrantes.
-- [x] Migración 004: 30 funciones, cinco por catálogo; seis repositorios C# solo invocan rutinas parametrizadas.
-- [x] Migración 005: trigger de normalización de área; pruebas SQL, API y formulario.
-- [x] Middleware SQLSTATE con respuestas seguras y validación de contrato en español; logs a consola.
-- [x] Búsqueda local, navegación activa, accesibilidad básica y estado de envío, sin ampliar alcance.
-- [x] Comprobación real en Edge de búsqueda, modales, alta, edición, retiro y menú móvil; capturas en `docs/evidencias/`.
-- [x] Matriz de doce criterios en `docs/criterios-v2.md` y reglas de negocio por entidad.
-- [x] Verificación final: 41 .NET, 42 Flask/arquitectura, 31 HTTP, dos SQL con rollback y 7 comprobaciones Edge. Persistencia comprobada tras reiniciar con nuevas rutinas.
-- [ ] Localizar modelo académico, VERSION_2 y estructura oficial de nueve documentos. El usuario no recuerda su ubicación.
-
-- [x] Auditar flujos reales y corregir mensajes HTTP 400/409, respuesta JSON inválida, CSRF no ASCII, longitud de textos y colisiones de términos activos/inactivos/concurrentes.
-- [x] Primera auditoría (histórico): 31 .NET, 40 Flask, 30 E2E HTTP y SQL con rollback.
-- [x] Comprobar persistencia tras reiniciar PostgreSQL, API y frontend.
-- [x] Documentar auditoría, arquitectura, trazabilidad, pruebas, sustentación y pendientes en `docs/*-v2.md`.
-
-- [x] Migrar historial Git de V1 al repositorio de destino sin alterar autoría.
-- [x] Crear rama aislada V2.
-- [x] Registrar los requisitos de clase en Spec Kit V2.
-- [ ] Confirmar modelo oficial completo y relaciones maestro-detalle. **BLOQUEADO: falta el modelo oficial de la Entrega 2.**
-- [x] Migraciones controladas (`database/migrations`, `apply.sh`, `schema_migrations`) para bases nuevas y existentes.
-- [x] Rutinas CRUD maestro-detalle con JSONB y atomicidad probada en PostgreSQL para usuario→roles (sin pantalla; dominio académico pendiente).
-- [ ] Triggers derivados de reglas efectivas. Vista `vw_usuarios_roles` hecha; triggers pendientes del modelo oficial.
-- [ ] Selects de FK del dominio académico y repositorios C# que llamen las rutinas. Pendiente del modelo oficial.
-- [x] **Retirar la autenticación del alcance activo** (rutas, JWT, bcrypt, pantallas, `--bootstrap-admin`, pruebas); historial y etiqueta `auth-futuro-v2-261872f` conservados; tablas `usuario/rol/usuario_rol` intactas.
-- [x] Plataforma localhost sin login: dashboard con conteos reales y seis módulos operativos.
-- [x] Arranque reproducible en Windows sin Docker (`scripts/start-local.ps1`), PostgreSQL exclusivo, migraciones controladas y parada con conservación de datos (`scripts/stop-local.ps1`). Verificado con 28 pruebas E2E, 24 pruebas .NET con PostgreSQL y 23 pruebas Flask.
-- [x] Pruebas actualizadas sin JWT ni credenciales (.NET, Flask, E2E).
-- [x] Regresión automatizada de los 6 catálogos V1 contra PostgreSQL real.
-- [x] Medidas generales de seguridad: validación, SQL parametrizado, CSRF en formularios.
-- [x] Migración a .NET 10 LTS.
-- [ ] Revisión y fusión del PR (no fusionar hasta superar las pruebas y recibir el modelo oficial).
+Commit/push a la rama de trabajo están autorizados por el usuario. La fusión a main y el hosting no forman parte de esta publicación.

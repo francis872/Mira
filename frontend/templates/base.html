@@ -31,6 +31,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('investigacion.home') }}"><i class="bi bi-people me-1" aria-hidden="true"></i> Investigación</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('area_conocimiento_list') }}">
                             <i class="bi bi-book me-1"></i> Áreas de conocimiento
                         </a>
@@ -74,7 +77,7 @@
     <header class="workspace-header">
         <div>
             <span class="workspace-eyebrow">MÓDULO DE INVESTIGACIÓN</span>
-            <div class="workspace-location"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>{{ current_catalog.title if current_catalog else 'Inicio' }}</span></div>
+            <div class="workspace-location"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>{{ page_title or (current_catalog.title if current_catalog else 'Inicio') }}</span></div>
         </div>
         <a href="{{ swagger_url }}" target="_blank" rel="noopener noreferrer" class="api-link" aria-label="Abrir documentación de la API en otra pestaña">
             <i class="bi bi-code-slash" aria-hidden="true"></i><span>Documentación API</span><i class="bi bi-arrow-up-right small" aria-hidden="true"></i>

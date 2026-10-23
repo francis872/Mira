@@ -127,6 +127,63 @@ await send('Input.dispatchKeyEvent', {type: 'keyUp', key: 'Enter', code: 'Enter'
 await until("document.querySelector('.project-status').open");
 assert.equal(await evaluate("document.querySelector('.project-status').open"), true);
 results.push('Estado del proyecto desplegable accesible mediante teclado');
+// Official research model: selectors, a real multi-row sheet and association conflicts.
+await send('Emulation.setDeviceMetricsOverride', {width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false});
+const researchMarker = 'e2e-browser-research-' + Date.now();
+await go('/investigacion/sedes/nuevo');
+await evaluate(`document.querySelector('[name=nombre]').value=${JSON.stringify(researchMarker)}; document.querySelector('[name=ciudad]').value='Medellín'; document.querySelector('form').requestSubmit()`);
+await until("location.pathname === '/investigacion/sedes' && document.readyState === 'complete'");
+const sedeId = await evaluate(`Array.from(document.querySelectorAll('tbody tr')).find(row=>row.textContent.includes(${JSON.stringify(researchMarker)})).querySelector('a').pathname.split('/').pop()`);
+await go('/investigacion/grupos_investigacion/nuevo');
+assert.equal(await evaluate("document.querySelector('[name=sede_id]').tagName"), 'SELECT');
+await evaluate(`document.querySelector('[name=sede_id]').value=${JSON.stringify(sedeId)}; document.querySelector('[name=gruptac_url]').value='https://example.org/browser'; document.querySelector('#add-detail').click(); document.querySelector('#add-detail').click();`);
+assert.equal(await evaluate("document.querySelector('[name=detalle_nombre]').getBoundingClientRect().width > 100"), true);
+await evaluate(`Array.from(document.querySelectorAll('[name=detalle_nombre]')).forEach((field,index)=>field.value=${JSON.stringify(researchMarker)}+'-'+index); document.querySelector('#group-sheet').requestSubmit()`);
+await until("/^\\/investigacion\\/grupos_investigacion\\/editar\\/\\d+$/.test(location.pathname) && document.readyState === 'complete' && document.querySelector('.alert-success') !== null");
+const grupoId=await evaluate("location.pathname.split('/').pop()");
+assert.equal(await evaluate("document.querySelectorAll('#group-details tr').length"), 2);
+assert.equal(await evaluate("document.querySelectorAll('#group-details [name=grupo_id]').length"), 0);
+await mkdir('docs/evidencias',{recursive:true});
+capture=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
+await writeFile('docs/evidencias/mira-v2-grupo-semilleros.png',Buffer.from(capture.data,'base64'));
+results.push('SQL oficial: sede seleccionada de la API, dos semilleros creados y recuperados en una misma ficha');
+await evaluate("document.querySelector('[name=detalle_nombre]').value+='-editado'; document.querySelectorAll('[data-remove-detail]')[1].click(); document.querySelectorAll('.alert').forEach(alert=>alert.remove()); document.querySelector('#group-sheet').requestSubmit()");
+await until("document.readyState === 'complete' && document.querySelector('.alert-success') !== null && document.querySelectorAll('#group-details tr').length === 1");
+assert.ok(await evaluate("document.querySelector('[name=detalle_nombre]').value.endsWith('-editado')"));
+results.push('Ficha real: editar un detalle y retirar otro conserva el estado persistido al guardar');
+await go('/investigacion/lineas_investigacion/nuevo');
+await evaluate(`document.querySelector('[name=codigo]').value=${JSON.stringify(researchMarker)}; document.querySelector('[name=nombre]').value=${JSON.stringify(researchMarker)}; document.querySelector('form').requestSubmit()`);
+await until("location.pathname === '/investigacion/lineas_investigacion' && document.readyState === 'complete'");
+const lineaId=await evaluate(`Array.from(document.querySelectorAll('tbody tr')).find(row=>row.textContent.includes(${JSON.stringify(researchMarker)})).querySelector('a').pathname.split('/').pop()`);
+await go('/investigacion/asociaciones/grupo_lineas');
+await evaluate(`document.querySelector('[name=grupo_id]').value=${JSON.stringify(grupoId)}; document.querySelector('[name=linea_id]').value=${JSON.stringify(lineaId)}; document.querySelector('form').requestSubmit()`);
+await until("document.readyState === 'complete' && document.querySelector('.alert-success') !== null");
+await evaluate(`document.querySelector('[name=grupo_id]').value=${JSON.stringify(grupoId)}; document.querySelector('[name=linea_id]').value=${JSON.stringify(lineaId)}; document.querySelector('form').requestSubmit()`);
+await until("document.readyState === 'complete' && document.querySelector('.alert-danger') !== null");
+assert.ok(await evaluate("document.querySelector('.alert-danger').textContent.includes('Ya existe')"));
+const associationRow=await evaluate(`Array.from(document.querySelectorAll('tbody tr')).findIndex(row=>row.textContent.includes(${JSON.stringify(researchMarker)}))`);
+assert.ok(associationRow>=0);
+await evaluate(`document.querySelectorAll('tbody tr')[${associationRow}].querySelector('form').requestSubmit()`);
+await until("document.readyState === 'complete' && document.querySelector('.alert-success') !== null");
+results.push('Puente real: asignacion desde desplegables, duplicado explicado en español y retiro desde la tabla');
+const researchRoutes=['/investigacion','/investigacion/grupos_investigacion/editar/'+grupoId,'/investigacion/docentes/nuevo','/investigacion/semilleros/nuevo','/investigacion/asociaciones/grupo_lineas'];
+for(const width of [390,768,1024,1440]) {
+    await send('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width<768});
+    for(const path of researchRoutes) {
+        await go(path);
+        assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'),true,`${path} en ${width}px`);
+    }
+}
+results.push('20 combinaciones adicionales de investigacion y ancho, incluida ficha editable movil sin desbordamiento');
+await go('/investigacion/grupos_investigacion/editar/'+grupoId);
+await evaluate("document.querySelectorAll('[data-remove-detail]').forEach(button=>button.click()); document.querySelector('#group-sheet').requestSubmit()");
+await until("document.readyState === 'complete' && document.querySelector('.alert-success') !== null && document.querySelectorAll('#group-details tr').length === 0");
+// Cleanup uses CSRF-protected forms in the same browser, and only the just-created records.
+for (const [resource,id] of [['grupos_investigacion',grupoId],['lineas_investigacion',lineaId],['sedes',sedeId]]) {
+    await go('/investigacion/'+resource);
+    await evaluate(`document.querySelector('form[action$="/retirar/${id}"]').requestSubmit()`);
+    await until("document.readyState === 'complete' && document.querySelector('.alert-success') !== null");
+}
 assert.deepEqual(errors, []);
 await writeFile('.local/browser-check.json', JSON.stringify({results, errors}, null, 2));
 console.log(JSON.stringify({checks: results.length, results, errors}, null, 2));

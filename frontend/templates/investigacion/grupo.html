@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% from 'investigacion/_campos.html' import campos %}
+{% macro fila(row={}) %}
+<tr><td><input type="hidden" name="detalle_id" value="{{ row.get('id','') }}"><input class="form-control" name="detalle_nombre" aria-label="Nombre del semillero" value="{{ row.get('nombre','') }}" maxlength="200" required></td><td><textarea class="form-control" name="detalle_descripcion" aria-label="Descripción del semillero" rows="2">{{ row.get('descripcion') or '' }}</textarea></td><td><button class="btn btn-outline-danger btn-sm" type="button" data-remove-detail>Retirar renglón</button></td></tr>
+{% endmacro %}
+{% block title %}Ficha de grupo{% endblock %}
+{% block content %}
+<a class="d-inline-block mb-3" href="{{ url_for('investigacion.listing',resource='grupos_investigacion') }}"><i class="bi bi-arrow-left" aria-hidden="true"></i> Volver a grupos</a>
+<div class="section-heading"><div><h1>{{ 'Ficha de grupo' if record_id else 'Nuevo grupo de investigación' }}</h1><p>Administre el grupo y todos sus semilleros desde esta ficha.</p></div></div>
+<form method="POST" id="group-sheet">{{ csrf_input() }}
+<section class="card card-custom mb-4"><div class="card-body p-4"><h2 class="h5 mb-3">Datos del grupo</h2>{{ campos(spec,data.grupo,options) }}</div></section>
+<section class="card card-custom mb-4"><div class="card-body p-4"><div class="d-flex flex-wrap gap-3 align-items-center justify-content-between mb-3"><div><h2 class="h5">Semilleros del grupo</h2><p class="small text-muted mb-0">Los renglones se guardan juntos al guardar la ficha.</p></div><button type="button" class="btn btn-outline-primary" id="add-detail"><i class="bi bi-plus-lg" aria-hidden="true"></i> Agregar semillero</button></div>
+<div class="table-responsive"><table class="table align-middle detail-table"><thead><tr><th scope="col">Nombre *</th><th scope="col">Descripción</th><th scope="col">Acciones</th></tr></thead><tbody id="group-details">{% for row in data.semilleros %}{{ fila(row) }}{% endfor %}</tbody></table></div>
+<p class="small text-muted" id="detail-status" role="status" aria-live="polite"></p>
+<p class="small text-muted mb-0">Retirar un renglón quita el semillero de la ficha cuando guarde. Cancelar descarta los cambios.</p></div></section>
+<div class="d-flex gap-2"><button class="btn btn-primary" type="submit" {{ 'disabled' if not loaded }}>Guardar grupo y semilleros</button><a class="btn btn-outline-secondary" href="{{ url_for('investigacion.listing',resource='grupos_investigacion') }}">Cancelar</a></div>
+</form>
+<template id="detail-template">{{ fila() }}</template>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static',filename='investigacion.js') }}" defer></script>{% endblock %}

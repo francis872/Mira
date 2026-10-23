@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Investigación{% endblock %}
+{% block content %}
+<div class="section-heading"><div><span class="section-eyebrow">GESTIÓN ACADÉMICA</span><h1>Investigación</h1><p>Organiza sedes, equipos, líneas y semilleros.</p></div></div>
+<div class="row g-3 mb-4">
+{% for key,spec in resources.items() %}
+<div class="col-md-6 col-xl-4"><article class="card card-custom h-100"><div class="card-body d-flex flex-column gap-3">
+<h2 class="h5">{{ spec.title }}</h2>
+<div class="d-flex gap-3 mt-auto"><a href="{{ url_for('investigacion.listing',resource=key) }}">Ver registros</a><a href="{{ url_for('investigacion.new',resource=key) }}" class="ms-auto">Nuevo <i class="bi bi-plus-lg" aria-hidden="true"></i></a></div>
+</div></article></div>
+{% endfor %}
+</div>
+<div class="section-heading"><div><h2>Asociaciones de líneas</h2><p>Asigna y retira relaciones con grupos, semilleros y catálogos.</p></div></div>
+<div class="row g-3">{% for key,spec in bridges.items() %}<div class="col-md-6"><a class="card card-custom text-decoration-none h-100" href="{{ url_for('investigacion.associations',resource=key) }}"><div class="card-body d-flex justify-content-between">{{ spec.title }} <i class="bi bi-arrow-right" aria-hidden="true"></i></div></a></div>{% endfor %}</div>
+{% endblock %}

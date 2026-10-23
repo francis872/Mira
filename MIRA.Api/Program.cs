@@ -50,6 +50,8 @@ builder.Services.AddScoped<IAreaAplicacionService, AreaAplicacionService>();
 builder.Services.AddScoped<ITerminoClaveService, TerminoClaveService>();
 builder.Services.AddScoped<IUniversidadService, UniversidadService>();
 builder.Services.AddScoped<ILineaInvestigacionService, LineaInvestigacionService>();
+builder.Services.AddScoped<MIRA.Api.Repositorios.Investigacion.InvestigacionRepository>();
+builder.Services.AddScoped<InvestigacionService>();
 
 var app = builder.Build();
 app.UseMiddleware<ApiExceptionMiddleware>();

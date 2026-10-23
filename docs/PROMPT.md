@@ -27,7 +27,8 @@ Contexto de partida:
 - V1 y V2 no incluyen autenticación ni autorización. El dashboard abre directamente, sin login. No agregues JWT, contraseñas, restricciones por sesión ni pantallas de usuarios como parte de estas versiones.
 - Conserva las validaciones, SQL parametrizado, integridad referencial, escape de HTML y protección CSRF en los formularios.
 - La migración 003 mantiene usuario, rol y usuario_rol y sus rutinas almacenadas con JSONB; no están integradas a la API ni a las pantallas. No elimines sus datos.
-- V2 está parcialmente implementada. El modelo relacional oficial de la Entrega 2 falta en docs/fuentes/. No inventes entidades, relaciones, triggers ni reglas académicas para completar ese vacío. Si una tarea depende de ese documento, explica la dependencia y continúa con el trabajo independiente que sí esté definido.
+- El usuario confirmó los SQL de repair/v1-catalogos (880ac75) como modelo oficial. Copias exactas en docs/fuentes/sql; incorporación aditiva en 006 y 78 funciones académicas en 007. Once recursos, cinco puentes y ficha atómica grupo→semilleros operan en /investigacion. No reemplaces las tablas V1 ni inventes relaciones distintas.
+- El SQL no contiene FK opcionales: C06 requiere aclaración de aplicabilidad. VERSION_2.md, rúbrica y nombres de los nueve documentos siguen ausentes. La plataforma habitual necesita personas institucionales reales cargadas para crear docentes; no inventes identidades ni credenciales.
 
 Forma de trabajar:
 - Sigue Spec-Driven Development: actualiza primero la especificación correspondiente si cambia la funcionalidad y después implementa.

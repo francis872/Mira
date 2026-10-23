@@ -1,29 +1,34 @@
-# Modelo de datos V2
+# Modelo de datos MIRA V2
 
-## Estado verificable de V1
-Los scripts `database/migrations/001_v1_catalogos_tablas.sql` y `002_v1_catalogos_datos_iniciales.sql` definen seis entidades independientes: area_conocimiento, objetivo_desarrollo_sostenible, area_aplicacion, termino_clave, universidad y linea_investigacion. Esta entrega no define FK ni pares maestro-detalle entre ellas.
+Fuente confirmada por el usuario: [SQL originales y blobs](../../docs/fuentes/sql/README.md). La migración 006 conserva las 19 tablas del archivo completo; `v2_modelo_oficial.sql` reconstruye esa fuente en un esquema aislado y compara columnas, orden, tipo, longitudes, nulabilidad, PK/FK, UNIQUE/CHECK e índices contra las tablas implementadas. No se añaden columnas.
 
-## Migraciones
+## Entidades y relaciones
 
-004 añade 30 funciones CRUD sobre las seis tablas sin cambiar su estructura ni borrar datos. 005 añade un trigger de normalización sobre el campo existente `area_aplicacion.nombre`; no añade columnas ni entidades. Tabla de rutinas/contratos en `6_contracts.md`.
-`database/migrations/NNN_*.sql` + `apply.sh` (registro en `schema_migrations`). En una base nueva Docker las aplica `database/init/00-migrar.sh`; en una existente: `docker compose exec mira-postgres sh /migrations/apply.sh`. Son idempotentes y aditivas: no borran tablas ni datos.
+```mermaid
+erDiagram
+    usuarios ||--o| docentes : perfil
+    sedes ||--o{ grupos_investigacion : aloja
+    grupos_investigacion ||--o{ semilleros : integra
+    grupos_investigacion ||--o{ grupo_docentes : vincula
+    docentes ||--o{ grupo_docentes : participa
+    semilleros ||--o{ semillero_tutores : vincula
+    docentes ||--o{ semillero_tutores : orienta
+    grupos_investigacion ||--o{ grupo_lineas : asocia
+    lineas_investigacion ||--o{ grupo_lineas : pertenece
+    semilleros ||--o{ semillero_lineas : asocia
+    lineas_investigacion ||--o{ semillero_lineas : pertenece
+    lineas_investigacion ||--o{ linea_disciplinas : clasifica
+    areas_conocimiento ||--o{ linea_disciplinas : referencia
+    lineas_investigacion ||--o{ linea_ods : contribuye
+    ods ||--o{ linea_ods : referencia
+    lineas_investigacion ||--o{ linea_aplicacion : aplica
+    areas_aplicacion ||--o{ linea_aplicacion : referencia
+    usuarios ||--o{ usuario_roles : asigna
+    roles ||--o{ usuario_roles : asigna
+```
 
-## Pares maestro–detalle identificados
-`usuario`/`usuario_rol` (migración 003) existe **solo en la base de datos**: se conserva con sus datos y sus rutinas almacenadas, pero queda fuera de la aplicación porque implica credenciales (fuera de alcance). No se expone en la API ni en el frontend.
-| Maestro | Detalle | PK maestro | FK detalle | Reglas de eliminación | Reglas de cálculo |
-|---|---|---|---|---|---|
-| `usuario` | `usuario_rol` | `usuario.id` (BIGINT) | `usuario_rol.usuario_id → usuario.id`; `usuario_rol.rol_id → rol.id` | Lógica (`usuario.activo`); sin `ON DELETE CASCADE` | Ninguna |
+`palabras_clave` es el catálogo independiente restante. Todas las PK simples son integer/serial; cinco puentes y `usuario_roles` tienen PK compuesta. Ninguna FK es nullable. Campos opcionales incluyen CvLAC, escalafón, categoría, descripción, fecha_fin y deleted_at según cada tabla; consultar el SQL para la definición exacta.
 
-Tipos reales: `usuario.id BIGINT`, `rol.id INTEGER`. Las tablas V1 (`area_conocimiento`, etc.) no tienen FK.
+La ficha implementada usa grupo→semilleros. Los semilleros omitidos se retiran lógicamente. Docentes y semillero_tutores no tienen indicador de estado; el retiro físico conserva las acciones CASCADE del modelo. `grupo_docentes` sí tiene activo. Las seis tablas singulares V1 y `usuario`/`rol`/`usuario_rol` de 003 siguen intactas, además del modelo plural.
 
-## Pendiente antes de migrar el dominio académico
-Incorporar las tablas de la siguiente entrega desde el modelo oficial (**no disponible en el repositorio**) y completar para cada par:
-| Maestro | Detalle | PK maestro | FK detalle | Reglas de eliminación | Reglas de cálculo |
-|---|---|---|---|---|---|
-| Por identificar | Por identificar | Pendiente | Pendiente | Pendiente | Pendiente |
-
-## Normas
-- FK con restricciones PostgreSQL reales y selección mediante catálogos activos.
-- Validación de existencia y autorización del FK en backend.
-- Evitar almacenar subtotales redundantes salvo justificación; si se almacenan, definir trigger de consistencia.
-- Diseñar migraciones aditivas, con respaldo previo y pruebas de reversión.
+Migraciones: 001 tablas V1; 002 semillas V1; 003 rutinas legadas; 004 funciones V1; 005 trigger de área; 006 modelo confirmado; 007 vistas y 78 funciones académicas. Los scripts aplican cada migración pendiente una sola vez mediante `schema_migrations`. No ejecutar directamente las copias fuente contra una base existente.

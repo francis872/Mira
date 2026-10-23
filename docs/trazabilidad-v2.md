@@ -1,50 +1,20 @@
-# Trazabilidad MIRA V1 + V2 parcial
+# Trazabilidad MIRA V1 y dominio V2
 
-Las especificaciones son documentos SDD mantenidos en `versiones/`; no se acredita una instalación de GitHub Spec Kit. IDs CAT/DASH/OPEN: `versiones/v0.1_api_inicial/2_spec.md`. IDs restantes: `versiones/v2_profesor/2_spec.md`. Esta matriz registra el alcance probado, no aprobación de documentos oficiales ausentes.
+Fuente funcional: prompt definitivo y confirmación posterior del SQL oficial por el usuario. Fuente física: `docs/fuentes/sql/`. Especificación previa: `docs/integracion-modelo-oficial.md`; requisitos e historias de trabajo: `versiones/v2_profesor/2_spec.md`. No se atribuyen estos identificadores a documentos no aportados del profesor.
 
-## Cadena completa de la instrucción definitiva
+| Requisito → Historia | Controller → Service → Repository | PostgreSQL | Interfaz | Prueba |
+|---|---|---|---|---|---|
+| RF-MIRA-CAT-01–06 / RF-V2-SP-01 → HU-MIRA-CAT-01–06 | Seis `*Controller`, `*Service`, `*Repository` existentes | `sp_{listar,consultar,crear,actualizar,eliminar}_{catalogo}` en 004 | `frontend/app.py`, `templates/modulos/` | `CatalogCrudRegressionTests`, `test_catalog_create_update_inactivate_persist`, Edge |
+| RF-V2-ACA-01 → HU-V2-ACA-01 | `InvestigacionController.Listar/Obtener/Crear/Actualizar/Eliminar` → `InvestigacionService` → `Repositorios/Investigacion/InvestigacionRepository` | Cinco `sp_*_v2_{recurso}` por cada uno de once recursos en 007 | `investigacion.py:listing/new/edit/remove`, `investigacion/list.html` y `form.html` | `ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows`, `test_investigacion.py` HTTP |
+| RF-V2-FK-01 → HU-V2-REF-01 | `RecursosInvestigacion`, Service.Validar, Controller.Usuarios | FK de 006; `sp_referencias_v2_usuarios` y listados de referencia | `options_for`, `_campos.html`; nombres reales sin códigos tecleados | 11 casos Flask, HTTP y Edge; nulabilidad auditada en SQL |
+| RF-V2-ASOC-01 → HU-V2-ASOC-01 | `ObtenerPuente/Crear/RetirarPuente` → Service → Repository | `sp_{listar,consultar,crear,eliminar}_v2_{puente}` para cinco pares PK | `associations/remove_association`, `asociaciones.html` | `AllFiveBridges_AssignQueryDuplicateConflictAndRemove`, cinco casos HTTP, Edge grupo–línea |
+| RF-V2-MD-01–04 → HU-V2-FICHA-01 | `CrearFicha/ActualizarFicha/Ficha` → Service.GuardarFicha/Ficha → Repository.GuardarFicha/Ficha | `sp_guardar_v2_ficha_grupo`, `sp_consultar_v2_ficha_grupo` | `group_form`, `grupo.html`, `investigacion.js` | SQL rollback tardío, .NET comparación completa tras fallo, HTTP y Edge varios renglones |
+| RF-V2-TR-01 → HU-MIRA-CAT-03 / HU-V2-FICHA-01 | Service deja actuar DB | Trigger normalizador 005; `semilleros_grupo_activo_trigger` oficial en 006/007 | Alta/edición V1 y ficha V2 | SQL, .NET, HTTP y Edge |
+| RF-V2-HTTP-01 → HU-MIRA-ERR-01 | `ApiExceptionMiddleware.InvokeAsync`, validación Service | Restricciones reales SQLSTATE 23503/23505/23514 | `app.py:error_message`, flash preservado en formularios | `ErroresPersistenciaTests`, FK real y duplicados de puentes |
+| RF-MIRA-CSRF-01 / RF-V2-UI-01–02 | Cliente Flask y plantillas | Sin SQL desde Flask | CSRF, escape Jinja, búsqueda, modales y estados de envío | 63 Flask/arquitectura, 46 HTTP y 14 comprobaciones Edge |
 
-Prompt auténtico aplicable a todas las filas: `docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md`, secciones 3, 5, 7, 10 y 11. Historias: `versiones/v2_profesor/2_spec.md`; reglas por entidad: `docs/reglas-negocio-v2.md`.
+Once recursos: sedes, docentes, grupos_investigacion, semilleros, lineas_investigacion, grupo_docentes, semillero_tutores, areas_conocimiento, ods, areas_aplicacion y palabras_clave. Puentes: grupo_lineas, semillero_lineas, linea_disciplinas, linea_ods y linea_aplicacion. Sus campos exactos están en `RecursosInvestigacion.cs` y su correspondencia con la fuente se compara en `v2_modelo_oficial.sql`.
 
-| Requisito → Historia | Controller → Service → Repository (MIRA.Api) | Rutinas de migración 004 | Interfaz (frontend) | Prueba |
-|---|---|---|---|---|
-| RF-MIRA-CAT-01 / RF-V2-SP-01 → HU-MIRA-CAT-01 | `Peticiones/AreaConocimientoController` → `Servicios/AreaConocimientoService` → `Repositorios/AreaConocimientoRepository` | `sp_{listar,consultar,crear,actualizar,eliminar}_area_conocimiento` | `app.py:area_conocimiento_*`, `templates/modulos/area_conocimiento/` | CRUD .NET y `test_catalog_create_update_inactivate_persist[area_conocimiento]` |
-| RF-MIRA-CAT-02 / RF-V2-SP-01 → HU-MIRA-CAT-02 | `ObjetivoDesarrolloSostenibleController` → `ObjetivoDesarrolloSostenibleService` → `ObjetivoDesarrolloSostenibleRepository` | mismo patrón `_objetivo_desarrollo_sostenible` | `app.py:ods_*`, `templates/modulos/objetivo_desarrollo_sostenible/` | CRUD .NET/HTTP parametrizado ODS |
-| RF-MIRA-CAT-03 / RF-V2-TR-01 → HU-MIRA-CAT-03 | `AreaAplicacionController` → `AreaAplicacionService` → `AreaAplicacionRepository` | patrón `_area_aplicacion`; trigger 005 `tr_area_aplicacion_normalizar` | `app.py:area_aplicacion_*`, `templates/modulos/area_aplicacion/` | SQL, `AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted`, formulario HTTP y Edge |
-| RF-MIRA-CAT-04 / RF-MIRA-TC-01 → HU-MIRA-CAT-04 | `TerminoClaveController` → `TerminoClaveService` → `TerminoClaveRepository` | patrón `_termino_clave` | `app.py:termino_clave_*`, `templates/modulos/termino_clave/` | CRUD y conflicto activo/inactivo/concurrente |
-| RF-MIRA-CAT-05 / RF-V2-SP-01 → HU-MIRA-CAT-05 | `UniversidadController` → `UniversidadService` → `UniversidadRepository` | patrón `_universidad` | `app.py:universidad_*`, `templates/modulos/universidad/` | CRUD .NET/HTTP universidad |
-| RF-MIRA-CAT-06 / RF-V2-SP-01 → HU-MIRA-CAT-06 | `LineaInvestigacionController` → `LineaInvestigacionService` → `LineaInvestigacionRepository` | patrón `_linea_investigacion` | `app.py:linea_investigacion_*`, `templates/modulos/linea_investigacion/` | CRUD .NET/HTTP línea |
-| RF-V2-HTTP-01 → HU-MIRA-ERR-01 | `Program.cs` y `Excepciones/ApiExceptionMiddleware.InvokeAsync` | Mapea SQLSTATE sin SQL adicional | `app.py:error_message` | `ErroresPersistenciaTests` (traducción y contrato JSON inválido) |
-| RF-V2-UI-01 → historias de catálogos | Sin cambio de contratos HTTP | Sin consultas nuevas | `static/mira.css`, `static/mira.js`, `includes/catalog_toolbar.html` | Flask/HTTP, `scripts/verify-browser.mjs`, capturas en `docs/evidencias/` |
+Las pruebas SQL reconstruyen las 19 tablas originales en un esquema temporal, comparan columnas/restricciones/índices y revierten todo. Las de .NET viven en `tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs`; Flask en `frontend/tests/test_investigacion.py`; HTTP en `frontend/tests/e2e/test_investigacion.py`; navegador en `scripts/verify-browser.mjs`.
 
-Métodos de los controladores: `GetAll`, `GetById` (`GetByTermino` en término), `Create`, `Update`, `Delete`. Métodos Service/Repository: `GetAllActivosAsync`, `GetByIdAsync` (`GetByTerminoAsync`), `CreateAsync`, `UpdateAsync`, `SoftDeleteAsync`. La prueba arquitectónica comprueba que las 30 llamadas no contienen CRUD directo; la regresión comprueba resultados contra PostgreSQL.
-
-Los criterios académicos aún bloqueados están en [criterios-v2.md](criterios-v2.md); no existe cadena de código para entidades académicas sin modelo oficial.
-
-## Requisitos acumulados
-
-| Requisito | Especificación | Código | Prueba | Estado |
-|---|---|---|---|---|
-| RF-MIRA-CAT-01 | V1, requisitos | `AreaConocimientoController`, `AreaConocimientoService`, `AreaConocimientoRepository`; `area_conocimiento_*` | `FullLifecycle_CreateReadListUpdateLogicalDelete`, `test_catalog_create_update_inactivate_persist[area_conocimiento]` | Verificado |
-| RF-MIRA-CAT-02 | V1, requisitos | `ObjetivoDesarrolloSostenibleController/Service/Repository`; `ods_*` | mismos casos para `objetivo_desarrollo_sostenible` | Verificado |
-| RF-MIRA-CAT-03 | V1, requisitos | `AreaAplicacionController/Service/Repository`; `area_aplicacion_*` | mismos casos para `area_aplicacion` | Verificado |
-| RF-MIRA-CAT-04 | V1, requisitos | `TerminoClaveController/Service/Repository`; `termino_clave_*` | mismos casos para `termino_clave` | Verificado en entradas probadas |
-| RF-MIRA-CAT-05 | V1, requisitos | `UniversidadController/Service/Repository`; `universidad_*` | mismos casos para `universidad` | Verificado |
-| RF-MIRA-CAT-06 | V1, requisitos | `LineaInvestigacionController/Service/Repository`; `linea_investigacion_*` | mismos casos para `linea_investigacion` | Verificado |
-| RF-MIRA-DASH-01 | V1, requisitos | `frontend/app.py:index`, `_count`, `api_call`; `templates/index.html` | `test_dashboard_counts_match_the_listing`, `test_dashboard_handles_invalid_api_payload` | Verificado |
-| RF-MIRA-OPEN-01 | V1, requisitos | `Program.cs`, controladores, rutas Flask | `SinAutenticacionTests`, `test_there_is_no_authentication_surface` | Verificado |
-| RF-MIRA-ERR-01 | V2, calidad | `frontend/app.py:error_message`, `list_items`, `api_call`, crear/editar | `test_validation_message_survives_real_response_truthiness`, `test_list_reports_http_failure`, `test_non_json_api_error_preserves_form_values` | Verificado |
-| RF-MIRA-VAL-01 | V2, calidad | `MIRA.Api/Modelos/*.cs`, atributos `StringLength` | `OversizedText_ReturnsBadRequest_OnCreateAndUpdate`, `test_oversized_form_preserves_data_and_explains_limit` | Verificado en casos de longitud probados |
-| RF-MIRA-TC-01 | V2, calidad | `TerminoClaveRepository.CreateAsync`, SQLSTATE 23505 | `InactiveAndConcurrentDuplicateKeyword_ReturnsConflict`, `test_duplicate_keyword_shows_conflict` | Verificado |
-| RF-MIRA-CSRF-01 | V2, calidad | `frontend/app.py:verify_csrf`, `csrf_input` | `test_unicode_csrf_is_rejected_without_api_call`, `test_unicode_csrf_is_rejected`, pruebas de token ausente e incorrecto | Verificado |
-| RNF-MIRA-OPS-01 | V2, calidad | `scripts/start-local.ps1`, `stop-local.ps1`, `verify-local.ps1` | Ejecución integral y comprobación de reinicio descritas en `docs/pruebas-v2.md` | Verificado localmente |
-| RNF-MIRA-ENV-01 | V2, calidad | `frontend/requirements*.txt` | Comparación con `importlib.metadata` | Versiones declaradas verificadas; Docker pendiente |
-| RF-V2-MD-01 | V2, requerimientos | `003_v2_usuarios_roles.sql:sp_usuario_crear` / `fn_usuario_crear` | `database/tests/v2_usuarios_roles.sql`, alta y error FK | Verificado solo usuario→roles en PostgreSQL |
-| RF-V2-MD-02 | V2, requerimientos | `sp_usuario_actualizar`, `fn_usuario_actualizar` | mismo archivo: reemplazo y comparación tras fallo | Verificado solo en PostgreSQL |
-| RF-V2-MD-03 | V2, requerimientos | `fn_usuario_consultar`, `fn_usuario_listar` | mismo archivo: consulta y presencia en arreglo JSONB | Verificado solo en PostgreSQL |
-| RF-V2-MD-04 | V2, requerimientos | `sp_usuario_inactivar`, `fn_usuario_inactivar` | mismo archivo: indicador de inactivación | Verificado solo en PostgreSQL |
-| RF-V2-FK-01 | V2, requerimientos | Sin implementación académica | Sin prueba | Bloqueado por modelo oficial |
-| RF-V2-DB-01 | V2, requerimientos | Sin triggers académicos definidos | Sin prueba | Bloqueado por reglas y modelo oficial |
-| RF-V2-DB-02 | V2, requerimientos | `vw_usuarios_roles` | SQL de rutinas sobre la vista | Parcial; vistas académicas bloqueadas |
-
-Rutas de las pruebas: `tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs`, `SinAutenticacionTests.cs`, `frontend/tests/test_app.py` y `frontend/tests/e2e/test_local_platform.py`. Los nombres abreviados de las capas corresponden a carpetas `Peticiones/`, `Servicios/` y `Repositorios/` de `MIRA.Api/`.
+La atomicidad usuario→roles de 003 sigue probándose por separado; no acredita el maestro-detalle académico ni crea una pantalla de credenciales. C06 sigue bloqueado: SQL confirmado sin FK opcional. [Matriz completa](criterios-v2.md).

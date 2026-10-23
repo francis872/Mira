@@ -1,3 +1,17 @@
+# Auditoría vigente: SQL localizado e integrado
+
+El usuario indicó que el SQL estaba en el repositorio y confirmó expresamente `database/init/01-init.sql` y `database/migrations/002-complete-research-model.sql` de `repair/v1-catalogos` (`880ac75`) como modelo oficial. Se corrige el diagnóstico anterior: los archivos existían en otra rama. Se preservaron sin modificar en `docs/fuentes/sql/`, con sus blobs.
+
+La especificación de integración precedió al código. Se añadieron 19 tablas oficiales mediante 006, conservando V1 y 003; 007 incorpora vistas y 78 funciones, once recursos editables y cinco puentes. Grupo→semilleros dispone de una ficha real con guardado JSONB atómico. No se inventaron columnas, FK opcionales ni una relación universidad→grupo. Usuarios solo se consulta como referencia de personas; no existe CRUD de credenciales.
+
+Verificación: 47 .NET, 63 Flask/arquitectura, 46 HTTP sobre PostgreSQL 16.15 y cuatro SQL; comparación de modelo contra la fuente sin diferencias. Edge: 14 controles y 72 combinaciones. Plataforma habitual respaldada y actualizada. [Resultados](pruebas-v2.md).
+
+Once criterios están verificados. C06 requiere aclarar no aplicabilidad porque el SQL no contiene FK nullable. VERSION_2/rúbrica/nombres de nueve documentos siguen pendientes, junto con datos institucionales de personas para registrar docentes en la plataforma habitual. [Pendientes](pendientes-v2.md).
+
+## Registro histórico de etapas anteriores
+
+Los bloqueos y resultados siguientes corresponden a etapas anteriores a la confirmación del SQL. El estado vigente es el indicado arriba y en la matriz actual.
+
 # Auditoría de MIRA V1 + V2 parcial
 
 ## Recuperación histórica y PostgreSQL 16
