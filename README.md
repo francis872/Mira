@@ -83,6 +83,8 @@ Pruebas:
 
 ## Development Workflow
 
+Prompt de contexto para continuar el desarrollo con un asistente: [docs/PROMPT.md](docs/PROMPT.md).
+
 1. Clone.
 2. Review docs/fuentes.
 3. Review Spec Kit.
