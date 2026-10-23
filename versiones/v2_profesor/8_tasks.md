@@ -1,5 +1,10 @@
 # Tareas verificables V2
 
+- [x] Auditar flujos reales y corregir mensajes HTTP 400/409, respuesta JSON inválida, CSRF no ASCII, longitud de textos y colisiones de términos activos/inactivos/concurrentes.
+- [x] Verificación automatizada en base exclusiva (`scripts/verify-local.ps1`): 31 .NET, 40 Flask, 30 E2E HTTP y SQL con rollback.
+- [x] Comprobar persistencia tras reiniciar PostgreSQL, API y frontend.
+- [x] Documentar auditoría, arquitectura, trazabilidad, pruebas, sustentación y pendientes en `docs/*-v2.md`.
+
 - [x] Migrar historial Git de V1 al repositorio de destino sin alterar autoría.
 - [x] Crear rama aislada V2.
 - [x] Registrar los requisitos de clase en Spec Kit V2.

@@ -45,6 +45,12 @@ def error_message(resp, default):
     except ValueError:
         return default
     if isinstance(body, dict):
+        errors = body.get("errors")
+        if isinstance(errors, dict):
+            messages = [message for values in errors.values() if isinstance(values, list)
+                        for message in values if isinstance(message, str)]
+            if messages:
+                return " ".join(messages)
         return body.get("mensaje") or body.get("title") or default
     return default
 
@@ -67,7 +73,7 @@ def verify_csrf():
     if request.method == "POST":
         sent = request.form.get("csrf_token", "")
         expected = session.get("csrf_token", "")
-        if not expected or not hmac.compare_digest(sent, expected):
+        if not expected or not hmac.compare_digest(sent.encode("utf-8"), expected.encode("utf-8")):
             abort(400)
     return None
 
@@ -87,7 +93,24 @@ def api_call(method, path, json_data=None):
         )
     except requests.exceptions.RequestException:
         return None
+    if response.status_code in (200, 201):
+        try:
+            body = response.json()
+        except ValueError:
+            app.logger.warning("La API devolvió una respuesta sin JSON válido.")
+            return None
+        is_list = method == "GET" and "/" not in path.strip("/")
+        if not isinstance(body, list if is_list else dict) or (is_list and any(not isinstance(item, dict) for item in body)):
+            app.logger.warning("La API devolvió una estructura de datos incompatible.")
+            return None
     return response
+
+
+def list_items(resp):
+    if resp is None or resp.status_code != 200:
+        flash("No fue posible cargar los datos. La información no está disponible; intente de nuevo.", "danger")
+        return []
+    return resp.json()
 
 # =============================================================================
 # Dashboard Principal
@@ -133,9 +156,7 @@ def index():
 @app.route("/area_conocimiento")
 def area_conocimiento_list():
     resp = api_call("GET", "area_conocimiento")
-    items = resp.json() if resp and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
+    items = list_items(resp)
     return render_template("modulos/area_conocimiento/list.html", items=items)
 
 @app.route("/area_conocimiento/nuevo")
@@ -150,17 +171,17 @@ def area_conocimiento_create():
         "disciplina": request.form.get("disciplina", "").strip()
     }
     resp = api_call("POST", "area_conocimiento", payload)
-    if resp and resp.status_code == 201:
+    if resp is not None and resp.status_code == 201:
         flash("Área de conocimiento creada exitosamente.", "success")
         return redirect(url_for("area_conocimiento_list"))
-    error_msg = resp.json().get("mensaje", "Error al crear.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/area_conocimiento/form.html", item=payload)
 
 @app.route("/area_conocimiento/editar/<int:id>")
 def area_conocimiento_edit(id):
     resp = api_call("GET", f"area_conocimiento/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         return render_template("modulos/area_conocimiento/form.html", item=resp.json())
     flash("Registro no encontrado o inactivo.", "warning")
     return redirect(url_for("area_conocimiento_list"))
@@ -174,17 +195,17 @@ def area_conocimiento_update(id):
         "disciplina": request.form.get("disciplina", "").strip()
     }
     resp = api_call("PUT", f"area_conocimiento/{id}", payload)
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Área de conocimiento actualizada exitosamente.", "success")
         return redirect(url_for("area_conocimiento_list"))
-    error_msg = resp.json().get("mensaje", "Error al actualizar.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/area_conocimiento/form.html", item=payload)
 
 @app.route("/area_conocimiento/eliminar/<int:id>", methods=["POST"])
 def area_conocimiento_delete(id):
     resp = api_call("DELETE", f"area_conocimiento/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Área de conocimiento eliminada lógicamente.", "success")
     else:
         flash("No se pudo eliminar el registro.", "danger")
@@ -196,9 +217,7 @@ def area_conocimiento_delete(id):
 @app.route("/objetivo_desarrollo_sostenible")
 def ods_list():
     resp = api_call("GET", "objetivo_desarrollo_sostenible")
-    items = resp.json() if resp and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
+    items = list_items(resp)
     return render_template("modulos/objetivo_desarrollo_sostenible/list.html", items=items)
 
 @app.route("/objetivo_desarrollo_sostenible/nuevo")
@@ -212,17 +231,17 @@ def ods_create():
         "categoria": request.form.get("categoria", "").strip()
     }
     resp = api_call("POST", "objetivo_desarrollo_sostenible", payload)
-    if resp and resp.status_code == 201:
+    if resp is not None and resp.status_code == 201:
         flash("ODS creado exitosamente.", "success")
         return redirect(url_for("ods_list"))
-    error_msg = resp.json().get("mensaje", "Error al crear.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=payload)
 
 @app.route("/objetivo_desarrollo_sostenible/editar/<int:id>")
 def ods_edit(id):
     resp = api_call("GET", f"objetivo_desarrollo_sostenible/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=resp.json())
     flash("Registro no encontrado o inactivo.", "warning")
     return redirect(url_for("ods_list"))
@@ -235,17 +254,17 @@ def ods_update(id):
         "categoria": request.form.get("categoria", "").strip()
     }
     resp = api_call("PUT", f"objetivo_desarrollo_sostenible/{id}", payload)
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("ODS actualizado exitosamente.", "success")
         return redirect(url_for("ods_list"))
-    error_msg = resp.json().get("mensaje", "Error al actualizar.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=payload)
 
 @app.route("/objetivo_desarrollo_sostenible/eliminar/<int:id>", methods=["POST"])
 def ods_delete(id):
     resp = api_call("DELETE", f"objetivo_desarrollo_sostenible/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("ODS eliminado lógicamente.", "success")
     else:
         flash("No se pudo eliminar el registro.", "danger")
@@ -257,9 +276,7 @@ def ods_delete(id):
 @app.route("/area_aplicacion")
 def area_aplicacion_list():
     resp = api_call("GET", "area_aplicacion")
-    items = resp.json() if resp and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
+    items = list_items(resp)
     return render_template("modulos/area_aplicacion/list.html", items=items)
 
 @app.route("/area_aplicacion/nuevo")
@@ -272,17 +289,17 @@ def area_aplicacion_create():
         "nombre": request.form.get("nombre", "").strip()
     }
     resp = api_call("POST", "area_aplicacion", payload)
-    if resp and resp.status_code == 201:
+    if resp is not None and resp.status_code == 201:
         flash("Área de aplicación creada exitosamente.", "success")
         return redirect(url_for("area_aplicacion_list"))
-    error_msg = resp.json().get("mensaje", "Error al crear.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/area_aplicacion/form.html", item=payload)
 
 @app.route("/area_aplicacion/editar/<int:id>")
 def area_aplicacion_edit(id):
     resp = api_call("GET", f"area_aplicacion/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         return render_template("modulos/area_aplicacion/form.html", item=resp.json())
     flash("Registro no encontrado o inactivo.", "warning")
     return redirect(url_for("area_aplicacion_list"))
@@ -294,17 +311,17 @@ def area_aplicacion_update(id):
         "nombre": request.form.get("nombre", "").strip()
     }
     resp = api_call("PUT", f"area_aplicacion/{id}", payload)
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Área de aplicación actualizada exitosamente.", "success")
         return redirect(url_for("area_aplicacion_list"))
-    error_msg = resp.json().get("mensaje", "Error al actualizar.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/area_aplicacion/form.html", item=payload)
 
 @app.route("/area_aplicacion/eliminar/<int:id>", methods=["POST"])
 def area_aplicacion_delete(id):
     resp = api_call("DELETE", f"area_aplicacion/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Área de aplicación eliminada lógicamente.", "success")
     else:
         flash("No se pudo eliminar el registro.", "danger")
@@ -316,9 +333,7 @@ def area_aplicacion_delete(id):
 @app.route("/termino_clave")
 def termino_clave_list():
     resp = api_call("GET", "termino_clave")
-    items = resp.json() if resp and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
+    items = list_items(resp)
     return render_template("modulos/termino_clave/list.html", items=items)
 
 @app.route("/termino_clave/nuevo")
@@ -332,10 +347,10 @@ def termino_clave_create():
         "terminoIngles": request.form.get("termino_ingles", "").strip() or None
     }
     resp = api_call("POST", "termino_clave", payload)
-    if resp and resp.status_code == 201:
+    if resp is not None and resp.status_code == 201:
         flash("Término clave creado exitosamente.", "success")
         return redirect(url_for("termino_clave_list"))
-    error_msg = resp.json().get("mensaje", "Error al crear.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/termino_clave/form.html", item=payload, is_new=True)
 
@@ -343,7 +358,7 @@ def termino_clave_create():
 def termino_clave_edit(termino):
     encoded = quote(termino, safe="")
     resp = api_call("GET", f"termino_clave/{encoded}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         return render_template("modulos/termino_clave/form.html", item=resp.json(), is_new=False)
     flash("Registro no encontrado o inactivo.", "warning")
     return redirect(url_for("termino_clave_list"))
@@ -356,10 +371,10 @@ def termino_clave_update(termino):
         "terminoIngles": request.form.get("termino_ingles", "").strip() or None
     }
     resp = api_call("PUT", f"termino_clave/{encoded}", payload)
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Término clave actualizado exitosamente.", "success")
         return redirect(url_for("termino_clave_list"))
-    error_msg = resp.json().get("mensaje", "Error al actualizar.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/termino_clave/form.html", item=payload, is_new=False)
 
@@ -367,7 +382,7 @@ def termino_clave_update(termino):
 def termino_clave_delete(termino):
     encoded = quote(termino, safe="")
     resp = api_call("DELETE", f"termino_clave/{encoded}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Término clave eliminado lógicamente.", "success")
     else:
         flash("No se pudo eliminar el registro.", "danger")
@@ -379,9 +394,7 @@ def termino_clave_delete(termino):
 @app.route("/universidad")
 def universidad_list():
     resp = api_call("GET", "universidad")
-    items = resp.json() if resp and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
+    items = list_items(resp)
     return render_template("modulos/universidad/list.html", items=items)
 
 @app.route("/universidad/nuevo")
@@ -396,17 +409,17 @@ def universidad_create():
         "ciudad": request.form.get("ciudad", "").strip()
     }
     resp = api_call("POST", "universidad", payload)
-    if resp and resp.status_code == 201:
+    if resp is not None and resp.status_code == 201:
         flash("Universidad creada exitosamente.", "success")
         return redirect(url_for("universidad_list"))
-    error_msg = resp.json().get("mensaje", "Error al crear.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/universidad/form.html", item=payload)
 
 @app.route("/universidad/editar/<int:id>")
 def universidad_edit(id):
     resp = api_call("GET", f"universidad/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         return render_template("modulos/universidad/form.html", item=resp.json())
     flash("Registro no encontrado o inactivo.", "warning")
     return redirect(url_for("universidad_list"))
@@ -420,17 +433,17 @@ def universidad_update(id):
         "ciudad": request.form.get("ciudad", "").strip()
     }
     resp = api_call("PUT", f"universidad/{id}", payload)
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Universidad actualizada exitosamente.", "success")
         return redirect(url_for("universidad_list"))
-    error_msg = resp.json().get("mensaje", "Error al actualizar.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/universidad/form.html", item=payload)
 
 @app.route("/universidad/eliminar/<int:id>", methods=["POST"])
 def universidad_delete(id):
     resp = api_call("DELETE", f"universidad/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Universidad eliminada lógicamente.", "success")
     else:
         flash("No se pudo eliminar el registro.", "danger")
@@ -442,9 +455,7 @@ def universidad_delete(id):
 @app.route("/linea_investigacion")
 def linea_investigacion_list():
     resp = api_call("GET", "linea_investigacion")
-    items = resp.json() if resp and resp.status_code == 200 else []
-    if resp is None:
-        flash("No fue posible conectar con la API REST.", "danger")
+    items = list_items(resp)
     return render_template("modulos/linea_investigacion/list.html", items=items)
 
 @app.route("/linea_investigacion/nuevo")
@@ -458,17 +469,17 @@ def linea_investigacion_create():
         "descripcion": request.form.get("descripcion", "").strip() or None
     }
     resp = api_call("POST", "linea_investigacion", payload)
-    if resp and resp.status_code == 201:
+    if resp is not None and resp.status_code == 201:
         flash("Línea de investigación creada exitosamente.", "success")
         return redirect(url_for("linea_investigacion_list"))
-    error_msg = resp.json().get("mensaje", "Error al crear.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/linea_investigacion/form.html", item=payload)
 
 @app.route("/linea_investigacion/editar/<int:id>")
 def linea_investigacion_edit(id):
     resp = api_call("GET", f"linea_investigacion/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         return render_template("modulos/linea_investigacion/form.html", item=resp.json())
     flash("Registro no encontrado o inactivo.", "warning")
     return redirect(url_for("linea_investigacion_list"))
@@ -481,17 +492,17 @@ def linea_investigacion_update(id):
         "descripcion": request.form.get("descripcion", "").strip() or None
     }
     resp = api_call("PUT", f"linea_investigacion/{id}", payload)
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Línea de investigación actualizada exitosamente.", "success")
         return redirect(url_for("linea_investigacion_list"))
-    error_msg = resp.json().get("mensaje", "Error al actualizar.") if resp else "Error de conexión."
+    error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
     return render_template("modulos/linea_investigacion/form.html", item=payload)
 
 @app.route("/linea_investigacion/eliminar/<int:id>", methods=["POST"])
 def linea_investigacion_delete(id):
     resp = api_call("DELETE", f"linea_investigacion/{id}")
-    if resp and resp.status_code == 200:
+    if resp is not None and resp.status_code == 200:
         flash("Línea de investigación eliminada lógicamente.", "success")
     else:
         flash("No se pudo eliminar el registro.", "danger")

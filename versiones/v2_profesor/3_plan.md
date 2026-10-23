@@ -19,7 +19,7 @@ Autenticación y autorización no forman parte del plan (ver 2_spec.md, "Correcc
 | 3–4. Contratos JSONB, rutinas y pruebas con rollback | Hecho en PostgreSQL para usuario→roles; pendiente para el dominio académico |
 | 5. Triggers y vistas | Pendiente (sin reglas derivadas identificadas) |
 | 6–7. Repositorios C# y selects de FK | Pendiente del modelo oficial |
-| 8. Pruebas V1+V2 | .NET: 9 sin base de datos (5 ejecutan, 4 requieren PostgreSQL) y 24 con `MIRA_TEST_DB`; Flask: 23; E2E contra la plataforma real: 28 (ver 7_quickstart.md) |
+| 8. Pruebas V1+V2 | Auditoría: 31 .NET con PostgreSQL real, 40 Flask y 30 E2E HTTP; SQL con rollback. Evidencias en `docs/pruebas-v2.md`. |
 | Migración a .NET LTS | Hecho (.NET 10) |
 | Plataforma localhost sin login | Hecho: frontend :5000, API :8081, PostgreSQL :5544 |
 

@@ -85,6 +85,8 @@ Pruebas:
 
 Prompt de contexto para continuar el desarrollo con un asistente: [docs/PROMPT.md](docs/PROMPT.md).
 
+Auditoría y sustentación: [auditoría](docs/auditoria-v2.md), [arquitectura](docs/arquitectura-v2.md), [trazabilidad](docs/trazabilidad-v2.md), [pruebas ejecutadas](docs/pruebas-v2.md), [guía de sustentación](docs/sustentacion-v2.md) y [pendientes](docs/pendientes-v2.md). La verificación actual acredita operación local de V1 y rutinas SQL V2; el dominio académico V2 sigue pendiente del modelo oficial.
+
 1. Clone.
 2. Review docs/fuentes.
 3. Review Spec Kit.

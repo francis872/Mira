@@ -47,4 +47,36 @@ BEGIN
  EXCEPTION WHEN unique_violation THEN NULL;
  END;
 END $$;
+DO $$
+DECLARE
+ v JSONB;
+ before_update JSONB;
+ v_id BIGINT;
+ role_id INTEGER;
+ inactive BOOLEAN;
+BEGIN
+ SELECT id INTO STRICT role_id FROM rol WHERE nombre='Investigador' AND activo;
+ CALL sp_usuario_crear('v2-procedure@example.invalid',repeat('x',60),jsonb_build_array(role_id),v);
+ v_id := (v->>'id')::bigint;
+ IF v_id IS NULL OR jsonb_array_length(v->'roles') <> 1 THEN
+  RAISE EXCEPTION 'CALL crear no devolvio maestro y detalles';
+ END IF;
+ CALL sp_usuario_actualizar(v_id,'v2-procedure-updated@example.invalid',jsonb_build_array(role_id),v);
+ before_update := fn_usuario_consultar(v_id);
+ BEGIN
+  CALL sp_usuario_actualizar(v_id,'v2-no-persist@example.invalid','[2147483647]'::jsonb,v);
+  RAISE EXCEPTION 'CALL actualizar acepto un rol inexistente';
+ EXCEPTION WHEN foreign_key_violation THEN NULL;
+ END;
+ IF fn_usuario_consultar(v_id) IS DISTINCT FROM before_update THEN
+  RAISE EXCEPTION 'La actualizacion fallida altero maestro o detalles';
+ END IF;
+ IF NOT EXISTS (SELECT 1 FROM jsonb_array_elements(fn_usuario_listar()) AS x WHERE (x->>'id')::bigint = v_id) THEN
+  RAISE EXCEPTION 'Listado JSONB incompleto';
+ END IF;
+ CALL sp_usuario_inactivar(v_id,inactive);
+ IF NOT inactive OR (fn_usuario_consultar(v_id)->>'activo')::boolean THEN
+  RAISE EXCEPTION 'CALL inactivar fallido';
+ END IF;
+END $$;
 ROLLBACK;

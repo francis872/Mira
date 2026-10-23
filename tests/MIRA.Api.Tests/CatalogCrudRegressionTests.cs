@@ -123,6 +123,35 @@ public sealed class CatalogCrudRegressionTests : IDisposable
         Assert.Equal(HttpStatusCode.Conflict, (await client.PostAsJsonAsync("/api/termino_clave", new { termino = term, terminoIngles = "b" })).StatusCode);
     }
 
+    [RequiresDatabaseFact]
+    public async Task InactiveAndConcurrentDuplicateKeyword_ReturnsConflict()
+    {
+        using var factory = TestHostFactory.Create();
+        using var client = Client(factory);
+        var term = Marker + Guid.NewGuid().ToString("N")[..10];
+        var payload = new { termino = term, terminoIngles = "test" };
+        var results = await Task.WhenAll(Enumerable.Range(0, 4)
+            .Select(_ => client.PostAsJsonAsync("/api/termino_clave", payload)));
+        Assert.Single(results, r => r.StatusCode == HttpStatusCode.Created);
+        Assert.Equal(3, results.Count(r => r.StatusCode == HttpStatusCode.Conflict));
+        Assert.Equal(HttpStatusCode.OK, (await client.DeleteAsync($"/api/termino_clave/{term}")).StatusCode);
+        Assert.Equal(HttpStatusCode.Conflict, (await client.PostAsJsonAsync("/api/termino_clave", payload)).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync($"/api/termino_clave/{term}")).StatusCode);
+    }
+
+    [RequiresDatabaseTheory]
+    [MemberData(nameof(Catalogs))]
+    public async Task OversizedText_ReturnsBadRequest_OnCreateAndUpdate(Catalog catalog)
+    {
+        using var factory = TestHostFactory.Create();
+        using var client = Client(factory);
+        var oversized = new string('x', 201);
+        Assert.Equal(HttpStatusCode.BadRequest,
+            (await client.PostAsJsonAsync(catalog.Route, catalog.Create(oversized))).StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest,
+            (await client.PutAsJsonAsync($"{catalog.Route}/1", catalog.Create(oversized))).StatusCode);
+    }
+
     private static async Task<bool> RowStillExistsAsync(Catalog catalog, string marker)
     {
         await using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("MIRA_TEST_DB"));

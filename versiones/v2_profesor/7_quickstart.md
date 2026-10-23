@@ -25,6 +25,8 @@ $env:API_URL = 'http://127.0.0.1:8081/api'; python frontend/app.py   # 127.0.0.1
 ```
 
 ## Pruebas
+
+Verificación local integrada con una base exclusiva de pruebas: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-local.ps1` (requiere plataforma iniciada y `.env.local`). Resultados actuales y límites: [docs/pruebas-v2.md](../../docs/pruebas-v2.md). Instrucciones completas: [scripts/README.md](../../scripts/README.md).
 ```powershell
 dotnet test MIRA.sln                      # sin base de datos: ejecuta las pruebas de "sin autenticación"; omite las que requieren PostgreSQL
 $env:MIRA_TEST_DB = 'Host=localhost;Port=5544;Database=<db de pruebas>;Username=<usuario>;Password=<clave>'
@@ -38,7 +40,7 @@ Rutinas almacenadas: `psql -f database/tests/v2_usuarios_roles.sql` sobre una ba
 ## Matriz de aceptación
 | Comprobación | Prueba |
 |---|---|
-| `http://localhost:5000` abre el dashboard | `test_root_opens_the_dashboard_directly`, captura del navegador |
+| `http://localhost:5000` abre el dashboard | `test_root_opens_the_dashboard_directly` (cliente HTTP; sin captura visual en esta auditoría) |
 | Ningún módulo exige login; `/login`, `/logout`, `/usuarios` no existen | `test_there_is_no_authentication_surface`, `test_authentication_and_user_routes_do_not_exist` |
 | La API funciona sin JWT | `test_api_answers_without_token`, `SinAutenticacionTests` |
 | Seis CRUD de V1 | `test_catalog_create_update_inactivate_persist[*]`, `CatalogCrudRegressionTests` |

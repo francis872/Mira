@@ -1,4 +1,5 @@
 using Dapper;
+using Npgsql;
 using MIRA.Api.Configuracion;
 using MIRA.Api.Modelos;
 
@@ -41,7 +42,15 @@ public class TerminoClaveRepository : ITerminoClaveRepository
             INSERT INTO termino_clave (termino, termino_ingles, activo) 
             VALUES (@Termino, @TerminoIngles, @Activo) 
             RETURNING termino, termino_ingles AS TerminoIngles, activo;";
-        return await connection.QuerySingleAsync<TerminoClave>(sql, entity);
+        try
+        {
+            return await connection.QuerySingleAsync<TerminoClave>(sql, entity);
+        }
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+        {
+            // Incluye claves inactivas y colisiones entre solicitudes concurrentes.
+            throw new InvalidOperationException("El término clave ya existe, activo o inactivo.");
+        }
     }
 
     public async Task<bool> UpdateAsync(string termino, TerminoClave entity)

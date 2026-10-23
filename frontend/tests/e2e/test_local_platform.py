@@ -141,6 +141,8 @@ def test_empty_form_shows_validation_error_and_creates_nothing(browser, catalog)
     response = browser.post(f"/{catalog['path']}/crear", empty, f"/{catalog['path']}/nuevo")
     assert response.status_code == 200
     assert "Error:" in response.text
+    assert "obligatorio" in response.text
+    assert "Error de conexión" not in response.text
 
 
 def test_duplicate_keyword_shows_conflict(browser):
@@ -148,7 +150,26 @@ def test_duplicate_keyword_shows_conflict(browser):
     assert browser.post("/termino_clave/crear", {"termino": term, "termino_ingles": "a"}, "/termino_clave/nuevo").status_code == 302
     second = browser.post("/termino_clave/crear", {"termino": term, "termino_ingles": "b"}, "/termino_clave/nuevo")
     assert second.status_code == 200 and "Error:" in second.text
+    assert "ya existe" in second.text
     browser.post(f"/termino_clave/eliminar/{term}", {}, "/termino_clave")
+    inactive = browser.post("/termino_clave/crear", {"termino": term}, "/termino_clave/nuevo")
+    assert inactive.status_code == 200 and "ya existe" in inactive.text
+
+
+def test_unicode_csrf_is_rejected(browser):
+    browser.get("/universidad/nuevo")
+    response = browser.post("/universidad/crear", {"nombre": "e2e-csrf-unicode", "csrf_token": "ñ-invalid"},
+                            "/universidad/nuevo", with_token=False)
+    assert response.status_code == 400
+
+
+def test_oversized_form_preserves_data_and_explains_limit(browser):
+    value = "e2e-" + "x" * 197
+    response = browser.post("/area_aplicacion/crear", {"nombre": value}, "/area_aplicacion/nuevo")
+    assert response.status_code == 200
+    assert "200 caracteres" in response.text
+    assert value in response.text
+    assert value not in Browser().get("/area_aplicacion").text
 
 
 # Medidas generales de seguridad

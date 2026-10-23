@@ -2,6 +2,8 @@
 
 Este prompt resume el contexto del repositorio para continuar el desarrollo con un asistente de programación. No reemplaza los documentos oficiales ni el Spec Kit. Verifica el estado actual del código antes de actuar.
 
+La auditoría adaptada a MIRA está registrada en [auditoria-v2.md](auditoria-v2.md), con [trazabilidad](trazabilidad-v2.md), [pruebas](pruebas-v2.md) y [pendientes](pendientes-v2.md). Consulta esas evidencias antes de repetir verificaciones o declarar completa V2.
+
 ## Prompt para copiar
 
 ```text

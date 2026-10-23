@@ -16,7 +16,7 @@ Se sustituirán los nombres genéricos una vez identificado el modelo real. Los 
 La validación de entrada debe fallar antes de persistir o causar rollback.
 
 ## Contratos implementados (verificados)
-Ninguna ruta exige credenciales ni token. Los errores usan `{"mensaje": "..."}`.
+Ninguna ruta de la API exige credenciales ni token de autenticación. Los errores controlados usan `{"mensaje": "..."}`. La validación automática de modelos de ASP.NET Core devuelve HTTP 400 con `title` y un diccionario `errors`; Flask muestra los mensajes de ese diccionario.
 
 | Método y ruta | Éxito | Errores |
 |---|---|---|
@@ -33,6 +33,9 @@ Procedimientos PostgreSQL disponibles solo en la base (sin ruta HTTP): `CALL sp_
 Flask: `GET /` (dashboard), `/{catálogo}`, `/{catálogo}/nuevo`, `POST /{catálogo}/crear`, `/{catálogo}/editar/{id}` (GET/POST), `POST /{catálogo}/eliminar/{id}`. Todo POST exige `csrf_token` (400 si falta o no coincide).
 
 ## Seguridad (medidas generales)
+- Límites de texto alineados con la migración 001: área de conocimiento (150 por campo), ODS (nombre 200, categoría 100), área de aplicación (200), término y equivalente inglés (150), universidad (nombre 200, tipo y ciudad 100), línea (nombre 200; descripción TEXT). Excederlos devuelve 400 en POST/PUT.
+- Duplicar un término activo, inactivo o creado concurrentemente devuelve 409; no se reactiva el registro.
+- Una respuesta no JSON o con estructura incompatible se presenta como información no disponible en el frontend; los valores ingresados se conservan al fallar una escritura.
 - Sin autenticación: reservada para una versión futura.
 - Validación de entrada y SQL parametrizado; respuestas sin cadenas de conexión ni datos secretos.
 - El frontend llenará las FK del dominio académico con GET a catálogos, mostrando nombre y enviando ID (pendiente del modelo oficial).

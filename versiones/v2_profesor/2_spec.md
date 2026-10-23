@@ -18,6 +18,12 @@ Se mantienen las medidas generales de seguridad (validación de entradas, SQL pa
 - **RF-V2-DB-02:** vistas justificadas por consultas recurrentes y requerimientos reales.
 
 ## Calidad y trazabilidad
+- **RF-MIRA-ERR-01:** el frontend conserva y muestra los mensajes de validación/conflicto de la API, incluidos HTTP 400 y 409; una respuesta no JSON o con estructura incompatible no causa un error 500 en la interfaz. Los listados muestran un aviso cuando los datos no están disponibles.
+- **RF-MIRA-VAL-01:** la API rechaza con 400 los textos que superan los límites VARCHAR de la migración 001, antes de intentar persistirlos.
+- **RF-MIRA-TC-01:** crear un término cuya clave ya existe, incluso inactiva o insertada concurrentemente, devuelve 409; no reactiva ni sobrescribe registros.
+- **RF-MIRA-CSRF-01:** un POST sin token, con token incorrecto o con caracteres no ASCII en el token devuelve 400 sin ejecutar escrituras.
+- **RNF-MIRA-OPS-01:** el arranque y la parada locales conservan la información; las pruebas de base de datos se ejecutan en una base exclusiva de pruebas.
+- **RNF-MIRA-ENV-01:** las versiones directas declaradas de Python y Werkzeug coinciden con el entorno utilizado para la verificación; una comprobación local no acredita el despliegue Docker ni la ausencia de vulnerabilidades.
 - Arquitectura Controller → Service → Repository → PostgreSQL y principios SOLID.
 - Validar claves foráneas del lado del servidor, no solo en el frontend.
 - No inventar entidades ni relaciones que no estén en el modelo oficial. No construir maestro-detalle ficticios a partir de las seis tablas independientes de la Entrega 1.

@@ -28,6 +28,10 @@ class FakeResponse:
             raise ValueError("no body")
         return self._body
 
+    def __bool__(self):
+        # requests.Response es falso para HTTP 4xx/5xx.
+        return self.status_code < 400
+
 
 class Calls(list):
     def __init__(self):
@@ -171,3 +175,39 @@ def test_dashboard_states_honestly_what_is_pending(client, calls):
     html = client.get("/").get_data(as_text=True)
     assert "Pendiente: requiere el modelo relacional oficial" in html
     assert "Fuera de alcance (versión futura)" in html
+
+
+@pytest.mark.parametrize("path", CATALOG_ROUTES)
+def test_validation_message_survives_real_response_truthiness(client, calls, path):
+    calls.responses[("POST", path.lstrip("/"))] = FakeResponse(400, {"mensaje": "Dato obligatorio de auditoría."})
+    response = client.post(path + "/crear", data={})
+    assert "Dato obligatorio de auditoría." in response.get_data(as_text=True)
+
+
+@pytest.mark.parametrize("body", [None, {"inesperado": True}, "texto"])
+def test_dashboard_handles_invalid_api_payload(client, calls, body):
+    calls.responses[("GET", "universidad")] = FakeResponse(200, body)
+    html = client.get("/").get_data(as_text=True)
+    assert "Registros activos: no disponible" in html
+
+
+@pytest.mark.parametrize("path", CATALOG_ROUTES)
+def test_list_reports_http_failure(client, calls, path):
+    calls.responses[("GET", path.lstrip("/"))] = FakeResponse(503, None)
+    html = client.get(path).get_data(as_text=True)
+    assert "No fue posible cargar los datos" in html
+
+
+def test_non_json_api_error_preserves_form_values(client, calls):
+    calls.responses[("POST", "universidad")] = FakeResponse(502, None)
+    response = client.post("/universidad/crear", data={"nombre": "Mi universidad", "tipo": "Privada", "ciudad": "Bogotá"})
+    html = response.get_data(as_text=True)
+    assert response.status_code == 200
+    assert "Mi universidad" in html and "Error al crear." in html
+    assert 'action="/universidad/crear"' in html
+
+
+def test_unicode_csrf_is_rejected_without_api_call(client, calls):
+    response = client.post("/universidad/crear", data={"csrf_token": "ñ-invalid"})
+    assert response.status_code == 400
+    assert calls == []
