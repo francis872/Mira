@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization; // 1. <- Agregar esta directiva
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Modelos;
 using MIRA.Api.Servicios;
@@ -5,18 +6,19 @@ using MIRA.Api.Servicios;
 namespace MIRA.Api.Peticiones;
 
 [ApiController]
-[Route("api/objetivo_desarrollo_sostenible")]
-public class ObjetivoDesarrolloSostenibleController : ControllerBase
+[Route("api/area_aplicacion")]
+[Authorize] // 2. <- Agregar este candado aquí
+public class AreaAplicacionController : ControllerBase
 {
-    private readonly IObjetivoDesarrolloSostenibleService _service;
+    private readonly IAreaAplicacionService _service;
 
-    public ObjetivoDesarrolloSostenibleController(IObjetivoDesarrolloSostenibleService service)
+    public AreaAplicacionController(IAreaAplicacionService service)
     {
         _service = service;
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<ObjetivoDesarrolloSostenible>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<AreaAplicacion>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         var result = await _service.GetAllActivosAsync();
@@ -24,21 +26,21 @@ public class ObjetivoDesarrolloSostenibleController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    [ProducesResponseType(typeof(ObjetivoDesarrolloSostenible), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AreaAplicacion), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
         var item = await _service.GetByIdAsync(id);
         if (item == null)
-            return NotFound(new { mensaje = $"Objetivo de desarrollo sostenible con ID {id} no encontrado o inactivo." });
+            return NotFound(new { mensaje = $"Área de aplicación con ID {id} no encontrada o inactiva." });
 
         return Ok(item);
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ObjetivoDesarrolloSostenible), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(AreaAplicacion), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] ObjetivoDesarrolloSostenible entity)
+    public async Task<IActionResult> Create([FromBody] AreaAplicacion entity)
     {
         try
         {
@@ -55,15 +57,15 @@ public class ObjetivoDesarrolloSostenibleController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update(int id, [FromBody] ObjetivoDesarrolloSostenible entity)
+    public async Task<IActionResult> Update(int id, [FromBody] AreaAplicacion entity)
     {
         try
         {
             var updated = await _service.UpdateAsync(id, entity);
             if (!updated)
-                return NotFound(new { mensaje = $"Objetivo de desarrollo sostenible con ID {id} no encontrado para actualizar." });
+                return NotFound(new { mensaje = $"Área de aplicación con ID {id} no encontrada para actualizar." });
 
-            return Ok(new { mensaje = "Objetivo de desarrollo sostenible actualizado exitosamente." });
+            return Ok(new { mensaje = "Área de aplicación actualizada exitosamente." });
         }
         catch (ArgumentException ex)
         {
@@ -78,9 +80,8 @@ public class ObjetivoDesarrolloSostenibleController : ControllerBase
     {
         var deleted = await _service.SoftDeleteAsync(id);
         if (!deleted)
-            return NotFound(new { mensaje = $"Objetivo de desarrollo sostenible con ID {id} no encontrado para eliminar." });
+            return NotFound(new { mensaje = $"Área de aplicación con ID {id} no encontrada para eliminar." });
 
-        return Ok(new { mensaje = "Objetivo de desarrollo sostenible eliminado lógicamente." });
+        return Ok(new { mensaje = "Área de aplicación eliminada lógicamente." });
     }
 }
-

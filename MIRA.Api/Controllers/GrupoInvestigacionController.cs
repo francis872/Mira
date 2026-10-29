@@ -1,22 +1,24 @@
+using Microsoft.AspNetCore.Authorization;
+namespace MIRA.Api.Peticiones;
+
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Modelos;
 using MIRA.Api.Servicios;
 
-namespace MIRA.Api.Peticiones;
-
 [ApiController]
-[Route("api/area_conocimiento")]
-public class AreaConocimientoController : ControllerBase
+[Route("api/grupo_investigacion")]
+[Authorize]
+public class GrupoInvestigacionController : ControllerBase
 {
-    private readonly IAreaConocimientoService _service;
+    private readonly IGrupoInvestigacionService _service;
 
-    public AreaConocimientoController(IAreaConocimientoService service)
+    public GrupoInvestigacionController(IGrupoInvestigacionService service)
     {
         _service = service;
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<AreaConocimiento>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<GrupoInvestigacion>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         var result = await _service.GetAllActivosAsync();
@@ -24,21 +26,21 @@ public class AreaConocimientoController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    [ProducesResponseType(typeof(AreaConocimiento), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GrupoInvestigacion), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
         var item = await _service.GetByIdAsync(id);
         if (item == null)
-            return NotFound(new { mensaje = $"Área de conocimiento con ID {id} no encontrada o inactiva." });
+            return NotFound(new { mensaje = $"Grupo de investigación con ID {id} no encontrado o inactivo." });
 
         return Ok(item);
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(AreaConocimiento), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(GrupoInvestigacion), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] AreaConocimiento entity)
+    public async Task<IActionResult> Create([FromBody] GrupoInvestigacion entity)
     {
         try
         {
@@ -47,7 +49,7 @@ public class AreaConocimientoController : ControllerBase
         }
         catch (ArgumentException ex)
         {
-            return BadRequest(new { mensaje = ex.Message });
+            return BadRequest(new { estado = 400, mensaje = ex.Message });
         }
     }
 
@@ -55,19 +57,19 @@ public class AreaConocimientoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update(int id, [FromBody] AreaConocimiento entity)
+    public async Task<IActionResult> Update(int id, [FromBody] GrupoInvestigacion entity)
     {
         try
         {
             var updated = await _service.UpdateAsync(id, entity);
             if (!updated)
-                return NotFound(new { mensaje = $"Área de conocimiento con ID {id} no encontrada para actualizar." });
+                return NotFound(new { mensaje = $"Grupo de investigación con ID {id} no encontrado para actualizar." });
 
-            return Ok(new { mensaje = "Área de conocimiento actualizada exitosamente." });
+            return Ok(new { mensaje = "Grupo de investigación actualizado exitosamente." });
         }
         catch (ArgumentException ex)
         {
-            return BadRequest(new { mensaje = ex.Message });
+            return BadRequest(new { estado = 400, mensaje = ex.Message });
         }
     }
 
@@ -78,9 +80,8 @@ public class AreaConocimientoController : ControllerBase
     {
         var deleted = await _service.SoftDeleteAsync(id);
         if (!deleted)
-            return NotFound(new { mensaje = $"Área de conocimiento con ID {id} no encontrada para eliminar." });
+            return NotFound(new { mensaje = $"Grupo de investigación con ID {id} no encontrado para eliminar." });
 
-        return Ok(new { mensaje = "Área de conocimiento eliminada lógicamente." });
+        return Ok(new { mensaje = "Grupo de investigación desactivado exitosamente (borrado lógico)." });
     }
 }
-
