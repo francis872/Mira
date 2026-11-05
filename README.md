@@ -21,9 +21,9 @@ Para ingresar a la plataforma web (`http://localhost:5000`) y comprobar los nive
 
 | Usuario | Contraseña | Rol Asignado | Alcance y Permisos en el Sistema |
 | :--- | :--- | :--- | :--- |
-| `superadmin` | `admin123` | **Administrador** | Acceso total al sistema, creación/edición de catálogos y gestión exclusiva del módulo administrativo de cuentas (`/usuarios`). |
-| `editor1` | `editor123` | **Editor** | Gestión operativa: creación y edición de docentes, grupos, semilleros y articulaciones (HU 3, 5, 6, 8, 9). Sin acceso a gestión de usuarios. |
-| `lector1` | `lector123` | **Consulta** | Modo solo lectura. La interfaz oculta contextual mente botones de acción y los decoradores bloquean cualquier intento de mutación de datos. |
+| `<USUARIO_ADMIN>` | `<PASSWORD_ADMIN>` | **Administrador** | Acceso total al sistema, creación/edición de catálogos y gestión exclusiva del módulo administrativo de cuentas (`/usuarios`). |
+| `<USUARIO_EDITOR>` | `<PASSWORD_EDITOR>` | **Editor** | Gestión operativa: creación y edición de docentes, grupos, semilleros y articulaciones (HU 3, 5, 6, 8, 9). Sin acceso a gestión de usuarios. |
+| `<USUARIO_LECTOR>` | `<PASSWORD_LECTOR>` | **Consulta** | Modo solo lectura. La interfaz oculta contextual mente botones de acción y los decoradores bloquean cualquier intento de mutación de datos. |
 
 ---
 
