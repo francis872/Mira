@@ -1,126 +1,83 @@
-# MIRA
+# MIRA V3
 
-Módulo de Investigación para la Gestión de Proyectos Académicos
+Módulo de Investigación para la Gestión de Proyectos Académicos · Universidad de San Buenaventura Medellín.
 
-Universidad de San Buenaventura Medellín
+V3 evoluciona V1/V2 con autenticación bcrypt/JWT, permisos en backend, sesiones del servidor y una interfaz institucional monocromática. Se conservan los seis catálogos, once recursos de investigación, cinco asociaciones, la ficha grupo-semilleros y las rutinas/triggers PostgreSQL. Rama: `feature/mira-v3`.
 
-## About MIRA
+Cierre de estabilización del 2026-11-05: **71 .NET, 78 Flask, 43 E2E y cinco suites SQL aprobadas**; los mismos E2E pasan en Linux/Gunicorn/Docker. 50 combinaciones de página/ancho, seis modales por teclado y 18 comprobaciones axe sin infracciones automáticas finales. OSV: 18 paquetes Python de la imagen final, cero avisos conocidos. Preparada para sustentación local con observaciones C06 y revisión asistiva. **Render/Neon reales y producción no validados.** Ver [informe y matriz](docs/V3_REVISION_FINAL.md). Sin commits ni despliegues automáticos.
 
-This repository contains the initial architecture and development foundation for the MIRA academic research management module.
+## Arquitectura
 
-## Current State
+ASP.NET Core (.NET 10) → servicios → repositorios Dapper/Npgsql → PostgreSQL 16. Frontend Flask 3.1/Jinja y Bootstrap 5; SVG Tabler locales, sin React. Solo los repositorios acceden a SQL.
 
-MIRA V1 (seis catálogos) + dominio académico V2 integrado con el SQL confirmado por el usuario. **Sin inicio de sesión**: `http://localhost:5000` abre el dashboard; [Investigación](http://localhost:5000/investigacion) contiene los nuevos módulos. Rama de trabajo: `feature/mira-v1-v2-integracion`.
+Las cuentas `usuario/rol/usuario_rol` (migración 003) autentican. Las personas `usuarios` (006), vinculadas a docentes, siguen siendo un dominio separado. No se fusionan datos ni se infiere correspondencia entre sus identificadores.
 
-| Área | Estado |
-|---|---|
-| V1: 6 catálogos (CRUD, borrado lógico, frontend Flask, PostgreSQL real) | Implementado y probado, sin autenticación |
-| CRUD mediante rutinas y trigger demostrable | 30 funciones PostgreSQL en 004; trigger de normalización de área en 005; seis repositorios sin SQL CRUD directo |
-| Inicio de sesión, JWT, bcrypt, roles, restricciones por sesión | **Fuera de alcance** (versión futura sin fecha). El código retirado sigue en el historial: etiqueta `auth-futuro-v2-261872f` |
-| V2: rutinas almacenadas `CREATE PROCEDURE` con JSONB, vista y atomicidad (`usuario`→`usuario_rol`) | Solo en PostgreSQL (migración 003 y `database/tests`); sin API ni pantalla |
-| V2: once recursos, cinco asociaciones y ficha grupo→semilleros | Operativos; 19 tablas del SQL oficial confirmado, selectores reales y guardado atómico. [Fuente exacta](docs/fuentes/sql/README.md) |
-| Verificación actual en PostgreSQL 16.15 | 47 .NET, 63 Flask/arquitectura, 46 HTTP y cuatro SQL aprobados; 14 controles Edge, 72 combinaciones de página/ancho |
-| Aceptación académica | 11/12 criterios verificados; C06 necesita aclaración porque el SQL confirmado no contiene FK opcionales |
+| Rol | Consultar | Crear/modificar | Eliminar | Gestionar cuentas |
+|---|---|---|---|---|
+| Investigador | Sí | No | No | No |
+| Coordinador | Sí | Sí | No | No |
+| Administrador | Sí | Sí | Sí | Sí |
 
-## Architecture
+## Ejecutar en Windows
 
-Controller
-→ Service
-→ Repository
-→ PostgreSQL
+1. Instalar .NET 10, Python y PostgreSQL. `dotnet restore MIRA.sln`; `python -m pip install -r frontend/requirements-dev.txt`.
+2. Configurar `.env.local` con POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD y POSTGRES_PORT. Ver [scripts](scripts/README.md). No versionar el archivo.
+3. `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1`. Crea una base local si falta, aplica migraciones pendientes y genera una clave JWT aleatoria persistente en `.local/jwt-key` si no se define JWT_KEY. El script admite `-PostgresBin`.
+4. Primera instalación: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/bootstrap-admin.ps1`. Solicita correo y contraseña privada. El procedimiento PostgreSQL impide aprovisionar otro administrador inicial cuando ya existe uno activo.
+5. Abrir [MIRA](http://localhost:5000/login) y [Swagger](http://localhost:8081/swagger). Crear cuentas y asignar roles desde **Cuentas de acceso** con un administrador.
 
-- Controller: HTTP input/output only.
-- Service: business rules and application orchestration.
-- Repository: data access and SQL execution.
-- PostgreSQL: persistent data storage.
+Para recuperar un administrador activo con contraseña heredada desconocida, el operador local puede usar `scripts/bootstrap-admin.ps1 -ResetPassword`; requiere acceso a la configuración de PostgreSQL y revoca sus sesiones.
 
-Repository is the only layer allowed to access PostgreSQL directly.
+Detener con `scripts/stop-local.ps1`. Los datos se conservan. Si ya hay procesos V2 ejecutándose, detenerlos con ese script y volver a iniciar para cargar V3.
 
-## Methodology
+## Docker Compose
 
-Spec-Driven Development (SDD).
+Copiar `.env.example` a `.env`; configurar POSTGRES_PASSWORD, JWT_KEY aleatoria (32 bytes o más) y SECRET_KEY. `docker compose up -d --build`.
 
-Specification precedes implementation.
+En una base existente: `docker compose exec mira-postgres sh /migrations/apply.sh`. Solo aplica migraciones pendientes; 008 añade sesiones, sin convertir credenciales ni borrar datos. Se conserva el nombre de proyecto Compose `mira-v2` para conservar su volumen.
 
-## Technology
+Para aprovisionar el administrador con Docker, definir MIRA_ADMIN_EMAIL y MIRA_ADMIN_PASSWORD por variables privadas de proceso y pasarlas al contenedor con `docker compose exec -e MIRA_ADMIN_EMAIL -e MIRA_ADMIN_PASSWORD mira-api dotnet MIRA.Api.dll --bootstrap-admin`. Retirarlas después. Nunca usar contraseña literal en el historial del terminal.
 
-- C# / ASP.NET Core Web API sobre .NET 10 (LTS)
-- PostgreSQL 16 (Npgsql + Dapper, SQL parametrizado y procedimientos almacenados)
-- Frontend Flask (Jinja, Bootstrap 5; token CSRF en los formularios)
-- Docker / Docker Compose
-- Swagger/OpenAPI
+El frontend usa Gunicorn, un worker con cuatro threads, y el volumen mira_frontend_sessions para una instancia. No usar réplicas con archivos de sesión independientes.
 
-## Repository Structure
+Los puertos siguen siendo 5000 (frontend), 8081 (API) y 5544 (PostgreSQL), solo en loopback. No se despliega infraestructura. Un despliegue de producción necesita HTTPS y configuración de sesiones/secretos apropiada: [arquitectura](docs/V3_ARQUITECTURA.md).
 
-- MIRA.Api/: ASP.NET Core API project foundation.
-- database/: PostgreSQL initialization foundation and database notes.
-- docs/: permanent rules, architecture notes, and source-document references.
-- versiones/: version-specific Spec Kits.
-- scripts/: utility script conventions.
+## API y seguridad
 
-## Getting Started
+- POST `/api/auth/login`: correo/password → 200 con token, expiraEn y usuario; credenciales inválidas → 401.
+- GET `/api/auth/me`, POST `/api/auth/logout`: requieren Bearer. Logout revoca jti en PostgreSQL.
+- GET/POST `/api/auth/usuarios`, PUT/DELETE `/api/auth/usuarios/{id}`, PUT `/api/auth/usuarios/{id}/password`, GET `/api/auth/roles`: solo Administrador.
+- Los endpoints V1/V2 conservan sus contratos de datos, ahora con Bearer y RBAC. Sin identidad: 401; sin permisos: 403. Swagger documenta Authorize/Bearer en Development.
+- bcrypt coste 12. JWT de 20 minutos, firma/emisor/audiencia/expiración validados. No hay refresh automático. No se aceptan contraseñas en texto plano heredadas: restablecerlas desde Cuentas.
+- El navegador recibe una cookie de sesión opaca HttpOnly/SameSite Strict; el JWT queda en el servidor. Todos los POST tienen CSRF, incluidos login/logout. SESSION_COOKIE_SECURE=true con HTTPS; MIRA_ENV=production exige Secure, SECRET_KEY externa >=32 caracteres, API_URL HTTPS y SESSION_DIRECTORY absoluta.
+- Configuración API: Jwt__Key, Jwt__Issuer (MIRA), Jwt__Audience (MIRA.Frontend), Jwt__Minutes (20, entre 1 y 60). Flask: API_URL, SECRET_KEY, SESSION_DIRECTORY y SESSION_COOKIE_SECURE.
 
-1. Copiar `.env.example` a `.env` y reemplazar la contraseña de PostgreSQL (`POSTGRES_PASSWORD`). Opcional: `SECRET_KEY` (firma la cookie del token CSRF), y los puertos si están ocupados (`POSTGRES_PORT=5544`, `API_PORT=8081`, `FRONTEND_PORT=5000`). Nunca versionar `.env`.
-2. `docker compose up -d --build`. Las migraciones de `database/migrations` se aplican solas al crear el volumen.
-3. Abrir `http://localhost:5000` (dashboard, sin login). API: `http://localhost:8081/api/...`; Swagger: `http://localhost:8081/swagger`; PostgreSQL: `localhost:5544`.
+## Verificar
 
-Detener: `docker compose down` (conserva los datos). Reiniciar desde cero: `docker compose down -v` (**borra el volumen de este proyecto**).
+```powershell
+dotnet test MIRA.sln
+python -m pytest frontend/tests --ignore=frontend/tests/e2e -q
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-postgres16.ps1 -Browser
+```
 
-**Base de datos existente** (sin borrar datos): `docker compose exec mira-postgres sh /migrations/apply.sh`. Aplica solo las migraciones nuevas (`schema_migrations`) y es idempotente.
+La verificación PostgreSQL usa una instancia/base aisladas, aplica migraciones y SQL, ejecuta regresiones y pruebas E2E con identidades temporales, y detiene sus procesos. `-Browser` requiere Edge y Node. Datos locales y logs permanecen en `.local/pg16-validation`; no publicarlos, pues contienen configuración privada.
 
-**Sin Docker para la API** (por ejemplo, si no se puede descargar la imagen base de .NET): con PostgreSQL en marcha, `ConnectionStrings__PostgreSql="Host=localhost;Port=5544;Database=...;Username=...;Password=..."` y `dotnet run --project MIRA.Api` (puerto 8081 con `ASPNETCORE_URLS=http://localhost:8081`); frontend: `pip install -r frontend/requirements.txt`, `API_URL=http://127.0.0.1:8081/api` (mejor que `localhost`, que en Windows puede añadir ~2 s por petición al probar primero IPv6), `python frontend/app.py`.
+Para E2E contra una plataforma de pruebas ya preparada: definir MIRA_E2E_URL, MIRA_E2E_API_URL, MIRA_E2E_EMAIL y MIRA_E2E_PASSWORD de una cuenta administradora de pruebas, y ejecutar `python -m pytest frontend/tests/e2e -q`. Nunca apuntar estas pruebas a datos institucionales. `MIRA_TEST_DB` habilita integraciones .NET; sin ella se omiten explícitamente.
 
-**Arranque completo en Windows sin Docker:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1`. Crea una base PostgreSQL exclusiva y persistente, aplica las migraciones y arranca API y frontend en localhost. Requisitos, configuración y comando para detener: [scripts/README.md](scripts/README.md).
+## Documentación y sustentación
 
-**Verificación independiente en PostgreSQL 16:** `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-postgres16.ps1`. Probada con motor 16.15, API y frontend separados: [resultados](docs/verificacion-postgres16.md). El SQL oficial está recuperado en [docs/fuentes/sql](docs/fuentes/sql/README.md) desde `repair/v1-catalogos`. El selector docente necesita personas institucionales reales previamente cargadas; no hay CRUD de credenciales ni identidades de ejemplo en la plataforma habitual.
+- [Auditoría inicial y plan](docs/V3_AUDITORIA_INICIAL.md), [especificación](versiones/v3/2_spec.md).
+- [Arquitectura y decisiones](docs/V3_ARQUITECTURA.md), [mapa técnico por archivo/método/prueba](docs/V3_MAPA_TECNICO.md).
+- [Guía de sustentación y simulacro](docs/V3_GUIA_SUSTENTACION.md).
+- [Revisión final, riesgos, Render/Neon y plan de commits](docs/V3_REVISION_FINAL.md), [resumen saneado](docs/evidencias/v3/revision-final.json).
+- [Pruebas ejecutadas y limitaciones](docs/V3_PRUEBAS.md), [cambios de contrato](docs/V3_CAMBIOS.md).
+- Antecedentes V2: [arquitectura](docs/arquitectura-v2.md), [criterios académicos](docs/criterios-v2.md), [fuente SQL oficial](docs/fuentes/sql/README.md), [prompts históricos](docs/prompts/README.md).
 
-**Solución de problemas**
-- Puerto 5544/5432 ocupado (otro PostgreSQL local): cambiar `POSTGRES_PORT` en `.env`.
-- El dashboard muestra "no disponible": la API no responde o no alcanza PostgreSQL; revisar `docker compose logs mira-api`.
-- Error 400 "token de seguridad" al guardar: recargar el formulario (el token CSRF vence al reiniciar Flask sin `SECRET_KEY`).
-- `docker compose build` falla al resolver `mcr.microsoft.com`: es un problema de red/DNS del equipo; usar la ejecución local de la API descrita arriba.
+Los documentos V2 describen su entrega sin autenticación. La especificación V3 reemplaza ese alcance para esta rama. No se declara aceptación académica de las discrepancias previas C06 ni certificación completa de accesibilidad. Consultar la evidencia V3 para distinguir resultados ejecutados de verificaciones pendientes.
 
-Pruebas:
-- `dotnet test MIRA.sln`: pruebas sin base de datos. Con `MIRA_TEST_DB` apuntando a una base de pruebas con las migraciones aplicadas se ejecuta también la regresión CRUD de los seis catálogos.
-- `pytest` en `frontend/` (`requirements-dev.txt`): pruebas del frontend con la API simulada.
-- E2E contra la plataforma en marcha: `MIRA_E2E_URL=http://localhost:5000 MIRA_E2E_API_URL=http://localhost:8081 pytest frontend/tests/e2e` (los datos de prueba llevan el prefijo `e2e-` y se inactivan).
-- SQL de rutinas almacenadas: `database/tests/v2_usuarios_roles.sql`.
 
-## Development Workflow
+## Preparación de producción sin despliegue
 
-Prompt de contexto para continuar el desarrollo con un asistente: [docs/PROMPT.md](docs/PROMPT.md).
+Consultar [deploy/README.md](deploy/README.md) y [render.yaml.example](deploy/render.yaml.example), validado solo contra JSON Schema. Dos imágenes Docker sin root, Gunicorn y PORT configurables; API Production exige TLS Npgsql VerifyFull/Channel Binding Require y errores detallados desactivados. El perfil frontend requiere disco privado persistente y una instancia; su eventual provisión puede generar coste. No se crearon servicios ni se usaron credenciales remotas.
 
-Colección de prompts: [índice](docs/prompts/README.md) y [prompt maestro MIRA V2](docs/prompts/PROMPT_MAESTRO_MIRA_V2.md), con el original de Backstage archivado como referencia.
-
-Instrucción vigente: [prompt maestro definitivo](docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md). [Matriz C01–C12](docs/criterios-v2.md): once verificados y C06 pendiente de aclaración de aplicabilidad. [Reglas por entidad](docs/reglas-negocio-v2.md) y [capturas reales](docs/evidencias/README.md).
-
-Diseño actualizado: navegación lateral, dashboard y formularios uniformes, búsqueda y adaptación móvil. [Cambios visuales y verificación](docs/diseno-v2.md). El código está en la rama de trabajo; la aplicación se ejecuta localmente según las instrucciones anteriores.
-
-Auditoría y sustentación: [auditoría](docs/auditoria-v2.md), [arquitectura](docs/arquitectura-v2.md), [trazabilidad](docs/trazabilidad-v2.md), [pruebas ejecutadas](docs/pruebas-v2.md), [guía de sustentación](docs/sustentacion-v2.md) y [pendientes](docs/pendientes-v2.md). El dominio oficial está integrado; no se certifica aceptación del curso sin resolver la discrepancia C06 y los documentos de versión aún ausentes.
-
-1. Clone.
-2. Review docs/fuentes.
-3. Review Spec Kit.
-4. Complete/update specification.
-5. Implement.
-6. Build.
-7. Test.
-8. Commit.
-
-## Branch Strategy
-
-- main: stable versions only.
-- develop: integration branch.
-- develop/v1-api-inicial: initial API implementation branch.
-
-## Security Status
-
-- Alcance: **no hay autenticación ni autorización** en V1/V2; se reserva para una versión futura. La API y el frontend son abiertos y están pensados para ejecución local; no exponer a internet.
-- Medidas generales vigentes: validación de entradas en servicios, SQL parametrizado (Dapper/Npgsql), restricciones e integridad en PostgreSQL, borrado lógico, escape de HTML en Jinja y token CSRF en todos los POST del frontend.
-- La cookie de Flask solo guarda el token CSRF y los mensajes; es `HttpOnly` y `SameSite=Strict`.
-- No hay contraseñas ni secretos en el repositorio (`.env` está ignorado).
-- Las tablas `usuario`, `rol` y `usuario_rol` (migración 003) se conservan con sus datos; no se usan desde la aplicación.
-
-## Project Status
-
-V1 + V2 parcial, sin inicio de sesión; ver `versiones/v2_profesor/8_tasks.md` para el detalle y los bloqueos.
+Instalar `frontend/requirements.lock` para runtime y `requirements-dev.txt` para pruebas en entorno limpio. Los ocho avisos anteriores están corregidos para las versiones auditadas; no se actualizó Python global ni se auditó todo el SO base. [OSV final](docs/evidencias/v3/osv-estabilizado.json). Para verificar contenedores locales: construir etiquetas mira-v3-api:stabilization/mira-v3-frontend:stabilization y ejecutar scripts/verify-docker.ps1; crea un proyecto de pruebas exclusivo. scripts/verify-production-smoke.py usa destinos ficticios: sus health/cookies no certifican TLS real ni conexión Neon.

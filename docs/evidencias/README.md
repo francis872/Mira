@@ -1,3 +1,5 @@
+> **Evidencias V3 (2026-11-05):** capturas y reportes del navegador en [v3](v3/), con [resultados explicados](../V3_PRUEBAS.md). Las imágenes listadas debajo corresponden a V2 y se conservan como antecedentes.
+
 # Evidencia visual real
 
 Capturas obtenidas con Edge headless/CDP sobre la plataforma local, 23 de octubre de 2026. Son páginas completas, no maquetas:

@@ -1,3 +1,5 @@
+> **Contexto vigente V3:** esta rama implementa autenticación y autorización. Para continuar, leer [especificación V3](../versiones/v3/2_spec.md), [arquitectura](V3_ARQUITECTURA.md), [mapa técnico](V3_MAPA_TECNICO.md) y [pruebas](V3_PRUEBAS.md). Conservar seguridad y módulos V1/V2; no aplicar las restricciones históricas de “sin login” del texto V2 que sigue. No publicar secretos ni modificar la base habitual al ejecutar pruebas.
+
 # Prompt de trabajo para MIRA
 
 Este prompt resume el contexto del repositorio para continuar el desarrollo con un asistente de programación. No reemplaza los documentos oficiales ni el Spec Kit. Verifica el estado actual del código antes de actuar.
