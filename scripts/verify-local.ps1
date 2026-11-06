@@ -42,11 +42,13 @@ try {
     $connection['Username'] = $config['POSTGRES_USER']
     $connection['Password'] = $config['POSTGRES_PASSWORD']
     $env:MIRA_TEST_DB = $connection.ConnectionString
-    & dotnet test MIRA.sln --no-restore --verbosity minimal
+    $ErrorActionPreference = 'Continue'
+    & dotnet test MIRA.sln --no-restore --verbosity minimal --logger 'trx;LogFileName=v3-backend.trx'
+    $ErrorActionPreference = 'Stop'
     if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas .NET' }
     Push-Location (Join-Path $repoRoot 'frontend')
     try {
-        & python -m pytest tests/test_app.py tests/test_architecture.py tests/test_investigacion.py -q -p no:cacheprovider
+        & python -m pytest tests --ignore=tests/e2e -q -p no:cacheprovider
         if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas Flask' }
     } finally { Pop-Location }
     $webPort = if ($config['FRONTEND_PORT']) { $config['FRONTEND_PORT'] } else { '5000' }

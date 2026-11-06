@@ -2,12 +2,15 @@ param(
     [string]$PostgresBin = '.local/postgresql16/pgsql/bin',
     [int]$DatabasePort = 5547,
     [int]$ApiPort = 8082,
-    [int]$FrontendPort = 5001
+    [int]$FrontendPort = 5001,
+    [switch]$Browser,
+    [switch]$BrowserOnly
 )
 
 # Instancia exclusiva: nunca abre el directorio PostgreSQL 17 ni detiene la plataforma habitual.
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
+if ($BrowserOnly) { $Browser = $true }
 Set-Location $repoRoot
 $PostgresBin = (Resolve-Path -LiteralPath $PostgresBin).Path
 $pgCtl = Join-Path $PostgresBin 'pg_ctl.exe'
@@ -18,6 +21,11 @@ foreach ($port in @($DatabasePort, $ApiPort, $FrontendPort)) {
     $listener = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, $port)
     try { $listener.Start() } catch { throw "El puerto de pruebas $port esta ocupado; no se detuvo ningun servicio" }
     finally { $listener.Stop() }
+}
+if ($Browser) {
+    $debugListener = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, 9226)
+    try { $debugListener.Start() } catch { throw 'Puerto 9226 ocupado; no se abrió ni cerró otro navegador' }
+    finally { $debugListener.Stop() }
 }
 if (@($DatabasePort, $ApiPort, $FrontendPort | Select-Object -Unique).Count -ne 3) { throw 'Los tres puertos deben ser diferentes' }
 
@@ -47,13 +55,15 @@ $database = 'mira_pg16_' + (Get-Date -Format 'yyyyMMddHHmmss') + '_' + $PID
     "POSTGRES_PORT=$DatabasePort", "API_PORT=$ApiPort", "FRONTEND_PORT=$FrontendPort"
 ), $encoding)
 $previous = @{}
-foreach ($key in @('PGPASSWORD','PGCLIENTENCODING','PGCONNECT_TIMEOUT','ConnectionStrings__PostgreSql','ASPNETCORE_URLS','ASPNETCORE_ENVIRONMENT','API_URL','SWAGGER_URL','PORT','SECRET_KEY','SESSION_COOKIE_SECURE')) {
+foreach ($key in @('PGPASSWORD','PGCLIENTENCODING','PGCONNECT_TIMEOUT','ConnectionStrings__PostgreSql','ASPNETCORE_URLS','ASPNETCORE_ENVIRONMENT','API_URL','SWAGGER_URL','PORT','SECRET_KEY','SESSION_COOKIE_SECURE','Jwt__Key','MIRA_ADMIN_EMAIL','MIRA_ADMIN_PASSWORD','MIRA_E2E_EMAIL','MIRA_E2E_PASSWORD','SESSION_DIRECTORY')) {
     $previous[$key] = [Environment]::GetEnvironmentVariable($key, 'Process')
 }
 $startedDatabase = $false
 $apiProcess = $null
 $webProcess = $null
 try {
+    $previous['PGOPTIONS'] = $env:PGOPTIONS
+    $env:PGOPTIONS = '-c client_min_messages=warning'
     $env:PGPASSWORD = $password
     $env:PGCLIENTENCODING = 'UTF8'
     $env:PGCONNECT_TIMEOUT = '5'
@@ -64,8 +74,10 @@ try {
             if ($LASTEXITCODE -ne 0) { throw 'No se pudo inicializar la instancia exclusiva' }
         } finally { Remove-Item -LiteralPath $passwordFile -ErrorAction SilentlyContinue }
     }
-    & $pgCtl start -D $data -l (Join-Path $runtime 'postgres.log') -o "-p $DatabasePort -h 127.0.0.1" -w
-    if ($LASTEXITCODE -ne 0) { throw 'No se pudo arrancar PostgreSQL 16 de pruebas' }
+    $pgStart = Start-Process -FilePath $pgCtl -ArgumentList @('start','-D',('"'+$data+'"'),'-l',('"'+(Join-Path $runtime 'postgres.log')+'"'),'-o',('"-p '+$DatabasePort+' -h 127.0.0.1"'),'-w') -WindowStyle Hidden -PassThru
+    # WaitForExit espera pg_ctl; Start-Process -Wait también esperaría al servidor descendiente.
+    $pgStart.WaitForExit()
+    if ($pgStart.ExitCode -ne 0) { throw 'No se pudo arrancar PostgreSQL 16 de pruebas' }
     $startedDatabase = $true
     $dbArgs = @('-h','127.0.0.1','-p',"$DatabasePort",'-U',$role,'-w','-v','ON_ERROR_STOP=1')
     $serverVersion = & $psql @dbArgs -d postgres -tA -c 'SHOW server_version_num'
@@ -78,7 +90,7 @@ try {
         & $psql @dbArgs -d $database --single-transaction -q -f $migration.FullName -c "INSERT INTO schema_migrations(nombre) VALUES ('$($migration.Name)')"
         if ($LASTEXITCODE -ne 0) { throw "Fallo la migracion $($migration.Name)" }
     }
-    # Fixture identity exists only in this new, isolated test database. There is no login or user API.
+    # Persona académica de prueba: separada de la cuenta de acceso V3.
     & $psql @dbArgs -d $database -q -c "INSERT INTO usuarios(nombre,correo,password_hash) VALUES ('Persona de prueba automatizada','pg16-audit@invalid.test','NO_ES_UNA_CREDENCIAL')"
     if ($LASTEXITCODE -ne 0) { throw 'No se pudo preparar la persona exclusiva de pruebas' }
     $apiOutput = Join-Path $runtime 'api'
@@ -92,6 +104,13 @@ try {
     $env:ConnectionStrings__PostgreSql = $connection.ConnectionString
     $env:ASPNETCORE_URLS = "http://127.0.0.1:$ApiPort"
     $env:ASPNETCORE_ENVIRONMENT = 'Development'
+    $env:Jwt__Key = [Guid]::NewGuid().ToString('N') + [Guid]::NewGuid().ToString('N')
+    $env:MIRA_ADMIN_EMAIL = 'v3-validation@invalid.test'
+    $env:MIRA_ADMIN_PASSWORD = [Guid]::NewGuid().ToString('N') + [Guid]::NewGuid().ToString('N')
+    $env:MIRA_E2E_EMAIL = $env:MIRA_ADMIN_EMAIL
+    $env:MIRA_E2E_PASSWORD = $env:MIRA_ADMIN_PASSWORD
+    & $apiExecutable --bootstrap-admin
+    if ($LASTEXITCODE -ne 0) { throw 'Fallo el aprovisionamiento aislado V3' }
     $apiProcess = Start-Process -FilePath $apiExecutable -WorkingDirectory $repoRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $runtime 'api.log') -RedirectStandardError (Join-Path $runtime 'api-error.log')
     $python = (Get-Command python).Source
     $env:API_URL = "http://127.0.0.1:$ApiPort/api"
@@ -99,8 +118,9 @@ try {
     $env:PORT = "$FrontendPort"
     $env:SECRET_KEY = $password
     $env:SESSION_COOKIE_SECURE = 'false'
+    $env:SESSION_DIRECTORY = Join-Path $runtime 'sessions'
     $webProcess = Start-Process -FilePath $python -ArgumentList '-c', "`"from app import app; app.run(host='127.0.0.1', port=$FrontendPort, debug=False)`"" -WorkingDirectory (Join-Path $repoRoot 'frontend') -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $runtime 'frontend.log') -RedirectStandardError (Join-Path $runtime 'frontend-error.log')
-    foreach ($url in @("http://127.0.0.1:$ApiPort/api/universidad", "http://127.0.0.1:$FrontendPort/")) {
+    foreach ($url in @("http://127.0.0.1:$ApiPort/health", "http://127.0.0.1:$FrontendPort/login")) {
         $ready = $false
         for ($attempt = 0; $attempt -lt 30; $attempt++) {
             try { Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 2 | Out-Null; $ready = $true; break } catch { Start-Sleep -Seconds 1 }
@@ -108,15 +128,33 @@ try {
         if (-not $ready) { throw "Servicio de pruebas no disponible: $url" }
     }
     Write-Output "Plataforma de pruebas: $version; base $database; puertos $DatabasePort/$ApiPort/$FrontendPort"
-    & (Join-Path $PSScriptRoot 'verify-local.ps1') -ConfigFile $configFile -PostgresBin $PostgresBin
+    if (-not $BrowserOnly) {
+        & (Join-Path $PSScriptRoot 'verify-local.ps1') -ConfigFile $configFile -PostgresBin $PostgresBin
+    }
+    if ($Browser) {
+        $env:MIRA_E2E_URL = "http://127.0.0.1:$FrontendPort"
+        $env:MIRA_BROWSER_DEBUG_URL = 'http://127.0.0.1:9226'
+        $profile = Join-Path $runtime ('edge-v3-' + $PID)
+        $edge = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+        if (-not (Test-Path -LiteralPath $edge)) { throw 'Edge no está disponible para verificar el navegador' }
+        $edgeProcess = Start-Process -FilePath $edge -ArgumentList @('--headless=new','--disable-gpu','--no-first-run','--remote-debugging-port=9226',('--user-data-dir="'+$profile+'"'),'about:blank') -WindowStyle Hidden -PassThru
+        try {
+            $ErrorActionPreference = 'Continue'
+            & node (Join-Path $PSScriptRoot 'verify-browser-v3.mjs')
+            $ErrorActionPreference = 'Stop'
+            if ($LASTEXITCODE -ne 0) { throw 'Falló la verificación del navegador V3' }
+        } finally {
+            if (-not $edgeProcess.HasExited) { $edgeProcess.Kill() }
+        }
+    }
     Write-Output "PostgreSQL 16: verificacion finalizada. Datos conservados en $runtime"
 } finally {
     foreach ($process in @($webProcess, $apiProcess)) {
         if ($process -and -not $process.HasExited) { $process.Kill(); $process.WaitForExit() }
     }
     if ($startedDatabase) {
-        & $pgCtl stop -D $data -m fast -w
-        if ($LASTEXITCODE -ne 0) { Write-Warning 'No se pudo detener la instancia PostgreSQL 16; revisar su log' }
+        $pgStop = Start-Process -FilePath $pgCtl -ArgumentList @('stop','-D',('"'+$data+'"'),'-m','fast','-w') -WindowStyle Hidden -Wait -PassThru
+        if ($pgStop.ExitCode -ne 0) { Write-Warning 'No se pudo detener la instancia PostgreSQL 16; revisar su log' }
     }
     foreach ($key in $previous.Keys) { [Environment]::SetEnvironmentVariable($key, $previous[$key], 'Process') }
 }

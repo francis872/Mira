@@ -24,6 +24,14 @@ $webPort = if ($config['FRONTEND_PORT']) { [int]$config['FRONTEND_PORT'] } else 
 $runtime = Join-Path $repoRoot '.local'
 $data = Join-Path $runtime 'postgres'
 New-Item -ItemType Directory -Force -Path $runtime | Out-Null
+$keyFile = Join-Path $runtime 'jwt-key'
+if (-not $config['JWT_KEY'] -and -not (Test-Path -LiteralPath $keyFile)) {
+    $keyBytes = New-Object byte[] 48
+    $keyRng = [Security.Cryptography.RandomNumberGenerator]::Create()
+    try { $keyRng.GetBytes($keyBytes) } finally { $keyRng.Dispose() }
+    [IO.File]::WriteAllText($keyFile, [Convert]::ToBase64String($keyBytes))
+}
+$env:Jwt__Key = if ($config['JWT_KEY']) { $config['JWT_KEY'] } else { [IO.File]::ReadAllText($keyFile) }
 $psql = Join-Path $PostgresBin 'psql.exe'
 $pgCtl = Join-Path $PostgresBin 'pg_ctl.exe'
 if (-not (Test-Path $psql)) { throw "PostgreSQL no encontrado en $PostgresBin" }
@@ -99,7 +107,7 @@ if (-not (Test-OwnProcess $apiPidFile $apiExe)) {
     $apiProcess.Id | Set-Content $apiPidFile
     Remove-Item Env:ConnectionStrings__PostgreSql
 }
-Wait-Http "http://127.0.0.1:$apiPort/api/universidad"
+Wait-Http "http://127.0.0.1:$apiPort/health"
 $python = (Get-Command python).Source
 $webPidFile = Join-Path $runtime 'frontend.pid'
 if (-not (Test-OwnProcess $webPidFile $python)) {

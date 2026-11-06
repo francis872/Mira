@@ -1,4 +1,8 @@
+> **MIRA V3 (2026-11-05):** el arranque local ahora abre `/login`. Después de `start-local.ps1`, ejecutar una vez `bootstrap-admin.ps1` para aprovisionar la cuenta inicial. `verify-postgres16.ps1 -Browser` verifica migraciones 001–008, sesiones y regresiones con cuentas aisladas. `-BrowserOnly` repite solo navegador en una base nueva. Puede definir `MIRA_AXE_SCRIPT` con la ruta a axe-core 4.10.3 para añadir sus reglas WCAG; la herramienta es opcional y no forma parte del runtime. El verificador vigente es `verify-browser-v3.mjs`. Las instrucciones V2 que siguen son antecedentes, incluidas las referencias a la ausencia de login. Ver [README actual](../README.md) y [pruebas V3](../docs/V3_PRUEBAS.md).
+
 # Scripts
+
+V3 estabilizada: `audit-worktree.py` revisa candidatos sin imprimir secretos; `audit-python.py` consulta OSV y distingue bloqueos de resultados limpios; `verify-docker.ps1` prueba un proyecto exclusivo con credenciales aleatorias y `verify-docker-session.py` comprueba reinicio/revocación. Construir antes las etiquetas mira-v3-api:stabilization y mira-v3-frontend:stabilization. `verify-production-smoke.py` comprueba PORT/health/cookie en modo Production local con destinos ficticios y `verify-image-content.py` revisa /app mediante export. Ver [procedimientos y límites](../docs/V3_PRUEBAS.md). Nunca usar E2E con datos reales; estos verificadores no despliegan en Render/Neon.
 
 This directory contains utility scripts for local development and repository maintenance.
 
