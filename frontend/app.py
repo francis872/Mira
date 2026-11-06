@@ -5,11 +5,12 @@ import requests
 from markupsafe import Markup
 from urllib.parse import quote
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
+from seguridad import configure_session, register_security, SesionVencida
 
 app = Flask(__name__)
 _secret = os.getenv("SECRET_KEY", "")
 if not _secret or _secret.startswith("REPLACE"):
-    # La cookie firmada solo transporta el token CSRF y los mensajes flash; no hay autenticación.
+    # Desarrollo local: una clave externa estable es obligatoria en producción.
     _secret = secrets.token_hex(32)
 app.secret_key = _secret
 app.config.update(
@@ -17,7 +18,14 @@ app.config.update(
     SESSION_COOKIE_SAMESITE="Strict",
     SESSION_COOKIE_SECURE=os.getenv("SESSION_COOKIE_SECURE", "false").lower() == "true",
 )
-SWAGGER_URL = os.getenv("SWAGGER_URL", "http://localhost:8081/swagger")
+configure_session(app)
+SWAGGER_URL = os.getenv("SWAGGER_URL", "" if os.getenv("MIRA_ENV") == "production" else "http://localhost:8081/swagger")
+
+
+@app.get("/health")
+def health():
+    """Liveness sin autenticación, consultas de negocio ni creación de sesión."""
+    return {"status": "ok"}
 
 
 def _csrf_token():
@@ -34,7 +42,10 @@ app.jinja_env.globals["csrf_input"] = lambda: Markup(
 
 
 def _headers():
-    return {"Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json"}
+    if session.get("token"):
+        headers["Authorization"] = "Bearer " + session["token"]
+    return headers
 
 
 def error_message(resp, default):
@@ -95,6 +106,11 @@ def api_call(method, path, json_data=None, expect_list=None):
         )
     except requests.exceptions.RequestException:
         return None
+    if response.status_code == 401 and path != "auth/login":
+        session.clear()
+        raise SesionVencida()
+    if response.status_code == 403:
+        abort(403)
     if response.status_code in (200, 201):
         try:
             body = response.json()
@@ -118,22 +134,22 @@ def list_items(resp):
 # Dashboard Principal
 # =============================================================================
 CATALOGS = [
-    {"path": "area_conocimiento", "title": "Área de Conocimiento", "icon": "bi-book", "color": "danger",
+    {"path": "area_conocimiento", "title": "Área de Conocimiento", "icon": "book-2", "color": "danger",
      "list": "area_conocimiento_list", "new": "area_conocimiento_new",
      "text": "Clasificación académica por gran área, área específica y disciplina."},
-    {"path": "objetivo_desarrollo_sostenible", "title": "ODS", "icon": "bi-globe-americas", "color": "success",
+    {"path": "objetivo_desarrollo_sostenible", "title": "ODS", "icon": "world", "color": "success",
      "list": "ods_list", "new": "ods_new",
      "text": "Objetivos de Desarrollo Sostenible con su categoría temática."},
-    {"path": "area_aplicacion", "title": "Área de Aplicación", "icon": "bi-cpu", "color": "primary",
+    {"path": "area_aplicacion", "title": "Área de Aplicación", "icon": "cpu", "color": "primary",
      "list": "area_aplicacion_list", "new": "area_aplicacion_new",
      "text": "Sectores y ámbitos donde se aplican los resultados de investigación."},
-    {"path": "termino_clave", "title": "Término Clave", "icon": "bi-tags", "color": "warning",
+    {"path": "termino_clave", "title": "Término Clave", "icon": "tags", "color": "warning",
      "list": "termino_clave_list", "new": "termino_clave_new",
      "text": "Palabras clave normalizadas en español e inglés."},
-    {"path": "universidad", "title": "Universidad", "icon": "bi-buildings", "color": "info",
+    {"path": "universidad", "title": "Universidad", "icon": "building-community", "color": "info",
      "list": "universidad_list", "new": "universidad_new",
      "text": "Instituciones de educación superior, tipo y ciudad sede."},
-    {"path": "linea_investigacion", "title": "Línea de Investigación", "icon": "bi-diagram-3", "color": "secondary",
+    {"path": "linea_investigacion", "title": "Línea de Investigación", "icon": "schema", "color": "secondary",
      "list": "linea_investigacion_list", "new": "linea_investigacion_new",
      "text": "Líneas temáticas institucionales con su descripción."},
 ]
@@ -178,7 +194,7 @@ def area_conocimiento_create():
         return redirect(url_for("area_conocimiento_list"))
     error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/area_conocimiento/form.html", item=payload)
+    return render_template("modulos/area_conocimiento/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/area_conocimiento/editar/<int:id>")
 def area_conocimiento_edit(id):
@@ -202,7 +218,7 @@ def area_conocimiento_update(id):
         return redirect(url_for("area_conocimiento_list"))
     error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/area_conocimiento/form.html", item=payload)
+    return render_template("modulos/area_conocimiento/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/area_conocimiento/eliminar/<int:id>", methods=["POST"])
 def area_conocimiento_delete(id):
@@ -238,7 +254,7 @@ def ods_create():
         return redirect(url_for("ods_list"))
     error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=payload)
+    return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/objetivo_desarrollo_sostenible/editar/<int:id>")
 def ods_edit(id):
@@ -261,7 +277,7 @@ def ods_update(id):
         return redirect(url_for("ods_list"))
     error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=payload)
+    return render_template("modulos/objetivo_desarrollo_sostenible/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/objetivo_desarrollo_sostenible/eliminar/<int:id>", methods=["POST"])
 def ods_delete(id):
@@ -296,7 +312,7 @@ def area_aplicacion_create():
         return redirect(url_for("area_aplicacion_list"))
     error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/area_aplicacion/form.html", item=payload)
+    return render_template("modulos/area_aplicacion/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/area_aplicacion/editar/<int:id>")
 def area_aplicacion_edit(id):
@@ -318,7 +334,7 @@ def area_aplicacion_update(id):
         return redirect(url_for("area_aplicacion_list"))
     error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/area_aplicacion/form.html", item=payload)
+    return render_template("modulos/area_aplicacion/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/area_aplicacion/eliminar/<int:id>", methods=["POST"])
 def area_aplicacion_delete(id):
@@ -354,7 +370,7 @@ def termino_clave_create():
         return redirect(url_for("termino_clave_list"))
     error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/termino_clave/form.html", item=payload, is_new=True)
+    return render_template("modulos/termino_clave/form.html", item=payload, is_new=True), (resp.status_code if resp is not None else 503)
 
 @app.route("/termino_clave/editar/<path:termino>")
 def termino_clave_edit(termino):
@@ -378,7 +394,7 @@ def termino_clave_update(termino):
         return redirect(url_for("termino_clave_list"))
     error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/termino_clave/form.html", item=payload, is_new=False)
+    return render_template("modulos/termino_clave/form.html", item=payload, is_new=False), (resp.status_code if resp is not None else 503)
 
 @app.route("/termino_clave/eliminar/<path:termino>", methods=["POST"])
 def termino_clave_delete(termino):
@@ -416,7 +432,7 @@ def universidad_create():
         return redirect(url_for("universidad_list"))
     error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/universidad/form.html", item=payload)
+    return render_template("modulos/universidad/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/universidad/editar/<int:id>")
 def universidad_edit(id):
@@ -440,7 +456,7 @@ def universidad_update(id):
         return redirect(url_for("universidad_list"))
     error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/universidad/form.html", item=payload)
+    return render_template("modulos/universidad/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/universidad/eliminar/<int:id>", methods=["POST"])
 def universidad_delete(id):
@@ -476,7 +492,7 @@ def linea_investigacion_create():
         return redirect(url_for("linea_investigacion_list"))
     error_msg = error_message(resp, "Error al crear.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/linea_investigacion/form.html", item=payload)
+    return render_template("modulos/linea_investigacion/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/linea_investigacion/editar/<int:id>")
 def linea_investigacion_edit(id):
@@ -499,7 +515,7 @@ def linea_investigacion_update(id):
         return redirect(url_for("linea_investigacion_list"))
     error_msg = error_message(resp, "Error al actualizar.")
     flash(f"Error: {error_msg}", "danger")
-    return render_template("modulos/linea_investigacion/form.html", item=payload)
+    return render_template("modulos/linea_investigacion/form.html", item=payload), (resp.status_code if resp is not None else 503)
 
 @app.route("/linea_investigacion/eliminar/<int:id>", methods=["POST"])
 def linea_investigacion_delete(id):
@@ -513,8 +529,11 @@ def linea_investigacion_delete(id):
 
 from investigacion import register_investigacion
 register_investigacion(app, api_call, error_message)
+register_security(app, api_call, error_message)
 
 if __name__ == "__main__":
+    if os.getenv("MIRA_ENV") == "production":
+        raise RuntimeError("En producción ejecute Gunicorn con gunicorn.conf.py; no use app.run.")
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
 

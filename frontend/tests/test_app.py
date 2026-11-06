@@ -1,4 +1,5 @@
 import os
+import time
 
 os.environ["SECRET_KEY"] = "test-secret-key-for-frontend-tests-only"
 os.environ["API_URL"] = "http://api.test/api"
@@ -46,7 +47,11 @@ def calls(monkeypatch):
 
     def fake_request(method, url, json=None, headers=None, timeout=None):
         recorded.append({"method": method, "url": url, "json": json, "headers": headers or {}})
-        return responses.get((method, url.split("/api/", 1)[1]), FakeResponse(200, []))
+        path = url.split("/api/", 1)[1]
+        if path == "auth/me":
+            from flask import session
+            return responses.get((method, path), FakeResponse(200, session.get("user", {})))
+        return responses.get((method, path), FakeResponse(200, []))
 
     monkeypatch.setattr(frontend.requests, "request", fake_request)
     return recorded
@@ -71,48 +76,49 @@ def client():
     frontend.app.config["TESTING"] = True
     frontend.app.test_client_class = CsrfClient
     with frontend.app.test_client() as test_client:
+        with test_client.session_transaction() as session:
+            session.update(token="isolated-test-token", user={"id":1,"correo":"test@invalid.test","roles":["Administrador"]}, expires=time.time()+1200)
         yield test_client
 
 
-def test_dashboard_opens_directly_without_login(client, calls):
+def test_dashboard_opens_with_authenticated_session(client, calls):
     response = client.get("/")
     assert response.status_code == 200
     assert "Bienvenido a MIRA" in response.get_data(as_text=True)
 
 
 @pytest.mark.parametrize("path", CATALOG_ROUTES)
-def test_catalog_pages_open_without_login(client, calls, path):
+def test_catalog_pages_open_with_authenticated_session(client, calls, path):
     assert client.get(path).status_code == 200
     assert client.get(path + "/nuevo").status_code == 200
 
 
-@pytest.mark.parametrize("path", ["/login", "/logout", "/usuarios", "/usuarios/nuevo"])
-def test_authentication_and_user_routes_do_not_exist(client, calls, path):
-    assert client.get(path).status_code == 404
-    assert client.post(path, no_csrf=True).status_code in (400, 404)
+def test_login_is_public_and_logout_requires_post(client, calls):
+    assert client.get("/login").status_code == 200
+    assert client.get("/logout").status_code == 405
 
 
-def test_no_authentication_artifacts_are_sent_to_the_api(client, calls):
+def test_bearer_is_sent_only_from_server_to_api(client, calls):
     for path in CATALOG_ROUTES:
         client.get(path)
     client.get("/")
     assert calls
-    assert all("Authorization" not in c["headers"] for c in calls)
-    assert not [c for c in calls if "auth" in c["url"]]
+    assert all(c["headers"]["Authorization"] == "Bearer isolated-test-token" for c in calls)
+    assert [c for c in calls if c["url"].endswith("auth/me")]
 
 
-def test_navigation_has_no_login_or_logout_controls(client, calls):
+def test_navigation_has_session_and_logout_controls(client, calls):
     html = client.get("/").get_data(as_text=True)
-    assert "/login" not in html and "/logout" not in html and "Salir" not in html
+    assert "/logout" in html and "Salir" in html and "test@invalid.test" in html
 
 
-def test_create_goes_to_the_api_without_token(client, calls):
+def test_create_preserves_contract_and_sends_bearer(client, calls):
     calls.responses[("POST", "universidad")] = FakeResponse(201, {"id": 1})
     response = client.post("/universidad/crear", data={"nombre": "U", "tipo": "Privada", "ciudad": "Medellín"})
     assert response.status_code == 302
     sent = [c for c in calls if c["method"] == "POST"]
     assert sent[-1]["json"] == {"nombre": "U", "tipo": "Privada", "ciudad": "Medellín"}
-    assert "Authorization" not in sent[-1]["headers"]
+    assert sent[-1]["headers"]["Authorization"] == "Bearer isolated-test-token"
 
 
 def test_update_and_logical_delete_reach_the_api(client, calls):
@@ -126,7 +132,7 @@ def test_update_and_logical_delete_reach_the_api(client, calls):
 def test_api_validation_error_is_shown_to_the_user(client, calls):
     calls.responses[("POST", "universidad")] = FakeResponse(400, {"mensaje": "El nombre es obligatorio."})
     response = client.post("/universidad/crear", data={"nombre": "", "tipo": "", "ciudad": ""})
-    assert response.status_code == 200
+    assert response.status_code == 400
     assert "El nombre es obligatorio." in response.get_data(as_text=True)
 
 
@@ -167,14 +173,14 @@ def test_dashboard_shows_real_counts_from_the_api(client, calls):
 def test_dashboard_reports_unavailable_data_instead_of_inventing_numbers(client, monkeypatch):
     monkeypatch.setattr(frontend.requests, "request", lambda *a, **k: (_ for _ in ()).throw(frontend.requests.exceptions.ConnectionError()))
     html = client.get("/").get_data(as_text=True)
-    assert "no disponible" in html
+    assert "No fue posible verificar su sesión" in html
     assert "<strong>0</strong>" not in html
 
 
 def test_dashboard_states_honestly_what_is_pending(client, calls):
     html = client.get("/").get_data(as_text=True)
     assert "/investigacion" in html
-    assert "Fuera de alcance (versión futura)" in html
+    assert "MIRA / V3" in html and "Fuera de alcance" not in html
 
 
 @pytest.mark.parametrize("path", CATALOG_ROUTES)
@@ -202,7 +208,7 @@ def test_non_json_api_error_preserves_form_values(client, calls):
     calls.responses[("POST", "universidad")] = FakeResponse(502, None)
     response = client.post("/universidad/crear", data={"nombre": "Mi universidad", "tipo": "Privada", "ciudad": "Bogotá"})
     html = response.get_data(as_text=True)
-    assert response.status_code == 200
+    assert response.status_code == 502
     assert "Mi universidad" in html and "Error al crear." in html
     assert 'action="/universidad/crear"' in html
 

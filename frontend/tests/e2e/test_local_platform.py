@@ -1,4 +1,4 @@
-"""Pruebas de extremo a extremo contra la plataforma en ejecución (sin inicio de sesión):
+"""Pruebas de extremo a extremo contra la plataforma en ejecución (con autenticación V3):
 navegador (cliente HTTP) -> Flask -> API ASP.NET Core -> PostgreSQL.
 
 Se omiten salvo que se defina MIRA_E2E_URL (p. ej. http://localhost:5000).
@@ -23,8 +23,22 @@ CSRF = re.compile(r'name="csrf_token" value="([^"]+)"')
 class Browser:
     """Simula un navegador: conserva la cookie con el token CSRF y lo reenvía en cada formulario."""
 
+    cookies = None
+
     def __init__(self):
         self.session = requests.Session()
+        if Browser.cookies is not None:
+            self.session.cookies.update(Browser.cookies)
+            return
+        email=os.getenv("MIRA_E2E_EMAIL")
+        password=os.getenv("MIRA_E2E_PASSWORD")
+        if not email or not password:
+            pytest.skip("Defina credenciales aisladas MIRA_E2E_EMAIL y MIRA_E2E_PASSWORD.")
+        page=self.session.get(BASE+"/login",timeout=30)
+        token=CSRF.search(page.text).group(1)
+        response=self.session.post(BASE+"/login",data={"correo":email,"password":password,"csrf_token":token},allow_redirects=False,timeout=30)
+        assert response.status_code==302, "No fue posible autenticar la identidad E2E"
+        Browser.cookies = self.session.cookies.copy()
 
     def get(self, path):
         return self.session.get(BASE + path, allow_redirects=False, timeout=30)
@@ -76,26 +90,19 @@ def test_root_opens_the_dashboard_directly(browser):
     assert "/investigacion" in response.text
 
 
-@pytest.mark.parametrize("path", ["/login", "/logout", "/usuarios"])
-def test_there_is_no_authentication_surface(browser, path):
-    assert browser.get(path).status_code == 404
+def test_login_surface_and_protected_api(browser):
+    assert browser.get("/login").status_code == 200
+    if not API: pytest.skip("Defina MIRA_E2E_API_URL")
+    assert requests.get(API+"/api/universidad",timeout=30).status_code == 401
+    assert requests.post(API+"/api/auth/login",json={},timeout=30).status_code == 400
 
-
-def test_api_answers_without_token():
-    if not API:
-        pytest.skip("Defina MIRA_E2E_API_URL para comprobar la API directamente.")
-    for path in ("universidad", "area_conocimiento", "objetivo_desarrollo_sostenible",
-                 "area_aplicacion", "termino_clave", "linea_investigacion"):
-        response = requests.get(f"{API}/api/{path}", timeout=30)
-        assert response.status_code == 200, path
-    assert requests.post(f"{API}/api/auth/login", json={}, timeout=30).status_code == 404
 
 
 def test_dashboard_counts_match_the_listing(browser):
     dashboard = browser.get("/").text
     listing = browser.get("/universidad").text
     shown = int(re.search(r"Universidad</h3>\s*<small[^>]*>\s*Registros activos: <strong>(\d+)</strong>", dashboard).group(1))
-    assert shown == len(re.findall(r'bi-check-circle me-1"></i>Activo', listing))
+    assert shown == len(re.findall(r'>Activo\s*</span>', listing))
 
 
 @pytest.mark.parametrize("catalog", CATALOGS, ids=IDS)
@@ -139,7 +146,7 @@ def test_catalog_create_update_inactivate_persist(browser, catalog):
 def test_empty_form_shows_validation_error_and_creates_nothing(browser, catalog):
     empty = {k: "" for k in catalog["create"]("x")}
     response = browser.post(f"/{catalog['path']}/crear", empty, f"/{catalog['path']}/nuevo")
-    assert response.status_code == 200
+    assert response.status_code == 400
     assert "Error:" in response.text
     assert "obligatorio" in response.text
     assert "Error de conexión" not in response.text
@@ -149,11 +156,11 @@ def test_duplicate_keyword_shows_conflict(browser):
     term = f"e2e-{uuid.uuid4().hex[:10]}"
     assert browser.post("/termino_clave/crear", {"termino": term, "termino_ingles": "a"}, "/termino_clave/nuevo").status_code == 302
     second = browser.post("/termino_clave/crear", {"termino": term, "termino_ingles": "b"}, "/termino_clave/nuevo")
-    assert second.status_code == 200 and "Error:" in second.text
+    assert second.status_code == 409 and "Error:" in second.text
     assert "ya existe" in second.text
     browser.post(f"/termino_clave/eliminar/{term}", {}, "/termino_clave")
     inactive = browser.post("/termino_clave/crear", {"termino": term}, "/termino_clave/nuevo")
-    assert inactive.status_code == 200 and "ya existe" in inactive.text
+    assert inactive.status_code == 409 and "ya existe" in inactive.text
 
 
 def test_unicode_csrf_is_rejected(browser):
@@ -166,7 +173,7 @@ def test_unicode_csrf_is_rejected(browser):
 def test_oversized_form_preserves_data_and_explains_limit(browser):
     value = "e2e-" + "x" * 197
     response = browser.post("/area_aplicacion/crear", {"nombre": value}, "/area_aplicacion/nuevo")
-    assert response.status_code == 200
+    assert response.status_code == 400
     assert "200 caracteres" in response.text
     assert value in response.text
     assert value not in Browser().get("/area_aplicacion").text

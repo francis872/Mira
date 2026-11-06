@@ -59,7 +59,7 @@ def test_duplicate_association_preserves_selection_and_is_escaped(client,calls):
 def test_group_rejects_misaligned_detail_collections_before_calling_api(client,calls):
     response=client.post('/investigacion/grupos_investigacion/nuevo',data={'detalle_nombre':['Uno'],'detalle_id':[]})
     assert response.status_code==400
-    assert not calls
+    assert not [call for call in calls if not call['url'].endswith('auth/me')]
 
 
 def test_research_does_not_add_authentication_or_writable_users(client,calls):

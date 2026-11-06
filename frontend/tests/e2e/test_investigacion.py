@@ -9,8 +9,18 @@ from test_local_platform import BASE, API, Browser
 pytestmark=pytest.mark.skipif(not BASE or not API,reason='Configure las URL E2E de la plataforma.')
 
 
+_api_session=None
 def api(method,path,payload=None):
-    return requests.request(method,f'{API}/api/investigacion/{path}',json=payload,timeout=30)
+    global _api_session
+    if _api_session is None:
+        import os
+        email=os.getenv('MIRA_E2E_EMAIL'); password=os.getenv('MIRA_E2E_PASSWORD')
+        if not email or not password: pytest.skip('Defina credenciales E2E aisladas.')
+        _api_session=requests.Session()
+        response=_api_session.post(API+'/api/auth/login',json={'correo':email,'password':password},timeout=30)
+        assert response.status_code==200
+        _api_session.headers['Authorization']='Bearer '+response.json()['token']
+    return _api_session.request(method,f'{API}/api/investigacion/{path}',json=payload,timeout=30)
 
 
 @pytest.fixture
