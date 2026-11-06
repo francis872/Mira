@@ -1,7 +1,8 @@
+{% from 'includes/icons.html' import icon %}
 <div class="catalog-toolbar">
     <div class="catalog-search-field">
         <label for="catalog-search">Buscar en el listado</label>
-        <i class="bi bi-search" aria-hidden="true"></i>
+        {{ icon('search', '') }}
         <input id="catalog-search" type="search" class="form-control catalog-search"
                placeholder="Nombre, descripción o palabra clave…" aria-describedby="catalog-results">
     </div>

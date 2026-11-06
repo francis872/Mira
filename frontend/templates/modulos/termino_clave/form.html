@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from 'includes/icons.html' import icon %}
 
 {% block title %}{{ 'Editar' if not is_new else 'Nuevo' }} Término Clave{% endblock %}
 
@@ -16,12 +17,12 @@
         <div class="card card-custom form-card">
             <div class="card-header bg-white py-3 border-bottom">
                 <h4 class="card-title fw-bold mb-0 text-dark">
-                    <i class="bi {{ 'bi-pencil-square text-primary' if not is_new else 'bi-plus-circle-fill text-warning' }} me-2"></i>
+                    {{ icon('edit' if not is_new else 'circle-plus', 'me-2 text-primary') }}
                     {{ 'Editar Término Clave' if not is_new else 'Nuevo Término Clave' }}
                 </h4>
             </div>
             <div class="card-body p-4">
-                <p class="form-intro" id="required-note">Completa los campos marcados con <span aria-label="obligatorio">*</span>.</p>
+                <p class="form-intro" id="required-note">Completa los campos marcados con <span aria-hidden="true">*</span> (obligatorios).</p>
                 <form aria-describedby="required-note" method="POST" action="{{ url_for('termino_clave_update', termino=item.termino) if not is_new else url_for('termino_clave_create') }}">{{ csrf_input() }}
                     <div class="mb-3">
                         <label for="termino" class="form-label fw-semibold">
@@ -31,7 +32,7 @@
                                value="{{ item.termino if item else '' }}" placeholder="Ej. Inteligencia Artificial"
                                {{ 'readonly' if not is_new else 'required' }}>
                         {% if not is_new %}
-                            <small class="text-muted"><i class="bi bi-lock-fill me-1"></i>El término identifica el registro y no se puede cambiar.</small>
+                            <small class="text-muted">{{ icon('lock', 'me-1') }}El término identifica el registro y no se puede cambiar.</small>
                         {% endif %}
                     </div>
 
@@ -43,10 +44,10 @@
 
                     <div class="d-flex justify-content-between align-items-center pt-3 border-top">
                         <a href="{{ url_for('termino_clave_list') }}" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i> Cancelar
+                            {{ icon('arrow-left', 'me-1') }} Cancelar
                         </a>
                         <button type="submit" class="btn btn-warning text-dark px-4">
-                            <i class="bi bi-save me-1"></i> {{ 'Guardar Cambios' if not is_new else 'Crear Registro' }}
+                            {{ icon('device-floppy', 'me-1') }} {{ 'Guardar Cambios' if not is_new else 'Crear Registro' }}
                         </button>
                     </div>
                 </form>

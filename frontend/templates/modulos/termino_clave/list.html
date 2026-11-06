@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from 'includes/icons.html' import icon %}
 
 {% block title %}Términos Clave{% endblock %}
 
@@ -13,20 +14,20 @@
 <div class="d-flex justify-content-between align-items-center mb-4 page-heading">
     <div>
         <h2 class="fw-bold text-dark mb-1">
-            <i class="bi bi-tags text-warning me-2"></i>Términos Clave (Vocabulario Controlado)
+            {{ icon('tags', 'text-warning me-2') }}Términos Clave (Vocabulario Controlado)
         </h2>
         <p class="text-muted mb-0 small">Palabras clave estandarizadas en español e inglés con clave primaria textual</p>
     </div>
-    <a href="{{ url_for('termino_clave_new') }}" class="btn btn-warning text-dark">
-        <i class="bi bi-plus-circle me-1"></i> Nuevo Término
-    </a>
+    {% if can_write %}<a href="{{ url_for('termino_clave_new') }}" class="btn btn-warning text-dark">
+        {{ icon('circle-plus', 'me-1') }} Nuevo Término
+    </a>{% endif %}
 </div>
 
 {% include "includes/catalog_toolbar.html" %}
 
 <div class="card card-custom">
     <div class="card-body p-0">
-        <div class="table-responsive">
+        <div class="table-responsive" role="region" aria-label="Tabla de registros, desplazable horizontalmente" tabindex="0">
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
@@ -40,7 +41,7 @@
                     {% for item in items %}
                     <tr>
                         <td class="ps-4 fw-bold text-dark">
-                            <i class="bi bi-tag-fill text-warning me-2"></i>{{ item.termino }}
+                            {{ icon('tag', 'text-warning me-2') }}{{ item.termino }}
                         </td>
                         <td>
                             {% if item.terminoIngles %}
@@ -52,28 +53,28 @@
                         <td class="text-center">
                             {% if item.activo %}
                                 <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
-                                    <i class="bi bi-check-circle me-1"></i>Activo
+                                    {{ icon('circle-check', 'me-1') }}Activo
                                 </span>
                             {% else %}
                                 <span class="badge bg-secondary-subtle text-secondary px-2 py-1">Inactivo</span>
                             {% endif %}
                         </td>
                         <td class="text-end pe-4">
-                            <a href="{{ url_for('termino_clave_edit', termino=item.termino) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ loop.index }}" title="Eliminar" aria-label="Retirar registro">
-                                <i class="bi bi-trash"></i>
-                            </button>
+                            {% if can_write %}<a href="{{ url_for('termino_clave_edit', termino=item.termino) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
+                                {{ icon('edit', '') }}
+                            </a>{% endif %}
+                            {% if can_delete %}<button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ loop.index }}" title="Eliminar" aria-label="Retirar registro">
+                                {{ icon('trash', '') }}
+                            </button>{% endif %}
 
                             <!-- Modal de Confirmación de Borrado Lógico -->
-                            <div class="modal fade text-start" id="deleteModal{{ loop.index }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade text-start" id="deleteModal{{ loop.index }}" tabindex="-1" aria-labelledby="deleteTitle{{ loop.index }}" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header bg-danger text-white">
-                                            <h5 class="modal-title">
-                                                <i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar retiro
-                                            </h5>
+                                            <h2 class="modal-title h5" id="deleteTitle{{ loop.index }}">
+                                                {{ icon('alert-triangle', 'me-2') }}Confirmar retiro
+                                            </h2>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar confirmación"></button>
                                         </div>
                                         <div class="modal-body">
@@ -83,14 +84,14 @@
                                                 <small class="text-muted">Inglés: {{ item.terminoIngles or 'N/A' }}</small>
                                             </div>
                                             <div class="alert alert-warning small mb-0">
-                                                <i class="bi bi-info-circle me-1"></i> El registro se retirará del listado. Su información se conservará y los demás registros seguirán disponibles.
+                                                {{ icon('info-circle', 'me-1') }} El registro se retirará del listado. Su información se conservará y los demás registros seguirán disponibles.
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                                             <form method="POST" action="{{ url_for('termino_clave_delete', termino=item.termino) }}" class="d-inline">{{ csrf_input() }}
                                                 <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="bi bi-trash me-1"></i> Eliminar
+                                                    {{ icon('trash', 'me-1') }} Eliminar
                                                 </button>
                                             </form>
                                         </div>
@@ -102,7 +103,7 @@
                     {% else %}
                     <tr>
                         <td colspan="4" class="text-center py-5 text-muted">
-                            <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
+                            {{ icon('inbox', 'fs-1 d-block mb-2 text-secondary') }}
                             No hay términos clave registrados o activos.
                         </td>
                     </tr>

@@ -12,7 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     body.addEventListener("click", event => {
         const button = event.target.closest("[data-remove-detail]");
-        if (button) { button.closest("tr").remove(); update(); }
+        if (button) {
+            const row = button.closest("tr");
+            const next = row.nextElementSibling || row.previousElementSibling;
+            row.remove();
+            (next?.querySelector('input[name="detalle_nombre"]') || document.getElementById("add-detail")).focus();
+            update();
+        }
     });
     update();
 });

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from 'includes/icons.html' import icon %}
 
 {% block title %}Inicio{% endblock %}
 
@@ -12,15 +13,15 @@
             {% if api_ok %}
             <span class="connection-pill"><span class="status-dot"></span>Datos disponibles</span>
             {% else %}
-            <span class="connection-pill connection-warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Algunos datos no están disponibles</span>
+            <span class="connection-pill connection-warning">{{ icon('alert-circle', '') }}Algunos datos no están disponibles</span>
             {% endif %}
             <span class="hero-institution">Universidad de San Buenaventura Medellín</span>
         </div>
     </div>
-    <div class="hero-symbol" aria-hidden="true"><i class="bi bi-journal-bookmark"></i><span>MIRA / V2</span></div>
+    <div class="hero-symbol" aria-hidden="true">{{ icon('notebook', '') }}<span>MIRA / V3</span></div>
 </section>
 
-<section class="card card-custom mb-4"><div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3"><div><h2 class="h4">Gestión de investigación</h2><p class="mb-0 text-muted">Sedes, docentes, grupos, semilleros y asociaciones de líneas.</p></div><a class="btn btn-primary" href="{{ url_for('investigacion.home') }}">Abrir investigación <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div></section>
+<section class="card card-custom mb-4"><div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3"><div><h2 class="h4">Gestión de investigación</h2><p class="mb-0 text-muted">Sedes, docentes, grupos, semilleros y asociaciones de líneas.</p></div><a class="btn btn-primary" href="{{ url_for('investigacion.home') }}">Abrir investigación {{ icon('arrow-right', '') }}</a></div></section>
 <div class="section-heading">
     <div><h2>Catálogos académicos</h2><p>Consulta, actualiza y organiza la información de cada catálogo.</p></div>
     <span class="module-label">6 catálogos</span>
@@ -31,7 +32,7 @@
         <article class="card h-100 card-custom catalog-card">
             <div class="card-body d-flex flex-column">
                 <div class="catalog-card-heading">
-                    <div class="catalog-icon bg-{{ c.color }}-subtle text-{{ c.color }}"><i class="bi {{ c.icon }}" aria-hidden="true"></i></div>
+                    <div class="catalog-icon bg-{{ c.color }}-subtle text-{{ c.color }}">{{ icon(c.icon) }}</div>
                     <span class="catalog-number">{{ '%02d' | format(loop.index) }}</span>
                 </div>
                 <div class="catalog-card-title">
@@ -43,8 +44,8 @@
                 </div>
                 <p class="catalog-description flex-grow-1">{{ c.text }}</p>
                 <div class="catalog-card-actions">
-                    <a href="{{ url_for(c.list) }}" class="catalog-open">Ver listado <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
-                    <a href="{{ url_for(c.new) }}" class="catalog-add" aria-label="Crear registro: {{ c.title }}"><i class="bi bi-plus-lg" aria-hidden="true"></i> Nuevo</a>
+                    <a href="{{ url_for(c.list) }}" class="catalog-open">Ver listado {{ icon('arrow-right', '') }}</a>
+                    {% if can_write %}<a href="{{ url_for(c.new) }}" class="catalog-add" aria-label="Crear registro: {{ c.title }}">{{ icon('plus', '') }} Nuevo</a>{% endif %}
                 </div>
             </div>
         </article>
@@ -52,13 +53,4 @@
     {% endfor %}
 </div>
 
-<details class="project-status" id="estado-proyecto">
-    <summary><span><i class="bi bi-info-circle" aria-hidden="true"></i> Estado del proyecto</span><span class="project-stage">V2 en desarrollo <i class="bi bi-chevron-down" aria-hidden="true"></i></span></summary>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><span>V1 — seis catálogos (consultar, crear, modificar, inactivar)</span><span class="badge bg-success-subtle text-success">Operativo</span></li>
-        <li class="list-group-item"><span>V2 — rutinas y atomicidad usuario→roles</span><span class="badge bg-secondary-subtle text-secondary">Solo base de datos</span></li>
-        <li class="list-group-item"><span>V2 — maestro–detalle y relaciones académicas</span><a href="{{ url_for('investigacion.home') }}" class="badge bg-success-subtle text-success">Consultar módulos</a></li>
-        <li class="list-group-item"><span>Inicio de sesión y control de acceso</span><span class="badge bg-light text-dark border">Fuera de alcance (versión futura)</span></li>
-    </ul>
-</details>
 {% endblock %}

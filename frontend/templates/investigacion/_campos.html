@@ -2,7 +2,7 @@
 <div class="row g-3">
 {% for f in spec.fields %}
 <div class="{{ 'col-12' if f.kind == 'textarea' else 'col-md-6' }}">
-    <label class="form-label" for="field-{{ f.name }}">{{ f.label }}{% if not f.optional %} <span class="text-danger" aria-label="obligatorio">*</span>{% endif %}</label>
+    <label class="form-label" for="field-{{ f.name }}">{{ f.label }}{% if not f.optional %} <span class="text-danger" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span>{% endif %}</label>
     {% if f.source or f.options %}
     <select class="form-select" id="field-{{ f.name }}" name="{{ f.name }}" {{ 'required' if not f.optional }}>
         <option value="">{{ 'Sin especificar' if f.optional else 'Seleccione una opción' }}</option>

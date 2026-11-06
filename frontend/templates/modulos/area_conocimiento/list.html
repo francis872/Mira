@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from 'includes/icons.html' import icon %}
 
 {% block title %}Áreas de Conocimiento{% endblock %}
 
@@ -13,20 +14,20 @@
 <div class="d-flex justify-content-between align-items-center mb-4 page-heading">
     <div>
         <h2 class="fw-bold text-dark mb-1">
-            <i class="bi bi-book text-danger me-2"></i>Áreas de Conocimiento
+            {{ icon('book-2', 'text-danger me-2') }}Áreas de Conocimiento
         </h2>
         <p class="text-muted mb-0 small">Catálogo de grandes áreas, áreas y disciplinas académicas activas</p>
     </div>
-    <a href="{{ url_for('area_conocimiento_new') }}" class="btn btn-danger">
-        <i class="bi bi-plus-circle me-1"></i> Nueva Área
-    </a>
+    {% if can_write %}<a href="{{ url_for('area_conocimiento_new') }}" class="btn btn-danger">
+        {{ icon('circle-plus', 'me-1') }} Nueva Área
+    </a>{% endif %}
 </div>
 
 {% include "includes/catalog_toolbar.html" %}
 
 <div class="card card-custom">
     <div class="card-body p-0">
-        <div class="table-responsive">
+        <div class="table-responsive" role="region" aria-label="Tabla de registros, desplazable horizontalmente" tabindex="0">
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
@@ -48,28 +49,28 @@
                         <td class="text-center">
                             {% if item.activo %}
                                 <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
-                                    <i class="bi bi-check-circle me-1"></i>Activo
+                                    {{ icon('circle-check', 'me-1') }}Activo
                                 </span>
                             {% else %}
                                 <span class="badge bg-secondary-subtle text-secondary px-2 py-1">Inactivo</span>
                             {% endif %}
                         </td>
                         <td class="text-end pe-4">
-                            <a href="{{ url_for('area_conocimiento_edit', id=item.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ item.id }}" title="Eliminar" aria-label="Retirar registro">
-                                <i class="bi bi-trash"></i>
-                            </button>
+                            {% if can_write %}<a href="{{ url_for('area_conocimiento_edit', id=item.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
+                                {{ icon('edit', '') }}
+                            </a>{% endif %}
+                            {% if can_delete %}<button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ item.id }}" title="Eliminar" aria-label="Retirar registro">
+                                {{ icon('trash', '') }}
+                            </button>{% endif %}
 
                             <!-- Modal de Confirmación de Borrado Lógico -->
-                            <div class="modal fade text-start" id="deleteModal{{ item.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade text-start" id="deleteModal{{ item.id }}" tabindex="-1" aria-labelledby="deleteTitle{{ item.id }}" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header bg-danger text-white">
-                                            <h5 class="modal-title">
-                                                <i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar retiro
-                                            </h5>
+                                            <h2 class="modal-title h5" id="deleteTitle{{ item.id }}">
+                                                {{ icon('alert-triangle', 'me-2') }}Confirmar retiro
+                                            </h2>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar confirmación"></button>
                                         </div>
                                         <div class="modal-body">
@@ -79,14 +80,14 @@
                                                 <small class="text-muted">{{ item.granArea }} &bull; {{ item.area }}</small>
                                             </div>
                                             <div class="alert alert-warning small mb-0">
-                                                <i class="bi bi-info-circle me-1"></i> El registro se retirará del listado. Su información se conservará y los demás registros seguirán disponibles.
+                                                {{ icon('info-circle', 'me-1') }} El registro se retirará del listado. Su información se conservará y los demás registros seguirán disponibles.
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                                             <form method="POST" action="{{ url_for('area_conocimiento_delete', id=item.id) }}" class="d-inline">{{ csrf_input() }}
                                                 <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="bi bi-trash me-1"></i> Eliminar
+                                                    {{ icon('trash', 'me-1') }} Eliminar
                                                 </button>
                                             </form>
                                         </div>
@@ -98,7 +99,7 @@
                     {% else %}
                     <tr>
                         <td colspan="6" class="text-center py-5 text-muted">
-                            <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
+                            {{ icon('inbox', 'fs-1 d-block mb-2 text-secondary') }}
                             No hay áreas de conocimiento registradas o activas.
                         </td>
                     </tr>
