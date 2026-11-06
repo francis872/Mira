@@ -7,9 +7,17 @@ using MIRA.Api.Servicios;
 
 DefaultTypeMap.MatchNamesWithUnderscores = true;
 var builder = WebApplication.CreateBuilder(args);
+var assignedPort = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(assignedPort) && string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_URLS")))
+{
+    if (!int.TryParse(assignedPort, out var port) || port is < 1 or > 65535)
+        throw new InvalidOperationException("PORT debe estar entre 1 y 65535.");
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
 // Los scripts capturan consola; no depender de permisos del Event Log de Windows.
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+builder.Services.AddSeguridad(builder.Configuration);
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 {
@@ -33,8 +41,18 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v2", new OpenApiInfo
     {
         Title = "MIRA API",
-        Version = "v2",
-        Description = "MIRA - Catálogos V1 y base relacional V2 (sin autenticación en esta entrega)"
+        Version = "v3",
+        Description = "MIRA V3 — autenticación JWT y permisos sobre catálogos V1 y dominio V2"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Type=SecuritySchemeType.Http, Scheme="bearer", BearerFormat="JWT",
+        Description="Obtenga el token mediante POST /api/auth/login e introdúzcalo aquí."
+    });
+    c.OperationFilter<SwaggerAnonymousOperationFilter>();
+    c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = []
     });
 });
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
@@ -54,12 +72,37 @@ builder.Services.AddScoped<MIRA.Api.Repositorios.Investigacion.InvestigacionRepo
 builder.Services.AddScoped<InvestigacionService>();
 
 var app = builder.Build();
+// Validación de configuración local, sin abrir conexión ni publicar credenciales.
+if (app.Environment.IsProduction()) _ = app.Services.GetRequiredService<IDbConnectionFactory>();
+if (args.Contains("--bootstrap-admin") || args.Contains("--reset-admin-password"))
+{
+    using var scope = app.Services.CreateScope();
+    var auth = scope.ServiceProvider.GetRequiredService<MIRA.Api.Servicios.Seguridad.AuthService>();
+    var email = Environment.GetEnvironmentVariable("MIRA_ADMIN_EMAIL") ?? "";
+    var password = Environment.GetEnvironmentVariable("MIRA_ADMIN_PASSWORD") ?? "";
+    if (args.Contains("--reset-admin-password"))
+        await auth.RestablecerAdmin(email, password);
+    else
+        await auth.Bootstrap(email, password);
+    Console.WriteLine("Operacion administrativa completada.");
+    return;
+}
 app.UseMiddleware<ApiExceptionMiddleware>();
+app.UseRouting();
+app.UseRateLimiter();
+app.UseAuthentication();
+app.UseAuthorization();
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    context.Response.Headers["Cache-Control"] = "no-store";
+    await next(context);
+});
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "MIRA API v2"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "MIRA API v3"));
 }
-app.MapControllers();
+app.MapControllers().RequireAuthorization("Datos");
 app.MapGet("/health", () => Results.Ok(new { status="ok", timestamp=DateTime.UtcNow }));
 app.Run();
 

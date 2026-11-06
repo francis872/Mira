@@ -15,6 +15,8 @@ public sealed class ApiExceptionMiddleware(RequestDelegate next, ILogger<ApiExce
         {
             var (status, message) = error switch
             {
+                MIRA.Api.Servicios.Seguridad.SeguridadValidationException validation => (400, validation.Message),
+                PostgresException { SqlState: "P0002" } => (404, "Registro no encontrado o inactivo."),
                 MIRA.Api.Servicios.ValidacionInvestigacionException validation => (400, validation.Message),
                 MIRA.Api.Servicios.RecursoInvestigacionNoEncontradoException => (404, "El módulo solicitado no existe."),
                 PostgresException { SqlState: "23503" } => (409, "No se puede completar la operación por una relación con otro registro. Revise las referencias seleccionadas."),
