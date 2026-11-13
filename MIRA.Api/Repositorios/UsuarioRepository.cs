@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using Microsoft.Extensions.Configuration;
+using MIRA.Api.Configuracion;
 using MIRA.Api.Modelos;
 using Npgsql;
 
@@ -12,31 +12,14 @@ namespace MIRA.Api.Repositorios
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly string _connectionString;
+        private readonly IDbConnectionFactory _connectionFactory;
 
-        public UsuarioRepository(IConfiguration configuration)
+        public UsuarioRepository(IDbConnectionFactory connectionFactory)
         {
-            var configured = configuration.GetConnectionString("PostgreSql") 
-                ?? configuration.GetConnectionString("DefaultConnection") 
-                ?? Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSql") 
-                ?? "";
-
-            if (!string.IsNullOrWhiteSpace(configured) && !configured.Contains("<TU_"))
-            {
-                _connectionString = configured;
-            }
-            else
-            {
-                var host = Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "localhost";
-                var port = Environment.GetEnvironmentVariable("POSTGRES_PORT") ?? "5544";
-                var db = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "mira_db";
-                var user = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "mira_user";
-                var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "postgres";
-                _connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
-            }
+            _connectionFactory = connectionFactory;
         }
 
-        private IDbConnection CreateConnection() => new NpgsqlConnection(_connectionString);
+        private IDbConnection CreateConnection() => _connectionFactory.CreateConnection();
 
         public async Task<Usuario?> ObtenerPorUsernameAsync(string username)
         {
@@ -127,7 +110,7 @@ namespace MIRA.Api.Repositorios
 
         public async Task<int> CrearAsync(Usuario usuario, List<int> rolesIds)
         {
-            using var connection = new NpgsqlConnection(_connectionString);
+            using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
             await connection.OpenAsync();
             using var transaction = connection.BeginTransaction();
 
@@ -170,7 +153,7 @@ namespace MIRA.Api.Repositorios
 
         public async Task<bool> EliminarLogicoAsync(int id)
         {
-            using var connection = new NpgsqlConnection(_connectionString);
+            using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
             await connection.OpenAsync();
             using var transaction = connection.BeginTransaction();
 

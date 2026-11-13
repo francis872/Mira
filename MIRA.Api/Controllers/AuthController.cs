@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,25 +22,38 @@ namespace MIRA.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginRequest peticion)
         {
-            var resultado = await _authService.AutenticarAsync(peticion);
-
-            if (resultado == null)
+            try
             {
-                return Unauthorized(new
+                var resultado = await _authService.AutenticarAsync(peticion);
+
+                if (resultado == null)
                 {
-                    estado = 401,
-                    mensaje = "Credenciales inválidas",
-                    detalle = "El nombre de usuario o la contraseña no coinciden."
+                    return Unauthorized(new
+                    {
+                        estado = 401,
+                        mensaje = "Credenciales inválidas",
+                        detalle = "El nombre de usuario o la contraseña no coinciden."
+                    });
+                }
+
+                return Ok(new
+                {
+                    estado = 200,
+                    mensaje = "Autenticación exitosa",
+                    token = resultado.Token,
+                    usuario = resultado.Usuario
                 });
             }
-
-            return Ok(new
+            catch (Exception ex)
             {
-                estado = 200,
-                mensaje = "Autenticación exitosa",
-                token = resultado.Token,
-                usuario = resultado.Usuario
-            });
+                return StatusCode(500, new
+                {
+                    estado = 500,
+                    mensaje = "Error al autenticar",
+                    detalle = ex.Message,
+                    tipo = ex.GetType().Name
+                });
+            }
         }
     }
 }

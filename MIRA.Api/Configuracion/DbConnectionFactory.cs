@@ -1,5 +1,7 @@
 using System;
 using System.Data;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
 
 namespace MIRA.Api.Configuracion;
@@ -15,11 +17,15 @@ public class DbConnectionFactory : IDbConnectionFactory
 
     public DbConnectionFactory(IConfiguration configuration)
     {
-        var configured = configuration.GetConnectionString("PostgreSql");
+        var rawConfigured = configuration.GetConnectionString("PostgreSql")
+            ?? configuration["DATABASE_URL"]
+            ?? Environment.GetEnvironmentVariable("DATABASE_URL")
+            ?? Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSql")
+            ?? "";
 
-        if (!string.IsNullOrWhiteSpace(configured) && !configured.Contains("<TU_"))
+        if (!string.IsNullOrWhiteSpace(rawConfigured) && !rawConfigured.Contains("<TU_"))
         {
-            _connectionString = configured;
+            _connectionString = NormalizeConnectionString(rawConfigured);
         }
         else
         {
@@ -31,6 +37,42 @@ public class DbConnectionFactory : IDbConnectionFactory
             var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "postgres";
             _connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
         }
+    }
+
+    public static string NormalizeConnectionString(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return raw;
+        raw = raw.Trim().Trim('"').Trim('\'');
+
+        // Si viene en formato URL (postgresql://user:pass@host:port/dbname?sslmode=require)
+        if (raw.StartsWith("postgresql://", StringComparison.OrdinalIgnoreCase) ||
+            raw.StartsWith("postgres://", StringComparison.OrdinalIgnoreCase))
+        {
+            try
+            {
+                var uri = new Uri(raw);
+                var userInfo = uri.UserInfo.Split(':');
+                var username = userInfo.Length > 0 ? Uri.UnescapeDataString(userInfo[0]) : "";
+                var password = userInfo.Length > 1 ? Uri.UnescapeDataString(userInfo[1]) : "";
+                var host = uri.Host;
+                var port = uri.Port > 0 ? uri.Port : 5432;
+                var database = uri.AbsolutePath.TrimStart('/');
+                return $"Host={host};Port={port};Database={database};Username={username};Password={password};SSL Mode=Require;Trust Server Certificate=true;";
+            }
+            catch
+            {
+                return raw;
+            }
+        }
+
+        // Si viene en formato Key=Value y es Neon u otro host cloud, garantizar SSL
+        if ((raw.Contains("neon.tech", StringComparison.OrdinalIgnoreCase) || raw.Contains("render.com", StringComparison.OrdinalIgnoreCase))
+            && !raw.Contains("SSL Mode", StringComparison.OrdinalIgnoreCase))
+        {
+            raw = raw.TrimEnd(';') + ";SSL Mode=Require;Trust Server Certificate=true;";
+        }
+
+        return raw;
     }
 
     public IDbConnection CreateConnection()

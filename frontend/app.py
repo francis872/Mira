@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 from urllib.parse import quote
 from functools import wraps
@@ -9,6 +10,8 @@ app.secret_key = os.getenv("SECRET_KEY", "mira-secret-key-prod-local")
 
 # URL base de la API REST de MIRA (normalizada para soportar URLs locales y cloud en Render)
 raw_api = os.getenv("API_URL", "http://localhost:8081/api").strip().rstrip("/")
+# Si el usuario colocó la URL de Swagger (ej. https://mira-api.onrender.com/swagger), limpiarla
+raw_api = re.sub(r"/swagger(/index\.html)?/?$", "", raw_api, flags=re.IGNORECASE).rstrip("/")
 if not raw_api.endswith("/api"):
     raw_api += "/api"
 API_URL = raw_api
@@ -72,7 +75,8 @@ def roles_required(*roles):
 @app.context_processor
 def inject_user():
     """Inyecta el usuario, su estado de autenticación y la URL de Swagger a todas las plantillas Jinja2."""
-    swagger_url = API_URL.replace("/api", "/swagger/index.html") if "/api" in API_URL else f"{API_URL}/swagger/index.html"
+    base_domain = re.sub(r"/api/?$", "", API_URL, flags=re.IGNORECASE).rstrip("/")
+    swagger_url = f"{base_domain}/swagger/index.html"
     return {
         "current_user": session.get("user"),
         "is_authenticated": "jwt_token" in session,
@@ -93,15 +97,24 @@ def login():
 
         resp = api_call("POST", "Auth/login", {"username": username, "password": password})
         if resp and resp.status_code == 200:
-            data = resp.json()
-            session["jwt_token"] = data.get("token")
-            session["user"] = data.get("usuario")
-            flash(f"¡Bienvenido(a), {session['user'].get('nombreCompleto') or username}!", "success")
-            next_url = request.args.get("next")
-            return redirect(next_url or url_for("index"))
-
-        error_msg = resp.json().get("detalle", "Credenciales inválidas.") if resp else "Error de conexión con el backend."
-        flash(error_msg, "danger")
+            try:
+                data = resp.json()
+                session["jwt_token"] = data.get("token")
+                session["user"] = data.get("usuario")
+                flash(f"¡Bienvenido(a), {session['user'].get('nombreCompleto') or username}!", "success")
+                next_url = request.args.get("next")
+                return redirect(next_url or url_for("index"))
+            except Exception as e:
+                flash("Error al procesar la respuesta del servidor.", "danger")
+        elif resp is not None:
+            try:
+                data = resp.json()
+                error_msg = data.get("detalle") or data.get("mensaje") or f"Credenciales inválidas (Código {resp.status_code})."
+            except Exception:
+                error_msg = f"Error del backend (Código {resp.status_code})."
+            flash(error_msg, "danger")
+        else:
+            flash(f"Error de conexión con el backend ({API_URL}). Verifique que el servicio esté activo.", "danger")
 
     return render_template("login.html")
 
