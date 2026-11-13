@@ -65,11 +65,20 @@ public class DbConnectionFactory : IDbConnectionFactory
             }
         }
 
-        // Si viene en formato Key=Value y es Neon u otro host cloud, garantizar SSL
-        if ((raw.Contains("neon.tech", StringComparison.OrdinalIgnoreCase) || raw.Contains("render.com", StringComparison.OrdinalIgnoreCase))
-            && !raw.Contains("SSL Mode", StringComparison.OrdinalIgnoreCase))
+        // Si viene en formato Key=Value y es Neon u otro host cloud, garantizar compatibilidad SSL y eliminar Channel Binding
+        raw = Regex.Replace(raw, @"Channel Binding\s*=\s*[^;]+;?", "", RegexOptions.IgnoreCase);
+        raw = Regex.Replace(raw, @"SSL Mode\s*=\s*VerifyFull;?", "SSL Mode=Require;", RegexOptions.IgnoreCase);
+
+        if (raw.Contains("neon.tech", StringComparison.OrdinalIgnoreCase) || raw.Contains("render.com", StringComparison.OrdinalIgnoreCase))
         {
-            raw = raw.TrimEnd(';') + ";SSL Mode=Require;Trust Server Certificate=true;";
+            if (!raw.Contains("SSL Mode", StringComparison.OrdinalIgnoreCase))
+            {
+                raw = raw.TrimEnd(';') + ";SSL Mode=Require;";
+            }
+            if (!raw.Contains("Trust Server Certificate", StringComparison.OrdinalIgnoreCase))
+            {
+                raw = raw.TrimEnd(';') + ";Trust Server Certificate=true;";
+            }
         }
 
         return raw;
