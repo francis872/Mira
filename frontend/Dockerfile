@@ -20,7 +20,7 @@ RUN useradd --uid 10001 --create-home --shell /usr/sbin/nologin mira \
     && chown mira:mira /var/lib/mira/sessions \
     && chmod 700 /var/lib/mira/sessions
 
-COPY app.py investigacion.py seguridad.py gunicorn.conf.py ./
+COPY app.py investigacion.py reportes.py seguridad.py session_store.py login_protection.py observabilidad.py gunicorn.conf.py ./
 COPY templates/ templates/
 COPY static/ static/
 

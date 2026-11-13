@@ -1,8 +1,18 @@
+# Despliegue actual SAPIENS — Fase 6
+
+Usar [guía Fase 6](../docs/FASE6_DESPLIEGUE.md) y [ejemplo API Free](render-free.yaml.example). Perfil seleccionado: Flask en Vercel, API .NET en Render Free y PostgreSQL/sesiones en Neon Free. Aplicar 001–015 con respaldo y roles de permisos_runtime.sql; nunca DDL desde el frontend. El perfil de disco y planes starter siguiente se conserva como antecedente, no como recurso contratado en esta fase.
+
+---
+
 # Preparación Render y Neon — sin aplicar
+
+Seguimiento operativo: [plan de pruebas, recuperación y reversión](../docs/V3_PLAN_DESPLIEGUE_PRUEBAS.md). Sigue siendo una propuesta sin ejecutar. El rebranding SAPIENS se prepara por separado y no cambia estos identificadores MIRA en el PR #7.
 
 El ejemplo render.yaml.example se validó con el JSON Schema público de Render, sin API autenticada, despliegue ni comprobación de branch remoto. Dos servicios starter y disco 1 GB generarían coste si se crearan; no se aprovisionaron. autoDeployTrigger está off y no se ofrece una orden de despliegue automático.
 
 ## Configuración privada necesaria
+
+D01 requiere el mismo secreto independiente en API (`LoginProtection__ForwardingKey`) y Flask (`MIRA_LOGIN_FORWARDING_KEY`), diferente de JWT/SECRET_KEY. `MIRA_TRUSTED_PROXY_NETWORKS` permanece vacío hasta identificar los proxies reales y sus CIDR; no asumir que la IP vista detrás de Render es la del navegador. [Protocolo, límites, pruebas y configuración](../docs/V3_D01_LIMITACION_LOGIN.md). El Blueprint solo declara variables, no genera ni configura credenciales reales.
 
 API: Production, PORT=10000, Jwt__Key aleatoria externa >=32 bytes, issuer MIRA, audience MIRA.Frontend, minutos 20. ConnectionStrings__PostgreSql debe usar formato Npgsql, no DATABASE_URL:
 

@@ -32,6 +32,16 @@ if (-not $config['JWT_KEY'] -and -not (Test-Path -LiteralPath $keyFile)) {
     [IO.File]::WriteAllText($keyFile, [Convert]::ToBase64String($keyBytes))
 }
 $env:Jwt__Key = if ($config['JWT_KEY']) { $config['JWT_KEY'] } else { [IO.File]::ReadAllText($keyFile) }
+$forwardingKeyFile = Join-Path $runtime 'login-forwarding-key'
+if (-not $config['LOGIN_FORWARDING_KEY'] -and -not (Test-Path -LiteralPath $forwardingKeyFile)) {
+    $forwardingBytes = New-Object byte[] 48
+    $forwardingRng = [Security.Cryptography.RandomNumberGenerator]::Create()
+    try { $forwardingRng.GetBytes($forwardingBytes) } finally { $forwardingRng.Dispose() }
+    [IO.File]::WriteAllText($forwardingKeyFile, [Convert]::ToBase64String($forwardingBytes))
+}
+$env:LoginProtection__ForwardingKey = if ($config['LOGIN_FORWARDING_KEY']) { $config['LOGIN_FORWARDING_KEY'] } else { [IO.File]::ReadAllText($forwardingKeyFile) }
+$env:MIRA_LOGIN_FORWARDING_KEY = $env:LoginProtection__ForwardingKey
+$env:MIRA_TRUSTED_PROXY_NETWORKS = $config['MIRA_TRUSTED_PROXY_NETWORKS']
 $psql = Join-Path $PostgresBin 'psql.exe'
 $pgCtl = Join-Path $PostgresBin 'pg_ctl.exe'
 if (-not (Test-Path $psql)) { throw "PostgreSQL no encontrado en $PostgresBin" }

@@ -1,0 +1,12 @@
+.env
+.env.*
+.local/
+.venv/
+.vercel/
+__pycache__/
+tests/
+*.log
+*.dump
+*.db
+Dockerfile
+requirements-dev.txt

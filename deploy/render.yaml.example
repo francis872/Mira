@@ -20,6 +20,8 @@ services:
         sync: false
       - key: Jwt__Key
         sync: false
+      - key: LoginProtection__ForwardingKey
+        sync: false
       - key: Jwt__Issuer
         value: MIRA
       - key: Jwt__Audience
@@ -47,6 +49,10 @@ services:
         value: production
       - key: SECRET_KEY
         sync: false
+      - key: MIRA_LOGIN_FORWARDING_KEY
+        sync: false
+      - key: MIRA_TRUSTED_PROXY_NETWORKS
+        value: ""
       - key: API_URL
         sync: false
       - key: SESSION_COOKIE_SECURE
