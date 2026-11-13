@@ -18,6 +18,37 @@ namespace MIRA.Api.Controllers
             _authService = authService;
         }
 
+        [HttpGet("/api/health")]
+        [AllowAnonymous]
+        public IActionResult HealthCheck([FromServices] Configuracion.IDbConnectionFactory connectionFactory)
+        {
+            try
+            {
+                using var conn = connectionFactory.CreateConnection();
+                conn.Open();
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT COUNT(1) FROM usuario;";
+                var count = Convert.ToInt32(cmd.ExecuteScalar());
+                return Ok(new
+                {
+                    status = "Healthy",
+                    database = "Connected",
+                    usuariosRegistrados = count,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    status = "DatabaseConnectionError",
+                    tipoError = ex.GetType().Name,
+                    detalle = ex.Message,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+        }
+
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginRequest peticion)

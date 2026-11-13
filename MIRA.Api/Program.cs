@@ -165,6 +165,9 @@ builder.Services.AddScoped<IReporteService, ReporteService>();
 // =============================================================================
 var app = builder.Build();
 
+// Mostrar siempre detalles de excepción durante la fase de despliegue
+app.UseDeveloperExceptionPage();
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
