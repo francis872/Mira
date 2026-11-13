@@ -119,7 +119,7 @@ def api_call(method, path, json_data=None, expect_list=None):
     login_auth = {'allow_redirects': False} if method == 'POST' and path == 'auth/login' else {}
     if method == 'POST' and path == 'auth/login' and app.config['LOGIN_FORWARDING_KEY']:
         origin = client_origin(app.config['LOGIN_TRUSTED_PROXY_NETWORKS'])
-        if app.config.get('LOGIN_PLATFORM') == 'vercel' and origin is None:
+        if app.config.get('LOGIN_PLATFORM') in ('vercel', 'render') and origin is None:
             return None
         if origin:
             login_auth['auth'] = LoginOriginAuth(app.config['LOGIN_FORWARDING_KEY'], origin)

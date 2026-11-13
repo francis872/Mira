@@ -23,6 +23,79 @@ def test_vercel_proxy_profile_requires_server_environment(monkeypatch):
     with pytest.raises(RuntimeError,match='VERCEL'):configured(monkeypatch)
 
 
+@pytest.mark.parametrize('header,expected', [
+    ('198.51.100.41', '198.51.100.41'),
+    ('2001:db8:0:0::41', '2001:db8::41'),
+    ('::ffff:198.51.100.41', '198.51.100.41'),
+    (None, None), ('not-an-ip', None),
+    ('198.51.100.41, 203.0.113.2', None), ('fe80::1%eth0', None),
+])
+def test_render_uses_only_cloudflare_origin(monkeypatch, header, expected):
+    monkeypatch.setenv('MIRA_PLATFORM', 'render')
+    monkeypatch.setenv('RENDER', 'true')
+    monkeypatch.setenv('RENDER_SERVICE_TYPE', 'web')
+    app = configured(monkeypatch)
+    headers = {'X-Forwarded-For': '192.0.2.9', 'X-Real-IP': '192.0.2.10',
+               'X-Vercel-Forwarded-For': '192.0.2.11'}
+    if header is not None:
+        headers['CF-Connecting-IP'] = header
+    with app.test_request_context('/login', headers=headers, environ_base={'REMOTE_ADDR': '10.0.0.2'}):
+        assert client_origin(()) == expected
+
+
+@pytest.mark.parametrize('render,service_type', [(None, 'web'), ('false', 'web'), ('true', None), ('true', 'pserv')])
+def test_render_profile_requires_official_web_environment(monkeypatch, render, service_type):
+    monkeypatch.setenv('MIRA_PLATFORM', 'render')
+    for key, value in [('RENDER', render), ('RENDER_SERVICE_TYPE', service_type)]:
+        monkeypatch.delenv(key, raising=False)
+        if value is not None:
+            monkeypatch.setenv(key, value)
+    with pytest.raises(RuntimeError, match='RENDER'):
+        configured(monkeypatch)
+
+
+def test_client_headers_cannot_enable_render_profile(monkeypatch):
+    monkeypatch.delenv('MIRA_PLATFORM', raising=False)
+    app = configured(monkeypatch)
+    with app.test_request_context('/login', headers={'RENDER': 'true', 'MIRA_PLATFORM': 'render',
+                                                   'CF-Connecting-IP': '192.0.2.9'},
+                                  environ_base={'REMOTE_ADDR': '198.51.100.10'}):
+        assert client_origin(()) == '198.51.100.10'
+
+
+@pytest.mark.parametrize('header', [None, 'invalid', '198.51.100.41, 203.0.113.2'])
+def test_render_login_does_not_call_api_without_valid_platform_origin(client, calls, monkeypatch, header):
+    import app as frontend
+    monkeypatch.setitem(frontend.app.config, 'LOGIN_PLATFORM', 'render')
+    monkeypatch.setitem(frontend.app.config, 'LOGIN_FORWARDING_KEY', KEY.encode())
+    headers = {} if header is None else {'CF-Connecting-IP': header}
+    with frontend.app.test_request_context('/login', headers=headers):
+        assert frontend.api_call('POST', 'auth/login', {'correo': 'test@invalid.test', 'password': 'wrong'}) is None
+    assert not calls
+
+
+def test_render_login_signs_cloudflare_origin_and_ignores_browser_assertion(client, calls, monkeypatch):
+    import app as frontend
+    from test_app import FakeResponse
+    observed = []
+
+    def capture(method, url, **kwargs):
+        observed.append(requests.Request(method, url, **{k: v for k, v in kwargs.items()
+                                                       if k not in ('timeout', 'allow_redirects')}).prepare())
+        return FakeResponse(401, {'mensaje': 'Credenciales invalidas.'})
+
+    monkeypatch.setattr(frontend.requests, 'request', capture)
+    monkeypatch.setitem(frontend.app.config, 'LOGIN_PLATFORM', 'render')
+    monkeypatch.setitem(frontend.app.config, 'LOGIN_FORWARDING_KEY', KEY.encode())
+    with frontend.app.test_request_context('/login', headers={'CF-Connecting-IP': '2001:db8::41',
+                    'X-Forwarded-For': '192.0.2.9', 'X-Mira-Login-Origin': 'forged'},
+                    environ_base={'REMOTE_ADDR': '10.0.0.2'}):
+        frontend.api_call('POST', 'auth/login', {'correo': 'test@invalid.test', 'password': 'wrong'})
+    assertion = observed[0].headers['X-Mira-Login-Origin']
+    assert assertion.split(';')[2] == '2001:db8::41'
+    assert assertion != 'forged'
+
+
 def configured(monkeypatch, production=False):
     monkeypatch.setenv('MIRA_ENV', 'production' if production else 'development')
     monkeypatch.setenv('MIRA_LOGIN_FORWARDING_KEY', KEY)

@@ -19,8 +19,12 @@ def canonical_ip(value):
 
 def configure_login_protection(app):
     platform = os.getenv('MIRA_PLATFORM', '')
-    if platform not in ('', 'vercel') or (platform == 'vercel' and os.getenv('VERCEL') != '1'):
+    if platform not in ('', 'vercel', 'render'):
+        raise RuntimeError('Perfil de proxy MIRA_PLATFORM desconocido.')
+    if platform == 'vercel' and os.getenv('VERCEL') != '1':
         raise RuntimeError('El perfil de proxy Vercel requiere el entorno oficial VERCEL=1.')
+    if platform == 'render' and (os.getenv('RENDER') != 'true' or os.getenv('RENDER_SERVICE_TYPE') != 'web'):
+        raise RuntimeError('El perfil de proxy Render requiere RENDER=true y RENDER_SERVICE_TYPE=web.')
     app.config['LOGIN_PLATFORM'] = platform
     key = os.getenv('MIRA_LOGIN_FORWARDING_KEY', '')
     if (os.getenv('MIRA_ENV') == 'production' or key) and (len(key.encode('utf-8')) < 32 or key.startswith('REPLACE')):
@@ -39,11 +43,15 @@ def configure_login_protection(app):
 
 
 def client_origin(networks):
-    if current_app.config.get('LOGIN_PLATFORM') == 'vercel':
-        # Vercel overwrites this header at its managed ingress. This profile is
-        # enabled only by server environment, never by an incoming header.
+    platform = current_app.config.get('LOGIN_PLATFORM')
+    if platform in ('vercel', 'render'):
+        # Explicit server profiles only. Render Free cannot receive private
+        # network traffic; its public ingress passes through Cloudflare, which
+        # supplies CF-Connecting-IP. Do not use this profile behind a custom
+        # upstream or after enabling private ingress without reviewing trust.
+        header = 'X-Vercel-Forwarded-For' if platform == 'vercel' else 'CF-Connecting-IP'
         try:
-            return canonical_ip(request.headers.get('X-Vercel-Forwarded-For'))
+            return canonical_ip(request.headers.get(header))
         except ValueError:
             return None
     # Neither X-Real-IP nor arbitrary X-Forwarded-For override an untrusted socket peer.
