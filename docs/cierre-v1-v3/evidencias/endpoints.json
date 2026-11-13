@@ -1,0 +1,341 @@
+{
+  "source": "HTTP attributes in all MIRA.Api/Peticiones/*Controller.cs",
+  "routes": [
+    {
+      "verb": "GET",
+      "route": "/api/area_aplicacion",
+      "file": "MIRA.Api/Peticiones/AreaAplicacionController.cs",
+      "method": "GetAll"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/area_aplicacion/{id:int}",
+      "file": "MIRA.Api/Peticiones/AreaAplicacionController.cs",
+      "method": "GetById"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/area_aplicacion",
+      "file": "MIRA.Api/Peticiones/AreaAplicacionController.cs",
+      "method": "Create"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/area_aplicacion/{id:int}",
+      "file": "MIRA.Api/Peticiones/AreaAplicacionController.cs",
+      "method": "Update"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/area_aplicacion/{id:int}",
+      "file": "MIRA.Api/Peticiones/AreaAplicacionController.cs",
+      "method": "Delete"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/area_conocimiento",
+      "file": "MIRA.Api/Peticiones/AreaConocimientoController.cs",
+      "method": "GetAll"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/area_conocimiento/{id:int}",
+      "file": "MIRA.Api/Peticiones/AreaConocimientoController.cs",
+      "method": "GetById"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/area_conocimiento",
+      "file": "MIRA.Api/Peticiones/AreaConocimientoController.cs",
+      "method": "Create"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/area_conocimiento/{id:int}",
+      "file": "MIRA.Api/Peticiones/AreaConocimientoController.cs",
+      "method": "Update"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/area_conocimiento/{id:int}",
+      "file": "MIRA.Api/Peticiones/AreaConocimientoController.cs",
+      "method": "Delete"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/auth/login",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Login"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/auth/me",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Me"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/auth/logout",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Logout"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/auth/usuarios",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Usuarios"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/auth/roles",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Roles"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/auth/usuarios",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Crear"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/auth/usuarios/{id:long:min(1)}",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Editar"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/auth/usuarios/{id:long:min(1)}",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Inactivar"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/auth/usuarios/{id:long:min(1)}/password",
+      "file": "MIRA.Api/Peticiones/AuthController.cs",
+      "method": "Restablecer"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/investigacion/referencias/usuarios",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Usuarios"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/investigacion/grupos/ficha/{id:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Ficha"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/investigacion/grupos/ficha",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "CrearFicha"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/investigacion/grupos/ficha/{id:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "ActualizarFicha"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/investigacion/{recurso}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Listar"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/investigacion/{recurso}/{id:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Obtener"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/investigacion/{recurso}/{izquierda:int:min(1)}/{derecha:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "ObtenerPuente"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/investigacion/{recurso}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Crear"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/investigacion/{recurso}/{id:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Actualizar"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/investigacion/{recurso}/{id:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "Eliminar"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/investigacion/{recurso}/{izquierda:int:min(1)}/{derecha:int:min(1)}",
+      "file": "MIRA.Api/Peticiones/InvestigacionController.cs",
+      "method": "RetirarPuente"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/linea_investigacion",
+      "file": "MIRA.Api/Peticiones/LineaInvestigacionController.cs",
+      "method": "GetAll"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/linea_investigacion/{id:int}",
+      "file": "MIRA.Api/Peticiones/LineaInvestigacionController.cs",
+      "method": "GetById"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/linea_investigacion",
+      "file": "MIRA.Api/Peticiones/LineaInvestigacionController.cs",
+      "method": "Create"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/linea_investigacion/{id:int}",
+      "file": "MIRA.Api/Peticiones/LineaInvestigacionController.cs",
+      "method": "Update"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/linea_investigacion/{id:int}",
+      "file": "MIRA.Api/Peticiones/LineaInvestigacionController.cs",
+      "method": "Delete"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/objetivo_desarrollo_sostenible",
+      "file": "MIRA.Api/Peticiones/ObjetivoDesarrolloSostenibleController.cs",
+      "method": "GetAll"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/objetivo_desarrollo_sostenible/{id:int}",
+      "file": "MIRA.Api/Peticiones/ObjetivoDesarrolloSostenibleController.cs",
+      "method": "GetById"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/objetivo_desarrollo_sostenible",
+      "file": "MIRA.Api/Peticiones/ObjetivoDesarrolloSostenibleController.cs",
+      "method": "Create"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/objetivo_desarrollo_sostenible/{id:int}",
+      "file": "MIRA.Api/Peticiones/ObjetivoDesarrolloSostenibleController.cs",
+      "method": "Update"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/objetivo_desarrollo_sostenible/{id:int}",
+      "file": "MIRA.Api/Peticiones/ObjetivoDesarrolloSostenibleController.cs",
+      "method": "Delete"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/termino_clave",
+      "file": "MIRA.Api/Peticiones/TerminoClaveController.cs",
+      "method": "GetAll"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/termino_clave/{termino}",
+      "file": "MIRA.Api/Peticiones/TerminoClaveController.cs",
+      "method": "GetByTermino"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/termino_clave",
+      "file": "MIRA.Api/Peticiones/TerminoClaveController.cs",
+      "method": "Create"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/termino_clave/{termino}",
+      "file": "MIRA.Api/Peticiones/TerminoClaveController.cs",
+      "method": "Update"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/termino_clave/{termino}",
+      "file": "MIRA.Api/Peticiones/TerminoClaveController.cs",
+      "method": "Delete"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/universidad",
+      "file": "MIRA.Api/Peticiones/UniversidadController.cs",
+      "method": "GetAll"
+    },
+    {
+      "verb": "GET",
+      "route": "/api/universidad/{id:int}",
+      "file": "MIRA.Api/Peticiones/UniversidadController.cs",
+      "method": "GetById"
+    },
+    {
+      "verb": "POST",
+      "route": "/api/universidad",
+      "file": "MIRA.Api/Peticiones/UniversidadController.cs",
+      "method": "Create"
+    },
+    {
+      "verb": "PUT",
+      "route": "/api/universidad/{id:int}",
+      "file": "MIRA.Api/Peticiones/UniversidadController.cs",
+      "method": "Update"
+    },
+    {
+      "verb": "DELETE",
+      "route": "/api/universidad/{id:int}",
+      "file": "MIRA.Api/Peticiones/UniversidadController.cs",
+      "method": "Delete"
+    }
+  ],
+  "health": "GET /health in Program.cs",
+  "academicResources": [
+    "sedes",
+    "docentes",
+    "grupos_investigacion",
+    "semilleros",
+    "lineas_investigacion",
+    "grupo_docentes",
+    "semillero_tutores",
+    "areas_conocimiento",
+    "ods",
+    "areas_aplicacion",
+    "palabras_clave"
+  ],
+  "bridges": {
+    "grupo_lineas": [
+      "grupo_id",
+      "linea_id"
+    ],
+    "semillero_lineas": [
+      "semillero_id",
+      "linea_id"
+    ],
+    "linea_disciplinas": [
+      "linea_id",
+      "disciplina_id"
+    ],
+    "linea_ods": [
+      "linea_id",
+      "ods_id"
+    ],
+    "linea_aplicacion": [
+      "linea_id",
+      "aplicacion_id"
+    ]
+  }
+}

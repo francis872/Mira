@@ -1,5 +1,7 @@
 # Arquitectura MIRA V3
 
+> Seguimiento local 2026-11-07: [cierre académico y propuesta sin publicar](V3_CIERRE_ACADEMICO.md). Este documento conserva su alcance histórico; el PR #7 publicado contiene ocho commits V3 más 43 anteriores. Las nuevas correcciones y CI requieren autorización de publicación.
+
 ## Componentes y responsabilidades
 
 Se conserva ASP.NET Core net10.0, Flask/Jinja y PostgreSQL 16. No se reemplazan catálogos ni el modelo oficial V2. No se introduce React.

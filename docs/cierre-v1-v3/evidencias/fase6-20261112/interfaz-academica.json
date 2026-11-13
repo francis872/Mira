@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-12",
+  "checks": [
+    {
+      "requirement": "HU02-CA03",
+      "englishContentRequired": true
+    },
+    {
+      "requirement": "HU02-CA02",
+      "categories": [
+        "Social",
+        "Económica",
+        "Ambiental"
+      ]
+    },
+    {
+      "requirement": "HU09-CA01/02",
+      "mandatoryMultipleSelectors": true
+    },
+    {
+      "requirement": "HU08-CA02",
+      "confirmationBeforeRemoval": true,
+      "keyboardTrapAndEscape": true
+    },
+    {
+      "requirement": "HU04-CA02",
+      "newSedeAppearsWithoutReload": true,
+      "via": "Authenticated POST and BroadcastChannel notification"
+    }
+  ],
+  "populatedFixturesTested": true
+}

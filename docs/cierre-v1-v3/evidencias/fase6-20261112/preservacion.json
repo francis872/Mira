@@ -1,0 +1,29 @@
+{
+  "clientDate": "2026-11-12",
+  "root": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA",
+  "initialHead": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "branch": "feature/mira-v3",
+  "remote": "https://github.com/francis872/Mira.git",
+  "initialCandidateCount": 165,
+  "sourceBackupSha256": "1009d5415cb79deac5ecceaadd674001ff5c2351ed274a5c88c6b8ca36c454de",
+  "gitBundleSha256": "5222fb63a878771549c845f7a6b2209d883cc1db5c03a59b969e0360eba90120",
+  "backupVerified": true,
+  "protectedOriginalsSha256": {
+    ".github/workflows/mira-v3-ci.yml": "87c6095481f64b509beb03646510fe47f9382e7a4b816cd58710a0b5dbd4e378",
+    "MIRA.Api/Configuracion/LoginProtection.cs": "4cf4b9a598d2160f6a10e6716fd60d0a50291a1eacbb530ce16e0f547c586568",
+    "MIRA.Api/Configuracion/SeguridadConfiguration.cs": "a5415dd4f37d5aa0da832504cab7b1a2db291001faf54328a0bbd08aba80ad27",
+    "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs": "30d4998a379355819d1db921de1e2d6fc6fd26d4aac2d78a93121bbb8d6312c2",
+    "MIRA.Api/Servicios/Seguridad/AuthService.cs": "f45af4b638115c08f259b9cb7bb08716f6d5be261c12e2eb6d6a5f5bd69507a2",
+    "database/migrations/001_v1_catalogos_tablas.sql": "7646b5ae793915fe4adbe1613064bdf2cbad25072846c2f29d2c0e4174eabebe",
+    "database/migrations/002_v1_catalogos_datos_iniciales.sql": "44ea3a9af428eb861ec7e6ed4b805f9b11b1dba229db585f19db574e302be658",
+    "database/migrations/003_v2_usuarios_roles.sql": "dbaace06230968c2fc67fd5b96e6fd49e4b01c1a2132c5a49d08431892133c7b",
+    "database/migrations/004_v2_catalogos_rutinas.sql": "53715d35c70f419a6c3bd40090e0d549621e4b3927558b59a8c7a343bc33ae6b",
+    "database/migrations/005_v2_area_aplicacion_trigger.sql": "2f397fd888a420d0cadc637824d7f3987f9ae8532b3edf4405aca694f8a08d09",
+    "database/migrations/006_v2_modelo_oficial.sql": "9be09a8eb31677f94e5ae44b4a132bdb286df8fe47b2ccd7088b004b02ae21c1",
+    "database/migrations/007_v2_rutinas_investigacion.sql": "802fd33efb0d3dbda352f9f8310a7a2f7306535ce6fce2635379e31889e71337",
+    "database/migrations/008_v3_sesiones.sql": "8f9d7f29898e209822af9775550a1e8f6459564bee3c6e911299010ff89ad995",
+    "database/migrations/009_v1_requisitos_originales.sql": "a2a43e9d873c1a7f98a21106a8293cc366aff020bbb6221aab14f5d1eba212b7"
+  },
+  "backstageAccessed": false,
+  "privateCredentialsExcluded": true
+}

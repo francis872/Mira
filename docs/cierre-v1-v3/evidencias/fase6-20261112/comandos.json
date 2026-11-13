@@ -1,0 +1,24 @@
+[
+  {
+    "scope": "native",
+    "command": "powershell -File scripts/verify-postgres16.ps1 -DatabasePort <libre> -ApiPort <libre> -FrontendPort <libre>",
+    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\integral-final\\verify-postgres16.ps1",
+    "logSha256": "e74df016e2f979606276ac4d9e97967ce6824c303a37302113cb7f291571bf06"
+  },
+  {
+    "scope": "browser",
+    "command": "powershell -File scripts/verify-postgres16.ps1 -BrowserOnly -Zoom; MIRA_EVIDENCE_DIRECTORY y MIRA_ZOOM_DIRECTORY en salida nueva; MIRA_ZOOM_DEBUG_PORT libre",
+    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\navegador-completo\\verify-postgres16.ps1",
+    "logSha256": "f4e0466a99747158b3901252bd15b2d981282f3148c10f785f69f0a3ed1c92b0"
+  },
+  {
+    "scope": "docker",
+    "command": "powershell -File scripts/verify-docker.ps1; override de imagen y backend PostgreSQL en proyecto nuevo aislado",
+    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\verify-docker-final.ps1",
+    "logSha256": "d35f61cf522865968f60f8455e57a19f12185f796d9629aca7ef4c1f2af90519"
+  },
+  {
+    "scope": "audits",
+    "command": "python scripts/audit-python.py --packages-json <inventario-imagen> --output <reporte>; dotnet list MIRA.sln package --vulnerable --include-transitive --no-restore --format json --output-version 1; actionlint .github/workflows/mira-v3-ci.yml"
+  }
+]

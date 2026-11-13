@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "MIRA.Api/MIRA.Api.csproj"
+    },
+    {
+      "path": "tests/MIRA.Api.Tests/MIRA.Api.Tests.csproj"
+    }
+  ]
+}

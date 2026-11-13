@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-07",
+  "timezone": "America/Bogota",
+  "publishedPr": {
+    "number": 7,
+    "url": "https://github.com/francis872/Mira/pull/7",
+    "draft": true,
+    "merged": false,
+    "head": "3105273af84e55a1e813e76f2acb92acc31caa94",
+    "base": "35640853dc4cbb4dd50f17c9208acb2feedaff1d",
+    "commits": 51,
+    "v3Commits": 8,
+    "previousCommits": 43,
+    "changedFiles": 197,
+    "formalReviews": 0,
+    "workflowRuns": 0
+  },
+  "scope": "Local unpublished academic-close proposal; original v3 evidence unchanged",
+  "tests": {
+    "dotnetPassed": 71,
+    "dotnetSkipped": 0,
+    "flaskPassed": 80,
+    "newFlaskCases": 2,
+    "httpE2ePassed": 43,
+    "sqlSuites": 5,
+    "dockerE2eSameCasesRepeated": 43,
+    "browserPageWidths": 50,
+    "axeChecks": 18,
+    "axeViolations": 0,
+    "axeIncomplete": 0,
+    "realPageZoomChecks": 27,
+    "zoomFactors": [
+      1,
+      2,
+      4
+    ],
+    "osvRuntimePackages": 18,
+    "osvKnownAdvisories": 0,
+    "nugetProjectsWithoutReportedAdvisories": 2
+  },
+  "ci": {
+    "workflowPrepared": true,
+    "actionlint": "passed; ShellCheck/Pyflakes not run",
+    "localReleaseBuildAndDatabaseComponents": "passed",
+    "negativeGates": "skipped, empty, advisory, missing CI flag and missing browser rejected",
+    "githubExecution": "not_run",
+    "githubApprovalClaimed": false
+  },
+  "c06": {
+    "foreignKeyColumns": 22,
+    "optionalForeignKeyColumns": 0,
+    "technicalApplicability": "no optional FK in confirmed model",
+    "academicAcceptance": "pending_professor"
+  },
+  "pending": [
+    "screen reader and physical devices",
+    "interactive tasks in other browsers",
+    "professor acceptance",
+    "authorization to commit/push local proposal and execute Actions",
+    "real Render/Neon/TLS/redeploy/recovery/load/OS CVE assessment",
+    "separate future SAPIENS branch/branding decisions"
+  ],
+  "newCommits": 0,
+  "pushPerformed": false,
+  "merged": false,
+  "remoteDeployment": false,
+  "remoteResourcesCreated": false,
+  "realDataModified": false,
+  "verdict": "Keep PR #7 Draft with observations; local corrections ready for publication review"
+}

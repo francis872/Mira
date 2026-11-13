@@ -2,6 +2,8 @@
 
 # Scripts
 
+Cierre académico propuesto: `verify-postgres16.ps1 -Browser -Zoom` añade zoom real de página Edge al 100/200/400 % con perfiles exclusivos; requiere Node/Edge y datos de prueba. `MIRA_EVIDENCE_DIRECTORY` y `MIRA_ZOOM_DIRECTORY` permiten conservar salidas nuevas en .local sin sobrescribir las históricas. `verify-production-smoke.py` admite --output/--api-image/--frontend-image. Los auditores emiten la fecha efectiva de Bogotá. Los scripts de `ci/` y el workflow siguen pendientes de publicación autorizada; ver [CI](../docs/V3_CI.md).
+
 V3 estabilizada: `audit-worktree.py` revisa candidatos sin imprimir secretos; `audit-python.py` consulta OSV y distingue bloqueos de resultados limpios; `verify-docker.ps1` prueba un proyecto exclusivo con credenciales aleatorias y `verify-docker-session.py` comprueba reinicio/revocación. Construir antes las etiquetas mira-v3-api:stabilization y mira-v3-frontend:stabilization. `verify-production-smoke.py` comprueba PORT/health/cookie en modo Production local con destinos ficticios y `verify-image-content.py` revisa /app mediante export. Ver [procedimientos y límites](../docs/V3_PRUEBAS.md). Nunca usar E2E con datos reales; estos verificadores no despliegan en Render/Neon.
 
 This directory contains utility scripts for local development and repository maintenance.

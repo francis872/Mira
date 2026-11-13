@@ -1,0 +1,62 @@
+[
+  {
+    "id": "HU02-CA02",
+    "observed": {
+      "arbitraryOdsCategoryAccepted": true
+    }
+  },
+  {
+    "id": "HU02-CA03",
+    "observed": {
+      "keywordEnglishNullAccepted": true
+    }
+  },
+  {
+    "id": "HU04-CA03",
+    "observed": {
+      "groupAssignedToInactiveSede": true
+    }
+  },
+  {
+    "id": "HU05-CA02-overlap",
+    "observed": {
+      "overlappingDatedLeadersAccepted": true
+    }
+  },
+  {
+    "id": "HU05-CA02-zero",
+    "observed": {
+      "groupCreatedWithoutLeader": true
+    }
+  },
+  {
+    "id": "HU06-CA03-ambiguity",
+    "observed": {
+      "overlappingTutorIntervalsAccepted": true
+    }
+  },
+  {
+    "id": "HU06-CA03-exact",
+    "observed": {
+      "exactDuplicateRejected": true
+    }
+  },
+  {
+    "id": "HU07-CA01",
+    "observed": {
+      "lineDescriptionNullAccepted": true
+    }
+  },
+  {
+    "id": "HU07-CA03",
+    "observed": {
+      "inactiveLineNewAssociationAccepted": true
+    }
+  },
+  {
+    "id": "HU09-CA04",
+    "observed": {
+      "lineCreatedWithoutOdsOrDiscipline": true
+    }
+  }
+]

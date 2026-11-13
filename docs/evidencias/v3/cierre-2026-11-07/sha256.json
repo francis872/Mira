@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-07",
+  "sha256": {
+    "accessibility-results.json": "aba0aec3cb8040d92d17e9991c3079a647933ba378e9a566490b9f9f93449396",
+    "browser-results.json": "f927ef528293985495a0595f9e24da5f22d952a9e695783b539cc39b9096f579",
+    "c06-schema.json": "d44cb9581be2df2e13b8a26a2b026dba09ff722e8832d8eb593e48364413c774",
+    "dashboard-1440.png": "343601da1782ccb486023518b2f5c264481239c6c9f9746ae057c11101aef49a",
+    "dashboard-390.png": "42c7ad6ae0aaa7652f7e349f2db5f903a974d5a13cb32ebb7cf48d75ec4e1b49",
+    "docker-session-results.json": "ec9829a3de3e791095f6e331f6499a316b4acf4a073d2cac2103591e6dad60e6",
+    "images.json": "02d6bce1a8f8fc2f7754a86ec509b81043d2deade398158d23560ae23faef024",
+    "keyboard-results.json": "612b38ea04e8ab30bb8b73b629b54e0b5667baacf6a68ad8037f492ac91c77a6",
+    "login-mobile.png": "f1594ad8c1aadea4297c058133868eb137032e396f22eee2ce470c1b9d470420",
+    "osv.json": "727b06d427eefba321d19e7608fe82d12259ad2248fef9b6bfe3004c776bcca6",
+    "production-smoke.json": "526f00b7d835ff92d48361e4fe6a8b666f324690515f49c8f678c2c022fe427a",
+    "resumen.json": "96252ae705823a7e49458984d7cfae3e578d85120d621c46ae3c360c4c5bff55",
+    "seguridad-pr-publicado.json": "7310a4315cc35162591293da83cd993fb08f1895796a45431d7dc0fde0064253",
+    "zoom-2-login.png": "4ec35454ee82ee3a0d2738c8504dbd76d765458862ff5b0a1c1df91458417489",
+    "zoom-4-ficha.png": "8df348b22f514f18ad08055b63f7302110a8f43ba35a6a9dff4d6953e41a69b5",
+    "zoom-4-inicio.png": "6ac30c8298f8a05e061124d60685b7d3a99dd6a1e715a08b0252199691142637",
+    "zoom-results.json": "fd7d7dbb2ed7ccc4e27047a2c014cf80d6abc5609d52f01aafb436550bbf352d"
+  }
+}

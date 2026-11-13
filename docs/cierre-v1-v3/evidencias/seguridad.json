@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-07T18:25:13.316321-05:00",
+  "scope": "Current tracked files plus every pending non-ignored file; Office XML inspected; known local secret comparison without values; binary PNG evidence reviewed separately. Not exhaustive Git history/cloud/OS CVE audit.",
+  "candidates": 323,
+  "pending": 111,
+  "texts": 300,
+  "binaries": [
+    "docs/cierre-v1-v3/evidencias/dashboard-1440.png",
+    "docs/cierre-v1-v3/evidencias/dashboard-390.png",
+    "docs/cierre-v1-v3/evidencias/dashboard-768.png",
+    "docs/cierre-v1-v3/evidencias/login-mobile.png",
+    "docs/cierre-v1-v3/evidencias/zoom-4-ficha.png",
+    "docs/evidencias/mira-v2-desktop.png",
+    "docs/evidencias/mira-v2-form.png",
+    "docs/evidencias/mira-v2-grupo-semilleros.png",
+    "docs/evidencias/mira-v2-mobile.png",
+    "docs/evidencias/v3/cierre-2026-11-07/dashboard-1440.png",
+    "docs/evidencias/v3/cierre-2026-11-07/dashboard-390.png",
+    "docs/evidencias/v3/cierre-2026-11-07/login-mobile.png",
+    "docs/evidencias/v3/cierre-2026-11-07/zoom-2-login.png",
+    "docs/evidencias/v3/cierre-2026-11-07/zoom-4-ficha.png",
+    "docs/evidencias/v3/cierre-2026-11-07/zoom-4-inicio.png",
+    "docs/evidencias/v3/dashboard-1024.png",
+    "docs/evidencias/v3/dashboard-1440.png",
+    "docs/evidencias/v3/dashboard-320.png",
+    "docs/evidencias/v3/dashboard-390.png",
+    "docs/evidencias/v3/dashboard-640.png",
+    "docs/evidencias/v3/dashboard-768.png",
+    "docs/evidencias/v3/login-desktop.png",
+    "docs/evidencias/v3/login-mobile.png"
+  ],
+  "officeXmlScanned": [
+    "docs/fuentes/historicos/Cronograma Módulo de Investigación - Plataforma Académica .xlsx",
+    "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx",
+    "docs/fuentes/historicos/Plan de desarrollo Módulo de Investigación - Plataforma Académica (1).docx"
+  ],
+  "highConfidenceFindings": [],
+  "literalFilesForManualReview": [
+    "frontend/tests/test_production.py",
+    "scripts/verify-production-smoke.py",
+    "tests/MIRA.Api.Tests/LoginProtectionTests.cs",
+    "tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs",
+    "tests/MIRA.Api.Tests/SeguridadTests.cs"
+  ],
+  "ignored": {
+    ".env": true,
+    ".env.local": true,
+    ".local/cierre-integral-20261107/runtime/config.env": true,
+    ".local/cierre-integral-20261107/probe-sessions/test": true
+  },
+  "imagesEvidence": "imagenes.json",
+  "privateOfficeOriginalsIncludedInNewPackage": false,
+  "manualLiteralReview": [
+    {
+      "path": "frontend/tests/test_production.py",
+      "classification": "Public isolated test fixture; not a real credential",
+      "reviewed": true
+    },
+    {
+      "path": "scripts/verify-production-smoke.py",
+      "classification": "example.invalid/unused destination and runtime-generated secrets in ignored private environment",
+      "reviewed": true
+    },
+    {
+      "path": "tests/MIRA.Api.Tests/LoginProtectionTests.cs",
+      "classification": "Public isolated test fixture; not a real credential",
+      "reviewed": true
+    },
+    {
+      "path": "tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs",
+      "classification": "Public isolated test fixture; not a real credential",
+      "reviewed": true
+    },
+    {
+      "path": "tests/MIRA.Api.Tests/SeguridadTests.cs",
+      "classification": "Public isolated test fixture; not a real credential",
+      "reviewed": true
+    }
+  ],
+  "newScreenshotsVisuallyInspected": 5,
+  "priorBinaryEvidence": "Prior hashes preserved; no new exhaustive visual audit of all historical images"
+}

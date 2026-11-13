@@ -1,5 +1,9 @@
 # Pruebas MIRA V3 — cierre de estabilización
 
+> Fase 6 (2026-11-12): [estado actual y despliegue](cierre-v1-v3/10_pruebas.md). 138 .NET, 132 Flask, 51 HTTP y 11 SQL aprobados localmente; V2/C06 mantienen pendientes académicos. Las cifras y propuestas anteriores se conservan como antecedentes. No confundirlos con CI o producción remotos.
+
+> Seguimiento local 2026-11-07: [cierre académico y propuesta sin publicar](V3_CIERRE_ACADEMICO.md). Este documento conserva su alcance histórico; el PR #7 publicado contiene ocho commits V3 más 43 anteriores. Las nuevas correcciones y CI requieren autorización de publicación.
+
 Fecha: 2026-11-05. [Matriz de 30 requisitos, métodos y evidencia](V3_REVISION_FINAL.md). Los resultados históricos de V1/V2 no se cuentan como ejecuciones actuales.
 
 | Comprobación | Resultado ejecutado | Evidencia |

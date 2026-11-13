@@ -1,0 +1,1179 @@
+{
+  "clientDate": "2026-11-12",
+  "headBeforePublication": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "branch": "feature/mira-v3",
+  "stagedBeforeAuthorizedCommits": [],
+  "initialPending": 165,
+  "pendingBeforePublication": 230,
+  "changedPreexistingFiles": [
+    {
+      "path": ".env.example",
+      "before": "b6d5c5287b9727b9592701a77efefd30fd65525dd04ec75db380864c8085ed0e",
+      "after": "e82aad60c9bd96797ebc2d5289e3435063ea58d9cb67f37a4f11f9b55e18b188"
+    },
+    {
+      "path": ".gitignore",
+      "before": "ffe726045a34b74e36f52954da98cc9cd083f35cb4621d4bbe131b6c59622f59",
+      "after": "4bef8c07cfb12aac7e9c0f2d87521d07822304dca2bfe192df8b95af462945cc"
+    },
+    {
+      "path": "MIRA.Api/Program.cs",
+      "before": "efcd2dff8d6c37e6d14e5f314c848eccf65ea3baa6969a2e9b6f81c82a8dc763",
+      "after": "3d919d62a820c3dbebfdad9b5ab1b65c66c37b6450351b359829f260c9c85bf4"
+    },
+    {
+      "path": "README.md",
+      "before": "b124187c2c8bcae43304dd4f965f7b121d32e077491ad9b304fbccb87d2495c1",
+      "after": "cda97bf35778b02cc736218461b2f1d1f53415b9e0688dab7c12029bcb6c4ed1"
+    },
+    {
+      "path": "deploy/README.md",
+      "before": "baf4c8a3946087ee274ac69e35026e822c6196670865082908d9827922771067",
+      "after": "6f4e15dd7b4d0e306a12a3f7de562af5f0f40aeff6e1e2efc20aa1a99a95ed61"
+    },
+    {
+      "path": "docker-compose.yml",
+      "before": "8a3eff5d5b5c6e50c584190faa457d5622f97f8f365500264ea0d0ac954f95d6",
+      "after": "818a543a54b7e565b227eb4dded2ad331a961c400161fe6433d33a8b31fe4f90"
+    },
+    {
+      "path": "docs/V3_GUIA_SUSTENTACION.md",
+      "before": "73785226d02ebacca6b94ce2050c21c6c99469edeab82bc957897b0c2a777425",
+      "after": "ce76786f2daff5191c60f70291af9da8118355141d5445977aaa6630f560717b"
+    },
+    {
+      "path": "docs/V3_PRUEBAS.md",
+      "before": "807ef79e098beecbe3e4e6b5e010530c3b6fc00de09839ca7dd93306e3990f15",
+      "after": "24946f096aab20a9676e20ed7a9a1453aa1edf83fa1a480c44bde7c63c608394"
+    },
+    {
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.csv",
+      "before": "ba6117432fbae0b410af027ab72f675125838ce738528536cfc1787528923047",
+      "after": "b3f9c214361d5d27bcc253b3a83f58a21c03f33f0f08c546291c84b91b02fb80"
+    },
+    {
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.json",
+      "before": "e519c3713cc9b30193b73375ebcfd6d99e8d717e5a812459a2ca2ba54eb3781c",
+      "after": "83a61060c4e5d76b35e2a390f84afcd0f163490b4492f71b0981a082f10b2840"
+    },
+    {
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.md",
+      "before": "960e5fe0b7699700f85b130e09cb80c6e6e46b0ef95f22409532bc8a8925b15e",
+      "after": "c82072cf238a9d55b689f0aa432af6a6a238497540b1c9bf40eaa7893c008b60"
+    },
+    {
+      "path": "docs/cierre-v1-v3/03_endpoints.md",
+      "before": "c4d404856aff27dacb27bb15f9a7acb9c777f1e35f6c0dcf02499275dee2cacc",
+      "after": "13f36b58434b3ea8cdbb2273d129f4c2bdc014842ddf4632cac22354f62326a3"
+    },
+    {
+      "path": "docs/cierre-v1-v3/04_modelo_datos.md",
+      "before": "b5b8cd83accd7735ac9af8037714a69b50fd48b83b5b7f3da241c350372ef968",
+      "after": "b4fedbc0f67b3758b335ddd71ca5660b3a274ad24693d651754f808c4ff289dc"
+    },
+    {
+      "path": "docs/cierre-v1-v3/05_rutinas_triggers.md",
+      "before": "4aac1d0555031e7a3fabb0e1cf913c3f4f0f1a27145eedf31fe994c96c8fdee5",
+      "after": "18bee369d4d80880a1a9d4af2fdc5d6a85788a3518b7c9df346f6fd63c95648d"
+    },
+    {
+      "path": "docs/cierre-v1-v3/07_instalacion_local.md",
+      "before": "eb06e87d7ad592202a98988c57ac5b366aac6a94eff34645bc3e9b1dab6d48d4",
+      "after": "3e5da0174b3117a48d8350bfa8fd919d7c087a42abb047f1602df88b30a6ee9e"
+    },
+    {
+      "path": "docs/cierre-v1-v3/08_manual_usuario.md",
+      "before": "86dea4b00c8ab8b52ba7f0d05a71a8b1387fc1470f0df15aad906208537c60c9",
+      "after": "1d87c55d3285680aceb4724c5e7d13c27686b229ad6db498c8d77f9a95773e39"
+    },
+    {
+      "path": "docs/cierre-v1-v3/09_manual_tecnico.md",
+      "before": "0999126dddc895e3aa848214f5a98c6c2c6f4237dd0546ec86430b5617ff6747",
+      "after": "00b03fd718e5152e1d9d82ce7fd134e5c3fe0ffa3ea96ae7e237e5586a54bf96"
+    },
+    {
+      "path": "docs/cierre-v1-v3/10_pruebas.md",
+      "before": "928c48903a6bbd20d62d02cfe687369388ee6145dbaa75826c743c4abd35797e",
+      "after": "5b048fbd4ebe8f380dfc2c5634f096798b4d8048dc8867d467fb92175cdd0d33"
+    },
+    {
+      "path": "docs/cierre-v1-v3/11_guia_sustentacion.md",
+      "before": "245ac120c6f45623a34d5e09c674b23d8a267cd764985678dd7f8c16984cc65f",
+      "after": "9669718d14de2ce7ae71e99cda7c9fa44956e0ee935f4d3e161c24e80e7f24a5"
+    },
+    {
+      "path": "docs/cierre-v1-v3/12_riesgos_excepciones.md",
+      "before": "ce8736448440a0dd2665b31b6d58433058d410b6e9b401ebaea0dc2af42d8770",
+      "after": "7a0e40e4ade8b755699733418e1921bd959a0d0df2b5b31dbb2bfc2887487120"
+    },
+    {
+      "path": "docs/cierre-v1-v3/13_historial_publicacion.md",
+      "before": "dead19d51051962a8c9e261cbdaa908fadba1befb3a02492e1a8220353a0fd36",
+      "after": "f904e9b004d8fee91ada208e9468a35bd34af4ae886ea2660a0829f7176bfe96"
+    },
+    {
+      "path": "docs/cierre-v1-v3/14_informe_cierre.md",
+      "before": "cfe69e8fbdb24096935f876921ab02b643c37be35a6da836a4f139b94cd99f34",
+      "after": "07af9f40f205cf2a7c65d10b6d6957fba02d9d228ffcfc45949c341ce6e5499d"
+    },
+    {
+      "path": "frontend/Dockerfile",
+      "before": "93151cc3149e1d5c599e459f952a3d4cacf005d5e351bd4f75224cd36bd5db2f",
+      "after": "593e6c9ba53f5d8f868fa7a6ba203bbc96c021bb00ecb7b3242f4d8f46a5094b"
+    },
+    {
+      "path": "frontend/app.py",
+      "before": "43c1417eed42efec6b8a00a23d7a870798a9ebb1c7cd2d9e5874e3ccc4bd1b06",
+      "after": "d610a420a73e9538c43123274154d1743bb64d7084d61161e91e1dffeb1fc96e"
+    },
+    {
+      "path": "frontend/login_protection.py",
+      "before": "ab25151697f7cc363d6ddd3e309f2ece99b36f56b4b7cb5501dfd61f4befb3b3",
+      "after": "23ffdae9bc7b756e0c37ce606c0c48662d4b9481342e997e21da8e65032a889c"
+    },
+    {
+      "path": "frontend/requirements.lock",
+      "before": "3408f380ff4f01da04cb68f43a014a520e74ff73f056611c5c2f4ab4babe78ad",
+      "after": "506baac619da272955ee141c257d6e6e08af9ae59c7411b49e114207750df9f2"
+    },
+    {
+      "path": "frontend/requirements.txt",
+      "before": "2f2d053d00ede5ed8735b89a7063f0d4aef045319f761d651a522db64f206d3b",
+      "after": "e7075177d83a36093c3d3dbaaf3dac5d8ca928760d46ee5263de3e2b364db609"
+    },
+    {
+      "path": "frontend/seguridad.py",
+      "before": "92367e7d76c2a18667dd2d2fcea96856ae8c7c3e683082d308ab6f0bbed5c340",
+      "after": "ff364638c8bfb06020900addaa62c7466f43f1af81f6d6677b51f20639937810"
+    },
+    {
+      "path": "frontend/templates/base.html",
+      "before": "cf29a47fefd5ef3154d62b0eb2b3d137850b358714af8dff198438a695e58999",
+      "after": "3fc7af66b16a887e9d492f49e3b7cdc5885e74b0122d7a07377d4dd3d7a5313b"
+    },
+    {
+      "path": "frontend/templates/index.html",
+      "before": "67529a549ec69b24e93f5daca95da6cf8762625d3adf3ee40ab67de6d0805204",
+      "after": "3f62392d80c33d1e9efc05c2a4207b42bf5468df401ac2760ad72b8204eb0213"
+    },
+    {
+      "path": "frontend/templates/login.html",
+      "before": "e7b018206adbbc96c21142854b7eba6643d5b674c90faa5d4ceaabad8ea98ea5",
+      "after": "955bd073a87065cd097fa9d0aa871208d3ef8ee27f61b2c89c438a2c30ec8637"
+    },
+    {
+      "path": "frontend/tests/e2e/test_local_platform.py",
+      "before": "c81163243d6c9a2c8a058d72eb66e02f3f0d9d0db5df839282aec2476731d09d",
+      "after": "612dc752bca558978581cba95efd29583d186ed08921c8debb0c1e3011148ee6"
+    },
+    {
+      "path": "frontend/tests/test_app.py",
+      "before": "ff67cc14361cd0aaf244e9ea22a67be2fa5641a19fb0e5838990abb3551fa99c",
+      "after": "b2bd188c8548ee16f79b8174399a0c89dfe46cc334d7a34c43186cc70002551e"
+    },
+    {
+      "path": "frontend/tests/test_login_protection.py",
+      "before": "b43497c6c67ff64baf6e56415d07198740d9a6187d4172f4b2b6c40fa99ff7a3",
+      "after": "178771f063430f26fcfb218e1899be3652fd1aa2249895cd6101cb9613df45e2"
+    },
+    {
+      "path": "scripts/verify-docker.ps1",
+      "before": "2756c035a8733b3bfbcaa22d9b1d1dbd96c5c6d72921b3ff04c5a262e1d20cdb",
+      "after": "304bd319f1805c8fa9a4aba0c7e64b2527aecc0895da73fd969a9b27c8bbca19"
+    },
+    {
+      "path": "scripts/verify-zoom-v3.mjs",
+      "before": "d8d6dfacc79ef1be9063336025411cfdba31f87eeee479910c00ddb769c0f186",
+      "after": "50154aa05cf337db3984bad3c8b2d2fbae201509eaa23298b34fe8454722743c"
+    }
+  ],
+  "newPaths": [
+    "MIRA.Api/Configuracion/Readiness.cs",
+    "database/migrations/015_v3_sesion_web_compartida.sql",
+    "database/tests/v3_sesion_web.sql",
+    "deploy/permisos_runtime.sql",
+    "deploy/render-free.yaml.example",
+    "docs/FASE6_DESPLIEGUE.md",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/axe.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/casos.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/ci-scripts.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/comandos.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/d01-sesiones.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/dashboard-390.png",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/github.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/imagenes.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/informe-pre-fase5.md",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/integrantes-academico.png",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/interfaz-academica.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/inventario-requisitos.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/matriz-pre-fase5.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/osv.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/preservacion.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/production-local.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/reportes-academicos.png",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/responsive.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/resultados.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/sesiones-docker.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/sha256-pre-fase5.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/teclado.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/upgrade-recuperacion.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/version-fuentes.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/workflow.json",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/zoom-4-ficha.png",
+    "docs/cierre-v1-v3/evidencias/fase5-20261107/zoom.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/axe.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/casos.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/comandos.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/d01.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/dashboard-390.png",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/imagenes.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/integrantes-academico.png",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/interfaz-academica.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/neon-migraciones.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/neon-respaldo.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/osv.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/preservacion.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/production-local.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/reportes-academicos.png",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/responsive.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/resultados.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/sesiones-docker.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/teclado.json",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/zoom-4-ficha.png",
+    "docs/cierre-v1-v3/evidencias/fase6-20261112/zoom.json",
+    "frontend/.gitignore",
+    "frontend/.python-version",
+    "frontend/.vercelignore",
+    "frontend/observabilidad.py",
+    "frontend/session_store.py",
+    "frontend/tests/test_observabilidad.py",
+    "frontend/tests/test_shared_sessions.py",
+    "frontend/vercel.json",
+    "tests/MIRA.Api.Tests/ReadinessTests.cs"
+  ],
+  "status": [
+    {
+      "status": " M",
+      "path": ".env.example"
+    },
+    {
+      "status": " M",
+      "path": ".gitignore"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Configuracion/SeguridadConfiguration.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Modelos/RecursosInvestigacion.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Modelos/TerminoClave.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Peticiones/InvestigacionController.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Program.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Servicios/InvestigacionService.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Servicios/ObjetivoDesarrolloSostenibleService.cs"
+    },
+    {
+      "status": " M",
+      "path": "MIRA.Api/Servicios/TerminoClaveService.cs"
+    },
+    {
+      "status": " M",
+      "path": "README.md"
+    },
+    {
+      "status": " M",
+      "path": "database/tests/v2_investigacion.sql"
+    },
+    {
+      "status": " M",
+      "path": "database/tests/v2_modelo_oficial.sql"
+    },
+    {
+      "status": " M",
+      "path": "deploy/README.md"
+    },
+    {
+      "status": " M",
+      "path": "deploy/render.yaml.example"
+    },
+    {
+      "status": " M",
+      "path": "docker-compose.yml"
+    },
+    {
+      "status": " M",
+      "path": "docs/V3_ARQUITECTURA.md"
+    },
+    {
+      "status": " M",
+      "path": "docs/V3_GUIA_SUSTENTACION.md"
+    },
+    {
+      "status": " M",
+      "path": "docs/V3_MAPA_TECNICO.md"
+    },
+    {
+      "status": " M",
+      "path": "docs/V3_PRUEBAS.md"
+    },
+    {
+      "status": " M",
+      "path": "docs/V3_REVISION_FINAL.md"
+    },
+    {
+      "status": " M",
+      "path": "frontend/Dockerfile"
+    },
+    {
+      "status": " M",
+      "path": "frontend/app.py"
+    },
+    {
+      "status": " M",
+      "path": "frontend/investigacion.py"
+    },
+    {
+      "status": " M",
+      "path": "frontend/requirements-dev.txt"
+    },
+    {
+      "status": " M",
+      "path": "frontend/requirements.lock"
+    },
+    {
+      "status": " M",
+      "path": "frontend/requirements.txt"
+    },
+    {
+      "status": " M",
+      "path": "frontend/seguridad.py"
+    },
+    {
+      "status": " M",
+      "path": "frontend/static/investigacion.js"
+    },
+    {
+      "status": " M",
+      "path": "frontend/static/mira.css"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/base.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/index.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/investigacion/_campos.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/investigacion/asociaciones.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/investigacion/form.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/investigacion/grupo.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/investigacion/home.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/investigacion/list.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/login.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/modulos/objetivo_desarrollo_sostenible/form.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/templates/modulos/termino_clave/form.html"
+    },
+    {
+      "status": " M",
+      "path": "frontend/tests/e2e/test_investigacion.py"
+    },
+    {
+      "status": " M",
+      "path": "frontend/tests/e2e/test_local_platform.py"
+    },
+    {
+      "status": " M",
+      "path": "frontend/tests/test_app.py"
+    },
+    {
+      "status": " M",
+      "path": "frontend/tests/test_investigacion.py"
+    },
+    {
+      "status": " M",
+      "path": "scripts/README.md"
+    },
+    {
+      "status": " M",
+      "path": "scripts/audit-python.py"
+    },
+    {
+      "status": " M",
+      "path": "scripts/audit-worktree.py"
+    },
+    {
+      "status": " M",
+      "path": "scripts/start-local.ps1"
+    },
+    {
+      "status": " M",
+      "path": "scripts/verify-browser-v3.mjs"
+    },
+    {
+      "status": " M",
+      "path": "scripts/verify-docker-session.py"
+    },
+    {
+      "status": " M",
+      "path": "scripts/verify-docker.ps1"
+    },
+    {
+      "status": " M",
+      "path": "scripts/verify-image-content.py"
+    },
+    {
+      "status": " M",
+      "path": "scripts/verify-postgres16.ps1"
+    },
+    {
+      "status": " M",
+      "path": "scripts/verify-production-smoke.py"
+    },
+    {
+      "status": " M",
+      "path": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs"
+    },
+    {
+      "status": " M",
+      "path": "versiones/v3/3_plan.md"
+    },
+    {
+      "status": "??",
+      "path": ".github/workflows/mira-v3-ci.yml"
+    },
+    {
+      "status": "??",
+      "path": "MIRA.Api/Configuracion/LoginProtection.cs"
+    },
+    {
+      "status": "??",
+      "path": "MIRA.Api/Configuracion/Readiness.cs"
+    },
+    {
+      "status": "??",
+      "path": "MIRA.Api/Modelos/AsignarLineasRequest.cs"
+    },
+    {
+      "status": "??",
+      "path": "MIRA.Api/Modelos/EstadoLineaRequest.cs"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/009_v1_requisitos_originales.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/010_v2_campos_y_articulaciones.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/011_v2_reportes_originales.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/012_v2_minimos_linea.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/013_v2_estado_linea.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/014_v2_catalogo_ods_original.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/migrations/015_v3_sesion_web_compartida.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/tests/v1_requisitos_originales.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/tests/v2_catalogo_ods_original.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/tests/v2_minimos_linea.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/tests/v2_reportes_originales.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/tests/v2_requisitos_originales.sql"
+    },
+    {
+      "status": "??",
+      "path": "database/tests/v3_sesion_web.sql"
+    },
+    {
+      "status": "??",
+      "path": "deploy/permisos_runtime.sql"
+    },
+    {
+      "status": "??",
+      "path": "deploy/render-free.yaml.example"
+    },
+    {
+      "status": "??",
+      "path": "docs/FASE6_DESPLIEGUE.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/SAPIENS_PLAN_TRANSICION.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/V3_C06_JUSTIFICACION.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/V3_CI.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/V3_CIERRE_ACADEMICO.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/V3_D01_LIMITACION_LOGIN.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/V3_PLAN_DESPLIEGUE_PRUEBAS.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/01_arquitectura.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.csv"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/03_endpoints.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/04_modelo_datos.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/05_rutinas_triggers.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/06_autenticacion_autorizacion.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/07_instalacion_local.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/08_manual_usuario.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/09_manual_tecnico.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/10_pruebas.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/11_guia_sustentacion.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/12_riesgos_excepciones.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/13_historial_publicacion.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/14_informe_cierre.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/axe.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/casos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/ci-config.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/consulta-esquema.sql"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/contraejemplos-historicos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/contraejemplos-historicos.sql"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/control-final.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/d01-sesiones.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/dashboard-1440.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/dashboard-390.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/dashboard-768.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/endpoints.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/esquema.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/axe.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/casos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/ci-scripts.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/comandos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/d01-sesiones.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/dashboard-390.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/github.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/imagenes.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/informe-pre-fase5.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/integrantes-academico.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/interfaz-academica.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/inventario-requisitos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/matriz-pre-fase5.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/osv.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/preservacion.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/production-local.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/reportes-academicos.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/responsive.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/resultados.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/sesiones-docker.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/sha256-pre-fase5.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/teclado.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/upgrade-recuperacion.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/version-fuentes.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/workflow.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/zoom-4-ficha.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase5-20261107/zoom.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/axe.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/casos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/comandos.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/d01.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/dashboard-390.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/imagenes.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/integrantes-academico.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/interfaz-academica.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/neon-migraciones.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/neon-respaldo.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/osv.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/preservacion.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/production-local.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/reportes-academicos.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/responsive.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/resultados.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/sesiones-docker.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/teclado.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/zoom-4-ficha.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fase6-20261112/zoom.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/fuentes-originales.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/imagenes.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/inventario.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/login-mobile.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/nuget.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/osv.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/plan_commits.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/pr.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/production-local.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/responsive.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/resultados.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/seguridad.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/sesiones-docker.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/sha256.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/teclado.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/version-fuentes.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/zoom-4-ficha.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/cierre-v1-v3/evidencias/zoom.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/accessibility-results.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/browser-results.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/c06-schema.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/dashboard-1440.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/dashboard-390.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/docker-session-results.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/images.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/keyboard-results.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/login-mobile.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/osv.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/production-smoke.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/resumen.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/seguridad-pr-publicado.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/sha256.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-2-login.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-4-ficha.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-4-inicio.png"
+    },
+    {
+      "status": "??",
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-results.json"
+    },
+    {
+      "status": "??",
+      "path": "frontend/.gitignore"
+    },
+    {
+      "status": "??",
+      "path": "frontend/.python-version"
+    },
+    {
+      "status": "??",
+      "path": "frontend/.vercelignore"
+    },
+    {
+      "status": "??",
+      "path": "frontend/login_protection.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/observabilidad.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/reportes.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/session_store.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/static/referencias.js"
+    },
+    {
+      "status": "??",
+      "path": "frontend/templates/investigacion/_resumen_lineas.html"
+    },
+    {
+      "status": "??",
+      "path": "frontend/templates/investigacion/integrantes.html"
+    },
+    {
+      "status": "??",
+      "path": "frontend/templates/investigacion/lineas_inactivas.html"
+    },
+    {
+      "status": "??",
+      "path": "frontend/templates/investigacion/reportes.html"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/e2e/test_fase5_academico.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/e2e/test_v1_requisitos.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/test_login_protection.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/test_observabilidad.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/test_reportes.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/test_shared_sessions.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/test_v1_requisitos.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/tests/test_v2_requisitos.py"
+    },
+    {
+      "status": "??",
+      "path": "frontend/vercel.json"
+    },
+    {
+      "status": "??",
+      "path": "scripts/ci/check_results.py"
+    },
+    {
+      "status": "??",
+      "path": "scripts/ci/check_tracked_secrets.py"
+    },
+    {
+      "status": "??",
+      "path": "scripts/ci/prepare_database.py"
+    },
+    {
+      "status": "??",
+      "path": "scripts/verify-zoom-v3.mjs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/LoginProtectionTests.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/ReadinessTests.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/ResearchTestData.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/V1RequisitosOriginalesTests.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/V2EstadoLineaTests.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/V2MinimosLineaTests.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/V2ReportesTests.cs"
+    },
+    {
+      "status": "??",
+      "path": "tests/MIRA.Api.Tests/V2RequisitosOriginalesTests.cs"
+    }
+  ],
+  "privatePathsIgnored": true,
+  "sourceChangesAuthorizedBy": "User Fase 6; free plans only; no destructive database actions",
+  "publicationStatus": "Reviewed local tree; commits/push next, not yet claimed"
+}

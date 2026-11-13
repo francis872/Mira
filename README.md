@@ -1,4 +1,8 @@
-# MIRA V3
+# SAPIENS — base académica MIRA V1–V3
+
+> Fase 6 (2026-11-12): [estado actual y despliegue](docs/FASE6_DESPLIEGUE.md). 138 .NET, 132 Flask, 51 HTTP y 11 SQL aprobados localmente; V2/C06 mantienen pendientes académicos. Las cifras y propuestas anteriores se conservan como antecedentes. No confundirlos con CI o producción remotos.
+
+> Cierre académico local del 2026-11-07: [hallazgos, correcciones y matriz con riesgos](docs/V3_CIERRE_ACADEMICO.md), [CI propuesto](docs/V3_CI.md), [plan de pruebas Render/Neon](docs/V3_PLAN_DESPLIEGUE_PRUEBAS.md) y [transición futura a SAPIENS](docs/SAPIENS_PLAN_TRANSICION.md). La aplicación/PR #7 conserva MIRA. Los cambios nuevos permanecen locales hasta autorizar sus commits y push; GitHub Actions aún no los ha ejecutado.
 
 Módulo de Investigación para la Gestión de Proyectos Académicos · Universidad de San Buenaventura Medellín.
 
@@ -44,6 +48,8 @@ Los puertos siguen siendo 5000 (frontend), 8081 (API) y 5544 (PostgreSQL), solo 
 
 ## API y seguridad
 
+Corrección local D01: [origen Flask autenticado, cuotas por origen/cuenta y condiciones de proxy](docs/V3_D01_LIMITACION_LOGIN.md). Configure una clave independiente `LOGIN_FORWARDING_KEY` para Compose, o `LoginProtection__ForwardingKey` en API y `MIRA_LOGIN_FORWARDING_KEY` en Flask. Producción la exige; no habilite confianza en proxies desconocidos. Los resultados de Fase 3 son nuevos y no sustituyen evidencias históricas.
+
 - POST `/api/auth/login`: correo/password → 200 con token, expiraEn y usuario; credenciales inválidas → 401.
 - GET `/api/auth/me`, POST `/api/auth/logout`: requieren Bearer. Logout revoca jti en PostgreSQL.
 - GET/POST `/api/auth/usuarios`, PUT/DELETE `/api/auth/usuarios/{id}`, PUT `/api/auth/usuarios/{id}/password`, GET `/api/auth/roles`: solo Administrador.
@@ -78,6 +84,6 @@ Los documentos V2 describen su entrega sin autenticación. La especificación V3
 
 ## Preparación de producción sin despliegue
 
-Consultar [deploy/README.md](deploy/README.md) y [render.yaml.example](deploy/render.yaml.example), validado solo contra JSON Schema. Dos imágenes Docker sin root, Gunicorn y PORT configurables; API Production exige TLS Npgsql VerifyFull/Channel Binding Require y errores detallados desactivados. El perfil frontend requiere disco privado persistente y una instancia; su eventual provisión puede generar coste. No se crearon servicios ni se usaron credenciales remotas.
+Perfil actual: [Flask en Vercel, API .NET en Render Free y Neon compartido](docs/FASE6_DESPLIEGUE.md). Sesiones PostgreSQL con rol web restringido, cookie opaca y TLS; Docker/Gunicorn conserva el modo de archivos privado como alternativa de instalación persistente. Migraciones 001–015 y privilegios controlados fuera del arranque. El proyecto Neon nuevo ya fue respaldado, restaurado y migrado; la operación web remota y Actions se acreditan por separado con resultados reales. El ejemplo starter anterior permanece histórico y no fue contratado.
 
 Instalar `frontend/requirements.lock` para runtime y `requirements-dev.txt` para pruebas en entorno limpio. Los ocho avisos anteriores están corregidos para las versiones auditadas; no se actualizó Python global ni se auditó todo el SO base. [OSV final](docs/evidencias/v3/osv-estabilizado.json). Para verificar contenedores locales: construir etiquetas mira-v3-api:stabilization/mira-v3-frontend:stabilization y ejecutar scripts/verify-docker.ps1; crea un proyecto de pruebas exclusivo. scripts/verify-production-smoke.py usa destinos ficticios: sus health/cookies no certifican TLS real ni conexión Neon.

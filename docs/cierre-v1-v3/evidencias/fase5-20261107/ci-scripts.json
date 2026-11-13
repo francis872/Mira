@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-07T20:36:36.915828-05:00",
+  "status": "passed",
+  "checks": [
+    {
+      "case": "prepare-database",
+      "exitCode": 0,
+      "expected": "success",
+      "passed": true
+    },
+    {
+      "case": "reject-nonempty",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "reject-outside-ci",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "reject-nonloopback",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "results-positive",
+      "exitCode": 0,
+      "expected": "success",
+      "passed": true
+    },
+    {
+      "case": "tracked-secret-scan",
+      "exitCode": 0,
+      "expected": "success",
+      "passed": true
+    },
+    {
+      "case": "reject-skipped-trx",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "reject-skipped-junit",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "reject-empty-nuget",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "reject-vulnerable-nuget",
+      "exitCode": 1,
+      "expected": "rejected",
+      "passed": true
+    }
+  ],
+  "scope": "Real CI scripts, new exclusive PostgreSQL16 database/role; no remote database; no workflow-run claim"
+}

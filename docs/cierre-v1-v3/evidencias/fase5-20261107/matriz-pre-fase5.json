@@ -1,0 +1,1769 @@
+{
+  "date": "2026-11-07T18:15:28.616471-05:00",
+  "statuses": [
+    "Cumplido y verificado",
+    "Implementado, pendiente de prueba",
+    "Parcial",
+    "No implementado",
+    "Bloqueado",
+    "Pendiente de aceptación docente",
+    "No aplicable, con justificación"
+  ],
+  "localAuditIds": [
+    "HUxx-CAyy",
+    "HU01-DESCRIPCION",
+    "PLAN-*",
+    "ARQ-TRES-CAPAS",
+    "CI-D01-CONFIG",
+    "A11Y-MANUAL",
+    "PRODUCCION-REAL"
+  ],
+  "rows": [
+    {
+      "id": "RF-MIRA-CAT-01",
+      "version": "V1",
+      "requirement": "CRUD y retiro lógico de áreas de conocimiento",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/AreaConocimientoController.cs",
+        "MIRA.Api/Servicios/AreaConocimientoService.cs",
+        "MIRA.Api/Repositorios/AreaConocimientoRepository.cs"
+      ],
+      "implementation": "Controller.GetAll/GetById/Create/Update/Delete; Service; Repository; funciones de 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-CAT-02",
+      "version": "V1",
+      "requirement": "CRUD y retiro lógico de ODS",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/ObjetivoDesarrolloSostenibleController.cs",
+        "MIRA.Api/Servicios/ObjetivoDesarrolloSostenibleService.cs",
+        "MIRA.Api/Repositorios/ObjetivoDesarrolloSostenibleRepository.cs"
+      ],
+      "implementation": "Controller.GetAll/GetById/Create/Update/Delete; Service; Repository; funciones de 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-CAT-03",
+      "version": "V1",
+      "requirement": "CRUD y retiro lógico de áreas de aplicación",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/AreaAplicacionController.cs",
+        "MIRA.Api/Servicios/AreaAplicacionService.cs",
+        "MIRA.Api/Repositorios/AreaAplicacionRepository.cs"
+      ],
+      "implementation": "Controller.GetAll/GetById/Create/Update/Delete; Service; Repository; funciones de 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-CAT-04",
+      "version": "V1",
+      "requirement": "CRUD y retiro lógico de términos clave",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/TerminoClaveController.cs",
+        "MIRA.Api/Servicios/TerminoClaveService.cs",
+        "MIRA.Api/Repositorios/TerminoClaveRepository.cs"
+      ],
+      "implementation": "TerminoClaveController.GetAll/GetByTermino/Create/Update/Delete; TerminoClaveService; TerminoClaveRepository; funciones de 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-CAT-05",
+      "version": "V1",
+      "requirement": "CRUD y retiro lógico de universidades",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/UniversidadController.cs",
+        "MIRA.Api/Servicios/UniversidadService.cs",
+        "MIRA.Api/Repositorios/UniversidadRepository.cs"
+      ],
+      "implementation": "Controller.GetAll/GetById/Create/Update/Delete; Service; Repository; funciones de 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-CAT-06",
+      "version": "V1",
+      "requirement": "CRUD y retiro lógico de líneas de investigación",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/LineaInvestigacionController.cs",
+        "MIRA.Api/Servicios/LineaInvestigacionService.cs",
+        "MIRA.Api/Repositorios/LineaInvestigacionRepository.cs"
+      ],
+      "implementation": "Controller.GetAll/GetById/Create/Update/Delete; Service; Repository; funciones de 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-DASH-01",
+      "version": "V1",
+      "requirement": "Conteos reales y estado no disponible",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "frontend/app.py"
+      ],
+      "implementation": "index/_count",
+      "test": "frontend/tests/e2e/test_local_platform.py::test_dashboard_counts_match_the_listing; frontend/tests/test_app.py",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-OPEN-01",
+      "version": "V1 → V3",
+      "requirement": "Acceso público histórico",
+      "source": "versiones/v0.1_api_inicial/2_spec.md",
+      "files": [
+        "MIRA.Api/Program.cs",
+        "frontend/seguridad.py"
+      ],
+      "implementation": "V3 protege datos y redirige a login; health público",
+      "test": "SeguridadTests.MissingOrInvalidTokenIs401; frontend/tests/test_seguridad.py",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "No aplicable, con justificación",
+      "limit": "Sustituido expresamente por versiones/v3/2_spec.md y el encargo actual, apartado 3.3. No es regresión involuntaria."
+    },
+    {
+      "id": "RF-V2-SP-01",
+      "version": "V2",
+      "requirement": "Cinco operaciones por funciones para seis catálogos",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "database/migrations/004_v2_catalogos_rutinas.sql",
+        "MIRA.Api/Repositorios/AreaConocimientoRepository.cs",
+        "MIRA.Api/Repositorios/ObjetivoDesarrolloSostenibleRepository.cs",
+        "MIRA.Api/Repositorios/AreaAplicacionRepository.cs",
+        "MIRA.Api/Repositorios/TerminoClaveRepository.cs",
+        "MIRA.Api/Repositorios/UniversidadRepository.cs",
+        "MIRA.Api/Repositorios/LineaInvestigacionRepository.cs"
+      ],
+      "implementation": "Repositorios V1; funciones 004",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-ACA-01",
+      "version": "V2",
+      "requirement": "Once recursos con campos del SQL confirmado",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "InvestigacionController.Listar/Obtener/Crear/Actualizar/Eliminar; RecursosInvestigacion",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-FK-01",
+      "version": "V2",
+      "requirement": "Selectores FK con referencias reales",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "options_for; InvestigacionService.Validar",
+      "test": "frontend/tests/test_investigacion.py; frontend/tests/e2e/test_investigacion.py::test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-ASOC-01",
+      "version": "V2",
+      "requirement": "Cinco asociaciones, consulta, alta, duplicado y retiro",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "ObtenerPuente/Crear/RetirarPuente; funciones 007",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-MD-01–04",
+      "version": "V2",
+      "requirement": "Ficha: alta, consulta, edición/retiro y rollback",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "CrearFicha/ActualizarFicha/Ficha → GuardarFicha → sp_guardar_v2_ficha_grupo",
+      "test": "InvestigacionIntegrationTests.SheetCreatesManyRowsThenRollsBackAllChangesWhenLastRowBelongsElsewhere; frontend/tests/e2e/test_investigacion.py::test_group_sheet_http_creates_edits_and_retires_multiple_details",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-TR-01",
+      "version": "V2",
+      "requirement": "Normalización V1 y grupo activo del semillero",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "fn_area_aplicacion_normalizar; mira_validar_grupo_activo_semillero",
+      "test": "CatalogCrudRegressionTests.AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted; InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-HTTP-01",
+      "version": "V2",
+      "requirement": "400, 404, 409 y 500 sin internos",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "ApiExceptionMiddleware.InvokeAsync; validación servicio",
+      "test": "tests/MIRA.Api.Tests/ErroresPersistenciaTests.cs; InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-UI-01–02",
+      "version": "V2",
+      "requirement": "Navegación, formularios, búsqueda, estados y móvil",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Flask/Jinja; mira.js; investigacion.js",
+      "test": "frontend/tests/test_investigacion.py; scripts/verify-browser-v3.mjs",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-V2-DB-01–02",
+      "version": "V2",
+      "requirement": "Integridad y vistas con nombres comprensibles",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Migraciones 006/007 y v2_*",
+      "test": "database/tests/v2_modelo_oficial.sql; database/tests/v2_investigacion.sql",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RF-MIRA-CSRF-01",
+      "version": "V2",
+      "requirement": "CSRF de formularios",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "frontend/app.py",
+        "frontend/seguridad.py"
+      ],
+      "implementation": "frontend/app.py::verify_csrf",
+      "test": "frontend/tests/e2e/test_local_platform.py::test_post_without_csrf_token_is_rejected",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "RNF-MIRA-OPS-01",
+      "version": "V2",
+      "requirement": "Migraciones aditivas, bases aisladas y preservación",
+      "source": "versiones/v2_profesor/2_spec.md",
+      "files": [
+        "scripts/start-local.ps1",
+        "scripts/verify-postgres16.ps1",
+        "database/migrations/apply.sh"
+      ],
+      "implementation": "scripts/start-local.ps1; verify-postgres16.ps1",
+      "test": "database/tests/v2_modelo_oficial.sql; comparación SHA inicial/final",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "C01",
+      "version": "V2",
+      "requirement": "CRUD V1 desde interfaz",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C02",
+      "version": "V2",
+      "requirement": "CRUD V2 desde interfaz",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C03",
+      "version": "V2",
+      "requirement": "Cinco operaciones por rutinas",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist; tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C04",
+      "version": "V2",
+      "requirement": "Trigger demostrable",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "database/tests/v2_catalogos_rutinas.sql; database/tests/v2_investigacion.sql",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C05",
+      "version": "V2",
+      "requirement": "FK en selectores API",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "frontend/tests/test_investigacion.py",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C06",
+      "version": "V2",
+      "requirement": "FK opcionales admiten null",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "database/tests/v3_c06_nulabilidad.sql",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Pendiente de aceptación docente",
+      "limit": "C06: sin nueva decisión docente localizada en las fuentes inspeccionadas; el test confirma metadatos, no una FK nullable."
+    },
+    {
+      "id": "C07",
+      "version": "V2",
+      "requirement": "409 integridad en español",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C08",
+      "version": "V2",
+      "requirement": "Puentes y conflictos",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C09",
+      "version": "V2",
+      "requirement": "Maestro y detalles en una pantalla",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "InvestigacionIntegrationTests.SheetCreatesManyRowsThenRollsBackAllChangesWhenLastRowBelongsElsewhere; scripts/verify-browser-v3.mjs",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C10",
+      "version": "V2",
+      "requirement": "Retiro lógico donde hay estado",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C11",
+      "version": "V2",
+      "requirement": "Lenguaje comprensible",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "scripts/verify-browser-v3.mjs; frontend/tests/test_investigacion.py",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "C12",
+      "version": "V2",
+      "requirement": "Regresión V1",
+      "source": "docs/prompts/PROMPT_MAESTRO_DEFINITIVO_MIRA_V2.md; docs/criterios-v2.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Implementación detallada por criterio en docs/criterios-v2.md; C06: 22 FK NOT NULL",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Alcance del SQL confirmado; no reemplaza las 36 condiciones de las historias originales."
+    },
+    {
+      "id": "R01",
+      "version": "V3",
+      "requirement": "Mantener tres capas",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "AuthController.Login → AuthService.Login → CuentaRepository.Buscar",
+      "test": "`frontend/tests/test_architecture.py::test_catalog_repositories_only_call_stored_routines`; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Inspección y regresión local; no se ha comprobado cada camino posible. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R02",
+      "version": "V3",
+      "requirement": "Correo/contraseña y respuesta 200",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Modelos/Seguridad.cs",
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "LoginRequest; AuthController.Login; AuthService.Login",
+      "test": "TS.Login_Read_ForbiddenWrite_Logout_Revoked; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Latencia/indisponibilidad de API/BD remotas pendientes. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R03",
+      "version": "V3",
+      "requirement": "Credencial incorrecta/inactiva 401",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Peticiones/AuthController.cs"
+      ],
+      "implementation": "AuthService.Login; AuthController.Login",
+      "test": "TS.BadLoginIs401; TS.InactiveAccountAndRoleChangesInvalidateSession (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Respuesta uniforme comprobada; no es certificación de resistencia a todos los canales temporales. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R04",
+      "version": "V3",
+      "requirement": "Límite de intentos",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Configuracion/LoginProtection.cs",
+        "frontend/login_protection.py"
+      ],
+      "implementation": "LoginProtectionMiddleware; LoginOriginAuth; cuotas por origen autenticado/cuenta y concurrencia",
+      "test": "LoginProtectionTests; frontend/tests/test_login_protection.py; regresión integrada D01 (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/d01-sesiones.json",
+      "status": "Cumplido y verificado",
+      "limit": "Requiere clave compartida independiente y proxies explícitos; NAT/origen desconocido comparten cuota; contadores por instancia. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R05",
+      "version": "V3",
+      "requirement": "me con identidad actual",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "AuthController.Me; AuthService.ValidarSesion",
+      "test": "TS.InactiveAccountAndRoleChangesInvalidateSession; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Depende de PostgreSQL disponible para revalidar identidad. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R06",
+      "version": "V3",
+      "requirement": "Logout con revocación real",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "AuthService.Revocar; CuentaRepository.Revocar/Sesion",
+      "test": "TS.Login_Read_ForbiddenWrite_Logout_Revoked; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/d01-sesiones.json",
+      "status": "Cumplido y verificado",
+      "limit": "No cancela una operación que ya pasó autenticación antes de revocar. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R07",
+      "version": "V3",
+      "requirement": "Cuentas/roles solo administrador",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Peticiones/AuthController.cs"
+      ],
+      "implementation": "Usuarios/Crear/Editar/Inactivar/Restablecer/Roles; atributos Authorize",
+      "test": "TS.RoleMatrix; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration; TF.test_users_page_never_renders_password_hash; TS.EveryAdministrativeActionRequiresAdministrator (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Recuperación operativa depende de acceso CLI/BD; proteger al operador. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R08",
+      "version": "V3",
+      "requirement": "Hash bcrypt coste 12",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "PasswordService.Hash",
+      "test": "TS.BcryptUsesSaltAndRejectsPlaintextAndWrongPassword; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Coste bcrypt requiere medir carga; sal no sustituye contraseñas robustas. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R09",
+      "version": "V3",
+      "requirement": "Mínimo 12 caracteres / máximo 72 bytes",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Modelos/Seguridad.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "CrearCuentaRequest/PasswordRequest; PasswordService.Hash/Verify",
+      "test": "TS.BcryptUsesSaltAndRejectsPlaintextAndWrongPassword; TS.PasswordBoundariesAreEnforced (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Length de .NET y bytes UTF-8 no equivalen a contar grafemas; política no certifica entropía. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R10",
+      "version": "V3",
+      "requirement": "No devolver hashes",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Modelos/Seguridad.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "Cuenta/SesionRespuesta; Listar/Crear/Editar",
+      "test": "TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration; TF.test_users_page_never_renders_password_hash (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Revisión no exhaustiva de todo el historial ni paneles cloud. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R11",
+      "version": "V3",
+      "requirement": "Bootstrap local y atómico",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Program.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "database/migrations/003_v2_usuarios_roles.sql"
+      ],
+      "implementation": "rama --bootstrap-admin; AuthService.Bootstrap; sp_usuario_bootstrap_admin/fn_usuario_bootstrap_admin",
+      "test": "ejecución real en `scripts/verify-postgres16.ps1`; `database/tests/v2_usuarios_roles.sql` (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Bootstrap remoto y privilegios reales no probados. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R12",
+      "version": "V3",
+      "requirement": "Recuperar administrador heredado",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Program.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "rama --reset-admin-password; AuthService.RestablecerAdmin; -ResetPassword",
+      "test": "TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Servicio/SQL probado; asistente PowerShell interactivo no recorrido manualmente. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R13",
+      "version": "V3",
+      "requirement": "health público / datos privados",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Program.cs"
+      ],
+      "implementation": "MapGet /health; MapControllers.RequireAuthorization(\"Datos\")",
+      "test": "TS.MissingOrInvalidTokenIs401; `frontend/tests/e2e/test_local_platform.py::test_login_surface_and_protected_api` (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Health es liveness, no readiness de Neon. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R14",
+      "version": "V3",
+      "requirement": "Swagger Bearer en Development",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Program.cs",
+        "MIRA.Api/Configuracion/SwaggerAnonymousOperationFilter.cs"
+      ],
+      "implementation": "AddSwaggerGen; SwaggerAnonymousOperationFilter.Apply",
+      "test": "TS.SwaggerDocumentsBearerAndAnonymousLogin (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Swagger deshabilitado en Production; URL v2 local se conserva por compatibilidad. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R15",
+      "version": "V3",
+      "requirement": "Matriz de tres roles",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "AddSeguridad, política Datos; RolesPermitidos",
+      "test": "TS.RoleMatrix; TF.test_read_only_identity_hides_mutations_and_denies_direct_routes; TF.test_coordinator_cannot_delete_or_manage_users (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Permisos globales por operación; no hay propiedad por proyecto en este modelo. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R16",
+      "version": "V3",
+      "requirement": "Roles desconocidos no conceden acceso",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs"
+      ],
+      "implementation": "AuthService.Login; RolesPermitidos; política Datos",
+      "test": "TS.UnknownRoleCannotLogin (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Lista explícita de roles conocidos; catálogo real remoto no inspeccionado. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R17",
+      "version": "V3",
+      "requirement": "Cuenta activa y roles actuales",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "database/migrations/008_v3_sesiones.sql"
+      ],
+      "implementation": "CuentaRepository.Sesion; AuthService.ValidarSesion; sp_v3_usuario_actualizar",
+      "test": "TS.InactiveAccountAndRoleChangesInvalidateSession; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Una consulta de sesión/roles por petición afecta disponibilidad y latencia. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R18",
+      "version": "V3",
+      "requirement": "Claims y firma JWT",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "AuthService.GenerarJwt; JwtSettings.Validation",
+      "test": "TS.Login_Read_ForbiddenWrite_Logout_Revoked; TS.InvalidJwtClaimsAre401 (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "JWT firmado no está cifrado; claims no deben contener secretos. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R19",
+      "version": "V3",
+      "requirement": "Clave externa, tolerancia mínima",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "AddSeguridad; JwtSettings.Validation",
+      "test": "TS.InvalidJwtClaimsAre401; configuración inspeccionada (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "La entropía y rotación de la clave elegida por un operador siguen fuera de la prueba. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R20",
+      "version": "V3",
+      "requirement": "JWT solo en servidor",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/seguridad.py",
+        "frontend/app.py"
+      ],
+      "implementation": "configure_session; register_security.login; _headers/api_call",
+      "test": "TF.test_login_rotates_identifier_and_never_exposes_jwt; `frontend/tests/test_app.py::test_bearer_is_sent_only_from_server_to_api` (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "CacheLib necesita filesystem privado/confiable; no compartir con usuarios no autorizados. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R21",
+      "version": "V3",
+      "requirement": "Rotación, HttpOnly/Strict, Secure con HTTPS",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/seguridad.py",
+        "frontend/app.py"
+      ],
+      "implementation": "configure_session; register_security.login; configuración Flask",
+      "test": "TF.test_login_rotates_identifier_and_never_exposes_jwt; `frontend/tests/test_app.py::test_session_cookie_is_httponly_and_samesite_strict`; frontend/tests/test_production.py::test_secure_cookie_is_httponly_strict_and_not_jwt (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/d01-sesiones.json",
+      "status": "Cumplido y verificado",
+      "limit": "HTTPS, disco y permisos reales Render pendientes; perfil de una instancia. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R22",
+      "version": "V3",
+      "requirement": "CSRF en todos los POST",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/app.py"
+      ],
+      "implementation": "verify_csrf; _csrf_token; csrf_input",
+      "test": "TF.test_login_error_and_csrf_are_preserved; `frontend/tests/test_app.py::test_every_rendered_form_embeds_the_csrf_token`; E2E CSRF (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "CSRF no sustituye prevención de XSS; mantener autoescape y origen de recursos confiable. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R23",
+      "version": "V3",
+      "requirement": "Caducidad y 401/403 comprensibles",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/seguridad.py",
+        "frontend/app.py"
+      ],
+      "implementation": "protect_routes/expired/forbidden; api_call",
+      "test": "TF.test_anonymous_and_expired_sessions_redirect_to_login; test_backend_401_clears_local_session; test_backend_forbidden_is_not_rendered_as_success (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Expiración determinista probada; falta esperar exp real en navegador/staging. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R24",
+      "version": "V3",
+      "requirement": "Sin redirección externa",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/seguridad.py"
+      ],
+      "implementation": "login/expired/logout, redirect(url_for(...))",
+      "test": "frontend/tests/test_production.py::test_login_ignores_external_redirect (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Destinos internos fijos verificados; no se realizó un pentest completo de navegación. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R25",
+      "version": "V3",
+      "requirement": "Salida local aun con API fallida",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/seguridad.py"
+      ],
+      "implementation": "logout; protect_routes exceptúa logout del me previo",
+      "test": "TF.test_server_outage_during_logout_reports_revocation_uncertainty; test_logout_revokes_before_clearing_session (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Si API falla en logout, la revocación puede no confirmarse hasta expirar. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R26",
+      "version": "V3",
+      "requirement": "Sin refresh automático",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/seguridad.py",
+        "MIRA.Api/Peticiones/AuthController.cs"
+      ],
+      "implementation": "protect_routes/login; rutas AuthController",
+      "test": "TF.test_anonymous_and_expired_sessions_redirect_to_login (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "No hay refresh: el usuario debe iniciar sesión otra vez al vencer. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R27",
+      "version": "V3",
+      "requirement": "Identidad monocromática / responsive",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/static/mira.css",
+        "frontend/templates/base.html",
+        "frontend/templates/login.html"
+      ],
+      "implementation": "reglas CSS; plantillas Jinja",
+      "test": "`scripts/verify-browser-v3.mjs::check/shot`; keyboard-results.json; scripts/verify-zoom-v3.mjs (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/axe.json; evidencias/teclado.json; evidencias/zoom.json",
+      "status": "Parcial",
+      "limit": "Axe local 0/0 y zoom real Edge no certifican WCAG ni lectores/dispositivos físicos. Recorridos con lector y dispositivos físicos pendientes, sin certificación WCAG."
+    },
+    {
+      "id": "R28",
+      "version": "V3",
+      "requirement": "SVG Tabler sin React",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "frontend/templates/includes/icons.html",
+        "frontend/static/icons/tabler.svg"
+      ],
+      "implementation": "macro icon; 31 symbol SVG",
+      "test": "`scripts/verify-browser-v3.mjs::check` valida getBBox (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Bootstrap CSS/JS conserva CDN; funcionamiento sin conectividad no certificado. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R29",
+      "version": "V3",
+      "requirement": "Mantener V1/V2, asociaciones y triggers",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs"
+      ],
+      "implementation": "CRUD; InvestigacionService.GuardarFicha; rutinas 004–007",
+      "test": "CatalogCrudRegressionTests; InvestigacionIntegrationTests; ambos archivos E2E (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Bases nuevas de pruebas verificadas; migración sobre datos reales/remotos no ejecutada. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "R30",
+      "version": "V3",
+      "requirement": "Mantener separados cuentas/personas",
+      "source": "versiones/v3/2_spec.md; docs/V3_CIERRE_ACADEMICO.md",
+      "files": [
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs",
+        "database/migrations/003_v2_usuarios_roles.sql",
+        "database/migrations/006_v2_modelo_oficial.sql"
+      ],
+      "implementation": "CuentaRepository.Buscar usa usuario; modelo docente usa usuarios",
+      "test": "InvestigacionIntegrationTests.NullsDatesAndEnumerationsAreValidated_AndPersonReferenceDoesNotExposeCredentials (TS=SeguridadTests.cs; TD=SeguridadDatabaseTests.cs; TF=frontend/tests/test_seguridad.py)",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "No se equiparan cuentas y personas; una futura unificación exige aprobación/migración explícitas. Resultado local repetido; validación cloud excluida."
+    },
+    {
+      "id": "HU01-CA01",
+      "version": "V3",
+      "requirement": "Las contraseñas deben cifrarse mediante algoritmos seguros (ej. bcrypt/argon2) antes de almacenarse.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 1, criterio 1)",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "PasswordService.Hash/Verify; bcrypt coste 12",
+      "test": "tests/MIRA.Api.Tests/SeguridadTests.cs; tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs::RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Hash irreversible; no cifrado reversible."
+    },
+    {
+      "id": "HU01-CA02",
+      "version": "V3",
+      "requirement": "El sistema debe validar credenciales y generar un token JWT válido para el inicio de sesión.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 1, criterio 2)",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "AuthService.Login/GenerarJwt; JwtSettings.Validation",
+      "test": "tests/MIRA.Api.Tests/SeguridadTests.cs; tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs::RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "JWT firmado, no cifrado."
+    },
+    {
+      "id": "HU01-CA03",
+      "version": "V3",
+      "requirement": "El sistema debe denegar el acceso a las vistas y endpoints que no correspondan al rol asignado del usuario.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 1, criterio 3)",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "Política Datos, Authorize Administrador y permisos Flask",
+      "test": "tests/MIRA.Api.Tests/SeguridadTests.cs; tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs::RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Permisos globales por operación, sin propiedad por persona."
+    },
+    {
+      "id": "HU01-CA04",
+      "version": "V3",
+      "requirement": "El Administrador puede asignar o revocar múltiples roles a una cuenta y los cambios deben reflejarse en la sesión inmediatamente tras reautenticarse.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 1, criterio 4)",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "implementation": "Editar cuenta/roles invalida JWT; login recupera roles actuales",
+      "test": "tests/MIRA.Api.Tests/SeguridadTests.cs; tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs::RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Se asignan roles existentes; no creación dinámica de roles."
+    },
+    {
+      "id": "HU02-CA01",
+      "version": "V1/V2",
+      "requirement": "Permitir las operaciones de registro, lectura, actualización y borrado lógico sobre los 4 catálogos.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 2, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py",
+        "MIRA.Api/Servicios/ObjetivoDesarrolloSostenibleService.cs",
+        "database/migrations/001_v1_catalogos_tablas.sql",
+        "MIRA.Api/Modelos/TerminoClave.cs"
+      ],
+      "implementation": "Cuatro catálogos presentes; seis V1 y cuatro plurales adicionales",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist; tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Ambos modelos coexisten; no son una única tabla compartida."
+    },
+    {
+      "id": "HU02-CA02",
+      "version": "V1",
+      "requirement": "El catálogo de ODS debe validar que la categoría asignada corresponda únicamente a Social, Económica o Ambiental.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 2, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py",
+        "MIRA.Api/Servicios/ObjetivoDesarrolloSostenibleService.cs",
+        "database/migrations/001_v1_catalogos_tablas.sql",
+        "MIRA.Api/Modelos/TerminoClave.cs"
+      ],
+      "implementation": "ODS.Categoria: texto obligatorio sin dominio cerrado; UI input libre",
+      "test": "Inspección Service/001/004 y contraejemplo SQL HU02-CA02",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "No implementado",
+      "limit": "Falta restringir Social/Económica/Ambiental. Requiere aprobación de cambio."
+    },
+    {
+      "id": "HU02-CA03",
+      "version": "V1/V2",
+      "requirement": "Las Palabras Clave deben permitir ingresar su equivalente obligatorio en español e inglés.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 2, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py",
+        "MIRA.Api/Servicios/ObjetivoDesarrolloSostenibleService.cs",
+        "database/migrations/001_v1_catalogos_tablas.sql",
+        "MIRA.Api/Modelos/TerminoClave.cs"
+      ],
+      "implementation": "termino_clave.termino_ingles nullable; palabras_clave plural no tiene inglés",
+      "test": "Contraejemplo SQL HU02-CA03 y metadatos",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "Parcial",
+      "limit": "El spec retrospectivo hace inglés opcional; no se encontró dispensa docente del requisito original."
+    },
+    {
+      "id": "HU02-CA04",
+      "version": "V1/V2",
+      "requirement": "No se debe permitir la eliminación física de un registro del catálogo si este se encuentra asociado a un grupo, semillero o línea activa.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 2, criterio 4)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py",
+        "MIRA.Api/Servicios/ObjetivoDesarrolloSostenibleService.cs",
+        "database/migrations/001_v1_catalogos_tablas.sql",
+        "MIRA.Api/Modelos/TerminoClave.cs"
+      ],
+      "implementation": "API retira lógicamente clasificaciones; FK preserva referencias",
+      "test": "tests/MIRA.Api.Tests/CatalogCrudRegressionTests.cs::FullLifecycle_CreateReadListUpdateLogicalDelete; frontend/tests/e2e/test_local_platform.py::test_catalog_create_update_inactivate_persist; tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "No se equiparan los catálogos singulares independientes con las referencias plurales; operaciones SQL privilegiadas quedan fuera de API."
+    },
+    {
+      "id": "HU03-CA01",
+      "version": "V2",
+      "requirement": "El campo URL del CvLAC debe validar la sintaxis de un enlace web válido.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 3, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "InvestigacionService.Validar URL http/https; CHECK docentes_cvlac_url_check",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle; InvestigacionIntegrationTests.NullsDatesAndEnumerationsAreValidated_AndPersonReferenceDoesNotExposeCredentials",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Campo opcional según SQL confirmado."
+    },
+    {
+      "id": "HU03-CA02",
+      "version": "V2",
+      "requirement": "La categoría Minciencias debe ser seleccionable a partir de una lista desplegable parametrizada (ej. Senior, Asociado, Junior, Sin Categoría).",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 3, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "RecursosInvestigacion opciones; Jinja select; CHECK de categoría",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Opciones fijas declaradas, no CRUD de categorías."
+    },
+    {
+      "id": "HU03-CA03",
+      "version": "V2/V3",
+      "requirement": "El docente debe poder editar y guardar sus datos sin perder el historial de vinculación institucional.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 3, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Edición administrativa de docentes; cuentas de acceso y personas separadas",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle; SeguridadTests.RoleMatrix",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Parcial",
+      "limit": "No hay autoservicio docente ni vínculo de propietario cuenta→docente. El CRUD general no prueba esta historia."
+    },
+    {
+      "id": "HU03-CA04",
+      "version": "V2",
+      "requirement": "La interfaz debe presentar retroalimentación visual inmediata (alerta de éxito/error) al guardar los datos.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 3, criterio 4)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "investigacion.py new/edit: flash de éxito/error",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Navegación HTTP; no actualización colaborativa en tiempo real."
+    },
+    {
+      "id": "HU04-CA01",
+      "version": "V2",
+      "requirement": "La interfaz debe permitir crear sedes definiendo nombre, ciudad y código institucional.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 4, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "sedes solo nombre/ciudad/activa; sin código institucional",
+      "test": "Metadatos y RecursosInvestigacion",
+      "evidence": "evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Parcial",
+      "limit": "El SQL confirmado carece del campo original; nueva columna necesita decisión de alcance y migración aprobada."
+    },
+    {
+      "id": "HU04-CA02",
+      "version": "V2",
+      "requirement": "Las listas desplegables de selección de sede en los demás módulos deben actualizarse en tiempo real tras crear o editar una sede.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 4, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "options_for consulta API al abrir/recargar formularios",
+      "test": "Inspección frontend/investigacion.py::options_for",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Parcial",
+      "limit": "No existe suscripción ni refresco automático de formularios ya abiertos. Aclarar significado de tiempo real."
+    },
+    {
+      "id": "HU04-CA03",
+      "version": "V2",
+      "requirement": "Al desactivar una sede, los grupos existentes asignados deben conservar su histórico pero no se deben permitir nuevas asignaciones.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 4, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Retiro lógico conserva grupos; rutina acepta grupo nuevo con sede inactiva",
+      "test": "Contraejemplo SQL HU04-CA03",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "Parcial",
+      "limit": "El selector filtra sedes; la regla no está impuesta en API/SQL."
+    },
+    {
+      "id": "HU05-CA01",
+      "version": "V2",
+      "requirement": "El campo del enlace GrupLAC debe ser validado como URL válida.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 5, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "InvestigacionService.Validar y CHECK grupos_gruptac_url_check",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Valida sintaxis http/https; no verifica disponibilidad de GrupLAC."
+    },
+    {
+      "id": "HU05-CA02",
+      "version": "V2",
+      "requirement": "Se debe controlar que un grupo tenga exactamente un docente asignado bajo el rol de \"Líder de Grupo\" en un periodo activo.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 5, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Índice limita a un líder activo con fecha_fin NULL",
+      "test": "Contraejemplos SQL HU05-CA02-zero/overlap",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "Parcial",
+      "limit": "Permite cero líderes y líderes con periodos fechados superpuestos; no exige exactamente uno por periodo activo."
+    },
+    {
+      "id": "HU05-CA03",
+      "version": "V2",
+      "requirement": "El sistema debe requerir fecha de inicio y fin opcional al vincular a un docente para guardar el historial de participación.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 5, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "grupo_docentes fecha_inicio requerida/fecha_fin nullable; CHECK periodo",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle; InvestigacionIntegrationTests.NullsDatesAndEnumerationsAreValidated_AndPersonReferenceDoesNotExposeCredentials",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Retiro lógico del vínculo; eliminar físicamente un docente puede causar CASCADE según SQL oficial."
+    },
+    {
+      "id": "HU05-CA04",
+      "version": "V2",
+      "requirement": "Se debe poder exportar la lista de integrantes vinculados en formato Excel/PDF.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 5, criterio 4)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "No hay exportador de integrantes Excel/PDF",
+      "test": "Inspección de todos los controladores API, rutas Flask y plantillas de investigación",
+      "evidence": "evidencias/endpoints.json",
+      "status": "No implementado",
+      "limit": "Sin endpoint, dependencia o acción de exportación de integrantes en el producto actual."
+    },
+    {
+      "id": "HU06-CA01",
+      "version": "V2",
+      "requirement": "Un semillero debe estar obligatoriamente vinculado a un Grupo de Investigación activo.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 6, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "semilleros_grupo_activo_trigger y FK obligatoria",
+      "test": "InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals; database/tests/v2_investigacion.sql",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Cumplido y verificado",
+      "limit": "Trigger en INSERT y UPDATE OF grupo_id; no prueba regla nueva al modificar solo otros campos."
+    },
+    {
+      "id": "HU06-CA02",
+      "version": "V2",
+      "requirement": "La asignación del docente debe exigir definir el rol (Director, Tutor o Coinvestigador) y el periodo academico.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 6, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Rol validado; periodo expresado como fecha_inicio/fecha_fin",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Parcial",
+      "limit": "No hay entidad o campo periodo académico. Confirmar si el intervalo de fechas satisface la intención docente."
+    },
+    {
+      "id": "HU06-CA03",
+      "version": "V2",
+      "requirement": "El sistema no debe permitir la duplicidad de la misma persona con el mismo rol en un mismo intervalo de fechas.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 6, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Índice único persona/rol/fechas con COALESCE para fin NULL",
+      "test": "Contraejemplo controlado HU06-CA03-exact: duplicado exacto rechazado",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "Cumplido y verificado",
+      "limit": "La fuente dice mismo intervalo: se verifica duplicado exacto. Intervalos diferentes superpuestos se admiten; no se inventa prohibición adicional sin aclaración docente."
+    },
+    {
+      "id": "HU06-CA04",
+      "version": "V2",
+      "requirement": "La vista principal debe permitir filtrar los semilleros por grupo de investigación base o por docente tutor.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 6, criterio 4)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Búsqueda textual por filas, etiqueta de grupo disponible",
+      "test": "Inspección list.html/mira.js y vista v2_semilleros",
+      "evidence": "evidencias/endpoints.json",
+      "status": "Parcial",
+      "limit": "Sin filtro dedicado por grupo o tutor; el listado de semilleros no incorpora tutor."
+    },
+    {
+      "id": "HU07-CA01",
+      "version": "V2",
+      "requirement": "Toda línea de investigación debe registrar un código institucional único, un nombre y una descripción corta.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 7, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Código UNIQUE y nombre obligatorios; descripción opcional",
+      "test": "Contraejemplo SQL HU07-CA01; metadatos",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "Parcial",
+      "limit": "El texto original exige descripción, el SQL confirmado la permite NULL."
+    },
+    {
+      "id": "HU07-CA02",
+      "version": "V2",
+      "requirement": "Se debe permitir cambiar el estado de la línea de investigación (Activa / Inactiva).",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 7, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Retiro activo→inactivo disponible; no hay reactivación en contrato",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "Parcial",
+      "limit": "No asumir que cambiar estado incluye reactivar: pendiente delimitar intención; PUT no expone activo."
+    },
+    {
+      "id": "HU07-CA03",
+      "version": "V2",
+      "requirement": "Si una línea pasa a estado Inactivo, no estará disponible para seleccionarse en nuevas articulaciones, manteniendo sus registros históricos intactos.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 7, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Selector solo muestra activas; SQL permite puente con línea inactiva",
+      "test": "Contraejemplo SQL HU07-CA03",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "Parcial",
+      "limit": "Conserva historia, pero falta garantía en frontera API/SQL de nuevas articulaciones."
+    },
+    {
+      "id": "HU08-CA01",
+      "version": "V2",
+      "requirement": "La interfaz debe proporcionar una selección múltiple para asignar líneas activas a un grupo o semillero.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 8, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Formularios asignan una pareja por envío, se pueden repetir",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Parcial",
+      "limit": "No existe select múltiple o envío de varias líneas de una vez."
+    },
+    {
+      "id": "HU08-CA02",
+      "version": "V2",
+      "requirement": "Se debe poder desvincular una línea previamente asociada previa confirmación del usuario.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 8, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Retirar asociación funciona; botón envía POST directamente",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Parcial",
+      "limit": "asociaciones.html y mira.js no ofrecen confirmación previa para puentes."
+    },
+    {
+      "id": "HU08-CA03",
+      "version": "V2 → V3",
+      "requirement": "Las líneas de investigación seleccionadas deben visualizarse claramente en el resumen o perfil público del grupo y semillero.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 8, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Asociaciones visibles en pantallas protegidas separadas",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Parcial",
+      "limit": "No hay resumen de líneas integrado en ficha grupo/semillero. Acceso público fue sustituido expresamente por V3."
+    },
+    {
+      "id": "HU09-CA01",
+      "version": "V2",
+      "requirement": "Al configurar una línea de investigación, el usuario podrá asociar una o múltiples Disciplinas del catálogo de Áreas del Conocimiento.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 9, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Puente linea_disciplinas permite varias disciplinas",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Asignación individual repetida; no impone mínimo para guardar línea."
+    },
+    {
+      "id": "HU09-CA02",
+      "version": "V2",
+      "requirement": "La línea de investigación debe permitir mapear uno o más de los 17 ODS declarados.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 9, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Puente linea_ods permite varias relaciones",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Parcial",
+      "limit": "Catálogo plural contiene solo dos ODS iniciales; no hay conjunto canónico de 17 impuesto. Se pueden registrar más ODS manualmente."
+    },
+    {
+      "id": "HU09-CA03",
+      "version": "V2",
+      "requirement": "Debe ser posible ligar la línea con sectores productivos/económicos del catálogo de Áreas de Aplicación.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 9, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Puente linea_aplicacion y selectores reales",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::AllFiveBridges_AssignQueryDuplicateConflictAndRemove; frontend/tests/e2e/test_investigacion.py::test_all_bridge_forms_assign_reject_duplicate_and_remove",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Catálogo de áreas de aplicación del SQL confirmado."
+    },
+    {
+      "id": "HU09-CA04",
+      "version": "V2",
+      "requirement": "Se debe bloquear el guardado si la línea no cuenta con al menos un ODS y un Área del Conocimiento vinculada.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 9, criterio 4)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Crear línea independiente no exige ODS ni disciplina",
+      "test": "Contraejemplo SQL HU09-CA04",
+      "evidence": "evidencias/contraejemplos-historicos.json; evidencias/contraejemplos-historicos.sql",
+      "status": "No implementado",
+      "limit": "No hay regla transaccional que bloquee el guardado sin ambos vínculos."
+    },
+    {
+      "id": "HU10-CA01",
+      "version": "V2",
+      "requirement": "La tabla o vista unificada debe mostrar la correspondencia entre Grupo/Semillero, Docentes, Línea de Investigación y ODS.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 10, criterio 1)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Vistas parciales por recurso; sin tabla unificada solicitada",
+      "test": "Inspección rutas, RecursosInvestigacion y vistas 007",
+      "evidence": "evidencias/endpoints.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "No implementado",
+      "limit": "No confundir las cinco pantallas de asociaciones con reporte consolidado."
+    },
+    {
+      "id": "HU10-CA02",
+      "version": "V2",
+      "requirement": "Se debe permitir filtrar la información por Sede, Facultad o Línea de Investigación.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 10, criterio 2)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Búsqueda textual de listados; sin reporte ni Facultad",
+      "test": "Inspección rutas y esquema",
+      "evidence": "evidencias/endpoints.json; evidencias/esquema.json; evidencias/consulta-esquema.sql",
+      "status": "No implementado",
+      "limit": "No existen Facultad ni filtros consolidados Sede/Facultad/Línea."
+    },
+    {
+      "id": "HU10-CA03",
+      "version": "V2",
+      "requirement": "Los datos consolidados descargados en formato Excel o CSV deben coincidir exactamente con los filtros aplicados en pantalla.",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (historia 10, criterio 3)",
+      "files": [
+        "database/migrations/006_v2_modelo_oficial.sql",
+        "database/migrations/007_v2_rutinas_investigacion.sql",
+        "MIRA.Api/Modelos/RecursosInvestigacion.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "frontend/investigacion.py"
+      ],
+      "implementation": "Sin exportación consolidada Excel/CSV",
+      "test": "Inspección rutas, plantillas y dependencias",
+      "evidence": "evidencias/endpoints.json",
+      "status": "No implementado",
+      "limit": "No se creó el módulo durante este cierre."
+    },
+    {
+      "id": "HU01-DESCRIPCION",
+      "version": "V3",
+      "requirement": "Crear roles (descripción de la historia original, adicional a sus cuatro criterios)",
+      "source": "docs/fuentes/historicos/Historias de usuario micro proyecto gestión del desempeño V 1.0 (1).docx (descripción de historia 1)",
+      "files": [
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs"
+      ],
+      "implementation": "RolesPermitidos es lista cerrada; GET roles; sin creación de roles",
+      "test": "Inspección completa AuthController y AuthService",
+      "evidence": "evidencias/endpoints.json",
+      "status": "Parcial",
+      "limit": "La asignación/revocación sí existe. El contrato V3 fija tres roles; falta aceptación expresa de esa limitación frente a la descripción original."
+    },
+    {
+      "id": "PLAN-TECNOLOGIA",
+      "version": "V1–V3",
+      "requirement": "Tecnología de datos Oracle en plan histórico",
+      "source": "docs/fuentes/historicos/Plan de desarrollo Módulo de Investigación - Plataforma Académica (1).docx",
+      "files": [
+        "MIRA.Api/Configuracion/DbConnectionFactory.cs"
+      ],
+      "implementation": "Npgsql/PostgreSQL exigidos posteriormente por el usuario",
+      "test": "tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "No aplicable, con justificación",
+      "limit": "El SQL confirmado y el encargo actual exigen PostgreSQL; Oracle no se introduce retroactivamente."
+    },
+    {
+      "id": "PLAN-VISION",
+      "version": "Fuera del alcance V1–V3 confirmado",
+      "requirement": "Proyectos, entregas y plantillas como visión general",
+      "source": "docs/fuentes/historicos/Plan de desarrollo Módulo de Investigación - Plataforma Académica (1).docx",
+      "files": [
+        "docs/1_constitution.md"
+      ],
+      "implementation": "No existe módulo de proyectos ni gestión de entregas",
+      "test": "Inspección completa catálogo API/Flask",
+      "evidence": "evidencias/endpoints.json",
+      "status": "No aplicable, con justificación",
+      "limit": "Visión del plan no asignada a V1–V3 por el SQL/Spec vigente. Registrar como backlog; no inventar alcance de V4."
+    },
+    {
+      "id": "ARQ-TRES-CAPAS",
+      "version": "V1–V3",
+      "requirement": "C#, REST, servicios/repositorios, DI, Dapper/Npgsql y Flask/Jinja",
+      "source": "docs/1_constitution.md; encargo actual 3.1",
+      "files": [
+        "MIRA.Api/Program.cs",
+        "MIRA.Api/Configuracion/DbConnectionFactory.cs",
+        "MIRA.Api/Peticiones/InvestigacionController.cs",
+        "MIRA.Api/Servicios/InvestigacionService.cs",
+        "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs",
+        "frontend/app.py"
+      ],
+      "implementation": "Controller→Service→Repository; conexiones creadas por factory; frontend HTTP",
+      "test": "frontend/tests/test_architecture.py; tests integrados",
+      "evidence": "evidencias/resultados.json; evidencias/casos.json",
+      "status": "Cumplido y verificado",
+      "limit": "Verificación local; no certifica producción ni aceptación docente."
+    },
+    {
+      "id": "CI-D01-CONFIG",
+      "version": "V3",
+      "requirement": "Workflow debe configurar la clave requerida por Compose",
+      "source": "Encargo actual apartado 10",
+      "files": [
+        ".github/workflows/mira-v3-ci.yml",
+        "docker-compose.yml"
+      ],
+      "implementation": "LOGIN_FORWARDING_KEY requerida en Compose, ausente en env de quality",
+      "test": "docker compose --env-file privado config --quiet con/sin fixture",
+      "evidence": "evidencias/ci-config.json",
+      "status": "Bloqueado",
+      "limit": "Corrección de una línea propuesta, no aplicada. Requiere autorización antes de tocar workflow; ningún run GitHub ejecutado."
+    },
+    {
+      "id": "A11Y-MANUAL",
+      "version": "V3",
+      "requirement": "Recorrido asistivo y dispositivos físicos",
+      "source": "Encargo actual 5.6",
+      "files": [
+        "scripts/verify-browser-v3.mjs",
+        "scripts/verify-zoom-v3.mjs"
+      ],
+      "implementation": "Edge responsive/axe/teclado/zoom comprobados",
+      "test": "Pendiente NVDA/Narrator/VoiceOver y Safari/Chrome físicos",
+      "evidence": "evidencias/axe.json; evidencias/teclado.json; evidencias/zoom.json",
+      "status": "Implementado, pendiente de prueba",
+      "limit": "No certifica WCAG AA; informe enumera tareas manuales pendientes."
+    },
+    {
+      "id": "PRODUCCION-REAL",
+      "version": "V3",
+      "requirement": "Validar Render, Neon, TLS, disco y recuperación reales",
+      "source": "Encargo actual: no desplegar ni modificar bases remotas",
+      "files": [
+        "deploy/render.yaml.example",
+        "deploy/README.md"
+      ],
+      "implementation": "Configuración revisada y arranque Production local",
+      "test": "No ejecutada en cloud: requiere autorización separada",
+      "evidence": "evidencias/production-local.json",
+      "status": "Bloqueado",
+      "limit": "No impide demostrar la plataforma local; sí impide declarar producción validada."
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Guía de sustentación MIRA V3
 
+> Fase 6 (2026-11-12): [estado actual y despliegue](cierre-v1-v3/11_guia_sustentacion.md). 138 .NET, 132 Flask, 51 HTTP y 11 SQL aprobados localmente; V2/C06 mantienen pendientes académicos. Las cifras y propuestas anteriores se conservan como antecedentes. No confundirlos con CI o producción remotos.
+
+> Seguimiento local 2026-11-07: [cierre académico](V3_CIERRE_ACADEMICO.md). La propuesta local pasa 71 .NET/80 Flask/43 E2E, 18 axe sin infracciones ni incomplete y zoom real Edge; requiere autorización antes de publicarse. El PR #7 conserva su evidencia anterior y la marca MIRA. C06 sigue pendiente del profesor.
+
 Revisión final: 2026-11-05. [Dictamen, matriz de requisitos y producción](V3_REVISION_FINAL.md). Preparada para demostración académica local; no declarar validado Render/Neon. Los ocho avisos Python anteriores están corregidos en el runtime Linux auditado; conservar la distinción entre prueba local y producción.
 
 ## Preparación reproducible
@@ -61,14 +65,14 @@ Para demostrar caducidad por paso del tiempo en un navegador real, esperar a la 
 
 ## Comprobaciones manuales pendientes de interfaz
 
-El reporte automatizado comprueba 50 combinaciones; axe cubre 18, sin infracciones automáticas finales, y detalla targets/motivos de reglas incompletas. Consultar el JSON para su conteo actual. Las capturas 1440, 768, 390 y 320 se inspeccionaron visualmente. Los tamaños simulados de Edge no sustituyen dispositivos reales.
+El snapshot publicado comprueba 50 combinaciones y 18 revisiones axe, sin infracciones y con diez instancias incomplete. La propuesta local del 7 de noviembre vuelve a comprobar 50/18 con cero infracciones y cero incomplete, más 27 comprobaciones de zoom real (nueve páginas al 100/200/400 %). Las evidencias se conservan separadas. Ninguno de estos tamaños de Edge sustituye dispositivos reales.
 
 - Navegar con NVDA/VoiceOver: encabezados, etiquetas, tablas, errores de formulario, avisos y anuncios de sesión expirada.
 - Narrator está instalado, pero no se obtuvo un recorrido asistido verificable en esta sesión de navegador headless. Debe completarlo un operador con interacción visual/audio; no se declara prueba de lector aprobada.
 - Repetir con tecnología asistiva los seis modales ya probados automáticamente por teclado: nombre, Enter, Tab/Shift+Tab, Escape y retorno de foco. Tabla desplazable, foco de validación y detalle también pasan; esto no sustituye la lectura asistida.
-- Probar zoom de escritorio 200 %/400 %, textos largos y ficha con varios semilleros. Ya se comprobó zoom visual 2x y reflow a 640/320 CSS px; no son equivalentes a certificar el zoom del navegador.
+- Repetir tareas completas con zoom en otros navegadores, textos largos y fichas con varios semilleros. La nueva propuesta sí comprobó zoom real de página Edge al 200/400 %, además del zoom visual/reflow anteriores; no certifica todos los navegadores o escenarios.
 - Probar Safari/iOS y Chrome/Android reales, orientación horizontal, teclado virtual y áreas táctiles.
-- Resolver las reglas incomplete de axe con revisión humana y conservar un informe detallado de cada decisión; no declarar conformidad AA a partir de cero infracciones automáticas.
+- Revisar visualmente y con tecnología asistiva los componentes corregidos: las diez instancias automáticas se resolvieron localmente sin excluir reglas. El PR publicado sigue mostrando su snapshot anterior hasta autorizar los cambios. No declarar conformidad AA a partir de cero infracciones/incomplete.
 - Verificar vencimiento por tiempo real y cookie Secure sobre HTTPS en staging autorizado. La sesión ya sobrevivió un reinicio real de Gunicorn con volumen local; falta redeploy/disco Render real.
 
 ## Recorrido por archivos
@@ -121,6 +125,39 @@ Swagger en `/swagger` (Development). POST `/api/auth/login` devuelve token; copi
 | ¿Qué queda para producción? | HTTPS, secretos externos, almacenamiento compartido si hay réplicas, pruebas del entorno real y evaluación completa de accesibilidad. La entrega no despliega infraestructura. |
 
 No mostrar `.env`, `.local/*`, passwords, hashes o tokens durante la sustentación. Abrir los archivos de ejemplo y los resultados saneados de docs.
+
+## Hoja verificable de los seis casos — cierre local
+
+Las peticiones siguientes usan exclusivamente una cuenta y base de demostración ficticias. No ejecutar la demostración contra la instalación habitual o datos reales. Preparar el entorno antes del cronómetro; `verify-postgres16.ps1 -Browser -Zoom` reproduce pruebas aisladas y detiene sus procesos al terminar, por lo que no deja una sesión interactiva abierta. Para una demostración interactiva, preparar y comprobar por separado una instalación de pruebas con configuración privada propia.
+
+Abreviaturas de archivo: AC=`MIRA.Api/Peticiones/AuthController.cs`; AS=`MIRA.Api/Servicios/Seguridad/AuthService.cs`; SC=`MIRA.Api/Configuracion/SeguridadConfiguration.cs`; CR=`MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs`. TS=`tests/MIRA.Api.Tests/SeguridadTests.cs`; TD=`tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs`.
+
+| Escenario | Petición y endpoint | Respuesta esperada | Archivo / clase / método | Prueba y explicación para el profesor |
+|---|---|---|---|---|
+| Autenticación correcta | POST /api/auth/login, JSON correo/password ficticios válidos; GET /api/universidad con Bearer | 200, SesionRespuesta JSON; consulta 200 | AC AuthController.Login; AS AuthService.Login/GenerarJwt y PasswordService.Verify | TS.Login_Read_ForbiddenWrite_Logout_Revoked: verificación bcrypt, firma JWT y serialización MVC; no imprimir el token. |
+| Contraseña incorrecta | POST /api/auth/login con correo existente y contraseña errónea no vacía | 401 uniforme | AC AuthController.Login; AS AuthService.Login/PasswordService.Verify | TS.BadLoginIs401. Un body inválido que dé 400 no demuestra este caso. |
+| Sin token | GET /api/universidad sin Authorization | 401 con desafío Bearer | SC SeguridadConfiguration.AddSeguridad; Program MapControllers.RequireAuthorization | TS.MissingOrInvalidTokenIs401: el pipeline impide entrar al controlador de datos. |
+| Token expirado | GET /api/auth/me con JWT firmado de exp pasado y clave Testing | 401 | AS JwtSettings.Validation; SC SeguridadConfiguration.AddSeguridad/AddJwtBearer | TS.InvalidJwtClaimsAre401(kind:expired). Es prueba determinista del middleware, no espera por reloj real ni cambio de clave productiva. |
+| Sesión revocada | Login, GET con JWT → 200, POST /api/auth/logout, repetir GET con el mismo JWT | Logout 200; GET 401 antes de exp | AC AuthController.Logout; AS AuthService.Revocar/ValidarSesion; CR CuentaRepository.Revocar/Sesion | TS.Login_Read_ForbiddenWrite_Logout_Revoked y TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration; jti ausente invalida acceso futuro. |
+| Rol insuficiente | Investigador autenticado: GET /api/auth/usuarios | 403; el catálogo ordinario sigue 200 | AC AuthController.Usuarios y Authorize; SC SeguridadConfiguration.AddSeguridad | TS.RoleMatrix y EveryAdministrativeActionRequiresAdministrator: permiso real en backend, no solo botones ocultos. |
+
+Los seis casos pueden recorrerse con el comando filtrado de SeguridadTests ya documentado. Mostrar solo estados/resultados y código; las claves/contraseñas de Testing son fixtures, no ejemplos para desplegar. El límite 429 se prueba aparte para no bloquear por IP el login de la demostración.
+
+## Preguntas difíciles adicionales
+
+| Pregunta | Respuesta verificable |
+|---|---|
+| ¿Todo nombre sp_ es un procedimiento? | No. En 003, sp_usuario_crear es CREATE PROCEDURE y CuentaRepository.Crear lo invoca con CALL. En 007, sp_guardar_v2_ficha_grupo es CREATE FUNCTION RETURNS jsonb, y InvestigacionRepository.GuardarFicha usa SELECT. El prefijo no define el tipo SQL. |
+| ¿Dónde está la transacción de grupo-semilleros si no hay BeginTransaction en C#? | GuardarFicha realiza una única llamada a la función PL/pgSQL de 007. El error de un detalle revierte la sentencia y sus escrituras; SheetCreatesManyRowsThenRollsBackAllChangesWhenLastRowBelongsElsewhere lo prueba con PostgreSQL. No se promete agrupar varias llamadas HTTP independientes. |
+| ¿JWT no debía ser stateless? | La firma/claims se validan sin reconstruir el token, pero este diseño añade una sesión jti y consulta roles/cuenta para revocar. AuthService.ValidarSesion y CuentaRepository.Sesion muestran el coste: dependencia de BD y una lectura por petición. |
+| ¿Logout cancela una escritura que ya empezó? | No necesariamente: la petición que ya pasó autenticación puede terminar. La revocación impide solicitudes posteriores; no es un mecanismo de cancelación de transacciones en curso. |
+| ¿Por qué cambiar el nombre del producto no cambia issuer, tablas o volúmenes? | Son contratos/estado persistente, no etiquetas de interfaz. Cambiar issuer/audience invalida JWT; cambiar Compose name puede crear otro volumen. El plan SAPIENS separa marca visible de identificadores internos y mantiene la historia MIRA. |
+| ¿Por qué C06 no figura aprobado si el SQL pasa? | La prueba verifica que el modelo confirmado no tiene FK opcionales, no una relación nullable inexistente. La aceptación de esa no aplicabilidad requiere decisión del profesor. Ver V3_C06_JUSTIFICACION. |
+| ¿Cero incomplete axe significa accesibilidad certificada? | No. Se corrigieron las causas automáticas concretas y se repitieron 18 auditorías; faltan lectura asistida y dispositivos reales. El zoom actual usa perfiles Chromium y comprueba DPR/viewport sin Emulation, pero tampoco prueba todos los navegadores. |
+| ¿Por qué el workflow no tiene un check verde todavía? | Sigue local, sin commit/push autorizado. actionlint y componentes locales no son una ejecución de GitHub. Solo el run real del SHA publicado podrá validar el CI. |
+| ¿12 caracteres son 72 bytes? | No. PasswordService.Hash usa string.Length de .NET y Encoding.UTF8.GetByteCount; los caracteres Unicode pueden ocupar varios bytes. El servidor aplica el máximo UTF-8 aunque el formulario también limite longitud. No es una medición de entropía ni de grafemas. |
+
+En el tramo 06:00–07:30 abrir los procedimientos de 003, el trigger de normalización de 005 y la función/triggers de 007. Distinguir función, procedimiento, FK y trigger; usar el rollback real de las pruebas como evidencia de conservación V1/V2. No consumir los diez minutos instalando herramientas, creando recursos o esperando una expiración de veinte minutos.
 
 
 ## Cierre de estabilización y defensa de producción

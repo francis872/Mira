@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-07",
+  "profile": "PostgreSQL16.15 local aislado; .NET10; venv limpio; Edge; Linux/Gunicorn Docker; datos ficticios",
+  "testSuites": {
+    "dotnet": {
+      "total": 136,
+      "passed": 136,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase5-20261107-192202-6355a6\\integral-cierre\\dotnet\\fase5-v1.trx",
+      "rawSha256": "1118d2001f628f17678cea788480a832c167bba7a14d92de2b1f4a1d3b92557c"
+    },
+    "flask": {
+      "total": 120,
+      "passed": 120,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase5-20261107-192202-6355a6\\integral-cierre\\flask-integrated.xml",
+      "rawSha256": "1252a35cc2b55761271d490d18135d74ced3191636849cb11f9c9da14041b4e3"
+    },
+    "http": {
+      "total": 51,
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase5-20261107-192202-6355a6\\integral-cierre\\e2e.xml",
+      "rawSha256": "2816306e14e28a9853edf0eb3f6989d0b983a08335ff2b0e823fc95671f47b12"
+    },
+    "dockerHttp": {
+      "total": 51,
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase5-20261107-192202-6355a6\\docker-e2e-final.xml",
+      "rawSha256": "c7569e232c04f1ec4ddb3f65db5bd674dc6102d46a22623730143b909bf20da2"
+    }
+  },
+  "sql": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "suites": [
+      "v1_requisitos_originales.sql",
+      "v2_catalogo_ods_original.sql",
+      "v2_catalogos_rutinas.sql",
+      "v2_investigacion.sql",
+      "v2_minimos_linea.sql",
+      "v2_modelo_oficial.sql",
+      "v2_reportes_originales.sql",
+      "v2_requisitos_originales.sql",
+      "v2_usuarios_roles.sql",
+      "v3_c06_nulabilidad.sql"
+    ]
+  },
+  "responsiveCombinations": 110,
+  "axeChecks": 38,
+  "axeViolations": 0,
+  "axeIncomplete": 2,
+  "keyboardGroups": 10,
+  "academicUiChecks": 5,
+  "realZoomChecks": 51,
+  "physicalDevices": false,
+  "screenReader": false,
+  "remoteProduction": false,
+  "remoteActionsValidated": false,
+  "builds": {
+    "date": "2026-11-07T20:25:35.416042",
+    "checks": [
+      {
+        "component": "api",
+        "exitCode": 0
+      },
+      {
+        "component": "frontend",
+        "exitCode": 0
+      }
+    ]
+  },
+  "localAudits": [
+    {
+      "name": "images",
+      "exit": 0
+    },
+    {
+      "name": "production-smoke",
+      "exit": 0
+    },
+    {
+      "name": "osv",
+      "exit": 0
+    },
+    {
+      "name": "nuget",
+      "exit": 0
+    },
+    {
+      "name": "nuget-gate",
+      "exit": 0
+    }
+  ],
+  "historicalFailedRunsPreserved": [
+    "v1",
+    "v2-core",
+    "v2-minimos",
+    "integral",
+    "navegador",
+    "navegador-final",
+    "navegador-completo",
+    "navegador-verificado"
+  ],
+  "nuget": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": [
+      "https://api.nuget.org/v3/index.json"
+    ],
+    "projects": [
+      {
+        "path": "C:/Users/Usuario/OneDrive/Escritorio/MIRA/MIRA.Api/MIRA.Api.csproj"
+      },
+      {
+        "path": "C:/Users/Usuario/OneDrive/Escritorio/MIRA/tests/MIRA.Api.Tests/MIRA.Api.Tests.csproj"
+      }
+    ]
+  },
+  "securityScope": "Los seis escenarios JwtBearer se conservan dentro de .NET; D01 integrado separado. No espera de 20 minutos ni TLS cloud.",
+  "consolidatedAt": "2026-11-12T19:47:19.239690-05:00"
+}

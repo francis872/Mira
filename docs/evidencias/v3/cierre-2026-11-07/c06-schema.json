@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-07",
+  "scope": "exclusive empty CI database on loopback; schema metadata only",
+  "serverVersion": "16.15 (Debian 16.15-1.pgdg13+2)",
+  "migrations": 8,
+  "sqlSuites": 5,
+  "foreignKeyColumns": [
+    {
+      "table": "docentes",
+      "column": "usuario_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_docentes",
+      "column": "docente_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_docentes",
+      "column": "grupo_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_lineas",
+      "column": "grupo_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_lineas",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "grupos_investigacion",
+      "column": "sede_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_aplicacion",
+      "column": "aplicacion_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_aplicacion",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_disciplinas",
+      "column": "disciplina_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_disciplinas",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_ods",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_ods",
+      "column": "ods_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_lineas",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_lineas",
+      "column": "semillero_id",
+      "nullable": false
+    },
+    {
+      "table": "semilleros",
+      "column": "grupo_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_tutores",
+      "column": "docente_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_tutores",
+      "column": "semillero_id",
+      "nullable": false
+    },
+    {
+      "table": "sesion_acceso",
+      "column": "usuario_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_rol",
+      "column": "rol_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_rol",
+      "column": "usuario_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_roles",
+      "column": "rol_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_roles",
+      "column": "usuario_id",
+      "nullable": false
+    }
+  ],
+  "optionalForeignKeyColumns": 0
+}

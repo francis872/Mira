@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-11-07T23:10:41.376Z",
+  "url": "https://github.com/francis872/Mira/pull/7",
+  "state": "open",
+  "draft": true,
+  "merged": false,
+  "head": "feature/mira-v3",
+  "headSha": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "base": "main",
+  "baseSha": "35640853dc4cbb4dd50f17c9208acb2feedaff1d",
+  "commits": 51,
+  "changedFiles": 197,
+  "actionsRuns": []
+}

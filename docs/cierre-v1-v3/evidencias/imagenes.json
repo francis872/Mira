@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-07",
+  "checks": [
+    {
+      "image": "mira-v3-api:cierre-fresco-20261107",
+      "id": "sha256:b28504ec55db6486199e8aa39f62f15992de75ddb103aab3b972aa7364424844",
+      "user": "1654",
+      "applicationFiles": 25,
+      "forbiddenApplicationPaths": [],
+      "privateKeyOrJwtLiterals": [],
+      "status": "passed"
+    },
+    {
+      "image": "mira-v3-frontend:cierre-fresco-20261107",
+      "id": "sha256:c305b34d5e02df0b48269eed6ecb5bd6c321520ca87fd8cbb1f98f43117d715d",
+      "user": "mira",
+      "applicationFiles": 50,
+      "forbiddenApplicationPaths": [],
+      "privateKeyOrJwtLiterals": [],
+      "status": "passed"
+    }
+  ]
+}

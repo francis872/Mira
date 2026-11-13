@@ -1,5 +1,7 @@
 # Mapa técnico V3
 
+> Seguimiento local 2026-11-07: [cierre académico y propuesta sin publicar](V3_CIERRE_ACADEMICO.md). Este documento conserva su alcance histórico; el PR #7 publicado contiene ocho commits V3 más 43 anteriores. Las nuevas correcciones y CI requieren autorización de publicación.
+
 La [matriz final R01–R30 y S01–S08](V3_REVISION_FINAL.md) amplía este mapa con capa, cobertura y evidencias de estabilización. Producción: `DbConnectionFactory` constructor valida TLS sin abrir conexión; `Program` resuelve PORT; `seguridad.configure_session` impone HTTPS/directorio privado; `gunicorn.conf.py` fija un worker/cuatro threads. Pruebas: ProductionConfigurationTests, test_production.py y verificadores Docker/Production. No hay validación remota Render/Neon.
 
 Las rutas de archivos son relativas a la raíz. La evidencia ejecutada y sus límites se registran en V3_PRUEBAS.md.

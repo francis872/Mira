@@ -1,5 +1,7 @@
 # Revisión final de estabilización — MIRA V3
 
+> Seguimiento local 2026-11-07: [cierre académico y propuesta sin publicar](V3_CIERRE_ACADEMICO.md). Este documento conserva su alcance histórico; el PR #7 publicado contiene ocho commits V3 más 43 anteriores. Las nuevas correcciones y CI requieren autorización de publicación.
+
 Fecha: 2026-11-05, America/Bogota. Rama `feature/mira-v3`; HEAD de partida `95e2e0bf00d02497d2c8a42d1efe814a6b551d3a`. Sin commits, staging Git, push ni despliegue. Cambios previos conservados. La estabilización corrige pendientes existentes; no crea una fase funcional nueva.
 
 **Dictamen:** preparada para sustentación local con observaciones académicas y manuales declaradas. Preparada técnicamente para iniciar un despliegue de pruebas controlado, sujeto a configurar y comprobar recursos reales. **Producción no validada ni aprobada.** C06 requiere aceptación del profesor; no se ha demostrado una FK opcional ausente del modelo oficial.
@@ -32,7 +34,7 @@ Fuente: `versiones/v3/2_spec.md`; plan: `versiones/v3/3_plan.md`. R01–R30 son 
 | R01. Mantener tres capas | `MIRA.Api/Peticiones/AuthController.cs`, `MIRA.Api/Servicios/Seguridad/AuthService.cs`, `MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs` | HTTP / servicio / repositorio | AuthController.Login → AuthService.Login → CuentaRepository.Buscar | `frontend/tests/test_architecture.py::test_catalog_repositories_only_call_stored_routines`; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration | E1; código inspeccionado. Cumplido localmente. |
 | R02. Correo/contraseña y respuesta 200 | `MIRA.Api/Modelos/Seguridad.cs`, `MIRA.Api/Peticiones/AuthController.cs`, `MIRA.Api/Servicios/Seguridad/AuthService.cs` | HTTP / servicio | LoginRequest; AuthController.Login; AuthService.Login | TS.Login_Read_ForbiddenWrite_Logout_Revoked; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration | E1, 200 y JSON comprobados. |
 | R03. Credencial incorrecta/inactiva 401 | `MIRA.Api/Servicios/Seguridad/AuthService.cs`, `MIRA.Api/Peticiones/AuthController.cs` | HTTP / servicio | AuthService.Login; AuthController.Login | TS.BadLoginIs401; TS.InactiveAccountAndRoleChangesInvalidateSession | E1. Cumplido. |
-| R04. Límite de intentos | `MIRA.Api/Configuracion/SeguridadConfiguration.cs` | middleware | SeguridadConfiguration.AddSeguridad, política login | TS.LoginRateLimitReturns429 | E1: 10 solicitudes y posterior 429. Por IP remota e instancia; proxy pendiente. |
+| R04. Límite de intentos | `MIRA.Api/Configuracion/SeguridadConfiguration.cs`, `MIRA.Api/Configuracion/LoginProtection.cs`, `frontend/login_protection.py` | middleware | LoginProtectionMiddleware; LoginOriginAuth; cuotas por origen autenticado/cuenta y concurrencia | LoginProtectionTests; frontend/tests/test_login_protection.py; regresión integrada D01 | Fase 3 local sin publicar: D01 corregido y reproducido con clientes independientes; diez solicitudes/minuto por origen y cuenta; cuatro trabajos concurrentes. [Condiciones y evidencia](V3_D01_LIMITACION_LOGIN.md). |
 | R05. me con identidad actual | `MIRA.Api/Peticiones/AuthController.cs`, `MIRA.Api/Servicios/Seguridad/AuthService.cs` | HTTP / middleware | AuthController.Me; AuthService.ValidarSesion | TS.InactiveAccountAndRoleChangesInvalidateSession; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration | E1. La revalidación ocurre antes del controlador. |
 | R06. Logout con revocación real | `MIRA.Api/Servicios/Seguridad/AuthService.cs`, `MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs` | servicio / repositorio / SQL | AuthService.Revocar; CuentaRepository.Revocar/Sesion | TS.Login_Read_ForbiddenWrite_Logout_Revoked; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration | E1: mismo JWT pasa a 401 tras logout 200. |
 | R07. Cuentas/roles solo administrador | `MIRA.Api/Peticiones/AuthController.cs` | HTTP / RBAC | Usuarios/Crear/Editar/Inactivar/Restablecer/Roles; atributos Authorize | TS.RoleMatrix; TD.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration; TF.test_users_page_never_renders_password_hash; TS.EveryAdministrativeActionRequiresAdministrator | E1/E3: seis acciones administrativas denegadas a Investigador y Coordinador; operaciones de administrador cubiertas por integración. Cumplido localmente. |
@@ -105,7 +107,7 @@ No cambiaron migraciones 001–007 ni controladores, servicios y repositorios V1
 | Antes de producción | Render/Neon no contactados; TLS, permisos, secretos remotos, pooler y dominio no probados | Staging autorizado: TLS válido/inválido, login/logout/401/403, cookie Secure en HTTPS, migraciones y reinicio. |
 | Antes de producción | Sesiones filesystem de una instancia, capacidad limitada y disco sujeto a permisos/ciclo de vida | Confirmar disco privado escribible por UID 10001, persistencia tras redeploy y pérdida controlada de sesión; no escalar réplicas independientes. |
 | Antes de producción | Sin prueba de carga, backup/restauración ni auditoría de CVE del SO/base completa | Validar recuperación, alertas, límites, parches base y comportamiento bajo concurrencia. |
-| P2 operación | Login limitado por IP remota e instancia; Flask puede concentrar usuarios detrás de una IP | Medir el límite real y configurar proxies/gateway conocidos; no confiar en headers arbitrarios. |
+| P2 operación | D01 corregido localmente: origen firmado, cuenta y concurrencia; confianza real de proxy y contadores por instancia pendientes | Configurar clave y proxies conocidos, probar topología real; no aceptar headers arbitrarios. [Detalle](V3_D01_LIMITACION_LOGIN.md). |
 | P2 disponibilidad | /health es liveness y no comprueba BD/API; dependencia de CDN Bootstrap conservada | Probar readiness operacional, indisponibilidad/arranque frío y acceso CDN. |
 | P2 reproducibilidad | Las bases Docker usan etiquetas; su contenido puede cambiar al reconstruir | Revisar CVE del SO y fijar digests al promover una imagen aprobada; IDs locales registrados en E10. |
 | Académico | C06 condicional sin relación opcional en SQL oficial | Obtener decisión explícita del profesor; registrar relación/fuente si cambia la interpretación. |
@@ -121,7 +123,7 @@ API: Production, Jwt__Key externa >=32 bytes, issuer/audience coherentes, PORT=1
 
 Render requiere bind 0.0.0.0 y expone PORT; los discos restringen el servicio a una instancia. [Servicios web](https://render.com/docs/web-services), [discos](https://render.com/docs/disks), [Flask](https://render.com/docs/deploy-flask), [Blueprint](https://render.com/docs/blueprint-spec). Neon/Npgsql documentan validación TLS: [Neon](https://neon.com/docs/guides/dotnet-npgsql), [Npgsql](https://www.npgsql.org/doc/security.html). E11/E12 son validación local/estructural, no validación del panel cloud.
 
-## Commits propuestos — ninguno ejecutado
+## Plan de commits registrado antes de su publicación
 
 | Orden | Título | Responsabilidad |
 |---|---|---|
@@ -134,7 +136,7 @@ Render requiere bind 0.0.0.0 y expone PORT; los discos restringen el servicio a 
 | 7 | test(local): consolidar verificación aislada | bootstrap/verificadores SQL/.NET/Flask/Docker, C06 y evidencias saneadas. |
 | 8 | docs(review): cerrar matriz y sustentación | README, guía de diez minutos, revisión, pruebas, mapa y resultados finales. |
 
-Varios archivos comparten responsabilidades; preparar hunks explícitos y revisar cada diff antes de cualquier futuro staging. No usar git add . ni adjuntar .local. La revisión queda disponible sin crear commits.
+Varios archivos comparten responsabilidades; preparar hunks explícitos y revisar cada diff antes de cualquier futuro staging. No usar git add . ni adjuntar .local. La revisión original quedó sin commits; después se publicaron los ocho commits autorizados, hasta 3105273. La propuesta nueva del cierre académico sigue sin commits/push.
 
 ## Recomendación de entrega
 
