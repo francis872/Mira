@@ -7,8 +7,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "mira-secret-key-prod-local")
 
-# URL base de la API REST de MIRA
-API_URL = os.getenv("API_URL", "http://localhost:8081/api").rstrip("/")
+# URL base de la API REST de MIRA (normalizada para soportar URLs locales y cloud en Render)
+raw_api = os.getenv("API_URL", "http://localhost:8081/api").strip().rstrip("/")
+if not raw_api.endswith("/api"):
+    raw_api += "/api"
+API_URL = raw_api
+
+# Timeout extendido (60s) para tolerar el "cold start" (despertar de reposo) en planes gratuitos de Render
+API_TIMEOUT = int(os.getenv("API_TIMEOUT", "60"))
 
 def api_call(method, path, json_data=None, params=None):
     """Función auxiliar para realizar llamadas seguras inyectando el token JWT."""
@@ -27,12 +33,13 @@ def api_call(method, path, json_data=None, params=None):
             json=json_data,
             params=params,
             headers=headers,
-            timeout=8
+            timeout=API_TIMEOUT
         )
         if response.status_code == 401 and path != "Auth/login":
             session.clear()
         return response
-    except requests.exceptions.RequestException:
+    except requests.exceptions.RequestException as e:
+        print(f"[API CONNECTION ERROR] {method} {url} -> {e}", flush=True)
         return None
 
 # =============================================================================
@@ -64,10 +71,12 @@ def roles_required(*roles):
 
 @app.context_processor
 def inject_user():
-    """Inyecta el usuario y su estado de autenticación a todas las plantillas Jinja2."""
+    """Inyecta el usuario, su estado de autenticación y la URL de Swagger a todas las plantillas Jinja2."""
+    swagger_url = API_URL.replace("/api", "/swagger/index.html") if "/api" in API_URL else f"{API_URL}/swagger/index.html"
     return {
         "current_user": session.get("user"),
-        "is_authenticated": "jwt_token" in session
+        "is_authenticated": "jwt_token" in session,
+        "swagger_url": swagger_url
     }
 
 # =============================================================================
