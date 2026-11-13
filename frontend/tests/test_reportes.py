@@ -23,6 +23,15 @@ def test_member_excel_and_pdf_contain_actual_names_dates_and_states(client,calls
     assert 'José Pérez' in text and 'Coinvestigador' in text and '2026-01-01' in text
 
 
+def test_wrapped_long_member_name_preserves_every_word_and_accent_in_pdf(client,calls):
+    name='PRUEBA AUTOMATIZADA REMOTA - SIN VALOR ACADÉMICO'
+    members(calls,[{'docente':name,'rol':'Coinvestigador','activo':True}])
+    response=client.get('/investigacion/reportes/grupos/4/integrantes.pdf')
+    assert response.status_code==200
+    text=' '.join(' '.join(page.extract_text().split()) for page in PdfReader(BytesIO(response.data)).pages)
+    assert name in text
+
+
 def test_excel_keeps_formula_like_names_as_literal_text(client,calls):
     members(calls,[{'docente':'=1+1','rol':'Tutor','activo':True}])
     r=client.get('/investigacion/reportes/grupos/4/integrantes.xlsx')

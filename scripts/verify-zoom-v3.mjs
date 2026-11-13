@@ -6,7 +6,10 @@ import {createServer} from 'node:net';
 import assert from 'node:assert/strict';
 
 const base=process.env.MIRA_E2E_URL || 'http://127.0.0.1:5001';
-assert(['127.0.0.1','localhost'].includes(new URL(base).hostname),'Solo una plataforma de pruebas loopback');
+const targetOrigin=new URL(base);
+assert(['127.0.0.1','localhost'].includes(targetOrigin.hostname) ||
+    (targetOrigin.protocol==='https:' && process.env.MIRA_BROWSER_ALLOWED_ORIGIN===targetOrigin.origin),
+    'Configure explícitamente el origen HTTPS remoto autorizado o use loopback');
 assert(process.env.MIRA_E2E_EMAIL && process.env.MIRA_E2E_PASSWORD,'Falta la identidad exclusiva de pruebas');
 const output=process.env.MIRA_ZOOM_DIRECTORY || '.local/zoom-v3';
 const edge=process.env.MIRA_BROWSER_EXECUTABLE || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';

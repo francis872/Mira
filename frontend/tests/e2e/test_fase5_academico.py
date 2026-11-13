@@ -12,7 +12,10 @@ def test_members_excel_pdf_and_filtered_report_use_persisted_relations(records):
     marker='e2e-f5-reporte-'+uuid.uuid4().hex[:8]
     sede=records('sedes',{'nombre':marker,'ciudad':'Prueba'})
     group=records('grupos_investigacion',{'sede_id':sede,'gruptac_url':'https://example.invalid/'+marker})
-    person=api('GET','referencias/usuarios').json()[0]
+    people=api('GET','referencias/usuarios').json()
+    used={row['usuario_id'] for row in api('GET','docentes').json()}
+    person=next((row for row in people if row['id'] not in used),None)
+    assert person is not None,'La base aislada requiere una persona QA sin perfil docente.'
     teacher=records('docentes',{'usuario_id':person['id']})
     records('grupo_docentes',{'grupo_id':group,'docente_id':teacher,'rol':'Coinvestigador','fecha_inicio':'2026-01-01'})
     line=records('lineas_investigacion',{'codigo':marker,'nombre':marker})
@@ -23,7 +26,8 @@ def test_members_excel_pdf_and_filtered_report_use_persisted_relations(records):
     row=list(load_workbook(BytesIO(excel.content)).active.values)[1]
     assert row[:3]==(person['nombre'],'Coinvestigador','2026-01-01')
     pdf=browser.get(base+'.pdf');assert pdf.status_code==200
-    assert person['nombre'] in ''.join(p.extract_text() for p in PdfReader(BytesIO(pdf.content)).pages)
+    pdf_text=' '.join(' '.join(p.extract_text().split()) for p in PdfReader(BytesIO(pdf.content)).pages)
+    assert ' '.join(person['nombre'].split()) in pdf_text
     filtered=browser.get(f'/investigacion/reportes?sede_id={sede}&linea_id={line}')
     workbook=load_workbook(BytesIO(browser.get(f'/investigacion/reportes/articulacion.xlsx?sede_id={sede}&linea_id={line}').content))
     rows=list(workbook.active.values)

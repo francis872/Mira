@@ -134,6 +134,14 @@ def api_call(method, path, json_data=None, expect_list=None):
         )
     except requests.exceptions.RequestException:
         return None
+    if response.status_code in (401, 403):
+        try:
+            error_body = response.json()
+        except ValueError:
+            app.logger.warning("El servicio devolvió un error de acceso sin JSON válido.")
+            return None
+        if not isinstance(error_body, dict):
+            return None
     if response.status_code == 401 and path != "auth/login":
         session.clear()
         raise SesionVencida()

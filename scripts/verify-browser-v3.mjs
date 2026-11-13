@@ -2,6 +2,10 @@ import {mkdir, writeFile, readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const base=process.env.MIRA_E2E_URL || 'http://127.0.0.1:5001';
+const targetOrigin=new URL(base);
+assert(['127.0.0.1','localhost'].includes(targetOrigin.hostname) ||
+    (targetOrigin.protocol==='https:' && process.env.MIRA_BROWSER_ALLOWED_ORIGIN===targetOrigin.origin),
+    'Configure explícitamente el origen HTTPS remoto autorizado o use loopback');
 const debug=process.env.MIRA_BROWSER_DEBUG_URL || 'http://127.0.0.1:9226';
 const output=process.env.MIRA_EVIDENCE_DIRECTORY || 'docs/evidencias/v3';
 const reviewDate=new Date().toLocaleDateString('en-CA',{timeZone:'America/Bogota'});

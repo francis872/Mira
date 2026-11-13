@@ -223,3 +223,12 @@ def test_area_form_sends_original_value_for_database_normalization(client, calls
     calls.responses[("POST", "area_aplicacion")] = FakeResponse(201, {"id": 9, "nombre": "Nombre"})
     assert client.post('/area_aplicacion/crear', data={'nombre': '  Nombre  '}).status_code == 302
     assert calls[-1]['json']['nombre'] == '  Nombre  '
+
+
+@pytest.mark.parametrize('status',[401,403])
+def test_non_json_access_error_is_not_misreported_as_session_or_role_failure(client,calls,status):
+    calls.responses['GET','auth/me']=FakeResponse(status,None)
+    response=client.get('/')
+    assert response.status_code==503
+    with client.session_transaction() as session:
+        assert session.get('token')=='isolated-test-token'
