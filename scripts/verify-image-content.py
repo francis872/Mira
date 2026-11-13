@@ -1,4 +1,5 @@
 """Comprueba filesystem exportado y usuario; no inspecciona ni muestra secretos del host."""
+from datetime import datetime, timedelta, timezone
 import argparse
 import json
 import re
@@ -46,7 +47,7 @@ def main():
                 reports.append(report)
         finally:
             subprocess.run(["docker", "rm", container], check=True, stdout=subprocess.DEVNULL)
-    Path(args.output).write_text(json.dumps({"date": "2026-11-05", "checks": reports}, indent=2) + "\n", encoding="utf-8")
+    Path(args.output).write_text(json.dumps({"date": datetime.now(timezone(timedelta(hours=-5))).date().isoformat(), "checks": reports}, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(reports))
     if any(r["status"] != "passed" for r in reports):
         raise SystemExit(1)

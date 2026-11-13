@@ -1,4 +1,5 @@
 """Audita distribuciones instaladas en OSV sin cargar la aplicación ni sus secretos."""
+from datetime import datetime, timedelta, timezone
 import argparse
 import importlib.metadata
 import json
@@ -26,7 +27,7 @@ def main():
     if not packages:
         parser.error("No se encontraron paquetes; no se puede emitir un resultado aprobado vacío.")
     payload = {"queries": [{"package": {"name": p["name"], "ecosystem": "PyPI"}, "version": p["version"]} for p in packages]}
-    report = {"date": "2026-11-05", "source": "https://api.osv.dev/v1/querybatch", "python": platform.python_version(),
+    report = {"date": datetime.now(timezone(timedelta(hours=-5))).date().isoformat(), "source": "https://api.osv.dev/v1/querybatch", "python": platform.python_version(),
               "platform": platform.system(), "packages": packages, "status": "blocked"}
     response = None
     for attempt in range(3):
