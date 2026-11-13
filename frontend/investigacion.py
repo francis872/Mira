@@ -1,25 +1,27 @@
 """Forms for the confirmed research model. All foreign keys use real API options."""
-from flask import Blueprint, abort, flash, redirect, render_template, request, url_for
+from flask import Blueprint, abort, flash, redirect, render_template, request, url_for, jsonify, session
+from urllib.parse import urlencode
 
 
-def field(name, label, kind='text', maximum=None, optional=False, source=None, options=None):
-    return dict(name=name, label=label, kind=kind, maximum=maximum, optional=optional, source=source, options=options)
+def field(name, label, kind='text', maximum=None, optional=False, source=None, options=None, multiple=False):
+    return dict(name=name, label=label, kind=kind, maximum=maximum, optional=optional, source=source, options=options, multiple=multiple)
 
 
 RESOURCES = {
-    'sedes': dict(title='Sedes', fields=[field('nombre','Nombre',maximum=120), field('ciudad','Ciudad',maximum=120)]),
+    'sedes': dict(title='Sedes', fields=[field('nombre','Nombre',maximum=120), field('ciudad','Ciudad',maximum=120), field('codigo_institucional','Código institucional')]),
     'docentes': dict(title='Docentes', fields=[field('usuario_id','Persona',source='referencias/usuarios'), field('cvlac_url','Enlace CvLAC','url',500,True), field('escalafon','Escalafón',maximum=100,optional=True), field('minciencias_categoria','Categoría Minciencias',optional=True,options=['Senior','Asociado','Junior','Sin Categoría'])]),
     'grupos_investigacion': dict(title='Grupos de investigación', fields=[field('sede_id','Sede',source='sedes'), field('gruptac_url','Enlace GrupLAC','url',500), field('categoria','Categoría',maximum=100,optional=True)]),
     'semilleros': dict(title='Semilleros', fields=[field('grupo_id','Grupo de investigación',source='grupos_investigacion'), field('nombre','Nombre',maximum=200), field('descripcion','Descripción','textarea',optional=True)]),
-    'lineas_investigacion': dict(title='Líneas académicas', fields=[field('codigo','Código',maximum=50), field('nombre','Nombre',maximum=200), field('descripcion','Descripción','textarea',optional=True)]),
+    'lineas_investigacion': dict(title='Líneas académicas', fields=[field('codigo','Código',maximum=50), field('nombre','Nombre',maximum=200), field('descripcion','Descripción','textarea'),field('disciplina_ids','Disciplinas',source='areas_conocimiento',multiple=True),field('ods_ids','ODS',source='ods',multiple=True)]),
     'grupo_docentes': dict(title='Docentes por grupo', fields=[field('grupo_id','Grupo',source='grupos_investigacion'), field('docente_id','Docente',source='docentes'), field('rol','Rol',options=['Líder de Grupo','Coinvestigador','Colaborador']), field('fecha_inicio','Fecha de inicio','date'), field('fecha_fin','Fecha de finalización','date',optional=True)]),
     'semillero_tutores': dict(title='Tutores de semilleros', fields=[field('semillero_id','Semillero',source='semilleros'), field('docente_id','Docente',source='docentes'), field('rol','Rol',options=['Director','Tutor','Coinvestigador']), field('fecha_inicio','Fecha de inicio','date'), field('fecha_fin','Fecha de finalización','date',optional=True)]),
     **{name: dict(title=title, fields=[field('nombre','Nombre',maximum=160)]) for name,title in (
-        ('areas_conocimiento','Disciplinas de líneas'), ('ods','ODS de líneas'), ('areas_aplicacion','Aplicaciones de líneas'), ('palabras_clave','Palabras del modelo académico'))},
+        ('areas_conocimiento','Disciplinas de líneas'), ('ods','ODS de líneas'), ('areas_aplicacion','Aplicaciones de líneas'))},
+    'palabras_clave': dict(title='Palabras del modelo académico',fields=[field('nombre','Término en español',maximum=160),field('termino_ingles','Equivalente en inglés',maximum=150)]),
 }
 BRIDGES = {
-    'grupo_lineas': dict(title='Líneas de grupos', fields=[field('grupo_id','Grupo',source='grupos_investigacion'),field('linea_id','Línea',source='lineas_investigacion')]),
-    'semillero_lineas': dict(title='Líneas de semilleros',fields=[field('semillero_id','Semillero',source='semilleros'),field('linea_id','Línea',source='lineas_investigacion')]),
+    'grupo_lineas': dict(title='Líneas de grupos', fields=[field('grupo_id','Grupo',source='grupos_investigacion'),field('linea_id','Líneas',source='lineas_investigacion',multiple=True)]),
+    'semillero_lineas': dict(title='Líneas de semilleros',fields=[field('semillero_id','Semillero',source='semilleros'),field('linea_id','Líneas',source='lineas_investigacion',multiple=True)]),
     'linea_disciplinas': dict(title='Disciplinas por línea',fields=[field('linea_id','Línea',source='lineas_investigacion'),field('disciplina_id','Disciplina',source='areas_conocimiento')]),
     'linea_ods': dict(title='ODS por línea',fields=[field('linea_id','Línea',source='lineas_investigacion'),field('ods_id','ODS',source='ods')]),
     'linea_aplicacion': dict(title='Aplicaciones por línea',fields=[field('linea_id','Línea',source='lineas_investigacion'),field('aplicacion_id','Aplicación',source='areas_aplicacion')]),
@@ -62,6 +64,13 @@ def register_investigacion(app, api_call, error_message):
     def payload(spec):
         data = {}
         for f in spec['fields']:
+            if f['multiple']:
+                values = request.form.getlist(f['name'])
+                try:
+                    data[f['name']] = [int(value) for value in values]
+                except ValueError:
+                    data[f['name']] = values
+                continue
             value = request.form.get(f['name'],'').strip()
             if f['source']:
                 try:
@@ -74,7 +83,31 @@ def register_investigacion(app, api_call, error_message):
 
     def render_form(resource, spec, item=None, status=200):
         options, loaded = options_for(spec)
-        return render_template('investigacion/form.html',resource=resource,spec=spec,item=item or {},options=options,loaded=loaded,page_title=spec['title']),status
+        summary, summary_ok = (None, True)
+        if resource == 'semilleros' and item and item.get('id'):
+            summary, summary_ok = load(f'asociaciones/semillero_lineas/resumen/{item["id"]}')
+        return render_template('investigacion/form.html',resource=resource,spec=spec,item=item or {},options=options,loaded=loaded,page_title=spec['title'],lineas_resumen=summary,resumen_disponible=summary_ok),status
+
+    @bp.get('/opciones/sedes')
+    def sede_options():
+        rows, loaded = load('sedes')
+        if not loaded:
+            return jsonify(mensaje='No fue posible actualizar las sedes.'),503
+        return jsonify(options=[dict(id=row['id'],label=label(row)) for row in rows])
+
+    @bp.get('/lineas_investigacion/inactivas')
+    def inactive_lines():
+        if 'Administrador' not in session.get('user',{}).get('roles',[]): abort(403)
+        rows,loaded=load('lineas_investigacion/inactivas')
+        return render_template('investigacion/lineas_inactivas.html',items=rows,loaded=loaded,page_title='Líneas inactivas')
+
+    @bp.post('/lineas_investigacion/reactivar/<int:record_id>')
+    def reactivate_line(record_id):
+        if 'Administrador' not in session.get('user',{}).get('roles',[]): abort(403)
+        response=call('PUT',f'lineas_investigacion/{record_id}/estado',dict(activo=True))
+        ok=response is not None and response.status_code==200
+        flash('Línea reactivada.' if ok else error_message(response,'No fue posible reactivar la línea.'),'success' if ok else 'danger')
+        return redirect(url_for('investigacion.inactive_lines'))
 
     @bp.get('')
     def home():
@@ -83,10 +116,14 @@ def register_investigacion(app, api_call, error_message):
     @bp.get('/<resource>')
     def listing(resource):
         spec = definition(resource)
-        rows, loaded = load(resource)
+        group = request.args.get('grupo_id','') if resource == 'semilleros' else ''
+        teacher = request.args.get('docente_id','') if resource == 'semilleros' else ''
+        query = urlencode({k:v for k,v in [('grupoId',group),('docenteId',teacher)] if v})
+        rows, loaded = load('semilleros/buscar?'+query if query else resource)
         options, references_ok = options_for(spec)
         maps = {key: dict(values) for key,values in options.items()}
-        return render_template('investigacion/list.html',resource=resource,spec=spec,items=rows,maps=maps,loaded=loaded and references_ok,page_title=spec['title'])
+        teachers, teachers_ok = load('docentes') if resource == 'semilleros' else ([],True)
+        return render_template('investigacion/list.html',resource=resource,spec=spec,items=rows,maps=maps,loaded=loaded and references_ok,page_title=spec['title'],filter_groups=options.get('grupo_id',[]),filter_teachers=[(row['id'],label(row)) for row in teachers],filter_group=group,filter_teacher=teacher,filters_loaded=references_ok and teachers_ok)
 
     @bp.route('/<resource>/nuevo',methods=['GET','POST'])
     def new(resource):
@@ -165,7 +202,14 @@ def register_investigacion(app, api_call, error_message):
                 return redirect(url_for('investigacion.listing',resource='grupos_investigacion'))
             data = response.json()
         options, loaded = options_for(spec)
-        return render_template('investigacion/grupo.html',data=data,spec=spec,options=options,loaded=loaded,record_id=record_id,page_title='Ficha de grupo'),status
+        summary, summary_ok = load(f'asociaciones/grupo_lineas/resumen/{record_id}') if record_id else (None,True)
+        # Retain an existing historical sede link without permitting a new inactive assignment.
+        existing_sede = data['grupo'].get('sede_id')
+        archived_sede = None
+        if record_id and existing_sede and existing_sede not in dict(options.get('sede_id',[])):
+            archived_sede = existing_sede
+            options.setdefault('sede_id',[]).append((existing_sede,(data['grupo'].get('sede_nombre') or f'Sede #{existing_sede}')+' (inactiva; vínculo existente)'))
+        return render_template('investigacion/grupo.html',data=data,spec=spec,options=options,loaded=loaded,record_id=record_id,page_title='Ficha de grupo',lineas_resumen=summary,resumen_disponible=summary_ok,archived_sede=archived_sede),status
 
     @bp.route('/asociaciones/<resource>',methods=['GET','POST'])
     def associations(resource):
@@ -174,7 +218,10 @@ def register_investigacion(app, api_call, error_message):
         data = {}
         if request.method == 'POST':
             data = payload(spec)
-            response = call('POST',resource,data)
+            if resource in ('grupo_lineas','semillero_lineas'):
+                response = call('POST',f'asociaciones/{resource}/asignar',dict(padreId=data[spec['fields'][0]['name']],lineas=data['linea_id']))
+            else:
+                response = call('POST',resource,data)
             if response is not None and response.status_code == 201:
                 flash('Asociación asignada correctamente.','success')
                 return redirect(url_for('investigacion.associations',resource=resource))

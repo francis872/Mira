@@ -7,7 +7,7 @@
 <section class="dashboard-hero" aria-labelledby="dashboard-title">
     <div class="hero-copy">
         <span class="section-eyebrow">TU ESPACIO DE TRABAJO</span>
-        <h1 id="dashboard-title">Bienvenido a MIRA</h1>
+        <h1 id="dashboard-title">Bienvenido a SAPIENS</h1>
         <p>Organiza la información que acompaña tus proyectos de investigación.</p>
         <div class="hero-status">
             {% if api_ok %}
@@ -18,7 +18,7 @@
             <span class="hero-institution">Universidad de San Buenaventura Medellín</span>
         </div>
     </div>
-    <div class="hero-symbol" aria-hidden="true">{{ icon('notebook', '') }}<span>MIRA / V3</span></div>
+    <div class="hero-symbol" aria-hidden="true">{{ icon('notebook', '') }}<span>SAPIENS / V3</span></div>
 </section>
 
 <section class="card card-custom mb-4"><div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3"><div><h2 class="h4">Gestión de investigación</h2><p class="mb-0 text-muted">Sedes, docentes, grupos, semilleros y asociaciones de líneas.</p></div><a class="btn btn-primary" href="{{ url_for('investigacion.home') }}">Abrir investigación {{ icon('arrow-right', '') }}</a></div></section>

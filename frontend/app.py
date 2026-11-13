@@ -6,8 +6,11 @@ from markupsafe import Markup
 from urllib.parse import quote
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from seguridad import configure_session, register_security, SesionVencida
+from login_protection import configure_login_protection, client_origin, LoginOriginAuth
+from observabilidad import configure_observability
 
 app = Flask(__name__)
+configure_observability(app)
 _secret = os.getenv("SECRET_KEY", "")
 if not _secret or _secret.startswith("REPLACE"):
     # Desarrollo local: una clave externa estable es obligatoria en producción.
@@ -19,6 +22,7 @@ app.config.update(
     SESSION_COOKIE_SECURE=os.getenv("SESSION_COOKIE_SECURE", "false").lower() == "true",
 )
 configure_session(app)
+configure_login_protection(app)
 SWAGGER_URL = os.getenv("SWAGGER_URL", "" if os.getenv("MIRA_ENV") == "production" else "http://localhost:8081/swagger")
 
 
@@ -26,6 +30,21 @@ SWAGGER_URL = os.getenv("SWAGGER_URL", "" if os.getenv("MIRA_ENV") == "productio
 def health():
     """Liveness sin autenticación, consultas de negocio ni creación de sesión."""
     return {"status": "ok"}
+
+
+@app.get('/ready')
+def ready():
+    from session_store import SessionStoreUnavailable
+    try:
+        cache = app.config['SESSION_CACHELIB']
+        if hasattr(cache, 'check'):
+            cache.check()
+        response = api_call('GET', '../ready', expect_list=False)
+        if response is None or response.status_code != 200:
+            return {'status': 'unavailable'}, 503
+    except SessionStoreUnavailable:
+        return {'status': 'unavailable'}, 503
+    return {'status': 'ready'}
 
 
 def _csrf_token():
@@ -70,7 +89,8 @@ def error_message(resp, default):
 def inject_globals():
     section = request.path.strip("/").split("/", 1)[0]
     current_catalog = next((catalog for catalog in CATALOGS if catalog["path"] == section), None)
-    return {"swagger_url": SWAGGER_URL, "current_catalog": current_catalog}
+    return {"swagger_url": SWAGGER_URL, "current_catalog": current_catalog,
+            "ods_categories": ("Social", "Económica", "Ambiental")}
 
 
 @app.errorhandler(400)
@@ -96,13 +116,21 @@ API_URL = os.getenv("API_URL", "http://localhost:8081/api").rstrip("/")
 def api_call(method, path, json_data=None, expect_list=None):
     """Función auxiliar para realizar llamadas seguras a la API REST."""
     url = f"{API_URL}/{path.lstrip('/')}"
+    login_auth = {'allow_redirects': False} if method == 'POST' and path == 'auth/login' else {}
+    if method == 'POST' and path == 'auth/login' and app.config['LOGIN_FORWARDING_KEY']:
+        origin = client_origin(app.config['LOGIN_TRUSTED_PROXY_NETWORKS'])
+        if app.config.get('LOGIN_PLATFORM') == 'vercel' and origin is None:
+            return None
+        if origin:
+            login_auth['auth'] = LoginOriginAuth(app.config['LOGIN_FORWARDING_KEY'], origin)
     try:
         response = requests.request(
             method=method,
             url=url,
             json=json_data,
             headers=_headers(),
-            timeout=8
+            timeout=8,
+            **login_auth
         )
     except requests.exceptions.RequestException:
         return None
@@ -529,6 +557,8 @@ def linea_investigacion_delete(id):
 
 from investigacion import register_investigacion
 register_investigacion(app, api_call, error_message)
+from reportes import register_reports
+register_reports(app, api_call, error_message)
 register_security(app, api_call, error_message)
 
 if __name__ == "__main__":

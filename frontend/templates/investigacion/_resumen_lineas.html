@@ -1,0 +1,7 @@
+{% if lineas_resumen is not none %}
+<section class="card card-custom mt-4"><div class="card-body"><h2 class="h5">Líneas de investigación vinculadas</h2>
+{% if not resumen_disponible %}<p role="status">No fue posible consultar las líneas vinculadas. Intente de nuevo.</p>
+{% elif lineas_resumen %}<ul>{% for line in lineas_resumen %}<li>{{ line.codigo }} · {{ line.nombre }}{% if not line.activo %} <span class="badge text-bg-secondary">Inactiva</span>{% endif %}</li>{% endfor %}</ul>
+{% else %}<p class="text-muted">Todavía no hay líneas vinculadas.</p>{% endif %}
+</div></section>
+{% endif %}

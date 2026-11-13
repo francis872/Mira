@@ -32,8 +32,12 @@
 
                     <div class="mb-4">
                         <label for="categoria" class="form-label fw-semibold">Categoría / Dimensión <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="categoria" name="categoria" maxlength="100"
-                               value="{{ item.categoria if item else '' }}" placeholder="Ej. Social, Económico, Ambiental" required>
+                        <select class="form-select" id="categoria" name="categoria" required>
+                            <option value="">Seleccione una categoría</option>
+                            {% for category in ods_categories %}
+                            <option value="{{ category }}"{% if item and item.categoria == category %} selected{% endif %}>{{ category }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center pt-3 border-top">

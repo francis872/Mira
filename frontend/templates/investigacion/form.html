@@ -12,4 +12,5 @@
 <div class="d-flex gap-2 mt-4"><button class="btn btn-primary" type="submit" {{ 'disabled' if not loaded }}>Guardar</button><a class="btn btn-outline-secondary" href="{{ url_for('investigacion.listing',resource=resource) }}">Cancelar</a></div>
 </form>
 </div></section>
+{% include 'investigacion/_resumen_lineas.html' %}
 {% endblock %}

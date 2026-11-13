@@ -23,19 +23,41 @@ def configure_session(app):
         api = urlsplit(os.getenv("API_URL", ""))
         if api.scheme != "https" or not api.hostname or api.username or api.password or api.query or api.fragment:
             raise RuntimeError("Producción requiere API_URL HTTPS sin credenciales ni parámetros en la URL.")
-    directory = os.getenv("SESSION_DIRECTORY", str(Path(__file__).resolve().parents[1] / ".local" / "sessions"))
-    if production and (not os.getenv("SESSION_DIRECTORY") or not Path(directory).is_absolute()):
-        raise RuntimeError("Producción requiere SESSION_DIRECTORY absoluta en almacenamiento privado y persistente para una instancia.")
-    Path(directory).mkdir(mode=0o700, parents=True, exist_ok=True)
+    backend = os.getenv('MIRA_SESSION_BACKEND', 'filesystem')
+    if backend not in ('filesystem', 'postgres'):
+        raise RuntimeError('Seleccione un almacenamiento de sesiones compatible.')
+    if os.getenv('VERCEL') == '1' and backend != 'postgres':
+        raise RuntimeError('Vercel requiere sesiones PostgreSQL compartidas; no se permite disco efímero.')
+    if backend == 'postgres':
+        from session_store import PostgresSessionCache, SharedSessionInterface
+        cache = PostgresSessionCache(os.getenv('MIRA_SESSION_DATABASE_URL', ''), app.secret_key, production)
+    else:
+        directory = os.getenv("SESSION_DIRECTORY", str(Path(__file__).resolve().parents[1] / ".local" / "sessions"))
+        if production and (not os.getenv("SESSION_DIRECTORY") or not Path(directory).is_absolute()):
+            raise RuntimeError("Producción requiere SESSION_DIRECTORY absoluta en almacenamiento privado y persistente para una instancia.")
+        Path(directory).mkdir(mode=0o700, parents=True, exist_ok=True)
+        cache = FileSystemCache(directory, threshold=2000, default_timeout=3600, mode=0o600)
     app.config.update(
         SESSION_TYPE="cachelib",
-        SESSION_CACHELIB=FileSystemCache(directory, threshold=2000, default_timeout=3600, mode=0o600),
+        SESSION_CACHELIB=cache,
         SESSION_PERMANENT=False,
         SESSION_REFRESH_EACH_REQUEST=False,
         PERMANENT_SESSION_LIFETIME=timedelta(hours=1),
         MAX_CONTENT_LENGTH=1024 * 1024,
     )
     Session(app)
+    if backend == 'postgres':
+        app.session_interface = SharedSessionInterface(app, client=cache, permanent=False)
+        from session_store import SessionStoreUnavailable
+
+        @app.errorhandler(SessionStoreUnavailable)
+        def unavailable_session(_error):
+            return render_template('error.html', status=503, message='El servicio de sesiones no está disponible. Intente de nuevo.'), 503
+
+        @app.before_request
+        def require_session_store():
+            if getattr(session, 'store_unavailable', False) and request.endpoint != 'health':
+                return render_template('error.html', status=503, message='El servicio de sesiones no está disponible. Intente de nuevo.'), 503
 
 
 def register_security(app, api_call, error_message):
@@ -51,7 +73,7 @@ def register_security(app, api_call, error_message):
 
     @app.before_request
     def protect_routes():
-        if request.endpoint in ("static", "login", "health") or request.endpoint is None:
+        if request.endpoint in ("static", "login", "health", "ready") or request.endpoint is None:
             return None
         if not session.get("token") or session.get("expires", 0) <= time.time():
             raise SesionVencida()

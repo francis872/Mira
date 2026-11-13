@@ -5,6 +5,13 @@
 {% block content %}
 <a class="d-inline-block mb-3" href="{{ url_for('investigacion.home') }}">{{ icon('arrow-left', '') }} Investigación</a>
 <div class="section-heading"><div><h1>{{ spec.title }}</h1><p>Consulta y administra los registros disponibles.</p></div>{% if can_write %}<a class="btn btn-primary" href="{{ url_for('investigacion.new',resource=resource) }}">{{ icon('plus', '') }} Nuevo registro</a>{% endif %}</div>
+{% if resource == 'lineas_investigacion' and is_admin %}<p><a href="{{ url_for('investigacion.inactive_lines') }}">Consultar y reactivar líneas inactivas</a></p>{% endif %}
+{% if resource == 'semilleros' %}
+<form method="GET" class="card card-custom mb-4"><div class="card-body"><h2 class="h5">Filtrar semilleros</h2><div class="row g-3">
+<div class="col-md-5"><label for="filter-grupo" class="form-label">Grupo de investigación</label><select id="filter-grupo" name="grupo_id" class="form-select"><option value="">Todos los grupos</option>{% for id,label in filter_groups %}<option value="{{ id }}"{% if filter_group == id|string %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>
+<div class="col-md-5"><label for="filter-docente" class="form-label">Docente tutor</label><select id="filter-docente" name="docente_id" class="form-select"><option value="">Todos los docentes</option>{% for id,label in filter_teachers %}<option value="{{ id }}"{% if filter_teacher == id|string %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>
+<div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary" type="submit"{% if not filters_loaded %} disabled{% endif %}>Filtrar</button></div></div>{% if not filters_loaded %}<p role="status" class="text-danger mt-2">No fue posible cargar los filtros. Recargue la página.</p>{% endif %}</div></form>
+{% endif %}
 <section class="card card-custom"><div class="card-body">
 {% if items %}
 <label class="form-label" for="catalog-search">Buscar en este listado</label><input id="catalog-search" type="search" class="form-control mb-2" placeholder="Escriba para buscar"><p id="catalog-results" class="small text-muted" aria-live="polite"></p>
