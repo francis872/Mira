@@ -4,6 +4,9 @@
 .venv/
 .vercel/
 __pycache__/
+.pytest_cache/
+**/__pycache__/
+*.pyc
 tests/
 *.log
 *.dump
