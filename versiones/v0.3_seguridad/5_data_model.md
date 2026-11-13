@@ -1,36 +1,54 @@
-# Modelo de Datos — MIRA v0.2 (Entrega 2)
+# Modelo de Datos de Seguridad — MIRA v0.3 (`5_data_model.md`)
 
-> **Versión 0.2**: Tablas Relacionales y Articulación Académica.  
-> Rige la constitución permanente: `docs/1_constitution.md`.  
-> Este documento detalla las tablas, columnas, restricciones de claves foráneas y estructuras puente que se incorporan al esquema de PostgreSQL sobre la base de la versión 0.1.
+> **Esquema Relacional del Subsistema de Seguridad RBAC (`database/init/04_seguridad_v0.3.sql`)**
 
 ---
 
-## 1. Alcance del Modelo en la Versión 0.2
+## 1. Diagrama Obligatorio: Entidad-Relación de Seguridad (`erDiagram`)
 
-La base de datos conserva íntegras las 6 tablas maestras independientes de la versión 0.1 (`area_conocimiento`, `objetivo_desarrollo_sostenible`, `area_aplicacion`, `termino_clave`, `universidad`, `linea_investigacion`).
+```mermaid
+erDiagram
+    USUARIO ||--o{ ROL_USUARIO : "posee (1:N)"
+    ROL ||--o{ ROL_USUARIO : "asignado_en (1:N)"
 
-En esta versión se incorporan **10 tablas nuevas** organizadas en dos categorías:
-1. **Entidades Fuertes Relacionales (3):** `docente`, `grupo_investigacion`, `semillero`.
-2. **Tablas Puente Muchos a Muchos (7):** `docente_grupo`, `docente_semillero`, `grupo_linea`, `semillero_linea`, `linea_area`, `linea_ods`, `linea_area_aplicacion`.
+    USUARIO {
+        int id PK "SERIAL (Generado por BD)"
+        varchar(50) username UK "NOT NULL UNIQUE"
+        varchar(255) password "NOT NULL (Hash BCrypt $2a$11$...)"
+        varchar(120) email UK "NOT NULL UNIQUE"
+        varchar(150) nombre_completo "NULL"
+        boolean activo "NOT NULL DEFAULT TRUE (Escrito por BD/SoftDelete)"
+        timestamp fecha_creacion "NOT NULL DEFAULT CURRENT_TIMESTAMP (Escrito por BD)"
+        timestamp fecha_actualizacion "NOT NULL DEFAULT CURRENT_TIMESTAMP (Escrito por BD)"
+    }
 
-Todas las tablas incluyen la columna `activo BOOLEAN NOT NULL DEFAULT TRUE` para garantizar el borrado lógico.
+    ROL {
+        int id PK "SERIAL (Generado por BD)"
+        varchar(50) nombre UK "NOT NULL UNIQUE (Administrador, Editor, Consultor)"
+        varchar(250) descripcion "NULL"
+        boolean activo "NOT NULL DEFAULT TRUE"
+        timestamp fecha_creacion "NOT NULL DEFAULT CURRENT_TIMESTAMP (Escrito por BD)"
+    }
+
+    ROL_USUARIO {
+        int usuario_id PK,FK "REFERENCES usuario(id)"
+        int rol_id PK,FK "REFERENCES rol(id)"
+        boolean activo "NOT NULL DEFAULT TRUE"
+        timestamp fecha_asignacion "NOT NULL DEFAULT CURRENT_TIMESTAMP (Escrito por BD)"
+    }
+```
+
+> **Guía de lectura del diagrama:** Las tres cajas representan las tablas físicas de seguridad en PostgreSQL (`usuario`, `rol` y la tabla puente `rol_usuario`), indicando sus llaves primarias (`PK`), foráneas (`FK`), restricciones únicas (`UK`) y qué columnas de auditoría (`id`, `activo`, `fecha_creacion`) son gestionadas directamente por el motor de base de datos.
 
 ---
 
-## 2. Diagrama de Relaciones de la Versión 0.2
+## 2. Diccionario de Datos (Delta v0.3)
 
-```text
-universidad (v0.1) ◄──────┐
-                          │ (universidad_id)
-linea_investigacion (v0.1)│
-      ▲                   ▼
-      │ (FK)     grupo_investigacion ◄─── docente (líder)
-      │                   ▲                  ▲
-   docente                │                  │
-      ▲                   │ (grupo_id)       │
-      │                   ▼                  │
-      └──────────► docente_grupo ────────────┘
-                          ▲
-                          │
-                      semillero ◄──── docente_semillero ◄── docente
+### 2.1. Tabla `rol`
+Almacena los tres perfiles de autorización del sistema (`1: Administrador`, `2: Editor`, `3: Consultor`).
+
+### 2.2. Tabla `usuario`
+Almacena las credenciales institucionales con contraseña encriptada mediante BCrypt y soporte de borrado lógico (`activo = TRUE/FALSE`).
+
+### 2.3. Tabla Puente `rol_usuario`
+Relación muchos a muchos con clave primaria compuesta `(usuario_id, rol_id)` que vincula a cada usuario con sus roles activos.

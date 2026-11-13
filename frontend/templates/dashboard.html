@@ -1,0 +1,662 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Analítico Multitabla (v0.4){% endblock %}
+
+{% block content %}
+<!-- Encabezado Ejecutivo del Dashboard v0.4 -->
+<div class="mira-hero mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-1 mb-3 small">
+                <i class="bi bi-bar-chart-line-fill text-warning me-2"></i>
+                <span>Versión 4 (v0.4) &bull; Inteligencia Institucional y Analítica Multitabla</span>
+            </div>
+            <h1 class="display-6 fw-bold text-white mb-2">
+                Dashboard Ejecutivo y 10 Consultas Multitabla
+            </h1>
+            <p class="text-white text-opacity-75 mb-0">
+                Visualización estratégica en tiempo real construida sobre 10 consultas SQL en Dapper que articulan entre <strong>4 y 7 tablas</strong> del ecosistema investigativo.
+            </p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            <a href="http://localhost:8081/api/reportes/dashboard" target="_blank" class="btn btn-warning fw-bold rounded-pill px-4 py-2 shadow-sm">
+                <i class="bi bi-braces me-1"></i> API Consolidada JSON
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     SECCIÓN 1: GRÁFICOS INTERACTIVOS (Chart.js 4.x)
+     ========================================================================== -->
+<div class="section-header">
+    <div>
+        <h4 class="fw-bold mb-0">
+            <i class="bi bi-pie-chart-fill text-danger me-2"></i>Visualización Gráfica del Ecosistema (Chart.js)
+        </h4>
+        <small class="text-muted">Gráficos alimentados dinámicamente por las consultas multitabla #1, #3, #8 y #9</small>
+    </div>
+    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Paleta Oficial marca.css</span>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- Gráfico 1: Capacidad por Universidad (Consulta 8 - 5 Tablas) -->
+    <div class="col-lg-6">
+        <div class="card card-custom h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6 class="fw-bold mb-0">Capacidad Investigativa por Universidad</h6>
+                        <small class="text-muted">Consulta #8 (5 tablas: universidad + grupo + docente + semillero + docente_grupo)</small>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary">5 Tablas JOIN</span>
+                </div>
+                <div style="height: 280px;">
+                    <canvas id="chartUniversidades"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico 2: Densidad 360 de Líneas de Investigación (Consulta 9 - 6 Tablas) -->
+    <div class="col-lg-6">
+        <div class="card card-custom h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6 class="fw-bold mb-0">Articulación 360° por Línea de Investigación</h6>
+                        <small class="text-muted">Consulta #9 (6 tablas: línea + grupo_linea + semillero_linea + ods + área + aplicación)</small>
+                    </div>
+                    <span class="badge bg-success-subtle text-success">6 Tablas JOIN</span>
+                </div>
+                <div style="height: 280px;">
+                    <canvas id="chartLineas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico 3: Impacto en ODS (Consulta 3 - 6 Tablas) -->
+    <div class="col-lg-6">
+        <div class="card card-custom h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6 class="fw-bold mb-0">Impacto en Objetivos de Desarrollo Sostenible (ODS)</h6>
+                        <small class="text-muted">Consulta #3 (6 tablas: ods + linea_ods + línea + grupo_linea + grupo + universidad)</small>
+                    </div>
+                    <span class="badge bg-warning-subtle text-warning-emphasis">6 Tablas JOIN</span>
+                </div>
+                <div style="height: 280px;">
+                    <canvas id="chartOds"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico 4: Productividad de Grupos por Líneas (Consulta 1 - 5 Tablas) -->
+    <div class="col-lg-6">
+        <div class="card card-custom h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6 class="fw-bold mb-0">Líneas Articuladas por Grupo de Investigación</h6>
+                        <small class="text-muted">Consulta #1 (5 tablas: grupo + universidad + docente + grupo_linea + línea)</small>
+                    </div>
+                    <span class="badge bg-danger-subtle text-danger">5 Tablas JOIN</span>
+                </div>
+                <div style="height: 280px;">
+                    <canvas id="chartGrupos"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     SECCIÓN 2: EXPLORADOR INTERACTIVO DE LAS 10 CONSULTAS MULTITABLA (4+ TABLAS)
+     ========================================================================== -->
+<div class="section-header">
+    <div>
+        <h4 class="fw-bold mb-0">
+            <i class="bi bi-table text-danger me-2"></i>Explorador de las 10 Consultas Multitabla (4 a 7 Tablas c/u)
+        </h4>
+        <small class="text-muted">Seleccione cada pestaña para inspeccionar los resultados en vivo devueltos por Dapper desde PostgreSQL 16</small>
+    </div>
+    <span class="badge bg-dark text-white px-3 py-2">10 / 10 Consultas Activas</span>
+</div>
+
+<div class="card card-custom mb-5">
+    <div class="card-header bg-white pt-3 pb-0 border-bottom">
+        <ul class="nav nav-tabs border-bottom-0 flex-nowrap overflow-auto" id="consultasTab" role="tablist">
+            {% for i in range(1, 11) %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if i == 1 %}active fw-bold text-danger{% else %}text-secondary{% endif %}"
+                        id="tab-c{{ i }}" data-bs-toggle="tab" data-bs-target="#pane-c{{ i }}" type="button" role="tab">
+                    Consulta #{{ i }}
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card-body p-4">
+        <div class="tab-content" id="consultasTabContent">
+
+            <!-- CONSULTA 1 -->
+            <div class="tab-pane fade show active" id="pane-c1" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #1: Productividad y Articulación de Grupos por Universidad y Líder</h5>
+                        <span class="badge bg-danger me-1">5 Tablas Unidas</span>
+                        <code class="small">grupo_investigacion ⋈ universidad ⋈ docente ⋈ grupo_linea ⋈ linea_investigacion</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/1" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/1
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Grupo de Investigación</th>
+                                <th>Categoría</th>
+                                <th>Universidad Sede (Ciudad)</th>
+                                <th>Docente Líder</th>
+                                <th>Total Líneas</th>
+                                <th>Líneas Articuladas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta1GruposProductividad %}
+                            <tr>
+                                <td><code class="fw-bold">{{ r.codigoGrupo }}</code></td>
+                                <td class="fw-semibold">{{ r.grupoNombre }}</td>
+                                <td><span class="badge bg-primary-subtle text-primary">{{ r.categoriaGrupo }}</span></td>
+                                <td>{{ r.universidadNombre }} <small class="text-muted">({{ r.ciudad }})</small></td>
+                                <td>{{ r.docenteLider }}</td>
+                                <td class="text-center"><span class="badge bg-dark">{{ r.totalLineas }}</span></td>
+                                <td class="small">{{ r.lineasArticuladas }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="7" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 2 -->
+            <div class="tab-pane fade" id="pane-c2" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #2: Ecosistema de Semilleros, Grupos, Universidades y Tutores</h5>
+                        <span class="badge bg-danger me-1">5 Tablas Unidas</span>
+                        <code class="small">semillero ⋈ grupo_investigacion ⋈ universidad ⋈ docente_semillero ⋈ docente</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/2" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/2
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Semillero</th>
+                                <th>Grupo Matriz</th>
+                                <th>Universidad Sede</th>
+                                <th>Docente Tutor</th>
+                                <th>Escalafón</th>
+                                <th>Rol</th>
+                                <th>Periodo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta2SemillerosTutores %}
+                            <tr>
+                                <td class="fw-semibold">{{ r.semilleroNombre }}</td>
+                                <td>{{ r.grupoNombre }} <small class="text-muted">({{ r.codigoGrupo }})</small></td>
+                                <td>{{ r.universidadNombre }}</td>
+                                <td>{{ r.docenteTutor }}</td>
+                                <td>{{ r.escalafonTutor }}</td>
+                                <td><span class="badge bg-success-subtle text-success">{{ r.rolTutor }}</span></td>
+                                <td><code>{{ r.periodoAcademico }}</code></td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="7" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 3 -->
+            <div class="tab-pane fade" id="pane-c3" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #3: Impacto en ODS por Línea, Grupo y Universidad</h5>
+                        <span class="badge bg-danger me-1">6 Tablas Unidas</span>
+                        <code class="small">objetivo_desarrollo_sostenible ⋈ linea_ods ⋈ linea_investigacion ⋈ grupo_linea ⋈ grupo_investigacion ⋈ universidad</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/3" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/3
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Objetivo ODS</th>
+                                <th>Categoría</th>
+                                <th>Línea de Investigación</th>
+                                <th>Grupo Articulado</th>
+                                <th>Universidad</th>
+                                <th>Grupos Impactados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta3ImpactoOds %}
+                            <tr>
+                                <td class="fw-semibold">{{ r.odsNombre }}</td>
+                                <td><span class="badge bg-warning-subtle text-warning-emphasis">{{ r.categoriaOds }}</span></td>
+                                <td>{{ r.lineaNombre }}</td>
+                                <td>{{ r.grupoNombre }}</td>
+                                <td>{{ r.universidadNombre }}</td>
+                                <td class="text-center"><span class="badge bg-dark">{{ r.totalGruposImpactados }}</span></td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="6" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 4 -->
+            <div class="tab-pane fade" id="pane-c4" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #4: Cobertura de Áreas OCDE por Línea, Grupo y Docente Líder</h5>
+                        <span class="badge bg-danger me-1">6 Tablas Unidas</span>
+                        <code class="small">area_conocimiento ⋈ linea_area ⋈ linea_investigacion ⋈ grupo_linea ⋈ grupo_investigacion ⋈ docente</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/4" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/4
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Gran Área OCDE</th>
+                                <th>Área</th>
+                                <th>Disciplina</th>
+                                <th>Línea de Investigación</th>
+                                <th>Grupo Asociado</th>
+                                <th>Docente Líder</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta4CoberturaOcde %}
+                            <tr>
+                                <td class="fw-semibold">{{ r.granArea }}</td>
+                                <td>{{ r.area }}</td>
+                                <td><span class="badge bg-info-subtle text-info-emphasis">{{ r.disciplina }}</span></td>
+                                <td>{{ r.lineaNombre }}</td>
+                                <td>{{ r.grupoNombre }}</td>
+                                <td>{{ r.docenteLider }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="6" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 5 -->
+            <div class="tab-pane fade" id="pane-c5" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #5: Transferencia Tecnológica por Área de Aplicación, Línea, Semillero y Grupo</h5>
+                        <span class="badge bg-danger me-1">6 Tablas Unidas</span>
+                        <code class="small">area_aplicacion ⋈ linea_area_aplicacion ⋈ linea_investigacion ⋈ semillero_linea ⋈ semillero ⋈ grupo_investigacion</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/5" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/5
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Sector / Área de Aplicación</th>
+                                <th>Línea de Investigación</th>
+                                <th>Semillero</th>
+                                <th>Grupo Matriz</th>
+                                <th>Categoría Minciencias</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta5TransferenciaAplicacion %}
+                            <tr>
+                                <td class="fw-semibold">{{ r.areaAplicacion }}</td>
+                                <td>{{ r.lineaNombre }}</td>
+                                <td>{{ r.semilleroNombre }}</td>
+                                <td>{{ r.grupoMatriz }}</td>
+                                <td><span class="badge bg-secondary">{{ r.categoriaGrupo }}</span></td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="5" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 6 -->
+            <div class="tab-pane fade" id="pane-c6" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #6: Trayectoria Histórica de Docentes en Grupos, Universidades y Líneas Matrices</h5>
+                        <span class="badge bg-danger me-1">5 Tablas Unidas</span>
+                        <code class="small">docente ⋈ linea_investigacion ⋈ docente_grupo ⋈ grupo_investigacion ⋈ universidad</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/6" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/6
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Cédula</th>
+                                <th>Docente Investigador</th>
+                                <th>Escalafón / Categoría</th>
+                                <th>Línea Matriz</th>
+                                <th>Grupo Vinculado</th>
+                                <th>Rol</th>
+                                <th>Universidad Sede</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta6TrayectoriaDocentes %}
+                            <tr>
+                                <td><code>{{ r.cedula }}</code></td>
+                                <td class="fw-semibold">{{ r.docenteNombre }}</td>
+                                <td>{{ r.escalafon }} &bull; <span class="badge bg-danger-subtle text-danger">{{ r.categoriaMinciencias }}</span></td>
+                                <td>{{ r.lineaMatriz }}</td>
+                                <td>{{ r.grupoVinculado }}</td>
+                                <td>{{ r.rolEnGrupo }}</td>
+                                <td>{{ r.universidadSede }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="7" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 7 -->
+            <div class="tab-pane fade" id="pane-c7" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #7: Matriz de Pertinencia Temática de Semilleros con Líneas, Áreas OCDE y ODS</h5>
+                        <span class="badge bg-danger me-1">7 Tablas Unidas</span>
+                        <code class="small">semillero ⋈ semillero_linea ⋈ linea_investigacion ⋈ linea_area ⋈ area_conocimiento ⋈ linea_ods ⋈ ods</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/7" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/7
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Semillero</th>
+                                <th>Línea de Investigación</th>
+                                <th>Gran Área OCDE</th>
+                                <th>Disciplina OCDE</th>
+                                <th>ODS Asociado</th>
+                                <th>Categoría ODS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta7MatrizSemilleros %}
+                            <tr>
+                                <td class="fw-semibold">{{ r.semilleroNombre }}</td>
+                                <td>{{ r.lineaInvestigacion }}</td>
+                                <td>{{ r.granAreaOcde }}</td>
+                                <td>{{ r.disciplinaOcde }}</td>
+                                <td>{{ r.odsAsociado }}</td>
+                                <td><span class="badge bg-success-subtle text-success">{{ r.categoriaOds }}</span></td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="6" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 8 -->
+            <div class="tab-pane fade" id="pane-c8" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #8: Capacidad Investigativa Agregada por Universidad y Ciudad</h5>
+                        <span class="badge bg-danger me-1">5 Tablas Unidas</span>
+                        <code class="small">universidad ⋈ grupo_investigacion ⋈ docente ⋈ semillero ⋈ docente_grupo</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/8" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/8
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Universidad</th>
+                                <th>Carácter</th>
+                                <th>Ciudad</th>
+                                <th class="text-center">Total Grupos</th>
+                                <th class="text-center">Total Semilleros</th>
+                                <th class="text-center">Líderes</th>
+                                <th class="text-center">Investigadores Vinculados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta8CapacidadUniversidades %}
+                            <tr>
+                                <td class="fw-semibold">{{ r.universidadNombre }}</td>
+                                <td><span class="badge bg-info-subtle text-info-emphasis">{{ r.tipoInstitucion }}</span></td>
+                                <td>{{ r.ciudad }}</td>
+                                <td class="text-center fw-bold">{{ r.totalGrupos }}</td>
+                                <td class="text-center fw-bold">{{ r.totalSemilleros }}</td>
+                                <td class="text-center">{{ r.totalLideres }}</td>
+                                <td class="text-center">{{ r.totalInvestigadoresVinculados }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="7" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 9 -->
+            <div class="tab-pane fade" id="pane-c9" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #9: Mapa Integral 360° de Líneas de Investigación</h5>
+                        <span class="badge bg-danger me-1">6 Tablas Unidas</span>
+                        <code class="small">linea_investigacion ⋈ grupo_linea ⋈ semillero_linea ⋈ linea_area ⋈ linea_ods ⋈ linea_area_aplicacion</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/9" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/9
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Línea de Investigación</th>
+                                <th class="text-center">Grupos</th>
+                                <th class="text-center">Semilleros</th>
+                                <th class="text-center">Áreas OCDE</th>
+                                <th class="text-center">ODS</th>
+                                <th class="text-center">Aplicaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta9MapaIntegralLineas %}
+                            <tr>
+                                <td><code>#{{ r.lineaId }}</code></td>
+                                <td class="fw-semibold">{{ r.lineaNombre }}</td>
+                                <td class="text-center"><span class="badge bg-primary">{{ r.gruposAsociados }}</span></td>
+                                <td class="text-center"><span class="badge bg-success">{{ r.semillerosAsociados }}</span></td>
+                                <td class="text-center"><span class="badge bg-danger">{{ r.areasOcdeAsociadas }}</span></td>
+                                <td class="text-center"><span class="badge bg-warning text-dark">{{ r.odsAsociados }}</span></td>
+                                <td class="text-center"><span class="badge bg-secondary">{{ r.aplicacionesAsociadas }}</span></td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="7" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSULTA 10 -->
+            <div class="tab-pane fade" id="pane-c10" role="tabpanel">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Consulta #10: Auditoría de Seguridad RBAC y Cruce con Directorio Docente</h5>
+                        <span class="badge bg-danger me-1">4 Tablas Unidas</span>
+                        <code class="small">usuario ⋈ rol_usuario ⋈ rol ⋈ docente</code>
+                    </div>
+                    <a href="http://localhost:8081/api/reportes/consulta/10" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> GET /api/reportes/consulta/10
+                    </a>
+                </div>
+                <div class="table-responsive table-custom">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Correo Institucional</th>
+                                <th>Nombre Completo</th>
+                                <th>Rol Asignado</th>
+                                <th>Correspondencia en Tabla Docente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in data.consulta10AuditoriaRbac %}
+                            <tr>
+                                <td><code class="fw-bold">{{ r.username }}</code></td>
+                                <td>{{ r.email }}</td>
+                                <td>{{ r.nombreCompleto }}</td>
+                                <td><span class="badge bg-warning text-dark">{{ r.rolAsignado }}</span></td>
+                                <td>{{ r.perfilDocenteCruzado }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="5" class="text-center text-muted py-3">Sin registros activos</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Chart.js 4.4.1 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+    const dashboardData = {{ data | tojson }};
+    const palette = ['#7f1d1d', '#0f172a', '#d97706', '#15803d', '#0369a1', '#64748b', '#991b1b', '#b45309'];
+
+    // 1. Gráfico de Capacidad por Universidad (Consulta 8)
+    const c8 = dashboardData.consulta8CapacidadUniversidades || [];
+    new Chart(document.getElementById('chartUniversidades'), {
+        type: 'bar',
+        data: {
+            labels: c8.map(x => x.universidadNombre),
+            datasets: [
+                {
+                    label: 'Grupos Inv.',
+                    data: c8.map(x => x.totalGrupos),
+                    backgroundColor: '#7f1d1d',
+                    borderRadius: 6
+                },
+                {
+                    label: 'Semilleros',
+                    data: c8.map(x => x.totalSemilleros),
+                    backgroundColor: '#d97706',
+                    borderRadius: 6
+                },
+                {
+                    label: 'Investigadores',
+                    data: c8.map(x => x.totalInvestigadoresVinculados),
+                    backgroundColor: '#0f172a',
+                    borderRadius: 6
+                }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 2. Gráfico Dona de Líneas de Investigación (Consulta 9)
+    const c9 = dashboardData.consulta9MapaIntegralLineas || [];
+    new Chart(document.getElementById('chartLineas'), {
+        type: 'doughnut',
+        data: {
+            labels: c9.map(x => x.lineaNombre),
+            datasets: [{
+                data: c9.map(x => (x.gruposAsociados + x.semillerosAsociados + x.areasOcdeAsociadas + x.odsAsociados + x.aplicacionesAsociadas) || 1),
+                backgroundColor: palette
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 3. Gráfico Polar de Impacto en ODS (Consulta 3)
+    const c3 = dashboardData.consulta3ImpactoOds || [];
+    new Chart(document.getElementById('chartOds'), {
+        type: 'polarArea',
+        data: {
+            labels: c3.map(x => x.odsNombre),
+            datasets: [{
+                data: c3.map(x => x.totalGruposImpactados || 1),
+                backgroundColor: ['rgba(127,29,29,0.75)', 'rgba(217,119,6,0.75)', 'rgba(21,128,61,0.75)', 'rgba(3,105,161,0.75)', 'rgba(15,23,42,0.75)']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 4. Gráfico Horizontal de Grupos por Líneas (Consulta 1)
+    const c1 = dashboardData.consulta1GruposProductividad || [];
+    new Chart(document.getElementById('chartGrupos'), {
+        type: 'bar',
+        data: {
+            labels: c1.map(x => x.grupoNombre),
+            datasets: [{
+                label: 'Total de Líneas Articuladas',
+                data: c1.map(x => x.totalLineas),
+                backgroundColor: '#15803d',
+                borderRadius: 6
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+{% endblock %}

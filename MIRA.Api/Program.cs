@@ -7,6 +7,28 @@ using MIRA.Api.Configuracion;
 using MIRA.Api.Repositorios;
 using MIRA.Api.Servicios;
 
+// Cargar variables desde archivo .env local (excluido en .gitignore) cuando se ejecuta fuera de Docker
+foreach (var envPath in new[] { ".env", "../.env" })
+{
+    if (File.Exists(envPath))
+    {
+        foreach (var line in File.ReadAllLines(envPath))
+        {
+            var trimmed = line.Trim();
+            if (string.IsNullOrEmpty(trimmed) || trimmed.StartsWith("#")) continue;
+            var idx = trimmed.IndexOf('=');
+            if (idx > 0)
+            {
+                var k = trimmed[..idx].Trim();
+                var v = trimmed[(idx + 1)..].Trim();
+                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable(k)))
+                    Environment.SetEnvironmentVariable(k, v);
+            }
+        }
+        break;
+    }
+}
+
 // Habilitar mapeo automático de columnas snake_case de PostgreSQL a propiedades PascalCase en Dapper
 DefaultTypeMap.MatchNamesWithUnderscores = true;
 
@@ -22,8 +44,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "MIRA API",
-        Version = "v0.3",
-        Description = "Módulo de Investigación - API con Autenticación JWT y Roles (RBAC)"
+        Version = "v0.4",
+        Description = "Módulo de Investigación - API Completa (Catálogos, Relaciones, Seguridad JWT/RBAC y 10 Consultas Multitabla)"
     });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -54,8 +76,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// 3. Configuración de Autenticación JWT
-var jwtKey = builder.Configuration["JwtSettings:Key"] ?? "ClaveSecretaSuperSeguraParaElModuloMIRA2026!*AutenticacionJWT_USBMed";
+// 3. Configuración de Autenticación JWT leyendo de variables de entorno sin secretos quemados
+var configuredJwtKey = builder.Configuration["JwtSettings:Key"];
+var jwtKey = (!string.IsNullOrWhiteSpace(configuredJwtKey) && !configuredJwtKey.Contains("<TU_"))
+    ? configuredJwtKey
+    : (Environment.GetEnvironmentVariable("JWT_SECRET") ?? "MIRA_Dev_Fallback_Key_2026_Min32Bytes_Length_OK!");
 var jwtIssuer = builder.Configuration["JwtSettings:Issuer"] ?? "MIRA_Api";
 var jwtAudience = builder.Configuration["JwtSettings:Audience"] ?? "MIRA_Client";
 
@@ -131,6 +156,10 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// --- FASE 4: Reportes Multitabla y Dashboard Ejecutivo (v0.4) ---
+builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
+builder.Services.AddScoped<IReporteService, ReporteService>();
+
 // =============================================================================
 // PIPELINE HTTP
 // =============================================================================
@@ -139,7 +168,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MIRA API v0.3");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MIRA API v0.4");
 });
 
 app.UseCors("CorsPolicy");

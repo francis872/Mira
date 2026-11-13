@@ -29,6 +29,8 @@ def api_call(method, path, json_data=None, params=None):
             headers=headers,
             timeout=8
         )
+        if response.status_code == 401 and path != "Auth/login":
+            session.clear()
         return response
     except requests.exceptions.RequestException:
         return None
@@ -103,10 +105,41 @@ def logout():
 # =============================================================================
 # Dashboard Principal
 # =============================================================================
+def _count_endpoint(path):
+    resp = api_call("GET", path)
+    if resp and resp.status_code == 401:
+        return None
+    if resp and resp.status_code == 200:
+        data = resp.json()
+        return len(data) if isinstance(data, list) else 0
+    return 0
+
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+    docentes = _count_endpoint("docente")
+    if docentes is None:
+        flash("Su sesión ha expirado. Por favor inicie sesión nuevamente.", "warning")
+        return redirect(url_for("login"))
+
+    grupos = _count_endpoint("grupo_investigacion") or 0
+    semilleros = _count_endpoint("semillero") or 0
+    lineas = _count_endpoint("linea_investigacion") or 0
+    universidades = _count_endpoint("universidad") or 0
+    areas = _count_endpoint("area_conocimiento") or 0
+    ods = _count_endpoint("objetivo_desarrollo_sostenible") or 0
+    aplicaciones = _count_endpoint("area_aplicacion") or 0
+    terminos = _count_endpoint("termino_clave") or 0
+
+    stats = {
+        "docentes": docentes,
+        "grupos": grupos,
+        "semilleros": semilleros,
+        "lineas": lineas,
+        "universidades": universidades,
+        "catalogos": areas + ods + aplicaciones + terminos + universidades + lineas
+    }
+    return render_template("index.html", stats=stats)
 
 # =============================================================================
 # Gestión de Usuarios (Exclusivo Administrador)
@@ -992,6 +1025,38 @@ def relaciones_delete(tipo):
     else:
         flash("No se pudo desactivar la relación.", "danger")
     return redirect(url_for("relaciones_dashboard"))
+
+# =============================================================================
+# v0.4 — Dashboard Analítico Multitabla (10 Consultas de 4+ Tablas)
+# =============================================================================
+@app.route("/dashboard")
+@login_required
+def dashboard_ejecutivo():
+    resp = api_call("GET", "reportes/dashboard")
+    if resp and resp.status_code == 401:
+        flash("Su sesión ha expirado. Por favor inicie sesión nuevamente.", "warning")
+        return redirect(url_for("login"))
+
+    data = {}
+    if resp and resp.status_code == 200:
+        data = resp.json()
+    else:
+        flash("No se pudo cargar el consolidado analítico desde el backend.", "warning")
+
+    return render_template("dashboard.html", data=data)
+
+
+# =============================================================================
+# v0.4 — 5 Páginas Corporativas Institucionales (Acceso Público / Autenticado)
+# =============================================================================
+@app.route("/corporativo")
+@app.route("/corporativo/<seccion>")
+def corporativo_page(seccion="inicio"):
+    secciones_validas = {"inicio", "servicios", "nosotros", "soporte", "contacto"}
+    if seccion not in secciones_validas:
+        seccion = "inicio"
+    return render_template("corporativo.html", seccion=seccion)
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))

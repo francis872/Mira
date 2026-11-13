@@ -1,0 +1,268 @@
+/* ==========================================================================
+   MIRA — Hoja de Identidad Visual y Variables de Marca (marca.css)
+   Cumple con la regla metodológica: todos los valores cromáticos, tipográficos
+   y de elevación se centralizan como variables CSS en este archivo.
+   ========================================================================== */
+
+:root {
+    /* Paleta Institucional Principal (Contraste WCAG AA verificado) */
+    --mira-primary: #7f1d1d;          /* Rojo Institucional Profundo (Ratio > 7.5:1 sobre blanco) */
+    --mira-primary-hover: #991b1b;    /* Rojo Institucional Hover */
+    --mira-primary-dark: #450a0a;     /* Borgoña Oscuro para Gradientes */
+    --mira-primary-soft: #fef2f2;     /* Fondo suave rojizo para iconos/badges */
+
+    /* Acentos y Secundarios */
+    --mira-accent: #d97706;           /* Ámbar Académico / Dorado Institucional */
+    --mira-accent-light: #fef3c7;     /* Ámbar Claro para alertas y destaques */
+    --mira-secondary: #0f172a;        /* Azul Pizarra Nocturno (Footer y Encabezados) */
+    --mira-secondary-mid: #1e293b;    /* Pizarra Medio */
+
+    /* Colores Semánticos */
+    --mira-success: #15803d;
+    --mira-success-soft: #dcfce7;
+    --mira-info: #0369a1;
+    --mira-info-soft: #e0f2fe;
+    --mira-warning: #b45309;
+    --mira-warning-soft: #fef3c7;
+    --mira-danger: #b91c1c;
+    --mira-danger-soft: #fee2e2;
+
+    /* Superficies y Fondos */
+    --mira-bg: #f1f5f9;               /* Gris Azulado Claro de Fondo General */
+    --mira-surface: #ffffff;          /* Blanco Puro para Tarjetas y Tablas */
+    --mira-surface-alt: #f8fafc;      /* Superficie Alterna */
+    --mira-border: #e2e8f0;           /* Bordes sutiles */
+
+    /* Texto */
+    --mira-text-main: #0f172a;        /* Texto Principal (Alto contraste) */
+    --mira-text-body: #334155;        /* Texto Secundario / Cuerpo */
+    --mira-text-muted: #64748b;       /* Texto de apoyo / Metadatos */
+
+    /* Tipografías Autorizadas */
+    --mira-font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    --mira-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* Bordes y Sombras */
+    --mira-radius-sm: 8px;
+    --mira-radius-md: 14px;
+    --mira-radius-lg: 20px;
+    --mira-shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.07), 0 1px 2px -1px rgba(15, 23, 42, 0.07);
+    --mira-shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.05);
+    --mira-shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06);
+}
+
+/* ==========================================================================
+   Estilos Base Aplicando Variables de Marca
+   ========================================================================== */
+
+body {
+    background-color: var(--mira-bg);
+    color: var(--mira-text-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--mira-font-sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--mira-text-main);
+    letter-spacing: -0.02em;
+}
+
+/* Navbar Institucional */
+.navbar-mira {
+    background: linear-gradient(135deg, var(--mira-primary-dark) 0%, var(--mira-primary) 55%, var(--mira-secondary-mid) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.navbar-mira .navbar-brand {
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    font-size: 1.25rem;
+}
+
+.navbar-mira .nav-link {
+    color: rgba(255, 255, 255, 0.88) !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.85rem !important;
+    border-radius: var(--mira-radius-sm);
+    transition: all 0.18s ease;
+}
+
+.navbar-mira .nav-link:hover,
+.navbar-mira .nav-link:focus,
+.navbar-mira .nav-link.active {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.navbar-mira .dropdown-menu {
+    border: 1px solid var(--mira-border);
+    border-radius: var(--mira-radius-md);
+    box-shadow: var(--mira-shadow-lg);
+    padding: 0.5rem;
+    margin-top: 0.4rem;
+}
+
+.navbar-mira .dropdown-item {
+    border-radius: var(--mira-radius-sm);
+    padding: 0.5rem 0.85rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--mira-text-body);
+    transition: all 0.15s ease;
+}
+
+.navbar-mira .dropdown-item:hover {
+    background-color: var(--mira-primary-soft);
+    color: var(--mira-primary);
+}
+
+/* Hero Banner del Dashboard */
+.mira-hero {
+    background: linear-gradient(135deg, var(--mira-secondary) 0%, var(--mira-primary-dark) 60%, var(--mira-primary) 100%);
+    color: #ffffff;
+    border-radius: var(--mira-radius-lg);
+    padding: 2.25rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--mira-shadow-lg);
+}
+
+.mira-hero::after {
+    content: "";
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+}
+
+/* Tarjetas KPI */
+.kpi-card {
+    background: var(--mira-surface);
+    border: 1px solid var(--mira-border);
+    border-radius: var(--mira-radius-md);
+    padding: 1.15rem 1.25rem;
+    box-shadow: var(--mira-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mira-shadow-md);
+}
+
+.kpi-value {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--mira-text-main);
+    line-height: 1.1;
+}
+
+.kpi-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--mira-text-muted);
+}
+
+/* Tarjetas de Módulos */
+.card-custom {
+    background-color: var(--mira-surface);
+    border: 1px solid var(--mira-border);
+    border-radius: var(--mira-radius-md);
+    box-shadow: var(--mira-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-custom:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--mira-shadow-lg);
+    border-color: #cbd5e1;
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.35rem;
+    flex-shrink: 0;
+}
+
+/* Tablas Modernizadas */
+.table-custom {
+    background-color: var(--mira-surface);
+    border-radius: var(--mira-radius-md);
+    border: 1px solid var(--mira-border);
+    overflow: hidden;
+    box-shadow: var(--mira-shadow-sm);
+}
+
+.table-custom thead th {
+    background-color: var(--mira-secondary);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.9rem 1rem;
+    border-bottom: none;
+}
+
+.table-custom tbody td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+}
+
+/* Sección Separadora */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--mira-border);
+}
+
+/* Login Card */
+.login-wrapper {
+    min-height: 76vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    border: 1px solid var(--mira-border);
+    border-radius: var(--mira-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--mira-shadow-lg);
+    background: var(--mira-surface);
+}
+
+.login-sidebar {
+    background: linear-gradient(155deg, var(--mira-primary-dark) 0%, var(--mira-primary) 55%, var(--mira-secondary) 100%);
+    color: #ffffff;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Footer Institucional */
+footer.mira-footer {
+    margin-top: auto;
+    background-color: var(--mira-secondary);
+    color: #94a3b8;
+    border-top: 3px solid var(--mira-primary);
+}

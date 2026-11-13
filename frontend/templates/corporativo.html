@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+
+{% block title %}Portal Corporativo — {{ seccion | capitalize }}{% endblock %}
+
+{% block content %}
+<!-- Sub-Navegación de las 5 Páginas Corporativas (v0.4) -->
+<div class="bg-white border rounded-4 p-2 mb-4 shadow-sm d-flex flex-wrap justify-content-between align-items-center">
+    <div class="d-flex flex-wrap gap-1">
+        <a href="{{ url_for('corporativo_page', seccion='inicio') }}"
+           class="btn btn-sm rounded-pill px-3 {% if seccion == 'inicio' %}btn-danger fw-bold{% else %}btn-light text-secondary{% endif %}">
+            <i class="bi bi-building me-1"></i> Inicio Corporativo
+        </a>
+        <a href="{{ url_for('corporativo_page', seccion='servicios') }}"
+           class="btn btn-sm rounded-pill px-3 {% if seccion == 'servicios' %}btn-danger fw-bold{% else %}btn-light text-secondary{% endif %}">
+            <i class="bi bi-layers-fill me-1"></i> Productos y Servicios
+        </a>
+        <a href="{{ url_for('corporativo_page', seccion='nosotros') }}"
+           class="btn btn-sm rounded-pill px-3 {% if seccion == 'nosotros' %}btn-danger fw-bold{% else %}btn-light text-secondary{% endif %}">
+            <i class="bi bi-people-fill me-1"></i> Sobre Nosotros y Marca
+        </a>
+        <a href="{{ url_for('corporativo_page', seccion='soporte') }}"
+           class="btn btn-sm rounded-pill px-3 {% if seccion == 'soporte' %}btn-danger fw-bold{% else %}btn-light text-secondary{% endif %}">
+            <i class="bi bi-life-preserver me-1"></i> Centro de Soporte
+        </a>
+        <a href="{{ url_for('corporativo_page', seccion='contacto') }}"
+           class="btn btn-sm rounded-pill px-3 {% if seccion == 'contacto' %}btn-danger fw-bold{% else %}btn-light text-secondary{% endif %}">
+            <i class="bi bi-envelope-paper-fill me-1"></i> Contacto
+        </a>
+    </div>
+    <span class="badge bg-warning text-dark px-3 py-2 d-none d-md-inline-block">
+        <i class="bi bi-palette-fill me-1"></i> Identidad Corporativa MIRA v0.4
+    </span>
+</div>
+
+{% if seccion == 'inicio' %}
+<!-- 1. PÁGINA CORPORATIVA: HOME / INICIO -->
+<div class="mira-hero mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <span class="badge bg-warning text-dark mb-3 px-3 py-2">Soluciones de Inteligencia Académica</span>
+            <h1 class="display-5 fw-bold text-white mb-3">Transformamos la Gestión de Investigación Universitaria</h1>
+            <p class="lead text-white text-opacity-75 mb-4">
+                <strong>MIRA Solutions</strong> provee a las Instituciones de Educación Superior una plataforma integral para gobernar sus grupos de investigación, semilleros, producción docente y alineación con los ODS y la OCDE.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ url_for('corporativo_page', seccion='servicios') }}" class="btn btn-warning fw-bold rounded-pill px-4 py-2">
+                    Explorar Módulos y Servicios
+                </a>
+                <a href="{{ url_for('dashboard_ejecutivo') }}" class="btn btn-outline-light rounded-pill px-4 py-2">
+                    <i class="bi bi-bar-chart-fill me-1"></i> Ver Dashboard Analítico
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center mt-4 mt-lg-0">
+            <div class="p-4 rounded-4 bg-white bg-opacity-10 border border-light border-opacity-25">
+                <i class="bi bi-mortarboard-fill display-1 text-warning"></i>
+                <h4 class="text-white fw-bold mt-2 mb-1">MIRA Enterprise v0.4</h4>
+                <p class="small text-white-50 mb-0">Arquitectura Multicapa Certificada (.NET 7 + Dapper + PostgreSQL 16 + Flask)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card card-custom h-100 p-3">
+            <div class="card-body">
+                <div class="icon-box bg-danger-subtle text-danger mb-3"><i class="bi bi-shield-check"></i></div>
+                <h5 class="fw-bold">Trazabilidad Sin Pérdida</h5>
+                <p class="text-secondary small mb-0">Cumplimiento estricto de borrado lógico constitucional en las 19 tablas del modelo para preservar el historial ante auditorías de Minciencias.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-custom h-100 p-3">
+            <div class="card-body">
+                <div class="icon-box bg-warning-subtle text-warning-emphasis mb-3"><i class="bi bi-diagram-3-fill"></i></div>
+                <h5 class="fw-bold">Articulación Multinivel N:M</h5>
+                <p class="text-secondary small mb-0">Conecta docentes, grupos, semilleros y líneas de investigación con áreas OCDE, Objetivos de Desarrollo Sostenible y sectores productivos.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-custom h-100 p-3">
+            <div class="card-body">
+                <div class="icon-box bg-primary-subtle text-primary mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                <h5 class="fw-bold">Analítica de 10 Consultas</h5>
+                <p class="text-secondary small mb-0">Motor de reportes multitabla en Dapper que une de 4 a 7 entidades en tiempo real con tableros interactivos en Chart.js.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif seccion == 'servicios' %}
+<!-- 2. PÁGINA CORPORATIVA: PRODUCTOS Y SERVICIOS -->
+<div class="section-header">
+    <div>
+        <h3 class="fw-bold mb-1">Portafolio de Productos y Servicios MIRA</h3>
+        <p class="text-muted mb-0">Cuatro suites modulares diseñadas bajo metodología Spec-Driven Development (SDD)</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <span class="badge bg-secondary mb-2">Módulo v0.1</span>
+                <h5 class="fw-bold">1. Suite de Catálogos Científicos Normalizados</h5>
+                <p class="text-secondary small">Administración centralizada de Áreas de Conocimiento OCDE, Objetivos de Desarrollo Sostenible (Agenda 2030), Áreas de Aplicación, Términos Clave bilingües, Universidades aliadas y Líneas de Investigación.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <span class="badge bg-danger mb-2">Módulo v0.2</span>
+                <h5 class="fw-bold">2. Motor Relacional de Grupos, Semilleros y Docentes</h5>
+                <p class="text-secondary small">Gestión de hojas de vida investigativas (CvLAC), grupos avalados (GrupLAC), semilleros formativos y 7 tablas puente con validación previa de claves foráneas activas.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <span class="badge bg-warning text-dark mb-2">Módulo v0.3</span>
+                <h5 class="fw-bold">3. Seguridad Perimetral JWT + BCrypt + RBAC</h5>
+                <p class="text-secondary small">Control de acceso basado en roles (Administrador, Editor y Consultor), tokens firmados con HmacSha256 y encriptación adaptativa de contraseñas con BCrypt.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <span class="badge bg-success mb-2">Módulo v0.4</span>
+                <h5 class="fw-bold">4. Inteligencia de Negocios y Analítica Multitabla</h5>
+                <p class="text-secondary small">Tablero ejecutivo con 10 consultas SQL multitabla (4 a 7 tablas cada una) para medir productividad, cobertura OCDE, impacto ODS y capacidad por ciudad.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif seccion == 'nosotros' %}
+<!-- 3. PÁGINA CORPORATIVA: SOBRE NOSOTROS E IDENTIDAD DE MARCA -->
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3">Sobre MIRA y la Universidad de San Buenaventura Medellín</h3>
+                <p class="text-secondary">
+                    <strong>MIRA (Módulo de Investigación para la Gestión de Proyectos Académicos)</strong> nació como un proyecto de ingeniería de software orientado a resolver la fragmentación de la información investigativa en las facultades universitarias.
+                </p>
+                <h5 class="fw-bold mt-4">Misión</h5>
+                <p class="text-secondary small">
+                    Proveer una arquitectura de software transparente, segura y mantenible que articule el talento humano docente con los grupos, semilleros y desafíos globales de sostenibilidad.
+                </p>
+                <h5 class="fw-bold mt-3">Visión</h5>
+                <p class="text-secondary small mb-0">
+                    Consolidarse como el estándar abierto de referencia para el mapeo de conocimiento y analítica curricular e investigativa en instituciones de educación superior.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-palette2 text-danger me-2"></i>Síntesis del Manual de Marca</h5>
+                <p class="small text-muted">Reglas aplicadas desde <code>MANUAL_DE_MARCA.md</code> y <code>static/css/marca.css</code>:</p>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="d-inline-block rounded me-2" style="width: 28px; height: 28px; background: var(--mira-primary);"></span>
+                    <div class="small"><strong>Rojo Institucional</strong> <code>#7F1D1D</code> (Contraste AAA 8.12:1)</div>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="d-inline-block rounded me-2" style="width: 28px; height: 28px; background: var(--mira-secondary);"></span>
+                    <div class="small"><strong>Azul Pizarra Nocturno</strong> <code>#0F172A</code> (Contraste AAA 17.4:1)</div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="d-inline-block rounded me-2" style="width: 28px; height: 28px; background: var(--mira-accent);"></span>
+                    <div class="small"><strong>Ámbar Académico</strong> <code>#D97706</code> (Con texto oscuro 8.9:1)</div>
+                </div>
+                <hr>
+                <div class="small text-secondary">
+                    <div><strong>Tipografía Títulos:</strong> Plus Jakarta Sans (600, 700, 800)</div>
+                    <div><strong>Tipografía Cuerpo:</strong> Inter (400, 500, 600)</div>
+                    <div><strong>Área de Reserva del Logo:</strong> Mínimo <code>0.5X</code> (16 px) y tamaño mínimo <code>32×32 px</code>.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif seccion == 'soporte' %}
+<!-- 4. PÁGINA CORPORATIVA: CENTRO DE SOPORTE TÉCNICO -->
+<div class="card card-custom">
+    <div class="card-body p-4">
+        <h3 class="fw-bold mb-3"><i class="bi bi-life-preserver text-danger me-2"></i>Centro de Soporte Técnico y Preguntas Frecuentes</h3>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        1. ¿Qué hacer si mi sesión muestra tablas vacías o expira el token JWT?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-secondary">
+                        Por seguridad perimetral, los tokens JWT tienen una vigencia limitada. El sistema detecta automáticamente la expiración (`401 Unauthorized`), limpia la sesión y redirige a <code>/login</code> para renovar el token.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        2. ¿Por qué no puedo eliminar un registro si tengo rol Editor o Consultor?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-secondary">
+                        Según la matriz RBAC de la versión 3, el borrado lógico (`DELETE` -> `activo = FALSE`) y la gestión de cuentas de usuario están reservados exclusivamente al perfil <strong>Administrador</strong>.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        3. ¿Cómo se verifican los endpoints desde Swagger OpenAPI?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-secondary">
+                        Ingrese a <code>http://localhost:8081/swagger/index.html</code>, autentíquese en <code>POST /api/Auth/login</code>, copie el token devuelto y péguelo en el botón <strong>Authorize</strong> con el formato <code>Bearer &lt;su_token&gt;</code>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif seccion == 'contacto' %}
+<!-- 5. PÁGINA CORPORATIVA: CONTACTO INSTITUCIONAL -->
+<div class="row g-4">
+    <div class="col-md-5">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <h4 class="fw-bold mb-3">Canales de Atención Institucional</h4>
+                <p class="text-secondary small">Universidad de San Buenaventura Medellín — Facultad de Ingenierías.</p>
+                <div class="mb-3 small">
+                    <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+                    <strong>Sede San Benito:</strong> Carrera 56C N° 51-110, Medellín, Colombia
+                </div>
+                <div class="mb-3 small">
+                    <i class="bi bi-building-fill text-danger me-2"></i>
+                    <strong>Campus Universitario:</strong> Bello, Antioquia
+                </div>
+                <div class="mb-3 small">
+                    <i class="bi bi-envelope-fill text-danger me-2"></i>
+                    <strong>Mesa de Ayuda MIRA:</strong> soporte.mira@usbmed.edu.co
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card card-custom h-100">
+            <div class="card-body p-4">
+                <h4 class="fw-bold mb-3">Enviar Solicitud o Reporte</h4>
+                <form method="GET" action="{{ url_for('corporativo_page', seccion='contacto') }}">
+                    <input type="hidden" name="enviado" value="1">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Nombre Completo</label>
+                        <input type="text" class="form-control" placeholder="Ingrese su nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Correo Institucional</label>
+                        <input type="email" class="form-control" placeholder="usuario@usbmed.edu.co" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Mensaje o Requerimiento</label>
+                        <textarea class="form-control" rows="3" placeholder="Describa su consulta sobre MIRA..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger fw-bold px-4">
+                        <i class="bi bi-send-fill me-1"></i> Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -45,8 +45,11 @@ namespace MIRA.Api.Servicios
                 claims.Add(new Claim(ClaimTypes.Role, rol));
             }
 
-            // 4. Firmar el Token JWT
-            var keyString = _configuration["JwtSettings:Key"] ?? "ClaveSecretaSuperSeguraParaElModuloMIRA2026!*AutenticacionJWT_USBMed";
+            // 4. Firmar el Token JWT leyendo de variables de entorno si appsettings tiene placeholder
+            var configuredKey = _configuration["JwtSettings:Key"];
+            var keyString = (!string.IsNullOrWhiteSpace(configuredKey) && !configuredKey.Contains("<TU_"))
+                ? configuredKey
+                : (Environment.GetEnvironmentVariable("JWT_SECRET") ?? "MIRA_Dev_Fallback_Key_2026_Min32Bytes_Length_OK!");
             var issuer = _configuration["JwtSettings:Issuer"] ?? "MIRA_Api";
             var audience = _configuration["JwtSettings:Audience"] ?? "MIRA_Client";
             var durationMinutes = double.TryParse(_configuration["JwtSettings:DurationInMinutes"], out var d) ? d : 480;

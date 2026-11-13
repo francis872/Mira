@@ -1,18 +1,41 @@
-# Guía de Inicio Rápido y Pruebas (Smoke Test) — MIRA v0.2 (Entrega 2)
+# Guía de Inicio Rápido y Validación — MIRA v0.3 (`7_quickstart.md`)
 
-> **Versión 0.2**: Validación de Integridad Referencial, Entidades Relacionales y Tablas Puente.  
-> Rige la constitución permanente: `docs/1_constitution.md`.  
-> Esta guía permite verificar el cumplimiento del 100% de los criterios de aceptación de `2_spec.md`.
+> **Comandos de Verificación de Autenticación JWT y Control de Roles RBAC**
 
 ---
 
-## 1. Arranque del Entorno de Desarrollo
+## 1. Diagrama Obligatorio: Ciclo de Validación de la Versión 3
 
-Todo el ecosistema se ejecuta centralizado en contenedores Docker:
+```mermaid
+flowchart LR
+    Start["1. Levantar Entorno\ndocker compose up -d --build"] --> Login["2. Probar POST /api/Auth/login\ny obtener Token JWT"]
+    Login --> Check401["3. Probar ruta sin token (401)\ny con rol insuficiente (403)"]
+    Check401 --> CheckAdmin["4. Probar CRUD /api/Usuario\ncon Token Administrador (200/201)"]
+    CheckAdmin --> Decision{"¿Pasan todos los\ncriterios + regresión v1-v2?"}
+    Decision -- "Sí (Verde)" --> Tag["5. Cerrar versión:\ngit tag v3"]
+    Decision -- "No (Rojo)" --> Fix["Corregir en código/spec\ny repetir validación"]
+    Fix --> Login
+```
 
-```powershell
-# 1. Asegurar que los contenedores estén actualizados y en ejecución
-docker compose up -d --build
+> **Guía de lectura:** El diagrama de flujo muestra la secuencia de pasos para arrancar los contenedores, ejecutar las pruebas de humo de seguridad (`200`, `401`, `403`) y decidir el cierre con `tag v3`.
 
-# 2. Verificar estado de salud de los servicios
-docker compose ps
+---
+
+## 2. Comandos de Prueba Rápida (`curl`)
+
+### 2.1. Iniciar sesión y obtener Token JWT (`200 OK`)
+```bash
+curl -X POST http://localhost:8081/api/Auth/login \
+  -H "Content-Type: application/json" \
+  -d "{\"username\": \"<USUARIO_ADMIN>\", \"password\": \"<PASSWORD_ADMIN>\"}"
+```
+
+### 2.2. Verificar bloqueo `401 Unauthorized` sin Token
+```bash
+curl -i http://localhost:8081/api/docente
+```
+
+### 2.3. Consultar listado de usuarios con Token de Administrador (`200 OK`)
+```bash
+curl -H "Authorization: Bearer <TOKEN_JWT>" http://localhost:8081/api/Usuario
+```
