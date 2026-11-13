@@ -42,4 +42,17 @@ public sealed class InvestigacionRepository(IDbConnectionFactory factory)
     public Task<JsonNode?> Ficha(int id) => Consultar("SELECT public.sp_consultar_v2_ficha_grupo(@Id);", new { Id=id });
     public Task<JsonNode?> GuardarFicha(int? id, JsonObject datos) =>
         Consultar("SELECT public.sp_guardar_v2_ficha_grupo(@Id,CAST(@Datos AS jsonb));", new { Id=id, Datos=datos.ToJsonString() });
+    public Task<JsonNode?> AsignarLineas(string recurso,int padre,int[] lineas) =>
+        Consultar("SELECT public.sp_asignar_v2_lineas(@Recurso,@Padre,CAST(@Lineas AS jsonb));",new {Recurso=recurso,Padre=padre,Lineas=System.Text.Json.JsonSerializer.Serialize(lineas)});
+    public Task<JsonNode?> ResumenLineas(string recurso,int padre) =>
+        Consultar("SELECT public.sp_resumen_v2_lineas(@Recurso,@Padre);",new {Recurso=recurso,Padre=padre});
+    public Task<JsonNode?> FiltrarSemilleros(int? grupo,int? docente) =>
+        Consultar("SELECT public.sp_filtrar_v2_semilleros(@Grupo,@Docente);",new {Grupo=grupo,Docente=docente});
+    public Task<JsonNode?> OpcionesReportes() => Consultar("SELECT public.sp_opciones_v2_reportes();");
+    public Task<JsonNode?> LineasInactivas() => Consultar("SELECT public.sp_listar_v2_lineas_inactivas();");
+    public Task<JsonNode?> EstadoLinea(int id,bool activo) => Consultar("SELECT public.sp_estado_v2_linea(@Id,@Activo);",new {Id=id,Activo=activo});
+    public Task<JsonNode?> ReporteIntegrantes(int grupo) =>
+        Consultar("SELECT public.sp_reporte_v2_integrantes(@Grupo);",new {Grupo=grupo});
+    public Task<JsonNode?> ReporteArticulacion(int? sede,int? linea) =>
+        Consultar("SELECT public.sp_reporte_v2_articulacion(@Sede,@Linea);",new {Sede=sede,Linea=linea});
 }

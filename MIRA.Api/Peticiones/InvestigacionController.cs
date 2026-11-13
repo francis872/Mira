@@ -1,6 +1,8 @@
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
 using MIRA.Api.Servicios;
+using MIRA.Api.Modelos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MIRA.Api.Peticiones;
 
@@ -13,6 +15,28 @@ public sealed class InvestigacionController(InvestigacionService service) : Cont
 
     [HttpGet("referencias/usuarios")]
     public async Task<IActionResult> Usuarios() => Ok(await service.Usuarios());
+    [HttpPost("asociaciones/{recurso}/asignar")]
+    public async Task<IActionResult> AsignarLineas(string recurso,AsignarLineasRequest datos) =>
+        StatusCode(StatusCodes.Status201Created,new {asociaciones=await service.AsignarLineas(recurso,datos)});
+    [HttpGet("asociaciones/{recurso}/resumen/{id:int:min(1)}")]
+    public async Task<IActionResult> ResumenLineas(string recurso,int id) => Resultado(await service.ResumenLineas(recurso,id));
+    [HttpGet("semilleros/buscar")]
+    public async Task<IActionResult> FiltrarSemilleros([FromQuery]int? grupoId,[FromQuery]int? docenteId) => Ok(await service.FiltrarSemilleros(grupoId,docenteId));
+    [HttpGet("lineas_investigacion/inactivas"),Authorize(Roles="Administrador")]
+    public async Task<IActionResult> LineasInactivas() => Ok(await service.LineasInactivas());
+    [HttpPut("lineas_investigacion/{id:int:min(1)}/estado"),Authorize(Roles="Administrador")]
+    public async Task<IActionResult> EstadoLinea(int id,EstadoLineaRequest request) => Resultado(await service.EstadoLinea(id,request));
+    [HttpGet("reportes/opciones")]
+    public async Task<IActionResult> OpcionesReportes() => Ok(await service.OpcionesReportes());
+    [HttpGet("reportes/integrantes/{grupoId:int:min(1)}")]
+    public async Task<IActionResult> ReporteIntegrantes(int grupoId) => Resultado(await service.ReporteIntegrantes(grupoId));
+    [HttpGet("reportes/articulacion")]
+    public async Task<IActionResult> ReporteArticulacion([FromQuery]int? sedeId,[FromQuery]int? lineaId)
+    {
+        if(Request.Query.Keys.Any(k=>k is not ("sedeId" or "lineaId")))
+            return BadRequest(new {mensaje="El reporte solo admite filtros de sede y línea definidos en el modelo actual."});
+        return Ok(await service.ReporteArticulacion(sedeId,lineaId));
+    }
     [HttpGet("grupos/ficha/{id:int:min(1)}")]
     public async Task<IActionResult> Ficha(int id) => Resultado(await service.Ficha(id));
     [HttpPost("grupos/ficha")]

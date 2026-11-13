@@ -16,7 +16,7 @@ if (!string.IsNullOrEmpty(assignedPort) && string.IsNullOrEmpty(Environment.GetE
 }
 // Los scripts capturan consola; no depender de permisos del Event Log de Windows.
 builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
+builder.Logging.AddJsonConsole();
 builder.Services.AddSeguridad(builder.Configuration);
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
@@ -72,6 +72,7 @@ builder.Services.AddScoped<MIRA.Api.Repositorios.Investigacion.InvestigacionRepo
 builder.Services.AddScoped<InvestigacionService>();
 
 var app = builder.Build();
+_ = app.Services.GetRequiredService<LoginOriginSettings>();
 // Validación de configuración local, sin abrir conexión ni publicar credenciales.
 if (app.Environment.IsProduction()) _ = app.Services.GetRequiredService<IDbConnectionFactory>();
 if (args.Contains("--bootstrap-admin") || args.Contains("--reset-admin-password"))
@@ -88,7 +89,13 @@ if (args.Contains("--bootstrap-admin") || args.Contains("--reset-admin-password"
     return;
 }
 app.UseMiddleware<ApiExceptionMiddleware>();
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["X-Correlation-ID"] = context.TraceIdentifier;
+    await next(context);
+});
 app.UseRouting();
+app.UseMiddleware<LoginProtectionMiddleware>();
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -104,6 +111,7 @@ if (app.Environment.IsDevelopment()) {
 }
 app.MapControllers().RequireAuthorization("Datos");
 app.MapGet("/health", () => Results.Ok(new { status="ok", timestamp=DateTime.UtcNow }));
+app.MapGet("/ready", Readiness.Check);
 app.Run();
 
 public partial class Program { }

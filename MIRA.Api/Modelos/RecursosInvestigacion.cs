@@ -16,12 +16,12 @@ public static class RecursosInvestigacion
     private static CampoInvestigacion Fecha(string nombre, bool opcional = false) => new(nombre, "fecha", Opcional: opcional);
     private static readonly RecursoInvestigacion[] Recursos =
     [
-        new("sedes", [Texto("nombre",120), Texto("ciudad",120)]),
+        new("sedes", [Texto("nombre",120), Texto("ciudad",120), Texto("codigo_institucional",0)]),
         new("docentes", [Referencia("usuario_id"), new("cvlac_url","url",500,true), Texto("escalafon",100,true),
             new("minciencias_categoria","texto",50,true,["Senior","Asociado","Junior","Sin Categoría"])]),
         new("grupos_investigacion", [Referencia("sede_id"), new("gruptac_url","url",500), Texto("categoria",100,true)]),
         new("semilleros", [Referencia("grupo_id"), Texto("nombre",200), Texto("descripcion",0,true)]),
-        new("lineas_investigacion", [Texto("codigo",50), Texto("nombre",200), Texto("descripcion",0,true)]),
+        new("lineas_investigacion", [Texto("codigo",50), Texto("nombre",200), Texto("descripcion",0),new("disciplina_ids","referencias"),new("ods_ids","referencias")]),
         new("grupo_docentes", [Referencia("grupo_id"), Referencia("docente_id"),
             new("rol",Opciones:["Líder de Grupo","Coinvestigador","Colaborador"]), Fecha("fecha_inicio"), Fecha("fecha_fin",true)]),
         new("semillero_tutores", [Referencia("semillero_id"), Referencia("docente_id"),
@@ -29,7 +29,7 @@ public static class RecursosInvestigacion
         new("areas_conocimiento", [Texto("nombre",160)]),
         new("ods", [Texto("nombre",160)]),
         new("areas_aplicacion", [Texto("nombre",160)]),
-        new("palabras_clave", [Texto("nombre",160)]),
+        new("palabras_clave", [Texto("nombre",160), Texto("termino_ingles",150)]),
         Puente("grupo_lineas","grupo_id","linea_id"),
         Puente("semillero_lineas","semillero_id","linea_id"),
         Puente("linea_disciplinas","linea_id","disciplina_id"),

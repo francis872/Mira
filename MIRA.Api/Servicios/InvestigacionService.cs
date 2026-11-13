@@ -34,6 +34,21 @@ public sealed class InvestigacionService(InvestigacionRepository repository)
                 result[campo.Nombre] = null;
                 continue;
             }
+            if (campo.Tipo == "referencias")
+            {
+                if(valor is not JsonArray ids || ids.Count is <1 or >200)
+                    throw new ValidacionInvestigacionException($"Seleccione entre una y doscientas referencias para {etiqueta}.");
+                var claves=new List<int>();
+                foreach(var item in ids)
+                {
+                    if(item is not JsonValue n || !n.TryGetValue<int>(out var key) || key<=0)
+                        throw new ValidacionInvestigacionException($"Seleccione referencias válidas para {etiqueta}.");
+                    claves.Add(key);
+                }
+                if(claves.Distinct().Count()!=claves.Count) throw new ValidacionInvestigacionException($"No repita referencias en {etiqueta}.");
+                result[campo.Nombre]=new JsonArray(claves.Order().Select(key=>(JsonNode?)JsonValue.Create(key)).ToArray());
+                continue;
+            }
             if (campo.Tipo == "referencia")
             {
                 if (valor is not JsonValue numero || !numero.TryGetValue<int>(out var id) || id <= 0)
@@ -76,6 +91,40 @@ public sealed class InvestigacionService(InvestigacionRepository repository)
     public Task<bool> Eliminar(string nombre, int id, int? derecha = null) => repository.Eliminar(Recurso(nombre,derecha.HasValue),id,derecha);
     public Task<JsonNode?> Usuarios() => repository.Usuarios();
     public Task<JsonNode?> Ficha(int id) => repository.Ficha(id);
+    private static void AsociacionDeLineas(string recurso)
+    {
+        if (recurso is not ("grupo_lineas" or "semillero_lineas")) throw new RecursoInvestigacionNoEncontradoException();
+    }
+    public Task<JsonNode?> AsignarLineas(string recurso,AsignarLineasRequest datos)
+    {
+        AsociacionDeLineas(recurso);
+        if(datos.PadreId<=0 || datos.Lineas is null || datos.Lineas.Length is <1 or >200 || datos.Lineas.Any(id=>id<=0) || datos.Lineas.Distinct().Count()!=datos.Lineas.Length)
+            throw new ValidacionInvestigacionException("Seleccione un registro y entre una y doscientas líneas distintas.");
+        return repository.AsignarLineas(recurso,datos.PadreId,datos.Lineas.Order().ToArray());
+    }
+    public Task<JsonNode?> ResumenLineas(string recurso,int padre)
+    {
+        AsociacionDeLineas(recurso);
+        return repository.ResumenLineas(recurso,padre);
+    }
+    public Task<JsonNode?> FiltrarSemilleros(int? grupo,int? docente)
+    {
+        if(grupo is <=0 || docente is <=0) throw new ValidacionInvestigacionException("Seleccione referencias válidas para filtrar semilleros.");
+        return repository.FiltrarSemilleros(grupo,docente);
+    }
+    public Task<JsonNode?> OpcionesReportes() => repository.OpcionesReportes();
+    public Task<JsonNode?> LineasInactivas() => repository.LineasInactivas();
+    public Task<JsonNode?> EstadoLinea(int id,EstadoLineaRequest request)
+    {
+        if(request.Activo is null) throw new ValidacionInvestigacionException("Indique explícitamente el estado de la línea.");
+        return repository.EstadoLinea(id,request.Activo.Value);
+    }
+    public Task<JsonNode?> ReporteIntegrantes(int grupo) => repository.ReporteIntegrantes(grupo);
+    public Task<JsonNode?> ReporteArticulacion(int? sede,int? linea)
+    {
+        if(sede is <=0 || linea is <=0) throw new ValidacionInvestigacionException("Seleccione referencias válidas para filtrar el reporte.");
+        return repository.ReporteArticulacion(sede,linea);
+    }
     public Task<JsonNode?> GuardarFicha(int? id, JsonNode? entrada)
     {
         if (entrada is not JsonObject datos || datos["semilleros"] is not JsonArray detalles ||

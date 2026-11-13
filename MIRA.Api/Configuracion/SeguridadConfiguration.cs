@@ -19,6 +19,7 @@ public static class SeguridadConfiguration
         if (string.IsNullOrWhiteSpace(settings.Issuer) || string.IsNullOrWhiteSpace(settings.Audience))
             throw new InvalidOperationException("Jwt__Issuer y Jwt__Audience no pueden estar vacíos.");
         services.AddSingleton(settings);
+        services.AddSingleton<LoginOriginSettings>();
         services.AddSingleton<PasswordService>();
         services.AddScoped<ICuentaRepository, CuentaRepository>();
         services.AddScoped<AuthService>();
@@ -59,9 +60,18 @@ public static class SeguridadConfiguration
         services.AddRateLimiter(options =>
         {
             options.RejectionStatusCode = 429;
-            options.AddPolicy("login", http => RateLimitPartition.GetFixedWindowLimiter(
-                http.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
-                { PermitLimit=10, Window=TimeSpan.FromMinutes(1), QueueLimit=0 }));
+            options.GlobalLimiter = PartitionedRateLimiter.CreateChained(
+                PartitionedRateLimiter.Create<HttpContext, string>(http => LoginOriginSettings.IsLogin(http)
+                    ? RateLimitPartition.GetFixedWindowLimiter("origin:" + http.Items[LoginProtectionMiddleware.OriginItem],
+                        _ => new FixedWindowRateLimiterOptions { PermitLimit=10, Window=TimeSpan.FromMinutes(1), QueueLimit=0 })
+                    : RateLimitPartition.GetNoLimiter("other")),
+                PartitionedRateLimiter.Create<HttpContext, string>(http => LoginOriginSettings.IsLogin(http)
+                    ? RateLimitPartition.GetFixedWindowLimiter("account:" + http.Items[LoginProtectionMiddleware.AccountItem],
+                        _ => new FixedWindowRateLimiterOptions { PermitLimit=10, Window=TimeSpan.FromMinutes(1), QueueLimit=0 })
+                    : RateLimitPartition.GetNoLimiter("other")));
+            // Bound simultaneous password work across accounts/origins without increasing the quota.
+            options.AddPolicy("login", _ => RateLimitPartition.GetConcurrencyLimiter("login-work",
+                _ => new ConcurrencyLimiterOptions { PermitLimit=4, QueueLimit=0 }));
             options.OnRejected = async (context, ct) => await context.HttpContext.Response.WriteAsJsonAsync(
                 new { mensaje="Demasiados intentos. Espere un minuto antes de volver a intentarlo." }, ct);
         });
