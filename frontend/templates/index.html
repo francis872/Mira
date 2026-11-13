@@ -1,42 +1,272 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Panel Principal{% endblock %}
 
 {% block content %}
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="p-4 p-md-5 rounded-3 bg-white shadow-sm border-start border-5 border-danger">
-            <h1 class="display-6 fw-bold text-dark mb-2">Panel de Administración de Catálogos</h1>
-            <p class="lead text-secondary mb-3">
-                Módulo de Investigación para la Gestión de Proyectos Académicos (MIRA) — Universidad de San Buenaventura Medellín.
+{% set can_edit = current_user and ('Administrador' in current_user.roles or 'Editor' in current_user.roles) %}
+{% set is_admin = current_user and ('Administrador' in current_user.roles) %}
+
+<!-- Hero Banner Institucional -->
+<div class="mira-hero mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-1 mb-3 small">
+                <i class="bi bi-patch-check-fill text-warning me-2"></i>
+                <span>Plataforma de Gestión Investigativa &bull; USB Medellín</span>
+            </div>
+            <h1 class="display-6 fw-bold text-white mb-2">
+                Bienvenido(a), {{ current_user.nombreCompleto or current_user.username }}
+            </h1>
+            <p class="text-white text-opacity-75 mb-3">
+                Gestione de extremo a extremo los catálogos científicos, perfiles docentes, grupos de investigación, semilleros y sus articulaciones estratégicas bajo arquitectura multicapa segura.
             </p>
             <div class="d-flex flex-wrap gap-2">
-                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">
-                    <i class="bi bi-shield-check me-1"></i> Borrado Lógico Activo
+                <span class="badge bg-light text-dark px-3 py-2">
+                    <i class="bi bi-person-badge me-1 text-danger"></i>
+                    Rol Activo: <strong>{{ current_user.roles[0] if current_user and current_user.roles else 'Usuario' }}</strong>
                 </span>
-                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
-                    <i class="bi bi-layers me-1"></i> Arquitectura Multicapa (HTTP REST)
+                <span class="badge bg-success text-white px-3 py-2">
+                    <i class="bi bi-shield-lock me-1"></i> JWT Bearer + BCrypt Activo
                 </span>
-                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2">
-                    <i class="bi bi-database me-1"></i> PostgreSQL 16
+                <span class="badge bg-warning text-dark px-3 py-2">
+                    <i class="bi bi-arrow-repeat me-1"></i> Borrado Lógico Constitucional
                 </span>
+            </div>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+            <a href="{{ url_for('dashboard_ejecutivo') }}" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm me-2 mb-2">
+                <i class="bi bi-bar-chart-line-fill me-1"></i> Dashboard v4 (10 Consultas)
+            </a>
+            <a href="{{ url_for('relaciones_dashboard') }}" class="btn btn-outline-light fw-semibold px-4 py-2 rounded-pill mb-2">
+                <i class="bi bi-bezier2 me-1"></i> Articulación N:M
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Barra de Indicadores KPI en Tiempo Real -->
+{% if stats %}
+<div class="row g-3 mb-5">
+    <div class="col-6 col-md-4 col-xl-2">
+        <div class="kpi-card d-flex align-items-center justify-content-between">
+            <div>
+                <div class="kpi-value">{{ stats.docentes }}</div>
+                <div class="kpi-label">Docentes Activos</div>
+            </div>
+            <div class="icon-box bg-danger-subtle text-danger">
+                <i class="bi bi-person-Workspace"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <div class="kpi-card d-flex align-items-center justify-content-between">
+            <div>
+                <div class="kpi-value">{{ stats.grupos }}</div>
+                <div class="kpi-label">Grupos Inv.</div>
+            </div>
+            <div class="icon-box bg-primary-subtle text-primary">
+                <i class="bi bi-collection-fill"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <div class="kpi-card d-flex align-items-center justify-content-between">
+            <div>
+                <div class="kpi-value">{{ stats.semilleros }}</div>
+                <div class="kpi-label">Semilleros</div>
+            </div>
+            <div class="icon-box bg-success-subtle text-success">
+                <i class="bi bi-sprout"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <div class="kpi-card d-flex align-items-center justify-content-between">
+            <div>
+                <div class="kpi-value">{{ stats.lineas }}</div>
+                <div class="kpi-label">Líneas Inv.</div>
+            </div>
+            <div class="icon-box bg-warning-subtle text-warning-emphasis">
+                <i class="bi bi-diagram-3-fill"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <div class="kpi-card d-flex align-items-center justify-content-between">
+            <div>
+                <div class="kpi-value">{{ stats.universidades }}</div>
+                <div class="kpi-label">Universidades</div>
+            </div>
+            <div class="icon-box bg-info-subtle text-info-emphasis">
+                <i class="bi bi-buildings-fill"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <div class="kpi-card d-flex align-items-center justify-content-between">
+            <div>
+                <div class="kpi-value">{{ stats.catalogos }}</div>
+                <div class="kpi-label">Ítems Catálogo</div>
+            </div>
+            <div class="icon-box bg-secondary-subtle text-secondary-emphasis">
+                <i class="bi bi-journals"></i>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- ==========================================================================
+     SECCIÓN 1: ECOSISTEMA INVESTIGATIVO Y RELACIONAL (Versión 2 — HU 3, 5, 6, 8, 9)
+     ========================================================================== -->
+<div class="section-header">
+    <div>
+        <h4 class="fw-bold mb-0">
+            <i class="bi bi-diagram-2-fill text-danger me-2"></i>Ecosistema Investigativo y Articulación (v0.2)
+        </h4>
+        <small class="text-muted">Entidades principales con integridad referencial y tablero Maestro-Detalle de 7 tablas puente</small>
+    </div>
+    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">HU 3, 5, 6, 8 y 9</span>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- Docentes Investigadores (HU 3) -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 card-custom">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-box bg-danger-subtle text-danger me-3">
+                        <i class="bi bi-person-badge-fill"></i>
+                    </div>
+                    <div>
+                        <h5 class="card-title fw-bold mb-0">Docentes</h5>
+                        <small class="text-muted">docente (HU 3)</small>
+                    </div>
+                </div>
+                <p class="card-text text-secondary small flex-grow-1">
+                    Perfiles profesorales con cédula institucional, enlace CvLAC, escalafón, categoría Minciencias y línea matriz.
+                </p>
+                <div class="d-flex gap-2 mt-3 pt-3 border-top">
+                    <a href="{{ url_for('docente_list') }}" class="btn btn-outline-danger btn-sm flex-grow-1 fw-semibold">
+                        <i class="bi bi-list-ul me-1"></i> Gestionar
+                    </a>
+                    {% if can_edit %}
+                    <a href="{{ url_for('docente_new') }}" class="btn btn-danger btn-sm" title="Nuevo Docente">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grupos de Investigación (HU 5) -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 card-custom">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-box bg-primary-subtle text-primary me-3">
+                        <i class="bi bi-collection-fill"></i>
+                    </div>
+                    <div>
+                        <h5 class="card-title fw-bold mb-0">Grupos Inv.</h5>
+                        <small class="text-muted">grupo_investigacion (HU 5)</small>
+                    </div>
+                </div>
+                <p class="card-text text-secondary small flex-grow-1">
+                    Grupos avalados con código GrupLAC, categoría Minciencias, universidad sede y docente líder.
+                </p>
+                <div class="d-flex gap-2 mt-3 pt-3 border-top">
+                    <a href="{{ url_for('grupo_investigacion_list') }}" class="btn btn-outline-primary btn-sm flex-grow-1 fw-semibold">
+                        <i class="bi bi-list-ul me-1"></i> Gestionar
+                    </a>
+                    {% if can_edit %}
+                    <a href="{{ url_for('grupo_investigacion_new') }}" class="btn btn-primary btn-sm" title="Nuevo Grupo">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Semilleros de Investigación (HU 6) -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 card-custom">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-box bg-success-subtle text-success me-3">
+                        <i class="bi bi-sprout"></i>
+                    </div>
+                    <div>
+                        <h5 class="card-title fw-bold mb-0">Semilleros</h5>
+                        <small class="text-muted">semillero (HU 6)</small>
+                    </div>
+                </div>
+                <p class="card-text text-secondary small flex-grow-1">
+                    Semilleros formativos adscritos a un grupo de investigación matriz con objetivos y líneas asociadas.
+                </p>
+                <div class="d-flex gap-2 mt-3 pt-3 border-top">
+                    <a href="{{ url_for('semillero_list') }}" class="btn btn-outline-success btn-sm flex-grow-1 fw-semibold">
+                        <i class="bi bi-list-ul me-1"></i> Gestionar
+                    </a>
+                    {% if can_edit %}
+                    <a href="{{ url_for('semillero_new') }}" class="btn btn-success btn-sm" title="Nuevo Semillero">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tablero Maestro-Detalle de Articulaciones N:M (HU 5, 6, 8, 9) -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 card-custom border-warning">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-box bg-warning-subtle text-warning-emphasis me-3">
+                        <i class="bi bi-bezier2"></i>
+                    </div>
+                    <div>
+                        <h5 class="card-title fw-bold mb-0">Articulación N:M</h5>
+                        <small class="text-muted">7 Tablas Puente</small>
+                    </div>
+                </div>
+                <p class="card-text text-secondary small flex-grow-1">
+                    Vinculación histórica de docentes a grupos/semilleros y cruce de líneas con Áreas OCDE, ODS y Aplicaciones.
+                </p>
+                <div class="d-flex gap-2 mt-3 pt-3 border-top">
+                    <a href="{{ url_for('relaciones_dashboard') }}" class="btn btn-warning text-dark btn-sm flex-grow-1 fw-bold">
+                        <i class="bi bi-sliders me-1"></i> Abrir Tablero N:M
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<h4 class="fw-bold mb-3 text-secondary">
-    <i class="bi bi-grid-fill me-2"></i>Catálogos Maestros (Sin Claves Foráneas)
-</h4>
+<!-- ==========================================================================
+     SECCIÓN 2: CATÁLOGOS MAESTROS INSTITUCIONALES (Versión 1 — Sin FK)
+     ========================================================================== -->
+<div class="section-header">
+    <div>
+        <h4 class="fw-bold mb-0">
+            <i class="bi bi-grid-fill text-secondary me-2"></i>Catálogos Maestros Institucionales (v0.1)
+        </h4>
+        <small class="text-muted">Tablas base de referencia sin claves foráneas con soporte de borrado lógico</small>
+    </div>
+    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2">6 Catálogos Base</span>
+</div>
 
-<div class="row g-4">
+<div class="row g-4 mb-5">
     <!-- Card 1: Área de Conocimiento -->
     <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+        <div class="card h-100 card-custom">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-danger-subtle text-danger rounded-circle me-3">
-                        <i class="bi bi-book fs-4"></i>
+                    <div class="icon-box bg-danger-subtle text-danger me-3">
+                        <i class="bi bi-book"></i>
                     </div>
                     <div>
                         <h5 class="card-title fw-bold mb-0">Área de Conocimiento</h5>
@@ -44,15 +274,17 @@
                     </div>
                 </div>
                 <p class="card-text text-secondary small flex-grow-1">
-                    Clasificación académica estructurada por gran área, área específica y disciplina investigativa.
+                    Clasificación académica OCDE estructurada por gran área, área específica y disciplina investigativa.
                 </p>
                 <div class="d-flex gap-2 mt-3 pt-3 border-top">
                     <a href="{{ url_for('area_conocimiento_list') }}" class="btn btn-outline-danger btn-sm flex-grow-1">
                         <i class="bi bi-list-ul me-1"></i> Ver Listado
                     </a>
+                    {% if can_edit %}
                     <a href="{{ url_for('area_conocimiento_new') }}" class="btn btn-danger btn-sm">
                         <i class="bi bi-plus-lg"></i>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -60,27 +292,29 @@
 
     <!-- Card 2: Objetivos de Desarrollo Sostenible -->
     <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+        <div class="card h-100 card-custom">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-success-subtle text-success rounded-circle me-3">
-                        <i class="bi bi-globe-americas fs-4"></i>
+                    <div class="icon-box bg-success-subtle text-success me-3">
+                        <i class="bi bi-globe-americas"></i>
                     </div>
                     <div>
-                        <h5 class="card-title fw-bold mb-0">ODS</h5>
+                        <h5 class="card-title fw-bold mb-0">Objetivos ODS</h5>
                         <small class="text-muted">objetivo_desarrollo_sostenible</small>
                     </div>
                 </div>
                 <p class="card-text text-secondary small flex-grow-1">
-                    Objetivos globales de desarrollo sostenible (ONU) con nombre y categoría temática.
+                    Objetivos globales de desarrollo sostenible (Agenda 2030 ONU) con nombre y categoría temática.
                 </p>
                 <div class="d-flex gap-2 mt-3 pt-3 border-top">
                     <a href="{{ url_for('ods_list') }}" class="btn btn-outline-success btn-sm flex-grow-1">
                         <i class="bi bi-list-ul me-1"></i> Ver Listado
                     </a>
+                    {% if can_edit %}
                     <a href="{{ url_for('ods_new') }}" class="btn btn-success btn-sm">
                         <i class="bi bi-plus-lg"></i>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -88,11 +322,11 @@
 
     <!-- Card 3: Área de Aplicación -->
     <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+        <div class="card h-100 card-custom">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-primary-subtle text-primary rounded-circle me-3">
-                        <i class="bi bi-cpu fs-4"></i>
+                    <div class="icon-box bg-primary-subtle text-primary me-3">
+                        <i class="bi bi-cpu"></i>
                     </div>
                     <div>
                         <h5 class="card-title fw-bold mb-0">Área de Aplicación</h5>
@@ -106,9 +340,11 @@
                     <a href="{{ url_for('area_aplicacion_list') }}" class="btn btn-outline-primary btn-sm flex-grow-1">
                         <i class="bi bi-list-ul me-1"></i> Ver Listado
                     </a>
+                    {% if can_edit %}
                     <a href="{{ url_for('area_aplicacion_new') }}" class="btn btn-primary btn-sm">
                         <i class="bi bi-plus-lg"></i>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -116,11 +352,11 @@
 
     <!-- Card 4: Término Clave -->
     <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+        <div class="card h-100 card-custom">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-warning-subtle text-warning-emphasis rounded-circle me-3">
-                        <i class="bi bi-tags fs-4"></i>
+                    <div class="icon-box bg-warning-subtle text-warning-emphasis me-3">
+                        <i class="bi bi-tags"></i>
                     </div>
                     <div>
                         <h5 class="card-title fw-bold mb-0">Término Clave</h5>
@@ -128,15 +364,17 @@
                     </div>
                 </div>
                 <p class="card-text text-secondary small flex-grow-1">
-                    Palabras clave normalizadas en español e inglés para indexación y metadatos de proyectos.
+                    Palabras clave normalizadas en español e inglés para indexación científica y metadatos de proyectos.
                 </p>
                 <div class="d-flex gap-2 mt-3 pt-3 border-top">
                     <a href="{{ url_for('termino_clave_list') }}" class="btn btn-outline-warning text-dark btn-sm flex-grow-1">
                         <i class="bi bi-list-ul me-1"></i> Ver Listado
                     </a>
+                    {% if can_edit %}
                     <a href="{{ url_for('termino_clave_new') }}" class="btn btn-warning text-dark btn-sm">
                         <i class="bi bi-plus-lg"></i>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -144,11 +382,11 @@
 
     <!-- Card 5: Universidad -->
     <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+        <div class="card h-100 card-custom">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-info-subtle text-info-emphasis rounded-circle me-3">
-                        <i class="bi bi-buildings fs-4"></i>
+                    <div class="icon-box bg-info-subtle text-info-emphasis me-3">
+                        <i class="bi bi-buildings"></i>
                     </div>
                     <div>
                         <h5 class="card-title fw-bold mb-0">Universidad</h5>
@@ -156,15 +394,17 @@
                     </div>
                 </div>
                 <p class="card-text text-secondary small flex-grow-1">
-                    Directorio de instituciones de educación superior aliadas, tipo de institución y ciudad sede.
+                    Directorio de instituciones de educación superior aliadas, carácter institucional y ciudad sede.
                 </p>
                 <div class="d-flex gap-2 mt-3 pt-3 border-top">
                     <a href="{{ url_for('universidad_list') }}" class="btn btn-outline-info text-dark btn-sm flex-grow-1">
                         <i class="bi bi-list-ul me-1"></i> Ver Listado
                     </a>
+                    {% if can_edit %}
                     <a href="{{ url_for('universidad_new') }}" class="btn btn-info text-dark btn-sm">
                         <i class="bi bi-plus-lg"></i>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -172,31 +412,32 @@
 
     <!-- Card 6: Línea de Investigación -->
     <div class="col-md-6 col-lg-4">
-        <div class="card h-100 card-custom bg-white">
+        <div class="card h-100 card-custom">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="p-3 bg-secondary-subtle text-secondary-emphasis rounded-circle me-3">
-                        <i class="bi bi-diagram-3 fs-4"></i>
+                    <div class="icon-box bg-secondary-subtle text-secondary-emphasis me-3">
+                        <i class="bi bi-diagram-3"></i>
                     </div>
                     <div>
                         <h5 class="card-title fw-bold mb-0">Línea de Investigación</h5>
-                        <small class="text-muted">linea_investigacion</small>
+                        <small class="text-muted">linea_investigacion (HU 2)</small>
                     </div>
                 </div>
                 <p class="card-text text-secondary small flex-grow-1">
-                    Líneas temáticas institucionales reconocidas con descripción y alcance de investigación.
+                    Ejes temáticos institucionales que articulan docentes, grupos, semilleros, ODS y áreas del conocimiento.
                 </p>
                 <div class="d-flex gap-2 mt-3 pt-3 border-top">
                     <a href="{{ url_for('linea_investigacion_list') }}" class="btn btn-outline-secondary btn-sm flex-grow-1">
                         <i class="bi bi-list-ul me-1"></i> Ver Listado
                     </a>
+                    {% if can_edit %}
                     <a href="{{ url_for('linea_investigacion_new') }}" class="btn btn-secondary btn-sm">
                         <i class="bi bi-plus-lg"></i>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
-
