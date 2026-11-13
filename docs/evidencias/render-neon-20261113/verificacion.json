@@ -1,0 +1,1794 @@
+{
+  "verifiedAtUtc": "2026-11-13T15:39:40.340989+00:00",
+  "timeZone": "America/Bogota",
+  "repository": "https://github.com/francis872/Mira",
+  "branch": "feature/mira-v3",
+  "deployedFrontendSource": "0891fe160bcaa898b73bb748fe596aed3ae9acce",
+  "existingApiSource": "630721a118f7cfa38093d1da8e885d502c889ddc",
+  "apiSourceComparison": {
+    "paths": [
+      "MIRA.Api",
+      "Dockerfile",
+      "database"
+    ],
+    "unchanged": true
+  },
+  "frontendDeployment": {
+    "serviceId": "srv-dbrijl0ae00c73fpf0mg",
+    "deployId": "dep-dbriod0n74is73fngprg",
+    "commit": "0891fe160bcaa898b73bb748fe596aed3ae9acce",
+    "status": "build_in_progress",
+    "plan": "free",
+    "loginProfile": "render",
+    "temporaryIngressLoggingRemoved": true,
+    "sourceTests": {
+      "passed": 146,
+      "skippedDatabaseTests": 5
+    }
+  },
+  "finalHttp": {
+    "at": "2026-11-13T15:38:55.938807+00:00",
+    "checks": [
+      {
+        "component": "web",
+        "path": "/health",
+        "http": 200,
+        "correlation": true,
+        "seconds": 0.885
+      },
+      {
+        "component": "web",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true,
+        "seconds": 1.051
+      },
+      {
+        "component": "api",
+        "path": "/health",
+        "http": 200,
+        "correlation": true,
+        "seconds": 0.859
+      },
+      {
+        "component": "api",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true,
+        "seconds": 0.88
+      }
+    ],
+    "deployments": [
+      {
+        "id": "dep-dbriod0n74is73fngprg",
+        "status": "live",
+        "commit": "0891fe160bcaa898b73bb748fe596aed3ae9acce"
+      },
+      {
+        "id": "dep-dbrijlgae00c73fpf1cg",
+        "status": "deactivated",
+        "commit": "b40a4cad19e811540b504fe19995ac7c39578610"
+      }
+    ],
+    "securityChecks": 15
+  },
+  "providerConfiguration": {
+    "services": {
+      "web": {
+        "id": "srv-dbrijl0ae00c73fpf0mg",
+        "name": "sapiens-web-v1-v3-20261113",
+        "url": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "plan": "free",
+        "runtime": "docker",
+        "healthCheckPath": "/health",
+        "autoDeploy": "no",
+        "dockerCommand": ""
+      },
+      "api": {
+        "id": "srv-dbr6i3dckfvc73dc3hr0",
+        "name": "sapiens-api-v1-v3-20261112",
+        "url": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "plan": "free",
+        "runtime": "docker",
+        "healthCheckPath": "/ready",
+        "autoDeploy": "no",
+        "dockerCommand": ""
+      }
+    },
+    "forwardingKeysMatch": true,
+    "threeIndependentKeys": true,
+    "postgresSessions": true,
+    "temporaryIngressLoggingRemoved": true
+  },
+  "neon": {
+    "database": "sapiens",
+    "readOnly": true,
+    "clientTls": true,
+    "sslMode": "verify-full",
+    "channelBinding": "require",
+    "migrationCount": 15,
+    "sourceHashesMatchAppliedEvidence": true,
+    "migrationExecuted": false,
+    "projectId": "snowy-bonus-50718377",
+    "organizationPlan": "free",
+    "privileges": {
+      "readOnly": true,
+      "clientTls": true,
+      "checks": {
+        "apiCannotCreatePublicObjects": true,
+        "webCannotCreatePublicObjects": true,
+        "webCannotReadDomainTables": true,
+        "webCanMaintainSessions": true,
+        "apiCannotModifyMigrationLedger": true
+      },
+      "webSessionPrivilegeDetails": {
+        "SELECT": true,
+        "INSERT": true,
+        "UPDATE": true,
+        "DELETE": true
+      }
+    },
+    "qaDataOnly": true
+  },
+  "flask": {
+    "exit": 0,
+    "tests": 151,
+    "failures": [],
+    "skipped": [
+      "test_sessions_survive_another_application_instance_and_keep_tokens_off_cookie",
+      "test_rotation_removes_old_identifier_from_shared_store",
+      "test_expired_or_tampered_database_session_fails_closed",
+      "test_read_outage_returns_503_without_replacing_the_existing_cookie",
+      "test_write_outage_does_not_report_a_successful_login_or_emit_cookie"
+    ],
+    "passed": 146,
+    "cases": [
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_opens_with_authenticated_session",
+        "status": "passed",
+        "seconds": 0.098
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_catalog_pages_open_with_authenticated_session[/area_conocimiento]",
+        "status": "passed",
+        "seconds": 0.097
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_catalog_pages_open_with_authenticated_session[/objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 0.104
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_catalog_pages_open_with_authenticated_session[/area_aplicacion]",
+        "status": "passed",
+        "seconds": 0.101
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_catalog_pages_open_with_authenticated_session[/termino_clave]",
+        "status": "passed",
+        "seconds": 0.156
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_catalog_pages_open_with_authenticated_session[/universidad]",
+        "status": "passed",
+        "seconds": 0.117
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_catalog_pages_open_with_authenticated_session[/linea_investigacion]",
+        "status": "passed",
+        "seconds": 0.09
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_login_is_public_and_logout_requires_post",
+        "status": "passed",
+        "seconds": 0.061
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_bearer_is_sent_only_from_server_to_api",
+        "status": "passed",
+        "seconds": 0.172
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_navigation_has_session_and_logout_controls",
+        "status": "passed",
+        "seconds": 0.047
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_create_preserves_contract_and_sends_bearer",
+        "status": "passed",
+        "seconds": 0.067
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_update_and_logical_delete_reach_the_api",
+        "status": "passed",
+        "seconds": 0.072
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_api_validation_error_is_shown_to_the_user",
+        "status": "passed",
+        "seconds": 0.061
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_post_without_csrf_token_is_rejected_and_nothing_is_sent",
+        "status": "passed",
+        "seconds": 0.054
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_post_with_wrong_csrf_token_is_rejected",
+        "status": "passed",
+        "seconds": 0.063
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_every_rendered_form_embeds_the_csrf_token",
+        "status": "passed",
+        "seconds": 0.094
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_session_cookie_is_httponly_and_samesite_strict",
+        "status": "passed",
+        "seconds": 0.046
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_shows_real_counts_from_the_api",
+        "status": "passed",
+        "seconds": 0.046
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_reports_unavailable_data_instead_of_inventing_numbers",
+        "status": "passed",
+        "seconds": 0.041
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_states_honestly_what_is_pending",
+        "status": "passed",
+        "seconds": 0.043
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_validation_message_survives_real_response_truthiness[/area_conocimiento]",
+        "status": "passed",
+        "seconds": 0.053
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_validation_message_survives_real_response_truthiness[/objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 0.054
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_validation_message_survives_real_response_truthiness[/area_aplicacion]",
+        "status": "passed",
+        "seconds": 0.115
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_validation_message_survives_real_response_truthiness[/termino_clave]",
+        "status": "passed",
+        "seconds": 0.056
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_validation_message_survives_real_response_truthiness[/universidad]",
+        "status": "passed",
+        "seconds": 0.057
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_validation_message_survives_real_response_truthiness[/linea_investigacion]",
+        "status": "passed",
+        "seconds": 0.059
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_handles_invalid_api_payload[None]",
+        "status": "passed",
+        "seconds": 0.039
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_handles_invalid_api_payload[body1]",
+        "status": "passed",
+        "seconds": 0.042
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_dashboard_handles_invalid_api_payload[texto]",
+        "status": "passed",
+        "seconds": 0.041
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_list_reports_http_failure[/area_conocimiento]",
+        "status": "passed",
+        "seconds": 0.038
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_list_reports_http_failure[/objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 0.037
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_list_reports_http_failure[/area_aplicacion]",
+        "status": "passed",
+        "seconds": 0.085
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_list_reports_http_failure[/termino_clave]",
+        "status": "passed",
+        "seconds": 0.042
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_list_reports_http_failure[/universidad]",
+        "status": "passed",
+        "seconds": 0.043
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_list_reports_http_failure[/linea_investigacion]",
+        "status": "passed",
+        "seconds": 0.042
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_non_json_api_error_preserves_form_values",
+        "status": "passed",
+        "seconds": 0.057
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_unicode_csrf_is_rejected_without_api_call",
+        "status": "passed",
+        "seconds": 0.048
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_area_form_sends_original_value_for_database_normalization",
+        "status": "passed",
+        "seconds": 0.053
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_non_json_access_error_is_not_misreported_as_session_or_role_failure[401]",
+        "status": "passed",
+        "seconds": 0.05
+      },
+      {
+        "class": "frontend.tests.test_app",
+        "case": "test_non_json_access_error_is_not_misreported_as_session_or_role_failure[403]",
+        "status": "passed",
+        "seconds": 0.047
+      },
+      {
+        "class": "frontend.tests.test_architecture",
+        "case": "test_catalog_repositories_only_call_stored_routines",
+        "status": "passed",
+        "seconds": 0.016
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[sedes]",
+        "status": "passed",
+        "seconds": 0.14
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[docentes]",
+        "status": "passed",
+        "seconds": 0.059
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[grupos_investigacion]",
+        "status": "passed",
+        "seconds": 0.073
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[semilleros]",
+        "status": "passed",
+        "seconds": 0.061
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[lineas_investigacion]",
+        "status": "passed",
+        "seconds": 0.058
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[grupo_docentes]",
+        "status": "passed",
+        "seconds": 0.061
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[semillero_tutores]",
+        "status": "passed",
+        "seconds": 0.061
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[areas_conocimiento]",
+        "status": "passed",
+        "seconds": 0.063
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[ods]",
+        "status": "passed",
+        "seconds": 0.058
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[areas_aplicacion]",
+        "status": "passed",
+        "seconds": 0.056
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_lists_and_forms_open_with_real_api_option_requests[palabras_clave]",
+        "status": "passed",
+        "seconds": 0.058
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_bridge_lists_and_api_options[grupo_lineas]",
+        "status": "passed",
+        "seconds": 0.066
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_bridge_lists_and_api_options[semillero_lineas]",
+        "status": "passed",
+        "seconds": 0.04
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_bridge_lists_and_api_options[linea_disciplinas]",
+        "status": "passed",
+        "seconds": 0.046
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_bridge_lists_and_api_options[linea_ods]",
+        "status": "passed",
+        "seconds": 0.045
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_bridge_lists_and_api_options[linea_aplicacion]",
+        "status": "passed",
+        "seconds": 0.042
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_group_sends_master_and_all_details_in_one_request_without_parent_fields",
+        "status": "passed",
+        "seconds": 0.054
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_reference_failure_disables_save_and_preserves_error_data",
+        "status": "passed",
+        "seconds": 0.038
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_empty_sheet_explains_how_to_add_details_without_fake_inputs",
+        "status": "passed",
+        "seconds": 0.04
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_populated_sheet_hides_empty_state_and_keeps_real_detail_inputs",
+        "status": "passed",
+        "seconds": 0.039
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_duplicate_association_preserves_selection_and_is_escaped",
+        "status": "passed",
+        "seconds": 0.055
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_group_rejects_misaligned_detail_collections_before_calling_api",
+        "status": "passed",
+        "seconds": 0.052
+      },
+      {
+        "class": "frontend.tests.test_investigacion",
+        "case": "test_research_does_not_add_authentication_or_writable_users",
+        "status": "passed",
+        "seconds": 0.056
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_vercel_uses_only_its_platform_header[198.51.100.41-198.51.100.41]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_vercel_uses_only_its_platform_header[not-an-ip-None]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_vercel_uses_only_its_platform_header[198.51.100.41, 203.0.113.2-None]",
+        "status": "passed",
+        "seconds": 0.006
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_vercel_proxy_profile_requires_server_environment",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[198.51.100.41-198.51.100.41]",
+        "status": "passed",
+        "seconds": 0.009
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[2001:db8:0:0::41-2001:db8::41]",
+        "status": "passed",
+        "seconds": 0.008
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[::ffff:198.51.100.41-198.51.100.41]",
+        "status": "passed",
+        "seconds": 0.009
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[None-None]",
+        "status": "passed",
+        "seconds": 0.048
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[not-an-ip-None]",
+        "status": "passed",
+        "seconds": 0.008
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[198.51.100.41, 203.0.113.2-None]",
+        "status": "passed",
+        "seconds": 0.024
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_uses_only_cloudflare_origin[fe80::1%eth0-None]",
+        "status": "passed",
+        "seconds": 0.009
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_profile_requires_official_web_environment[None-web]",
+        "status": "passed",
+        "seconds": 0.008
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_profile_requires_official_web_environment[false-web]",
+        "status": "passed",
+        "seconds": 0.033
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_profile_requires_official_web_environment[true-None]",
+        "status": "passed",
+        "seconds": 0.011
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_profile_requires_official_web_environment[true-pserv]",
+        "status": "passed",
+        "seconds": 0.009
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_client_headers_cannot_enable_render_profile",
+        "status": "passed",
+        "seconds": 0.031
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_login_does_not_call_api_without_valid_platform_origin[None]",
+        "status": "passed",
+        "seconds": 0.015
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_login_does_not_call_api_without_valid_platform_origin[invalid]",
+        "status": "passed",
+        "seconds": 0.027
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_login_does_not_call_api_without_valid_platform_origin[198.51.100.41, 203.0.113.2]",
+        "status": "passed",
+        "seconds": 0.027
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_render_login_signs_cloudflare_origin_and_ignores_browser_assertion",
+        "status": "passed",
+        "seconds": 0.025
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_valid_forwarding_configuration[False]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_valid_forwarding_configuration[True]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_production_rejects_missing_weak_or_placeholder_key[]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_production_rejects_missing_weak_or_placeholder_key[short]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_production_rejects_missing_weak_or_placeholder_key[REPLACExxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_development_without_key_does_not_invent_a_trusted_origin",
+        "status": "passed",
+        "seconds": 0.004
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_session_key_cannot_be_reused_for_forwarding",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_untrusted_peer_headers_cannot_change_origin[headers0]",
+        "status": "passed",
+        "seconds": 0.006
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_untrusted_peer_headers_cannot_change_origin[headers1]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_untrusted_peer_headers_cannot_change_origin[headers2]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_only_explicit_trusted_proxy_chain_is_used[192.0.2.99-192.0.2.99]",
+        "status": "passed",
+        "seconds": 0.006
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_only_explicit_trusted_proxy_chain_is_used[203.0.113.99, 198.51.100.10-198.51.100.10]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_only_explicit_trusted_proxy_chain_is_used[192.0.2.99, 10.0.0.2-192.0.2.99]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_only_explicit_trusted_proxy_chain_is_used[invalid-address-10.0.0.1]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_only_explicit_trusted_proxy_chain_is_used[-10.0.0.1]",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_trusting_all_proxies_is_rejected",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_signer_binds_actual_body_and_ignores_incoming_assertion",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_login_protection",
+        "case": "test_api_call_attaches_auth_only_to_login_and_signs_socket_origin",
+        "status": "passed",
+        "seconds": 0.024
+      },
+      {
+        "class": "frontend.tests.test_observabilidad",
+        "case": "test_final_request_logs_and_correlation_exclude_user_input",
+        "status": "passed",
+        "seconds": 0.009
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_production_requires_https_and_explicit_storage",
+        "status": "passed",
+        "seconds": 0.024
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_production_rejects_placeholder_secret",
+        "status": "passed",
+        "seconds": 0.01
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_production_rejects_plaintext_api",
+        "status": "passed",
+        "seconds": 0.011
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_session_survives_app_restart_and_disappears_without_storage",
+        "status": "passed",
+        "seconds": 0.068
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_secure_cookie_is_httponly_strict_and_not_jwt",
+        "status": "passed",
+        "seconds": 0.023
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_health_is_anonymous_and_does_not_create_session",
+        "status": "passed",
+        "seconds": 0.054
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_login_ignores_external_redirect",
+        "status": "passed",
+        "seconds": 0.068
+      },
+      {
+        "class": "frontend.tests.test_production",
+        "case": "test_gunicorn_uses_assigned_port_and_one_worker",
+        "status": "passed",
+        "seconds": 0.008
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_member_excel_and_pdf_contain_actual_names_dates_and_states",
+        "status": "passed",
+        "seconds": 0.158
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_wrapped_long_member_name_preserves_every_word_and_accent_in_pdf",
+        "status": "passed",
+        "seconds": 0.066
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_excel_keeps_formula_like_names_as_literal_text",
+        "status": "passed",
+        "seconds": 0.071
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_articulation_download_and_screen_use_identical_filters_and_rows",
+        "status": "passed",
+        "seconds": 0.104
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_empty_reports_still_export_headers_and_clear_empty_pdf",
+        "status": "passed",
+        "seconds": 0.102
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_read_only_user_can_export_without_any_mutation",
+        "status": "passed",
+        "seconds": 0.07
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_export_is_not_public[xlsx]",
+        "status": "passed",
+        "seconds": 0.056
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_export_is_not_public[pdf]",
+        "status": "passed",
+        "seconds": 0.053
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_report_errors_are_not_downloaded_as_empty_success",
+        "status": "passed",
+        "seconds": 0.043
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_undefined_faculty_filter_is_rejected_without_ignoring_it",
+        "status": "passed",
+        "seconds": 0.039
+      },
+      {
+        "class": "frontend.tests.test_reportes",
+        "case": "test_excel_rejects_unsupported_control_text_instead_of_silently_changing_data",
+        "status": "passed",
+        "seconds": 0.041
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_anonymous_and_expired_sessions_redirect_to_login",
+        "status": "passed",
+        "seconds": 0.084
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_login_rotates_identifier_and_never_exposes_jwt",
+        "status": "passed",
+        "seconds": 0.102
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_login_error_and_csrf_are_preserved",
+        "status": "passed",
+        "seconds": 0.051
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_backend_401_clears_local_session",
+        "status": "passed",
+        "seconds": 0.038
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_read_only_identity_hides_mutations_and_denies_direct_routes",
+        "status": "passed",
+        "seconds": 0.091
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_coordinator_cannot_delete_or_manage_users",
+        "status": "passed",
+        "seconds": 0.096
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_logout_revokes_before_clearing_session",
+        "status": "passed",
+        "seconds": 0.057
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_users_page_never_renders_password_hash",
+        "status": "passed",
+        "seconds": 0.05
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_server_outage_during_logout_reports_revocation_uncertainty",
+        "status": "passed",
+        "seconds": 0.069
+      },
+      {
+        "class": "frontend.tests.test_seguridad",
+        "case": "test_backend_forbidden_is_not_rendered_as_success",
+        "status": "passed",
+        "seconds": 0.129
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_sessions_survive_another_application_instance_and_keep_tokens_off_cookie",
+        "status": "skipped",
+        "seconds": 0.001
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_rotation_removes_old_identifier_from_shared_store",
+        "status": "skipped",
+        "seconds": 0.001
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_expired_or_tampered_database_session_fails_closed",
+        "status": "skipped",
+        "seconds": 0.001
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_read_outage_returns_503_without_replacing_the_existing_cookie",
+        "status": "skipped",
+        "seconds": 0.001
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_write_outage_does_not_report_a_successful_login_or_emit_cookie",
+        "status": "skipped",
+        "seconds": 0.001
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_session_configuration_rejects_missing_tls_without_exposing_password",
+        "status": "passed",
+        "seconds": 0.001
+      },
+      {
+        "class": "frontend.tests.test_shared_sessions",
+        "case": "test_vercel_cannot_use_ephemeral_session_files",
+        "status": "passed",
+        "seconds": 0.005
+      },
+      {
+        "class": "frontend.tests.test_v1_requisitos",
+        "case": "test_keyword_english_is_required_on_both_forms[False]",
+        "status": "passed",
+        "seconds": 0.044
+      },
+      {
+        "class": "frontend.tests.test_v1_requisitos",
+        "case": "test_keyword_english_is_required_on_both_forms[True]",
+        "status": "passed",
+        "seconds": 0.046
+      },
+      {
+        "class": "frontend.tests.test_v1_requisitos",
+        "case": "test_ods_form_exposes_exactly_original_categories[False]",
+        "status": "passed",
+        "seconds": 0.042
+      },
+      {
+        "class": "frontend.tests.test_v1_requisitos",
+        "case": "test_ods_form_exposes_exactly_original_categories[True]",
+        "status": "passed",
+        "seconds": 0.042
+      },
+      {
+        "class": "frontend.tests.test_v1_requisitos",
+        "case": "test_rejected_english_preserves_spanish_and_error",
+        "status": "passed",
+        "seconds": 0.055
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_multi_line_form_sends_one_atomic_request",
+        "status": "passed",
+        "seconds": 0.056
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_line_form_sends_required_ods_and_disciplines_in_one_request",
+        "status": "passed",
+        "seconds": 0.054
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_line_removal_requires_named_confirmation_dialog",
+        "status": "passed",
+        "seconds": 0.04
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_semillero_filters_are_sent_to_api_and_kept_in_form",
+        "status": "passed",
+        "seconds": 0.039
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_group_summary_keeps_inactive_line_names_escaped",
+        "status": "passed",
+        "seconds": 0.038
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_sede_options_are_authenticated_and_do_not_expose_credentials",
+        "status": "passed",
+        "seconds": 0.057
+      },
+      {
+        "class": "frontend.tests.test_v2_requisitos",
+        "case": "test_reactivation_is_admin_only_and_uses_csrf_protected_route",
+        "status": "passed",
+        "seconds": 0.096
+      }
+    ]
+  },
+  "functionalHttp": {
+    "startedAt": "2026-11-13T15:29:39.904875+00:00",
+    "finishedAt": "2026-11-13T15:34:21.082759+00:00",
+    "exit": 0,
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com",
+    "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+    "profile": "Render Free public HTTPS URL; QA-only data; same reviewed frontend source; no browser fixture concurrently",
+    "connectionRetryPolicy": "Up to three establishment/DNS retries only; no read or status retries and no OS DNS change",
+    "excludedLocalPersistenceCase": "test_injection_text_is_stored_as_data_and_escaped: Cloudflare blocks malicious payload before API; separate perimeter rejection check required",
+    "expectedFunctionalCases": 50,
+    "summary": {
+      "tests": 50,
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    },
+    "cases": [
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_members_excel_pdf_and_filtered_report_use_persisted_relations",
+        "status": "passed",
+        "seconds": 14.239
+      },
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_line_save_rejects_missing_links_and_rolls_back_bad_reference",
+        "status": "passed",
+        "seconds": 6.056
+      },
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_multiple_association_summary_and_reactivation_preserve_links",
+        "status": "passed",
+        "seconds": 8.478
+      },
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_report_api_and_download_do_not_restore_public_access",
+        "status": "passed",
+        "seconds": 3.388
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_group_sheet_http_creates_edits_and_retires_multiple_details",
+        "status": "passed",
+        "seconds": 6.391
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[sedes]",
+        "status": "passed",
+        "seconds": 4.606
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+        "status": "passed",
+        "seconds": 6.268
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+        "status": "passed",
+        "seconds": 4.771
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[ods]",
+        "status": "passed",
+        "seconds": 4.698
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+        "status": "passed",
+        "seconds": 4.814
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[palabras_clave]",
+        "status": "passed",
+        "seconds": 4.99
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+        "status": "passed",
+        "seconds": 8.491
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+        "status": "passed",
+        "seconds": 7.78
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+        "status": "passed",
+        "seconds": 8.309
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+        "status": "passed",
+        "seconds": 9.188
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+        "status": "passed",
+        "seconds": 8.909
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+        "status": "passed",
+        "seconds": 11.845
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_semillero_independent_form_lifecycle_uses_group_selector",
+        "status": "passed",
+        "seconds": 4.636
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+        "status": "passed",
+        "seconds": 1.13
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_root_opens_the_dashboard_directly",
+        "status": "passed",
+        "seconds": 1.579
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_login_surface_and_protected_api",
+        "status": "passed",
+        "seconds": 2.8
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_dashboard_counts_match_the_listing",
+        "status": "passed",
+        "seconds": 2.081
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[area_conocimiento]",
+        "status": "passed",
+        "seconds": 1.11
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 1.366
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[area_aplicacion]",
+        "status": "passed",
+        "seconds": 1.431
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[termino_clave]",
+        "status": "passed",
+        "seconds": 1.089
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[universidad]",
+        "status": "passed",
+        "seconds": 1.486
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[linea_investigacion]",
+        "status": "passed",
+        "seconds": 1.222
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[area_conocimiento]",
+        "status": "passed",
+        "seconds": 10.886
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 9.235
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[area_aplicacion]",
+        "status": "passed",
+        "seconds": 8.049
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[termino_clave]",
+        "status": "passed",
+        "seconds": 8.523
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[universidad]",
+        "status": "passed",
+        "seconds": 12.609
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[linea_investigacion]",
+        "status": "passed",
+        "seconds": 10.661
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+        "status": "passed",
+        "seconds": 3.117
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 1.835
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+        "status": "passed",
+        "seconds": 2.023
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+        "status": "passed",
+        "seconds": 3.145
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+        "status": "passed",
+        "seconds": 2.75
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+        "status": "passed",
+        "seconds": 2.374
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_duplicate_keyword_shows_conflict",
+        "status": "passed",
+        "seconds": 7.094
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_unicode_csrf_is_rejected",
+        "status": "passed",
+        "seconds": 1.838
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_oversized_form_preserves_data_and_explains_limit",
+        "status": "passed",
+        "seconds": 3.827
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_area_form_uses_trigger_and_displays_persisted_value",
+        "status": "passed",
+        "seconds": 7.587
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_post_without_csrf_token_is_rejected",
+        "status": "passed",
+        "seconds": 2.434
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_session_cookie_flags",
+        "status": "passed",
+        "seconds": 1.048
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_keyword_without_english_is_rejected_and_update_preserves_it",
+        "status": "passed",
+        "seconds": 8.199
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "status": "passed",
+        "seconds": 9.871
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "status": "passed",
+        "seconds": 8.978
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "status": "passed",
+        "seconds": 8.19
+      }
+    ]
+  },
+  "security": {
+    "startedAt": "2026-11-13T15:27:57.827864+00:00",
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com",
+    "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+    "checks": [
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "path": "/health",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "path": "/health",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "swagger_hidden",
+        "http": 404
+      },
+      {
+        "case": "correct_api_authentication",
+        "http": 200,
+        "jwtLifetimeSeconds": 1200
+      },
+      {
+        "case": "wrong_api_password",
+        "http": 401
+      },
+      {
+        "case": "anonymous_api",
+        "http": 401
+      },
+      {
+        "case": "web_role_denied",
+        "role": "investigator",
+        "login": 302,
+        "home": 200,
+        "accountAdministration": 403
+      },
+      {
+        "case": "web_role_denied",
+        "role": "coordinator",
+        "login": 302,
+        "home": 200,
+        "accountAdministration": 403
+      },
+      {
+        "case": "secure_web_session",
+        "login": 302,
+        "home": 200,
+        "opaqueSidRotated": true,
+        "jwtInBrowser": false,
+        "secureHttpOnlyStrict": true
+      },
+      {
+        "case": "csrf_rejection",
+        "http": 400
+      },
+      {
+        "case": "web_logout",
+        "logout": 302,
+        "protected": 302
+      },
+      {
+        "case": "same_jwt_revoked",
+        "logout": 200,
+        "reuse": 401
+      },
+      {
+        "case": "wrong_web_password",
+        "http": 401,
+        "correlation": true
+      }
+    ],
+    "status": "passed",
+    "finishedAt": "2026-11-13T15:38:51.812399+00:00",
+    "credentialsPrinted": false,
+    "realTimeExpiryReference": "Historical Fase 6 remote-security.json only; the unchanged API was tested with an actually issued 60-second JWT; normal 20-minute expiry is verified here by token claims, not by waiting 20 minutes",
+    "historicalExpiryPublicEvidence": "docs/cierre-v1-v3/evidencias/fase6-20261112/seguridad-preview.json"
+  },
+  "perimeter": {
+    "http": 403,
+    "applicationCorrelation": false,
+    "cloudflareRay": true,
+    "server": "cloudflare",
+    "scope": "Separate perimeter check, not the local stored-and-escaped persistence assertion",
+    "perimeterRejected": true
+  },
+  "ingress": {
+    "checks": [
+      {
+        "path": "/health/origin-check-baseline-cd811ca8",
+        "status": 404,
+        "cfCanonical": true,
+        "cfDiffersPeer": true,
+        "cfNotInjected": true,
+        "xffHasInjected": false
+      },
+      {
+        "path": "/health/origin-check-xff-cd811ca8",
+        "status": 404,
+        "cfCanonical": true,
+        "cfDiffersPeer": true,
+        "cfNotInjected": true,
+        "xffHasInjected": true
+      }
+    ],
+    "singleOriginAcrossReachedProbes": true,
+    "additionalRequests": [
+      {
+        "probe": "xff",
+        "http": 404,
+        "applicationCorrelation": true,
+        "cloudflareRay": true,
+        "server": "cloudflare"
+      },
+      {
+        "probe": "cf-repeat",
+        "http": 403,
+        "applicationCorrelation": false,
+        "cloudflareRay": true,
+        "server": "cloudflare"
+      }
+    ],
+    "rawIpPublished": false
+  },
+  "sessionRestart": {
+    "startedAt": "2026-11-13T15:34:39.487523+00:00",
+    "serviceId": "srv-dbrijl0ae00c73fpf0mg",
+    "status": "passed",
+    "observations": [
+      {
+        "at": "2026-11-13T15:34:45.232047+00:00",
+        "instanceChanged": false
+      },
+      {
+        "at": "2026-11-13T15:34:50.637762+00:00",
+        "instanceChanged": false
+      },
+      {
+        "at": "2026-11-13T15:34:56.134219+00:00",
+        "instanceChanged": false
+      },
+      {
+        "at": "2026-11-13T15:35:01.797299+00:00",
+        "instanceChanged": true,
+        "protectedHttp": 200
+      }
+    ],
+    "credentialsPrinted": false,
+    "beforeInstances": [
+      {
+        "id": "srv-dbrijl0ae00c73fpf0mg-fj9hz",
+        "createdAt": "2026-11-13T15:26:57Z",
+        "status": "RUNNING",
+        "ready": true
+      }
+    ],
+    "restartAccepted": true,
+    "afterInstances": [
+      {
+        "id": "srv-dbrijl0ae00c73fpf0mg-996wm",
+        "createdAt": "2026-11-13T15:34:47Z",
+        "status": "RUNNING",
+        "ready": true
+      }
+    ],
+    "sameOpaqueSessionId": true,
+    "authenticatedWithoutSecondLogin": true,
+    "readiness": 200,
+    "finishedAt": "2026-11-13T15:35:04.653413+00:00",
+    "oldSessionRejectedAfterLogout": true,
+    "zeroDowntimeClaimed": false
+  },
+  "browser": {
+    "date": "2026-11-13",
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com",
+    "status": "passed",
+    "checks": [
+      {
+        "path": "/login",
+        "width": 1440,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 1
+      },
+      {
+        "path": "/login",
+        "width": 390,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 1
+      },
+      {
+        "path": "/",
+        "width": 1440,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 31
+      },
+      {
+        "path": "/universidad",
+        "width": 1440,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 35
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 1440,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 11
+      },
+      {
+        "path": "/",
+        "width": 768,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 31
+      },
+      {
+        "path": "/universidad",
+        "width": 768,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 35
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 768,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 11
+      },
+      {
+        "path": "/",
+        "width": 390,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 31
+      },
+      {
+        "path": "/universidad",
+        "width": 390,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 35
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 390,
+        "overflow": false,
+        "unnamed": 0,
+        "main": true,
+        "icons": 11
+      }
+    ],
+    "accessibility": [
+      {
+        "path": "/login",
+        "width": 1440,
+        "passes": 19,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/login",
+        "width": 390,
+        "passes": 19,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/",
+        "width": 1440,
+        "passes": 20,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/universidad",
+        "width": 1440,
+        "passes": 28,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 1440,
+        "passes": 29,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/",
+        "width": 390,
+        "passes": 18,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/universidad",
+        "width": 390,
+        "passes": 29,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 390,
+        "passes": 29,
+        "incomplete": 0,
+        "manualReview": [],
+        "violations": []
+      }
+    ],
+    "consoleErrors": [],
+    "scope": "Production smoke desktop/tablet/mobile; full responsive/zoom/keyboard suite recorded on Preview; no physical devices or screen reader"
+  },
+  "blueprintValidation": {
+    "exit": 0,
+    "response": {
+      "plan": {
+        "totalActions": 2
+      },
+      "valid": true
+    }
+  },
+  "githubActions": {
+    "runId": 43452629583,
+    "commit": "0891fe160bcaa898b73bb748fe596aed3ae9acce",
+    "jobs": [
+      {
+        "name": "quality",
+        "conclusion": "failure",
+        "steps": 0,
+        "messages": [
+          "The job was not started because your account is locked due to a billing issue."
+        ]
+      },
+      {
+        "name": "containers",
+        "conclusion": "failure",
+        "steps": 0,
+        "messages": [
+          "The job was not started because your account is locked due to a billing issue."
+        ]
+      }
+    ]
+  },
+  "sourceSha256": {
+    "frontend/login_protection.py": "a7efe2c9bd378a5df81b42b52d837de59874f07714a420fec0961e3e6686ee9e",
+    "frontend/app.py": "63190a7bee6eb3c60a0ed75fbd4064357dd0a46b10e36d9659673c9d50df9414",
+    "frontend/tests/test_login_protection.py": "65c158edb42465bde6bdfa00aafcc5493ad429e1c44f434ddc3839bdacdca5c5",
+    "frontend/Dockerfile": "593e6c9ba53f5d8f868fa7a6ba203bbc96c021bb00ecb7b3242f4d8f46a5094b",
+    "frontend/gunicorn.conf.py": "642f901a33deb938264b73c1e10f9d2feb1da567ffe3249b8162e6ecfd4ac5aa",
+    "frontend/session_store.py": "3577fa38d4ad1ffaf66800f42699bfa6b3873adaf2770e92f9a06813e402c66e",
+    ".github/workflows/mira-v3-ci.yml": "87c6095481f64b509beb03646510fe47f9382e7a4b816cd58710a0b5dbd4e378"
+  },
+  "scope": {
+    "secretsOrCookiesPublished": false,
+    "migrationsExecuted": false,
+    "existingCredentialsChanged": false,
+    "paidPlansSelected": false,
+    "paymentsChanged": false,
+    "automaticDeploysEnabled": false,
+    "mergeExecuted": false,
+    "institutionalProductionCertified": false,
+    "freshTwentyMinuteExpiryWait": false,
+    "databaseDestructiveTestsRun": false,
+    "newEndpointColdStartAfterFifteenMinutesTested": false
+  },
+  "pending": [
+    "GitHub Actions account billing restriction",
+    "Joint cold start after inactivity",
+    "Physical devices and screen reader",
+    "Institutional load and recurring recovery/backup verification",
+    "Academic V2 acceptance including C06"
+  ],
+  "publicationCheck": {
+    "filesChecked": 447,
+    "knownPrivateValuesFound": [],
+    "markdownLinksMissing": [],
+    "passed": true
+  }
+}

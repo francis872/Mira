@@ -1,6 +1,8 @@
-# Despliegue actual SAPIENS — Fase 6
+# Despliegue actual SAPIENS — Render + Neon
 
-Usar [guía Fase 6](../docs/FASE6_DESPLIEGUE.md) y [ejemplo API Free](render-free.yaml.example). Perfil seleccionado: Flask en Vercel, API .NET en Render Free y PostgreSQL/sesiones en Neon Free. Aplicar 001–015 con respaldo y roles de permisos_runtime.sql; nunca DDL desde el frontend. El perfil de disco y planes starter siguiente se conserva como antecedente, no como recurso contratado en esta fase.
+Desde el 2026-11-13, Flask y la API están en Render Free; PostgreSQL y sesiones permanecen en Neon Free. Abrir [SAPIENS](https://sapiens-web-v1-v3-20261113.onrender.com). Usar la [guía y evidencia verificadas](../docs/DESPLIEGUE_RENDER_NEON.md) y el [ejemplo de los dos servicios Free](render-neon-free.yaml.example), validado sin aplicarlo. El frontend usa `MIRA_PLATFORM=render` para el ingreso público de Render Free y sesiones PostgreSQL; no necesita disco persistente. Conservar las 15 migraciones y los roles existentes, sin DDL desde el arranque.
+
+El [perfil anterior de Fase 6 con Vercel](../docs/FASE6_DESPLIEGUE.md) y su [ejemplo solo API](render-free.yaml.example) permanecen disponibles. Las secciones siguientes describen la propuesta histórica de disco y planes starter; no son la configuración actual ni recursos contratados.
 
 ---
 
