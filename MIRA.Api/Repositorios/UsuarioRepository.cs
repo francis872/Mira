@@ -16,10 +16,24 @@ namespace MIRA.Api.Repositorios
 
         public UsuarioRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("PostgreSql") 
+            var configured = configuration.GetConnectionString("PostgreSql") 
                 ?? configuration.GetConnectionString("DefaultConnection") 
                 ?? Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSql") 
                 ?? "";
+
+            if (!string.IsNullOrWhiteSpace(configured) && !configured.Contains("<TU_"))
+            {
+                _connectionString = configured;
+            }
+            else
+            {
+                var host = Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "localhost";
+                var port = Environment.GetEnvironmentVariable("POSTGRES_PORT") ?? "5544";
+                var db = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "mira_db";
+                var user = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "mira_user";
+                var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "postgres";
+                _connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
+            }
         }
 
         private IDbConnection CreateConnection() => new NpgsqlConnection(_connectionString);
