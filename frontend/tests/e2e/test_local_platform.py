@@ -83,7 +83,7 @@ def row_for(html, marker):
 def test_root_opens_the_dashboard_directly(browser):
     response = browser.get("/")
     assert response.status_code == 200
-    assert "Bienvenido a MIRA" in response.text
+    assert "Bienvenido a SAPIENS" in response.text
     for title in ("Área de Conocimiento", "ODS", "Área de Aplicación", "Término Clave", "Universidad", "Línea de Investigación"):
         assert title in response.text
     assert re.search(r"Registros activos: <strong>\d+</strong>", response.text)
@@ -159,7 +159,8 @@ def test_duplicate_keyword_shows_conflict(browser):
     assert second.status_code == 409 and "Error:" in second.text
     assert "ya existe" in second.text
     browser.post(f"/termino_clave/eliminar/{term}", {}, "/termino_clave")
-    inactive = browser.post("/termino_clave/crear", {"termino": term}, "/termino_clave/nuevo")
+    # Keep the duplicate request valid under HU02-CA03 so this still tests conflict, not missing English.
+    inactive = browser.post("/termino_clave/crear", {"termino": term, "termino_ingles": "a"}, "/termino_clave/nuevo")
     assert inactive.status_code == 409 and "ya existe" in inactive.text
 
 

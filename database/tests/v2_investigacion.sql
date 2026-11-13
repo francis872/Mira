@@ -14,7 +14,7 @@ BEGIN
         AND c.is_nullable='YES'
     ) THEN RAISE EXCEPTION 'Unexpected optional FK: inspect the source model'; END IF;
 
-    v_sede := (sp_crear_v2_sedes('{"nombre":"Sede prueba SQL","ciudad":"Medellín"}')->>'id')::integer;
+    v_sede := (sp_crear_v2_sedes('{"nombre":"Sede prueba SQL","ciudad":"Medellín","codigo_institucional":"PRUEBA-SQL"}')->>'id')::integer;
     INSERT INTO usuarios(nombre,correo,password_hash) VALUES ('Persona prueba SQL','sql-test@invalid.test','NO_ES_UNA_CREDENCIAL') RETURNING id INTO v_user;
     v_docente := (sp_crear_v2_docentes(jsonb_build_object('usuario_id',v_user))->>'id')::integer;
     IF (sp_consultar_v2_docentes(v_docente)->'cvlac_url') IS DISTINCT FROM 'null'::jsonb THEN RAISE EXCEPTION 'Optional text must remain null'; END IF;
@@ -24,7 +24,9 @@ BEGIN
     v_group := (v_sheet->'grupo'->>'id')::integer;
     v_semillero := (v_sheet->'semilleros'->0->>'id')::integer;
     IF jsonb_array_length(v_sheet->'semilleros')<>2 THEN RAISE EXCEPTION 'Missing detail rows'; END IF;
-    v_line := (sp_crear_v2_lineas_investigacion('{"codigo":"TEST-SQL-V2","nombre":"Línea prueba"}')->>'id')::integer;
+    v_line := (sp_crear_v2_lineas_investigacion(jsonb_build_object('codigo','TEST-SQL-V2','nombre','Línea prueba','descripcion','Descripción de prueba',
+        'disciplina_ids',jsonb_build_array((SELECT min(id) FROM areas_conocimiento WHERE activo)),
+        'ods_ids',jsonb_build_array((SELECT min(id) FROM ods WHERE activo))))->>'id')::integer;
     PERFORM sp_crear_v2_grupo_lineas(jsonb_build_object('grupo_id',v_group,'linea_id',v_line));
     BEGIN
         PERFORM sp_crear_v2_grupo_lineas(jsonb_build_object('grupo_id',v_group,'linea_id',v_line));

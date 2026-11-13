@@ -15,6 +15,8 @@ BEGIN
     ), actual AS (
         SELECT table_name,column_name,ordinal_position,udt_name,character_maximum_length,is_nullable,datetime_precision
         FROM information_schema.columns WHERE table_schema='public' AND table_name IN (SELECT table_name FROM expected)
+        -- Additions required by the original stories in Phase5; every historical column is still compared.
+        AND (table_name,column_name) NOT IN (('sedes','codigo_institucional'),('palabras_clave','termino_ingles'))
     ), differences AS ((SELECT * FROM expected EXCEPT SELECT * FROM actual) UNION ALL (SELECT * FROM actual EXCEPT SELECT * FROM expected))
     SELECT count(*) INTO v_count FROM differences;
     IF v_count<>0 THEN RAISE EXCEPTION 'Official column mismatch (% differences)',v_count; END IF;
@@ -24,6 +26,8 @@ BEGIN
             replace(replace(pg_get_constraintdef(c.oid),'mira_source_model.',''),'public.','') AS definition
         FROM pg_constraint c JOIN pg_class t ON t.oid=c.conrelid JOIN pg_namespace n ON n.oid=t.relnamespace
         WHERE n.nspname IN ('public','mira_source_model')
+        AND c.conname NOT IN ('sedes_codigo_original_ck','palabras_clave_ingles_original_ck','lineas_descripcion_original_ck',
+            'linea_minimos_original_ct','linea_disciplinas_minimos_original_ct','linea_ods_minimos_original_ct')
     ), expected AS (SELECT relname,contype,definition FROM definitions WHERE schema_name='mira_source_model'),
     actual AS (SELECT relname,contype,definition FROM definitions WHERE schema_name='public' AND relname IN (SELECT relname FROM expected)),
     differences AS ((SELECT * FROM expected EXCEPT SELECT * FROM actual) UNION ALL (SELECT * FROM actual EXCEPT SELECT * FROM expected))

@@ -27,6 +27,14 @@ def api(method,path,payload=None):
 def records():
     created=[]
     def create(resource,payload):
+        # Valid fixtures for unrelated contracts; dedicated Phase5 tests omit these fields explicitly.
+        payload=dict(payload)
+        if resource=='sedes': payload.setdefault('codigo_institucional','PRUEBA-E2E')
+        if resource=='lineas_investigacion': payload.setdefault('descripcion','Descripción académica de prueba')
+        if resource=='palabras_clave': payload.setdefault('termino_ingles','Test keyword')
+        if resource=='lineas_investigacion':
+            if 'disciplina_ids' not in payload: payload['disciplina_ids']=[create('areas_conocimiento',{'nombre':'Disciplina mínima '+uuid.uuid4().hex})]
+            if 'ods_ids' not in payload: payload['ods_ids']=[create('ods',{'nombre':'ODS mínimo '+uuid.uuid4().hex})]
         response=api('POST',resource,payload)
         assert response.status_code==201,response.text
         row=response.json()
@@ -71,11 +79,15 @@ def test_group_sheet_http_creates_edits_and_retires_multiple_details(records):
 
 
 @pytest.mark.parametrize('resource',['sedes','lineas_investigacion','areas_conocimiento','ods','areas_aplicacion','palabras_clave'])
-def test_research_resource_full_http_form_lifecycle(resource):
+def test_research_resource_full_http_form_lifecycle(resource,records):
     marker='e2e-research-'+uuid.uuid4().hex[:10]
     data={'nombre':marker}
-    if resource=='sedes': data['ciudad']='Medellín'
-    if resource=='lineas_investigacion': data.update(codigo=marker,descripcion='')
+    if resource=='sedes': data.update(ciudad='Medellín',codigo_institucional='PRUEBA-E2E')
+    if resource=='lineas_investigacion':
+        data.update(codigo=marker,descripcion='Descripción académica de prueba',
+            disciplina_ids=[str(records('areas_conocimiento',{'nombre':marker+' disciplina'}))],
+            ods_ids=[str(records('ods',{'nombre':marker+' ODS'}))])
+    if resource=='palabras_clave': data['termino_ingles']='Test keyword'
     browser=Browser()
     path=f'/investigacion/{resource}'
     assert browser.post(path+'/nuevo',data,path+'/nuevo').status_code==302

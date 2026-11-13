@@ -1,6 +1,7 @@
 from test_app import client, calls, FakeResponse
 from investigacion import RESOURCES, BRIDGES
 import pytest
+import re
 
 
 @pytest.mark.parametrize('resource',list(RESOURCES))
@@ -43,10 +44,29 @@ def test_reference_failure_disables_save_and_preserves_error_data(client,calls):
     assert 'type="submit" disabled' in text
 
 
+def test_empty_sheet_explains_how_to_add_details_without_fake_inputs(client,calls):
+    text=client.get('/investigacion/grupos_investigacion/nuevo').get_data(as_text=True)
+    body=text.split('<tbody id="group-details">',1)[1].split('</tbody>',1)[0]
+    assert 'Aún no hay semilleros' in body and 'Agregar semillero' in body
+    assert '<tr id="empty-details"><td colspan="3">' in body
+    assert '<input' not in body and 'data-detail-row' not in body
+
+
+def test_populated_sheet_hides_empty_state_and_keeps_real_detail_inputs(client,calls):
+    calls.responses['GET','investigacion/grupos/ficha/7']=FakeResponse(200,{
+        'grupo':{'id':7,'sede_id':3,'gruptac_url':'https://example.org/grupo'},
+        'semilleros':[{'id':9,'nombre':'Semillero existente','descripcion':None}]})
+    text=client.get('/investigacion/grupos_investigacion/editar/7').get_data(as_text=True)
+    body=text.split('<tbody id="group-details">',1)[1].split('</tbody>',1)[0]
+    assert re.search(r'<tr id="empty-details"\s+hidden>',body)
+    assert body.count('data-detail-row')==1
+    assert 'name="detalle_id" value="9"' in body and 'Semillero existente' in body
+
+
 def test_duplicate_association_preserves_selection_and_is_escaped(client,calls):
     calls.responses['GET','investigacion/grupos_investigacion']=FakeResponse(200,[{'id':1,'etiqueta':'<script>bad</script>'}])
     calls.responses['GET','investigacion/lineas_investigacion']=FakeResponse(200,[{'id':2,'nombre':'Línea real'}])
-    calls.responses['POST','investigacion/grupo_lineas']=FakeResponse(409,{'mensaje':'Ya existe un registro con esos datos.'})
+    calls.responses['POST','investigacion/asociaciones/grupo_lineas/asignar']=FakeResponse(409,{'mensaje':'Ya existe un registro con esos datos.'})
     response=client.post('/investigacion/asociaciones/grupo_lineas',data={'grupo_id':'1','linea_id':'2'})
     assert response.status_code==409
     text=response.get_data(as_text=True)

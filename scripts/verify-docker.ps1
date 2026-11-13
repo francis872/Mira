@@ -15,6 +15,7 @@ $password=[Guid]::NewGuid().ToString('N')+[Guid]::NewGuid().ToString('N')
 $jwtKey=[Guid]::NewGuid().ToString('N')+[Guid]::NewGuid().ToString('N')
 [IO.File]::WriteAllLines($envFile,@(
     'POSTGRES_DB=mira_docker_test','POSTGRES_USER=mira_docker_test',"POSTGRES_PASSWORD=$password", "JWT_KEY=$jwtKey", "SECRET_KEY=$password",
+    ('LOGIN_FORWARDING_KEY='+[Guid]::NewGuid().ToString('N')+[Guid]::NewGuid().ToString('N')),
     "POSTGRES_PORT=$DatabasePort","API_PORT=$ApiPort","FRONTEND_PORT=$FrontendPort",'ASPNETCORE_ENVIRONMENT=Development','MIRA_ENV=development','SESSION_COOKIE_SECURE=false'
 ),[Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText($override,"services:`n  mira-api:`n    image: mira-v3-api:stabilization`n  mira-frontend:`n    image: mira-v3-frontend:stabilization`n",[Text.UTF8Encoding]::new($false))
@@ -28,7 +29,7 @@ try {
     & docker @compose up --detach --no-build
     $ErrorActionPreference='Stop'
     if($LASTEXITCODE -ne 0){throw 'Fallo el arranque del proyecto Docker aislado'}
-    foreach($url in @("http://127.0.0.1:$ApiPort/health","http://127.0.0.1:$FrontendPort/health")) {
+    foreach($url in @("http://127.0.0.1:$ApiPort/ready","http://127.0.0.1:$FrontendPort/ready")) {
         $ready=$false
         for($i=0;$i -lt 60;$i++) {
             try {Invoke-WebRequest $url -UseBasicParsing -TimeoutSec 2|Out-Null;$ready=$true;break} catch {Start-Sleep -Seconds 1}

@@ -3,10 +3,14 @@ import assert from 'node:assert/strict';
 
 const base=process.env.MIRA_E2E_URL || 'http://127.0.0.1:5001';
 const debug=process.env.MIRA_BROWSER_DEBUG_URL || 'http://127.0.0.1:9226';
-const output='docs/evidencias/v3';
+const output=process.env.MIRA_EVIDENCE_DIRECTORY || 'docs/evidencias/v3';
+const reviewDate=new Date().toLocaleDateString('en-CA',{timeZone:'America/Bogota'});
 const axeScript=process.env.MIRA_AXE_SCRIPT ? await readFile(process.env.MIRA_AXE_SCRIPT,'utf8') : null;
 const accessibility=[];
 const keyboard=[];
+const academic=[];
+const fixtures=process.env.MIRA_ACADEMIC_FIXTURES ? JSON.parse(await readFile(process.env.MIRA_ACADEMIC_FIXTURES,'utf8')) : null;
+const academicPaths=['/termino_clave/nuevo','/objetivo_desarrollo_sostenible/nuevo','/investigacion/sedes/nuevo','/investigacion/palabras_clave/nuevo','/investigacion/lineas_investigacion/nuevo','/investigacion/lineas_investigacion/inactivas','/investigacion/semilleros','/investigacion/reportes'];
 await mkdir(output,{recursive:true});
 let ready=false;
 for(let i=0;i<100;i++) {
@@ -77,7 +81,43 @@ try {
     await until(`location.pathname==='/' && document.readyState==='complete'`);
     for(const value of [1440,1024,768,640,390,320]) {
         for(const path of ['/','/universidad','/universidad/nuevo','/investigacion','/investigacion/grupos_investigacion','/investigacion/grupos_investigacion/nuevo','/investigacion/asociaciones/grupo_lineas','/usuarios']) await check(path,value);
+        for(const path of academicPaths) await check(path,value);
+        if(fixtures) for(const path of [`/investigacion/grupos_investigacion/editar/${fixtures.group}`,`/investigacion/reportes/grupos/${fixtures.group}/integrantes`]) await check(path,value);
         await go('/');await shot(`dashboard-${value}`);
+    }
+    await width(1440);await go('/termino_clave/nuevo');
+    assert(await evaluate(`document.querySelector('[name="termino_ingles"]').required`));
+    academic.push({requirement:'HU02-CA03',englishContentRequired:true});
+    await go('/objetivo_desarrollo_sostenible/nuevo');
+    assert.deepEqual(await evaluate(`[...document.querySelector('[name="categoria"]').options].map(x=>x.value).filter(Boolean)`),['Social','Económica','Ambiental']);
+    academic.push({requirement:'HU02-CA02',categories:['Social','Económica','Ambiental']});
+    await go('/investigacion/lineas_investigacion/nuevo');
+    assert(await evaluate(`['disciplina_ids','ods_ids'].every(name=>{const x=document.querySelector('[name="'+name+'"]');return x.multiple&&x.required})`));
+    academic.push({requirement:'HU09-CA01/02',mandatoryMultipleSelectors:true});
+    if(fixtures) {
+        await go('/investigacion/asociaciones/grupo_lineas');
+        await evaluate(`window.modalTrigger=document.querySelector('[data-bs-toggle="modal"]');modalTrigger.focus();true`);
+        await key('Enter','Enter',13);await until(`!!document.querySelector('.modal.show')`);
+        await until(`bootstrap.Modal.getInstance(document.querySelector('.modal.show'))._focustrap._isActive`);
+        await until(`document.querySelector('.modal.show').contains(document.activeElement)`);
+        for(let i=0;i<5;i++) {
+            await key('Tab','Tab',9);
+            await until(`document.querySelector('.modal.show').contains(document.activeElement)`);
+            assert(await evaluate(`document.querySelector('.modal.show').contains(document.activeElement)`));
+        }
+        await key('Tab','Tab',9,8);assert(await evaluate(`document.querySelector('.modal.show').contains(document.activeElement)`));
+        await key('Escape','Escape',27);await until(`!document.querySelector('.modal.show')&&document.activeElement===window.modalTrigger`);
+        academic.push({requirement:'HU08-CA02',confirmationBeforeRemoval:true,keyboardTrapAndEscape:true});
+        await go('/investigacion/grupos_investigacion/nuevo');
+        assert(await evaluate(`!document.querySelector('[name="sede_id"] option[value="${fixtures.refreshSede}"]')`));
+        const added=await evaluate(`(async()=>{const form=await fetch('/investigacion/sedes/nuevo').then(r=>r.text());const doc=new DOMParser().parseFromString(form,'text/html');const body=new URLSearchParams({csrf_token:doc.querySelector('[name="csrf_token"]').value,nombre:'Sede actualización de navegador',ciudad:'Prueba',codigo_institucional:'BROWSER-'+Date.now()});const response=await fetch('/investigacion/sedes/nuevo',{method:'POST',body});return response.ok&&response.redirected})()`);
+        assert(added,'No se pudo crear la sede de prueba desde el frontend');
+        await evaluate(`window.sedeChannel=new BroadcastChannel('mira-sedes');sedeChannel.postMessage({source:'sedes'});true`);
+        await until(`[...document.querySelector('[name="sede_id"]').options].some(x=>x.text.includes('Sede actualización de navegador'))`);
+        academic.push({requirement:'HU04-CA02',newSedeAppearsWithoutReload:true,via:'Authenticated POST and BroadcastChannel notification'});
+        await go(`/investigacion/reportes/grupos/${fixtures.group}/integrantes`);await shot('integrantes-academico');
+        assert(await evaluate(`document.querySelector('main').textContent.includes(${JSON.stringify(fixtures.personName)})`));
+        await go('/investigacion/reportes');await shot('reportes-academicos');
     }
     await width(390);await go('/');
     assert(await evaluate(`typeof bootstrap!=='undefined'`),'Bootstrap no está disponible; verificar CDN');
@@ -118,7 +158,7 @@ try {
     await key('Enter','Enter',13);
     assert(await evaluate(`document.activeElement.name==='detalle_nombre'`));
     await key('Tab','Tab',9);await key('Tab','Tab',9);await key('Enter','Enter',13);
-    assert(await evaluate(`document.querySelectorAll('#group-details tr').length===0 && document.activeElement.id==='add-detail'`));
+    assert(await evaluate(`document.querySelectorAll('#group-details tr[data-detail-row]').length===0 && !document.getElementById('empty-details').hidden && document.activeElement.id==='add-detail'`));
     keyboard.push({path:'/investigacion/grupos_investigacion/nuevo',detailKeyboardAddRemove:true,focusPreserved:true});
     await width(1440);await go('/');
     await send('Emulation.setPageScaleFactor',{pageScaleFactor:2});
@@ -126,13 +166,17 @@ try {
     await send('Emulation.setPageScaleFactor',{pageScaleFactor:1});
     keyboard.push({path:'/',visualZoom:2,reflowCssWidths:[640,320],desktopBrowserZoomManuallyPending:true});
     assert.deepEqual(errors,[],'Excepciones JavaScript');
-    await writeFile(`${output}/browser-results.json`,JSON.stringify({date:'2026-11-05',checks:results,consoleErrors:errors,mobileNavigation:true,keyboardFocus:true},null,2));
-    await writeFile(`${output}/keyboard-results.json`,JSON.stringify({date:'2026-11-05',checks:keyboard,screenReaderTested:false},null,2));
+    await writeFile(`${output}/browser-results.json`,JSON.stringify({date:reviewDate,checks:results,consoleErrors:errors,mobileNavigation:true,keyboardFocus:true},null,2));
+    await writeFile(`${output}/keyboard-results.json`,JSON.stringify({date:reviewDate,checks:keyboard,screenReaderTested:false},null,2));
+    await writeFile(`${output}/academic-results.json`,JSON.stringify({date:reviewDate,checks:academic,populatedFixturesTested:!!fixtures},null,2));
     if(axeScript) {
-        await writeFile(`${output}/accessibility-results.json`,JSON.stringify({date:'2026-11-05',tool:'axe-core 4.10.3',checks:accessibility},null,2));
+        await writeFile(`${output}/accessibility-results.json`,JSON.stringify({date:reviewDate,tool:'axe-core 4.10.3',checks:accessibility},null,2));
         assert(accessibility.every(x=>x.violations.length===0),'axe encontró problemas; consultar accessibility-results.json');
     }
     console.log(`Navegador V3: ${results.length} combinaciones, menú móvil y foco aprobados; ${errors.length} excepciones JavaScript.`);
+} catch(error) {
+    await writeFile(`${output}/failed-run.json`,JSON.stringify({status:'failed',error:error.message,checks:results,accessibility,academic,keyboard,consoleErrors:errors},null,2));
+    throw error;
 } finally {
     try { await send('Browser.close'); } catch {}
     ws.close();

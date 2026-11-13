@@ -11,7 +11,7 @@ public sealed class InvestigacionIntegrationTests
     private const string Prefix = "/api/investigacion/";
     private static async Task<JsonObject> Create(HttpClient client, string resource, object payload)
     {
-        var response = await client.PostAsJsonAsync(Prefix+resource,payload);
+        var response = await client.PostAsJsonAsync(Prefix+resource,await ResearchTestData.WithLineLinks(client,resource,payload));
         Assert.True(response.StatusCode == HttpStatusCode.Created,$"{resource}: {response.StatusCode} {await response.Content.ReadAsStringAsync()}");
         return (await response.Content.ReadFromJsonAsync<JsonObject>())!;
     }
@@ -26,11 +26,11 @@ public sealed class InvestigacionIntegrationTests
     }
     private static async Task<(int Sede,int Grupo,int Semillero,int Docente,int Linea)> References(HttpClient client)
     {
-        var sede=Id(await Create(client,"sedes",new { nombre="Sede prueba API",ciudad="Medellín" }));
+        var sede=Id(await Create(client,"sedes",new { nombre="Sede prueba API",ciudad="Medellín",codigo_institucional="PRUEBA-API" }));
         var grupo=Id(await Create(client,"grupos_investigacion",new { sede_id=sede,gruptac_url="https://example.org/grupo" }));
         var semillero=Id(await Create(client,"semilleros",new { grupo_id=grupo,nombre="Semillero prueba API" }));
         var docente=Id(await Create(client,"docentes",new { usuario_id=await Person() }));
-        var linea=Id(await Create(client,"lineas_investigacion",new { codigo=Guid.NewGuid().ToString("N"),nombre="Línea prueba API" }));
+        var linea=Id(await Create(client,"lineas_investigacion",new { codigo=Guid.NewGuid().ToString("N"),nombre="Línea prueba API",descripcion="Descripción de prueba" }));
         return (sede,grupo,semillero,docente,linea);
     }
 
@@ -42,31 +42,32 @@ public sealed class InvestigacionIntegrationTests
         var refs=await References(client);
         var person=await Person();
         var cases=new (string Resource,object Data)[] {
-            ("sedes",new { nombre="Nueva sede",ciudad="Ciudad" }),
+            ("sedes",new { nombre="Nueva sede",ciudad="Ciudad",codigo_institucional="PRUEBA-CRUD" }),
             ("docentes",new { usuario_id=person,cvlac_url=(string?)null }),
             ("grupos_investigacion",new { sede_id=refs.Sede,gruptac_url="https://example.org/nuevo",categoria=(string?)null }),
             ("semilleros",new { grupo_id=refs.Grupo,nombre="Nuevo semillero",descripcion=(string?)null }),
-            ("lineas_investigacion",new { codigo=Guid.NewGuid().ToString("N"),nombre="Nueva línea" }),
+            ("lineas_investigacion",new { codigo=Guid.NewGuid().ToString("N"),nombre="Nueva línea",descripcion="Descripción de prueba" }),
             ("grupo_docentes",new { grupo_id=refs.Grupo,docente_id=refs.Docente,rol="Coinvestigador",fecha_inicio="2026-01-01",fecha_fin=(string?)null }),
             ("semillero_tutores",new { semillero_id=refs.Semillero,docente_id=refs.Docente,rol="Tutor",fecha_inicio="2026-01-01",fecha_fin=(string?)null }),
             ("areas_conocimiento",new { nombre=Guid.NewGuid().ToString() }),
             ("ods",new { nombre=Guid.NewGuid().ToString() }),
             ("areas_aplicacion",new { nombre=Guid.NewGuid().ToString() }),
-            ("palabras_clave",new { nombre=Guid.NewGuid().ToString() })
+            ("palabras_clave",new { nombre=Guid.NewGuid().ToString(),termino_ingles="Test keyword" })
         };
         foreach (var (resource,data) in cases)
         {
-            var item=await Create(client,resource,data);
+            var validData=await ResearchTestData.WithLineLinks(client,resource,data);
+            var item=await Create(client,resource,validData);
             var id=Id(item);
             Assert.NotNull(item["created_at"] ?? item["activo"]); // Stored defaults, not an echoed input object.
             var location=Prefix+resource+"/"+id;
             Assert.Equal(HttpStatusCode.OK,(await client.GetAsync(location)).StatusCode);
             var list=(await client.GetFromJsonAsync<JsonArray>(Prefix+resource))!;
             Assert.Contains(list,n=>n!["id"]!.GetValue<int>()==id);
-            Assert.Equal(HttpStatusCode.OK,(await client.PutAsJsonAsync(location,data)).StatusCode);
+            Assert.Equal(HttpStatusCode.OK,(await client.PutAsJsonAsync(location,validData)).StatusCode);
             Assert.Equal(HttpStatusCode.OK,(await client.DeleteAsync(location)).StatusCode);
             Assert.Equal(HttpStatusCode.NotFound,(await client.GetAsync(location)).StatusCode);
-            Assert.Equal(HttpStatusCode.NotFound,(await client.PutAsJsonAsync(location,data)).StatusCode);
+            Assert.Equal(HttpStatusCode.NotFound,(await client.PutAsJsonAsync(location,validData)).StatusCode);
             Assert.Equal(HttpStatusCode.NotFound,(await client.DeleteAsync(location)).StatusCode);
             list=(await client.GetFromJsonAsync<JsonArray>(Prefix+resource))!;
             Assert.DoesNotContain(list,n=>n!["id"]!.GetValue<int>()==id);
@@ -121,7 +122,7 @@ public sealed class InvestigacionIntegrationTests
     {
         using var factory=TestHostFactory.Create();
         using var client=factory.CreateClient();
-        var sede=Id(await Create(client,"sedes",new { nombre="Ficha prueba API",ciudad="Medellín" }));
+        var sede=Id(await Create(client,"sedes",new { nombre="Ficha prueba API",ciudad="Medellín",codigo_institucional="PRUEBA-FICHA" }));
         var group=new { sede_id=sede,gruptac_url="https://example.org/atomic",categoria=(string?)null };
         var response=await client.PostAsJsonAsync(Prefix+"grupos/ficha",new { grupo=group,semilleros=new[]{new{nombre="Primero",descripcion=(string?)null},new{nombre="Segundo",descripcion=(string?)null}} });
         Assert.Equal(HttpStatusCode.Created,response.StatusCode);

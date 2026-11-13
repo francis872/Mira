@@ -4,13 +4,15 @@ param(
     [int]$ApiPort = 8082,
     [int]$FrontendPort = 5001,
     [switch]$Browser,
-    [switch]$BrowserOnly
+    [switch]$BrowserOnly,
+    [switch]$Zoom
 )
 
 # Instancia exclusiva: nunca abre el directorio PostgreSQL 17 ni detiene la plataforma habitual.
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
 if ($BrowserOnly) { $Browser = $true }
+if ($Zoom) { $Browser = $true }
 Set-Location $repoRoot
 $PostgresBin = (Resolve-Path -LiteralPath $PostgresBin).Path
 $pgCtl = Join-Path $PostgresBin 'pg_ctl.exe'
@@ -55,7 +57,7 @@ $database = 'mira_pg16_' + (Get-Date -Format 'yyyyMMddHHmmss') + '_' + $PID
     "POSTGRES_PORT=$DatabasePort", "API_PORT=$ApiPort", "FRONTEND_PORT=$FrontendPort"
 ), $encoding)
 $previous = @{}
-foreach ($key in @('PGPASSWORD','PGCLIENTENCODING','PGCONNECT_TIMEOUT','ConnectionStrings__PostgreSql','ASPNETCORE_URLS','ASPNETCORE_ENVIRONMENT','API_URL','SWAGGER_URL','PORT','SECRET_KEY','SESSION_COOKIE_SECURE','Jwt__Key','MIRA_ADMIN_EMAIL','MIRA_ADMIN_PASSWORD','MIRA_E2E_EMAIL','MIRA_E2E_PASSWORD','SESSION_DIRECTORY')) {
+foreach ($key in @('PGPASSWORD','PGCLIENTENCODING','PGCONNECT_TIMEOUT','ConnectionStrings__PostgreSql','ASPNETCORE_URLS','ASPNETCORE_ENVIRONMENT','API_URL','SWAGGER_URL','PORT','SECRET_KEY','SESSION_COOKIE_SECURE','Jwt__Key','MIRA_ADMIN_EMAIL','MIRA_ADMIN_PASSWORD','MIRA_E2E_EMAIL','MIRA_E2E_PASSWORD','SESSION_DIRECTORY','LoginProtection__ForwardingKey','MIRA_LOGIN_FORWARDING_KEY','MIRA_TRUSTED_PROXY_NETWORKS')) {
     $previous[$key] = [Environment]::GetEnvironmentVariable($key, 'Process')
 }
 $startedDatabase = $false
@@ -105,6 +107,9 @@ try {
     $env:ASPNETCORE_URLS = "http://127.0.0.1:$ApiPort"
     $env:ASPNETCORE_ENVIRONMENT = 'Development'
     $env:Jwt__Key = [Guid]::NewGuid().ToString('N') + [Guid]::NewGuid().ToString('N')
+    $env:LoginProtection__ForwardingKey = [Guid]::NewGuid().ToString('N') + [Guid]::NewGuid().ToString('N')
+    $env:MIRA_LOGIN_FORWARDING_KEY = $env:LoginProtection__ForwardingKey
+    $env:MIRA_TRUSTED_PROXY_NETWORKS = ''
     $env:MIRA_ADMIN_EMAIL = 'v3-validation@invalid.test'
     $env:MIRA_ADMIN_PASSWORD = [Guid]::NewGuid().ToString('N') + [Guid]::NewGuid().ToString('N')
     $env:MIRA_E2E_EMAIL = $env:MIRA_ADMIN_EMAIL
@@ -143,6 +148,12 @@ try {
             & node (Join-Path $PSScriptRoot 'verify-browser-v3.mjs')
             $ErrorActionPreference = 'Stop'
             if ($LASTEXITCODE -ne 0) { throw 'Falló la verificación del navegador V3' }
+            if ($Zoom) {
+                $ErrorActionPreference = 'Continue'
+                & node (Join-Path $PSScriptRoot 'verify-zoom-v3.mjs')
+                $ErrorActionPreference = 'Stop'
+                if ($LASTEXITCODE -ne 0) { throw 'Falló el zoom real del navegador V3' }
+            }
         } finally {
             if (-not $edgeProcess.HasExited) { $edgeProcess.Kill() }
         }

@@ -1,4 +1,5 @@
 """Flask real → API real → PostgreSQL; reinicio de Gunicorn y revocación."""
+from datetime import datetime, timedelta, timezone
 import argparse
 import json
 import os
@@ -44,7 +45,7 @@ def main():
     assert requests.get(api+'/api/auth/me',headers=headers,timeout=20).status_code==200
     assert requests.post(api+'/api/auth/logout',headers=headers,json={},timeout=20).status_code==200
     assert requests.get(api+'/api/auth/me',headers=headers,timeout=20).status_code==401
-    report={'date':'2026-11-05','runtime':'Linux / Gunicorn / ASP.NET Core / PostgreSQL 16',
+    report={'date':datetime.now(timezone(timedelta(hours=-5))).date().isoformat(),'runtime':'Linux / Gunicorn / ASP.NET Core / PostgreSQL 16',
         'profile':'isolated HTTP development transport; production TLS ingress not claimed',
         'frontendRestartPreservesSession':True,'frontendLogoutClearsSession':True,'apiLogoutRevokesSameJwt':True,
         'secretsOrTokensPublished':False,'status':'passed'}

@@ -1,4 +1,5 @@
 """Revisa candidatos Git y emite solo nombres de archivos, nunca secretos."""
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import subprocess,json,re,hashlib
 root=Path.cwd()
@@ -37,7 +38,7 @@ for row in pending:
 ignored={}
 for name in ['.env','.env.local','.local/v3-final-review.log','.local/pg16-validation/config.env','tests/MIRA.Api.Tests/TestResults/v3-backend.trx']:
     ignored[name]=subprocess.run(['git','check-ignore','-q','--',name],capture_output=True).returncode==0
-summary={'date':'2026-11-05','branch':subprocess.check_output(['git','branch','--show-current']).decode().strip(),
+summary={'date':datetime.now(timezone(timedelta(hours=-5))).date().isoformat(),'branch':subprocess.check_output(['git','branch','--show-current']).decode().strip(),
     'pendingPaths':len(pending),'textFilesScanned':texts,'binaryFiles':binaries,'findings':findings,'ignored':ignored,
     'scope':'pending tracked/untracked non-ignored files; known local secret comparison without displaying values; current worktree, not full history'}
 Path('.local/v3-final-source-snapshot.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
