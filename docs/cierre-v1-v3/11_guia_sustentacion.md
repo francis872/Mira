@@ -1,3 +1,34 @@
+# Sustentación vigente — Fase 6 (diez minutos)
+
+Preparar la URL Production y las cuentas QA privadas; no mostrar contraseñas, JWT, cookies, archivos .env ni dumps. Abrir el informe A–O, la matriz y los archivos de código. Los datos QA carecen de valor académico. La API gratuita puede tener arranque frío: comprobar /ready antes de comenzar.
+
+| Tiempo | Demostración y respaldo verificable |
+|---|---|
+| 0–1 | Mostrar SAPIENS en Vercel, API Render y Neon; separar cuentas V3 de personas académicas. Presentar PR Draft y bloqueo real Actions sin ocultarlo. |
+| 1–2 | Login válido y password incorrecto. AuthController.Login → AuthService.Login → PasswordService.Verify. Hash bcrypt12 se genera en PasswordService.Hash, no en frontend. |
+| 2–3 | Sin token401, JWT expirado401, sesión revocada401 y permisos403. Mostrar evidencia real de expiración 60 s y mismoJWT revocado; no esperar20 min en la presentación ni fabricar un token inválido como prueba de expiración. |
+| 3–4 | JwtBearer valida firma/issuer/audience/exp; OnTokenValidated llama ValidarSesion; CuentaRepository consulta jti, cuenta y roles activos. Investigar permisos reales desde la cuenta Investigador. |
+| 4–5 | V1 inglés obligatorio y categorías Social/Económica/Ambiental; intento inválido se rechaza también por API/SQL. Mostrar test_v1_requisitos y migración009. |
+| 5–6 | V2 sede/código, mínimos disciplinas/ODS, guardado atómico; estados y asociaciones preservados. Abrir funciones/triggers012 y V2MinimosLineaTests. |
+| 6–7 | Reportes y miembros XLSX/PDF con datos persistidos y filtros Sede/Línea; explicar Facultad/periodos/perfil propio pendientes sin fingir cumplimiento. |
+| 7–8 | Cookie opaca Secure/HttpOnly/Strict, CSRF y SID rotado; PostgresSessionCache/SharedSessionInterface; HMAC no equivale a cifrado. D01 firmado mantiene cuotas por origen/cuenta. |
+| 8–9 | Evidencias: 138/135/51/11 locales, 50 criterios funcionales Production, incluida repetición del timeout TLS, 14 checks; reinicio cambia instancia y conserva JWT/SID; responsive/axe/zoom con límites manuales. |
+| 9–10 | Dictamen: operación demostrada, V2 sin cierre académico, CI cuenta bloqueada; no merge ni aceptación definitiva. C06 y revisión humana siguen pendientes. |
+
+Para reproducir los seis escenarios de autenticación de forma aislada: ejecutar `dotnet test tests/MIRA.Api.Tests --filter FullyQualifiedName~SeguridadTests`. Login_Read_ForbiddenWrite_Logout_Revoked, BadLoginIs401, MissingOrInvalidTokenIs401 e InvalidJwtClaimsAre401 cubren los resultados deterministas. Para PostgreSQL/jti/reinicio usar `scripts/verify-postgres16.ps1`, que crea destinos nuevos y ejecuta integraciones reales. La prueba remota de expiración usa evidencia de espera real, distinta de los JWT vencidos construidos en unit tests. Los runners remotos privados están identificados en comandos.json; requieren variables privadas y un proyecto QA, nunca datos institucionales.
+
+Preguntas y respuestas basadas en código:
+
+- ¿Dónde se genera el JWT? AuthService.GenerarJwt registra jti y construye HS256; JwtBearer valida y luego reconsulta la sesión. Una firma válida no basta si la sesión fue revocada.
+- ¿Por qué hay SQL para cada petición autenticada? CuentaRepository.Sesion comprueba jti/cuenta/roles actuales para invalidar revocaciones y cambios de permisos sin esperar exp.
+- ¿Por qué PostgreSQL para Flask? Vercel no garantiza disco compartido/persistente. session_store usa SID opaco, JSON/HMAC y fallo503; no utiliza pickle ni JWT en cookies.
+- ¿Por qué un HTML403 remoto produce503? app.api_call solo interpreta 401/403 JSON de la API como resultados de autenticación/autorización. La respuesta HTML Cloudflare es indisponibilidad del upstream; no desactiva el firewall ni concede permisos.
+- ¿Qué diferencia hay entre health y ready? health prueba vida; ready comprueba dependencias y esquema con timeout. Los logs correlacionan el estado final sin imprimir secretos.
+- ¿Por qué Actions está rojo con pruebas locales verdes? GitHub rechazó iniciar ambos jobs por bloqueo de la cuenta; cero pasos ejecutados. Las pruebas locales no reemplazan ese gate.
+- ¿Qué falta para entrega definitiva? CI aprobado, revisión PR y aceptación de C06/Facultad/cuenta–docente/periodos; además accesibilidad humana y operación institucional dentro de límites reales.
+
+## Recorrido histórico Fase 5
+
 # Recorrido actual de diez minutos — Fase 5
 
 | Minutos | Demostración y respaldo |

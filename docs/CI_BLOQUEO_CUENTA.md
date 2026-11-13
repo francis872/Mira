@@ -8,7 +8,9 @@ Se verificó que usan runners estándar ubuntu-24.04 y que el repositorio es pú
 
 GitHub documenta que una retención de autorización fallida puede bloquear también acceso gratuito, incluso sin una suscripción o saldo visibles. Si el panel no muestra un problema resoluble, indica solicitar revisión a soporte. [Procedimiento oficial](https://docs.github.com/es/billing/how-tos/troubleshooting/locked-account).
 
-La validación local actual pasa 138 .NET, 132 Flask, 51 HTTP, once SQL y 51 Docker/Gunicorn con PostgreSQL compartido. No reemplaza una ejecución Actions aprobada. No se cambia el workflow para ocultar el bloqueo, no se publican estados verdes falsos y no se hace merge con este gate pendiente.
+La validación local actual pasa 138 .NET, 135 Flask, 51 HTTP, once SQL y 51 Docker/Gunicorn con PostgreSQL compartido. No reemplaza una ejecución Actions aprobada. No se cambia el workflow para ocultar el bloqueo, no se publican estados verdes falsos y no se hace merge con este gate pendiente.
+
+La comprobación posterior [43350345420](https://github.com/francis872/Mira/actions/runs/43350345420) en `e3f60e5e78381432c885e68cf8b24376c303aedb` repitió exactamente el bloqueo: ambos jobs sin pasos. No es un fallo reproducible del workflow.
 
 ## Solicitud preparada para revisión del titular
 

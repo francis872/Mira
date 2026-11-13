@@ -1,15 +1,7 @@
 {
   "dotnet": [
     {
-      "name": "MIRA.Api.Tests.SeguridadDatabaseTests.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23502\", expected: BadRequest)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ReadinessTests.ReadinessChecksDatabaseWhileCatalogsRemainProtected",
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.OriginalFieldsAreRequiredAndPersistWithoutChangingContractKeys(resource: \"lineas_investigacion\", field: \"descripcion\")",
       "outcome": "passed"
     },
     {
@@ -17,7 +9,7 @@
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=Prefer\")",
+      "name": "MIRA.Api.Tests.V2EstadoLineaTests.StateChangesKeepTheExistingAdministrativeRestriction(role: \"Investigador\", expected: Forbidden)",
       "outcome": "passed"
     },
     {
@@ -25,327 +17,7 @@
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.ReadOnlyJwtCannotAssignLinesThroughNewEndpoint",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=VerifyFull;Channel Binding=Require;Includ\"···)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.ConcurrentRemovalsCannotLeaveLineWithoutDiscipline",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2ReportesTests.ExistingReadRolesCanConsultReportsUsingRealJwt(role: \"Investigador\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=VerifyFull;Channel Binding=Prefer\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.JwtSigningKeyCannotBeReusedForForwarding",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.SemilleroFiltersUseActualGroupAndTutorRelationships",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Económico\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.NewReadRoutesRejectAnonymousClients(path: \"asociaciones/grupo_lineas/resumen/1\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2ReportesTests.ExistingReadRolesCanConsultReportsUsingRealJwt(role: \"Coordinador\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"XX000\", expected: InternalServerError)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.IndependentSignedOriginsKeepTheirQuota(production: True)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.NewApplicationInstanceResetsInMemoryQuota",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2ReportesTests.ReportUsesActualRelationshipsAndFiltersWithoutCredentials",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.OriginalFieldsAreRequiredAndPersistWithoutChangingContractKeys(resource: \"lineas_investigacion\", field: \"descripcion\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.EveryAdministrativeActionRequiresAdministrator(role: \"Coordinador\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: \"\\t\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.LastMandatoryAssociationCannotBeRemoved(bridge: \"linea_ods\", field: \"ods_ids\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionAcceptsVerifiedTlsConfigurationWithoutConnecting",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.SwaggerDocumentsBearerAndAnonymousLogin",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.MissingOrInvalidTokenIs401(token: null)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"disciplina_ids\", empty: False)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.AllSeventeenGoalsAreAvailableAndCanBeSelectedTogether",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.UnknownRoleCannotLogin",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Administrador\", create: 201, delete: 200)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2ReportesTests.MemberReportPreservesInactiveMembershipAndMissingGroupIs404",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 72, accepted: True)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"ods_ids\", empty: True)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.DevelopmentWithoutConfiguredKeyAcceptsDirectLoginButNotOriginAssertions",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.MultipleLineAssignmentIsAtomicAndInactiveLinesRemainInSummary(resource: \"semillero_lineas\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.OriginalFieldsAreRequiredAndPersistWithoutChangingContractKeys(resource: \"palabras_clave\", field: \"termino_ingles\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"audience\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"short\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.UnknownEntitiesAndWritableFieldsAreRejected",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: null)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: null)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 73, accepted: False)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.MissingOrInvalidTokenIs401(token: \"invalid-token\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2EstadoLineaTests.NewWriteRoutesRemainProtectedAgainstAnonymousRequests",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2ReportesTests.ReportEndpointsAreNotPublic(path: \"reportes/articulacion\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.InvalidJsonContract_ReturnsSpanishValidation(payload: \"{\\\"nombre\\\":[]}\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"body\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.NullsDatesAndEnumerationsAreValidated_AndPersonReferenceDoesNotExposeCredentials",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 11, accepted: False)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.Login_Read_ForbiddenWrite_Logout_Revoked",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"expired\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Environmental\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"22023\", expected: BadRequest)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.LastMandatoryAssociationCannotBeRemoved(bridge: \"linea_disciplinas\", field: \"disciplina_ids\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2EstadoLineaTests.StateChangesKeepTheExistingAdministrativeRestriction(role: \"Coordinador\", expected: Forbidden)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.OriginalFieldsAreRequiredAndPersistWithoutChangingContractKeys(resource: \"sedes\", field: \"codigo_institucional\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.EveryAdministrativeActionRequiresAdministrator(role: \"Investigador\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2EstadoLineaTests.StateChangesKeepTheExistingAdministrativeRestriction(role: \"Investigador\", expected: Forbidden)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 12, accepted: True)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Investigador\", create: 403, delete: 403)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2ReportesTests.ExistingReadRolesCanConsultReportsUsingRealJwt(role: \"Administrador\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"disciplina_ids\", empty: True)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
       "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=Require\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.IndependentSignedOriginsKeepTheirQuota(production: False)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.NewReadRoutesRejectAnonymousClients(path: \"asociaciones/semillero_lineas/resumen/1\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.OnlyOriginalOdsCategoriesPersist(category: \"Social\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: \"\")",
       "outcome": "passed"
     },
     {
@@ -353,103 +25,15 @@
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"signature\")",
+      "name": "MIRA.Api.Tests.SeguridadTests.SwaggerDocumentsBearerAndAnonymousLogin",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.SeguridadTests.InactiveAccountAndRoleChangesInvalidateSession",
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.NewReadRoutesRejectAnonymousClients(path: \"asociaciones/semillero_lineas/resumen/1\")",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"malformed\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.InactiveAndConcurrentDuplicateKeyword_ReturnsConflict",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"expired\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Economica\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"unexpected\", expected: InternalServerError)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2EstadoLineaTests.StateChangesKeepTheExistingAdministrativeRestriction(role: \"Administrador\", expected: OK)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.UnknownAndKnownIncorrectCredentialsHaveTheSameResponse",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.InactiveSedePreservesOldGroupButRejectsNewAssignments",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.AllFiveBridges_AssignQueryDuplicateConflictAndRemove",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"ods_ids\", empty: False)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"duplicate\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"22001\", expected: BadRequest)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.SheetCreatesManyRowsThenRollsBackAllChangesWhenLastRowBelongsElsewhere",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"REPLACE_WITH_AT_LEAST_32_RANDOM_BYTES\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.LoginRateLimitReturns429",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ReadinessTests.DatabaseFailureIsUnavailableWithoutLeakingConfiguration",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.ArbitraryIpHeadersCannotChangeUnsignedSocketPartition",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"signature\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.BcryptUsesSaltAndRejectsPlaintextAndWrongPassword",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionAcceptsVerifiedTlsConfigurationWithoutConnecting",
       "outcome": "passed"
     },
     {
@@ -457,63 +41,27 @@
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.V2ReportesTests.ReportEndpointsAreNotPublic(path: \"reportes/integrantes/1\")",
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Economica\")",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.AccountLimitAppliesAcrossDifferentAuthenticatedOriginsAndCasing",
+      "name": "MIRA.Api.Tests.SeguridadDatabaseTests.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.DuplicateKeyword_ReturnsConflict",
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.NewReadRoutesRejectAnonymousClients(path: \"asociaciones/grupo_lineas/resumen/1\")",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Otra\")",
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"expired\")",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.MultipleLineAssignmentIsAtomicAndInactiveLinesRemainInSummary(resource: \"grupo_lineas\")",
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Coordinador\", create: 201, delete: 403)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.V2EstadoLineaTests.MissingStateDoesNotImplicitlyInactivateALine",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23503\", expected: Conflict)",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.BadLoginIs401(email: \"unknown@invalid.test\", password: \"Password-test-2026!\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.SeguridadTests.BadLoginIs401(email: \"test@invalid.test\", password: \"incorrecta\")",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.OversizedLoginIsRejectedWithoutReadingAnUnboundedBody",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
-      "outcome": "passed"
-    },
-    {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 73, accepted: False)",
       "outcome": "passed"
     },
     {
@@ -521,11 +69,19 @@
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23505\", expected: Conflict)",
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"XX000\", expected: InternalServerError)",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "name": "MIRA.Api.Tests.V2EstadoLineaTests.StateChangesKeepTheExistingAdministrativeRestriction(role: \"Administrador\", expected: OK)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23502\", expected: BadRequest)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2EstadoLineaTests.NewWriteRoutesRemainProtectedAgainstAnonymousRequests",
       "outcome": "passed"
     },
     {
@@ -533,15 +89,47 @@
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"future\")",
+      "name": "MIRA.Api.Tests.V2ReportesTests.MemberReportPreservesInactiveMembershipAndMissingGroupIs404",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.LoginProtectionTests.ConcurrentPasswordWorkIsBoundedAcrossOriginsAndAccounts",
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.UnknownEntitiesAndWritableFieldsAreRejected",
       "outcome": "passed"
     },
     {
-      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: \"   \")",
+      "name": "MIRA.Api.Tests.V2ReportesTests.ReportEndpointsAreNotPublic(path: \"reportes/articulacion\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2ReportesTests.ExistingReadRolesCanConsultReportsUsingRealJwt(role: \"Investigador\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InactiveAccountAndRoleChangesInvalidateSession",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: \"\\t\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"22001\", expected: BadRequest)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23505\", expected: Conflict)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"unexpected\", expected: InternalServerError)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"signature\")",
       "outcome": "passed"
     },
     {
@@ -549,7 +137,419 @@
       "outcome": "passed"
     },
     {
+      "name": "MIRA.Api.Tests.V2EstadoLineaTests.MissingStateDoesNotImplicitlyInactivateALine",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.OriginalFieldsAreRequiredAndPersistWithoutChangingContractKeys(resource: \"sedes\", field: \"codigo_institucional\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.IndependentSignedOriginsKeepTheirQuota(production: False)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.AllSeventeenGoalsAreAvailableAndCanBeSelectedTogether",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: null)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2ReportesTests.ReportEndpointsAreNotPublic(path: \"reportes/integrantes/1\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2ReportesTests.ReportUsesActualRelationshipsAndFiltersWithoutCredentials",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"future\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"ods_ids\", empty: False)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ConcurrentPasswordWorkIsBoundedAcrossOriginsAndAccounts",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"REPLACE_WITH_AT_LEAST_32_RANDOM_BYTES\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ReadinessTests.ReadinessChecksDatabaseWhileCatalogsRemainProtected",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.EveryAdministrativeActionRequiresAdministrator(role: \"Coordinador\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.AccountLimitAppliesAcrossDifferentAuthenticatedOriginsAndCasing",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.SemilleroFiltersUseActualGroupAndTutorRelationships",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Otra\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"audience\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 12, accepted: True)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"duplicate\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Investigador\", create: 403, delete: 403)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Environmental\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"disciplina_ids\", empty: True)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.MultipleLineAssignmentIsAtomicAndInactiveLinesRemainInSummary(resource: \"grupo_lineas\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2EstadoLineaTests.StateChangesKeepTheExistingAdministrativeRestriction(role: \"Coordinador\", expected: Forbidden)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.MissingOrInvalidTokenIs401(token: \"invalid-token\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.IndependentSignedOriginsKeepTheirQuota(production: True)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: \"   \")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.InvalidJsonContract_ReturnsSpanishValidation(payload: \"{\\\"nombre\\\":[]}\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.OnlyOriginalOdsCategoriesPersist(category: \"Social\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.AllFiveBridges_AssignQueryDuplicateConflictAndRemove",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.UnknownAndKnownIncorrectCredentialsHaveTheSameResponse",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 11, accepted: False)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.MultipleLineAssignmentIsAtomicAndInactiveLinesRemainInSummary(resource: \"semillero_lineas\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2ReportesTests.ExistingReadRolesCanConsultReportsUsingRealJwt(role: \"Administrador\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.JwtSigningKeyCannotBeReusedForForwarding",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.BadLoginIs401(email: \"unknown@invalid.test\", password: \"Password-test-2026!\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"disciplina_ids\", empty: False)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
       "name": "MIRA.Api.Tests.ErroresPersistenciaTests.InvalidJsonContract_ReturnsSpanishValidation(payload: \"null\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.Login_Read_ForbiddenWrite_Logout_Revoked",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"22023\", expected: BadRequest)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"malformed\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.InactiveSedePreservesOldGroupButRejectsNewAssignments",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.NullsDatesAndEnumerationsAreValidated_AndPersonReferenceDoesNotExposeCredentials",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.ConcurrentRemovalsCannotLeaveLineWithoutDiscipline",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ReadinessTests.DatabaseFailureIsUnavailableWithoutLeakingConfiguration",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.EveryAdministrativeActionRequiresAdministrator(role: \"Investigador\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=Prefer\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.LastMandatoryAssociationCannotBeRemoved(bridge: \"linea_disciplinas\", field: \"disciplina_ids\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.LastMandatoryAssociationCannotBeRemoved(bridge: \"linea_ods\", field: \"ods_ids\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=VerifyFull;Channel Binding=Require;Includ\"···)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.BcryptUsesSaltAndRejectsPlaintextAndWrongPassword",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.OversizedLoginIsRejectedWithoutReadingAnUnboundedBody",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.LoginRateLimitReturns429",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.DuplicateKeyword_ReturnsConflict",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.OriginalFieldsAreRequiredAndPersistWithoutChangingContractKeys(resource: \"palabras_clave\", field: \"termino_ingles\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"body\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.SheetCreatesManyRowsThenRollsBackAllChangesWhenLastRowBelongsElsewhere",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: \"\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.InvalidOdsCategoryIsRejectedOnCreateAndUpdate(category: \"Económico\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.NewApplicationInstanceResetsInMemoryQuota",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23503\", expected: Conflict)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.MissingOrInvalidTokenIs401(token: null)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=VerifyFull;Channel Binding=Prefer\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2RequisitosOriginalesTests.ReadOnlyJwtCannotAssignLinesThroughNewEndpoint",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"expired\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.UnknownRoleCannotLogin",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.InactiveAndConcurrentDuplicateKeyword_ReturnsConflict",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"signature\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"short\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.DevelopmentWithoutConfiguredKeyAcceptsDirectLoginButNotOriginAssertions",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Administrador\", create: 201, delete: 200)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V1RequisitosOriginalesTests.KeywordRequiresEnglishOnCreateAndUpdate(english: null)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 72, accepted: True)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2ReportesTests.ExistingReadRolesCanConsultReportsUsingRealJwt(role: \"Coordinador\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ArbitraryIpHeadersCannotChangeUnsignedSocketPartition",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.BadLoginIs401(email: \"test@invalid.test\", password: \"incorrecta\")",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Coordinador\", create: 201, delete: 403)",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.V2MinimosLineaTests.MissingOrEmptyMinimumIsRejectedOnCreateAndUpdate(field: \"ods_ids\", empty: True)",
       "outcome": "passed"
     }
   ],
@@ -704,6 +704,14 @@
     },
     {
       "name": "frontend.tests.test_app.test_area_form_sends_original_value_for_database_normalization",
+      "outcome": "passed"
+    },
+    {
+      "name": "frontend.tests.test_app.test_non_json_access_error_is_not_misreported_as_session_or_role_failure[401]",
+      "outcome": "passed"
+    },
+    {
+      "name": "frontend.tests.test_app.test_non_json_access_error_is_not_misreported_as_session_or_role_failure[403]",
       "outcome": "passed"
     },
     {
@@ -928,6 +936,10 @@
     },
     {
       "name": "frontend.tests.test_reportes.test_member_excel_and_pdf_contain_actual_names_dates_and_states",
+      "outcome": "passed"
+    },
+    {
+      "name": "frontend.tests.test_reportes.test_wrapped_long_member_name_preserves_every_word_and_accent_in_pdf",
       "outcome": "passed"
     },
     {

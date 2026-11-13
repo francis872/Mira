@@ -1881,9 +1881,9 @@
       ],
       "implementation": "Corrección Fase 4 preservada byte a byte; clave criptográfica efímera en un único step con máscara y unset",
       "test": "actionlint y cinco casos del bloque Bash real; diez comprobaciones de scripts CI",
-      "evidence": "evidencias/fase5-20261107/workflow.json; evidencias/fase5-20261107/ci-scripts.json; evidencias/fase5-20261107/preservacion.json; evidencias/fase6-20261112/resultados.json",
+      "evidence": "evidencias/fase5-20261107/workflow.json; evidencias/fase5-20261107/ci-scripts.json; evidencias/fase5-20261107/preservacion.json; evidencias/fase6-20261112/resultados.json; evidencias/fase6-20261112/github-actions.json",
       "status": "Cumplido y verificado",
-      "limit": "Verificación local; PR Draft, sin ejecuciones pull_request ni estados devueltos para HEAD por las consultas remotas. No se afirma Actions verde.",
+      "limit": "Configuración y pruebas locales aprobadas. Actions intentado realmente: ambos jobs bloqueados por la cuenta antes de iniciar pasos; no se afirma CI verde.",
       "phase5PreviousStatus": "Bloqueado"
     },
     {
@@ -1897,7 +1897,7 @@
       ],
       "implementation": "Edge responsive/axe/teclado/zoom comprobados",
       "test": "Pendiente NVDA/Narrator/VoiceOver y Safari/Chrome físicos",
-      "evidence": "evidencias/axe.json; evidencias/teclado.json; evidencias/zoom.json; evidencias/fase6-20261112/resultados.json",
+      "evidence": "evidencias/axe.json; evidencias/teclado.json; evidencias/zoom.json; evidencias/fase6-20261112/resultados.json; evidencias/fase6-20261112/axe-remoto.json; evidencias/fase6-20261112/navegador-production.json",
       "status": "Implementado, pendiente de prueba",
       "limit": "No certifica WCAG AA; informe enumera tareas manuales pendientes.",
       "phase5PreviousStatus": "Implementado, pendiente de prueba"
@@ -1906,18 +1906,27 @@
       "id": "PRODUCCION-REAL",
       "version": "V3",
       "requirement": "Validar Render, Neon, TLS, disco y recuperación reales",
-      "source": "Encargo actual: no desplegar ni modificar bases remotas",
+      "source": "Requisito operativo original; despliegues autorizados expresamente por Fase 6 y respuestas OAuth/solo planes gratuitos",
       "files": [
-        "deploy/render.yaml.example",
-        "deploy/README.md"
+        "frontend/session_store.py",
+        "frontend/vercel.json",
+        "deploy/render-free.yaml.example",
+        "deploy/permisos_runtime.sql",
+        "MIRA.Api/Configuracion/Readiness.cs"
       ],
-      "implementation": "Configuración revisada y arranque Production local",
-      "test": "No ejecutada en cloud: requiere autorización separada",
-      "evidence": "evidencias/production-local.json; evidencias/fase6-20261112/resultados.json",
-      "status": "Bloqueado",
-      "limit": "No impide demostrar la plataforma local; sí impide declarar producción validada.",
+      "implementation": "Flask Vercel Hobby + API Render Free + Neon Free; TLS, roles mínimos, sesiones PostgreSQL, migraciones001–015 y recuperación verificadas",
+      "test": "50 criterios funcionales Production, incluida repetición del timeout TLS;14 checks de seguridad/operación; reinicio Render y redeploy Flask reales",
+      "evidence": "evidencias/fase6-20261112/remoto.json; evidencias/fase6-20261112/seguridad-production.json; evidencias/fase6-20261112/reinicio-api.json; evidencias/fase6-20261112/neon-migraciones.json",
+      "status": "Parcial",
+      "limit": "Operación remota comprobada en demostración gratuita; falta CI de cuenta, carga/operación institucional, aislamiento Preview/Production y revisiones asistivas. No cierre institucional definitivo.",
       "phase5PreviousStatus": "Bloqueado"
     }
   ],
-  "phase5Source": "Historias originales prevalecen; alcance de corrección autorizado por prompt Fase 5; fuentes históricas conservadas en respaldo y evidencias/fase5-20261107."
+  "phase5Source": "Historias originales prevalecen; alcance de corrección autorizado por prompt Fase 5; fuentes históricas conservadas en respaldo y evidencias/fase5-20261107.",
+  "phase6Snapshot": {
+    "date": "2026-11-12T21:44:37.945552-05:00",
+    "report": "../FASE6_INFORME_FINAL.md",
+    "productionFunctionalCases": 50,
+    "githubActionsApproved": false
+  }
 }

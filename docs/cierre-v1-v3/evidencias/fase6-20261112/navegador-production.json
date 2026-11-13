@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-12",
+  "web": "https://sapiens-v1-v3-20261112.vercel.app",
+  "status": "passed",
+  "checks": [
+    {
+      "path": "/login",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 1
+    },
+    {
+      "path": "/login",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 1
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    }
+  ],
+  "accessibility": [
+    {
+      "path": "/login",
+      "width": 1440,
+      "passes": 19,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "width": 390,
+      "passes": 19,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 1440,
+      "passes": 29,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "passes": 18,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad",
+      "width": 390,
+      "passes": 29,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 390,
+      "passes": 29,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    }
+  ],
+  "consoleErrors": [],
+  "scope": "Production smoke desktop/tablet/mobile; full responsive/zoom/keyboard suite recorded on Preview; no physical devices or screen reader"
+}

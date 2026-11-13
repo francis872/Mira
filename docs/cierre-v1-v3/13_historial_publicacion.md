@@ -1,5 +1,7 @@
 # Control de cambios Fase 5 — sin ejecutar commits
 
+> Corte final Fase 6: SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe A–O](../FASE6_INFORME_FINAL.md), [despliegue y recuperación](../FASE6_DESPLIEGUE.md). Las referencias anteriores conservan su fecha/alcance.
+
 HEAD 3105273af84e55a1e813e76f2acb92acc31caa94, rama feature/mira-v3 y remoto francis872/Mira conservados; índice sin preparar. Respaldo independiente previo 6fdeba6c2d67801a39ead866801b8b48ed7e4519e94ee08918a4bc29ab57baaa. [Inventario exacto antes/después](evidencias/fase5-20261107/control-final.json). No hubo acceso ni escritura en BACKSTAGE en esta fase.
 
 La corrección LOGIN_FORWARDING_KEY de Fase 4 y D01 conservan hashes; 001–008 no cambiaron. 009–014 son nuevas. Los 111 archivos pendientes previos no se descartan: las modificaciones legítimas adicionales se comparan contra sus 323 hashes, no solo contra HEAD.

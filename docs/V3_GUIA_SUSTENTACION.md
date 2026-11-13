@@ -1,6 +1,6 @@
 # Guía de sustentación MIRA V3
 
-> Fase 6 (2026-11-12): [estado actual y despliegue](cierre-v1-v3/11_guia_sustentacion.md). 138 .NET, 132 Flask, 51 HTTP y 11 SQL aprobados localmente; V2/C06 mantienen pendientes académicos. Las cifras y propuestas anteriores se conservan como antecedentes. No confundirlos con CI o producción remotos.
+> Fase 6 (2026-11-12): SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe vigente](FASE6_INFORME_FINAL.md). Las secciones fechadas de abajo se conservan como antecedentes.
 
 > Seguimiento local 2026-11-07: [cierre académico](V3_CIERRE_ACADEMICO.md). La propuesta local pasa 71 .NET/80 Flask/43 E2E, 18 axe sin infracciones ni incomplete y zoom real Edge; requiere autorización antes de publicarse. El PR #7 conserva su evidencia anterior y la marca MIRA. C06 sigue pendiente del profesor.
 

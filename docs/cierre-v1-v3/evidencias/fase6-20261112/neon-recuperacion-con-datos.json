@@ -1,0 +1,30 @@
+{
+  "executedAt": "2026-11-13T02:53:29.119177+00:00",
+  "projectId": "snowy-bonus-50718377",
+  "backupSha256": "27e85a0829d3fdad3debf137079c98da3bf8877175eedde3f542024a9d1604d8",
+  "format": "pg_dump custom archive with portable derived SQL for vanilla PostgreSQL16",
+  "backupScope": "Populated new QA database after tests; auth/session content private and ignored",
+  "restoredIntoNewLocalCluster": true,
+  "localHost": "127.0.0.1",
+  "localPort": 16169,
+  "publicTables": 42,
+  "accessAccounts": 3,
+  "academicQaPersons": 2,
+  "migrationsRestored": 15,
+  "webSessionTableRestored": true,
+  "restoreNoOwnerNoPrivileges": true,
+  "existingDatabasesOverwritten": false,
+  "periodicBackupScheduleConfigured": false,
+  "scopeLimit": "Schema, constraints and populated auth/person/session presence restored; no claim of periodically scheduled backup or full restored-application E2E",
+  "status": "passed",
+  "portability": {
+    "originalCustomArchiveUnchanged": true,
+    "directVanillaRestore": "failed: unrecognized parameter pg_attver",
+    "derivedSqlOnlyRemovesExactUnsupportedColumnStorageOptions": 125,
+    "copyRowsOrOtherStatementsRemoved": false,
+    "originalSqlSha256": "088d2dc9c10ffd2088b07306f5bb9e19818f40b8efd4c7e0aacaf909207ace40",
+    "portableSqlSha256": "5e84028c5f3badee301ed2900b83d46669665851595da19c0495f9ce2652aa1c",
+    "removedStatementListSha256": "12b67391ca840fda4009a0087cd8ea40d52230a574208dfff3411fbf9e0b3fc4",
+    "scope": "Portable derived SQL for local PostgreSQL16; not proof of unmodified archive restore or restore to another Neon endpoint"
+  }
+}

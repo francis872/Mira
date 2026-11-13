@@ -1,14 +1,14 @@
 # SAPIENS — base académica MIRA V1–V3
 
-> Fase 6 (2026-11-12): [estado actual y despliegue](docs/FASE6_DESPLIEGUE.md). 138 .NET, 132 Flask, 51 HTTP y 11 SQL aprobados localmente; V2/C06 mantienen pendientes académicos. Las cifras y propuestas anteriores se conservan como antecedentes. No confundirlos con CI o producción remotos.
+> Fase 6 (2026-11-12): SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe completo y evidencias](docs/FASE6_INFORME_FINAL.md).
 
-> Cierre académico local del 2026-11-07: [hallazgos, correcciones y matriz con riesgos](docs/V3_CIERRE_ACADEMICO.md), [CI propuesto](docs/V3_CI.md), [plan de pruebas Render/Neon](docs/V3_PLAN_DESPLIEGUE_PRUEBAS.md) y [transición futura a SAPIENS](docs/SAPIENS_PLAN_TRANSICION.md). La aplicación/PR #7 conserva MIRA. Los cambios nuevos permanecen locales hasta autorizar sus commits y push; GitHub Actions aún no los ha ejecutado.
+> Antecedente conservado, superado por Fase 6. Cierre académico local del 2026-11-07: [hallazgos, correcciones y matriz con riesgos](docs/V3_CIERRE_ACADEMICO.md), [CI propuesto](docs/V3_CI.md), [plan de pruebas Render/Neon](docs/V3_PLAN_DESPLIEGUE_PRUEBAS.md) y [transición futura a SAPIENS](docs/SAPIENS_PLAN_TRANSICION.md). La aplicación/PR #7 conserva MIRA. Los cambios nuevos permanecen locales hasta autorizar sus commits y push; GitHub Actions aún no los ha ejecutado.
 
 Módulo de Investigación para la Gestión de Proyectos Académicos · Universidad de San Buenaventura Medellín.
 
 V3 evoluciona V1/V2 con autenticación bcrypt/JWT, permisos en backend, sesiones del servidor y una interfaz institucional monocromática. Se conservan los seis catálogos, once recursos de investigación, cinco asociaciones, la ficha grupo-semilleros y las rutinas/triggers PostgreSQL. Rama: `feature/mira-v3`.
 
-Cierre de estabilización del 2026-11-05: **71 .NET, 78 Flask, 43 E2E y cinco suites SQL aprobadas**; los mismos E2E pasan en Linux/Gunicorn/Docker. 50 combinaciones de página/ancho, seis modales por teclado y 18 comprobaciones axe sin infracciones automáticas finales. OSV: 18 paquetes Python de la imagen final, cero avisos conocidos. Preparada para sustentación local con observaciones C06 y revisión asistiva. **Render/Neon reales y producción no validados.** Ver [informe y matriz](docs/V3_REVISION_FINAL.md). Sin commits ni despliegues automáticos.
+Antecedente histórico (no estado actual), cierre de estabilización del 2026-11-05: **71 .NET, 78 Flask, 43 E2E y cinco suites SQL aprobadas**; los mismos E2E pasan en Linux/Gunicorn/Docker. 50 combinaciones de página/ancho, seis modales por teclado y 18 comprobaciones axe sin infracciones automáticas finales. OSV: 18 paquetes Python de la imagen final, cero avisos conocidos. Preparada para sustentación local con observaciones C06 y revisión asistiva. **Render/Neon reales y producción no validados.** Ver [informe y matriz](docs/V3_REVISION_FINAL.md). Sin commits ni despliegues automáticos.
 
 ## Arquitectura
 
@@ -38,7 +38,7 @@ Detener con `scripts/stop-local.ps1`. Los datos se conservan. Si ya hay procesos
 
 Copiar `.env.example` a `.env`; configurar POSTGRES_PASSWORD, JWT_KEY aleatoria (32 bytes o más) y SECRET_KEY. `docker compose up -d --build`.
 
-En una base existente: `docker compose exec mira-postgres sh /migrations/apply.sh`. Solo aplica migraciones pendientes; 008 añade sesiones, sin convertir credenciales ni borrar datos. Se conserva el nombre de proyecto Compose `mira-v2` para conservar su volumen.
+En una base existente: `docker compose exec mira-postgres sh /migrations/apply.sh`. Solo aplica migraciones pendientes; el conjunto actual llega a 015. Revisar preflight de 009 y datos heredados de 010 antes de actualizar una base existente, según docs/FASE6_DESPLIEGUE.md. Se conserva el nombre de proyecto Compose `mira-v2` para conservar su volumen.
 
 Para aprovisionar el administrador con Docker, definir MIRA_ADMIN_EMAIL y MIRA_ADMIN_PASSWORD por variables privadas de proceso y pasarlas al contenedor con `docker compose exec -e MIRA_ADMIN_EMAIL -e MIRA_ADMIN_PASSWORD mira-api dotnet MIRA.Api.dll --bootstrap-admin`. Retirarlas después. Nunca usar contraseña literal en el historial del terminal.
 

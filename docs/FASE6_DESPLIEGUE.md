@@ -8,11 +8,11 @@ Raíz `C:\Users\Usuario\OneDrive\Escritorio\MIRA`, rama `feature/mira-v3`, remot
 
 El cierre Fase 5 estaba implementado y probado, pero su documentación seguía incompleta. Se consolidaron sus **136 .NET, 120 Flask, 51 HTTP, 10 SQL y 51 Docker**, ejecutados el 7 de noviembre, como evidencia histórica. No se presentan como ejecución de Fase 6.
 
-La repetición actual aprobó **138 .NET, 132 Flask, 51 HTTP y 11 suites SQL**, sin fallos ni omisiones, en PostgreSQL local exclusivo. Incluye persistencia de sesiones entre dos aplicaciones Flask independientes, rotación de identificador, vencimiento, manipulación de datos, caída de lectura/escritura y configuración TLS. D01 integrado conserva orígenes independientes, rechazo de cabeceras falsificadas y revocación tras reinicio. La verificación Docker usa PostgreSQL para sesiones; la interfaz mantiene el modo de archivos para instalaciones persistentes existentes.
+La repetición actual aprobó **138 .NET, 135 Flask, 51 HTTP y 11 suites SQL**, sin fallos ni omisiones, en PostgreSQL local exclusivo. Incluye persistencia de sesiones entre dos aplicaciones Flask independientes, rotación de identificador, vencimiento, manipulación de datos, caída de lectura/escritura y configuración TLS. D01 integrado conserva orígenes independientes, rechazo de cabeceras falsificadas y revocación tras reinicio. La verificación Docker usa PostgreSQL para sesiones; la interfaz mantiene el modo de archivos para instalaciones persistentes existentes.
 
 OSV y NuGet se consultaron de nuevo sin avisos reportados. Esto no cubre todos los paquetes del sistema operativo ni garantiza ausencia de vulnerabilidades futuras. Responsive, axe, teclado y zoom se registran con sus resultados actuales; las revisiones asistivas humanas y dispositivos físicos siguen pendientes.
 
-## Arquitectura preparada
+## Arquitectura desplegada
 
 ```mermaid
 flowchart LR
@@ -30,9 +30,9 @@ La firma HMAC protege el contenido de sesión almacenado y la clave primaria es 
 
 ## Servicios y costes
 
-- Vercel: equipo Hobby comprobado y proyecto nuevo `sapiens-v1-v3-20261112`, directorio `frontend`; todavía debe distinguirse un proyecto creado de un despliegue funcional.
+- Vercel: equipo Hobby comprobado y proyecto nuevo `sapiens-v1-v3-20261112`, directorio de producto `frontend`; Production y Preview comprobadas con pruebas funcionales.
 - Neon: organización con plan **free** comprobado; proyecto nuevo `snowy-bonus-50718377`, nombre `sapiens-v1-v3-fase6-20261112`, PostgreSQL 16.16, región aws-us-east-1, base `sapiens`. No se modificaron bases existentes.
-- Render: workspace autorizado; servicio API nuevo previsto exclusivamente con `plan=free`, sin disco ni réplicas de pago y con autodespliegue desactivado.
+- Render: workspace autorizado; servicio API nuevo activo exclusivamente con `plan=free`, sin disco ni réplicas de pago y con autodespliegue desactivado.
 
 No se contrataron planes de pago. Los planes gratuitos tienen cuotas y límites: Render los describe como apropiados para demostraciones y pruebas, no como garantía de producción. [Límites oficiales](https://render.com/docs/free). No se eleva un plan para superar un bloqueo sin autorización.
 
@@ -59,4 +59,36 @@ Para recuperar: registrar SHA/digests y configuración privada aprobados; restau
 
 Mantener separados tres dictámenes: operación técnica del entorno desplegado, aceptación académica de los criterios originales y validación de producción. C06, Facultad, periodo activo/líder y vínculo cuenta–docente siguen pendientes de definición; no hay excepciones académicas aceptadas. El código funcional de estos dominios no se inventó para facilitar la publicación.
 
-Las URL, commits, Actions y pruebas remotas se registrarán únicamente después de obtener resultados reales. Un proyecto creado, un build o un `/health` 200 no equivalen a una plataforma desplegada y validada.
+SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional.
+
+[Informe A–O](FASE6_INFORME_FINAL.md), [casos remotos](cierre-v1-v3/evidencias/fase6-20261112/remoto.json). Preview/Production comparten la base nueva QA; separar recursos antes de uso institucional. El primer alias Production automático no validado fue sustituido tras aceptar Preview. API normal JWT20 min; expiración real60 s probada antes de restaurarlo. Los roles/secretos runtime se guardan en gestores oficiales. El endpoint Neon conserva el intervalo fijo del plan gratuito; no se elevó el plan ante el rechazo 412.
+
+## Recuperación comprobada con datos y límite de portabilidad
+
+Se conservó el dump QA posterior a las pruebas (SHA256 `27e85a0829d3fdad3debf137079c98da3bf8877175eedde3f542024a9d1604d8`). La restauración directa en PostgreSQL16 estándar falla por la opción de columna `pg_attver`. La restauración portable derivada aprobó en otro clúster: 42 tablas públicas, 15 migraciones, 3 cuentas, 2 personas QA y esquema de sesiones. [Evidencia](cierre-v1-v3/evidencias/fase6-20261112/neon-recuperacion-con-datos.json). Solo se eliminaron 125 instrucciones exactas ALTER COLUMN SET de esa opción, fuera de COPY; no datos, funciones ni restricciones. Es una adaptación basada en el error observado; no acredita restauración nativa en Neon ni E2E completo del destino recuperado.
+
+Reproducción en un destino local nuevo y exclusivo, con credenciales privadas en el entorno:
+
+1. Verificar identidad y SHA del backup. No usar la base operativa como destino. El dump y SQL contienen hashes/sesiones: guardarlos en rutas privadas ignoradas.
+2. Exportar SQL privado: `pg_restore --no-owner --no-privileges --file backup-privado.sql backup.dump`.
+3. Si PostgreSQL estándar rechaza pg_attver, generar otro archivo sin modificar el original, usando únicamente este filtro acotado. Revisar cantidad y hashes como en la evidencia:
+
+```python
+from pathlib import Path
+import re
+pattern = re.compile(r'^ALTER TABLE ONLY [A-Za-z_][A-Za-z_0-9.]* ALTER COLUMN [A-Za-z_][A-Za-z_0-9]* SET \(pg_attver=[0-9]+\);$')
+in_copy = False
+with Path('backup-portable-privado.sql').open('x', encoding='utf-8') as target:
+    for line in Path('backup-privado.sql').read_text(encoding='utf-8').splitlines(keepends=True):
+        text = line.rstrip('\r\n')
+        if in_copy or not pattern.fullmatch(text):
+            target.write(line)
+        if text.startswith('COPY ') and text.endswith(' FROM stdin;'):
+            in_copy = True
+        elif in_copy and text == '\\.':
+            in_copy = False
+```
+
+4. Crear una base nueva en un clúster aislado; restaurar con `psql -X --single-transaction -v ON_ERROR_STOP=1 -d <base_nueva> -f backup-portable-privado.sql`. No ignorar otros errores ni eliminar instrucciones adicionales para forzar el resultado.
+5. Comprobar tablas, migraciones, restricciones y datos esperados; aprovisionar roles runtime con deploy/permisos_runtime.sql bajo administración autorizada. Probar la aplicación contra el destino nuevo antes de cambiar conexiones. Esta última prueba integral y la recuperación nativa Neon siguen pendientes.
+6. Detener solo los procesos de prueba propios. Conservar backups, logs privados y metadatos saneados. No se programaron tareas ni servicios de pago.

@@ -6,7 +6,7 @@ Actualización de Fase 6, 12 de noviembre de 2026. El trabajo se realizó exclus
 |---|---|
 | V1 | **CERRADA TÉCNICAMENTE en el alcance local probado.** Inglés obligatorio de contenido y tres categorías ODS aplicados en interfaz/API/SQL; seis catálogos y regresión aprobados. No implica aceptación docente ni producción validada. |
 | V2 | **NO CERRADA ACADÉMICAMENTE.** Se corrigieron 16 de los 22 criterios originales incompletos del inventario y se probaron códigos, inglés, descripción, mínimos, estados, articulaciones y reportes. Siguen pendientes perfil propio cuenta–docente, exactamente un líder por periodo, periodo académico y Facultad/filtros completos; C06 requiere decisión docente. |
-| V3 | **Seguridad validada localmente y adaptación serverless probada; publicación/operación remota por comprobar.** bcrypt, JWT, roles, revocación, CSRF y D01 preservados. Sesiones compartidas, ingreso Vercel y readiness añadidos sin JWT en cookies. No se afirma Actions verde ni producción validada antes de resultados remotos. |
+| V3 | **Seguridad y adaptación serverless verificadas local y remotamente en el entorno gratuito.** bcrypt, JWT, roles, revocación, CSRF y D01 preservados. Sesiones compartidas, ingreso Vercel y readiness añadidos sin JWT en cookies. Production cubrió 50 criterios funcionales tras repetir el caso con timeout TLS y 14 comprobaciones de seguridad/operación; Actions continúa bloqueado. No hay cierre institucional integral. |
 
 La Fase 5 dejó implementaciones y pruebas nuevas, pero este informe aún describía la auditoría previa. Se conserva el [informe anterior](evidencias/fase5-20261107/informe-pre-fase5.md), su matriz y hashes. La consolidación posterior distingue las pruebas del 7 de noviembre de las nuevas del 12; no se reciclan resultados.
 
@@ -40,7 +40,7 @@ AuthService/PasswordService siguen generando/verificando bcrypt12 y JWT HS256; C
 
 ## G. Calidad
 
-138 .NET, 132 Flask, 51 HTTP, 11 SQL y repetición de 51 HTTP en Docker/Gunicorn con sesiones PostgreSQL: cero fallos/omisiones. 110 combinaciones responsive; 38 revisiones axe sin infracciones, con dos incomplete de contraste en textarea descripción; 10 grupos de teclado más cinco académicos; 51 comprobaciones de zoom real 100/200/400%. El verificador espera el cierre de su propio navegador, sin matar procesos ajenos. Se corrigió una carrera de health de PostgreSQL temporal; los intentos fallidos se conservan.
+138 .NET, 135 Flask, 51 HTTP, 11 SQL y repetición de 51 HTTP en Docker/Gunicorn con sesiones PostgreSQL: cero fallos/omisiones. 110 combinaciones responsive; 38 revisiones axe sin infracciones, con dos incomplete de contraste en textarea descripción; 10 grupos de teclado más cinco académicos; 51 comprobaciones de zoom real 100/200/400%. El verificador espera el cierre de su propio navegador, sin matar procesos ajenos. Se corrigió una carrera de health de PostgreSQL temporal; los intentos fallidos se conservan.
 
 OSV/NuGet sin avisos reportados en nuevas consultas. No se certifica WCAG, lector de pantalla, dispositivos físicos ni todo el SO/base. [Casos y hashes](evidencias/fase6-20261112/casos.json), [comandos](evidencias/fase6-20261112/comandos.json).
 
@@ -54,12 +54,14 @@ La autorización de Fase 6 permite commits/push y despliegues no destructivos de
 
 ## J. Dictamen
 
-V1 cumple el alcance técnico verificado. V2 tiene operaciones implementadas funcionales pero no cierre académico integral. V3 conserva seguridad local y adaptación para almacenamiento compartido; su operación remota se declarará exclusivamente con URL y pruebas reales. No se acepta C06 por inferencia ni se confunde una base remota migrada con toda la plataforma validada.
+V1 cumple el alcance técnico verificado. V2 tiene operaciones implementadas funcionales pero no cierre académico integral. V3 conserva seguridad y sesiones compartidas verificadas en la URL real. El informe A–O distingue operación técnica, aceptación académica y alcance de la validación remota. No se acepta C06 por inferencia ni se confunde una base remota migrada con toda la plataforma validada.
 
 ## K. Pendientes y riesgos
 
 Definir Facultad, cuenta–docente y periodos/líder; resolver C06 y aceptación de los tres roles cerrados. Revisar dos incomplete axe, lector de pantalla y dispositivos físicos. Límites gratuitos/cold starts/cuotas, carga, patches del SO y recuperación operativa periódica siguen siendo riesgos reales. No se contrata pago para resolverlos sin autorización.
 
-## L. Publicación y siguiente paso
+## L. Publicación y estado actual
 
-Completar revisión de secretos y commits autorizados, publicar feature/mira-v3, inspeccionar Actions y actualizar PR #7. Desplegar API en Render Free y Flask en Vercel con Neon compartido; validar Preview antes de Production. Solo registrar resultados efectivos. No iniciar V4 ni declarar aceptación académica/producción por el mero hecho de publicar.
+SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional.
+
+[Informe A–O](../FASE6_INFORME_FINAL.md), [evidencia remota](evidencias/fase6-20261112/remoto.json), [bloqueo CI](../CI_BLOQUEO_CUENTA.md).

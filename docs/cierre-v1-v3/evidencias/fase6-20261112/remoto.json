@@ -1,0 +1,726 @@
+{
+  "recordedAt": "2026-11-12T21:44:37.527154-05:00",
+  "production": "https://sapiens-v1-v3-20261112.vercel.app",
+  "preview": "https://sapiens-preview-v1-v3-20261112.vercel.app",
+  "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+  "previewRun": {
+    "cases": [
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_members_excel_pdf_and_filtered_report_use_persisted_relations",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_line_save_rejects_missing_links_and_rolls_back_bad_reference",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_multiple_association_summary_and_reactivation_preserve_links",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_report_api_and_download_do_not_restore_public_access",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_group_sheet_http_creates_edits_and_retires_multiple_details",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[sedes]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[ods]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[palabras_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_semillero_independent_form_lifecycle_uses_group_selector",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_root_opens_the_dashboard_directly",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_login_surface_and_protected_api",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_dashboard_counts_match_the_listing",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_duplicate_keyword_shows_conflict",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_unicode_csrf_is_rejected",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_oversized_form_preserves_data_and_explains_limit",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_area_form_uses_trigger_and_displays_persisted_value",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_post_without_csrf_token_is_rejected",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_session_cookie_flags",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_keyword_without_english_is_rejected_and_update_preserves_it",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "outcome": "failed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "outcome": "passed"
+      }
+    ],
+    "status": {
+      "startedAt": "2026-11-13T02:06:39.938743+00:00",
+      "finishedAt": "2026-11-13T02:17:48.702087+00:00",
+      "exit": 1,
+      "web": "https://sapiens-preview-v1-v3-20261112.vercel.app",
+      "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "profile": "New free Preview deployment; QA-only data; browser fixture and HTTP suite run serially",
+      "connectionRetryPolicy": "Up to three establishment/DNS retries only; no read or status retries and no OS DNS change",
+      "excludedLocalPersistenceCase": "test_injection_text_is_stored_as_data_and_escaped: Cloudflare blocks malicious payload before API; separate perimeter rejection check required",
+      "expectedFunctionalCases": 50
+    },
+    "rawSha256": "532c6c41f50596adc1396c6113cbf65e086524d03d7da05fa5447b5dec7a9fd6"
+  },
+  "targetedRepeat": {
+    "cases": [
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "outcome": "passed"
+      }
+    ],
+    "status": {
+      "startedAt": "2026-11-13T02:25:28.916372+00:00",
+      "finishedAt": "2026-11-13T02:26:09.710070+00:00",
+      "exit": 0,
+      "web": "https://sapiens-preview-v1-v3-20261112.vercel.app",
+      "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "profile": "New free Preview deployment; QA-only data; browser fixture and HTTP suite run serially",
+      "connectionRetryPolicy": "Up to three establishment/DNS retries only; no read or status retries and no OS DNS change",
+      "excludedLocalPersistenceCase": "test_injection_text_is_stored_as_data_and_escaped: Cloudflare blocks malicious payload before API; separate perimeter rejection check required",
+      "expectedFunctionalCases": 3
+    },
+    "rawSha256": "653a1fcaed3876bafd32cfb939abb42acdcde344468a1cbbdd8d856dd9c87d09"
+  },
+  "previewCoverage": {
+    "total": 50,
+    "passed": 50,
+    "scope": "49 passed plus successful targeted repeat of timed-out GET; not one clean 50/50 run"
+  },
+  "perimeterCase": "perimetro-preview.json; distinct criterion; malicious Cloudflare-rejected payload excluded from unchanged local persistence assertion",
+  "productionDeployment": {
+    "id": "dpl_CZ8PmvmSDaceuD4N8HjPFHyEcBaC",
+    "url": "https://sapiens-v1-v3-20261112-awbg19h9g.vercel.app",
+    "target": "production",
+    "sourceCommit": "e3f60e5e78381432c885e68cf8b24376c303aedb"
+  },
+  "physicalDevicesTested": false,
+  "screenReaderTested": false,
+  "productionRun": {
+    "cases": [
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_members_excel_pdf_and_filtered_report_use_persisted_relations",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_line_save_rejects_missing_links_and_rolls_back_bad_reference",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_multiple_association_summary_and_reactivation_preserve_links",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_report_api_and_download_do_not_restore_public_access",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_group_sheet_http_creates_edits_and_retires_multiple_details",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[sedes]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[ods]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[palabras_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_semillero_independent_form_lifecycle_uses_group_selector",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_root_opens_the_dashboard_directly",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_login_surface_and_protected_api",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_dashboard_counts_match_the_listing",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_duplicate_keyword_shows_conflict",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_unicode_csrf_is_rejected",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_oversized_form_preserves_data_and_explains_limit",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_area_form_uses_trigger_and_displays_persisted_value",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_post_without_csrf_token_is_rejected",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_session_cookie_flags",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_keyword_without_english_is_rejected_and_update_preserves_it",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "outcome": "failed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "outcome": "passed"
+      }
+    ],
+    "status": {
+      "startedAt": "2026-11-13T02:32:12.248060+00:00",
+      "finishedAt": "2026-11-13T02:41:30.411057+00:00",
+      "exit": 1,
+      "web": "https://sapiens-v1-v3-20261112.vercel.app",
+      "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "profile": "Production URL on Hobby; QA-only data; same reviewed frontend source; no browser fixture concurrently",
+      "connectionRetryPolicy": "Up to three establishment/DNS retries only; no read or status retries and no OS DNS change",
+      "excludedLocalPersistenceCase": "test_injection_text_is_stored_as_data_and_escaped: Cloudflare blocks malicious payload before API; separate perimeter rejection check required",
+      "expectedFunctionalCases": 50
+    },
+    "rawSha256": "eba14465dab171e2a3159cc31a15f385e5a5a0ad9c2435f9a46b51cee45e29e9",
+    "passed": 49,
+    "failed": 1,
+    "skipped": 0
+  },
+  "previewInitialRun": {
+    "cases": [
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_members_excel_pdf_and_filtered_report_use_persisted_relations",
+        "outcome": "failed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_line_save_rejects_missing_links_and_rolls_back_bad_reference",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_multiple_association_summary_and_reactivation_preserve_links",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_fase5_academico.test_report_api_and_download_do_not_restore_public_access",
+        "outcome": "failed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_group_sheet_http_creates_edits_and_retires_multiple_details",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[sedes]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[ods]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_resource_full_http_form_lifecycle[palabras_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+        "outcome": "skipped"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_semillero_independent_form_lifecycle_uses_group_selector",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_investigacion.test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_root_opens_the_dashboard_directly",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_login_surface_and_protected_api",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_dashboard_counts_match_the_listing",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_lists_real_seed_data[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_catalog_create_update_inactivate_persist[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_duplicate_keyword_shows_conflict",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_unicode_csrf_is_rejected",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_oversized_form_preserves_data_and_explains_limit",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_area_form_uses_trigger_and_displays_persisted_value",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_post_without_csrf_token_is_rejected",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_injection_text_is_stored_as_data_and_escaped",
+        "outcome": "failed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_local_platform.test_session_cookie_flags",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_keyword_without_english_is_rejected_and_update_preserves_it",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "outcome": "passed"
+      }
+    ],
+    "rawSha256": "7dd1297a7f33e128e8409352a4f2550513ef328d7bb00c40c8aee1438a3329db",
+    "scope": "Preserved initial 47 passed, three failures and one skipped; PDF layout assertion, network and upstream HTML403 investigated before final runs"
+  },
+  "productionTargetedRepeat": {
+    "cases": [
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "outcome": "passed"
+      },
+      {
+        "name": "frontend.tests.e2e.test_v1_requisitos.test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "outcome": "passed"
+      }
+    ],
+    "status": {
+      "startedAt": "2026-11-13T02:43:26.105929+00:00",
+      "finishedAt": "2026-11-13T02:44:21.532455+00:00",
+      "exit": 0,
+      "web": "https://sapiens-v1-v3-20261112.vercel.app",
+      "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "profile": "Production URL on Hobby; QA-only data; browser fixture and HTTP suite run serially",
+      "connectionRetryPolicy": "Up to three establishment/DNS retries only; no read or status retries and no OS DNS change",
+      "excludedLocalPersistenceCase": "test_injection_text_is_stored_as_data_and_escaped: Cloudflare blocks malicious payload before API; separate perimeter rejection check required",
+      "expectedFunctionalCases": 3
+    },
+    "rawSha256": "5e7376f035d150022373ba03e6f043d1f97c3ac76172634f29206bb3f6cd950d"
+  },
+  "productionCoverage": {
+    "total": 50,
+    "passed": 50,
+    "scope": "49 passed in full run plus successful targeted ODS repeat after TLS handshake timeout; not one clean 50/50 run"
+  }
+}

@@ -1,5 +1,7 @@
 # Riesgos vigentes después de Fase 5
 
+> Corte final Fase 6: SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe A–O](../FASE6_INFORME_FINAL.md), [despliegue y recuperación](../FASE6_DESPLIEGUE.md). Las referencias anteriores conservan su fecha/alcance.
+
 V2 sigue sin cierre: HU03-CA03 (perfil propio), HU05-CA02 (exactamente un líder por periodo), HU06-CA02 (periodo académico) y HU10-CA02/03 (Facultad/filtro completo). HU01-DESCRIPCION requiere aceptar tres roles cerrados frente a creación dinámica. No hay dispensas inventadas.
 
 C06 permanece pendiente: «En el SQL confirmado hay 22 columnas FK públicas NOT NULL. ¿Ratifica que C06 no aplica a este modelo o identifica una relación opcional concreta? Indicar tabla/columna, cardinalidad, documento fuente y aceptación escrita». No se modificó nulabilidad.

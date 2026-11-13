@@ -1,5 +1,7 @@
 # Perfil vigente de Fase 6
 
+> Corte final Fase 6: SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe A–O](../FASE6_INFORME_FINAL.md), [despliegue y recuperación](../FASE6_DESPLIEGUE.md). Las referencias anteriores conservan su fecha/alcance.
+
 Nuevas instalaciones aplican 001–015. Docker conserva Python 3.11 y el modo filesystem privado existente; Vercel selecciona Python 3.14 y exige MIRA_SESSION_BACKEND=postgres, MIRA_SESSION_DATABASE_URL privada con verify-full/channel_binding=require y MIRA_PLATFORM=vercel. No se usa /tmp para sesiones. Instalar requirements-dev.txt para verificar, requirements.lock para runtime Docker; requirements.txt también fija transitivos para Vercel. [Instalación y recuperación cloud](../FASE6_DESPLIEGUE.md). Los apartados Fase 5 y anteriores siguientes se conservan como antecedentes.
 
 # Instalación de las correcciones Fase 5

@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-12T20:08:07.223387-05:00",
+  "date": "2026-11-12T20:58:59.032618-05:00",
   "scope": "Flask test clients with distinct REMOTE_ADDR; real HTTP to a dedicated API process and isolated PostgreSQL",
   "checks": [
     {

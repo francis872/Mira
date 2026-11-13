@@ -2,8 +2,8 @@
   {
     "scope": "native",
     "command": "powershell -File scripts/verify-postgres16.ps1 -DatabasePort <libre> -ApiPort <libre> -FrontendPort <libre>",
-    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\integral-final\\verify-postgres16.ps1",
-    "logSha256": "e74df016e2f979606276ac4d9e97967ce6824c303a37302113cb7f291571bf06"
+    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\integral-upstream\\verify-postgres16.ps1",
+    "logSha256": "d1760d4eba64bb6f13b46be98b25b20c2d9175756780281c4b3d79d4d277f348"
   },
   {
     "scope": "browser",
@@ -14,11 +14,21 @@
   {
     "scope": "docker",
     "command": "powershell -File scripts/verify-docker.ps1; override de imagen y backend PostgreSQL en proyecto nuevo aislado",
-    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\verify-docker-final.ps1",
-    "logSha256": "d35f61cf522865968f60f8455e57a19f12185f796d9629aca7ef4c1f2af90519"
+    "actualPrivateHarness": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\verify-docker-upstream.ps1",
+    "logSha256": "4958dd071176345f7f981b761afd1a9707ad77ba9117249c3ef2512c2be3cbba"
   },
   {
     "scope": "audits",
     "command": "python scripts/audit-python.py --packages-json <inventario-imagen> --output <reporte>; dotnet list MIRA.sln package --vulnerable --include-transitive --no-restore --format json --output-version 1; actionlint .github/workflows/mira-v3-ci.yml"
+  },
+  {
+    "scope": "remote",
+    "command": "MIRA_E2E_URL=<origen HTTPS autorizado>; MIRA_E2E_API_URL=<API>; MIRA_E2E_EMAIL/PASSWORD privados; python -m pytest frontend/tests/e2e -k \"not test_injection_text_is_stored_as_data_and_escaped\" -q --junitxml <salida nueva>",
+    "privateRunners": [
+      "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\remote-regression-final.py",
+      "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\remote-regression-repeat.py",
+      "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\production-regression.py"
+    ],
+    "safety": "Proyecto nuevo con datos QA identificados; el caso de persistencia de carga maliciosa se prueba localmente y el rechazo remoto por Cloudflare se registra por separado; no reintentos de lectura ni estados HTTP."
   }
 ]

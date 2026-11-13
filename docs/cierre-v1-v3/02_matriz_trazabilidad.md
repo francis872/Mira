@@ -1,10 +1,10 @@
-# Matriz de trazabilidad V1–V3 — actualización Fase 5
+# Matriz de trazabilidad V1–V3 — corte vigente Fase 6
 
 [JSON completo](02_matriz_trazabilidad.json) · [CSV completo](02_matriz_trazabilidad.csv) · [Informe](14_informe_cierre.md).
 
 Se conservan **104 registros y 36 criterios de las diez historias originales**. Los RF, C01–C12, R01–R30 y criterios HU se solapan; no representan 104 requisitos independientes ni un porcentaje de cumplimiento. HUxx-CAyy son localizadores de auditoría, no códigos atribuidos al docente.
 
-La fuente DOCX original y el SQL confirmado conservan sus hashes. Esta fase autoriza corregir diferencias inequívocas mediante migraciones 009–014; no altera retrospectivamente el SQL original. El inglés obligatorio corresponde al contenido español/inglés de palabras clave, sin exigir traducción de toda la interfaz. Las categorías ODS V1 son Social, Económica, Ambiental; HU09-CA02 exige por separado los 17 ODS para las líneas V2.
+La fuente DOCX original y el SQL confirmado conservan sus hashes. Fase 5 autorizó corregir diferencias inequívocas mediante migraciones 009–014; Fase 6 añade 015 para sesiones compartidas y autoriza publicación/despliegue; no altera retrospectivamente el SQL original. El inglés obligatorio corresponde al contenido español/inglés de palabras clave, sin exigir traducción de toda la interfaz. Las categorías ODS V1 son Social, Económica, Ambiental; HU09-CA02 exige por separado los 17 ODS para las líneas V2.
 
 Cada fila conserva fuente, archivos, clase/método/regla, prueba, evidencia, estado anterior y posterior, y límite. El [corte previo](evidencias/fase5-20261107/matriz-pre-fase5.json) y el [inventario antes/después](evidencias/fase5-20261107/inventario-requisitos.json) permiten auditar las decisiones. Facultad, periodo activo, perfil propio y C06 no se completan mediante supuestos.
 
@@ -15,9 +15,9 @@ No se localizaron VERSION_2.md, mapa de versiones ni nombres oficiales de los nu
 | Cumplido y verificado | 91 |
 | No aplicable, con justificación | 3 |
 | Pendiente de aceptación docente | 1 |
-| Parcial | 7 |
+| Parcial | 8 |
 | Implementado, pendiente de prueba | 1 |
-| Bloqueado | 1 |
+| Bloqueado | 0 |
 
 | Código | Versión | Anterior → actual | Implementación / prueba | Evidencia / límite |
 |---|---|---|---|---|
@@ -122,9 +122,11 @@ No se localizaron VERSION_2.md, mapa de versiones ni nombres oficiales de los nu
 | PLAN-TECNOLOGIA | V1–V3 | No aplicable, con justificación → No aplicable, con justificación | Npgsql/PostgreSQL exigidos posteriormente por el usuario; tests/MIRA.Api.Tests/InvestigacionIntegrationTests.cs::ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows; frontend/tests/e2e/test_investigacion.py::test_research_resource_full_http_form_lifecycle | evidencias/resultados.json; evidencias/casos.json; El SQL confirmado y el encargo actual exigen PostgreSQL; Oracle no se introduce retroactivamente. |
 | PLAN-VISION | Fuera del alcance V1–V3 confirmado | No aplicable, con justificación → No aplicable, con justificación | No existe módulo de proyectos ni gestión de entregas; Inspección completa catálogo API/Flask | evidencias/endpoints.json; Visión del plan no asignada a V1–V3 por el SQL/Spec vigente. Registrar como backlog; no inventar alcance de V4. |
 | ARQ-TRES-CAPAS | V1–V3 | Cumplido y verificado → Cumplido y verificado | Controller→Service→Repository; conexiones creadas por factory; frontend HTTP; frontend/tests/test_architecture.py; tests integrados | evidencias/resultados.json; evidencias/casos.json; evidencias/fase5-20261107/resultados.json; Verificación local; no certifica producción ni aceptación docente. |
-| CI-D01-CONFIG | V3 | Bloqueado → Cumplido y verificado | Corrección Fase 4 preservada byte a byte; clave criptográfica efímera en un único step con máscara y unset; actionlint y cinco casos del bloque Bash real; diez comprobaciones de scripts CI | evidencias/fase5-20261107/workflow.json; evidencias/fase5-20261107/ci-scripts.json; evidencias/fase5-20261107/preservacion.json; Verificación local; PR Draft, sin ejecuciones pull_request ni estados devueltos para HEAD por las consultas remotas. No se afirma Actions verde. |
-| A11Y-MANUAL | V3 | Implementado, pendiente de prueba → Implementado, pendiente de prueba | Edge responsive/axe/teclado/zoom comprobados; Pendiente NVDA/Narrator/VoiceOver y Safari/Chrome físicos | evidencias/axe.json; evidencias/teclado.json; evidencias/zoom.json; No certifica WCAG AA; informe enumera tareas manuales pendientes. |
-| PRODUCCION-REAL | V3 | Bloqueado → Bloqueado | Configuración revisada y arranque Production local; No ejecutada en cloud: requiere autorización separada | evidencias/production-local.json; No impide demostrar la plataforma local; sí impide declarar producción validada. |
+| CI-D01-CONFIG | V3 | Bloqueado → Cumplido y verificado | Corrección Fase 4 preservada byte a byte; clave criptográfica efímera en un único step con máscara y unset; actionlint y cinco casos del bloque Bash real; diez comprobaciones de scripts CI | evidencias/fase5-20261107/workflow.json; evidencias/fase5-20261107/ci-scripts.json; evidencias/fase5-20261107/preservacion.json; evidencias/fase6-20261112/resultados.json; evidencias/fase6-20261112/github-actions.json; Configuración y pruebas locales aprobadas. Actions intentado realmente: ambos jobs bloqueados por la cuenta antes de iniciar pasos; no se afirma CI verde. |
+| A11Y-MANUAL | V3 | Implementado, pendiente de prueba → Implementado, pendiente de prueba | Edge responsive/axe/teclado/zoom comprobados; Pendiente NVDA/Narrator/VoiceOver y Safari/Chrome físicos | evidencias/axe.json; evidencias/teclado.json; evidencias/zoom.json; evidencias/fase6-20261112/resultados.json; evidencias/fase6-20261112/axe-remoto.json; evidencias/fase6-20261112/navegador-production.json; No certifica WCAG AA; informe enumera tareas manuales pendientes. |
+| PRODUCCION-REAL | V3 | Bloqueado → Parcial | Flask Vercel Hobby + API Render Free + Neon Free; TLS, roles mínimos, sesiones PostgreSQL, migraciones001–015 y recuperación verificadas; 50 criterios funcionales Production, incluida repetición del timeout TLS;14 checks de seguridad/operación; reinicio Render y redeploy Flask reales | evidencias/fase6-20261112/remoto.json; evidencias/fase6-20261112/seguridad-production.json; evidencias/fase6-20261112/reinicio-api.json; evidencias/fase6-20261112/neon-migraciones.json; Operación remota comprobada en demostración gratuita; falta CI de cuenta, carga/operación institucional, aislamiento Preview/Production y revisiones asistivas. No cierre institucional definitivo. |
 
 
 Fase 6: [resultados actuales](evidencias/fase6-20261112/resultados.json) y [adaptación Vercel/Neon](../FASE6_DESPLIEGUE.md). JSON/CSV incorporan archivos y pruebas del almacén compartido/readiness; se conservan los 104 registros y las limitaciones académicas.
+
+Corte final Fase 6: [informe A–O](../FASE6_INFORME_FINAL.md). Production:50 criterios funcionales cubiertos mediante pasada y repetición y seguridad remota verificadas; Actions bloqueado por cuenta. Estados académicos/manuales se conservan.

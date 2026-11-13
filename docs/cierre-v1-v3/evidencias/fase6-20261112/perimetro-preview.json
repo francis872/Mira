@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "web": "https://sapiens-preview-v1-v3-20261112.vercel.app",
+  "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+  "upstreamMaliciousPayloadStatus": 403,
+  "upstreamServer": "Cloudflare",
+  "reachedApplication": false,
+  "frontendServiceUnavailable": 503,
+  "notMisreportedAsRoleFailure": true,
+  "maliciousValuePersisted": false,
+  "catalogStillOperational": true,
+  "localPersistenceAndEscapingCasePassed": true,
+  "firewallDisabled": false,
+  "scope": "Separate remote perimeter acceptance; not counted as the local 302/persistence test running unchanged through Cloudflare"
+}

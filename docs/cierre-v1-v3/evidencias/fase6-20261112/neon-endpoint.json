@@ -1,0 +1,9 @@
+{
+  "id": "ep-wispy-violet-bb8s4omb",
+  "current_state": "active",
+  "suspend_timeout_seconds": 0,
+  "autoscaling_limit_min_cu": 0.25,
+  "autoscaling_limit_max_cu": 1,
+  "interpretation": "0 uses plan default; Free fixes automatic suspension after five minutes inactivity; explicit override returned 412; no plan changed",
+  "officialSource": "https://neon.com/docs/introduction/scale-to-zero"
+}

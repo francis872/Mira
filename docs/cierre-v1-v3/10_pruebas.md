@@ -1,4 +1,13 @@
-# Pruebas actuales — Fase 5
+# Pruebas actuales — Fase 6
+
+SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional.
+
+138 .NET / 135 Flask / 51 HTTP / 11 SQL y repetición 51 HTTP Docker: cero fallos u omisiones. [Resultados locales](evidencias/fase6-20261112/resultados.json), [remotos y cronología de fallos](evidencias/fase6-20261112/remoto.json), [seguridad Production](evidencias/fase6-20261112/seguridad-production.json), [comandos](evidencias/fase6-20261112/comandos.json). No sumar las repeticiones como pruebas distintas.
+
+Preview: 110 responsive, 38 axe sin infracciones y 2 incomplete, teclado y 51 zoom reales. Production: 11 responsive y 8 axe sin infracciones. JWT expiró esperando sus 60 s durante Preview contra la misma API; JWT 20 min normal restaurado. No se probaron dispositivos físicos, lector de pantalla, carga institucional ni recuperación periódica.
+
+## Antecedente Fase 5: ejecutado el 7 de noviembre, consolidado el 12
+
 
 Fecha del corte: 2026-11-12T19:47:19.807350-05:00. [Resultados y hashes de reportes crudos](evidencias/fase5-20261107/resultados.json), [nombres/outcomes](evidencias/fase5-20261107/casos.json), [código exacto](evidencias/fase5-20261107/version-fuentes.json). No sumar repeticiones Docker como casos distintos.
 
