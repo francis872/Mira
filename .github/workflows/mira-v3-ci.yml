@@ -1,0 +1,115 @@
+name: MIRA V3 CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mira-v3-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          # Fixture pública para este servicio efímero; no es una credencial real.
+          POSTGRES_DB: mira_ci_ephemeral
+          POSTGRES_USER: mira_ci
+          POSTGRES_PASSWORD: ci-only-disposable-postgres
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U mira_ci -d mira_ci_ephemeral"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      MIRA_CI: '1'
+      PGHOST: 127.0.0.1
+      PGPORT: '5432'
+      PGDATABASE: mira_ci_ephemeral
+      PGUSER: mira_ci
+      PGPASSWORD: ci-only-disposable-postgres
+      MIRA_TEST_DB: Host=127.0.0.1;Port=5432;Database=mira_ci_ephemeral;Username=mira_ci;Password=ci-only-disposable-postgres;GSS Encryption Mode=Disable
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - name: Prepare tooling and restore fixed dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --yes --no-install-recommends postgresql-client
+          mkdir -p .local/ci
+          dotnet restore MIRA.sln
+          python -m pip install -r frontend/requirements-dev.txt
+          python -m pip check
+      - name: Compile, migrate temporary database and test
+        run: |
+          dotnet build MIRA.sln --configuration Release --no-restore
+          python scripts/ci/prepare_database.py --report .local/ci/sql.json
+          dotnet test MIRA.sln --configuration Release --no-build --no-restore --logger 'trx;LogFileName=ci.trx' --results-directory .local/ci
+          python -m pytest frontend/tests --ignore=frontend/tests/e2e -q -p no:cacheprovider --junitxml=.local/ci/flask.xml
+          python scripts/ci/check_results.py --trx .local/ci/ci.trx --junit .local/ci/flask.xml
+      - name: Security checks (blocked audits fail the job)
+        run: |
+          python scripts/ci/check_tracked_secrets.py
+          dotnet list MIRA.sln package --vulnerable --include-transitive --no-restore --format json --output-version 1 > .local/ci/nuget.json
+          python scripts/ci/check_results.py --nuget .local/ci/nuget.json
+          python -m venv .local/ci-runtime
+          .local/ci-runtime/bin/python -m pip install -r frontend/requirements.lock
+          .local/ci-runtime/bin/python -m pip check
+          .local/ci-runtime/bin/python -m pip uninstall --yes pip setuptools wheel
+          python scripts/audit-python.py --package-dir .local/ci-runtime/lib/python3.11/site-packages --output .local/ci/osv.json
+      - name: Validate Compose and Gunicorn configuration without starting services
+        env:
+          POSTGRES_DB: mira_ci_ephemeral
+          POSTGRES_USER: mira_ci
+          POSTGRES_PASSWORD: ci-only-disposable-postgres
+          JWT_KEY: ci-only-signing-fixture-at-least-32-bytes-not-for-deploy
+          PORT: '10000'
+          WEB_CONCURRENCY: '1'
+        run: |
+          # Step-scoped disposable key; never persist it in GITHUB_ENV or artifacts.
+          set +x
+          LOGIN_FORWARDING_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
+          printf '::add-mask::%s\n' "$LOGIN_FORWARDING_KEY"
+          export LOGIN_FORWARDING_KEY
+          docker compose config --quiet
+          unset LOGIN_FORWARDING_KEY
+          python frontend/gunicorn.conf.py
+
+  containers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - name: Build non-root images locally (no registry push)
+        run: |
+          mkdir -p .local/ci
+          docker build -t mira-v3-api:stabilization .
+          docker build -t mira-v3-frontend:stabilization frontend
+      - name: Inspect images and Production-mode startup (no real destinations)
+        run: |
+          python scripts/verify-image-content.py --output .local/ci/images.json mira-v3-api:stabilization mira-v3-frontend:stabilization
+          python scripts/verify-production-smoke.py --output .local/ci/production-smoke.json

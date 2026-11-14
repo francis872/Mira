@@ -1,0 +1,334 @@
+{
+  "date": "2026-11-12",
+  "tool": "axe-core 4.10.3",
+  "checks": [
+    {
+      "path": "/login",
+      "width": 1440,
+      "passes": 19,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "width": 390,
+      "passes": 19,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 1440,
+      "passes": 23,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion",
+      "width": 1440,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 1440,
+      "passes": 27,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 1440,
+      "passes": 27,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/usuarios",
+      "width": 1440,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 1440,
+      "passes": 22,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 1440,
+      "passes": 23,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 1440,
+      "passes": 22,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 1440,
+      "passes": 22,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 1440,
+      "passes": 23,
+      "incomplete": 1,
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                "#field-descripcion"
+              ],
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ]
+        }
+      ],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 1440,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 1440,
+      "passes": 22,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/1",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/reportes/grupos/1/integrantes",
+      "width": 1440,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "passes": 18,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad",
+      "width": 390,
+      "passes": 29,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 390,
+      "passes": 23,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion",
+      "width": 390,
+      "passes": 18,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 390,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 390,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 390,
+      "passes": 25,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/usuarios",
+      "width": 390,
+      "passes": 24,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 390,
+      "passes": 22,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 390,
+      "passes": 23,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 390,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 390,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 390,
+      "passes": 21,
+      "incomplete": 1,
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                "#field-descripcion"
+              ],
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ]
+        }
+      ],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 390,
+      "passes": 24,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 390,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 390,
+      "passes": 29,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/1",
+      "width": 390,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/reportes/grupos/1/integrantes",
+      "width": 390,
+      "passes": 25,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    }
+  ]
+}

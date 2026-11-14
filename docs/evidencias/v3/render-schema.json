@@ -1,0 +1,6 @@
+{
+  "date": "2026-11-05",
+  "schema": "https://render.com/schema/render.yaml.json",
+  "status": "passed",
+  "scope": "JSON Schema only; no account, branch availability, provisioning or deployment validation"
+}

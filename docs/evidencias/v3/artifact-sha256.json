@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-05",
+  "sha256": {
+    "accessibility-results.json": "017f4b3b3c3f4c4fcd63d40b240d0456a7d224d9a472c3760754881a58d01430",
+    "browser-results.json": "9ef6642198f72fb0478ab922df6aea40a16740ed07931e567cd132b8325436d8",
+    "dashboard-1024.png": "fc4e5dcdfd80f3ea1059c76f50c3bac878811a6e8ef4ec8bddbd6c82c7f0e784",
+    "dashboard-1440.png": "343601da1782ccb486023518b2f5c264481239c6c9f9746ae057c11101aef49a",
+    "dashboard-320.png": "40c2d5e6db1f015e2e47c33eb121f25e85e5ffbb28688cf95c443df5451a3343",
+    "dashboard-390.png": "42c7ad6ae0aaa7652f7e349f2db5f903a974d5a13cb32ebb7cf48d75ec4e1b49",
+    "dashboard-640.png": "228664f7d6ac7e938e47fc88ce868972372e3e18100410b0e719bc4cc66f79bf",
+    "dashboard-768.png": "9507fbd88f6a2aa02380cdeca30792b8624c62a5726f2ecd1ed8e182f8e88d59",
+    "dependencias-python.json": "2f62f126eac9550f6b695e588123776f69ad76a2fbba95d0ced86ef9726e6f3e",
+    "docker-images.json": "50e218aea2ff314fd2dd0d222d9d2bc9ef0bf49f5ccbba7646eb4d627cb5c443",
+    "docker-session-results.json": "6c50178d5dff25e4efbe6c2f0c43b29ed60f9d713a297dcc3dfcad34bee23b4f",
+    "keyboard-results.json": "1e29abf0d2690a422a8ca9f51000e56d59d58382c0e6ac1943932c7f4a571032",
+    "login-desktop.png": "a18b078d45c9df4951c4b717bce12e82a73c9d00ea18525a482bdf7c97e79cec",
+    "login-mobile.png": "bdd861c06095018b76d09b2b28f0bb098143b18daa4ba815f8e642fd3604def1",
+    "osv-estabilizado.json": "0d8971729a5c5a89be871ecff1b7bc25e4b976410f172ea93aa75bed9e6543f0",
+    "production-smoke.json": "c85325a468b61a0a49e7851e9163347d6673e87f24fae7b6504e9da350fbe81d",
+    "render-schema.json": "99a3eedcc25480b7db0037061966039c7fb449778613c372190763e2c3841ca4",
+    "revision-final.json": "c00d9f873d460d52a3aab6be4057586f7a528c00538b708aaaec08b841088e53",
+    "secret-scan.json": "97abb94e0d1fe3ef4b2c3e84042a48bfb6bab603985584faf60bbb90130647d3"
+  }
+}

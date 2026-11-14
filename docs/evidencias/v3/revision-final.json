@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-05",
+  "timezone": "America/Bogota",
+  "branch": "feature/mira-v3",
+  "head": "95e2e0bf00d02497d2c8a42d1efe814a6b551d3a",
+  "requirementsTraced": 30,
+  "tests": {
+    "dotnet": {
+      "passed": 71,
+      "failed": 0,
+      "skipped": 0
+    },
+    "flask": {
+      "passed": 78,
+      "failed": 0
+    },
+    "httpE2E": {
+      "passed": 43,
+      "failed": 0
+    },
+    "dockerE2E": {
+      "passed": 43,
+      "failed": 0,
+      "sameCasesRepeated": true
+    },
+    "sqlSuites": 5,
+    "browserPageWidths": 50,
+    "consoleErrors": 0,
+    "keyboardGroups": 10,
+    "axeChecks": 18,
+    "axeViolations": 0,
+    "axeIncompleteRuleInstances": 10
+  },
+  "security": {
+    "osvRuntimeDistributions": 18,
+    "osvKnownAdvisories": 0,
+    "priorGhsaCorrected": 8,
+    "scope": "Linux Python runtime only; not full OS/base image CVE scan; old global Windows environment unchanged"
+  },
+  "c06": {
+    "publicForeignKeyColumns": 22,
+    "nullableForeignKeyColumns": 0,
+    "professorAcceptance": "pending"
+  },
+  "deployment": {
+    "localDefense": "ready_with_declared_observations",
+    "testDeployment": "configuration_prepared_not_deployed",
+    "production": "not_validated",
+    "renderNeonContacted": false,
+    "realTlsTested": false,
+    "dockerBuildsAndProductionModeStartup": "passed_local"
+  },
+  "manualPending": [
+    "screen reader walkthrough (Narrator detected, no verified assisted session)",
+    "desktop browser zoom 200/400 percent",
+    "real Safari iOS / Chrome Android",
+    "axe incomplete color-contrast and th-has-data-cells",
+    "real-time expiry and staging HTTPS/redeploy"
+  ],
+  "commitsCreated": false,
+  "gitStagingPerformed": false,
+  "deployed": false,
+  "realDataModified": false
+}

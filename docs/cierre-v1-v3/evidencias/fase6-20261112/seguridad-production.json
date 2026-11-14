@@ -1,0 +1,92 @@
+{
+  "startedAt": "2026-11-13T02:33:08.755953+00:00",
+  "web": "https://sapiens-v1-v3-20261112.vercel.app",
+  "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+  "checks": [
+    {
+      "case": "health_readiness",
+      "origin": "https://sapiens-v1-v3-20261112.vercel.app",
+      "path": "/health",
+      "http": 200,
+      "correlation": true
+    },
+    {
+      "case": "health_readiness",
+      "origin": "https://sapiens-v1-v3-20261112.vercel.app",
+      "path": "/ready",
+      "http": 200,
+      "correlation": true
+    },
+    {
+      "case": "health_readiness",
+      "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/health",
+      "http": 200,
+      "correlation": true
+    },
+    {
+      "case": "health_readiness",
+      "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/ready",
+      "http": 200,
+      "correlation": true
+    },
+    {
+      "case": "swagger_hidden",
+      "http": 404
+    },
+    {
+      "case": "correct_api_authentication",
+      "http": 200,
+      "jwtLifetimeSeconds": 1200
+    },
+    {
+      "case": "wrong_api_password",
+      "http": 401
+    },
+    {
+      "case": "anonymous_api",
+      "http": 401
+    },
+    {
+      "case": "web_role_denied",
+      "role": "investigator",
+      "login": 302,
+      "home": 200,
+      "accountAdministration": 403
+    },
+    {
+      "case": "web_role_denied",
+      "role": "coordinator",
+      "login": 302,
+      "home": 200,
+      "accountAdministration": 403
+    },
+    {
+      "case": "secure_web_session",
+      "login": 302,
+      "home": 200,
+      "opaqueSidRotated": true,
+      "jwtInBrowser": false,
+      "secureHttpOnlyStrict": true
+    },
+    {
+      "case": "csrf_rejection",
+      "http": 400
+    },
+    {
+      "case": "web_logout",
+      "logout": 302,
+      "protected": 302
+    },
+    {
+      "case": "same_jwt_revoked",
+      "logout": 200,
+      "reuse": 401
+    }
+  ],
+  "status": "passed",
+  "finishedAt": "2026-11-13T02:34:12.947835+00:00",
+  "credentialsPrinted": false,
+  "realTimeExpiryReference": "remote-security.json; same unchanged Render API tested with actually issued 60-second JWT before normal 20-minute lifetime was restored"
+}

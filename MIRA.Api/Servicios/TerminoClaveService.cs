@@ -27,6 +27,8 @@ public class TerminoClaveService : ITerminoClaveService
     {
         if (string.IsNullOrWhiteSpace(entity.Termino))
             throw new ArgumentException("El campo 'termino' es obligatorio.");
+        if (string.IsNullOrWhiteSpace(entity.TerminoIngles))
+            throw new ArgumentException("El equivalente en inglés es obligatorio.");
 
         entity.Termino = entity.Termino.Trim();
         entity.TerminoIngles = entity.TerminoIngles?.Trim();
@@ -42,6 +44,8 @@ public class TerminoClaveService : ITerminoClaveService
     public async Task<bool> UpdateAsync(string termino, TerminoClave entity)
     {
         if (string.IsNullOrWhiteSpace(termino)) return false;
+        if (string.IsNullOrWhiteSpace(entity.TerminoIngles))
+            throw new ArgumentException("El equivalente en inglés es obligatorio.");
 
         var existing = await _repository.GetByTerminoAsync(termino.Trim());
         if (existing == null) return false;

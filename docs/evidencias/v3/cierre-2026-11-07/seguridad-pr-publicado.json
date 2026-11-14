@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-07",
+  "scope": "full main...feature/mira-v3 final diff; not all historical object versions",
+  "head": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "base": "35640853dc4cbb4dd50f17c9208acb2feedaff1d",
+  "files": 197,
+  "commits": 51,
+  "texts": 181,
+  "officeDocumentsXmlScanned": 3,
+  "binaryPaths": [
+    "docs/evidencias/mira-v2-desktop.png",
+    "docs/evidencias/mira-v2-form.png",
+    "docs/evidencias/mira-v2-grupo-semilleros.png",
+    "docs/evidencias/mira-v2-mobile.png",
+    "docs/evidencias/v3/dashboard-1024.png",
+    "docs/evidencias/v3/dashboard-1440.png",
+    "docs/evidencias/v3/dashboard-320.png",
+    "docs/evidencias/v3/dashboard-390.png",
+    "docs/evidencias/v3/dashboard-640.png",
+    "docs/evidencias/v3/dashboard-768.png",
+    "docs/evidencias/v3/login-desktop.png",
+    "docs/evidencias/v3/login-mobile.png"
+  ],
+  "deleted": [
+    "database/init/02_seed_data.sql"
+  ],
+  "findings": [
+    {
+      "file": "frontend/tests/test_production.py",
+      "kind": "credentialLikeFixtureReview",
+      "line": 12
+    },
+    {
+      "file": "tests/MIRA.Api.Tests/SeguridadDatabaseTests.cs",
+      "kind": "credentialLikeFixtureReview",
+      "line": 24
+    },
+    {
+      "file": "tests/MIRA.Api.Tests/SeguridadTests.cs",
+      "kind": "credentialLikeFixtureReview",
+      "line": 54
+    },
+    {
+      "file": "tests/MIRA.Api.Tests/SeguridadTests.cs",
+      "kind": "credentialLikeFixtureReview",
+      "line": 120
+    },
+    {
+      "file": "tests/MIRA.Api.Tests/SeguridadTests.cs",
+      "kind": "credentialLikeFixtureReview",
+      "line": 127
+    },
+    {
+      "file": "tests/MIRA.Api.Tests/SeguridadTests.cs",
+      "kind": "credentialLikeFixtureReview",
+      "line": 155
+    }
+  ],
+  "forbiddenCandidatePaths": [],
+  "review": "Matches reviewed as isolated test fixtures; no real secret detected. Heuristic final Git tree scan, not complete history."
+}

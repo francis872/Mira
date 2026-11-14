@@ -1,0 +1,22 @@
+{
+  "clientDate": "2026-11-12",
+  "projectId": "snowy-bonus-50718377",
+  "endpointId": "ep-wispy-violet-bb8s4omb",
+  "database": "sapiens",
+  "role": "mira_migrador",
+  "version": "16.16 (ff7d7f1)",
+  "initialUserTableCount": 0,
+  "tls": {
+    "clientEnabled": true,
+    "sslMode": "verify-full",
+    "channelBinding": "require",
+    "backendSessionSsl": false,
+    "scope": "Client to Neon managed TLS proxy; pg_stat_ssl describes provider-internal backend link"
+  },
+  "backupSha256": "7cba6987514d9241c0c0315112f715fea745b4d89e1502064cf4c00f0e262ef9",
+  "archiveListReadable": true,
+  "restorationStillRequired": false,
+  "migrationsApplied": false,
+  "existingDatabasesModified": false,
+  "restorationTest": "passed in new isolated local PostgreSQL16 database"
+}

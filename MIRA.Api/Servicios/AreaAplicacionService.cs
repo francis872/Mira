@@ -28,7 +28,7 @@ public class AreaAplicacionService : IAreaAplicacionService
         if (string.IsNullOrWhiteSpace(entity.Nombre))
             throw new ArgumentException("El campo 'nombre' es obligatorio.");
 
-        entity.Nombre = entity.Nombre.Trim();
+        // La normalización final corresponde al trigger PostgreSQL (migración 005).
         entity.Activo = true;
 
         return await _repository.CreateAsync(entity);
@@ -44,7 +44,7 @@ public class AreaAplicacionService : IAreaAplicacionService
         if (existing == null) return false;
 
         entity.Id = id;
-        entity.Nombre = entity.Nombre.Trim();
+        // PostgreSQL normaliza el nombre sin duplicar esa transformación en la API.
 
         return await _repository.UpdateAsync(entity);
     }

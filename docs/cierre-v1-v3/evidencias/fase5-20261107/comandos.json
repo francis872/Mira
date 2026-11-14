@@ -1,0 +1,9 @@
+{
+  "scope": "Historical Phase 5, 2026-11-07",
+  "privateHarnesses": [
+    ".local/fase5-20261107-192202-6355a6/integral-cierre/verify-postgres16.ps1",
+    ".local/fase5-20261107-192202-6355a6/verify-docker-keyboard.ps1",
+    ".local/fase5-20261107-192202-6355a6/navegador-aprobado/verify-postgres16.ps1"
+  ],
+  "publicReproduction": "Use scripts/verify-postgres16.ps1 and scripts/verify-docker.ps1 with new isolated ports/data and evidence output paths. Runtime credentials are not included."
+}

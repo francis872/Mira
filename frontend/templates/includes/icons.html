@@ -1,0 +1,4 @@
+{# Tabler Icons 3.34.1, MIT. SVG local, sin runtime React ni CDN. #}
+{% macro icon(name, classes='') -%}
+<svg class="mira-icon {{ classes }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="{{ url_for('static', filename='icons/tabler.svg') }}#{{ name }}"></use></svg>
+{%- endmacro %}

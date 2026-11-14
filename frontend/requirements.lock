@@ -1,0 +1,13 @@
+# Resolución runtime verificada; mismo conjunto en Linux 3.11 y Windows 3.14.
+# Gunicorn se selecciona solo en Linux mediante el marker de requirements.txt.
+-r requirements.txt
+blinker==1.9.0
+click==8.5.0
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.4
+msgspec==0.22.0
+packaging==26.3
+et-xmlfile==2.0.0
+pillow==13.0.0
+psycopg-binary==3.3.9

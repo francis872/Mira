@@ -16,54 +16,38 @@ public class AreaAplicacionRepository : IAreaAplicacionRepository
     public async Task<IEnumerable<AreaAplicacion>> GetAllActivosAsync()
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            SELECT id, nombre, activo 
-            FROM area_aplicacion 
-            WHERE activo = TRUE 
-            ORDER BY id;";
+        const string sql = "SELECT * FROM public.sp_listar_area_aplicacion();";
         return await connection.QueryAsync<AreaAplicacion>(sql);
     }
 
     public async Task<AreaAplicacion?> GetByIdAsync(int id)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            SELECT id, nombre, activo 
-            FROM area_aplicacion 
-            WHERE id = @Id AND activo = TRUE;";
+        const string sql = "SELECT * FROM public.sp_consultar_area_aplicacion(@Id);";
         return await connection.QueryFirstOrDefaultAsync<AreaAplicacion>(sql, new { Id = id });
     }
 
     public async Task<AreaAplicacion> CreateAsync(AreaAplicacion entity)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            INSERT INTO area_aplicacion (nombre, activo) 
-            VALUES (@Nombre, @Activo) 
-            RETURNING id, nombre, activo;";
+        const string sql = "SELECT * FROM public.sp_crear_area_aplicacion(@Nombre);";
         return await connection.QuerySingleAsync<AreaAplicacion>(sql, entity);
     }
 
     public async Task<bool> UpdateAsync(AreaAplicacion entity)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            UPDATE area_aplicacion 
-            SET nombre = @Nombre 
-            WHERE id = @Id AND activo = TRUE;";
-        var affected = await connection.ExecuteAsync(sql, entity);
-        return affected > 0;
+        const string sql = "SELECT public.sp_actualizar_area_aplicacion(@Id, @Nombre);";
+        var affected = await connection.QuerySingleAsync<bool>(sql, entity);
+        return affected;
     }
 
     public async Task<bool> SoftDeleteAsync(int id)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            UPDATE area_aplicacion 
-            SET activo = FALSE 
-            WHERE id = @Id AND activo = TRUE;";
-        var affected = await connection.ExecuteAsync(sql, new { Id = id });
-        return affected > 0;
+        const string sql = "SELECT public.sp_eliminar_area_aplicacion(@Id);";
+        var affected = await connection.QuerySingleAsync<bool>(sql, new { Id = id });
+        return affected;
     }
 }
 

@@ -1,0 +1,58 @@
+{
+  "startedAt": "2026-11-13T01:42:45.004135+00:00",
+  "web": "https://sapiens-v1-v3-20261112-jr0m39owg.vercel.app",
+  "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+  "profile": "Preview; one-minute JWT expiry for real-time test; no weakened signature/roles/CSRF",
+  "checks": [
+    {
+      "case": "correct_authentication",
+      "status": 200,
+      "jwtPrinted": false
+    },
+    {
+      "case": "incorrect_password",
+      "status": 401
+    },
+    {
+      "case": "request_without_token",
+      "status": 401
+    },
+    {
+      "case": "authorization_denied",
+      "status": 403,
+      "authorizedRead": 200
+    },
+    {
+      "case": "same_jwt_revoked",
+      "logout": 200,
+      "reuse": 401
+    },
+    {
+      "case": "https_secure_session",
+      "login": 302,
+      "home": 200,
+      "secureHttpOnlyStrict": true,
+      "sessionIdentifierRotated": true,
+      "jwtInBrowser": false
+    },
+    {
+      "case": "csrf_missing",
+      "status": 400
+    },
+    {
+      "case": "web_logout",
+      "logout": 302,
+      "protectedPageAfterLogout": 302
+    },
+    {
+      "case": "real_time_expired_jwt",
+      "status": 401,
+      "issuedLifetimeSeconds": 60,
+      "timeWaited": true,
+      "tokenOrClockModified": false
+    }
+  ],
+  "status": "passed",
+  "waitingForRealJwtExpiry": false,
+  "finishedAt": "2026-11-13T01:43:55.266384+00:00"
+}

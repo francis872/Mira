@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Líneas inactivas{% endblock %}
+{% block content %}
+<a href="{{ url_for('investigacion.listing',resource='lineas_investigacion') }}">Volver a líneas activas</a>
+<h1 class="my-4">Líneas inactivas</h1>
+<section class="card card-custom"><div class="card-body"><div class="table-responsive" role="region" aria-label="Líneas inactivas, tabla desplazable" tabindex="0"><table class="table"><caption class="visually-hidden">Reactivación de líneas que conservan sus asociaciones</caption><thead><tr><th scope="col">Código</th><th scope="col">Nombre</th><th scope="col">Acciones</th></tr></thead><tbody>
+{% for row in items %}<tr><td>{{ row.codigo }}</td><td>{{ row.nombre }}</td><td><form method="POST" action="{{ url_for('investigacion.reactivate_line',record_id=row.id) }}">{{ csrf_input() }}<button class="btn btn-outline-primary" type="submit">Reactivar</button></form></td></tr>{% else %}<tr><td colspan="3">{{ 'No hay líneas inactivas.' if loaded else 'No fue posible consultar las líneas.' }}</td></tr>{% endfor %}
+</tbody></table></div></div></section>
+{% endblock %}

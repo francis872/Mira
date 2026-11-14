@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-05",
+  "checks": [
+    {
+      "path": "/universidad",
+      "modalName": true,
+      "tabTrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "path": "/area_conocimiento",
+      "modalName": true,
+      "tabTrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible",
+      "modalName": true,
+      "tabTrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "path": "/area_aplicacion",
+      "modalName": true,
+      "tabTrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "path": "/termino_clave",
+      "modalName": true,
+      "tabTrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "path": "/linea_investigacion",
+      "modalName": true,
+      "tabTrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "path": "/universidad",
+      "width": 390,
+      "tableKeyboardScroll": true,
+      "focusVisible": true
+    },
+    {
+      "path": "/universidad/nuevo",
+      "requiredFieldFocus": true
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "detailKeyboardAddRemove": true,
+      "focusPreserved": true
+    },
+    {
+      "path": "/",
+      "visualZoom": 2,
+      "reflowCssWidths": [
+        640,
+        320
+      ],
+      "desktopBrowserZoomManuallyPending": true
+    }
+  ],
+  "screenReaderTested": false
+}

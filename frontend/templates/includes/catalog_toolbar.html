@@ -1,0 +1,11 @@
+{% from 'includes/icons.html' import icon %}
+<div class="catalog-toolbar">
+    <div class="catalog-search-field">
+        <label for="catalog-search">Buscar en el listado</label>
+        {{ icon('search', '') }}
+        <input id="catalog-search" type="search" class="form-control catalog-search"
+               placeholder="Nombre, descripción o palabra clave…" aria-describedby="catalog-results">
+    </div>
+    <p id="catalog-results" class="catalog-summary" role="status" aria-live="polite">La búsqueda filtra los registros cargados.</p>
+    <p id="catalog-no-results" class="catalog-summary w-100" hidden>No hay coincidencias. Prueba con otro texto.</p>
+</div>

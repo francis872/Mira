@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-07",
+  "checks": [
+    {
+      "image": "mira-v3-api:fase5-20261107",
+      "id": "sha256:6fde67a206e845f2fb6c30141ca6aee3153d4e2fde2783a7afcf74d1e9e96d1a",
+      "user": "1654",
+      "applicationFiles": 25,
+      "forbiddenApplicationPaths": [],
+      "privateKeyOrJwtLiterals": [],
+      "status": "passed"
+    },
+    {
+      "image": "mira-v3-frontend:fase5-20261107",
+      "id": "sha256:1b7ad631c7d003f1b26030a9b405109503e79dc1bbf084e425ff8d520125cfb0",
+      "user": "mira",
+      "applicationFiles": 56,
+      "forbiddenApplicationPaths": [],
+      "privateKeyOrJwtLiterals": [],
+      "status": "passed"
+    }
+  ]
+}

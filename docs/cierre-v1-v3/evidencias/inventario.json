@@ -1,0 +1,898 @@
+{
+  "originalPending": 64,
+  "newDocumentation": 47,
+  "pendingTotal": 111,
+  "modifiedExistingThisTask": 0,
+  "deletedThisTask": 0,
+  "staged": 0,
+  "files": [
+    {
+      "path": ".env.example",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b6d5c5287b9727b9592701a77efefd30fd65525dd04ec75db380864c8085ed0e",
+      "hashNote": null
+    },
+    {
+      "path": "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "a5415dd4f37d5aa0da832504cab7b1a2db291001faf54328a0bbd08aba80ad27",
+      "hashNote": null
+    },
+    {
+      "path": "MIRA.Api/Program.cs",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "efcd2dff8d6c37e6d14e5f314c848eccf65ea3baa6969a2e9b6f81c82a8dc763",
+      "hashNote": null
+    },
+    {
+      "path": "README.md",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b124187c2c8bcae43304dd4f965f7b121d32e077491ad9b304fbccb87d2495c1",
+      "hashNote": null
+    },
+    {
+      "path": "deploy/README.md",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "baf4c8a3946087ee274ac69e35026e822c6196670865082908d9827922771067",
+      "hashNote": null
+    },
+    {
+      "path": "deploy/render.yaml.example",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b4fa8fd8c3597e1522e1fdb65473980d9cafe666c8c31eb7d8c29580986e8900",
+      "hashNote": null
+    },
+    {
+      "path": "docker-compose.yml",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "8a3eff5d5b5c6e50c584190faa457d5622f97f8f365500264ea0d0ac954f95d6",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_ARQUITECTURA.md",
+      "status": " M",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "d7b8a66a9613e7bafe36add699f75ac89b74b16158e9df62c1ef7e265fc228e3",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_GUIA_SUSTENTACION.md",
+      "status": " M",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "73785226d02ebacca6b94ce2050c21c6c99469edeab82bc957897b0c2a777425",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_MAPA_TECNICO.md",
+      "status": " M",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "3e56e11d8bc30f788db1b1502da85b998047f5ae77396cb1bef26103466b9a96",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_PRUEBAS.md",
+      "status": " M",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "807ef79e098beecbe3e4e6b5e010530c3b6fc00de09839ca7dd93306e3990f15",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_REVISION_FINAL.md",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "912acfa38e0d0b7047a92886adee7de1d9cbb71ad5355f3815acec455cbbb972",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/Dockerfile",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "9bd9a7d526fbc606a0343fab3b7da736e2742a8a6a51bd1cf1328c1580295eec",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/app.py",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "2e8aa269fe8394390880f61f0bfa6ac4f86bf7c70cd1ab1340069200dc3d8612",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/static/investigacion.js",
+      "status": " M",
+      "responsibilityGroup": 1,
+      "origin": "Pendiente previo preservado",
+      "sha256": "42373cc00ea5b660e271d2cb8eee47a93fe85da33c25d73cb60a02110b00ab00",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/static/mira.css",
+      "status": " M",
+      "responsibilityGroup": 1,
+      "origin": "Pendiente previo preservado",
+      "sha256": "76237bfae558760ff358ef3fb7f0962e80866ce570b7daeb169c8fccdb175d5c",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/templates/investigacion/grupo.html",
+      "status": " M",
+      "responsibilityGroup": 1,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b774198e0e5f449405ca84dc431eac2f03e1db98cff4db20383e5ec336cefc6f",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/templates/login.html",
+      "status": " M",
+      "responsibilityGroup": 1,
+      "origin": "Pendiente previo preservado",
+      "sha256": "e7b018206adbbc96c21142854b7eba6643d5b674c90faa5d4ceaabad8ea98ea5",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/tests/test_app.py",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "ff67cc14361cd0aaf244e9ea22a67be2fa5641a19fb0e5838990abb3551fa99c",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/tests/test_investigacion.py",
+      "status": " M",
+      "responsibilityGroup": 1,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b439812bc19df6cce6171331629230c0f2576309139429c39d5ac1d24e520dc0",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/README.md",
+      "status": " M",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "46a486ae5eee167e7fe93cab09cace96872775c4568f8d9ae9ab16abb1215faa",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/audit-python.py",
+      "status": " M",
+      "responsibilityGroup": 2,
+      "origin": "Pendiente previo preservado",
+      "sha256": "8a549d3daf309bfcf7edb468067e01a245ac7f13931e1e0e59345cb10fac117e",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/audit-worktree.py",
+      "status": " M",
+      "responsibilityGroup": 2,
+      "origin": "Pendiente previo preservado",
+      "sha256": "cd670ca8f6e7917c51c74962e7ae65d74c286728f22d76a41abfdda82e50674e",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/start-local.ps1",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b87d22a635835c7c2cc0ee692d94adff70e2508b9fc26085f9043cf02d09de1a",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-browser-v3.mjs",
+      "status": " M",
+      "responsibilityGroup": 2,
+      "origin": "Pendiente previo preservado",
+      "sha256": "0c5ebde6870ecc54c2cf031dc612d8f2494134f299a5417e0f07d6897a185b05",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-docker-session.py",
+      "status": " M",
+      "responsibilityGroup": 2,
+      "origin": "Pendiente previo preservado",
+      "sha256": "32b63ee244b1b8d678759f04185b7cf7d161771866ab2e6035e949577ccf015d",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-docker.ps1",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "2756c035a8733b3bfbcaa22d9b1d1dbd96c5c6d72921b3ff04c5a262e1d20cdb",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-image-content.py",
+      "status": " M",
+      "responsibilityGroup": 2,
+      "origin": "Pendiente previo preservado",
+      "sha256": "95732f50fb77147983c08896e16a19e8abec3af118a4e2570592ceccd28fdf45",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-postgres16.ps1",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "c7bde046ff1acba83447d85d3bd304949ddf6cad9e06ce723299f3cecab4d1e7",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-production-smoke.py",
+      "status": " M",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "0d4e8e0564507fead39745906c79c9e76b7cf4029cbde9dbc73f8e41fd9c59f9",
+      "hashNote": null
+    },
+    {
+      "path": "versiones/v3/3_plan.md",
+      "status": " M",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "38dff704cb385619d48a873cecf7d9954ef3b860612f6e5daa0b5bbddc0f26ce",
+      "hashNote": null
+    },
+    {
+      "path": ".github/workflows/mira-v3-ci.yml",
+      "status": "??",
+      "responsibilityGroup": 4,
+      "origin": "Pendiente previo preservado",
+      "sha256": "ccdb565473f649f7beb0142fb6ed3bc6c0582ed50e33fd0363c626dc9d0f9a4b",
+      "hashNote": null
+    },
+    {
+      "path": "MIRA.Api/Configuracion/LoginProtection.cs",
+      "status": "??",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "4cf4b9a598d2160f6a10e6716fd60d0a50291a1eacbb530ce16e0f547c586568",
+      "hashNote": null
+    },
+    {
+      "path": "docs/SAPIENS_PLAN_TRANSICION.md",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "28243ce186d937a31045f329f8302afb5f686d154f34ff8f44d54dbdfafa9ce4",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_C06_JUSTIFICACION.md",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "c08d1eeec2390e3101c185dcaf1db9832e8a4ff54c9afd92ac113382884de721",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_CI.md",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "1a6307582ea5b1f9ee2649619398682b11b0517ffa96fcd7fd23fd5c8e95aac3",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_CIERRE_ACADEMICO.md",
+      "status": "??",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "06c89121a50ff6a4ecc2e6c47e118d0d17a32ba8367246196dca6e0726d437c7",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_D01_LIMITACION_LOGIN.md",
+      "status": "??",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "86920cb9c7a0a0148952e89e89ddc3346971763601e09445e12f033af477f763",
+      "hashNote": null
+    },
+    {
+      "path": "docs/V3_PLAN_DESPLIEGUE_PRUEBAS.md",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "64e44f3dc2ba2438ac99e269a128fbb3734dc7a7506a78a869824b0c2456a3d1",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/01_arquitectura.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "fd79ab2ab5afe3ac44e1e08ac675f95f080d49b50caab468885c11a11d5f4761",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.csv",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "ba6117432fbae0b410af027ab72f675125838ce738528536cfc1787528923047",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "e519c3713cc9b30193b73375ebcfd6d99e8d717e5a812459a2ca2ba54eb3781c",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/02_matriz_trazabilidad.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "960e5fe0b7699700f85b130e09cb80c6e6e46b0ef95f22409532bc8a8925b15e",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/03_endpoints.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "c4d404856aff27dacb27bb15f9a7acb9c777f1e35f6c0dcf02499275dee2cacc",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/04_modelo_datos.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "b5b8cd83accd7735ac9af8037714a69b50fd48b83b5b7f3da241c350372ef968",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/05_rutinas_triggers.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "4aac1d0555031e7a3fabb0e1cf913c3f4f0f1a27145eedf31fe994c96c8fdee5",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/06_autenticacion_autorizacion.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "7d4c897cda6645c66be44762618962132edbde61677e177e773f6e6c1b82b9f9",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/07_instalacion_local.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "eb06e87d7ad592202a98988c57ac5b366aac6a94eff34645bc3e9b1dab6d48d4",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/08_manual_usuario.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "86dea4b00c8ab8b52ba7f0d05a71a8b1387fc1470f0df15aad906208537c60c9",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/09_manual_tecnico.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "0999126dddc895e3aa848214f5a98c6c2c6f4237dd0546ec86430b5617ff6747",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/10_pruebas.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "928c48903a6bbd20d62d02cfe687369388ee6145dbaa75826c743c4abd35797e",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/11_guia_sustentacion.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "245ac120c6f45623a34d5e09c674b23d8a267cd764985678dd7f8c16984cc65f",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/12_riesgos_excepciones.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "ce8736448440a0dd2665b31b6d58433058d410b6e9b401ebaea0dc2af42d8770",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/13_historial_publicacion.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "dead19d51051962a8c9e261cbdaa908fadba1befb3a02492e1a8220353a0fd36",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/14_informe_cierre.md",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "cfe69e8fbdb24096935f876921ab02b643c37be35a6da836a4f139b94cd99f34",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/axe.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "aba0aec3cb8040d92d17e9991c3079a647933ba378e9a566490b9f9f93449396",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/casos.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "e8334af11c6a95ff40f9070caaea133983dc53a1c72080cfb59e26acf217e257",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/ci-config.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "31bea27e820f8eb28fedcd37ecc9778f30eadc9ce1f1af557f22b961b57eda05",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/consulta-esquema.sql",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "97ccd8c4f68b851341ec0c35cdfd47ef7b8a229a873cadeea71d11be4e55196b",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/contraejemplos-historicos.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "a27c8cbf9aa908b702246904844e9b90be001e8d84aa3243fffec47d9de1d10f",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/contraejemplos-historicos.sql",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "170c25978a0736c5464f3abd16dc381251b76830a4b2d5b21e6b0314ef560f20",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/control-final.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": null,
+      "hashNote": "See final sha256.json; self manifest excluded"
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/d01-sesiones.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "58b7e73ab1d2cc63fad2ffd119e08f57a674de4dc3e16c5785a9df243e5acd33",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/dashboard-1440.png",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "343601da1782ccb486023518b2f5c264481239c6c9f9746ae057c11101aef49a",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/dashboard-390.png",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "42c7ad6ae0aaa7652f7e349f2db5f903a974d5a13cb32ebb7cf48d75ec4e1b49",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/dashboard-768.png",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "9507fbd88f6a2aa02380cdeca30792b8624c62a5726f2ecd1ed8e182f8e88d59",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/endpoints.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "ef3555a18bfa1dd162b220905a45e7941ec03843e0229d00ba8964dc9bc75333",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/esquema.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "aa0a5e4d56f5c1ff3434f068ee9864ef3f60a1bb9a9dfe5726d6fe1f1454e3bb",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/fuentes-originales.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "e99f19bdfcd73bbbcfb7f27ed85b74e636636138bec8506e0ef8ff6480a84f19",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/imagenes.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "1ce7fb25abe6fbc36b893bc8dca4a9c3a44009f73c7efe33ef9018f07835c9c5",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/inventario.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": null,
+      "hashNote": "See final sha256.json; self manifest excluded"
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/login-mobile.png",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "f1594ad8c1aadea4297c058133868eb137032e396f22eee2ce470c1b9d470420",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/nuget.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "57cac9d878d35b19ceca01003539026c340e775366248550414034ca659f9e44",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/osv.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "080e1bc90e952248855e9b7fbb8d868c0014c2515860913fe9e69ebfec9fc6ea",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/plan_commits.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "8134c622f6b87b905c5fdf1cd4eba1aaa042983f0f82ce5eb3c41c3d6fc10e98",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/pr.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "7012b806c0d7f7c4054dc13443cd3d6258c7e508eb000573879e17bf84c78b5c",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/production-local.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "526f00b7d835ff92d48361e4fe6a8b666f324690515f49c8f678c2c022fe427a",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/responsive.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "f927ef528293985495a0595f9e24da5f22d952a9e695783b539cc39b9096f579",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/resultados.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "6fd4245cc1524f2e7119df30a43f39fe5fe32d3390bf2a578b63cc6384a8d536",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/seguridad.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "5437326afda7c658855be00ae3531ed5296c4fe888af2806df334bd3ea8a7df4",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/sesiones-docker.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "ec9829a3de3e791095f6e331f6499a316b4acf4a073d2cac2103591e6dad60e6",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/sha256.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": null,
+      "hashNote": "See final sha256.json; self manifest excluded"
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/teclado.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "612b38ea04e8ab30bb8b73b629b54e0b5667baacf6a68ad8037f492ac91c77a6",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/version-fuentes.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "3b5d8e103d2a97676c3cf6666a77dba73ca8e21f5da18a7f8302677329b4517b",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/zoom-4-ficha.png",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "8df348b22f514f18ad08055b63f7302110a8f43ba35a6a9dff4d6953e41a69b5",
+      "hashNote": null
+    },
+    {
+      "path": "docs/cierre-v1-v3/evidencias/zoom.json",
+      "status": "??",
+      "responsibilityGroup": 6,
+      "origin": "Documento/evidencia nuevo de este encargo",
+      "sha256": "fd7d7dbb2ed7ccc4e27047a2c014cf80d6abc5609d52f01aafb436550bbf352d",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/accessibility-results.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "aba0aec3cb8040d92d17e9991c3079a647933ba378e9a566490b9f9f93449396",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/browser-results.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "f927ef528293985495a0595f9e24da5f22d952a9e695783b539cc39b9096f579",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/c06-schema.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "d44cb9581be2df2e13b8a26a2b026dba09ff722e8832d8eb593e48364413c774",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/dashboard-1440.png",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "343601da1782ccb486023518b2f5c264481239c6c9f9746ae057c11101aef49a",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/dashboard-390.png",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "42c7ad6ae0aaa7652f7e349f2db5f903a974d5a13cb32ebb7cf48d75ec4e1b49",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/docker-session-results.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "ec9829a3de3e791095f6e331f6499a316b4acf4a073d2cac2103591e6dad60e6",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/images.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "02d6bce1a8f8fc2f7754a86ec509b81043d2deade398158d23560ae23faef024",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/keyboard-results.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "612b38ea04e8ab30bb8b73b629b54e0b5667baacf6a68ad8037f492ac91c77a6",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/login-mobile.png",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "f1594ad8c1aadea4297c058133868eb137032e396f22eee2ce470c1b9d470420",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/osv.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "727b06d427eefba321d19e7608fe82d12259ad2248fef9b6bfe3004c776bcca6",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/production-smoke.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "526f00b7d835ff92d48361e4fe6a8b666f324690515f49c8f678c2c022fe427a",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/resumen.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "96252ae705823a7e49458984d7cfae3e578d85120d621c46ae3c360c4c5bff55",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/seguridad-pr-publicado.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "7310a4315cc35162591293da83cd993fb08f1895796a45431d7dc0fde0064253",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/sha256.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "8d575a3f486560ca556fbaeb37f6b9171845dfd2af3bf82d1150f960ed2e022c",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-2-login.png",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "4ec35454ee82ee3a0d2738c8504dbd76d765458862ff5b0a1c1df91458417489",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-4-ficha.png",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "8df348b22f514f18ad08055b63f7302110a8f43ba35a6a9dff4d6953e41a69b5",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-4-inicio.png",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "6ac30c8298f8a05e061124d60685b7d3a99dd6a1e715a08b0252199691142637",
+      "hashNote": null
+    },
+    {
+      "path": "docs/evidencias/v3/cierre-2026-11-07/zoom-results.json",
+      "status": "??",
+      "responsibilityGroup": 5,
+      "origin": "Pendiente previo preservado",
+      "sha256": "fd7d7dbb2ed7ccc4e27047a2c014cf80d6abc5609d52f01aafb436550bbf352d",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/login_protection.py",
+      "status": "??",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "ab25151697f7cc363d6ddd3e309f2ece99b36f56b4b7cb5501dfd61f4befb3b3",
+      "hashNote": null
+    },
+    {
+      "path": "frontend/tests/test_login_protection.py",
+      "status": "??",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "b43497c6c67ff64baf6e56415d07198740d9a6187d4172f4b2b6c40fa99ff7a3",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/ci/check_results.py",
+      "status": "??",
+      "responsibilityGroup": 4,
+      "origin": "Pendiente previo preservado",
+      "sha256": "ecec38f2e9e3fe111ee88136b020edb3e06008ed7ec87c92b686c55c2e68ff81",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/ci/check_tracked_secrets.py",
+      "status": "??",
+      "responsibilityGroup": 4,
+      "origin": "Pendiente previo preservado",
+      "sha256": "9802a02f9b4a194109e2720a3ce21bf70a16000d7f05b74d313589be3b230cea",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/ci/prepare_database.py",
+      "status": "??",
+      "responsibilityGroup": 4,
+      "origin": "Pendiente previo preservado",
+      "sha256": "26135c43d266115347cdc470a8cd1f92239013b226c70ac99ea46611f8692398",
+      "hashNote": null
+    },
+    {
+      "path": "scripts/verify-zoom-v3.mjs",
+      "status": "??",
+      "responsibilityGroup": 2,
+      "origin": "Pendiente previo preservado",
+      "sha256": "d89d67fae083c5ec9b6ef1d008b13de6811fdf9b9876cc56875e35437fac1795",
+      "hashNote": null
+    },
+    {
+      "path": "tests/MIRA.Api.Tests/LoginProtectionTests.cs",
+      "status": "??",
+      "responsibilityGroup": 3,
+      "origin": "Pendiente previo preservado",
+      "sha256": "830102f0e73177e6ae2d54f627966a7cb09aeb1af3239af08d7d63975fad0dd3",
+      "hashNote": null
+    }
+  ]
+}

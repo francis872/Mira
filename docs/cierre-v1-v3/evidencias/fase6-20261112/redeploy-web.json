@@ -1,0 +1,11 @@
+{
+  "web": "https://sapiens-preview-v1-v3-20261112.vercel.app",
+  "oldDeployment": "sapiens-v1-v3-20261112-jr0m39owg.vercel.app",
+  "newDeployment": "sapiens-v1-v3-20261112-p88bg82j4.vercel.app",
+  "sameSessionAfterNewDeployment": true,
+  "homeBefore": 200,
+  "homeAfter": 200,
+  "sharedPostgres": true,
+  "status": "passed",
+  "cookieOrTokenPrinted": false
+}
