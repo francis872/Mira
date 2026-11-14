@@ -1,6 +1,6 @@
 # SAPIENS: despliegue completo en Render y Neon
 
-Comprobado el **13 de noviembre de 2026**, zona America/Bogota. Repositorio `francis872/Mira`, rama `feature/mira-v3`. Esta operación publica la interfaz Flask en Render y reutiliza la API y la base Neon existentes. Se mantienen V1–V3 y el despliegue anterior de Vercel.
+Verificación inicial del **13 de noviembre de 2026** y republicación comprobada el **14 de noviembre**, zona America/Bogota. Repositorio `francis872/Mira`, rama `feature/mira-v3`. La interfaz Flask y la API se publican en Render y reutilizan la base Neon existente. Se mantienen V1–V3 y el despliegue anterior de Vercel.
 
 ## Recursos y versión
 
@@ -10,7 +10,24 @@ Comprobado el **13 de noviembre de 2026**, zona America/Bogota. Repositorio `fra
 | API .NET | [sapiens-api-v1-v3-20261112.onrender.com](https://sapiens-api-v1-v3-20261112.onrender.com) · `srv-dbr6i3dckfvc73dc3hr0` | Docker, Render Free, Virginia, una instancia |
 | PostgreSQL 16 | Neon, proyecto `snowy-bonus-50718377`, base `sapiens` | Organización Free; conexión TLS `verify-full` y `channel_binding=require` |
 
-Frontend desplegado: commit [`0891fe160bcaa898b73bb748fe596aed3ae9acce`](https://github.com/francis872/Mira/commit/0891fe160bcaa898b73bb748fe596aed3ae9acce), despliegue `dep-dbriod0n74is73fngprg`, estado `live` en la API de Render. La API conserva el despliegue `dep-dbr6nft6e07s73an9bd0`, commit `630721a118f7cfa38093d1da8e885d502c889ddc`: `git diff` confirma que `MIRA.Api`, `Dockerfile` y `database` no cambian entre ese commit y el nuevo frontend. Los commits posteriores de documentación no representan otra versión de la imagen.
+### Versión activa: republicación solicitada
+
+Ambos servicios sirven el commit [`caf4c8cd0c8debb641f6605b478a2f043e11f22f`](https://github.com/francis872/Mira/commit/caf4c8cd0c8debb641f6605b478a2f043e11f22f). Se solicitó su despliegue el 13 de noviembre, a las 15:47 UTC, y se confirmó nuevamente `live` el 14 de noviembre:
+
+| Servicio | Despliegue activo |
+|---|---|
+| API | `dep-dbrj24gn74is73fo7a4g` |
+| Interfaz | `dep-dbrj256tlv9c738maehg` |
+
+[Evidencia de republicación y comprobaciones posteriores](evidencias/render-neon-20261114/redespliegue.json). Se conservaron variables privadas, planes Free, Neon, el mismo JWT y el mismo SID durante el redespliegue; el logout posterior invalidó ambos accesos. El 14 de noviembre se aprobaron las 14 comprobaciones de seguridad/operación y, adicionalmente, el rechazo 401 de contraseña incorrecta desde la interfaz. Ambos `/health` y `/ready` respondieron 200 con correlación de la aplicación. Render y Neon confirmaron sus planes Free.
+
+La verificación requirió repetición: el primer intento dejó ocho comprobaciones aprobadas y un timeout de lectura de 40 segundos al consultar `/login`; el segundo dejó una aprobada y falló al exigir 200 de `/ready` web, sin capturar su código real. La tercera corrida completó las 14. Se preservan los intentos incompletos; no se afirma una primera corrida limpia ni una causa de red demostrada. La comprobación posterior de `/health` API tardó 16,334 segundos y los restantes endpoints alrededor de un segundo. Estos datos no garantizan disponibilidad continua ni sustituyen un ensayo controlado de arranque frío.
+
+`git diff` confirma que el código de ejecución no cambió respecto de la validación funcional anterior. No se repitieron los 50 E2E completos ni el navegador en esta republicación. Los resultados de la sección de pruebas siguiente pertenecen a la verificación inicial. La documentación posterior no exige reconstruir las imágenes.
+
+### Versiones de la verificación inicial
+
+Frontend inicial: commit [`0891fe160bcaa898b73bb748fe596aed3ae9acce`](https://github.com/francis872/Mira/commit/0891fe160bcaa898b73bb748fe596aed3ae9acce), despliegue `dep-dbriod0n74is73fngprg`, entonces `live`. La API utilizaba `dep-dbr6nft6e07s73an9bd0`, commit `630721a118f7cfa38093d1da8e885d502c889ddc`: `git diff` confirma que `MIRA.Api`, `Dockerfile` y `database` no cambian entre ese commit y el frontend aceptado.
 
 El primer despliegue web `dep-dbrijlgae00c73fpf1cg`, basado en `b40a4ca`, se usó para observar el ingreso de solicitudes. El despliegue aceptado lo reemplazó: se retiró el comando temporal de logs y se restauró el CMD de la imagen. No se ejecutaron migraciones, restablecimientos de cuentas ni cambios de credenciales existentes. Las pruebas funcionales crean registros QA identificados e inactivan sus propios registros; la base sigue siendo de demostración.
 
@@ -40,7 +57,7 @@ Prueba sobre el servicio real: una solicitud base y otra con `X-Forwarded-For`, 
 
 El origen canónico se firma con el protocolo HMAC existente (`LoginOriginAuth`); no cambiaron `LoginProtectionMiddleware`, bcrypt, JWT, roles ni cuotas en la API. Las cuotas siguen siendo por instancia, sin garantía distribuida.
 
-## Pruebas ejecutadas en esta operación
+## Pruebas de la verificación inicial (13 de noviembre)
 
 La [evidencia saneada](evidencias/render-neon-20261113/verificacion.json) incluye casos, resultados, versiones y marcas de tiempo. Los resultados históricos permanecen separados.
 
