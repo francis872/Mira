@@ -1,5 +1,7 @@
 # Revisión de entrega: CI, pendientes V2 y recuperación
 
+> Decisión vigente del **15 de noviembre de 2026**: el usuario indicó «no necesito actions» y confirmó que **no existe decisión escrita del docente sobre C06**. Actions deja de ser requisito para continuar o fusionar; sus resultados históricos no cambian. C06, la revisión formal y el hallazgo de arranque mantienen su estado pendiente. [Registro de la decisión](evidencias/decision-entrega-20261115.json).
+
 Fecha de cierre de esta comprobación: **14 de noviembre de 2026, America/Bogota**. Algunas marcas UTC corresponden al 15 de noviembre. Repositorio `francis872/Mira`, rama `feature/mira-v3`, fuente revisada `2974abcc984e7df3adb5afa560efceca864ab20f`, base del PR `35640853dc4cbb4dd50f17c9208acb2feedaff1d`. Las imágenes públicas conservan `caf4c8c`; la diferencia posterior era documental, sin cambiar el código de ejecución.
 
 **El PR #7 no está aprobado para fusionarse.** Se verificó una recuperación nativa en Neon y se revisaron los pendientes académicos. Actions sigue rechazando jobs por bloqueo de cuenta. El ensayo controlado de arranque conjunto no recuperó la aplicación dentro de su plazo; la operación volvió después de calentamiento manual. No se declara cierre académico de V2 ni producción institucional validada.
@@ -10,10 +12,10 @@ Fecha de cierre de esta comprobación: **14 de noviembre de 2026, America/Bogota
 
 | Solicitud | Resultado comprobado | Condición que falta |
 |---|---|---|
-| Resolver Actions y obtener ejecución válida | Se reintentaron ambos jobs; el intento 2 volvió a fallar con cero pasos. Actions está habilitado en el repositorio | Desbloqueo de la cuenta por titular/GitHub y ejecución real aprobada del SHA final |
+| Resolver Actions y obtener ejecución válida | Se reintentaron ambos jobs; el intento 2 volvió a fallar con cero pasos. El 15 de noviembre el usuario excluyó Actions | Ya no es requisito; no se requiere resolver facturación ni obtener CI verde para continuar |
 | Revisar V2, incluido C06 | Revisión de fuentes, esquema vivo de solo lectura, código y contraejemplos en copia aislada | Decisiones académicas escritas; no se inventaron dispensas ni relaciones |
 | Arranque y recuperación de Neon | Respaldo consistente y restauración nativa verificados; 51 criterios funcionales cubiertos entre corrida y repetición. Arranque automático **no aprobado** | Resolver o delimitar el fallo de recuperación tras inactividad y repetir su ensayo |
-| Aprobar y fusionar el PR cuando pasen gates | Revisión técnica documentada; sin aprobación formal ni merge | CI válido, revisión aprobada y tratamiento explícito de los pendientes |
+| Aprobar y fusionar el PR cuando pasen gates | Revisión técnica documentada; sin aprobación formal ni merge | Revisión aprobada y tratamiento explícito de los pendientes; Actions excluido por el usuario |
 
 ## GitHub Actions y autorización de merge
 
@@ -25,7 +27,7 @@ GitHub documenta que una retención de autorización fallida puede afectar funci
 
 En la consulta de revisión, el PR era Draft, tenía cero revisiones y cero hilos; el autor y la identidad disponible coinciden: `francis872`. GitHub impide al autor aprobar su propio PR. [Regla oficial de revisión](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request#submitting-your-review). La revisión técnica de este documento no se presenta como un `APPROVED` independiente. No se contactaron revisores ni se creó una identidad alternativa.
 
-Aunque la configuración de la rama permita fusionar sin esas condiciones, la instrucción del usuario las exige. No se ejecutó merge, auto-merge ni omisión administrativa de gates.
+La instrucción original condicionaba la fusión a CI y revisión. El 15 de noviembre el usuario retiró el requisito de Actions; se conserva el requisito de revisión y el tratamiento de los hallazgos no aceptados. No se ejecutó merge, auto-merge ni una aprobación ficticia.
 
 ## Pendientes académicos contrastados
 
@@ -105,9 +107,9 @@ La auditoría OSV consultó los **25 paquetes reales de la imagen Linux nueva**,
 
 ## Condiciones para continuar
 
-1. Titular/GitHub: resolver el bloqueo de cuenta y ejecutar Actions sobre el SHA final. La consulta actual no permite determinar ni modificar la situación financiera.
+1. Actions: excluido por el usuario el 15 de noviembre. No continuar solicitando resolución de facturación ni exigir una ejecución válida. El workflow y sus resultados históricos se conservan; esta actualización documental puede omitir su ejecución con `[skip ci]`.
 2. Docente/equipo: registrar decisiones verificables para C06, titularidad docente, periodo/liderazgo, Facultad y alcance de roles. La documentación preparada no es aceptación.
 3. Equipo: tratar el fallo de arranque automático y repetir su ensayo, conservando el caso fallido y los límites Free.
-4. Revisor autorizado distinto del autor: revisión formal. Solo después de CI y revisión aprobadas podrá ejecutarse el merge solicitado. Si el head cambia, volver a comprobar esos gates en ese SHA.
+4. Revisor autorizado distinto del autor: revisión formal. Solo después de revisión aprobada y tratamiento explícito de los hallazgos podrá ejecutarse el merge solicitado. Si el head cambia, comprobar la revisión sobre ese SHA; Actions ya no es requisito del usuario.
 
 **Recomendación:** conservar el despliegue para demostración supervisada y el PR Draft. No fusionar ni declarar entrega integral cerrada con los gates actuales.

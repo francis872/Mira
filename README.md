@@ -1,5 +1,7 @@
 # SAPIENS — base académica MIRA V1–V3
 
+> Decisión vigente (2026-11-15): **Actions no es requisito del usuario**. C06 sigue sin decisión docente escrita; la revisión formal y el arranque automático permanecen pendientes. [Estado y decisiones de entrega](docs/REVISION_ENTREGA_2026-11-14.md).
+
 > Despliegue actual (2026-11-13): abrir [SAPIENS en Render](https://sapiens-web-v1-v3-20261113.onrender.com). Flask y API .NET en **Render Free**, PostgreSQL y sesiones en **Neon Free**. Verificados 50/50 E2E remotos, 15 comprobaciones de seguridad/operación, escritorio/tableta/móvil emulados y conservación de sesión tras reinicio real. El arranque tras inactividad puede tardar; ambos `/ready` deben responder antes de demostrar. Actions sigue bloqueado por la cuenta y el PR #7 continúa Draft. [Configuración, evidencias y límites](docs/DESPLIEGUE_RENDER_NEON.md).
 
 > Antecedente Fase 6 (2026-11-12): SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe completo y evidencias](docs/FASE6_INFORME_FINAL.md).
@@ -74,7 +76,7 @@ Para E2E contra una plataforma de pruebas ya preparada: definir MIRA_E2E_URL, MI
 
 ## Documentación y sustentación
 
-- [Revisión de entrega del 14 de noviembre: Actions, C06, arranque y recuperación nativa en Neon](docs/REVISION_ENTREGA_2026-11-14.md). PR sin merge: bloqueo de cuenta, aceptación académica y arranque automático pendientes; respaldo restaurado y probado.
+- [Revisión de entrega y decisión del 15 de noviembre](docs/REVISION_ENTREGA_2026-11-14.md). Actions excluido como requisito; PR sin merge por revisión y hallazgos pendientes. Respaldo restaurado y probado; C06 sin aceptación docente escrita.
 - [Auditoría inicial y plan](docs/V3_AUDITORIA_INICIAL.md), [especificación](versiones/v3/2_spec.md).
 - [Arquitectura y decisiones](docs/V3_ARQUITECTURA.md), [mapa técnico por archivo/método/prueba](docs/V3_MAPA_TECNICO.md).
 - [Guía de sustentación y simulacro](docs/V3_GUIA_SUSTENTACION.md).

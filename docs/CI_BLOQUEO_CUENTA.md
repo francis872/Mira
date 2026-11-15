@@ -1,5 +1,7 @@
 # GitHub Actions: bloqueo de cuenta comprobado
 
+**Decisión del usuario, 15 de noviembre de 2026: Actions no es necesario.** Se retira como requisito de entrega/fusión y se detiene la gestión del desbloqueo de facturación. Se conservan el workflow y los resultados anteriores; no se los presenta como aprobados. El texto de soporte sigue preparado, no enviado. La actualización es documental y no cambia pagos ni configuración de cuenta. [Registro de decisión](evidencias/decision-entrega-20261115.json).
+
 Revalidación del **14 de noviembre de 2026, America/Bogota**: se reintentaron los jobs de [43610378994](https://github.com/francis872/Mira/actions/runs/43610378994), SHA `2974abcc984e7df3adb5afa560efceca864ab20f`. El **intento 2** volvió a fallar con cero pasos en `quality` y `containers`, con la misma anotación de bloqueo de cuenta. Actions está habilitado; los accesos de facturación siguen devolviendo 404 con esta autorización. No se determinó saldo ni plan personal, y no se cambió el workflow para eludir el bloqueo. [Revisión actual, recuperación y condiciones de merge](REVISION_ENTREGA_2026-11-14.md).
 
 ## Antecedentes conservados
