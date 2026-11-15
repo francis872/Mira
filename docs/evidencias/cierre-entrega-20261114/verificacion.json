@@ -1,0 +1,1678 @@
+{
+  "verifiedDateBogota": "2026-11-14",
+  "recordedAtUtc": "2026-11-15T00:31:37.250071+00:00",
+  "repository": "https://github.com/francis872/Mira",
+  "branch": "feature/mira-v3",
+  "reviewedSourceCommit": "2974abcc984e7df3adb5afa560efceca864ab20f",
+  "decision": "do_not_merge_until_ci_review_and_findings_resolved",
+  "githubActions": {
+    "atUtc": "2026-11-14T23:35:30.583841+00:00",
+    "runId": 43610378994,
+    "attempt": 2,
+    "head": "2974abcc984e7df3adb5afa560efceca864ab20f",
+    "status": "completed",
+    "conclusion": "failure",
+    "url": "https://github.com/francis872/Mira/actions/runs/43610378994",
+    "jobs": [
+      {
+        "name": "containers",
+        "steps": 0,
+        "conclusion": "failure",
+        "messages": [
+          "The job was not started because your account is locked due to a billing issue."
+        ]
+      },
+      {
+        "name": "quality",
+        "steps": 0,
+        "conclusion": "failure",
+        "messages": [
+          "The job was not started because your account is locked due to a billing issue."
+        ]
+      }
+    ]
+  },
+  "githubReadOnlyAccessChecks": [
+    {
+      "endpoint": "repos/francis872/Mira/branches/main/protection",
+      "exit": 1,
+      "message": "Branch not protected",
+      "keys": [
+        "message",
+        "documentation_url",
+        "status"
+      ]
+    },
+    {
+      "endpoint": "repos/francis872/Mira/rulesets",
+      "exit": 0,
+      "message": null,
+      "keys": []
+    },
+    {
+      "endpoint": "repos/francis872/Mira/actions/permissions",
+      "exit": 0,
+      "message": null,
+      "keys": [
+        "enabled",
+        "allowed_actions",
+        "sha_pinning_required"
+      ]
+    },
+    {
+      "endpoint": "users/francis872/settings/billing/usage",
+      "exit": 1,
+      "message": "Not Found",
+      "keys": [
+        "message",
+        "documentation_url",
+        "status"
+      ]
+    },
+    {
+      "endpoint": "users/francis872/settings/billing/actions",
+      "exit": 1,
+      "message": "Not Found",
+      "keys": [
+        "message",
+        "documentation_url",
+        "status"
+      ]
+    }
+  ],
+  "review": {
+    "sourceCommit": "2974abcc984e7df3adb5afa560efceca864ab20f",
+    "diffBase": "35640853dc4cbb4dd50f17c9208acb2feedaff1d",
+    "changedFileCount": 404,
+    "reviewScope": "Critical authentication, authorization, proxy, sessions, persistence, reports, production configuration and original academic contracts; file inventory covers entire historical PR but does not imply line-by-line review of all historical documents",
+    "criticalFiles": {
+      "MIRA.Api/Program.cs": "3d919d62a820c3dbebfdad9b5ab1b65c66c37b6450351b359829f260c9c85bf4",
+      "MIRA.Api/Configuracion/DbConnectionFactory.cs": "72f8e4ca8dddf7cb79ca1a2f080f977143c97cdb7d201f49350e1ee0ae793129",
+      "MIRA.Api/Configuracion/SeguridadConfiguration.cs": "a5415dd4f37d5aa0da832504cab7b1a2db291001faf54328a0bbd08aba80ad27",
+      "MIRA.Api/Configuracion/LoginProtection.cs": "4cf4b9a598d2160f6a10e6716fd60d0a50291a1eacbb530ce16e0f547c586568",
+      "MIRA.Api/Configuracion/Readiness.cs": "bc8d78e92887013d30509d459e6e936ad53cab8dc191898529864f739dfccee7",
+      "MIRA.Api/Excepciones/ApiExceptionMiddleware.cs": "aa84582840f4c258e82dfdaac9eea967721557fb0d42f6f14c14ae438ffc9029",
+      "MIRA.Api/Servicios/Seguridad/AuthService.cs": "f45af4b638115c08f259b9cb7bb08716f6d5be261c12e2eb6d6a5f5bd69507a2",
+      "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs": "30d4998a379355819d1db921de1e2d6fc6fd26d4aac2d78a93121bbb8d6312c2",
+      "MIRA.Api/Peticiones/AuthController.cs": "7235b6ff2214855794fa17b47ecae0ec549ebd6db002787c71096c63f39e7bfc",
+      "MIRA.Api/Modelos/RecursosInvestigacion.cs": "77fdff9dfb32963c80b1237efe39de197ba5c3a2c4346d98fbb5b965548b3a90",
+      "MIRA.Api/Servicios/InvestigacionService.cs": "11ef1c78abec652a5afa5098dfacd2fc69c932f9498a4f2e015ef74c470ac55b",
+      "MIRA.Api/Repositorios/Investigacion/InvestigacionRepository.cs": "667eb9935c81b4a1038d8f4e1de47b714ab9647fa14862fe62c089999526bfb8",
+      "MIRA.Api/Peticiones/InvestigacionController.cs": "09cffb0236d729d1197da4b34ab8c6c96657e9b7d9fefef7f1d82105d51104e2",
+      "frontend/app.py": "63190a7bee6eb3c60a0ed75fbd4064357dd0a46b10e36d9659673c9d50df9414",
+      "frontend/seguridad.py": "ff364638c8bfb06020900addaa62c7466f43f1af81f6d6677b51f20639937810",
+      "frontend/session_store.py": "3577fa38d4ad1ffaf66800f42699bfa6b3873adaf2770e92f9a06813e402c66e",
+      "frontend/login_protection.py": "a7efe2c9bd378a5df81b42b52d837de59874f07714a420fec0961e3e6686ee9e",
+      "frontend/investigacion.py": "04bcc32f1475362a239e1ec654e6efe28de40d4d275756e08c416730087f6637",
+      "frontend/reportes.py": "51be9c892c880d1baef58fe528d81ba24c95b480ee4afdee2f7b7825a65452c1",
+      "frontend/gunicorn.conf.py": "642f901a33deb938264b73c1e10f9d2feb1da567ffe3249b8162e6ecfd4ac5aa",
+      "Dockerfile": "5c6ef6d8a529faa9e765914409ed24e4a35832cce643c06bc1a3d78678ed81ca",
+      "frontend/Dockerfile": "593e6c9ba53f5d8f868fa7a6ba203bbc96c021bb00ecb7b3242f4d8f46a5094b",
+      "deploy/permisos_runtime.sql": "1231aaef1c2e08d0177ccc5ecd6e40b65e971dadc0cc5ea7ada3a7462ef1b758",
+      ".github/workflows/mira-v3-ci.yml": "87c6095481f64b509beb03646510fe47f9382e7a4b816cd58710a0b5dbd4e378",
+      "database/migrations/006_v2_modelo_oficial.sql": "9be09a8eb31677f94e5ae44b4a132bdb286df8fe47b2ccd7088b004b02ae21c1"
+    },
+    "githubAuthor": "francis872",
+    "availableGithubIdentity": "francis872",
+    "formalReviewApprovalRecorded": false,
+    "mergePerformed": false,
+    "blockingFindings": [
+      "CI account billing lock with zero job steps",
+      "Formal approval unavailable from the PR author account",
+      "V2 academic decisions remain pending",
+      "Automatic recovery after controlled inactivity did not meet deadline"
+    ]
+  },
+  "c06": {
+    "verifiedAtUtc": "2026-11-14T23:37:53.938617+00:00",
+    "sourceReadOnly": true,
+    "foreignKeyColumns": [
+      {
+        "table": "docentes",
+        "column": "usuario_id",
+        "nullable": false
+      },
+      {
+        "table": "grupo_docentes",
+        "column": "docente_id",
+        "nullable": false
+      },
+      {
+        "table": "grupo_docentes",
+        "column": "grupo_id",
+        "nullable": false
+      },
+      {
+        "table": "grupo_lineas",
+        "column": "grupo_id",
+        "nullable": false
+      },
+      {
+        "table": "grupo_lineas",
+        "column": "linea_id",
+        "nullable": false
+      },
+      {
+        "table": "grupos_investigacion",
+        "column": "sede_id",
+        "nullable": false
+      },
+      {
+        "table": "linea_aplicacion",
+        "column": "aplicacion_id",
+        "nullable": false
+      },
+      {
+        "table": "linea_aplicacion",
+        "column": "linea_id",
+        "nullable": false
+      },
+      {
+        "table": "linea_disciplinas",
+        "column": "disciplina_id",
+        "nullable": false
+      },
+      {
+        "table": "linea_disciplinas",
+        "column": "linea_id",
+        "nullable": false
+      },
+      {
+        "table": "linea_ods",
+        "column": "linea_id",
+        "nullable": false
+      },
+      {
+        "table": "linea_ods",
+        "column": "ods_id",
+        "nullable": false
+      },
+      {
+        "table": "semillero_lineas",
+        "column": "linea_id",
+        "nullable": false
+      },
+      {
+        "table": "semillero_lineas",
+        "column": "semillero_id",
+        "nullable": false
+      },
+      {
+        "table": "semillero_tutores",
+        "column": "docente_id",
+        "nullable": false
+      },
+      {
+        "table": "semillero_tutores",
+        "column": "semillero_id",
+        "nullable": false
+      },
+      {
+        "table": "semilleros",
+        "column": "grupo_id",
+        "nullable": false
+      },
+      {
+        "table": "sesion_acceso",
+        "column": "usuario_id",
+        "nullable": false
+      },
+      {
+        "table": "usuario_rol",
+        "column": "rol_id",
+        "nullable": false
+      },
+      {
+        "table": "usuario_rol",
+        "column": "usuario_id",
+        "nullable": false
+      },
+      {
+        "table": "usuario_roles",
+        "column": "rol_id",
+        "nullable": false
+      },
+      {
+        "table": "usuario_roles",
+        "column": "usuario_id",
+        "nullable": false
+      }
+    ],
+    "count": 22,
+    "optionalCount": 0,
+    "teacherAcceptanceFound": false
+  },
+  "academicReview": {
+    "atUtc": "2026-11-15T00:00:01.220681+00:00",
+    "target": "isolated recovery database",
+    "liveDatabaseWritten": false,
+    "counterexampleTransactionRolledBack": true,
+    "findings": [
+      {
+        "criterion": "C06",
+        "foreignKeyColumns": 22,
+        "optionalForeignKeyColumns": 0,
+        "state": "academic_acceptance_pending"
+      },
+      {
+        "criterion": "HU05-CA02",
+        "groupCanStartWithZeroLeaders": true,
+        "overlappingDatedLeaderRowsAccepted": 2,
+        "state": "partial"
+      },
+      {
+        "criterion": "HU06-CA02",
+        "dateIntervalFields": [
+          "fecha_inicio",
+          "fecha_fin"
+        ],
+        "periodAcademicFieldPresent": false,
+        "state": "academic_contract_pending"
+      },
+      {
+        "criterion": "HU10-CA02/03",
+        "facultyRelationPresent": false,
+        "state": "partial_sede_and_linea_only"
+      }
+    ],
+    "apiChecks": {
+      "undefinedFacultyFilterRejected": 400,
+      "closedRoleNamesVerified": true
+    },
+    "status": "reviewed_with_pending_criteria",
+    "teacherDecisionInvented": false
+  },
+  "backup": {
+    "startedAtUtc": "2026-11-14T23:37:45.813035+00:00",
+    "status": "passed",
+    "sourceReadOnly": true,
+    "snapshotSharedWithDump": true,
+    "sourceModified": false,
+    "finishedAtUtc": "2026-11-14T23:38:27.885238+00:00",
+    "clientTls": true,
+    "sslMode": "verify-full",
+    "channelBinding": "require",
+    "baseTables": 31,
+    "views": 12,
+    "routines": 136,
+    "triggers": 10,
+    "indexes": 56,
+    "tableCounts": {
+      "mira_web.sesion": 2,
+      "public.area_aplicacion": 11,
+      "public.area_conocimiento": 7,
+      "public.areas_aplicacion": 26,
+      "public.areas_conocimiento": 66,
+      "public.docentes": 1,
+      "public.grupo_docentes": 1,
+      "public.grupo_lineas": 13,
+      "public.grupos_investigacion": 40,
+      "public.linea_aplicacion": 0,
+      "public.linea_disciplinas": 41,
+      "public.linea_investigacion": 7,
+      "public.linea_ods": 41,
+      "public.lineas_investigacion": 41,
+      "public.objetivo_desarrollo_sostenible": 24,
+      "public.ods": 81,
+      "public.palabras_clave": 6,
+      "public.rol": 3,
+      "public.roles": 0,
+      "public.schema_migrations": 15,
+      "public.sedes": 46,
+      "public.semillero_lineas": 0,
+      "public.semillero_tutores": 0,
+      "public.semilleros": 35,
+      "public.sesion_acceso": 2,
+      "public.termino_clave": 15,
+      "public.universidad": 7,
+      "public.usuario": 3,
+      "public.usuario_rol": 3,
+      "public.usuario_roles": 0,
+      "public.usuarios": 2
+    },
+    "backupSha256": "cafe162de755c84940a448523b4b91ee853af6a7d407d2fe9593b3f24ea2877e",
+    "backupBytes": 254183,
+    "format": "unmodified pg_dump custom archive",
+    "containsSensitiveData": true,
+    "backupPubliclyExported": false
+  },
+  "nativeRestore": {
+    "startedAtUtc": "2026-11-14T23:44:48.411913+00:00",
+    "status": "passed",
+    "targetBranchId": "br-flat-flower-bbsc7axc",
+    "targetDatabase": "sapiens_recovery_f6f48f",
+    "sourceModified": false,
+    "existingDatabaseOverwritten": false,
+    "archiveModified": false,
+    "initialBytewiseVerification": "failed on four CHECK expression representations; all data and archive restore succeeded",
+    "bytewiseObjectDefinitionsMatch": {
+      "views": true,
+      "routines": true,
+      "triggers": true,
+      "indexes": true,
+      "constraints": false
+    },
+    "constraintCanonicalVerification": {
+      "rawChangedConstraints": 4,
+      "checks": [
+        {
+          "table": "docentes",
+          "constraint": "docentes_minciencias_categoria_check",
+          "rawDefinitionChanged": true,
+          "validationFlagUnchanged": true,
+          "reparsedExpectedMatchesRestored": true
+        },
+        {
+          "table": "grupo_docentes",
+          "constraint": "grupo_docentes_rol_check",
+          "rawDefinitionChanged": true,
+          "validationFlagUnchanged": true,
+          "reparsedExpectedMatchesRestored": true
+        },
+        {
+          "table": "objetivo_desarrollo_sostenible",
+          "constraint": "ods_categoria_original_ck",
+          "rawDefinitionChanged": true,
+          "validationFlagUnchanged": true,
+          "reparsedExpectedMatchesRestored": true
+        },
+        {
+          "table": "semillero_tutores",
+          "constraint": "semillero_tutores_rol_check",
+          "rawDefinitionChanged": true,
+          "validationFlagUnchanged": true,
+          "reparsedExpectedMatchesRestored": true
+        }
+      ],
+      "method": "Reparse original CHECK definition on temporary LIKE table in isolated recovery database and compare server canonical definition; rollback transaction",
+      "archiveEdited": false,
+      "sourceDatabaseTouched": false
+    },
+    "finishedAtUtc": "2026-11-14T23:49:56.851553+00:00",
+    "backupSha256": "cafe162de755c84940a448523b4b91ee853af6a7d407d2fe9593b3f24ea2877e",
+    "archiveHashUnchanged": true,
+    "baseTables": 31,
+    "tables": {
+      "mira_web.sesion": {
+        "rows": 2,
+        "contentMatchesSnapshot": true
+      },
+      "public.area_aplicacion": {
+        "rows": 11,
+        "contentMatchesSnapshot": true
+      },
+      "public.area_conocimiento": {
+        "rows": 7,
+        "contentMatchesSnapshot": true
+      },
+      "public.areas_aplicacion": {
+        "rows": 26,
+        "contentMatchesSnapshot": true
+      },
+      "public.areas_conocimiento": {
+        "rows": 66,
+        "contentMatchesSnapshot": true
+      },
+      "public.docentes": {
+        "rows": 1,
+        "contentMatchesSnapshot": true
+      },
+      "public.grupo_docentes": {
+        "rows": 1,
+        "contentMatchesSnapshot": true
+      },
+      "public.grupo_lineas": {
+        "rows": 13,
+        "contentMatchesSnapshot": true
+      },
+      "public.grupos_investigacion": {
+        "rows": 40,
+        "contentMatchesSnapshot": true
+      },
+      "public.linea_aplicacion": {
+        "rows": 0,
+        "contentMatchesSnapshot": true
+      },
+      "public.linea_disciplinas": {
+        "rows": 41,
+        "contentMatchesSnapshot": true
+      },
+      "public.linea_investigacion": {
+        "rows": 7,
+        "contentMatchesSnapshot": true
+      },
+      "public.linea_ods": {
+        "rows": 41,
+        "contentMatchesSnapshot": true
+      },
+      "public.lineas_investigacion": {
+        "rows": 41,
+        "contentMatchesSnapshot": true
+      },
+      "public.objetivo_desarrollo_sostenible": {
+        "rows": 24,
+        "contentMatchesSnapshot": true
+      },
+      "public.ods": {
+        "rows": 81,
+        "contentMatchesSnapshot": true
+      },
+      "public.palabras_clave": {
+        "rows": 6,
+        "contentMatchesSnapshot": true
+      },
+      "public.rol": {
+        "rows": 3,
+        "contentMatchesSnapshot": true
+      },
+      "public.roles": {
+        "rows": 0,
+        "contentMatchesSnapshot": true
+      },
+      "public.schema_migrations": {
+        "rows": 15,
+        "contentMatchesSnapshot": true
+      },
+      "public.sedes": {
+        "rows": 46,
+        "contentMatchesSnapshot": true
+      },
+      "public.semillero_lineas": {
+        "rows": 0,
+        "contentMatchesSnapshot": true
+      },
+      "public.semillero_tutores": {
+        "rows": 0,
+        "contentMatchesSnapshot": true
+      },
+      "public.semilleros": {
+        "rows": 35,
+        "contentMatchesSnapshot": true
+      },
+      "public.sesion_acceso": {
+        "rows": 2,
+        "contentMatchesSnapshot": true
+      },
+      "public.termino_clave": {
+        "rows": 15,
+        "contentMatchesSnapshot": true
+      },
+      "public.universidad": {
+        "rows": 7,
+        "contentMatchesSnapshot": true
+      },
+      "public.usuario": {
+        "rows": 3,
+        "contentMatchesSnapshot": true
+      },
+      "public.usuario_rol": {
+        "rows": 3,
+        "contentMatchesSnapshot": true
+      },
+      "public.usuario_roles": {
+        "rows": 0,
+        "contentMatchesSnapshot": true
+      },
+      "public.usuarios": {
+        "rows": 2,
+        "contentMatchesSnapshot": true
+      }
+    },
+    "objectDefinitionsMatch": {
+      "views": true,
+      "routines": true,
+      "triggers": true,
+      "indexes": true,
+      "constraints": true
+    },
+    "migrationsRestored": 15,
+    "clientTlsVerifyFull": true,
+    "channelBindingRequired": true,
+    "nativeNeonRestore": true,
+    "runtimeGrantsAppliedOnlyToRecoveryDatabase": true,
+    "restoreFlags": [
+      "--no-owner",
+      "--no-privileges",
+      "--exit-on-error"
+    ],
+    "dataOrStatementsRemoved": false
+  },
+  "recoveryTarget": {
+    "atUtc": "2026-11-14T23:40:27.584625+00:00",
+    "projectId": "snowy-bonus-50718377",
+    "branchId": "br-flat-flower-bbsc7axc",
+    "branchName": "recovery-20261114-f6f48f",
+    "parentBranchId": "br-still-smoke-bbs220nn",
+    "endpointId": "ep-cool-cloud-bbqjgk3u",
+    "host": "ep-cool-cloud-bbqjgk3u.c-15.us-east-1.aws.neon.tech",
+    "minCu": 0.25,
+    "maxCu": 0.25,
+    "plan": "free",
+    "branchCountAfter": 2,
+    "mainModified": false,
+    "database": "sapiens_recovery_f6f48f"
+  },
+  "restoredApplication": {
+    "startedAtUtc": "2026-11-14T23:55:09.039413+00:00",
+    "status": "ready",
+    "network": "sapiens-recovery-f6f48f",
+    "targetBranchId": "br-flat-flower-bbsc7axc",
+    "targetDatabase": "sapiens_recovery_f6f48f",
+    "containers": {
+      "api": {
+        "id": "c96c2f0a1c494d4315dc5afb8c5e11ee6fb654688fbc13112c2164da8c0de8f8",
+        "name": "sapiens-recovery-api-f6f48f",
+        "url": "http://127.0.0.1:61323"
+      },
+      "web": {
+        "id": "8d5625152e77f5a9caa7917bc4e3fdebd61dcc3956f7c82df68f68ba29f1ca55",
+        "name": "sapiens-recovery-web-f6f48f",
+        "url": "http://127.0.0.1:61324"
+      }
+    },
+    "readyAtUtc": "2026-11-14T23:55:15.547031+00:00",
+    "databaseTlsVerifyFull": true,
+    "channelBindingRequired": true,
+    "loopbackOnly": true,
+    "frontendProfile": "development, local HTTP only; not a production HTTPS assertion",
+    "currentStatus": "test containers removed after successful targeted repeat"
+  },
+  "restoredFunctionalInitialAttempt": {
+    "startedAtUtc": "2026-11-14T23:56:04.568757+00:00",
+    "status": "failed",
+    "scope": "Fresh local Linux images of reviewed code against isolated Neon database restored from unmodified custom archive; all E2E including stored injection test",
+    "targetBranchId": "br-flat-flower-bbsc7axc",
+    "targetDatabase": "sapiens_recovery_f6f48f",
+    "web": "http://127.0.0.1:61324",
+    "api": "http://127.0.0.1:61323",
+    "productionDatabaseUsed": false,
+    "finishedAtUtc": "2026-11-15T00:12:44.604929+00:00",
+    "exit": 1,
+    "tests": 51,
+    "passed": 49,
+    "failed": 2,
+    "skipped": 0,
+    "cases": [
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_members_excel_pdf_and_filtered_report_use_persisted_relations",
+        "status": "passed",
+        "seconds": 25.363
+      },
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_line_save_rejects_missing_links_and_rolls_back_bad_reference",
+        "status": "passed",
+        "seconds": 15.049
+      },
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_multiple_association_summary_and_reactivation_preserve_links",
+        "status": "passed",
+        "seconds": 23.628
+      },
+      {
+        "class": "frontend.tests.e2e.test_fase5_academico",
+        "case": "test_report_api_and_download_do_not_restore_public_access",
+        "status": "passed",
+        "seconds": 1.346
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_group_sheet_http_creates_edits_and_retires_multiple_details",
+        "status": "passed",
+        "seconds": 20.001
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[sedes]",
+        "status": "passed",
+        "seconds": 18.322
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+        "status": "passed",
+        "seconds": 20.609
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+        "status": "passed",
+        "seconds": 23.759
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[ods]",
+        "status": "passed",
+        "seconds": 20.007
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+        "status": "passed",
+        "seconds": 23.029
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_resource_full_http_form_lifecycle[palabras_clave]",
+        "status": "passed",
+        "seconds": 28.153
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+        "status": "passed",
+        "seconds": 36.876
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+        "status": "passed",
+        "seconds": 35.31
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+        "status": "passed",
+        "seconds": 39.731
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+        "status": "failed",
+        "seconds": 34.842
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+        "status": "failed",
+        "seconds": 21.026
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+        "status": "passed",
+        "seconds": 73.805
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_semillero_independent_form_lifecycle_uses_group_selector",
+        "status": "passed",
+        "seconds": 32.15
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+        "status": "passed",
+        "seconds": 2.569
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_root_opens_the_dashboard_directly",
+        "status": "passed",
+        "seconds": 4.805
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_login_surface_and_protected_api",
+        "status": "passed",
+        "seconds": 1.256
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_dashboard_counts_match_the_listing",
+        "status": "passed",
+        "seconds": 7.47
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[area_conocimiento]",
+        "status": "passed",
+        "seconds": 2.947
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 3.581
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[area_aplicacion]",
+        "status": "passed",
+        "seconds": 2.827
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[termino_clave]",
+        "status": "passed",
+        "seconds": 2.059
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[universidad]",
+        "status": "passed",
+        "seconds": 2.479
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_lists_real_seed_data[linea_investigacion]",
+        "status": "passed",
+        "seconds": 3.691
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[area_conocimiento]",
+        "status": "passed",
+        "seconds": 39.624
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 34.605
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[area_aplicacion]",
+        "status": "passed",
+        "seconds": 42.295
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[termino_clave]",
+        "status": "passed",
+        "seconds": 26.148
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[universidad]",
+        "status": "passed",
+        "seconds": 30.887
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_catalog_create_update_inactivate_persist[linea_investigacion]",
+        "status": "passed",
+        "seconds": 42.906
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+        "status": "passed",
+        "seconds": 5.929
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+        "status": "passed",
+        "seconds": 4.8
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+        "status": "passed",
+        "seconds": 4.813
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+        "status": "passed",
+        "seconds": 9.659
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+        "status": "passed",
+        "seconds": 4.623
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+        "status": "passed",
+        "seconds": 4.769
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_duplicate_keyword_shows_conflict",
+        "status": "passed",
+        "seconds": 22.066
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_unicode_csrf_is_rejected",
+        "status": "passed",
+        "seconds": 3.236
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_oversized_form_preserves_data_and_explains_limit",
+        "status": "passed",
+        "seconds": 6.659
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_area_form_uses_trigger_and_displays_persisted_value",
+        "status": "passed",
+        "seconds": 16.779
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_post_without_csrf_token_is_rejected",
+        "status": "passed",
+        "seconds": 3.943
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_injection_text_is_stored_as_data_and_escaped",
+        "status": "passed",
+        "seconds": 18.56
+      },
+      {
+        "class": "frontend.tests.e2e.test_local_platform",
+        "case": "test_session_cookie_flags",
+        "status": "passed",
+        "seconds": 2.884
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_keyword_without_english_is_rejected_and_update_preserves_it",
+        "status": "passed",
+        "seconds": 44.039
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Econ\\xf3mico]",
+        "status": "passed",
+        "seconds": 32.34
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Economica]",
+        "status": "passed",
+        "seconds": 29.706
+      },
+      {
+        "class": "frontend.tests.e2e.test_v1_requisitos",
+        "case": "test_ods_category_cannot_bypass_select_and_failed_update_keeps_value[Otra]",
+        "status": "passed",
+        "seconds": 37.69
+      }
+    ]
+  },
+  "restoredFunctionalTargetedRepeat": {
+    "startedAtUtc": "2026-11-15T00:18:03.831696+00:00",
+    "finishedAtUtc": "2026-11-15T00:18:58.370464+00:00",
+    "exit": 0,
+    "tests": 2,
+    "passed": 2,
+    "cases": [
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+        "passed": true,
+        "seconds": 30.41
+      },
+      {
+        "class": "frontend.tests.e2e.test_investigacion",
+        "case": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+        "passed": true,
+        "seconds": 22.076
+      }
+    ],
+    "initialFailureRetained": true,
+    "retryScope": "Only two failed full scenarios, fresh login, same source and same restored database; no automatic read/status retries and no assertion changes"
+  },
+  "restoredFunctionalCoverage": {
+    "totalDistinctCriteria": 51,
+    "initialPassed": 49,
+    "initialFailed": 2,
+    "targetedRepeatPassed": 2,
+    "singleCleanFullRun": false,
+    "incidentClasses": [
+      "NpgsqlException",
+      "EndOfStreamException"
+    ],
+    "fullTraceOrCookiesPublished": false
+  },
+  "dependencies": {
+    "pythonRuntimeOsv": {
+      "date": "2026-11-14",
+      "source": "https://api.osv.dev/v1/querybatch",
+      "python": "3.14.2",
+      "platform": "Windows",
+      "packages": [
+        {
+          "name": "blinker",
+          "version": "1.9.0",
+          "advisories": []
+        },
+        {
+          "name": "cachelib",
+          "version": "0.13.0",
+          "advisories": []
+        },
+        {
+          "name": "certifi",
+          "version": "2026.10.18",
+          "advisories": []
+        },
+        {
+          "name": "charset-normalizer",
+          "version": "3.4.4",
+          "advisories": []
+        },
+        {
+          "name": "click",
+          "version": "8.5.0",
+          "advisories": []
+        },
+        {
+          "name": "et-xmlfile",
+          "version": "2.0.0",
+          "advisories": []
+        },
+        {
+          "name": "flask",
+          "version": "3.1.3",
+          "advisories": []
+        },
+        {
+          "name": "flask-session",
+          "version": "0.8.0",
+          "advisories": []
+        },
+        {
+          "name": "gunicorn",
+          "version": "26.2.0",
+          "advisories": []
+        },
+        {
+          "name": "idna",
+          "version": "3.15",
+          "advisories": []
+        },
+        {
+          "name": "itsdangerous",
+          "version": "2.2.0",
+          "advisories": []
+        },
+        {
+          "name": "jinja2",
+          "version": "3.1.6",
+          "advisories": []
+        },
+        {
+          "name": "markupsafe",
+          "version": "3.0.4",
+          "advisories": []
+        },
+        {
+          "name": "msgspec",
+          "version": "0.22.0",
+          "advisories": []
+        },
+        {
+          "name": "openpyxl",
+          "version": "3.1.5",
+          "advisories": []
+        },
+        {
+          "name": "packaging",
+          "version": "26.3",
+          "advisories": []
+        },
+        {
+          "name": "pillow",
+          "version": "13.0.0",
+          "advisories": []
+        },
+        {
+          "name": "psycopg",
+          "version": "3.3.9",
+          "advisories": []
+        },
+        {
+          "name": "psycopg-binary",
+          "version": "3.3.9",
+          "advisories": []
+        },
+        {
+          "name": "python-dotenv",
+          "version": "1.2.2",
+          "advisories": []
+        },
+        {
+          "name": "reportlab",
+          "version": "5.1.0",
+          "advisories": []
+        },
+        {
+          "name": "requests",
+          "version": "2.33.0",
+          "advisories": []
+        },
+        {
+          "name": "typing-extensions",
+          "version": "4.15.0",
+          "advisories": []
+        },
+        {
+          "name": "urllib3",
+          "version": "2.8.0",
+          "advisories": []
+        },
+        {
+          "name": "werkzeug",
+          "version": "3.1.9",
+          "advisories": []
+        }
+      ],
+      "status": "passed"
+    },
+    "nuget": {
+      "exit": 0,
+      "status": "passed",
+      "projects": 2,
+      "advisories": [],
+      "errors": []
+    },
+    "scope": "Python inventory exported from rebuilt Linux image; OSV collector Python/platform fields describe the host collector, not the image runtime. Operating-system/base-layer vulnerabilities not audited."
+  },
+  "idleStartup": {
+    "verifiedAtUtc": "2026-11-15T00:26:30.146841+00:00",
+    "verifiedDateBogota": "2026-11-14",
+    "status": "automatic_recovery_not_approved",
+    "ownIdleSeconds": 1380.0,
+    "renderSleepConfirmed": true,
+    "neonIdleConfirmed": true,
+    "firstLoginHttp": 502,
+    "automaticReadinessDeadlineSeconds": 180,
+    "automaticRecoverySucceeded": false,
+    "manualRecovery": {
+      "atUtc": "2026-11-15T00:21:10.706682+00:00",
+      "status": "recovered_after_manual_warmup",
+      "checks": [
+        {
+          "method": "POST",
+          "endpoint": "API/api/auth/login",
+          "http": 200,
+          "correlation": true,
+          "contentType": "application/json; charset=utf-8",
+          "seconds": 3.224
+        },
+        {
+          "method": "POST",
+          "endpoint": "API/api/auth/logout",
+          "http": 200,
+          "correlation": true,
+          "contentType": "application/json; charset=utf-8",
+          "seconds": 0.518
+        },
+        {
+          "method": "GET",
+          "endpoint": "WEB/login",
+          "http": 200,
+          "correlation": true,
+          "contentType": "text/html; charset=utf-8",
+          "seconds": 1.238
+        },
+        {
+          "method": "POST",
+          "endpoint": "WEB/login",
+          "http": 302,
+          "correlation": true,
+          "contentType": "text/html; charset=utf-8",
+          "seconds": 2.751
+        },
+        {
+          "method": "GET",
+          "endpoint": "WEB/",
+          "http": 200,
+          "correlation": true,
+          "contentType": "text/html; charset=utf-8",
+          "seconds": 1.124
+        },
+        {
+          "method": "POST",
+          "endpoint": "WEB/logout",
+          "http": 302,
+          "correlation": true,
+          "contentType": "text/html; charset=utf-8",
+          "seconds": 0.4
+        }
+      ],
+      "authenticatedHomeHttp": 200,
+      "finishedAtUtc": "2026-11-15T00:21:19.970284+00:00"
+    },
+    "rootCauseDemonstrated": false,
+    "testClientDnsFailureAlsoObserved": true,
+    "paidPlanSelected": false,
+    "keepAliveInstalled": false
+  },
+  "idleDetailedChronology": {
+    "startedAtUtc": "2026-11-14T23:43:06.297715+00:00",
+    "status": "probing_after_idle",
+    "ownIdleTargetSeconds": 1380,
+    "observations": [
+      {
+        "method": "GET",
+        "path": "API/ready",
+        "atUtc": "2026-11-14T23:43:06.298837+00:00",
+        "http": 200,
+        "appCorrelation": true,
+        "seconds": 16.47
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-14T23:43:22.770257+00:00",
+        "http": 200,
+        "appCorrelation": true,
+        "seconds": 1.109
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-14T23:43:23.935826+00:00",
+        "http": 200,
+        "appCorrelation": true,
+        "seconds": 0.919
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-15T00:06:30.862834+00:00",
+        "errorType": "ConnectionError",
+        "seconds": 21.741
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-15T00:06:57.606445+00:00",
+        "http": 200,
+        "appCorrelation": true,
+        "seconds": 14.746
+      },
+      {
+        "method": "POST",
+        "path": "WEB/login",
+        "atUtc": "2026-11-15T00:07:12.354237+00:00",
+        "http": 502,
+        "appCorrelation": true,
+        "seconds": 0.352
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:07:12.707999+00:00",
+        "errorType": "ConnectionError",
+        "seconds": 19.263
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:07:36.972396+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 1.434
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:07:43.408499+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.325
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:07:48.735458+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.425
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:07:54.161710+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.305
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:07:59.468766+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.341
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:04.811619+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.319
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:10.133073+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.431
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:15.565764+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.63
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:21.197432+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.361
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:26.560153+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.333
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:31.894730+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.377
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:37.273646+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.323
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:42.598675+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.326
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:47.926710+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.335
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:53.263537+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.289
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:08:58.554731+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.422
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:03.979495+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.449
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:09.431141+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.288
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:14.720537+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.375
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:20.098850+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.309
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:25.411048+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.353
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:30.765130+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.396
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:36.162404+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.365
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:41.528747+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.33
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:46.860977+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.32
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:52.182919+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.284
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:09:57.469269+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.299
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:10:02.771513+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.334
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-15T00:10:08.106887+00:00",
+        "http": 503,
+        "appCorrelation": true,
+        "seconds": 0.274
+      }
+    ],
+    "externalTrafficControlled": false,
+    "forcedProviderSuspension": false,
+    "keepAliveInstalled": false,
+    "credentialsPublished": false,
+    "beforeInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-v5bxq",
+          "createdAt": "2026-11-14T23:28:43Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": [
+        {
+          "id": "srv-dbr6i3dckfvc73dc3hr0-hzzph",
+          "createdAt": "2026-11-14T23:43:09Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ]
+    },
+    "idleStartedAtUtc": "2026-11-14T23:43:26.696920+00:00",
+    "probeNotBeforeUtc": "2026-11-15T00:06:26.696943+00:00",
+    "ownIdleActualSeconds": 1380.0,
+    "instancesBeforeProbe": {
+      "web": [],
+      "api": []
+    },
+    "neonStateBeforeProbe": "idle",
+    "anonymousSessionIdPreserved": true,
+    "firstLoginHttpAfterIdle": 502
+  },
+  "manualRecoveryIntermediate": {
+    "atUtc": "2026-11-15T00:15:00.091598+00:00",
+    "initialRecoveryFailed": true,
+    "initialRecoveryDeadlineSeconds": 180,
+    "initialLoginHttp": 502,
+    "manualApiWarmupPerformed": true,
+    "checks": [
+      {
+        "path": "/health",
+        "http": 200,
+        "seconds": 1.303,
+        "appCorrelation": true
+      },
+      {
+        "path": "/ready",
+        "http": 200,
+        "seconds": 0.313,
+        "appCorrelation": true
+      },
+      {
+        "path": "/login",
+        "http": 200,
+        "seconds": 0.304,
+        "appCorrelation": true
+      }
+    ],
+    "loginHttp": 503,
+    "protectedHomeHttp": 302,
+    "afterInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-gd6zt",
+          "createdAt": "2026-11-15T00:07:00Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": [
+        {
+          "id": "srv-dbr6i3dckfvc73dc3hr0-7ft88",
+          "createdAt": "2026-11-15T00:11:29Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ]
+    },
+    "status": "still_degraded"
+  },
+  "apiAfterColdStart": {
+    "atUtc": "2026-11-15T00:11:44.890814+00:00",
+    "observations": [
+      {
+        "path": "/health",
+        "http": 200,
+        "seconds": 16.306,
+        "appCorrelation": true,
+        "contentType": "application/json; charset=utf-8",
+        "statusField": "ok"
+      },
+      {
+        "path": "/ready",
+        "http": 200,
+        "seconds": 1.546,
+        "appCorrelation": true,
+        "contentType": "application/json; charset=utf-8",
+        "statusField": "ready"
+      }
+    ],
+    "instances": [
+      {
+        "id": "srv-dbr6i3dckfvc73dc3hr0-7ft88",
+        "createdAt": "2026-11-15T00:11:29Z",
+        "status": "RUNNING",
+        "ready": true
+      }
+    ]
+  },
+  "finalIntegrity": {
+    "atUtc": "2026-11-15T00:23:04.119201+00:00",
+    "containers": {
+      "api": {
+        "container": "sapiens-recovery-api-f6f48f",
+        "nonRootUid": "1654",
+        "sourceCommit": "2974abcc984e7df3adb5afa560efceca864ab20f"
+      },
+      "web": {
+        "container": "sapiens-recovery-web-f6f48f",
+        "nonRootUid": "10001",
+        "sourceCommit": "2974abcc984e7df3adb5afa560efceca864ab20f"
+      }
+    },
+    "originalBackupHashUnchanged": true,
+    "databaseTlsVerifiedPreviously": true
+  },
+  "cleanup": {
+    "atUtc": "2026-11-15T00:24:25.463756+00:00",
+    "ownedContainersRemoved": [
+      "sapiens-recovery-api-f6f48f",
+      "sapiens-recovery-web-f6f48f"
+    ],
+    "productionServiceStopped": false,
+    "databaseDeleted": false,
+    "backupDeleted": false,
+    "ownedNetworkRemoved": true,
+    "recoveryEndpointState": "idle",
+    "recoveryBranchRetained": "br-flat-flower-bbsc7axc",
+    "recoveryDatabaseRetained": "sapiens_recovery_f6f48f"
+  },
+  "imageBuildProvenance": {
+    "sourceCommit": "2974abcc984e7df3adb5afa560efceca864ab20f",
+    "sourceArchiveSha256": "92acf3e08cc5cb213dbdbeb9b0b50c68a231d1a934a0be31564af300caab8785",
+    "context": "git archive; tracked files only; no local caches or secrets",
+    "builds": [
+      {
+        "component": "api",
+        "image": "sapiens-recovery-api:f6f48f",
+        "exit": 0
+      },
+      {
+        "component": "web",
+        "image": "sapiens-recovery-web:f6f48f",
+        "exit": 0
+      }
+    ]
+  },
+  "protectedMigrationHashesMatchAppliedEvidence": {
+    "001_v1_catalogos_tablas.sql": true,
+    "002_v1_catalogos_datos_iniciales.sql": true,
+    "003_v2_usuarios_roles.sql": true,
+    "004_v2_catalogos_rutinas.sql": true,
+    "005_v2_area_aplicacion_trigger.sql": true,
+    "006_v2_modelo_oficial.sql": true,
+    "007_v2_rutinas_investigacion.sql": true,
+    "008_v3_sesiones.sql": true,
+    "009_v1_requisitos_originales.sql": true,
+    "010_v2_campos_y_articulaciones.sql": true,
+    "011_v2_reportes_originales.sql": true,
+    "012_v2_minimos_linea.sql": true,
+    "013_v2_estado_linea.sql": true,
+    "014_v2_catalogo_ods_original.sql": true,
+    "015_v3_sesion_web_compartida.sql": true
+  },
+  "scope": {
+    "archiveOrCredentialsPublished": false,
+    "publishedDomainDataWritten": false,
+    "publishedAuthenticationSessionsExercised": true,
+    "publishedSchemaChanged": false,
+    "credentialsRotated": false,
+    "workflowModified": false,
+    "billingOrPlansChanged": false,
+    "paidSnapshotsCreated": false,
+    "supportMessageSent": false,
+    "formalGithubApprovalRecorded": false,
+    "mergePerformed": false,
+    "teacherAcceptanceInvented": false,
+    "automaticColdRecoveryApproved": false,
+    "periodicBackupsConfigured": false,
+    "neonPitrTested": false
+  },
+  "publicationCheck": {
+    "filesChecked": 450,
+    "knownPrivateValuesFound": [],
+    "missingLocalLinks": [],
+    "passed": true,
+    "checkedAtUtc": "2026-11-15T00:34:22.915413+00:00",
+    "applicationSqlWorkflowUnchanged": true
+  },
+  "privateEvidenceHashes": {
+    "sapiens-consistent-private.dump": {
+      "relativePath": ".local/cierre-entrega-20261114T233041Z-f6f48f/sapiens-consistent-private.dump",
+      "sha256": "cafe162de755c84940a448523b4b91ee853af6a7d407d2fe9593b3f24ea2877e",
+      "contentPublished": false
+    },
+    "restored-e2e.xml": {
+      "relativePath": ".local/cierre-entrega-20261114T233041Z-f6f48f/restored-e2e.xml",
+      "sha256": "ff1494feda18ac3ca5ec1f5abb2772005e0242c6f85faf6386595c998aa410c0",
+      "contentPublished": false
+    },
+    "restored-e2e-repeat.xml": {
+      "relativePath": ".local/cierre-entrega-20261114T233041Z-f6f48f/restored-e2e-repeat.xml",
+      "sha256": "b79f7fc3fe1b21ec426fb3bb41ebdb4a3aeee6d477516353c49fe445161e5dba",
+      "contentPublished": false
+    },
+    "api-final-runtime-private.log": {
+      "relativePath": ".local/cierre-entrega-20261114T233041Z-f6f48f/api-final-runtime-private.log",
+      "sha256": "b1f55af993539ecb2fd0f2f615ee944f090f9ad25af42c18a6af5885e0173317",
+      "contentPublished": false
+    },
+    "pg-restore-stderr-private.log": {
+      "relativePath": ".local/cierre-entrega-20261114T233041Z-f6f48f/pg-restore-stderr-private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentPublished": false
+    },
+    "source-fingerprints-private.json": {
+      "relativePath": ".local/cierre-entrega-20261114T233041Z-f6f48f/source-fingerprints-private.json",
+      "sha256": "fb67f41df1198e8c4ba8ac230f1a66c447b5abbcd08aa574caedda8cc511a4d5",
+      "contentPublished": false
+    }
+  }
+}

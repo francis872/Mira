@@ -2,6 +2,8 @@
 
 Verificación inicial del **13 de noviembre de 2026** y republicación comprobada el **14 de noviembre**, zona America/Bogota. Repositorio `francis872/Mira`, rama `feature/mira-v3`. La interfaz Flask y la API se publican en Render y reutilizan la base Neon existente. Se mantienen V1–V3 y el despliegue anterior de Vercel.
 
+> Comprobación posterior del 14 de noviembre: la restauración del respaldo original en una copia Neon fue verificada, incluida la aplicación. El ensayo de 23 minutos de inactividad confirmó suspensión real, pero el arranque conjunto **no recuperó readiness en su plazo**; hubo recuperación posterior con intervención manual. No se considera aprobado el arranque automático. [Resultados actuales y condiciones de entrega](REVISION_ENTREGA_2026-11-14.md).
+
 ## Recursos y versión
 
 | Componente | Recurso | Estado comprobado |
@@ -90,7 +92,7 @@ El [ejemplo de despliegue](../deploy/render-neon-free.yaml.example), `frontend/D
 ## Límites y pendientes
 
 - Solo se seleccionaron planes **Free**. Render comparte **750 horas gratuitas por workspace/mes**, se suspende por inactividad y puede tardar aproximadamente un minuto en despertar. Dos servicios activos consumen horas por separado; no se afirma disponibilidad continua. No se modificaron pagos ni límites de facturación. [Condiciones y límites actuales](https://render.com/docs/free).
-- Esta validación se hizo con servicios activos. Queda pendiente la prueba conjunta tras al menos 15 minutos de inactividad de ambos servicios, además de carga sostenida y seguimiento de cuotas. Una API dormida puede causar un 503 temporal en Flask hasta completar el arranque. No se habilitaron peticiones artificiales para impedir la suspensión.
+- La validación inicial se hizo con servicios activos. El ensayo posterior de 23 minutos confirmó ambos servicios suspendidos y Neon idle, pero falló la recuperación automática dentro de 180 segundos: primer login 502 y readiness web 503. Posteriormente se recuperó la operación con calentamiento manual de API. Se conserva el ensayo fallido; carga sostenida, causa de los fallos y repetición satisfactoria del arranque siguen pendientes. No se instalaron keep-alives. [Cronología y recuperación de backup](REVISION_ENTREGA_2026-11-14.md).
 - **GitHub Actions bloqueado por la cuenta**: [ejecución 43452629583](https://github.com/francis872/Mira/actions/runs/43452629583), SHA `0891fe1`, jobs `quality` y `containers` fallidos con cero pasos; anotación: `The job was not started because your account is locked due to a billing issue.` No es una aprobación de CI. El PR #7 sigue Draft y sin merge; el titular/soporte debe resolver el bloqueo sin necesidad de contratar planes por esta operación.
 - Dispositivos físicos, lector de pantalla, validación institucional de carga/recuperación, respaldo periódico y aceptación académica de C06/otros pendientes de V2 siguen abiertos. El muestreo axe no certifica accesibilidad completa. El dossier de sustentación anterior sigue siendo una instantánea independiente; no se alteró.
 

@@ -74,6 +74,7 @@ Para E2E contra una plataforma de pruebas ya preparada: definir MIRA_E2E_URL, MI
 
 ## Documentación y sustentación
 
+- [Revisión de entrega del 14 de noviembre: Actions, C06, arranque y recuperación nativa en Neon](docs/REVISION_ENTREGA_2026-11-14.md). PR sin merge: bloqueo de cuenta, aceptación académica y arranque automático pendientes; respaldo restaurado y probado.
 - [Auditoría inicial y plan](docs/V3_AUDITORIA_INICIAL.md), [especificación](versiones/v3/2_spec.md).
 - [Arquitectura y decisiones](docs/V3_ARQUITECTURA.md), [mapa técnico por archivo/método/prueba](docs/V3_MAPA_TECNICO.md).
 - [Guía de sustentación y simulacro](docs/V3_GUIA_SUSTENTACION.md).

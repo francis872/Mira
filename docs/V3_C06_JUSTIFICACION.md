@@ -1,5 +1,7 @@
 # C06 — justificación para evaluación académica
 
+Revalidación del **14 de noviembre de 2026, America/Bogota**: la consulta de catálogo en Neon, de solo lectura, confirmó nuevamente **22 columnas FK públicas y cero opcionales**. La copia recuperada dio el mismo resultado. C06 permanece pendiente de decisión docente; no se cambió nulabilidad ni se declaró aceptación. [Revisión actual y decisiones necesarias](REVISION_ENTREGA_2026-11-14.md), [evidencia nueva](evidencias/cierre-entrega-20261114/verificacion.json). El texto siguiente conserva el razonamiento y el corte original.
+
 Revisión local del 2026-11-07. Propuesta sin publicar; no constituye aceptación del profesor ni cambia el esquema.
 
 ## Enunciado y evidencia

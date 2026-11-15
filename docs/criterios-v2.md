@@ -1,5 +1,7 @@
 # Matriz C01–C12 de MIRA V2
 
+> Revisión actual del 14 de noviembre de 2026: C06 fue contrastado con el catálogo vivo y la copia recuperada; persisten 22 FK obligatorias y ninguna opcional. No hay aceptación docente documentada. Los pendientes de liderazgo/periodos, Facultad y perfil propio también se revisaron. [Dictamen actual y evidencias](REVISION_ENTREGA_2026-11-14.md). La tabla siguiente conserva el corte histórico del 23 de octubre; sus cifras y límites no describen por sí solos el despliegue actual.
+
 Actualización del 23 de octubre de 2026. Fuente de criterios: prompt definitivo auténtico. Fuente física: los SQL de `880ac75`, identificados y confirmados por el usuario; copias exactas en [fuentes/sql](fuentes/sql/README.md). Las conclusiones anteriores sobre ausencia del modelo quedan corregidas.
 
 | Criterio | Estado | Implementación y evidencia real | Límite |
