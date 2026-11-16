@@ -12,9 +12,22 @@ Verificación inicial del **13 de noviembre de 2026** y republicación comprobad
 | API .NET | [sapiens-api-v1-v3-20261112.onrender.com](https://sapiens-api-v1-v3-20261112.onrender.com) · `srv-dbr6i3dckfvc73dc3hr0` | Docker, Render Free, Virginia, una instancia |
 | PostgreSQL 16 | Neon, proyecto `snowy-bonus-50718377`, base `sapiens` | Organización Free; conexión TLS `verify-full` y `channel_binding=require` |
 
-### Actualización del 16 de noviembre: recuperación verificada y límites
+### Versión activa: republicación posterior del 16 de noviembre
 
-La interfaz sirve `68d22614593b7efe2bc3aee57ee4646fb7cdf1e7`, despliegue `dep-dbtkgnbl550s73di9g5g`, confirmado `live`. La API conserva `caf4c8c` y `dep-dbrj24gn74is73fo7a4g`; no se redesplegó. Ambos servicios siguen en Free, con autodeploy deshabilitado, sus mismas variables privadas y sus health checks anteriores. No se aplicaron migraciones ni se cambiaron credenciales.
+Por solicitud de despliegue se republicaron ambos servicios desde `4a9c0463cf6791b0aff83315b12dfd7d61adbb0a`, con estado `live` comprobado en Render:
+
+| Servicio | Despliegue activo | Fuente |
+|---|---|---|
+| API | `dep-dbtoe4t6e07s73anhhmg` | `4a9c046` |
+| Interfaz | `dep-dbtoeb8n74is73eck580` | `4a9c046` |
+
+El código de API/SQL/Dockerfile coincide con `caf4c8c`, y el frontend con `68d2261`. Las diferencias de esta revisión eran documentales. No se modificaron variables privadas, credenciales, esquema ni planes; no se crearon servicios o bases. Ambos autodeploys siguen deshabilitados. Se comprobaron **22 solicitudes HTTP antes y después**: salud/readiness, HEAD de acceso, autenticación, mismo JWT válido tras reemplazar la API, misma sesión/SID e inicio protegido 200 tras reemplazar Flask, cierre de sesión y reutilización del JWT revocado 401. Neon confirmó Free. [Evidencia de republicación](evidencias/republicacion-render-20261116/verificacion.json).
+
+Este paso comprueba el redespliegue y la continuidad de sesiones; no repite las suites completas ni el ensayo de suspensión siguiente. La sesión web se conservó durante ambos reemplazos. Esto es una comprobación nueva y distinta de la conservación del SID anónimo durante el ensayo de arranque, que quedó sin medir por reinicio del instrumento.
+
+### Validación anterior del 16 de noviembre: recuperación verificada y límites
+
+El ensayo descrito en esta sección utilizó frontend `68d22614593b7efe2bc3aee57ee4646fb7cdf1e7`, despliegue `dep-dbtkgnbl550s73di9g5g`, y API `caf4c8c`, `dep-dbrj24gn74is73fo7a4g`. En ese ensayo no se redesplegó la API. Ambos servicios conservaban Free, autodeploy deshabilitado, sus variables privadas y health checks anteriores. La republicación posterior figura arriba y mantiene el mismo código de aplicación. No se aplicaron migraciones ni se cambiaron credenciales.
 
 La espera fija de ocho segundos era inferior a los 16,283 segundos observados al despertar la API desde un cliente externo. `frontend/app.py::_wake_render_api` consulta `/health` sin credenciales antes del login de Render y de `/ready`. Solo repite GET de salud; el POST con credenciales se envía una vez. Se conserva la comprobación del origen Cloudflare antes de cualquier consulta de arranque, la firma HMAC, TLS, CSRF y RBAC. `/health` de Flask sigue sin despertar dependencias; no hay un proceso de keep-alive.
 

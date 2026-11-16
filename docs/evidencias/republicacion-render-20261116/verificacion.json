@@ -1,0 +1,283 @@
+{
+  "startedAtUtc": "2026-11-16T22:42:24.877444+00:00",
+  "status": "passed",
+  "stage": "complete",
+  "source": "4a9c0463cf6791b0aff83315b12dfd7d61adbb0a",
+  "repository": "francis872/Mira",
+  "branch": "feature/mira-v3",
+  "checks": [
+    {
+      "stage": "baseline",
+      "method": "GET",
+      "path": "API/ready",
+      "atUtc": "2026-11-16T22:42:24.878509+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 16.228
+    },
+    {
+      "stage": "baseline",
+      "method": "GET",
+      "path": "WEB/ready",
+      "atUtc": "2026-11-16T22:42:41.107190+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 23.339
+    },
+    {
+      "stage": "baseline",
+      "method": "POST",
+      "path": "API/api/auth/login",
+      "atUtc": "2026-11-16T22:43:04.446757+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 10.509
+    },
+    {
+      "stage": "baseline",
+      "method": "GET",
+      "path": "API/api/auth/me",
+      "atUtc": "2026-11-16T22:43:14.956516+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.409
+    },
+    {
+      "stage": "baseline",
+      "method": "GET",
+      "path": "WEB/login",
+      "atUtc": "2026-11-16T22:43:15.366597+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.281
+    },
+    {
+      "stage": "baseline",
+      "method": "POST",
+      "path": "WEB/login",
+      "atUtc": "2026-11-16T22:43:15.648846+00:00",
+      "http": 302,
+      "applicationCorrelation": true,
+      "seconds": 9.03
+    },
+    {
+      "stage": "baseline",
+      "method": "GET",
+      "path": "WEB/",
+      "atUtc": "2026-11-16T22:43:24.678966+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 1.006
+    },
+    {
+      "stage": "deploy_api",
+      "method": "GET",
+      "path": "API/ready",
+      "atUtc": "2026-11-16T22:43:50.442808+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.171
+    },
+    {
+      "stage": "deploy_api",
+      "method": "GET",
+      "path": "API/api/auth/me",
+      "atUtc": "2026-11-16T22:43:50.614313+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 1.3
+    },
+    {
+      "stage": "deploy_web",
+      "method": "GET",
+      "path": "WEB/ready",
+      "atUtc": "2026-11-16T22:44:16.156368+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.627
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "API/health",
+      "atUtc": "2026-11-16T22:44:16.784638+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.168
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "API/ready",
+      "atUtc": "2026-11-16T22:44:16.953242+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.172
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "WEB/health",
+      "atUtc": "2026-11-16T22:44:17.125544+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.869
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "WEB/ready",
+      "atUtc": "2026-11-16T22:44:17.995169+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.393
+    },
+    {
+      "stage": "verify_release",
+      "method": "HEAD",
+      "path": "WEB/login",
+      "atUtc": "2026-11-16T22:44:18.388871+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.198
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "WEB/",
+      "atUtc": "2026-11-16T22:44:18.588288+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 1.299
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "API/api/auth/me",
+      "atUtc": "2026-11-16T22:44:19.888576+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.188
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "API/api/universidad",
+      "atUtc": "2026-11-16T22:44:23.723620+00:00",
+      "http": 401,
+      "applicationCorrelation": true,
+      "seconds": 0.181
+    },
+    {
+      "stage": "verify_release",
+      "method": "POST",
+      "path": "WEB/logout",
+      "atUtc": "2026-11-16T22:44:23.905048+00:00",
+      "http": 302,
+      "applicationCorrelation": true,
+      "seconds": 0.372
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "WEB/",
+      "atUtc": "2026-11-16T22:44:24.278025+00:00",
+      "http": 302,
+      "applicationCorrelation": true,
+      "seconds": 0.229
+    },
+    {
+      "stage": "verify_release",
+      "method": "POST",
+      "path": "API/api/auth/logout",
+      "atUtc": "2026-11-16T22:44:24.508110+00:00",
+      "http": 200,
+      "applicationCorrelation": true,
+      "seconds": 0.24
+    },
+    {
+      "stage": "verify_release",
+      "method": "GET",
+      "path": "API/api/auth/me",
+      "atUtc": "2026-11-16T22:44:24.748664+00:00",
+      "http": 401,
+      "applicationCorrelation": true,
+      "seconds": 0.179
+    }
+  ],
+  "deployments": {
+    "api": {
+      "id": "dep-dbtoe4t6e07s73anhhmg",
+      "source": "4a9c0463cf6791b0aff83315b12dfd7d61adbb0a",
+      "status": "live"
+    },
+    "web": {
+      "id": "dep-dbtoeb8n74is73eck580",
+      "source": "4a9c0463cf6791b0aff83315b12dfd7d61adbb0a",
+      "status": "live"
+    }
+  },
+  "applicationCodeEquivalentToPreviousValidation": true,
+  "credentialsPublished": false,
+  "newMigrationsApplied": false,
+  "newResourcesCreated": false,
+  "prMerged": false,
+  "actionsStarted": false,
+  "institutionalProductionCertified": false,
+  "continuity": {
+    "sameApiJwtAfterRedeploy": true,
+    "sameWebSidAfterRedeploy": true,
+    "protectedHomeHttp": 200,
+    "credentialsChanged": false
+  },
+  "configuration": {
+    "api": {
+      "plan": "free",
+      "autoDeploy": "no",
+      "environmentUnchanged": true,
+      "healthCheckPath": "/ready",
+      "branch": "feature/mira-v3"
+    },
+    "web": {
+      "plan": "free",
+      "autoDeploy": "no",
+      "environmentUnchanged": true,
+      "healthCheckPath": "/health",
+      "branch": "feature/mira-v3"
+    }
+  },
+  "neon": {
+    "plan": "free",
+    "existingProject": "snowy-bonus-50718377",
+    "database": "sapiens",
+    "manualSqlExecuted": false,
+    "credentialsChanged": false
+  },
+  "finishedAtUtc": "2026-11-16T22:44:24.928684+00:00",
+  "sameJwtRevokedAfterLogout": true,
+  "testsScope": "Live redeployment smoke and session continuity; no repeated cold-start or full business E2E suite",
+  "codeEquivalence": {
+    "apiCodeUnchangedSinceLive": true,
+    "webCodeUnchangedSinceLive": true
+  },
+  "previousColdStartEvidence": "docs/evidencias/arranque-render-20261116/verificacion.json",
+  "coldStartRepeatedInThisRedeployment": false,
+  "prReviewAndAcademicDecisionsRemainPending": true,
+  "evidenceGeneratedAtUtc": "2026-11-16T22:48:21.273664+00:00",
+  "previousDeployments": {
+    "api": {
+      "id": "dep-dbrj24gn74is73fo7a4g",
+      "status": "live",
+      "source": "caf4c8cd0c8debb641f6605b478a2f043e11f22f"
+    },
+    "web": {
+      "id": "dep-dbtkgnbl550s73di9g5g",
+      "status": "live",
+      "source": "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7"
+    }
+  },
+  "urls": {
+    "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com"
+  }
+}
