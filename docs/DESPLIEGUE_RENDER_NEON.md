@@ -1,5 +1,25 @@
 # SAPIENS: despliegue completo en Render y Neon
 
+## Acceso vigente: registro propio y diseño oscuro — 16 de noviembre de 2026
+
+**[Abrir SAPIENS: sapiens-usb.onrender.com](https://sapiens-usb.onrender.com)**. Es un subdominio gratuito del proveedor; no se compró ni se afirma propiedad de un dominio raíz. Se creó el frontend `srv-dbtp70tckfvc7393jn5g` en el mismo espacio de Render, plan **Free**, región Virginia, Docker y una instancia. El cambio de nombre del frontend anterior no alteró su URL: se restauró su nombre y se conservó actualizado como respaldo.
+
+| Componente | Despliegue confirmado live | Commit de código |
+|---|---|---|
+| Interfaz nueva `sapiens-usb` | `dep-dbtp90d6e07s73apshqg` | `541a4591aeb2837cdbdc4b3ec277876ca41d18ee` |
+| API existente | `dep-dbtp6grl550s738uec6g` | `5b91bf559012338cd2224ebe93dbcea706fbe179` |
+| Interfaz anterior, conservada | `dep-dbtp90h42hec73ajn8hg` | `541a4591aeb2837cdbdc4b3ec277876ca41d18ee` |
+
+`541a459` modifica únicamente el contraste CSS de hover; el backend coincide con `5b91bf5`. Los tres servicios tienen autodeploy desactivado y plan Free; Neon confirmó Free. No hubo nuevas migraciones, bases ni cambios de contraseña. Tras una denegación inicial de revisión automática, el usuario autorizó expresamente configurar en el nuevo frontend los tres valores privados necesarios: SECRET_KEY, firma Flask–API y conexión de sesiones del usuario `mira_web`. Se validaron el mismo propietario, destino Neon y una lista cerrada de diez variables de runtime; no se trasladaron tokens de proveedores ni conexiones administrativas. La configuración de los servicios anteriores se conserva.
+
+El nuevo `/registro` guarda la cuenta en `usuario` usando `sp_usuario_crear`, bcrypt coste 12 y solo el rol activo Investigador, resuelto por nombre en servidor. No se crean personas académicas ni se infiere afiliación. La web confirma la contraseña y crea una sesión de servidor después del registro. La API rechaza roles/estado/identificadores adicionales; comparte con login las cuotas por origen y cuenta, límite de cuerpo, firma de origen y concurrencia bcrypt. No reintenta POST con credenciales. El correo duplicado no reemplaza hashes ni reactiva cuentas.
+
+Se comprobaron en la URL pública: registro y reingreso mediante navegador, persistencia y rol en Neon, duplicados 409, datos de privilegios 400, contraseña incorrecta/sin token/revocado 401, administración 403, salud/readiness y HEAD sin autenticación. La cuenta QA creada por estas pruebas quedó inactiva y sus sesiones se cerraron. La pasada final verificó 17 muestras responsive y contraste de hover 4,54:1; los dispositivos fueron emulados. [Resultados, capturas y límites](evidencias/acceso-20261116/verificacion.json), [pruebas reproducibles y pendientes manuales](V3_PRUEBAS.md).
+
+Los servicios comparten las cuotas gratuitas del espacio de Render; no hay garantía de disponibilidad continua y pueden suspenderse por inactividad o límites del plan. No se añadió correo de verificación, recuperación por email ni controles para acreditar pertenencia institucional. Los ensayos anteriores de suspensión y recuperación de respaldo no se repitieron en esta actualización. C06 y la revisión formal del PR #7 permanecen pendientes; no se declara validada producción institucional.
+
+## Antecedentes de despliegue
+
 Verificación inicial del **13 de noviembre de 2026** y republicación comprobada el **14 de noviembre**, zona America/Bogota. Repositorio `francis872/Mira`, rama `feature/mira-v3`. La interfaz Flask y la API se publican en Render y reutilizan la base Neon existente. Se mantienen V1–V3 y el despliegue anterior de Vercel.
 
 > El ensayo del 14 de noviembre falló y queda conservado. La repetición aprobada del **16 de noviembre**, con las correcciones siguientes, recuperó el inicio desde el navegador en **51,571 segundos**, con suspensión real confirmada y sin calentamiento manual de API. Es un muestreo con JavaScript, no una certificación de disponibilidad continua. La restauración nativa del respaldo sigue verificada en su copia Neon. [Resultados y condiciones de entrega](REVISION_ENTREGA_2026-11-14.md).
@@ -12,7 +32,7 @@ Verificación inicial del **13 de noviembre de 2026** y republicación comprobad
 | API .NET | [sapiens-api-v1-v3-20261112.onrender.com](https://sapiens-api-v1-v3-20261112.onrender.com) · `srv-dbr6i3dckfvc73dc3hr0` | Docker, Render Free, Virginia, una instancia |
 | PostgreSQL 16 | Neon, proyecto `snowy-bonus-50718377`, base `sapiens` | Organización Free; conexión TLS `verify-full` y `channel_binding=require` |
 
-### Versión activa: republicación posterior del 16 de noviembre
+### Antecedente: republicación anterior del 16 de noviembre
 
 Por solicitud de despliegue se republicaron ambos servicios desde `4a9c0463cf6791b0aff83315b12dfd7d61adbb0a`, con estado `live` comprobado en Render:
 
