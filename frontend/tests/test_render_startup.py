@@ -180,3 +180,14 @@ def test_browser_startup_is_limited_to_render_profile(client, monkeypatch, platf
     monkeypatch.setitem(frontend.app.config, 'LOGIN_PLATFORM', platform)
     monkeypatch.setattr(frontend, 'API_URL', 'https://api.example.invalid/api')
     assert 'render-startup.js' not in client.get('/login').get_data(as_text=True)
+
+
+@pytest.mark.parametrize('data', [{}, {'correo': 'private@invalid.test', 'password': 'must-not-be-sent'}])
+def test_login_head_is_read_only_and_never_authenticates_or_wakes_dependencies(client, calls, render_profile, data):
+    with client.session_transaction() as current:
+        current.clear()
+    response = client.head('/login', data=data, no_csrf=True)
+    assert response.status_code == 200 and response.data == b''
+    assert not calls
+    with client.session_transaction() as current:
+        assert 'token' not in current and 'user' not in current

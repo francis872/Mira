@@ -112,7 +112,7 @@ def register_security(app, api_call, error_message):
 
     @app.route("/login", methods=["GET", "POST"])
     def login():
-        if request.method == "GET":
+        if request.method in ("GET", "HEAD"):
             return render_template("login.html")
         correo = request.form.get("correo", "").strip()
         response = api_call("POST", "auth/login", {"correo": correo, "password": request.form.get("password", "")}, expect_list=False)
