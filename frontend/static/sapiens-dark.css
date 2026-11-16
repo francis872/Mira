@@ -60,9 +60,9 @@ a:hover { color:var(--mira-primary-dark); }
 .modal-header { background:#233453 !important; }
 .modal-footer, .modal-header, .list-group-item { border-color:var(--mira-border); }
 .list-group-item { background:#131d2d; color:var(--mira-ink); }
-.btn-primary, .btn-mira { --bs-btn-bg:#5264d9; --bs-btn-border-color:#5264d9; --bs-btn-color:#fff; --bs-btn-hover-bg:#6376e9; --bs-btn-hover-border-color:#6376e9; --bs-btn-hover-color:#fff; --bs-btn-active-bg:#4657c7; }
+.btn-primary, .btn-mira { --bs-btn-bg:#5264d9; --bs-btn-border-color:#5264d9; --bs-btn-color:#fff; --bs-btn-hover-bg:#5a6cdd; --bs-btn-hover-border-color:#5a6cdd; --bs-btn-hover-color:#fff; --bs-btn-active-bg:#4657c7; }
 .page-heading > .btn, .form-card button[type="submit"] { background:#5264d9; border-color:#5264d9; }
-.page-heading > .btn:hover, .form-card button[type="submit"]:hover { background:#6376e9; border-color:#6376e9; }
+.page-heading > .btn:hover, .form-card button[type="submit"]:hover { background:#5a6cdd; border-color:#5a6cdd; }
 .btn-outline-primary { --bs-btn-color:#bdcaff; --bs-btn-border-color:#6474a8; --bs-btn-hover-bg:#35477c; --bs-btn-hover-border-color:#8b9ce1; --bs-btn-hover-color:#fff; }
 .btn-outline-secondary { --bs-btn-color:#c3cee0; --bs-btn-border-color:#52617b; --bs-btn-hover-color:#fff; --bs-btn-hover-bg:#35435c; --bs-btn-hover-border-color:#7889a6; }
 .form-card .btn-outline-secondary { color:#c3cee0; border-color:#52617b; }
@@ -116,7 +116,7 @@ input[type="checkbox"] { accent-color:#91a7ff; }
 .password-toggle:hover { background:#202e47; }
 .auth-hint { color:#a8b8cf; font-size:11px; margin:-11px 0 18px; }
 .auth-submit { display:flex; justify-content:center; align-items:center; gap:13px; min-height:50px; background:#5264d9; border:1px solid #6b7ce3; border-radius:10px; color:#fff; font-size:14px; font-weight:650; cursor:pointer; margin-top:4px; box-shadow:0 5px 20px #233b9a33; }
-.auth-submit:hover { background:#6376e9; }
+.auth-submit:hover { background:#5a6cdd; }
 .auth-submit:active { background:#4657c7; }
 .auth-footnote { color:#acbad0; font-size:12px; text-align:center; line-height:1.8; margin:20px 0 0; }
 .auth-footnote a { color:#b8c6ff; font-weight:600; }
