@@ -80,6 +80,8 @@ def test_render_login_signs_cloudflare_origin_and_ignores_browser_assertion(clie
     observed = []
 
     def capture(method, url, **kwargs):
+        if method == 'GET' and url.endswith('/health'):
+            return FakeResponse(200, {'status': 'ok'})
         observed.append(requests.Request(method, url, **{k: v for k, v in kwargs.items()
                                                        if k not in ('timeout', 'allow_redirects')}).prepare())
         return FakeResponse(401, {'mensaje': 'Credenciales invalidas.'})

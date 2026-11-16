@@ -1,9 +1,10 @@
 import hmac
 import os
 import secrets
+import time
 import requests
 from markupsafe import Markup
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from seguridad import configure_session, register_security, SesionVencida
 from login_protection import configure_login_protection, client_origin, LoginOriginAuth
@@ -36,6 +37,8 @@ def health():
 def ready():
     from session_store import SessionStoreUnavailable
     try:
+        if app.config.get('LOGIN_PLATFORM') == 'render' and not _wake_render_api(time.monotonic() + 35):
+            return {'status': 'unavailable'}, 503
         cache = app.config['SESSION_CACHELIB']
         if hasattr(cache, 'check'):
             cache.check()
@@ -113,26 +116,69 @@ def verify_csrf():
 # URL base de la API REST de MIRA
 API_URL = os.getenv("API_URL", "http://localhost:8081/api").rstrip("/")
 
+
+def _wake_render_api(deadline):
+    """Wake the managed API with bounded, credential-free GETs, never a login retry."""
+    for attempt in range(20):
+        remaining = deadline - time.monotonic()
+        if remaining <= 1:
+            return False
+        connect = min(3, remaining / 2)
+        read = min(30, remaining - connect)
+        try:
+            response = requests.request('GET', urljoin(API_URL + '/', '../health'),
+                headers={'Accept': 'application/json'}, timeout=(connect, read), allow_redirects=False)
+            if response.status_code == 200:
+                try:
+                    body = response.json()
+                except ValueError:
+                    body = None
+                if isinstance(body, dict) and body.get('status') == 'ok':
+                    return time.monotonic() < deadline
+            elif response.status_code not in (502, 503, 504):
+                return False
+            app.logger.warning('api_startup_probe_unavailable status=%s', response.status_code)
+        except requests.exceptions.RequestException as error:
+            app.logger.warning('api_startup_probe_failed type=%s', type(error).__name__)
+        remaining = deadline - time.monotonic()
+        if attempt < 19 and remaining > 1:
+            time.sleep(min(2, remaining - 1))
+    return False
+
+
 def api_call(method, path, json_data=None, expect_list=None):
     """Función auxiliar para realizar llamadas seguras a la API REST."""
     url = f"{API_URL}/{path.lstrip('/')}"
     login_auth = {'allow_redirects': False} if method == 'POST' and path == 'auth/login' else {}
+    timeout = 8
+    render_login = method == 'POST' and path == 'auth/login' and app.config.get('LOGIN_PLATFORM') == 'render'
     if method == 'POST' and path == 'auth/login' and app.config['LOGIN_FORWARDING_KEY']:
         origin = client_origin(app.config['LOGIN_TRUSTED_PROXY_NETWORKS'])
         if app.config.get('LOGIN_PLATFORM') in ('vercel', 'render') and origin is None:
             return None
         if origin:
             login_auth['auth'] = LoginOriginAuth(app.config['LOGIN_FORWARDING_KEY'], origin)
+    if render_login:
+        # Reserve time for session storage; Requests timeouts are not wall-clock limits.
+        deadline = time.monotonic() + 45
+        if not _wake_render_api(deadline - 8):
+            return None
+        remaining = deadline - time.monotonic()
+        if remaining <= 4:
+            return None
+        timeout = (3, min(30, remaining - 3))
     try:
         response = requests.request(
             method=method,
             url=url,
             json=json_data,
             headers=_headers(),
-            timeout=8,
+            timeout=timeout,
             **login_auth
         )
-    except requests.exceptions.RequestException:
+    except requests.exceptions.RequestException as error:
+        app.logger.warning('api_request_failed operation=%s type=%s',
+            'login' if path == 'auth/login' else 'readiness' if path == '../ready' else 'data', type(error).__name__)
         return None
     if response.status_code in (401, 403):
         try:
