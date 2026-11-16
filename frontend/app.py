@@ -127,7 +127,7 @@ def _wake_render_api(deadline):
         read = min(30, remaining - connect)
         try:
             response = requests.request('GET', urljoin(API_URL + '/', '../health'),
-                headers={'Accept': 'application/json'}, timeout=(connect, read), allow_redirects=False)
+                headers={'Accept': '*/*'}, timeout=(connect, read), allow_redirects=False)
             if response.status_code == 200:
                 try:
                     body = response.json()

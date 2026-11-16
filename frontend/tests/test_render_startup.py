@@ -37,7 +37,7 @@ def test_gateway_startup_get_is_retried_without_credentials_and_login_is_signed_
     assert [x[0] for x in observed] == ['GET', 'GET', 'POST']
     for method, url, kwargs in observed[:2]:
         assert url.endswith('/health') and '/api/../' not in url
-        assert kwargs['headers'] == {'Accept': 'application/json'}
+        assert kwargs['headers'] == {'Accept': '*/*'}
         assert kwargs.get('json') is None and kwargs.get('auth') is None
         assert kwargs['allow_redirects'] is False and kwargs.get('verify', True) is True
     method, url, kwargs = observed[-1]
