@@ -1,8 +1,26 @@
 # Pruebas MIRA V3 — cierre de estabilización
 
+> Actualización del 16 de noviembre de 2026: **170 Flask aprobadas, cinco omitidas**, recuperación real desde suspensión en **51,571 s**, primer login 302 sin reenvío, inicio/readiness 200 y mismo JWT realmente expirado 401. Aprobaron 16 comprobaciones remotas y seis muestras responsive emuladas. Se conservan los ensayos fallidos y las interrupciones del instrumento. OSV: 25 distribuciones fijadas, sin avisos conocidos; no es un inventario del SO. Actions está excluido como requisito; C06 y la revisión formal continúan pendientes. [Despliegue y alcance](DESPLIEGUE_RENDER_NEON.md), [evidencia nueva](evidencias/arranque-render-20261116/verificacion.json). Los resultados históricos siguientes conservan sus fechas y fuentes.
+
 > Fase 6 (2026-11-12): SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe vigente](FASE6_INFORME_FINAL.md). Las secciones fechadas de abajo se conservan como antecedentes.
 
 > Seguimiento local 2026-11-07: [cierre académico y propuesta sin publicar](V3_CIERRE_ACADEMICO.md). Este documento conserva su alcance histórico; el PR #7 publicado contiene ocho commits V3 más 43 anteriores. Las nuevas correcciones y CI requieren autorización de publicación.
+
+## Trazabilidad de la corrección de arranque del 16 de noviembre
+
+| Control | Implementación | Prueba o evidencia |
+|---|---|---|
+| Activar salud sin credenciales desde el navegador | `templates/login.html`, `static/render-startup.js` | `verify-render-startup.mjs`: GET 200 por HTTPS, sin cuerpo, cookie, Authorization, Referer ni assertion; resultado saneado nuevo |
+| Publicar solo una URL de salud sin secretos, únicamente en Render | `app.py::inject_globals` | `test_render_login_page_can_activate_only_public_health_from_browser`, `test_non_public_configuration_never_becomes_a_browser_startup_target`, `test_browser_startup_is_limited_to_render_profile` |
+| Esperar la API sin repetir credenciales | `app.py::_wake_render_api/api_call` | `test_gateway_startup_get_is_retried_without_credentials_and_login_is_signed_once`, `test_credential_post_is_never_replayed_and_diagnostics_do_not_log_its_values` |
+| Rechazar redirecciones del servidor y respuestas de carga incompatibles | `app.py::_wake_render_api` | `test_non_startup_errors_never_forward_credentials_or_follow_redirects`, `test_loading_html_does_not_count_as_a_ready_api` |
+| Agotar la espera sin enviar el login; conservar límites de otras llamadas | `app.py::api_call` | `test_unready_platform_is_bounded_and_does_not_attempt_login`, `test_deadline_exhaustion_does_not_send_credentials`, `test_slow_api_startup_reserves_a_longer_login_wait_without_changing_other_calls` |
+| Mantener CSRF y separar liveness/readiness | `app.py::verify_csrf/health/ready` | `test_csrf_rejection_happens_before_any_startup_probe`, `test_readiness_can_wake_the_api_but_liveness_does_not`, `test_readiness_stays_unavailable_when_api_cannot_wake` |
+| Impedir que los probes HEAD autentiquen u ocupen threads esperando la API | `seguridad.py::register_security.login` | `test_login_head_is_read_only_and_never_authenticates_or_wakes_dependencies`, con y sin cuerpo de credenciales; logs históricos de HEAD de 36–37 s conservados |
+
+Las pruebas Python anteriores están en [test_render_startup.py](../frontend/tests/test_render_startup.py). [Resultados, fuentes y fallos conservados](evidencias/arranque-render-20261116/verificacion.json). Los cinco tests de PostgreSQL compartido se omiten por falta de la base aislada del verificador integrado; no se cuentan como aprobados. Los muestreos anteriores de interfaz y V1/V2 conservan su alcance y fecha.
+
+## Antecedente de estabilización
 
 Fecha: 2026-11-05. [Matriz de 30 requisitos, métodos y evidencia](V3_REVISION_FINAL.md). Los resultados históricos de V1/V2 no se cuentan como ejecuciones actuales.
 
@@ -25,6 +43,32 @@ Fecha: 2026-11-05. [Matriz de 30 requisitos, métodos y evidencia](V3_REVISION_F
 | Render YAML | conforme a JSON Schema público | [schema](evidencias/v3/render-schema.json); sin despliegue |
 
 ## Reproducción
+
+### Regresión anónima del arranque en Edge
+
+`scripts/verify-render-startup.mjs` comprueba en un navegador real que el script sí llega a la red, obtiene 200 de la URL de salud y no transmite cuerpo, cookie, Authorization, Referer ni assertion. No usa cuentas y **no acredita suspensión ni login**: ese ensayo se registra aparte. Requiere Node con WebSocket global y Microsoft Edge; usar un perfil exclusivo y un puerto de depuración libre en loopback.
+
+```powershell
+if (Get-NetTCPConnection -LocalPort 9226 -State Listen -ErrorAction SilentlyContinue) {
+    throw 'El puerto 9226 está ocupado; elija otro puerto libre para esta prueba.'
+}
+$perfilPrueba = Join-Path (Get-Location).Path ('.local\edge-arranque-' + [guid]::NewGuid().ToString('N'))
+$edgePrueba = Start-Process 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' -WindowStyle Hidden -PassThru -ArgumentList @('--headless=new', '--remote-debugging-address=127.0.0.1', '--remote-debugging-port=9226', "--user-data-dir=`"$perfilPrueba`"", 'about:blank')
+try {
+    Start-Sleep -Seconds 3
+    $env:MIRA_E2E_URL = 'https://sapiens-web-v1-v3-20261113.onrender.com'
+    $env:MIRA_BROWSER_ALLOWED_ORIGIN = $env:MIRA_E2E_URL
+    $env:MIRA_RENDER_API_HEALTH_URL = 'https://sapiens-api-v1-v3-20261112.onrender.com/health'
+    $env:MIRA_BROWSER_DEBUG_URL = 'http://127.0.0.1:9226'
+    node scripts/verify-render-startup.mjs
+} finally {
+    if (-not $edgePrueba.HasExited) { Stop-Process -Id $edgePrueba.Id }
+}
+```
+
+La evidencia se guarda en `.local/render-startup-browser/render-startup-browser.json`. El proceso de cierre corresponde exclusivamente a la instancia creada por el comando; no cerrar otros procesos de Edge. El perfil de prueba queda conservado bajo `.local`, ignorado por Git. Para el ensayo de inactividad seguir el procedimiento de [operación reproducible](DESPLIEGUE_RENDER_NEON.md#operación-reproducible), que evita calentar la API antes de medir.
+
+### Regresión integrada histórica
 
 Instalar `frontend/requirements-dev.txt` en entorno limpio; incluye requirements.lock. Restaurar .NET. Para el conjunto integrado usar `scripts/verify-postgres16.ps1 -Browser`; requiere PostgreSQL 16, Edge y Node. `MIRA_AXE_SCRIPT` debe señalar una copia local de axe-core 4.10.3 para incluir axe; sin ella no se genera esa verificación. Los scripts crean bases nuevas, datos ficticios y servicios en puertos exclusivos y detienen sus procesos; nunca apuntar las E2E a una base institucional.
 

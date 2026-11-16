@@ -1,14 +1,32 @@
 # Revisión de entrega: CI, pendientes V2 y recuperación
 
-> Decisión vigente del **15 de noviembre de 2026**: el usuario indicó «no necesito actions» y confirmó que **no existe decisión escrita del docente sobre C06**. Actions deja de ser requisito para continuar o fusionar; sus resultados históricos no cambian. C06, la revisión formal y el hallazgo de arranque mantienen su estado pendiente. [Registro de la decisión](evidencias/decision-entrega-20261115.json).
+> Decisión vigente del **15 de noviembre de 2026**: el usuario indicó «no necesito actions» y confirmó que **no existe decisión escrita del docente sobre C06**. Actions deja de ser requisito para continuar o fusionar; sus resultados históricos no cambian. C06 y la revisión formal mantienen su estado pendiente. [Registro de la decisión](evidencias/decision-entrega-20261115.json). El seguimiento de arranque del 16 de noviembre figura a continuación.
 
-Fecha de cierre de esta comprobación: **14 de noviembre de 2026, America/Bogota**. Algunas marcas UTC corresponden al 15 de noviembre. Repositorio `francis872/Mira`, rama `feature/mira-v3`, fuente revisada `2974abcc984e7df3adb5afa560efceca864ab20f`, base del PR `35640853dc4cbb4dd50f17c9208acb2feedaff1d`. Las imágenes públicas conservan `caf4c8c`; la diferencia posterior era documental, sin cambiar el código de ejecución.
+## Seguimiento técnico del 16 de noviembre
+
+La interfaz está desplegada en `68d2261`, `dep-dbtkgnbl550s73di9g5g`; la API conserva `caf4c8c`. Se corrigieron la espera de activación, el GET público sin credenciales desde el navegador y el despacho de HEAD `/login`. Este último estaba recorriendo la rama de autenticación: los probes esperaban unos 36 segundos y ocupaban los cuatro threads. Hay **170 Flask aprobadas y cinco omitidas**.
+
+**La recuperación de navegador aprobó en un ensayo completo:** 964,694 s sin tráfico propio, ambos servicios sin instancias y Neon idle antes del acceso; primer login **302**, un solo POST, inicio y readiness **200**, recuperación observada en **51,571 s**, sin calentamiento manual de API. HEAD respondió 200 en 0,788 s. El mismo JWT de vigencia 1200 s, válido al emitir, fue rechazado 401 después de expirar. Aprobaron **16 comprobaciones remotas de seguridad/operación**, incluida denegación directa 403 en API, y **seis muestras responsive** emuladas sin overflow ni excepciones JavaScript observadas. La conservación del SID anónimo previo no se comprobó porque se reinició el navegador del instrumento; sí se verificó su rotación al autenticar.
+
+Los intentos con interrupciones de CDP y el intervalo extendido de 43 minutos quedan separados del ensayo aprobado. El instrumento final espera el documento real de la aplicación antes de consultar el DOM y permite 150 s de comunicación; los presupuestos de la aplicación no se ampliaron por ese ajuste. La activación requiere JavaScript y acceso público del navegador a salud. El resultado es un muestreo funcional, no una garantía de disponibilidad institucional.
+
+Se conservan los dos ensayos fallidos del 16 de noviembre y el fallo anterior del 14. OSV consultó las 25 distribuciones Python fijadas, sin avisos conocidos; no es una auditoría nueva del SO. El respaldo anterior conserva su hash y la rama de recuperación sigue preservada. Las variables privadas y los planes gratuitos permanecen iguales; no se aplicaron nuevas migraciones.
+
+[Evidencia nueva, hashes de fuente y diagnóstico HEAD](evidencias/arranque-render-20261116/verificacion.json), [configuración y reproducción](DESPLIEGUE_RENDER_NEON.md), [pruebas](V3_PRUEBAS.md), [sustentación](V3_GUIA_SUSTENTACION.md). C06, los demás pendientes académicos, la revisión formal y las comprobaciones institucionales siguen sin aceptación. No se ejecuta merge ni se declara producción institucional validada.
+
+**Recomendación vigente:** preparada para demostración con observaciones documentadas. **No dar por lista la entrega académica integral** hasta resolver las decisiones de alcance —incluido C06— y la revisión del PR. Permanecen las comprobaciones en dispositivos físicos, lector de pantalla, carga/disponibilidad institucional y operación periódica de respaldos. Actions no es un requisito del usuario.
+
+## Corte histórico del 14 de noviembre
+
+Las secciones siguientes conservan los resultados y condiciones de ese corte. La evaluación vigente del arranque corresponde al seguimiento del 16 de noviembre situado arriba.
+
+Fecha de cierre de esta comprobación histórica: **14 de noviembre de 2026, America/Bogota**. Algunas marcas UTC corresponden al 15 de noviembre. Repositorio `francis872/Mira`, rama `feature/mira-v3`, fuente revisada `2974abcc984e7df3adb5afa560efceca864ab20f`, base del PR `35640853dc4cbb4dd50f17c9208acb2feedaff1d`. Las imágenes públicas de ese corte conservaban `caf4c8c`; la diferencia posterior era entonces documental, sin cambiar el código de ejecución. El seguimiento del 16 de noviembre actualiza la interfaz.
 
 **El PR #7 no está aprobado para fusionarse.** Se verificó una recuperación nativa en Neon y se revisaron los pendientes académicos. Actions sigue rechazando jobs por bloqueo de cuenta. El ensayo controlado de arranque conjunto no recuperó la aplicación dentro de su plazo; la operación volvió después de calentamiento manual. No se declara cierre académico de V2 ni producción institucional validada.
 
 [Evidencia saneada y cronología](evidencias/cierre-entrega-20261114/verificacion.json). No contiene el respaldo, filas de negocio, cookies, JWT, contraseñas, cadenas de conexión ni logs completos.
 
-## Resultado de las cuatro solicitudes
+## Resultado de las cuatro solicitudes — corte del 14 de noviembre
 
 | Solicitud | Resultado comprobado | Condición que falta |
 |---|---|---|
@@ -95,7 +113,7 @@ Después de un baseline disponible se dejaron **1380 segundos (23 minutos) sin t
 
 Las instancias posteriores fueron distintas. No se cambiaron credenciales, configuración, código o planes para obtener la comprobación final. Las observaciones no demuestran una única causa del fallo: hubo efectos de arranque y problemas de transporte/resolución en el entorno de prueba. El éxito posterior **no convierte el ensayo automático en aprobado**.
 
-Para una demostración supervisada se debe preparar la API y comprobar ambos `/ready`, ensayar el login y dejar tiempo para reintentar. Sigue pendiente estabilizar o delimitar el arranque sin intervención y repetir un ensayo controlado. No se recomienda disponibilidad institucional continua con el resultado actual. [Condiciones Free de Render](https://render.com/docs/free).
+Para una demostración supervisada se debe preparar la API y comprobar ambos `/ready`, ensayar el login y dejar tiempo para reintentar. Al cierre del 14 de noviembre seguía pendiente estabilizar o delimitar el arranque sin intervención y repetir un ensayo controlado; el seguimiento del 16 verifica esa recuperación en el flujo de navegador descrito arriba. La disponibilidad institucional continua no queda certificada. [Condiciones Free de Render](https://render.com/docs/free).
 
 ## Revisión técnica del PR y dependencias
 

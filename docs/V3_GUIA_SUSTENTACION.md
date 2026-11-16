@@ -1,5 +1,7 @@
 # Guía de sustentación MIRA V3
 
+> Seguimiento del 16 de noviembre de 2026: usar la [interfaz actual en Render](https://sapiens-web-v1-v3-20261113.onrender.com), junto con el [registro de despliegue y arranque](DESPLIEGUE_RENDER_NEON.md) y la [evidencia nueva](evidencias/arranque-render-20261116/verificacion.json). C06 sigue sin decisión docente escrita y el PR continúa pendiente de revisión; Actions fue excluido por el usuario. Las comprobaciones históricas siguientes conservan sus fechas y alcances.
+
 > Fase 6 (2026-11-12): SAPIENS está operativa en [https://sapiens-v1-v3-20261112.vercel.app](https://sapiens-v1-v3-20261112.vercel.app), con Flask en Vercel Hobby, API .NET en Render Free y PostgreSQL 16 en Neon Free. La URL Production aprobó **50 criterios funcionales (49 en la pasada completa y repetición puntual aprobada tras un timeout TLS)**, 14 comprobaciones de seguridad/operación y una revisión de navegador de escritorio, tableta y móvil emulados. GitHub Actions continúa bloqueado por la cuenta; el PR #7 permanece Draft y sin merge. V2 mantiene pendientes académicos, incluido C06. No se declara cerrada toda la misión ni certificada producción institucional. [Informe vigente](FASE6_INFORME_FINAL.md). Las secciones fechadas de abajo se conservan como antecedentes.
 
 > Seguimiento local 2026-11-07: [cierre académico](V3_CIERRE_ACADEMICO.md). La propuesta local pasa 71 .NET/80 Flask/43 E2E, 18 axe sin infracciones ni incomplete y zoom real Edge; requiere autorización antes de publicarse. El PR #7 conserva su evidencia anterior y la marca MIRA. C06 sigue pendiente del profesor.
@@ -7,6 +9,8 @@
 Revisión final: 2026-11-05. [Dictamen, matriz de requisitos y producción](V3_REVISION_FINAL.md). Preparada para demostración académica local; no declarar validado Render/Neon. Los ocho avisos Python anteriores están corregidos en el runtime Linux auditado; conservar la distinción entre prueba local y producción.
 
 ## Preparación reproducible
+
+Completar el arranque y comprobar disponibilidad **antes de iniciar los diez minutos**. El ensayo controlado de inactividad es una prueba separada; no consultar manualmente la API mientras se mide su recuperación. El 16 de noviembre se verificaron recuperación en 51,571 s, login 302, inicio/readiness 200 y rechazo 401 del mismo JWT emitido con vigencia real de veinte minutos después de expirar. Presentar su registro saneado; no ocupar la sustentación esperando veinte minutos ni reducir la duración JWT del servicio. La denegación 403 también se comprobó directamente en API con un Investigador, además de la interfaz.
 
 1. Instalar .NET 10, Python y PostgreSQL 16/17 para ejecución local. `dotnet restore MIRA.sln`; `python -m pip install -r frontend/requirements-dev.txt` (incluye requirements.lock).
 2. Configurar `.env.local` como indica scripts/README.md. `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1`. Aplica migraciones pendientes sin borrar datos; genera una clave JWT local si falta JWT_KEY.
@@ -169,3 +173,15 @@ Abrir `DbConnectionFactory` constructor y ProductionConfigurationTests: VerifyFu
 Pregunta C06: citar literalmente las líneas 406/707 de PROMPT_MAESTRO_DEFINITIVO_MIRA_V2. La consulta SQL halló 22 columnas FK públicas, cero opcionales. El requisito es condicional; no se inventó una relación opcional ni se modificó el SQL docente. La aceptación académica corresponde al profesor. Un test de texto/fecha null no se presenta como prueba de FK nullable.
 
 Pregunta sobre OSV: requests/urllib3/idna/certifi se actualizaron a 2.33.0/2.8.0/3.15/2026.10.18; OSV consultó las 18 distribuciones de la imagen Linux y devolvió cero avisos conocidos. Es una observación fechada, no una garantía absoluta ni una auditoría del SO completo. Instalar el lock en entorno limpio; el Python global antiguo no fue actualizado.
+
+## Preguntas sobre el arranque en Render — 16 de noviembre
+
+| Pregunta | Respuesta fundamentada |
+|---|---|
+| ¿Qué activa el servicio desde la interfaz? | `templates/login.html` carga `static/render-startup.js` solo cuando `app.inject_globals` publica una URL HTTPS de salud sin usuario/password, query ni fragmento. El script hace un único GET al abrir la página. La evidencia de Edge verifica ausencia de cuerpo, cookies, autorización, referente y assertion. |
+| ¿El navegador autentica o recibe el JWT? | Ese script no lee el formulario ni procesa tokens. La respuesta `no-cors` es opaca. Flask espera JSON válido de salud en `_wake_render_api`; `api_call` envía el login una vez con la firma de origen existente. `seguridad.login` conserva el JWT en la sesión del servidor; API/AuthService mantienen la autenticación y los roles. |
+| ¿Por qué se permite `follow` en ese fetch? | El estándar Fetch exige `follow` al usar `no-cors`; la combinación anterior impedía emitir la solicitud y fue detectada en Edge. Es un GET sin credenciales en todos los saltos. El POST de login y las consultas de salud del servidor conservan `allow_redirects=False`. [Regresión reproducible](V3_PRUEBAS.md#regresión-anónima-del-arranque-en-edge). |
+| ¿Esto mantiene los servicios despiertos? | Se emite al cargar el acceso, sin un intervalo periódico. AbortController limita su espera a 45 segundos. La configuración `/health` de Render para Flask conserva la separación de dependencias. La recuperación automática de esta topología depende de JavaScript y del acceso público del navegador a salud; los resultados de suspensión real se consultan en la evidencia, no se deducen del GET con servicios activos. |
+| ¿Qué ocurría con HEAD `/login`? | `seguridad.register_security.login` distinguía solo GET y enviaba HEAD por la rama de autenticación. Los probes del cargador esperaban unos 36 segundos y ocupaban los threads. `68d2261` trata GET/HEAD como consultas. Las dos pruebas nuevas verifican que HEAD, incluso con datos de credenciales y sin CSRF, no envía llamadas a API ni crea identidad y devuelve 200 sin cuerpo. |
+
+La nueva consulta OSV del 16 de noviembre cubre 25 distribuciones fijadas, sin avisos conocidos; no es un inventario nuevo de la imagen o del sistema operativo. Dispositivos físicos, lector de pantalla, carga institucional y decisiones académicas siguen pendientes de sus comprobaciones o responsables.

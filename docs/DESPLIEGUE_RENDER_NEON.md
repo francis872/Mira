@@ -2,7 +2,7 @@
 
 Verificación inicial del **13 de noviembre de 2026** y republicación comprobada el **14 de noviembre**, zona America/Bogota. Repositorio `francis872/Mira`, rama `feature/mira-v3`. La interfaz Flask y la API se publican en Render y reutilizan la base Neon existente. Se mantienen V1–V3 y el despliegue anterior de Vercel.
 
-> Comprobación posterior del 14 de noviembre: la restauración del respaldo original en una copia Neon fue verificada, incluida la aplicación. El ensayo de 23 minutos de inactividad confirmó suspensión real, pero el arranque conjunto **no recuperó readiness en su plazo**; hubo recuperación posterior con intervención manual. No se considera aprobado el arranque automático. [Resultados actuales y condiciones de entrega](REVISION_ENTREGA_2026-11-14.md).
+> El ensayo del 14 de noviembre falló y queda conservado. La repetición aprobada del **16 de noviembre**, con las correcciones siguientes, recuperó el inicio desde el navegador en **51,571 segundos**, con suspensión real confirmada y sin calentamiento manual de API. Es un muestreo con JavaScript, no una certificación de disponibilidad continua. La restauración nativa del respaldo sigue verificada en su copia Neon. [Resultados y condiciones de entrega](REVISION_ENTREGA_2026-11-14.md).
 
 ## Recursos y versión
 
@@ -12,9 +12,43 @@ Verificación inicial del **13 de noviembre de 2026** y republicación comprobad
 | API .NET | [sapiens-api-v1-v3-20261112.onrender.com](https://sapiens-api-v1-v3-20261112.onrender.com) · `srv-dbr6i3dckfvc73dc3hr0` | Docker, Render Free, Virginia, una instancia |
 | PostgreSQL 16 | Neon, proyecto `snowy-bonus-50718377`, base `sapiens` | Organización Free; conexión TLS `verify-full` y `channel_binding=require` |
 
-### Versión activa: republicación solicitada
+### Actualización del 16 de noviembre: recuperación verificada y límites
 
-Ambos servicios sirven el commit [`caf4c8cd0c8debb641f6605b478a2f043e11f22f`](https://github.com/francis872/Mira/commit/caf4c8cd0c8debb641f6605b478a2f043e11f22f). Se solicitó su despliegue el 13 de noviembre, a las 15:47 UTC, y se confirmó nuevamente `live` el 14 de noviembre:
+La interfaz sirve `68d22614593b7efe2bc3aee57ee4646fb7cdf1e7`, despliegue `dep-dbtkgnbl550s73di9g5g`, confirmado `live`. La API conserva `caf4c8c` y `dep-dbrj24gn74is73fo7a4g`; no se redesplegó. Ambos servicios siguen en Free, con autodeploy deshabilitado, sus mismas variables privadas y sus health checks anteriores. No se aplicaron migraciones ni se cambiaron credenciales.
+
+La espera fija de ocho segundos era inferior a los 16,283 segundos observados al despertar la API desde un cliente externo. `frontend/app.py::_wake_render_api` consulta `/health` sin credenciales antes del login de Render y de `/ready`. Solo repite GET de salud; el POST con credenciales se envía una vez. Se conserva la comprobación del origen Cloudflare antes de cualquier consulta de arranque, la firma HMAC, TLS, CSRF y RBAC. `/health` de Flask sigue sin despertar dependencias; no hay un proceso de keep-alive.
+
+El presupuesto previsto es de 45 segundos para preparar/enviar el login, reservando ocho para su envío después de la espera; `/ready` permite 35 segundos para activar la API antes de comprobar dependencias. Las demás llamadas conservan ocho segundos. Los límites connect/read de Requests no garantizan un máximo estricto de tiempo total, especialmente durante DNS. [Semántica oficial de los timeouts](https://requests.readthedocs.io/en/latest/user/advanced/#timeouts).
+
+El primer candidato, `f522f8b`, recibió 17 respuestas 502 al consultar salud con `Accept: application/json`; después de despertar manualmente la API, `/ready` web respondió 200. El segundo, `8bc49a0`, cambió ese encabezado a `*/*` y volvió a fallar tras suspensión real: primer login 503 en 36,294 segundos y readiness sin recuperar. **El encabezado no resolvió el hallazgo; la causa interna del proveedor no está demostrada.** Se preservan ambos fallos y los dos errores de conexión del cliente HTTP anteriores a cargar el formulario.
+
+`frontend/static/render-startup.js` hace un GET público de salud desde el navegador al cargar el acceso en el perfil Render. Omite cookies, autorización y referente, no lee el formulario ni maneja JWT, y limita su espera a 45 segundos mediante AbortController. El navegador solo activa el servicio: su respuesta `no-cors` es opaca y no demuestra autenticación. La disponibilidad y las credenciales se comprueban después en Flask/API. La recuperación automática de esta topología requiere JavaScript y acceso del navegador a esa URL pública; `/ready` por sí solo continúa reflejando dependencias no disponibles cuando la API está dormida.
+
+Edge detectó un error del primer script (`32bed57`): combinar `no-cors` con `redirect: error` impide que salga la consulta. `3018573` lo corrige a `follow`, exigido por el [estándar Fetch](https://fetch.spec.whatwg.org/#main-fetch). Esa consulta no contiene credenciales, tampoco en redirecciones; el POST de login y los GET de salud del servidor mantienen `allow_redirects=False`. No se habilitó CORS sobre la API ni se modificó su autorización.
+
+El ensayo completo de Edge sobre `3018573` volvió a confirmar ambas instancias ausentes y Neon idle, pero no obtuvo el formulario: la página de espera hizo HEAD repetidos y aparecieron 503/502. Los logs de Flask identificaron **siete HEAD `/login` con duración aproximada de 36–37 segundos**. `seguridad.register_security.login` solo consideraba GET como consulta; HEAD entraba por error en la rama que enviaba un POST de autenticación. La nueva espera agravaba esa ocupación de los cuatro threads. La URL de salud del navegador ni siquiera llegó a ejecutarse en ese intento.
+
+`68d2261` corrige el despacho: GET y HEAD renderizan la página de acceso; HEAD no autentica ni consulta dependencias. Dos pruebas envían HEAD con y sin datos de credenciales, sin CSRF, y comprueban 200 sin cuerpo, cero llamadas a API y ausencia de identidad autenticada. La prueba aislada anterior, con web activa y API dormida, sí alcanzó login 302 e inicio 200; una aserción de instrumentación sobre headers provisionales impidió completar sus demás controles. No se presenta como aprobación integral.
+
+Hay **170 pruebas Flask aprobadas y cinco omitidas** por requerir PostgreSQL exclusivo de pruebas. El [verificador nuevo de Edge](../scripts/verify-render-startup.mjs) aprobó la consulta automática: un GET, HTTP 200 por HTTPS —QUIC en esta ejecución— y sin cuerpo/cookie/autorización/referente/assertion, comprobados también en los headers efectivos de CDP ExtraInfo.
+
+La repetición completa aprobó después de **964,694 segundos sin tráfico propio**, con **cero instancias en ambos servicios y Neon idle** antes de abrir el acceso. El navegador recién conectado esperó el documento real de SAPIENS y ejecutó el flujo sin consultas manuales a la API. El instrumento espera hasta 150 segundos por comandos de navegación/DOM; los presupuestos de la aplicación siguen iguales. Los intentos previos interrumpidos por CDP y el intervalo extendido de 43 minutos se conservan como resultados instrumentales, no como aprobaciones de la aplicación. Una prueba local de transición 503→200 verificó el nuevo mecanismo del instrumento sin contactar la instalación.
+
+| Comprobación del ensayo aprobado | Resultado |
+|---|---|
+| Navegación inicial hasta inicio autenticado | **51,571 s**; 28,007 s desde enviar el formulario hasta el inicio |
+| Primer login | **Un POST, 302**; ningún reenvío de credenciales |
+| Inicio / readiness / logout | Inicio **200**, `/ready` web **200**, cierre regresa al acceso |
+| Activación de API desde navegador | Un GET de salud, sin cuerpo, Cookie, Authorization, Referer ni assertion; sin calentamiento manual |
+| HEAD en los logs de este arranque | **200 en 0,788 s**; GET de acceso 200 en 0,040 s. Antes había HEAD de 36–37 s |
+| Instancias y sesión | Ambas instancias cambiaron; SID rotado al autenticar. La conservación del SID anónimo anterior no se pudo medir porque se reinició el navegador del instrumento |
+| JWT emitido realmente | Vigencia de **1200 s**, `/auth/me` 200 al emitir; el mismo token devolvió **401** a los 5499 s desde su emisión, después de expirar, sin cambiar duración, claves ni reloj. Esta comprobación es independiente de los 16 minutos del último intervalo de arranque |
+
+Después aprobaron **16 comprobaciones remotas de seguridad/operación**: las 14 del programa base, contraseña incorrecta desde la web 401 y denegación nativa de `/api/auth/usuarios` 403 para Investigador. La expiración por reloj real es una comprobación separada del ensayo. Las **seis muestras responsive** cubren acceso e inicio a 1280×800, 768×1024 y 390×844 en Edge con viewport/touch emulados: sin overflow, botones sin nombre ni excepciones JavaScript observadas. No son pruebas en dispositivos físicos ni una repetición completa de los E2E históricos. [Evidencia, fuentes y fallos conservados](evidencias/arranque-render-20261116/verificacion.json).
+
+### Antecedente: republicación del 13–14 de noviembre
+
+Ambos servicios servían el commit [`caf4c8cd0c8debb641f6605b478a2f043e11f22f`](https://github.com/francis872/Mira/commit/caf4c8cd0c8debb641f6605b478a2f043e11f22f). Se solicitó su despliegue el 13 de noviembre, a las 15:47 UTC, y se confirmó nuevamente `live` el 14 de noviembre:
 
 | Servicio | Despliegue activo |
 |---|---|
@@ -89,11 +123,15 @@ La duración JWT de 1200 segundos se verificó en los claims de un token autént
 
 El [ejemplo de despliegue](../deploy/render-neon-free.yaml.example), `frontend/Dockerfile` y `frontend/gunicorn.conf.py` describen los parámetros reproducibles. No importar el ejemplo sobre recursos ajenos ni añadir claves literales.
 
+Para repetir específicamente el ensayo de arranque, registrar primero readiness con ambos servicios activos y una página de login con sesión anónima. Dejar **23 minutos sin HTTP ni SQL propios** hacia la instalación. Antes del primer acceso, comprobar en los paneles/API de control del proveedor que ambos servicios no tienen instancias y Neon está idle; consultar `/health` en ese momento alteraría el ensayo. El tráfico externo no está bajo control: si siguen activos, registrar el ensayo como inconcluso respecto de suspensión real.
+
+Después del intervalo, acceder a `/login` y enviar el formulario una sola vez desde la interfaz. Registrar código y duración del primer GET/POST, acceso al inicio y `/ready` web, y cierre de sesión. No despertar manualmente la API durante esa medición. Cualquier repetición explícita del login debe registrarse aparte del primer intento. Conservar solo códigos, tiempos y correlaciones saneadas, sin cookies ni credenciales. La comprobación rutinaria previa a una sustentación y este ensayo controlado son operaciones distintas.
+
 ## Límites y pendientes
 
 - Solo se seleccionaron planes **Free**. Render comparte **750 horas gratuitas por workspace/mes**, se suspende por inactividad y puede tardar aproximadamente un minuto en despertar. Dos servicios activos consumen horas por separado; no se afirma disponibilidad continua. No se modificaron pagos ni límites de facturación. [Condiciones y límites actuales](https://render.com/docs/free).
-- La validación inicial se hizo con servicios activos. El ensayo posterior de 23 minutos confirmó ambos servicios suspendidos y Neon idle, pero falló la recuperación automática dentro de 180 segundos: primer login 502 y readiness web 503. Posteriormente se recuperó la operación con calentamiento manual de API. Se conserva el ensayo fallido; carga sostenida, causa de los fallos y repetición satisfactoria del arranque siguen pendientes. No se instalaron keep-alives. [Cronología y recuperación de backup](REVISION_ENTREGA_2026-11-14.md).
-- **Actions excluido como requisito por el usuario el 15 de noviembre**. Se conserva como antecedente el bloqueo de cuenta de la [ejecución 43452629583](https://github.com/francis872/Mira/actions/runs/43452629583), SHA `0891fe1`, sin pasos iniciados; no se lo presenta como aprobación de CI. Ya no se exige resolver facturación ni obtener Actions verde. El PR #7 conserva pendientes de revisión y arranque, según el [registro actual](evidencias/decision-entrega-20261115.json).
+- El ensayo del 14 de noviembre falló y se conserva. La repetición del 16 aprobó el flujo de navegador con JavaScript y suspensión confirmada, tras corregir HEAD y activar salud desde el cliente. No demuestra una disponibilidad continua ni que un cliente sin JavaScript despierte por sí solo ambos servicios. Se mantienen pendientes carga sostenida y validación institucional. No se instalaron keep-alives. [Cronología y recuperación de backup](REVISION_ENTREGA_2026-11-14.md).
+- **Actions excluido como requisito por el usuario el 15 de noviembre**. Se conserva como antecedente el bloqueo de cuenta de la [ejecución 43452629583](https://github.com/francis872/Mira/actions/runs/43452629583), SHA `0891fe1`, sin pasos iniciados; no se lo presenta como aprobación de CI. Ya no se exige resolver facturación ni obtener Actions verde. El PR #7 conserva pendientes de revisión y aceptación académica; el [registro del 15 de noviembre](evidencias/decision-entrega-20261115.json) es anterior al ensayo aprobado del 16.
 - Dispositivos físicos, lector de pantalla, validación institucional de carga/recuperación, respaldo periódico y aceptación académica de C06/otros pendientes de V2 siguen abiertos. El muestreo axe no certifica accesibilidad completa. El dossier de sustentación anterior sigue siendo una instantánea independiente; no se alteró.
 
 **Resultado:** plataforma desplegada y verificada para demostración en Render + Neon con los alcances anteriores. No se certifica producción institucional ni cierre académico integral.
