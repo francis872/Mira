@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-12",
+  "runtime": "Linux / Gunicorn / ASP.NET Core / PostgreSQL 16",
+  "profile": "isolated HTTP development transport; production TLS ingress not claimed",
+  "frontendRestartPreservesSession": true,
+  "frontendLogoutClearsSession": true,
+  "apiLogoutRevokesSameJwt": true,
+  "secretsOrTokensPublished": false,
+  "status": "passed"
+}

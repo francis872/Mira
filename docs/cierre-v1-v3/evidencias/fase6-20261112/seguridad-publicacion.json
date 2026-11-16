@@ -1,0 +1,21 @@
+{
+  "publishablePathsReviewed": 442,
+  "knownPrivateValueMatches": 0,
+  "protectedFilesIdentical": [
+    ".github/workflows/mira-v3-ci.yml",
+    "MIRA.Api/Configuracion/LoginProtection.cs",
+    "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+    "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs",
+    "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+    "database/migrations/001_v1_catalogos_tablas.sql",
+    "database/migrations/002_v1_catalogos_datos_iniciales.sql",
+    "database/migrations/003_v2_usuarios_roles.sql",
+    "database/migrations/004_v2_catalogos_rutinas.sql",
+    "database/migrations/005_v2_area_aplicacion_trigger.sql",
+    "database/migrations/006_v2_modelo_oficial.sql",
+    "database/migrations/007_v2_rutinas_investigacion.sql",
+    "database/migrations/008_v3_sesiones.sql",
+    "database/migrations/009_v1_requisitos_originales.sql"
+  ],
+  "scope": "442 candidate tracked/untracked publication paths at pre-final-evidence review; all newly staged paths also pass CI heuristic secret gate before commit"
+}

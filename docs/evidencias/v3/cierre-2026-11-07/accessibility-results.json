@@ -1,0 +1,150 @@
+{
+  "date": "2026-11-07",
+  "tool": "axe-core 4.10.3",
+  "checks": [
+    {
+      "path": "/login",
+      "width": 1440,
+      "passes": 19,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "width": 390,
+      "passes": 19,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 1440,
+      "passes": 23,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion",
+      "width": 1440,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 1440,
+      "passes": 20,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 1440,
+      "passes": 28,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 1440,
+      "passes": 27,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/usuarios",
+      "width": 1440,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "passes": 18,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad",
+      "width": 390,
+      "passes": 29,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 390,
+      "passes": 23,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion",
+      "width": 390,
+      "passes": 18,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 390,
+      "passes": 18,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 390,
+      "passes": 26,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 390,
+      "passes": 25,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    },
+    {
+      "path": "/usuarios",
+      "width": 390,
+      "passes": 24,
+      "incomplete": 0,
+      "manualReview": [],
+      "violations": []
+    }
+  ]
+}

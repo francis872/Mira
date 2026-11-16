@@ -32,6 +32,7 @@ public class ObjetivoDesarrolloSostenibleService : IObjetivoDesarrolloSostenible
 
         entity.Nombre = entity.Nombre.Trim();
         entity.Categoria = entity.Categoria.Trim();
+        ValidarCategoria(entity.Categoria);
         entity.Activo = true;
 
         return await _repository.CreateAsync(entity);
@@ -51,6 +52,7 @@ public class ObjetivoDesarrolloSostenibleService : IObjetivoDesarrolloSostenible
         entity.Id = id;
         entity.Nombre = entity.Nombre.Trim();
         entity.Categoria = entity.Categoria.Trim();
+        ValidarCategoria(entity.Categoria);
 
         return await _repository.UpdateAsync(entity);
     }
@@ -62,6 +64,12 @@ public class ObjetivoDesarrolloSostenibleService : IObjetivoDesarrolloSostenible
         if (existing == null) return false;
 
         return await _repository.SoftDeleteAsync(id);
+    }
+
+    private static void ValidarCategoria(string categoria)
+    {
+        if (categoria is not ("Social" or "Económica" or "Ambiental"))
+            throw new ArgumentException("La categoría ODS debe ser Social, Económica o Ambiental.");
     }
 }
 

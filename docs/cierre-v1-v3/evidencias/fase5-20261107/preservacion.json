@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-12T19:47:19.239690-05:00",
+  "root": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA",
+  "head": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "branch": "feature/mira-v3",
+  "remote": "https://github.com/francis872/Mira.git",
+  "stagedFiles": [],
+  "baselineSourceFiles": 323,
+  "baselinePendingFiles": 111,
+  "backup": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\respaldos\\fase5-pre-cambios-20261107-192202-6355a6.zip",
+  "backupSha256": "6fdeba6c2d67801a39ead866801b8b48ed7e4519e94ee08918a4bc29ab57baaa",
+  "backupCrcAndAllMemberHashes": "passed",
+  "priorBackups": [
+    {
+      "path": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA-respaldos\\cierre-pre-documentos-20261107-180231-b5ffa531.zip",
+      "sha256": "32636149c9d0b44c27b5458c1a57642f565a0b68c13c2a1cfb5cc2f32f430e1c",
+      "crc": "passed"
+    },
+    {
+      "path": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA-respaldos\\fase2-20261107-143626-3c61e13c.zip",
+      "sha256": "622b7e6611d6a270a43eba79710c49e620c9cd532c175027841bf4f7ef973a15",
+      "crc": "passed"
+    },
+    {
+      "path": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\cierre-integral-20261107\\SAPIENS-MIRA-V1-V3-revision-local.zip",
+      "sha256": "729977c312e1365b3a3aa97a14aaa848ce22fd7faf53a96cb8888e16555f39c3",
+      "crc": "passed"
+    }
+  ],
+  "protectedFilesSha256": {
+    "database/migrations/001_v1_catalogos_tablas.sql": "7646b5ae793915fe4adbe1613064bdf2cbad25072846c2f29d2c0e4174eabebe",
+    "database/migrations/002_v1_catalogos_datos_iniciales.sql": "44ea3a9af428eb861ec7e6ed4b805f9b11b1dba229db585f19db574e302be658",
+    "database/migrations/003_v2_usuarios_roles.sql": "dbaace06230968c2fc67fd5b96e6fd49e4b01c1a2132c5a49d08431892133c7b",
+    "database/migrations/004_v2_catalogos_rutinas.sql": "53715d35c70f419a6c3bd40090e0d549621e4b3927558b59a8c7a343bc33ae6b",
+    "database/migrations/005_v2_area_aplicacion_trigger.sql": "2f397fd888a420d0cadc637824d7f3987f9ae8532b3edf4405aca694f8a08d09",
+    "database/migrations/006_v2_modelo_oficial.sql": "9be09a8eb31677f94e5ae44b4a132bdb286df8fe47b2ccd7088b004b02ae21c1",
+    "database/migrations/007_v2_rutinas_investigacion.sql": "802fd33efb0d3dbda352f9f8310a7a2f7306535ce6fce2635379e31889e71337",
+    "database/migrations/008_v3_sesiones.sql": "8f9d7f29898e209822af9775550a1e8f6459564bee3c6e911299010ff89ad995",
+    "database/migrations/apply.sh": "66c5a1c9e25b436b07b59e6e89aee094606080d61400084d6ea404144e86bfef",
+    ".github/workflows/mira-v3-ci.yml": "87c6095481f64b509beb03646510fe47f9382e7a4b816cd58710a0b5dbd4e378",
+    "MIRA.Api/Configuracion/LoginProtection.cs": "4cf4b9a598d2160f6a10e6716fd60d0a50291a1eacbb530ce16e0f547c586568",
+    "MIRA.Api/Configuracion/SeguridadConfiguration.cs": "a5415dd4f37d5aa0da832504cab7b1a2db291001faf54328a0bbd08aba80ad27",
+    "MIRA.Api/Program.cs": "efcd2dff8d6c37e6d14e5f314c848eccf65ea3baa6969a2e9b6f81c82a8dc763",
+    "MIRA.Api/Servicios/Seguridad/AuthService.cs": "f45af4b638115c08f259b9cb7bb08716f6d5be261c12e2eb6d6a5f5bd69507a2",
+    "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs": "30d4998a379355819d1db921de1e2d6fc6fd26d4aac2d78a93121bbb8d6312c2",
+    "frontend/seguridad.py": "92367e7d76c2a18667dd2d2fcea96856ae8c7c3e683082d308ab6f0bbed5c340",
+    "frontend/login_protection.py": "ab25151697f7cc363d6ddd3e309f2ece99b36f56b4b7cb5501dfd61f4befb3b3",
+    "docker-compose.yml": "8a3eff5d5b5c6e50c584190faa457d5622f97f8f365500264ea0d0ac954f95d6",
+    "deploy/render.yaml.example": "b4fa8fd8c3597e1522e1fdb65473980d9cafe666c8c31eb7d8c29580986e8900",
+    ".env.example": "b6d5c5287b9727b9592701a77efefd30fd65525dd04ec75db380864c8085ed0e"
+  },
+  "appOriginalFunctionsUnchangedExcept": [
+    "inject_globals"
+  ],
+  "backstage": "No se accedió ni se escribió en esta fase; no se certifica el árbol completo frente a cambios de otros procesos."
+}

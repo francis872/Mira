@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-07T18:32:07.321510-05:00",
+  "root": "C:/Users/Usuario/OneDrive/Escritorio/MIRA",
+  "branch": "feature/mira-v3",
+  "head": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "remote": "https://github.com/francis872/Mira.git",
+  "originalPendingHashesUnchanged": 64,
+  "previouslyTrackedHashesUnchanged": 243,
+  "newDocumentationFiles": 47,
+  "stagedFiles": 0,
+  "deletedFiles": 0,
+  "commitsCreated": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "remoteDatabasesContacted": false,
+  "realDataModified": false,
+  "privateTestDatabasesOnly": true,
+  "docsLinksMissing": [],
+  "matrixRows": 104,
+  "historicalCriteria": 36,
+  "backupsSha256AndCrcVerified": true,
+  "backstage": {
+    "head": "ce18b6d7b79867d940e1689d61755446acbf974c",
+    "readinessSha256": "0e5a92d3896baff889887e40cb35d37974447605ac49f6d77ed991062207a0a3",
+    "scope": "Known HEAD/report fingerprints only; no write or exhaustive whole-tree guarantee"
+  },
+  "backstageVerificationScope": "Known HEAD and one report only, compared with previous audit; no BACKSTAGE writes; not an exhaustive whole-tree verification",
+  "validationOrder": "Source tests first, new documentation only afterwards; source hashes unchanged; static document/link/matrix checks after writing",
+  "package": ".local/cierre-integral-20261107/SAPIENS-MIRA-V1-V3-revision-local.zip",
+  "readiness": {
+    "V1": "NO CERRADA",
+    "V2": "NO CERRADA",
+    "V3": "NO CERRADA",
+    "production": "No validada",
+    "V4": "No iniciada"
+  },
+  "publication": "Proposal only; CI01 still blocked; no PR status mutation",
+  "finalDockerNoCachePullVerified": true,
+  "finalDockerE2e": 43
+}

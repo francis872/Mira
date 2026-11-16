@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "web": "https://sapiens-preview-v1-v3-20261112.vercel.app",
+  "checks": [
+    {
+      "role": "investigator",
+      "login": 302,
+      "home": 200,
+      "accountAdministration": 403,
+      "forbiddenMutationOrForm": 403
+    },
+    {
+      "role": "coordinator",
+      "login": 302,
+      "home": 200,
+      "accountAdministration": 403,
+      "forbiddenMutationOrForm": 403
+    }
+  ],
+  "credentialsPrinted": false
+}

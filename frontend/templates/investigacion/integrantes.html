@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Integrantes del grupo{% endblock %}
+{% block content %}
+<a href="{{ url_for('reportes.index') }}">Volver a los reportes</a>
+<div class="section-heading"><div><h1>Integrantes del grupo</h1><p>{{ group.nombre }}</p></div><div class="d-flex gap-2"><a class="btn btn-primary" href="{{ url_for('reportes.member_excel',grupo_id=group.id) }}">Descargar Excel</a><a class="btn btn-outline-primary" href="{{ url_for('reportes.member_pdf',grupo_id=group.id) }}">Descargar PDF</a></div></div>
+<section class="card card-custom"><div class="card-body"><div class="table-responsive" role="region" aria-label="Integrantes, tabla desplazable" tabindex="0"><table class="table"><caption class="visually-hidden">Integrantes y periodos de vinculación del grupo</caption><thead><tr>{% for key,label in columns %}<th scope="col">{{ label }}</th>{% endfor %}</tr></thead><tbody>{% for row in rows %}<tr>{% for value in row %}<td>{{ value }}</td>{% endfor %}</tr>{% else %}<tr><td colspan="{{ columns|length }}">No hay integrantes vinculados.</td></tr>{% endfor %}</tbody></table></div></div></section>
+{% endblock %}

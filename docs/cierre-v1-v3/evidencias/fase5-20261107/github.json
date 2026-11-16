@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-08 01:29:16 UTC",
+  "source": "GitHub connector, read only",
+  "pr": {
+    "url": "https://github.com/francis872/Mira/pull/7",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "head": "feature/mira-v3",
+    "head_sha": "3105273af84e55a1e813e76f2acb92acc31caa94",
+    "updated_at": "2026-11-07T18:04:05Z"
+  },
+  "workflowRuns": {
+    "workflow_runs": []
+  },
+  "commitStatus": {
+    "statuses": []
+  },
+  "limit": "Workflow query filters pull_request events and first page; no claim of all possible repository runs, no remote mutation."
+}

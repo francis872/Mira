@@ -1,0 +1,86 @@
+{
+  "clientDate": "2026-11-12",
+  "recordedAt": "2026-11-12T21:44:37.527154-05:00",
+  "suites": {
+    "dotnet": {
+      "total": 138,
+      "passed": 138,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\integral-upstream\\dotnet\\fase5-v1.trx",
+      "rawSha256": "755f6ef753e3ed29fe8b5b3347011e7974846052d4e5b3c874b20237e3030fee"
+    },
+    "flask": {
+      "total": 135,
+      "passed": 135,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\integral-upstream\\flask-integrated.xml",
+      "rawSha256": "b401654d26ad865843e8fef5d870a6d8b4255f7d8032ca5fa5b31c8d0c4a5ed8"
+    },
+    "http": {
+      "total": 51,
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\integral-upstream\\e2e.xml",
+      "rawSha256": "65ca5ff9f6366415bd9fa1942b605ddeeb702d166b821792d87dee522fd97c39"
+    },
+    "dockerHttp": {
+      "total": 51,
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "rawPrivatePath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\MIRA\\.local\\fase6-20261112-b090c56f\\docker-e2e-upstream.xml",
+      "rawSha256": "7445fc4f6033da19aa390997a262e22e94943b2d0d27e472b068f730a5179ef0"
+    }
+  },
+  "sql": {
+    "total": 11,
+    "passed": 11,
+    "names": [
+      "v1_requisitos_originales.sql",
+      "v2_catalogo_ods_original.sql",
+      "v2_catalogos_rutinas.sql",
+      "v2_investigacion.sql",
+      "v2_minimos_linea.sql",
+      "v2_modelo_oficial.sql",
+      "v2_reportes_originales.sql",
+      "v2_requisitos_originales.sql",
+      "v2_usuarios_roles.sql",
+      "v3_c06_nulabilidad.sql",
+      "v3_sesion_web.sql"
+    ]
+  },
+  "responsiveChecks": 110,
+  "axeChecks": 38,
+  "axeViolations": 0,
+  "axeIncomplete": 2,
+  "keyboardGroups": 10,
+  "academicUiChecks": 5,
+  "realZoomChecks": 51,
+  "dockerProfile": "Linux/Gunicorn with shared PostgreSQL sessions",
+  "osvPackageCount": 25,
+  "osvStatus": "passed",
+  "nuget": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": [
+      "https://api.nuget.org/v3/index.json"
+    ],
+    "projects": [
+      {
+        "path": "C:/Users/Usuario/OneDrive/Escritorio/MIRA/MIRA.Api/MIRA.Api.csproj"
+      },
+      {
+        "path": "C:/Users/Usuario/OneDrive/Escritorio/MIRA/tests/MIRA.Api.Tests/MIRA.Api.Tests.csproj"
+      }
+    ]
+  },
+  "remoteWebApplicationValidated": true,
+  "remoteGitHubActionsValidated": false,
+  "physicalDevicesTested": false,
+  "screenReaderTested": false,
+  "remoteEvidence": "remoto.json",
+  "sourceProductCommit": "e3f60e5e78381432c885e68cf8b24376c303aedb"
+}

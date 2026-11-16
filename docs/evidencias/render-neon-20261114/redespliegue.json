@@ -1,0 +1,503 @@
+{
+  "repository": "https://github.com/francis872/Mira",
+  "branch": "feature/mira-v3",
+  "requestedAtUtc": "2026-11-13T15:47:28.091675+00:00",
+  "verifiedAtUtc": "2026-11-14T15:25:20.517433+00:00",
+  "sourceCommit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+  "providers": {
+    "atUtc": "2026-11-14T15:25:16.730309+00:00",
+    "services": {
+      "api": {
+        "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+        "deployId": "dep-dbrj24gn74is73fo7a4g",
+        "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+        "status": "live",
+        "plan": "free",
+        "url": "https://sapiens-api-v1-v3-20261112.onrender.com"
+      },
+      "web": {
+        "serviceId": "srv-dbrijl0ae00c73fpf0mg",
+        "deployId": "dep-dbrj256tlv9c738maehg",
+        "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+        "status": "live",
+        "plan": "free",
+        "url": "https://sapiens-web-v1-v3-20261113.onrender.com"
+      }
+    },
+    "neon": {
+      "organizationId": "org-shy-unit-30877213",
+      "plan": "free",
+      "queryExit": 0
+    }
+  },
+  "deploymentObservations": {
+    "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+    "status": "live",
+    "observations": [
+      {
+        "component": "api",
+        "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+        "deployId": "dep-dbrj24gn74is73fo7a4g",
+        "status": "live",
+        "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+        "checkedAt": "2026-11-13T15:48:50.121929+00:00"
+      },
+      {
+        "component": "web",
+        "serviceId": "srv-dbrijl0ae00c73fpf0mg",
+        "deployId": "dep-dbrj256tlv9c738maehg",
+        "status": "live",
+        "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+        "checkedAt": "2026-11-13T15:48:50.626249+00:00"
+      }
+    ],
+    "deployments": {
+      "api": {
+        "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+        "deployId": "dep-dbrj24gn74is73fo7a4g",
+        "status": "live",
+        "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+        "checkedAt": "2026-11-13T15:48:50.121929+00:00"
+      },
+      "web": {
+        "serviceId": "srv-dbrijl0ae00c73fpf0mg",
+        "deployId": "dep-dbrj256tlv9c738maehg",
+        "status": "live",
+        "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+        "checkedAt": "2026-11-13T15:48:50.626249+00:00"
+      }
+    }
+  },
+  "verification": {
+    "startedAt": "2026-11-13T15:49:52.384880+00:00",
+    "commit": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+    "status": "passed_after_retry",
+    "checks": [
+      {
+        "case": "provider_configuration",
+        "bothFree": true,
+        "environmentUnchanged": true
+      },
+      {
+        "case": "same_api_jwt_survives_redeploy",
+        "http": 200
+      },
+      {
+        "case": "same_web_session_survives_redeploy",
+        "http": 200,
+        "sameOpaqueId": true
+      },
+      {
+        "case": "preserved_sessions_revoked_after_logout",
+        "webReplay": 302,
+        "apiReplay": 401
+      },
+      {
+        "case": "security_and_operational_suite",
+        "passed": 14,
+        "attempt": 3
+      },
+      {
+        "case": "wrong_web_password",
+        "http": 401
+      }
+    ],
+    "credentialsPublished": false,
+    "finishedAt": "2026-11-14T15:25:20.517433+00:00",
+    "fullFunctionalSuiteRepeated": false,
+    "sourceUnchangedFromPriorFunctionalVerification": true,
+    "migrationsExecuted": false,
+    "credentialsChanged": false,
+    "paidResourcesCreated": false,
+    "firstAttempt": {
+      "at": "2026-11-13T15:54:15.027774+00:00",
+      "errorType": "requests.exceptions.ReadTimeout",
+      "completedSecurityChecks": 8,
+      "failedOperation": "GET frontend /login before first QA role login",
+      "timeoutSeconds": 40,
+      "assertionFailure": false,
+      "status": "incomplete"
+    },
+    "secondAttempt": {
+      "status": "incomplete",
+      "completedSecurityChecks": 1,
+      "failure": "Expected frontend /ready HTTP 200; actual status was not captured",
+      "startedAt": "2026-11-14T15:21:12.835672+00:00"
+    },
+    "currentReadiness": {
+      "atUtc": "2026-11-14T15:23:18.929248+00:00",
+      "observations": [
+        {
+          "component": "api",
+          "path": "/health",
+          "http": 200,
+          "seconds": 16.334,
+          "correlation": true
+        },
+        {
+          "component": "api",
+          "path": "/ready",
+          "http": 200,
+          "seconds": 0.974,
+          "correlation": true
+        },
+        {
+          "component": "web",
+          "path": "/health",
+          "http": 200,
+          "seconds": 1.11,
+          "correlation": true
+        },
+        {
+          "component": "web",
+          "path": "/ready",
+          "http": 200,
+          "seconds": 1.036,
+          "correlation": true
+        }
+      ]
+    }
+  },
+  "security": {
+    "startedAt": "2026-11-14T15:24:33.227389+00:00",
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com",
+    "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+    "checks": [
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "path": "/health",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "path": "/health",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "swagger_hidden",
+        "http": 404
+      },
+      {
+        "case": "correct_api_authentication",
+        "http": 200,
+        "jwtLifetimeSeconds": 1200
+      },
+      {
+        "case": "wrong_api_password",
+        "http": 401
+      },
+      {
+        "case": "anonymous_api",
+        "http": 401
+      },
+      {
+        "case": "web_role_denied",
+        "role": "investigator",
+        "login": 302,
+        "home": 200,
+        "accountAdministration": 403
+      },
+      {
+        "case": "web_role_denied",
+        "role": "coordinator",
+        "login": 302,
+        "home": 200,
+        "accountAdministration": 403
+      },
+      {
+        "case": "secure_web_session",
+        "login": 302,
+        "home": 200,
+        "opaqueSidRotated": true,
+        "jwtInBrowser": false,
+        "secureHttpOnlyStrict": true
+      },
+      {
+        "case": "csrf_rejection",
+        "http": 400
+      },
+      {
+        "case": "web_logout",
+        "logout": 302,
+        "protected": 302
+      },
+      {
+        "case": "same_jwt_revoked",
+        "logout": 200,
+        "reuse": 401
+      }
+    ],
+    "status": "passed",
+    "finishedAt": "2026-11-14T15:25:14.720022+00:00",
+    "credentialsPrinted": false,
+    "realTimeExpiryReference": "Historical Fase 6 remote-security.json only; the unchanged API was tested with an actually issued 60-second JWT; normal 20-minute expiry is verified here by token claims, not by waiting 20 minutes"
+  },
+  "httpObservationsSuccessfulAttempt": [
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/health",
+      "at": "2026-11-14T15:24:33.230628+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.065
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/ready",
+      "at": "2026-11-14T15:24:34.359224+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.064
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/health",
+      "at": "2026-11-14T15:24:35.430524+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.324
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/ready",
+      "at": "2026-11-14T15:24:36.762142+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 0.812
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/swagger/index.html",
+      "at": "2026-11-14T15:24:37.581246+00:00",
+      "http": 404,
+      "correlation": true,
+      "seconds": 0.914
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/api/auth/login",
+      "at": "2026-11-14T15:24:38.502252+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 11.463
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/api/auth/login",
+      "at": "2026-11-14T15:24:49.968053+00:00",
+      "http": 401,
+      "correlation": true,
+      "seconds": 4.093
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/api/universidad",
+      "at": "2026-11-14T15:24:54.068670+00:00",
+      "http": 401,
+      "correlation": true,
+      "seconds": 0.914
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/login",
+      "at": "2026-11-14T15:24:54.989384+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.119
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/login",
+      "at": "2026-11-14T15:24:56.171108+00:00",
+      "http": 302,
+      "correlation": true,
+      "seconds": 3.01
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/",
+      "at": "2026-11-14T15:24:59.187235+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.733
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/usuarios",
+      "at": "2026-11-14T15:25:00.923244+00:00",
+      "http": 403,
+      "correlation": true,
+      "seconds": 0.455
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/login",
+      "at": "2026-11-14T15:25:01.381786+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.075
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/login",
+      "at": "2026-11-14T15:25:02.458887+00:00",
+      "http": 302,
+      "correlation": true,
+      "seconds": 2.662
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/",
+      "at": "2026-11-14T15:25:05.126268+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 0.914
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/usuarios",
+      "at": "2026-11-14T15:25:06.042843+00:00",
+      "http": 403,
+      "correlation": true,
+      "seconds": 0.324
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/login",
+      "at": "2026-11-14T15:25:06.370174+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 0.901
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/login",
+      "at": "2026-11-14T15:25:07.273136+00:00",
+      "http": 302,
+      "correlation": true,
+      "seconds": 3.084
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/",
+      "at": "2026-11-14T15:25:10.362035+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.414
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/universidad/crear",
+      "at": "2026-11-14T15:25:11.844697+00:00",
+      "http": 400,
+      "correlation": true,
+      "seconds": 0.238
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/logout",
+      "at": "2026-11-14T15:25:12.087077+00:00",
+      "http": 302,
+      "correlation": true,
+      "seconds": 0.482
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-web-v1-v3-20261113.onrender.com",
+      "path": "/",
+      "at": "2026-11-14T15:25:12.571791+00:00",
+      "http": 302,
+      "correlation": true,
+      "seconds": 0.231
+    },
+    {
+      "method": "POST",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/api/auth/logout",
+      "at": "2026-11-14T15:25:12.806345+00:00",
+      "http": 200,
+      "correlation": true,
+      "seconds": 1.12
+    },
+    {
+      "method": "GET",
+      "host": "sapiens-api-v1-v3-20261112.onrender.com",
+      "path": "/api/auth/me",
+      "at": "2026-11-14T15:25:13.931631+00:00",
+      "http": 401,
+      "correlation": true,
+      "seconds": 0.783
+    }
+  ],
+  "sourceComparisons": {
+    "previousVerifiedFrontend": {
+      "base": "0891fe160bcaa898b73bb748fe596aed3ae9acce",
+      "paths": [
+        "frontend",
+        "MIRA.Api",
+        "Dockerfile",
+        "database"
+      ],
+      "unchanged": true
+    },
+    "previousVerifiedApi": {
+      "base": "630721a118f7cfa38093d1da8e885d502c889ddc",
+      "paths": [
+        "MIRA.Api",
+        "Dockerfile",
+        "database"
+      ],
+      "unchanged": true
+    }
+  },
+  "scope": {
+    "newServicesCreated": false,
+    "neonProjectReused": "snowy-bonus-50718377",
+    "credentialsChanged": false,
+    "migrationsExecuted": false,
+    "paidPlansSelected": false,
+    "mergeExecuted": false,
+    "fullFunctionalSuiteRepeated": false,
+    "priorFunctionalEvidence": "docs/evidencias/render-neon-20261113/verificacion.json",
+    "guaranteedAvailability": false
+  }
+}

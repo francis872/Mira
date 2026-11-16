@@ -2,33 +2,42 @@
 
 ## Purpose
 
-Template pending completion from official source documents.
+Gestionar seis catálogos de apoyo a la investigación académica. Esta revisión documenta retrospectivamente el código existente; no sustituye los documentos oficiales que faltan en `docs/fuentes/`.
 
 ## Scope
 
-Template pending completion from official source documents.
+API REST, frontend Flask y persistencia PostgreSQL para los seis catálogos independientes de la migración 001.
 
 ## Included
 
-Template pending completion from official source documents.
+Consulta de activos, alta, edición y borrado lógico. Dashboard con conteos obtenidos de la API. Formularios protegidos con token CSRF.
 
 ## Explicitly excluded
 
-- Domain functionality is not implemented in this repository bootstrap task.
-- Security/authentication features are intentionally out of scope for this version foundation step.
+- Autenticación y autorización: fuera de V1/V2, conforme a `docs/1_constitution.md`.
+- Entidades y relaciones del modelo académico V2: dependen del documento oficial de la Entrega 2.
 
 ## Functional requirements
 
-Template pending completion from official source documents.
+| ID | Comportamiento |
+|---|---|
+| RF-MIRA-CAT-01 | CRUD con inactivación de áreas de conocimiento (gran área, área y disciplina). |
+| RF-MIRA-CAT-02 | CRUD con inactivación de ODS (nombre y categoría). |
+| RF-MIRA-CAT-03 | CRUD con inactivación de áreas de aplicación (nombre). |
+| RF-MIRA-CAT-04 | CRUD con inactivación de términos clave (clave textual inmutable y equivalente inglés opcional). |
+| RF-MIRA-CAT-05 | CRUD con inactivación de universidades (nombre, tipo y ciudad). |
+| RF-MIRA-CAT-06 | CRUD con inactivación de líneas de investigación (nombre y descripción opcional). |
+| RF-MIRA-DASH-01 | Mostrar conteos reales y señalar información no disponible sin inventar números. |
+| RF-MIRA-OPEN-01 | Acceso directo al dashboard y a catálogos sin credenciales; no existen rutas de login. |
 
 ## Non-functional requirements
 
-Template pending completion from official source documents.
+Controller → Service → Repository → PostgreSQL, inyección de dependencias, SQL parametrizado, escape HTML y CSRF. Límites de texto, manejo de errores y operación local se detallan en `versiones/v2_profesor/2_spec.md`.
 
 ## Acceptance criteria
 
-Template pending completion from official source documents.
+Los seis ciclos de alta, lectura desde un cliente nuevo, modificación e inactivación pasan contra PostgreSQL real. La fila inactiva permanece en la base y deja de aparecer en las consultas de activos. El dashboard coincide con los listados.
 
 ## Definition of Done
 
-Template pending completion from official source documents.
+Compilación y pruebas documentadas en `docs/pruebas-v2.md`; trazabilidad en `docs/trazabilidad-v2.md`. La auditoría local no cierra la entrega académica V2 ni acredita producción.

@@ -1,0 +1,2969 @@
+{
+  "columns": [
+    {
+      "data_type": "integer",
+      "table_name": "area_aplicacion",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "area_aplicacion",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "area_aplicacion",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "area_conocimiento",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "area_conocimiento",
+      "column_name": "gran_area",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 150
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "area_conocimiento",
+      "column_name": "area",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 150
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "area_conocimiento",
+      "column_name": "disciplina",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": 150
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "area_conocimiento",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "areas_aplicacion",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "areas_aplicacion",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "areas_aplicacion",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "areas_conocimiento",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "areas_conocimiento",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "areas_conocimiento",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "docentes",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "docentes",
+      "column_name": "usuario_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "docentes",
+      "column_name": "cvlac_url",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": 500
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "docentes",
+      "column_name": "escalafon",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "docentes",
+      "column_name": "minciencias_categoria",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": 50
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "docentes",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "docentes",
+      "column_name": "updated_at",
+      "is_nullable": "NO",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupo_docentes",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupo_docentes",
+      "column_name": "grupo_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupo_docentes",
+      "column_name": "docente_id",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "grupo_docentes",
+      "column_name": "rol",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "date",
+      "table_name": "grupo_docentes",
+      "column_name": "fecha_inicio",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "date",
+      "table_name": "grupo_docentes",
+      "column_name": "fecha_fin",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "grupo_docentes",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "grupo_docentes",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 8,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupo_lineas",
+      "column_name": "grupo_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupo_lineas",
+      "column_name": "linea_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "grupo_lineas",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupos_investigacion",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "grupos_investigacion",
+      "column_name": "sede_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "grupos_investigacion",
+      "column_name": "gruptac_url",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 500
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "grupos_investigacion",
+      "column_name": "categoria",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "grupos_investigacion",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "grupos_investigacion",
+      "column_name": "deleted_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "grupos_investigacion",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_aplicacion",
+      "column_name": "linea_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_aplicacion",
+      "column_name": "aplicacion_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_disciplinas",
+      "column_name": "linea_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_disciplinas",
+      "column_name": "disciplina_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_investigacion",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "linea_investigacion",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "text",
+      "table_name": "linea_investigacion",
+      "column_name": "descripcion",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "linea_investigacion",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_ods",
+      "column_name": "linea_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "linea_ods",
+      "column_name": "ods_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "lineas_investigacion",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "lineas_investigacion",
+      "column_name": "codigo",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 50
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "lineas_investigacion",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "text",
+      "table_name": "lineas_investigacion",
+      "column_name": "descripcion",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "lineas_investigacion",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "lineas_investigacion",
+      "column_name": "deleted_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "lineas_investigacion",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "objetivo_desarrollo_sostenible",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "objetivo_desarrollo_sostenible",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "objetivo_desarrollo_sostenible",
+      "column_name": "categoria",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "objetivo_desarrollo_sostenible",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "ods",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "ods",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "ods",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "palabras_clave",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "palabras_clave",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "palabras_clave",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "rol",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "rol",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 80
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "rol",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "roles",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "roles",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 50
+    },
+    {
+      "data_type": "text",
+      "table_name": "schema_migrations",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "schema_migrations",
+      "column_name": "aplicada_en",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "sedes",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "sedes",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "sedes",
+      "column_name": "ciudad",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "sedes",
+      "column_name": "activa",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "sedes",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semillero_lineas",
+      "column_name": "semillero_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semillero_lineas",
+      "column_name": "linea_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "semillero_lineas",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semillero_tutores",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semillero_tutores",
+      "column_name": "semillero_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semillero_tutores",
+      "column_name": "docente_id",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "semillero_tutores",
+      "column_name": "rol",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "date",
+      "table_name": "semillero_tutores",
+      "column_name": "fecha_inicio",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "date",
+      "table_name": "semillero_tutores",
+      "column_name": "fecha_fin",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "semillero_tutores",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semilleros",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "semilleros",
+      "column_name": "grupo_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "semilleros",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "text",
+      "table_name": "semilleros",
+      "column_name": "descripcion",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "semilleros",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "semilleros",
+      "column_name": "deleted_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "semilleros",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "text",
+      "table_name": "sesion_acceso",
+      "column_name": "jti",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "bigint",
+      "table_name": "sesion_acceso",
+      "column_name": "usuario_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp with time zone",
+      "table_name": "sesion_acceso",
+      "column_name": "expira_en",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "termino_clave",
+      "column_name": "termino",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": 150
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "termino_clave",
+      "column_name": "termino_ingles",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 150
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "termino_clave",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "universidad",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "universidad",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "universidad",
+      "column_name": "tipo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "universidad",
+      "column_name": "ciudad",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "universidad",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "bigint",
+      "table_name": "usuario",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "usuario",
+      "column_name": "correo",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 254
+    },
+    {
+      "data_type": "text",
+      "table_name": "usuario",
+      "column_name": "password_hash",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "usuario",
+      "column_name": "activo",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "bigint",
+      "table_name": "usuario_rol",
+      "column_name": "usuario_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "usuario_rol",
+      "column_name": "rol_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "usuario_roles",
+      "column_name": "usuario_id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "usuario_roles",
+      "column_name": "rol_id",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "usuarios",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "usuarios",
+      "column_name": "nombre",
+      "is_nullable": "NO",
+      "ordinal_position": 2,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "usuarios",
+      "column_name": "correo",
+      "is_nullable": "NO",
+      "ordinal_position": 3,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "usuarios",
+      "column_name": "password_hash",
+      "is_nullable": "NO",
+      "ordinal_position": 4,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "usuarios",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_areas_aplicacion",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_areas_aplicacion",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_areas_aplicacion",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_areas_conocimiento",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_areas_conocimiento",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_areas_conocimiento",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_docentes",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_docentes",
+      "column_name": "usuario_id",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_docentes",
+      "column_name": "cvlac_url",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": 500
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_docentes",
+      "column_name": "escalafon",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_docentes",
+      "column_name": "minciencias_categoria",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": 50
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_docentes",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_docentes",
+      "column_name": "updated_at",
+      "is_nullable": "YES",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_docentes",
+      "column_name": "usuario_nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 8,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "grupo_id",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "docente_id",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "rol",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "date",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "fecha_inicio",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "date",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "fecha_fin",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 8,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "docente_nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 9,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "text",
+      "table_name": "v2_grupo_docentes",
+      "column_name": "grupo_etiqueta",
+      "is_nullable": "YES",
+      "ordinal_position": 10,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "sede_id",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "gruptac_url",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": 500
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "categoria",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "deleted_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "sede_nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 8,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "text",
+      "table_name": "v2_grupos_investigacion",
+      "column_name": "etiqueta",
+      "is_nullable": "YES",
+      "ordinal_position": 9,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "codigo",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 50
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "text",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "descripcion",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "deleted_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_lineas_investigacion",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_ods",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_ods",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_ods",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_palabras_clave",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_palabras_clave",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 160
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_palabras_clave",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_sedes",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_sedes",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_sedes",
+      "column_name": "ciudad",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_sedes",
+      "column_name": "activa",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_sedes",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "semillero_id",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "docente_id",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "rol",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": 100
+    },
+    {
+      "data_type": "date",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "fecha_inicio",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "date",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "fecha_fin",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "docente_nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 8,
+      "character_maximum_length": 120
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_semillero_tutores",
+      "column_name": "semillero_nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 9,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_semilleros",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "integer",
+      "table_name": "v2_semilleros",
+      "column_name": "grupo_id",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "v2_semilleros",
+      "column_name": "nombre",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": 200
+    },
+    {
+      "data_type": "text",
+      "table_name": "v2_semilleros",
+      "column_name": "descripcion",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "v2_semilleros",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 5,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_semilleros",
+      "column_name": "deleted_at",
+      "is_nullable": "YES",
+      "ordinal_position": 6,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "timestamp without time zone",
+      "table_name": "v2_semilleros",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "ordinal_position": 7,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "text",
+      "table_name": "v2_semilleros",
+      "column_name": "grupo_etiqueta",
+      "is_nullable": "YES",
+      "ordinal_position": 8,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "bigint",
+      "table_name": "vw_usuarios_roles",
+      "column_name": "id",
+      "is_nullable": "YES",
+      "ordinal_position": 1,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "character varying",
+      "table_name": "vw_usuarios_roles",
+      "column_name": "correo",
+      "is_nullable": "YES",
+      "ordinal_position": 2,
+      "character_maximum_length": 254
+    },
+    {
+      "data_type": "boolean",
+      "table_name": "vw_usuarios_roles",
+      "column_name": "activo",
+      "is_nullable": "YES",
+      "ordinal_position": 3,
+      "character_maximum_length": null
+    },
+    {
+      "data_type": "jsonb",
+      "table_name": "vw_usuarios_roles",
+      "column_name": "roles",
+      "is_nullable": "YES",
+      "ordinal_position": 4,
+      "character_maximum_length": null
+    }
+  ],
+  "indexes": [
+    {
+      "indexdef": "CREATE UNIQUE INDEX area_aplicacion_pkey ON public.area_aplicacion USING btree (id)",
+      "indexname": "area_aplicacion_pkey",
+      "tablename": "area_aplicacion"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX area_conocimiento_pkey ON public.area_conocimiento USING btree (id)",
+      "indexname": "area_conocimiento_pkey",
+      "tablename": "area_conocimiento"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX areas_aplicacion_nombre_key ON public.areas_aplicacion USING btree (nombre)",
+      "indexname": "areas_aplicacion_nombre_key",
+      "tablename": "areas_aplicacion"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX areas_aplicacion_pkey ON public.areas_aplicacion USING btree (id)",
+      "indexname": "areas_aplicacion_pkey",
+      "tablename": "areas_aplicacion"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX areas_conocimiento_nombre_key ON public.areas_conocimiento USING btree (nombre)",
+      "indexname": "areas_conocimiento_nombre_key",
+      "tablename": "areas_conocimiento"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX areas_conocimiento_pkey ON public.areas_conocimiento USING btree (id)",
+      "indexname": "areas_conocimiento_pkey",
+      "tablename": "areas_conocimiento"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX docentes_pkey ON public.docentes USING btree (id)",
+      "indexname": "docentes_pkey",
+      "tablename": "docentes"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX docentes_usuario_id_key ON public.docentes USING btree (usuario_id)",
+      "indexname": "docentes_usuario_id_key",
+      "tablename": "docentes"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_docentes_usuario_id ON public.docentes USING btree (usuario_id)",
+      "indexname": "idx_docentes_usuario_id",
+      "tablename": "docentes"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX grupo_docentes_grupo_id_docente_id_rol_fecha_inicio_fecha_f_key ON public.grupo_docentes USING btree (grupo_id, docente_id, rol, fecha_inicio, fecha_fin)",
+      "indexname": "grupo_docentes_grupo_id_docente_id_rol_fecha_inicio_fecha_f_key",
+      "tablename": "grupo_docentes"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX grupo_docentes_pkey ON public.grupo_docentes USING btree (id)",
+      "indexname": "grupo_docentes_pkey",
+      "tablename": "grupo_docentes"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX grupo_docentes_un_lider_activo_idx ON public.grupo_docentes USING btree (grupo_id) WHERE (((rol)::text = 'Líder de Grupo'::text) AND (activo = true) AND (fecha_fin IS NULL))",
+      "indexname": "grupo_docentes_un_lider_activo_idx",
+      "tablename": "grupo_docentes"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_grupo_docentes_docente_id ON public.grupo_docentes USING btree (docente_id)",
+      "indexname": "idx_grupo_docentes_docente_id",
+      "tablename": "grupo_docentes"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_grupo_docentes_grupo_id ON public.grupo_docentes USING btree (grupo_id)",
+      "indexname": "idx_grupo_docentes_grupo_id",
+      "tablename": "grupo_docentes"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX grupo_lineas_pkey ON public.grupo_lineas USING btree (grupo_id, linea_id)",
+      "indexname": "grupo_lineas_pkey",
+      "tablename": "grupo_lineas"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX grupos_investigacion_pkey ON public.grupos_investigacion USING btree (id)",
+      "indexname": "grupos_investigacion_pkey",
+      "tablename": "grupos_investigacion"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_grupos_sede_id ON public.grupos_investigacion USING btree (sede_id)",
+      "indexname": "idx_grupos_sede_id",
+      "tablename": "grupos_investigacion"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_linea_aplicacion_aplicacion_id ON public.linea_aplicacion USING btree (aplicacion_id)",
+      "indexname": "idx_linea_aplicacion_aplicacion_id",
+      "tablename": "linea_aplicacion"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX linea_aplicacion_pkey ON public.linea_aplicacion USING btree (linea_id, aplicacion_id)",
+      "indexname": "linea_aplicacion_pkey",
+      "tablename": "linea_aplicacion"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_linea_disciplinas_linea_id ON public.linea_disciplinas USING btree (linea_id)",
+      "indexname": "idx_linea_disciplinas_linea_id",
+      "tablename": "linea_disciplinas"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX linea_disciplinas_pkey ON public.linea_disciplinas USING btree (linea_id, disciplina_id)",
+      "indexname": "linea_disciplinas_pkey",
+      "tablename": "linea_disciplinas"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX linea_investigacion_pkey ON public.linea_investigacion USING btree (id)",
+      "indexname": "linea_investigacion_pkey",
+      "tablename": "linea_investigacion"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_linea_ods_linea_id ON public.linea_ods USING btree (linea_id)",
+      "indexname": "idx_linea_ods_linea_id",
+      "tablename": "linea_ods"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX linea_ods_pkey ON public.linea_ods USING btree (linea_id, ods_id)",
+      "indexname": "linea_ods_pkey",
+      "tablename": "linea_ods"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX lineas_investigacion_codigo_key ON public.lineas_investigacion USING btree (codigo)",
+      "indexname": "lineas_investigacion_codigo_key",
+      "tablename": "lineas_investigacion"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX lineas_investigacion_pkey ON public.lineas_investigacion USING btree (id)",
+      "indexname": "lineas_investigacion_pkey",
+      "tablename": "lineas_investigacion"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX objetivo_desarrollo_sostenible_pkey ON public.objetivo_desarrollo_sostenible USING btree (id)",
+      "indexname": "objetivo_desarrollo_sostenible_pkey",
+      "tablename": "objetivo_desarrollo_sostenible"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX ods_nombre_key ON public.ods USING btree (nombre)",
+      "indexname": "ods_nombre_key",
+      "tablename": "ods"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX ods_pkey ON public.ods USING btree (id)",
+      "indexname": "ods_pkey",
+      "tablename": "ods"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX palabras_clave_nombre_key ON public.palabras_clave USING btree (nombre)",
+      "indexname": "palabras_clave_nombre_key",
+      "tablename": "palabras_clave"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX palabras_clave_pkey ON public.palabras_clave USING btree (id)",
+      "indexname": "palabras_clave_pkey",
+      "tablename": "palabras_clave"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX rol_nombre_key ON public.rol USING btree (nombre)",
+      "indexname": "rol_nombre_key",
+      "tablename": "rol"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX rol_pkey ON public.rol USING btree (id)",
+      "indexname": "rol_pkey",
+      "tablename": "rol"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX roles_nombre_key ON public.roles USING btree (nombre)",
+      "indexname": "roles_nombre_key",
+      "tablename": "roles"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX roles_pkey ON public.roles USING btree (id)",
+      "indexname": "roles_pkey",
+      "tablename": "roles"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX schema_migrations_pkey ON public.schema_migrations USING btree (nombre)",
+      "indexname": "schema_migrations_pkey",
+      "tablename": "schema_migrations"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX sedes_pkey ON public.sedes USING btree (id)",
+      "indexname": "sedes_pkey",
+      "tablename": "sedes"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX semillero_lineas_pkey ON public.semillero_lineas USING btree (semillero_id, linea_id)",
+      "indexname": "semillero_lineas_pkey",
+      "tablename": "semillero_lineas"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_semillero_tutores_semillero_id ON public.semillero_tutores USING btree (semillero_id)",
+      "indexname": "idx_semillero_tutores_semillero_id",
+      "tablename": "semillero_tutores"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX semillero_tutores_persona_rol_periodo_idx ON public.semillero_tutores USING btree (semillero_id, docente_id, rol, fecha_inicio, COALESCE(fecha_fin, '9999-12-31'::date))",
+      "indexname": "semillero_tutores_persona_rol_periodo_idx",
+      "tablename": "semillero_tutores"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX semillero_tutores_pkey ON public.semillero_tutores USING btree (id)",
+      "indexname": "semillero_tutores_pkey",
+      "tablename": "semillero_tutores"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_semilleros_grupo_id ON public.semilleros USING btree (grupo_id)",
+      "indexname": "idx_semilleros_grupo_id",
+      "tablename": "semilleros"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX semilleros_pkey ON public.semilleros USING btree (id)",
+      "indexname": "semilleros_pkey",
+      "tablename": "semilleros"
+    },
+    {
+      "indexdef": "CREATE INDEX ix_sesion_acceso_expiracion ON public.sesion_acceso USING btree (expira_en)",
+      "indexname": "ix_sesion_acceso_expiracion",
+      "tablename": "sesion_acceso"
+    },
+    {
+      "indexdef": "CREATE INDEX ix_sesion_acceso_usuario ON public.sesion_acceso USING btree (usuario_id)",
+      "indexname": "ix_sesion_acceso_usuario",
+      "tablename": "sesion_acceso"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX sesion_acceso_pkey ON public.sesion_acceso USING btree (jti)",
+      "indexname": "sesion_acceso_pkey",
+      "tablename": "sesion_acceso"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX termino_clave_pkey ON public.termino_clave USING btree (termino)",
+      "indexname": "termino_clave_pkey",
+      "tablename": "termino_clave"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX universidad_pkey ON public.universidad USING btree (id)",
+      "indexname": "universidad_pkey",
+      "tablename": "universidad"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX usuario_correo_key ON public.usuario USING btree (correo)",
+      "indexname": "usuario_correo_key",
+      "tablename": "usuario"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX usuario_pkey ON public.usuario USING btree (id)",
+      "indexname": "usuario_pkey",
+      "tablename": "usuario"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX usuario_rol_pkey ON public.usuario_rol USING btree (usuario_id, rol_id)",
+      "indexname": "usuario_rol_pkey",
+      "tablename": "usuario_rol"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX usuario_roles_pkey ON public.usuario_roles USING btree (usuario_id, rol_id)",
+      "indexname": "usuario_roles_pkey",
+      "tablename": "usuario_roles"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX usuarios_correo_key ON public.usuarios USING btree (correo)",
+      "indexname": "usuarios_correo_key",
+      "tablename": "usuarios"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX usuarios_pkey ON public.usuarios USING btree (id)",
+      "indexname": "usuarios_pkey",
+      "tablename": "usuarios"
+    }
+  ],
+  "routines": [
+    {
+      "kind": "f",
+      "name": "fn_area_aplicacion_normalizar",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "fn_usuario_actualizar",
+      "signature": "p_id bigint, p_correo text, p_roles jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "fn_usuario_bootstrap_admin",
+      "signature": "p_correo text, p_hash text"
+    },
+    {
+      "kind": "f",
+      "name": "fn_usuario_consultar",
+      "signature": "p_id bigint"
+    },
+    {
+      "kind": "f",
+      "name": "fn_usuario_crear",
+      "signature": "p_correo text, p_hash text, p_roles jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "fn_usuario_inactivar",
+      "signature": "p_id bigint"
+    },
+    {
+      "kind": "f",
+      "name": "fn_usuario_listar",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "mira_validar_grupo_activo_semillero",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_area_aplicacion",
+      "signature": "p_id integer, p_nombre text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_area_conocimiento",
+      "signature": "p_id integer, p_gran_area text, p_area text, p_disciplina text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_linea_investigacion",
+      "signature": "p_id integer, p_nombre text, p_descripcion text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_objetivo_desarrollo_sostenible",
+      "signature": "p_id integer, p_nombre text, p_categoria text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_termino_clave",
+      "signature": "p_termino text, p_termino_ingles text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_universidad",
+      "signature": "p_id integer, p_nombre text, p_tipo text, p_ciudad text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_areas_aplicacion",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_areas_conocimiento",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_docentes",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_grupo_docentes",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_grupos_investigacion",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_lineas_investigacion",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_ods",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_palabras_clave",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_sedes",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_semillero_tutores",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_actualizar_v2_semilleros",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_area_aplicacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_area_conocimiento",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_linea_investigacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_objetivo_desarrollo_sostenible",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_termino_clave",
+      "signature": "p_termino text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_universidad",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_areas_aplicacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_areas_conocimiento",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_docentes",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_ficha_grupo",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_grupo_docentes",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_grupo_lineas",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_grupos_investigacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_linea_aplicacion",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_linea_disciplinas",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_linea_ods",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_lineas_investigacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_ods",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_palabras_clave",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_sedes",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_semillero_lineas",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_semillero_tutores",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_consultar_v2_semilleros",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_area_aplicacion",
+      "signature": "p_nombre text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_area_conocimiento",
+      "signature": "p_gran_area text, p_area text, p_disciplina text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_linea_investigacion",
+      "signature": "p_nombre text, p_descripcion text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_objetivo_desarrollo_sostenible",
+      "signature": "p_nombre text, p_categoria text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_termino_clave",
+      "signature": "p_termino text, p_termino_ingles text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_universidad",
+      "signature": "p_nombre text, p_tipo text, p_ciudad text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_areas_aplicacion",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_areas_conocimiento",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_docentes",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_grupo_docentes",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_grupo_lineas",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_grupos_investigacion",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_linea_aplicacion",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_linea_disciplinas",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_linea_ods",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_lineas_investigacion",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_ods",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_palabras_clave",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_sedes",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_semillero_lineas",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_semillero_tutores",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_crear_v2_semilleros",
+      "signature": "p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_area_aplicacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_area_conocimiento",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_linea_investigacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_objetivo_desarrollo_sostenible",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_termino_clave",
+      "signature": "p_termino text"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_universidad",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_areas_aplicacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_areas_conocimiento",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_docentes",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_grupo_docentes",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_grupo_lineas",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_grupos_investigacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_linea_aplicacion",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_linea_disciplinas",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_linea_ods",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_lineas_investigacion",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_ods",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_palabras_clave",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_sedes",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_semillero_lineas",
+      "signature": "p_izquierda integer, p_derecha integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_semillero_tutores",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_eliminar_v2_semilleros",
+      "signature": "p_id integer"
+    },
+    {
+      "kind": "f",
+      "name": "sp_guardar_v2_ficha_grupo",
+      "signature": "p_id integer, p_datos jsonb"
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_area_aplicacion",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_area_conocimiento",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_linea_investigacion",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_objetivo_desarrollo_sostenible",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_termino_clave",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_universidad",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_areas_aplicacion",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_areas_conocimiento",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_docentes",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_grupo_docentes",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_grupo_lineas",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_grupos_investigacion",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_linea_aplicacion",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_linea_disciplinas",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_linea_ods",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_lineas_investigacion",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_ods",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_palabras_clave",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_sedes",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_semillero_lineas",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_semillero_tutores",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_listar_v2_semilleros",
+      "signature": ""
+    },
+    {
+      "kind": "f",
+      "name": "sp_referencias_v2_usuarios",
+      "signature": ""
+    },
+    {
+      "kind": "p",
+      "name": "sp_usuario_actualizar",
+      "signature": "IN p_id bigint, IN p_correo text, IN p_roles jsonb, INOUT p_resultado jsonb"
+    },
+    {
+      "kind": "p",
+      "name": "sp_usuario_bootstrap_admin",
+      "signature": "IN p_correo text, IN p_hash text, INOUT p_resultado jsonb"
+    },
+    {
+      "kind": "p",
+      "name": "sp_usuario_crear",
+      "signature": "IN p_correo text, IN p_hash text, IN p_roles jsonb, INOUT p_resultado jsonb"
+    },
+    {
+      "kind": "p",
+      "name": "sp_usuario_inactivar",
+      "signature": "IN p_id bigint, INOUT p_inactivado boolean"
+    },
+    {
+      "kind": "p",
+      "name": "sp_v3_usuario_actualizar",
+      "signature": "IN p_id bigint, IN p_correo text, IN p_roles jsonb, INOUT p_resultado jsonb"
+    },
+    {
+      "kind": "p",
+      "name": "sp_v3_usuario_password",
+      "signature": "IN p_id bigint, IN p_hash text"
+    }
+  ],
+  "triggers": [
+    {
+      "name": "semilleros_grupo_activo_trigger",
+      "table": "semilleros",
+      "definition": "CREATE TRIGGER semilleros_grupo_activo_trigger BEFORE INSERT OR UPDATE OF grupo_id ON public.semilleros FOR EACH ROW EXECUTE FUNCTION mira_validar_grupo_activo_semillero()"
+    },
+    {
+      "name": "tr_area_aplicacion_normalizar",
+      "table": "area_aplicacion",
+      "definition": "CREATE TRIGGER tr_area_aplicacion_normalizar BEFORE INSERT OR UPDATE OF nombre ON public.area_aplicacion FOR EACH ROW EXECUTE FUNCTION fn_area_aplicacion_normalizar()"
+    }
+  ],
+  "constraints": [
+    {
+      "kind": "p",
+      "name": "area_aplicacion_pkey",
+      "table": "area_aplicacion",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "p",
+      "name": "area_conocimiento_pkey",
+      "table": "area_conocimiento",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "areas_aplicacion_nombre_key",
+      "table": "areas_aplicacion",
+      "definition": "UNIQUE (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "areas_aplicacion_pkey",
+      "table": "areas_aplicacion",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "areas_conocimiento_nombre_key",
+      "table": "areas_conocimiento",
+      "definition": "UNIQUE (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "areas_conocimiento_pkey",
+      "table": "areas_conocimiento",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "c",
+      "name": "ck_usuario_correo",
+      "table": "usuario",
+      "definition": "CHECK ((length(TRIM(BOTH FROM correo)) > 3))"
+    },
+    {
+      "kind": "c",
+      "name": "docentes_cvlac_url_check",
+      "table": "docentes",
+      "definition": "CHECK (((cvlac_url IS NULL) OR ((cvlac_url)::text ~ '^https?://'::text)))"
+    },
+    {
+      "kind": "c",
+      "name": "docentes_minciencias_categoria_check",
+      "table": "docentes",
+      "definition": "CHECK (((minciencias_categoria IS NULL) OR ((minciencias_categoria)::text = ANY ((ARRAY['Senior'::character varying, 'Asociado'::character varying, 'Junior'::character varying, 'Sin Categoría'::character varying])::text[]))))"
+    },
+    {
+      "kind": "p",
+      "name": "docentes_pkey",
+      "table": "docentes",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "f",
+      "name": "docentes_usuario_id_fkey",
+      "table": "docentes",
+      "definition": "FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "u",
+      "name": "docentes_usuario_id_key",
+      "table": "docentes",
+      "definition": "UNIQUE (usuario_id)"
+    },
+    {
+      "kind": "f",
+      "name": "grupo_docentes_docente_id_fkey",
+      "table": "grupo_docentes",
+      "definition": "FOREIGN KEY (docente_id) REFERENCES docentes(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "u",
+      "name": "grupo_docentes_grupo_id_docente_id_rol_fecha_inicio_fecha_f_key",
+      "table": "grupo_docentes",
+      "definition": "UNIQUE (grupo_id, docente_id, rol, fecha_inicio, fecha_fin)"
+    },
+    {
+      "kind": "f",
+      "name": "grupo_docentes_grupo_id_fkey",
+      "table": "grupo_docentes",
+      "definition": "FOREIGN KEY (grupo_id) REFERENCES grupos_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "c",
+      "name": "grupo_docentes_period_check",
+      "table": "grupo_docentes",
+      "definition": "CHECK (((fecha_fin IS NULL) OR (fecha_fin > fecha_inicio)))"
+    },
+    {
+      "kind": "p",
+      "name": "grupo_docentes_pkey",
+      "table": "grupo_docentes",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "c",
+      "name": "grupo_docentes_rol_check",
+      "table": "grupo_docentes",
+      "definition": "CHECK (((rol)::text = ANY ((ARRAY['Líder de Grupo'::character varying, 'Coinvestigador'::character varying, 'Colaborador'::character varying])::text[])))"
+    },
+    {
+      "kind": "f",
+      "name": "grupo_lineas_grupo_id_fkey",
+      "table": "grupo_lineas",
+      "definition": "FOREIGN KEY (grupo_id) REFERENCES grupos_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "f",
+      "name": "grupo_lineas_linea_id_fkey",
+      "table": "grupo_lineas",
+      "definition": "FOREIGN KEY (linea_id) REFERENCES lineas_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "p",
+      "name": "grupo_lineas_pkey",
+      "table": "grupo_lineas",
+      "definition": "PRIMARY KEY (grupo_id, linea_id)"
+    },
+    {
+      "kind": "c",
+      "name": "grupos_gruptac_url_check",
+      "table": "grupos_investigacion",
+      "definition": "CHECK (((gruptac_url)::text ~ '^https?://'::text))"
+    },
+    {
+      "kind": "p",
+      "name": "grupos_investigacion_pkey",
+      "table": "grupos_investigacion",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "f",
+      "name": "grupos_investigacion_sede_id_fkey",
+      "table": "grupos_investigacion",
+      "definition": "FOREIGN KEY (sede_id) REFERENCES sedes(id)"
+    },
+    {
+      "kind": "f",
+      "name": "linea_aplicacion_aplicacion_id_fkey",
+      "table": "linea_aplicacion",
+      "definition": "FOREIGN KEY (aplicacion_id) REFERENCES areas_aplicacion(id)"
+    },
+    {
+      "kind": "f",
+      "name": "linea_aplicacion_linea_id_fkey",
+      "table": "linea_aplicacion",
+      "definition": "FOREIGN KEY (linea_id) REFERENCES lineas_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "p",
+      "name": "linea_aplicacion_pkey",
+      "table": "linea_aplicacion",
+      "definition": "PRIMARY KEY (linea_id, aplicacion_id)"
+    },
+    {
+      "kind": "f",
+      "name": "linea_disciplinas_disciplina_id_fkey",
+      "table": "linea_disciplinas",
+      "definition": "FOREIGN KEY (disciplina_id) REFERENCES areas_conocimiento(id)"
+    },
+    {
+      "kind": "f",
+      "name": "linea_disciplinas_linea_id_fkey",
+      "table": "linea_disciplinas",
+      "definition": "FOREIGN KEY (linea_id) REFERENCES lineas_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "p",
+      "name": "linea_disciplinas_pkey",
+      "table": "linea_disciplinas",
+      "definition": "PRIMARY KEY (linea_id, disciplina_id)"
+    },
+    {
+      "kind": "p",
+      "name": "linea_investigacion_pkey",
+      "table": "linea_investigacion",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "f",
+      "name": "linea_ods_linea_id_fkey",
+      "table": "linea_ods",
+      "definition": "FOREIGN KEY (linea_id) REFERENCES lineas_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "f",
+      "name": "linea_ods_ods_id_fkey",
+      "table": "linea_ods",
+      "definition": "FOREIGN KEY (ods_id) REFERENCES ods(id)"
+    },
+    {
+      "kind": "p",
+      "name": "linea_ods_pkey",
+      "table": "linea_ods",
+      "definition": "PRIMARY KEY (linea_id, ods_id)"
+    },
+    {
+      "kind": "u",
+      "name": "lineas_investigacion_codigo_key",
+      "table": "lineas_investigacion",
+      "definition": "UNIQUE (codigo)"
+    },
+    {
+      "kind": "p",
+      "name": "lineas_investigacion_pkey",
+      "table": "lineas_investigacion",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "p",
+      "name": "objetivo_desarrollo_sostenible_pkey",
+      "table": "objetivo_desarrollo_sostenible",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "ods_nombre_key",
+      "table": "ods",
+      "definition": "UNIQUE (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "ods_pkey",
+      "table": "ods",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "palabras_clave_nombre_key",
+      "table": "palabras_clave",
+      "definition": "UNIQUE (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "palabras_clave_pkey",
+      "table": "palabras_clave",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "rol_nombre_key",
+      "table": "rol",
+      "definition": "UNIQUE (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "rol_pkey",
+      "table": "rol",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "roles_nombre_key",
+      "table": "roles",
+      "definition": "UNIQUE (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "roles_pkey",
+      "table": "roles",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "p",
+      "name": "schema_migrations_pkey",
+      "table": "schema_migrations",
+      "definition": "PRIMARY KEY (nombre)"
+    },
+    {
+      "kind": "p",
+      "name": "sedes_pkey",
+      "table": "sedes",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "f",
+      "name": "semillero_lineas_linea_id_fkey",
+      "table": "semillero_lineas",
+      "definition": "FOREIGN KEY (linea_id) REFERENCES lineas_investigacion(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "p",
+      "name": "semillero_lineas_pkey",
+      "table": "semillero_lineas",
+      "definition": "PRIMARY KEY (semillero_id, linea_id)"
+    },
+    {
+      "kind": "f",
+      "name": "semillero_lineas_semillero_id_fkey",
+      "table": "semillero_lineas",
+      "definition": "FOREIGN KEY (semillero_id) REFERENCES semilleros(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "f",
+      "name": "semillero_tutores_docente_id_fkey",
+      "table": "semillero_tutores",
+      "definition": "FOREIGN KEY (docente_id) REFERENCES docentes(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "c",
+      "name": "semillero_tutores_period_check",
+      "table": "semillero_tutores",
+      "definition": "CHECK (((fecha_fin IS NULL) OR (fecha_fin > fecha_inicio)))"
+    },
+    {
+      "kind": "p",
+      "name": "semillero_tutores_pkey",
+      "table": "semillero_tutores",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "c",
+      "name": "semillero_tutores_rol_check",
+      "table": "semillero_tutores",
+      "definition": "CHECK (((rol)::text = ANY ((ARRAY['Director'::character varying, 'Tutor'::character varying, 'Coinvestigador'::character varying])::text[])))"
+    },
+    {
+      "kind": "f",
+      "name": "semillero_tutores_semillero_id_fkey",
+      "table": "semillero_tutores",
+      "definition": "FOREIGN KEY (semillero_id) REFERENCES semilleros(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "f",
+      "name": "semilleros_grupo_id_fkey",
+      "table": "semilleros",
+      "definition": "FOREIGN KEY (grupo_id) REFERENCES grupos_investigacion(id)"
+    },
+    {
+      "kind": "p",
+      "name": "semilleros_pkey",
+      "table": "semilleros",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "p",
+      "name": "sesion_acceso_pkey",
+      "table": "sesion_acceso",
+      "definition": "PRIMARY KEY (jti)"
+    },
+    {
+      "kind": "f",
+      "name": "sesion_acceso_usuario_id_fkey",
+      "table": "sesion_acceso",
+      "definition": "FOREIGN KEY (usuario_id) REFERENCES usuario(id)"
+    },
+    {
+      "kind": "p",
+      "name": "termino_clave_pkey",
+      "table": "termino_clave",
+      "definition": "PRIMARY KEY (termino)"
+    },
+    {
+      "kind": "p",
+      "name": "universidad_pkey",
+      "table": "universidad",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "u",
+      "name": "usuario_correo_key",
+      "table": "usuario",
+      "definition": "UNIQUE (correo)"
+    },
+    {
+      "kind": "p",
+      "name": "usuario_pkey",
+      "table": "usuario",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "kind": "p",
+      "name": "usuario_rol_pkey",
+      "table": "usuario_rol",
+      "definition": "PRIMARY KEY (usuario_id, rol_id)"
+    },
+    {
+      "kind": "f",
+      "name": "usuario_rol_rol_id_fkey",
+      "table": "usuario_rol",
+      "definition": "FOREIGN KEY (rol_id) REFERENCES rol(id)"
+    },
+    {
+      "kind": "f",
+      "name": "usuario_rol_usuario_id_fkey",
+      "table": "usuario_rol",
+      "definition": "FOREIGN KEY (usuario_id) REFERENCES usuario(id)"
+    },
+    {
+      "kind": "p",
+      "name": "usuario_roles_pkey",
+      "table": "usuario_roles",
+      "definition": "PRIMARY KEY (usuario_id, rol_id)"
+    },
+    {
+      "kind": "f",
+      "name": "usuario_roles_rol_id_fkey",
+      "table": "usuario_roles",
+      "definition": "FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "f",
+      "name": "usuario_roles_usuario_id_fkey",
+      "table": "usuario_roles",
+      "definition": "FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE"
+    },
+    {
+      "kind": "u",
+      "name": "usuarios_correo_key",
+      "table": "usuarios",
+      "definition": "UNIQUE (correo)"
+    },
+    {
+      "kind": "p",
+      "name": "usuarios_pkey",
+      "table": "usuarios",
+      "definition": "PRIMARY KEY (id)"
+    }
+  ],
+  "serverVersion": "16.15",
+  "foreignKeyColumns": [
+    {
+      "table": "docentes",
+      "column": "usuario_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_docentes",
+      "column": "docente_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_docentes",
+      "column": "grupo_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_lineas",
+      "column": "grupo_id",
+      "nullable": false
+    },
+    {
+      "table": "grupo_lineas",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "grupos_investigacion",
+      "column": "sede_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_aplicacion",
+      "column": "aplicacion_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_aplicacion",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_disciplinas",
+      "column": "disciplina_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_disciplinas",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_ods",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "linea_ods",
+      "column": "ods_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_lineas",
+      "column": "linea_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_lineas",
+      "column": "semillero_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_tutores",
+      "column": "docente_id",
+      "nullable": false
+    },
+    {
+      "table": "semillero_tutores",
+      "column": "semillero_id",
+      "nullable": false
+    },
+    {
+      "table": "semilleros",
+      "column": "grupo_id",
+      "nullable": false
+    },
+    {
+      "table": "sesion_acceso",
+      "column": "usuario_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_rol",
+      "column": "rol_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_rol",
+      "column": "usuario_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_roles",
+      "column": "rol_id",
+      "nullable": false
+    },
+    {
+      "table": "usuario_roles",
+      "column": "usuario_id",
+      "nullable": false
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+# Perfil comprobado el 2026-11-13: dos servicios Render Free y Neon externo.
+# Ejemplo de configuracion, no una orden de despliegue. No crea bases ni discos.
+# Conservar secretos existentes al importar; revisar antes de sincronizar.
+# Las dos claves de forwarding deben coincidir entre si y ser independientes
+# de Jwt__Key y SECRET_KEY. No generarlas por separado con generateValue.
+services:
+  - type: web
+    name: sapiens-api-v1-v3-20261112
+    runtime: docker
+    repo: https://github.com/francis872/Mira
+    branch: feature/mira-v3
+    region: virginia
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    numInstances: 1
+    autoDeployTrigger: "off"
+    healthCheckPath: /ready
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: PORT
+        value: "10000"
+      - key: ConnectionStrings__PostgreSql
+        sync: false
+      - key: Jwt__Key
+        sync: false
+      - key: LoginProtection__ForwardingKey
+        sync: false
+      - key: Jwt__Issuer
+        value: MIRA
+      - key: Jwt__Audience
+        value: MIRA.Frontend
+      - key: Jwt__Minutes
+        value: "20"
+  - type: web
+    name: sapiens-web-v1-v3-20261113
+    runtime: docker
+    repo: https://github.com/francis872/Mira
+    branch: feature/mira-v3
+    region: virginia
+    rootDir: frontend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    numInstances: 1
+    autoDeployTrigger: "off"
+    healthCheckPath: /health
+    envVars:
+      - key: MIRA_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: SECRET_KEY
+        sync: false
+      - key: API_URL
+        value: https://sapiens-api-v1-v3-20261112.onrender.com/api
+      - key: MIRA_PLATFORM
+        value: render
+      - key: MIRA_LOGIN_FORWARDING_KEY
+        sync: false
+      - key: MIRA_SESSION_BACKEND
+        value: postgres
+      - key: MIRA_SESSION_DATABASE_URL
+        sync: false
+      - key: SESSION_COOKIE_SECURE
+        value: "true"

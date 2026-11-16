@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% from 'investigacion/_campos.html' import campos, valor %}
+{% block title %}{{ spec.title }}{% endblock %}
+{% block content %}
+<a class="d-inline-block mb-3" href="{{ url_for('investigacion.home') }}">{{ icon('arrow-left', '') }} Investigación</a>
+<div class="section-heading"><div><h1>{{ spec.title }}</h1><p>{{ 'Seleccione un registro y una o varias líneas para vincularlas juntas.' if resource in ['grupo_lineas','semillero_lineas'] else 'Seleccione dos registros para asignar su relación.' }}</p></div></div>
+{% if can_write %}<section class="card card-custom mb-4"><div class="card-body p-4"><h2 class="h5 mb-3">Asignar asociación</h2><form method="POST">{{ csrf_input() }}{{ campos(spec,item,options) }}<button class="btn btn-primary mt-3" type="submit" {{ 'disabled' if not loaded }}>Asignar</button></form></div></section>{% endif %}
+<section class="card card-custom"><div class="card-body"><h2 class="h5 mb-3">Asociaciones existentes</h2><div class="table-responsive" role="region" aria-label="Tabla de registros, desplazable horizontalmente" tabindex="0"><table class="table align-middle"><thead><tr>{% for f in spec.fields %}<th scope="col">{{ f.label }}</th>{% endfor %}<th scope="col">Acciones</th></tr></thead><tbody>
+{% for row in items %}<tr>{% for f in spec.fields %}<td>{{ valor(row,f,maps) }}</td>{% endfor %}<td>{% if can_delete %}<button class="btn btn-sm btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#retirar-asociacion-{{ row[spec.fields[0].name] }}-{{ row[spec.fields[1].name] }}">Retirar asociación</button>{% endif %}</td></tr>{% else %}<tr><td colspan="3" class="text-muted py-4">{{ 'Todavía no hay asociaciones.' if loaded else 'Las asociaciones no están disponibles.' }}</td></tr>{% endfor %}
+</tbody></table></div></div></section>
+{% if can_delete %}{% for row in items %}
+{% set dialog_id = 'retirar-asociacion-' ~ row[spec.fields[0].name] ~ '-' ~ row[spec.fields[1].name] %}
+<div class="modal fade" data-line-confirmation id="{{ dialog_id }}" tabindex="-1" aria-labelledby="titulo-{{ dialog_id }}" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+<div class="modal-header"><h2 class="modal-title fs-5" id="titulo-{{ dialog_id }}">Retirar asociación</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+<div class="modal-body">¿Desea retirar esta asociación? Los dos registros vinculados se conservarán.</div>
+<div class="modal-footer"><button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button><form method="POST" action="{{ url_for('investigacion.remove_association',resource=resource,left=row[spec.fields[0].name],right=row[spec.fields[1].name]) }}">{{ csrf_input() }}<button class="btn btn-danger" type="submit">Confirmar retiro</button></form></div>
+</div></div></div>
+{% endfor %}{% endif %}
+{% endblock %}

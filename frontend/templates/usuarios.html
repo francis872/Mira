@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Cuentas de acceso{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="section-eyebrow">ADMINISTRACIÓN</span><h1>Cuentas de acceso</h1><p>Identidades de acceso a MIRA y permisos institucionales.</p></div></div>
+<details class="card card-custom mb-4"><summary class="p-3">Crear una cuenta</summary><form class="p-4" method="post">
+    {{ csrf_input() }}
+    <label for="correo" class="form-label">Correo electrónico</label><input id="correo" class="form-control mb-3" name="correo" type="email" maxlength="254" autocomplete="off" required>
+    <label for="password" class="form-label">Contraseña inicial</label><input id="password" class="form-control" name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" aria-describedby="password-help" required>
+    <p id="password-help" class="form-text">Al menos 12 caracteres y hasta 72 bytes UTF-8. Entregue la contraseña por un canal privado.</p>
+    <fieldset class="mb-3"><legend class="fs-6">Roles</legend>{% for role in roles %}<label class="me-3"><input type="checkbox" name="roles" value="{{ role.id }}"> {{ role.nombre }}</label>{% endfor %}</fieldset>
+    <button class="btn btn-mira" type="submit">Crear cuenta</button>
+</form></details>
+<div class="card card-custom"><div class="table-responsive" role="region" aria-label="Tabla de registros, desplazable horizontalmente" tabindex="0"><table class="table align-middle mb-0">
+    <caption class="px-3">Cuentas de acceso; las personas académicas se conservan en el modelo de investigación.</caption>
+    <thead><tr><th scope="col">Correo y permisos</th><th scope="col">Estado</th><th scope="col">Acciones</th></tr></thead>
+    <tbody>{% for user in users %}<tr><td><strong>{{ user.correo }}</strong><div>{% for role in user.roles %}<span class="badge text-bg-light">{{ role.nombre }}</span> {% endfor %}</div>
+        {% if user.activo %}<details><summary>Editar correo y roles</summary><form method="post" action="{{ url_for('editar_usuario', id=user.id) }}" class="py-3">
+        {{ csrf_input() }}<label for="correo-{{ user.id }}">Correo</label><input class="form-control mb-2" id="correo-{{ user.id }}" name="correo" type="email" value="{{ user.correo }}" required maxlength="254">
+        <fieldset><legend class="fs-6">Roles de {{ user.correo }}</legend>{% for role in roles %}<label class="d-block"><input type="checkbox" name="roles" value="{{ role.id }}" {% if role.id in user.roles|map(attribute='id')|list %}checked{% endif %}> {{ role.nombre }}</label>{% endfor %}</fieldset>
+        <button class="btn btn-mira mt-2">Guardar cambios</button></form></details>
+        <details><summary>Restablecer contraseña</summary><form method="post" action="{{ url_for('password_usuario', id=user.id) }}" class="py-3">{{ csrf_input() }}
+        <label for="password-{{ user.id }}">Nueva contraseña de {{ user.correo }}</label><input class="form-control" id="password-{{ user.id }}" name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required>
+        <button class="btn btn-mira mt-2" type="submit">Restablecer y revocar sesiones</button></form></details>{% endif %}
+    </td><td>{{ 'Activa' if user.activo else 'Inactiva' }}</td><td>{% if user.activo %}<form method="post" action="{{ url_for('inactivar_usuario', id=user.id) }}">{{ csrf_input() }}<button class="btn btn-outline-danger" type="submit">Inactivar <span class="visually-hidden">{{ user.correo }}</span></button></form>{% endif %}</td></tr>
+    {% else %}<tr><td colspan="3" class="p-4">No hay cuentas registradas.</td></tr>{% endfor %}</tbody>
+</table></div></div>
+{% endblock %}

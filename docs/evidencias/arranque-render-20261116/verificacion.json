@@ -1,0 +1,1478 @@
+{
+  "verifiedDateBogota": "2026-11-16",
+  "status": "cold_browser_recovery_verified_with_limitations",
+  "repository": "francis872/Mira",
+  "branch": "feature/mira-v3",
+  "sourceCommits": [
+    "f522f8b81cae969198dbc8fe4b44d32b1970b6a2",
+    "8bc49a0789ecf1f5acf84d05ddc72a6e9e1b2cb5",
+    "32bed57a94742a6ea31d12067191ca2ef0146c92",
+    "3018573fa71714538415bedd24d789b8a6c69f56",
+    "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7"
+  ],
+  "webDeployment": {
+    "id": "dep-dbtkgnbl550s73di9g5g",
+    "source": "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7",
+    "status": "live"
+  },
+  "apiDeployment": {
+    "id": "dep-dbrj24gn74is73fo7a4g",
+    "source": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+    "redeployed": false
+  },
+  "localFlask": {
+    "exit": 0,
+    "tests": 175,
+    "passed": 170,
+    "failed": [],
+    "skipped": [
+      "test_sessions_survive_another_application_instance_and_keep_tokens_off_cookie",
+      "test_rotation_removes_old_identifier_from_shared_store",
+      "test_expired_or_tampered_database_session_fails_closed",
+      "test_read_outage_returns_503_without_replacing_the_existing_cookie",
+      "test_write_outage_does_not_report_a_successful_login_or_emit_cookie"
+    ]
+  },
+  "configuration": {
+    "web": {
+      "plan": "free",
+      "autoDeploy": "no",
+      "healthCheckPath": "/health",
+      "environmentUnchanged": true
+    },
+    "api": {
+      "plan": "free",
+      "autoDeploy": "no",
+      "healthCheckPath": "/ready",
+      "environmentUnchanged": true
+    }
+  },
+  "securityWithServicesAwake": {
+    "startedAt": "2026-11-16T19:49:16.363825+00:00",
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com",
+    "api": "https://sapiens-api-v1-v3-20261112.onrender.com",
+    "checks": [
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "path": "/health",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-web-v1-v3-20261113.onrender.com",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "path": "/health",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "health_readiness",
+        "origin": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "path": "/ready",
+        "http": 200,
+        "correlation": true
+      },
+      {
+        "case": "swagger_hidden",
+        "http": 404
+      },
+      {
+        "case": "correct_api_authentication",
+        "http": 200,
+        "jwtLifetimeSeconds": 1200
+      },
+      {
+        "case": "wrong_api_password",
+        "http": 401
+      },
+      {
+        "case": "anonymous_api",
+        "http": 401
+      },
+      {
+        "case": "web_role_denied",
+        "role": "investigator",
+        "login": 302,
+        "home": 200,
+        "accountAdministration": 403
+      },
+      {
+        "case": "web_role_denied",
+        "role": "coordinator",
+        "login": 302,
+        "home": 200,
+        "accountAdministration": 403
+      },
+      {
+        "case": "secure_web_session",
+        "login": 302,
+        "home": 200,
+        "opaqueSidRotated": true,
+        "jwtInBrowser": false,
+        "secureHttpOnlyStrict": true
+      },
+      {
+        "case": "csrf_rejection",
+        "http": 400
+      },
+      {
+        "case": "web_logout",
+        "logout": 302,
+        "protected": 302
+      },
+      {
+        "case": "same_jwt_revoked",
+        "logout": 200,
+        "reuse": 401
+      }
+    ],
+    "status": "passed",
+    "finishedAt": "2026-11-16T19:49:52.007723+00:00",
+    "credentialsPrinted": false,
+    "realTimeExpiryReference": "Historical Fase 6 remote-security.json only; the unchanged API was tested with an actually issued 60-second JWT; normal 20-minute expiry is verified here by token claims, not by waiting 20 minutes"
+  },
+  "sourceFiles": {
+    "frontend/app.py": {
+      "sha256": "74696c78be24b36cea346f009b5a4bfae8abc3703c5292e0fda46587950b8975",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    },
+    "frontend/login_protection.py": {
+      "sha256": "a7efe2c9bd378a5df81b42b52d837de59874f07714a420fec0961e3e6686ee9e",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": false
+    },
+    "frontend/seguridad.py": {
+      "sha256": "0af5f88f7c680e31dad9525faf98e0bda4cecafff59b198552cb92efbf8df7dd",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    },
+    "frontend/session_store.py": {
+      "sha256": "3577fa38d4ad1ffaf66800f42699bfa6b3873adaf2770e92f9a06813e402c66e",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": false
+    },
+    "frontend/gunicorn.conf.py": {
+      "sha256": "642f901a33deb938264b73c1e10f9d2feb1da567ffe3249b8162e6ecfd4ac5aa",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": false
+    },
+    "MIRA.Api/Peticiones/AuthController.cs": {
+      "sha256": "7235b6ff2214855794fa17b47ecae0ec549ebd6db002787c71096c63f39e7bfc",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": false
+    },
+    "MIRA.Api/Servicios/Seguridad/AuthService.cs": {
+      "sha256": "f45af4b638115c08f259b9cb7bb08716f6d5be261c12e2eb6d6a5f5bd69507a2",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": false
+    },
+    "frontend/tests/test_login_protection.py": {
+      "sha256": "7d6fd68b6287940f0b33dcbcbd8f0647574e6ba2db11ca971578915af46e07d3",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    },
+    "frontend/tests/test_render_startup.py": {
+      "sha256": "9235f1c563d4e8bf546860b7f8d069ea1d9e8c31eac80ecde698892aae90a39b",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    },
+    "frontend/static/render-startup.js": {
+      "sha256": "bdd181a8a821d208144954a11a21ffab44634f22681d0f2d0fd1283e8273a72e",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    },
+    "frontend/templates/login.html": {
+      "sha256": "a2fd92e955f3d848d928aa36c0ae436dd3ca0e2056b1d01fb0684993b738aab6",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    },
+    "scripts/verify-render-startup.mjs": {
+      "sha256": "0c4ed24893f74f27cd18859912e16262ded3ddeb7e9511e3bdb87d36167fd609",
+      "hashScope": "git show 68d2261:path bytes",
+      "changedSinceB19ef96": true
+    }
+  },
+  "firstCandidateFailure": {
+    "source": "f522f8b81cae969198dbc8fe4b44d32b1970b6a2",
+    "deployment": "dep-dbtjav3bc2fs73bsr6fg",
+    "result": "startup_gate_not_sufficient",
+    "healthRequestAccept": "application/json",
+    "upstreamGatewayFailures": [
+      {
+        "atUtc": "2026-11-16T16:57:06.304415583Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:08.3640751Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:10.44553023Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:12.547126923Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:14.610604776Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:16.677219646Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:18.735411268Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:20.792668477Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:22.899237486Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:24.96655836Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:27.019619707Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:29.083357492Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:31.140200724Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:33.229498766Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:35.298962864Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:37.352629017Z",
+        "http": 502
+      },
+      {
+        "atUtc": "2026-11-16T16:57:39.400057757Z",
+        "http": 502
+      }
+    ],
+    "externalManualApiHealth": {
+      "http": 200,
+      "seconds": 16.283
+    },
+    "webReadinessAfterManualApiWarmup": {
+      "http": 200,
+      "seconds": 1.434
+    },
+    "rootCauseProven": false
+  },
+  "pythonDependencies": {
+    "atUtc": "2026-11-16T17:05:25.109302+00:00",
+    "source": "pinned runtime requirements, including platform marker packages",
+    "packages": {
+      "Flask": "3.1.3",
+      "Werkzeug": "3.1.9",
+      "requests": "2.33.0",
+      "python-dotenv": "1.2.2",
+      "Flask-Session": "0.8.0",
+      "cachelib": "0.13.0",
+      "urllib3": "2.8.0",
+      "idna": "3.15",
+      "certifi": "2026.10.18",
+      "charset-normalizer": "3.4.4",
+      "gunicorn": "26.2.0",
+      "openpyxl": "3.1.5",
+      "reportlab": "5.1.0",
+      "blinker": "1.9.0",
+      "click": "8.5.0",
+      "itsdangerous": "2.2.0",
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "msgspec": "0.22.0",
+      "packaging": "26.3",
+      "et-xmlfile": "2.0.0",
+      "pillow": "13.0.0",
+      "typing-extensions": "4.15.0",
+      "psycopg-binary": "3.3.9",
+      "psycopg": "3.3.9"
+    },
+    "completeOsAudit": false,
+    "status": "completed",
+    "advisories": {},
+    "packageCount": 25,
+    "queryBatches": 2,
+    "scope": "25 pinned runtime package distributions, marker packages included; not an installed image or OS inventory"
+  },
+  "preservation": {
+    "recoveryArchivePresent": true,
+    "archiveUnchanged": true,
+    "newRestoreExecuted": false,
+    "runtimeDependencyFilesUnchanged": true
+  },
+  "neon": {
+    "organizationPlan": "free",
+    "recoveryBranchPresent": true,
+    "recoveryParentPreserved": true,
+    "recoveryEndpointState": "idle",
+    "newResourcesCreated": false,
+    "mainDatabaseQueried": false
+  },
+  "actionsRequiredByUser": false,
+  "c06WrittenTeacherDecisionReceived": false,
+  "formalPrReviews": 0,
+  "prMerged": false,
+  "institutionalProductionCertified": false,
+  "manualChecksStillPending": [
+    "physical desktop/tablet/mobile devices",
+    "screen reader",
+    "institutional load and availability",
+    "periodic backup scheduling and operational handover"
+  ],
+  "dockerAdditionalBuild": {
+    "executed": false,
+    "block": "Docker info did not respond successfully; no Docker restart or unrelated container changes"
+  },
+  "secretsPublished": false,
+  "httpOnlyColdStartFailure": {
+    "startedAtUtc": "2026-11-16T17:02:31.962802+00:00",
+    "status": "failed",
+    "ownIdleTargetSeconds": 1380,
+    "observations": [
+      {
+        "method": "GET",
+        "path": "API/ready",
+        "atUtc": "2026-11-16T17:02:31.964360+00:00",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 0.958
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:02:32.923564+00:00",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 1.035
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:02:33.959799+00:00",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 0.257
+      },
+      {
+        "method": "POST",
+        "path": "API/api/auth/login",
+        "atUtc": "2026-11-16T17:02:34.217321+00:00",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 3.038
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:25:42.363687+00:00",
+        "errorType": "ConnectionError",
+        "seconds": 21.686
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:26:09.051286+00:00",
+        "errorType": "ConnectionError",
+        "seconds": 0.076
+      },
+      {
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:26:14.129983+00:00",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 16.54
+      },
+      {
+        "method": "POST",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:26:30.672128+00:00",
+        "http": 503,
+        "applicationCorrelation": true,
+        "seconds": 36.294
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:27:06.966703+00:00",
+        "http": 503,
+        "applicationCorrelation": true,
+        "seconds": 34.518
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:27:46.487319+00:00",
+        "http": 503,
+        "applicationCorrelation": true,
+        "seconds": 34.22
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:28:25.709905+00:00",
+        "http": 503,
+        "applicationCorrelation": true,
+        "seconds": 34.217
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:29:04.928504+00:00",
+        "http": 503,
+        "applicationCorrelation": true,
+        "seconds": 34.216
+      },
+      {
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:29:44.146042+00:00",
+        "http": 503,
+        "applicationCorrelation": true,
+        "seconds": 34.274
+      }
+    ],
+    "externalTrafficControlled": false,
+    "forcedProviderSuspension": false,
+    "keepAliveInstalled": false,
+    "postIdleDirectApiRequestsBeforeRecovery": 0,
+    "credentialsPublished": false,
+    "expiryProbe": {
+      "issuedAtUnix": 1794848560,
+      "expiresAtUnix": 1794849760,
+      "lifetimeSeconds": 1200,
+      "revokedBeforeProbe": false
+    },
+    "beforeInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-dlk28",
+          "createdAt": "2026-11-16T17:01:42Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": [
+        {
+          "id": "srv-dbr6i3dckfvc73dc3hr0-j7ct6",
+          "createdAt": "2026-11-16T16:58:09Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ]
+    },
+    "idleStartedAtUtc": "2026-11-16T17:02:38.465602+00:00",
+    "probeNotBeforeUtc": "2026-11-16T17:25:38.465631+00:00",
+    "ownIdleActualSeconds": 1380.001,
+    "instancesBeforeProbe": {
+      "web": [],
+      "api": []
+    },
+    "neonStateBeforeProbe": "idle",
+    "renderSleepConfirmed": true,
+    "anonymousSessionIdPreserved": true,
+    "firstLoginHttpAfterIdle": 503,
+    "firstLoginSecondsAfterIdle": 36.294,
+    "firstLoginSucceeded": false,
+    "errorType": "AssertionError",
+    "finishedAtUtc": "2026-11-16T17:30:23.422753+00:00"
+  },
+  "browserFetchFailure": {
+    "startedAtUtc": "2026-11-16T17:36:19.761Z",
+    "status": "failed",
+    "ownIdleTargetSeconds": 1380,
+    "source": "32bed57",
+    "browser": "Microsoft Edge headless, desktop 1280x800",
+    "observations": [
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/ready",
+        "atUtc": "2026-11-16T17:36:19.763Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 15.948
+      },
+      {
+        "phase": "baseline",
+        "method": "POST",
+        "path": "API/api/auth/login",
+        "atUtc": "2026-11-16T17:36:35.717Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 10.018
+      },
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/api/auth/me",
+        "atUtc": "2026-11-16T17:36:45.740Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 0.433
+      },
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:36:46.373Z",
+        "initiator": "other",
+        "http": 200,
+        "tlsProtocol": "TLS 1.3",
+        "applicationCorrelation": true
+      }
+    ],
+    "healthRequests": [],
+    "healthResponses": [],
+    "externalTrafficControlled": false,
+    "forcedProviderSuspension": false,
+    "keepAliveInstalled": false,
+    "credentialsPublished": false,
+    "expiryProbe": {
+      "issuedAtUnix": 1794850609,
+      "expiresAtUnix": 1794851809,
+      "lifetimeSeconds": 1200,
+      "validBeforeIdleHttp": 200,
+      "revokedBeforeProbe": false
+    },
+    "errorType": "AssertionError",
+    "errorStage": "baseline",
+    "finishedAtUtc": "2026-11-16T17:37:31.821Z"
+  },
+  "publicBrowserVerifier": {
+    "startedAtUtc": "2026-11-16T18:16:33.292Z",
+    "web": "https://sapiens-web-v1-v3-20261113.onrender.com",
+    "health": "https://sapiens-api-v1-v3-20261112.onrender.com/health",
+    "status": "passed",
+    "requests": [
+      {
+        "method": "GET",
+        "body": false,
+        "authorization": false,
+        "cookie": false,
+        "referer": false,
+        "forwardingAssertion": false,
+        "extraHeadersObserved": true,
+        "http": 200,
+        "sameHealthUrl": true,
+        "tlsProtocol": "QUIC"
+      }
+    ],
+    "credentialsUsed": false,
+    "coldStartCertified": false,
+    "finishedAtUtc": "2026-11-16T18:16:34.252Z"
+  },
+  "browserColdBeforeHeadFix": {
+    "startedAtUtc": "2026-11-16T17:42:04.093Z",
+    "status": "failed",
+    "ownIdleTargetSeconds": 1380,
+    "source": "3018573fa71714538415bedd24d789b8a6c69f56",
+    "browser": "Microsoft Edge headless, desktop 1280x800",
+    "observations": [
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/ready",
+        "atUtc": "2026-11-16T17:42:04.096Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 0.613
+      },
+      {
+        "phase": "baseline",
+        "method": "POST",
+        "path": "API/api/auth/login",
+        "atUtc": "2026-11-16T17:42:04.720Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 3.783
+      },
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/api/auth/me",
+        "atUtc": "2026-11-16T17:42:08.505Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 0.203
+      },
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T17:42:08.820Z",
+        "initiator": "other",
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": true
+      },
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/health",
+        "atUtc": "2026-11-16T17:42:09.839Z",
+        "initiator": "script",
+        "authorizationPresent": false,
+        "cookiePresent": false,
+        "refererPresent": false,
+        "forwardingAssertionPresent": false,
+        "requestBodyPresent": false,
+        "extraHeadersObserved": true,
+        "http": 200,
+        "tlsProtocol": "TLS 1.3",
+        "applicationCorrelation": false
+      },
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T17:42:10.412Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 0.856
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T18:05:21.512Z",
+        "initiator": "other",
+        "http": 503,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T18:06:07.345Z",
+        "initiator": "script",
+        "http": 502,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T18:06:07.567Z",
+        "initiator": "script",
+        "http": 502,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      }
+    ],
+    "healthRequests": [
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/health",
+        "atUtc": "2026-11-16T17:42:09.839Z",
+        "initiator": "script",
+        "authorizationPresent": false,
+        "cookiePresent": false,
+        "refererPresent": false,
+        "forwardingAssertionPresent": false,
+        "requestBodyPresent": false,
+        "extraHeadersObserved": true
+      }
+    ],
+    "healthResponses": [
+      {
+        "phase": "baseline",
+        "method": "GET",
+        "path": "API/health",
+        "atUtc": "2026-11-16T17:42:09.839Z",
+        "initiator": "script",
+        "authorizationPresent": false,
+        "cookiePresent": false,
+        "refererPresent": false,
+        "forwardingAssertionPresent": false,
+        "requestBodyPresent": false,
+        "extraHeadersObserved": true,
+        "http": 200,
+        "tlsProtocol": "TLS 1.3",
+        "applicationCorrelation": false
+      }
+    ],
+    "externalTrafficControlled": false,
+    "forcedProviderSuspension": false,
+    "keepAliveInstalled": false,
+    "credentialsPublished": false,
+    "expiryProbe": {
+      "issuedAtUnix": 1794850932,
+      "expiresAtUnix": 1794852132,
+      "lifetimeSeconds": 1200,
+      "validBeforeIdleHttp": 200,
+      "revokedBeforeProbe": false
+    },
+    "secureCookie": {
+      "secure": true,
+      "httpOnly": true,
+      "sameSite": "Strict"
+    },
+    "publicBrowserVerifier": true,
+    "beforeInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-vm7ch",
+          "createdAt": "2026-11-16T17:41:49Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": [
+        {
+          "id": "srv-dbr6i3dckfvc73dc3hr0-wjrd8",
+          "createdAt": "2026-11-16T17:36:25Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ]
+    },
+    "idleStartedAtUtc": "2026-11-16T17:42:17.948Z",
+    "probeNotBeforeUtc": "2026-11-16T18:05:17.948Z",
+    "ownIdleActualSeconds": 1380.013,
+    "instancesBeforeProbe": {
+      "web": [],
+      "api": []
+    },
+    "neonStateBeforeProbe": "idle",
+    "renderSleepConfirmed": true,
+    "applicationRequestsDuringIdle": 0,
+    "errorType": "Error",
+    "errorStage": "recovery",
+    "finishedAtUtc": "2026-11-16T18:07:22.288Z"
+  },
+  "headDiagnosis": {
+    "affectedSource": "3018573fa71714538415bedd24d789b8a6c69f56",
+    "file": "frontend/seguridad.py",
+    "method": "register_security.login",
+    "confirmedDefect": "HEAD was dispatched to authentication instead of rendering the login page",
+    "configuredThreads": 4,
+    "headObservations": [
+      {
+        "startedAtUtc": "2026-11-16T18:05:39.290475+00:00",
+        "endedAtUtc": "2026-11-16T18:06:16.690753+00:00",
+        "http": 503,
+        "seconds": 37.400278
+      },
+      {
+        "startedAtUtc": "2026-11-16T18:05:41.275796+00:00",
+        "endedAtUtc": "2026-11-16T18:06:17.321624+00:00",
+        "http": 503,
+        "seconds": 36.045828
+      },
+      {
+        "startedAtUtc": "2026-11-16T18:05:46.283813+00:00",
+        "endedAtUtc": "2026-11-16T18:06:22.382798+00:00",
+        "http": 503,
+        "seconds": 36.098985
+      },
+      {
+        "startedAtUtc": "2026-11-16T18:05:51.271878+00:00",
+        "endedAtUtc": "2026-11-16T18:06:27.359145+00:00",
+        "http": 503,
+        "seconds": 36.087267
+      },
+      {
+        "startedAtUtc": "2026-11-16T18:06:16.692508+00:00",
+        "endedAtUtc": "2026-11-16T18:06:52.786234+00:00",
+        "http": 503,
+        "seconds": 36.093726
+      },
+      {
+        "startedAtUtc": "2026-11-16T18:06:17.324214+00:00",
+        "endedAtUtc": "2026-11-16T18:06:53.368332+00:00",
+        "http": 503,
+        "seconds": 36.044118
+      },
+      {
+        "startedAtUtc": "2026-11-16T18:06:22.384716+00:00",
+        "endedAtUtc": "2026-11-16T18:06:58.459682+00:00",
+        "http": 503,
+        "seconds": 36.074966
+      }
+    ],
+    "fixSource": "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7",
+    "newTests": [
+      "test_login_head_is_read_only_and_never_authenticates_or_wakes_dependencies[data0]",
+      "test_login_head_is_read_only_and_never_authenticates_or_wakes_dependencies[data1]"
+    ]
+  },
+  "knownSecretScan": {
+    "atUtc": "2026-11-16T19:55:00.559367+00:00",
+    "files": 455,
+    "knownPrivateValuesCompared": 25,
+    "matches": [],
+    "emptyOrNonJsonOptionalPrivateSourcesSkipped": 1,
+    "privateDirectoryIgnored": true,
+    "scope": "tracked and nonignored working tree; known live/provider/recovery/local values; not full git history"
+  },
+  "apiColdTargetedPartial": {
+    "firstLoginHttp": 302,
+    "authenticatedHomeHttp": 200,
+    "frontendActiveBefore": true,
+    "apiInstancesBefore": 0,
+    "neonBefore": "active",
+    "remainingChecksCompleted": false,
+    "result": "stopped by a provisional Referer assertion; no CDP ExtraInfo recorded in that diagnostic",
+    "notACompleteColdStartApproval": true
+  },
+  "completedAtUtc": "2026-11-16T19:56:26.823320+00:00",
+  "coldBrowserRecovery": {
+    "startedAtUtc": "2026-11-16T19:47:14.137Z",
+    "status": "passed",
+    "ownIdleTargetSeconds": 960,
+    "source": "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7",
+    "browser": "Microsoft Edge headless, desktop 1280x800",
+    "observations": [
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T19:47:18.520Z",
+        "initiator": "other",
+        "http": 503,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T19:47:41.347Z",
+        "initiator": "script",
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": true
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "API/health",
+        "atUtc": "2026-11-16T19:47:42.036Z",
+        "initiator": "script",
+        "authorizationPresent": false,
+        "cookiePresent": false,
+        "refererPresent": false,
+        "forwardingAssertionPresent": false,
+        "requestBodyPresent": false,
+        "extraHeadersObserved": true,
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      },
+      {
+        "phase": "recovery",
+        "method": "POST",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T19:47:42.101Z",
+        "initiator": "other",
+        "http": 302,
+        "applicationCorrelation": true
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/",
+        "atUtc": "2026-11-16T19:48:08.268Z",
+        "initiator": "other",
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": true
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/ready",
+        "atUtc": "2026-11-16T19:48:10.078Z",
+        "http": 200,
+        "applicationCorrelation": true,
+        "seconds": 1.058
+      },
+      {
+        "phase": "after_recovery",
+        "method": "GET",
+        "path": "API/api/auth/me",
+        "atUtc": "2026-11-16T19:48:13.127Z",
+        "http": 401,
+        "applicationCorrelation": true,
+        "seconds": 0.445
+      },
+      {
+        "phase": "logout",
+        "method": "POST",
+        "path": "WEB/logout",
+        "atUtc": "2026-11-16T19:48:13.609Z",
+        "initiator": "other",
+        "http": 302,
+        "applicationCorrelation": true
+      },
+      {
+        "phase": "logout",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T19:48:14.101Z",
+        "initiator": "other",
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": true
+      }
+    ],
+    "healthRequests": [
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "API/health",
+        "atUtc": "2026-11-16T19:47:42.036Z",
+        "initiator": "script",
+        "authorizationPresent": false,
+        "cookiePresent": false,
+        "refererPresent": false,
+        "forwardingAssertionPresent": false,
+        "requestBodyPresent": false,
+        "extraHeadersObserved": true
+      }
+    ],
+    "healthResponses": [
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "API/health",
+        "atUtc": "2026-11-16T19:47:42.036Z",
+        "initiator": "script",
+        "authorizationPresent": false,
+        "cookiePresent": false,
+        "refererPresent": false,
+        "forwardingAssertionPresent": false,
+        "requestBodyPresent": false,
+        "extraHeadersObserved": true,
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      }
+    ],
+    "externalTrafficControlled": false,
+    "forcedProviderSuspension": false,
+    "keepAliveInstalled": false,
+    "credentialsPublished": false,
+    "expiryProbe": {
+      "issuedAtUnix": 1794852994,
+      "expiresAtUnix": 1794854194,
+      "lifetimeSeconds": 1200,
+      "validBeforeIdleHttp": 200,
+      "revokedBeforeProbe": false,
+      "checkedAtUnix": 1794858493,
+      "expiredTokenHttp": 401
+    },
+    "browserRestartedBeforeProbe": true,
+    "instrumentationFailureReference": "CDP response timed out before a recovery application request; services remained asleep",
+    "idleStartedAtUtc": "2026-11-16T19:31:09.474524+00:00",
+    "ownIdleActualSeconds": 964.694,
+    "beforeInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-qhkz6",
+          "createdAt": "2026-11-16T19:27:11Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": []
+    },
+    "lastCdpCommand": "Runtime.evaluate",
+    "instancesBeforeProbe": {
+      "web": [],
+      "api": []
+    },
+    "neonStateBeforeProbe": "idle",
+    "renderSleepConfirmed": true,
+    "applicationRequestsDuringIdle": 0,
+    "anonymousSessionIdPreserved": null,
+    "sessionPreservationLimitation": "Session cookie not available after the instrumentation browser restart",
+    "loginToHomeSeconds": 28.007,
+    "recoveryObservedSeconds": 51.571,
+    "firstLoginHttpAfterIdle": 302,
+    "authenticatedHomeHttp": 200,
+    "firstBrowserHealthHttp": 200,
+    "browserStartupRequestWithoutCredentials": true,
+    "noManualApiWarmupBeforeRecovery": true,
+    "sessionRotatedAfterLogin": true,
+    "readinessAfterRecovery": 200,
+    "afterInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-m8754",
+          "createdAt": "2026-11-16T19:47:23Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": [
+        {
+          "id": "srv-dbr6i3dckfvc73dc3hr0-z54j9",
+          "createdAt": "2026-11-16T19:47:47Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ]
+    },
+    "instanceChanged": {
+      "web": true,
+      "api": true
+    },
+    "logoutReturnedToLogin": true,
+    "institutionalAvailabilityCertified": false,
+    "finishedAtUtc": "2026-11-16T19:48:14.434Z"
+  },
+  "headFixedLiveEvidence": [
+    {
+      "atUtc": "2026-11-16T19:05:22.130237253Z",
+      "method": "HEAD",
+      "http": 200,
+      "seconds": 0.717315
+    },
+    {
+      "atUtc": "2026-11-16T19:05:22.422488628Z",
+      "method": "GET",
+      "http": 200,
+      "seconds": 0.047839
+    }
+  ],
+  "instrumentationInterruptedBeforeNewRun": {
+    "startedAtUtc": "2026-11-16T19:26:50.027Z",
+    "status": "failed",
+    "ownIdleTargetSeconds": 960,
+    "source": "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7",
+    "browser": "Microsoft Edge headless, desktop 1280x800",
+    "observations": [
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T19:27:05.922Z",
+        "initiator": "other",
+        "http": 503,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": false
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "HEAD",
+        "path": "WEB/login",
+        "errorType": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/login",
+        "atUtc": "2026-11-16T19:27:22.779Z",
+        "initiator": "script",
+        "http": 200,
+        "tlsProtocol": "QUIC",
+        "applicationCorrelation": true
+      },
+      {
+        "phase": "recovery",
+        "method": "GET",
+        "path": "WEB/static/render-startup.js",
+        "errorType": "net::ERR_ABORTED"
+      }
+    ],
+    "healthRequests": [],
+    "healthResponses": [],
+    "externalTrafficControlled": false,
+    "forcedProviderSuspension": false,
+    "keepAliveInstalled": false,
+    "credentialsPublished": false,
+    "expiryProbe": {
+      "issuedAtUnix": 1794852994,
+      "expiresAtUnix": 1794854194,
+      "lifetimeSeconds": 1200,
+      "validBeforeIdleHttp": 200,
+      "revokedBeforeProbe": false
+    },
+    "browserRestartedBeforeProbe": true,
+    "instrumentationFailureReference": "CDP response timed out before a recovery application request; services remained asleep",
+    "idleStartedAtUtc": "2026-11-16T19:10:45.271402+00:00",
+    "ownIdleActualSeconds": 964.799,
+    "beforeInstances": {
+      "web": [
+        {
+          "id": "srv-dbrijl0ae00c73fpf0mg-49kjq",
+          "createdAt": "2026-11-16T19:05:09Z",
+          "status": "RUNNING",
+          "ready": true
+        }
+      ],
+      "api": []
+    },
+    "lastCdpCommand": "Runtime.evaluate",
+    "instancesBeforeProbe": {
+      "web": [],
+      "api": []
+    },
+    "neonStateBeforeProbe": "idle",
+    "renderSleepConfirmed": true,
+    "applicationRequestsDuringIdle": 0,
+    "anonymousSessionIdPreserved": null,
+    "sessionPreservationLimitation": "Session cookie not available after the instrumentation browser restart",
+    "errorType": "Error",
+    "errorStage": "recovery",
+    "finishedAtUtc": "2026-11-16T19:27:53.165Z"
+  },
+  "instrumentationScopeNote": "Earlier CDP timeouts are not counted as a successful continuous recovery. Latest runner waits for the correlated application document before polling its DOM.",
+  "localInstrumentFixture": {
+    "status": "passed",
+    "scope": "local synthetic loading-page transition only; no live platform or credentials",
+    "seconds": 2.151,
+    "responses": [
+      {
+        "http": 503,
+        "kind": "Document",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Other",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 503,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 200,
+        "kind": "Fetch",
+        "app": false
+      },
+      {
+        "http": 200,
+        "kind": "Document",
+        "app": true
+      }
+    ]
+  },
+  "wrongWebPassword": {
+    "http": 401,
+    "applicationCorrelation": true,
+    "responseDoesNotEchoPassword": true
+  },
+  "backendRoleEnforcement": {
+    "status": "passed",
+    "atUtc": "2026-11-16T19:51:10.842873+00:00",
+    "role": "Investigador",
+    "loginHttp": 200,
+    "accountAdministrationHttp": 403,
+    "logoutHttp": 200,
+    "apiRoleEnforcedIndependentlyOfUi": true,
+    "credentialsPublished": false
+  },
+  "responsive": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-16T19:49:58.185Z",
+    "scope": "Edge headless viewport/touch emulation; login and authenticated home",
+    "cases": [
+      {
+        "path": "/login",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "width": 1280,
+        "overflow": false,
+        "main": true,
+        "unnamedButtons": 0,
+        "startupScript": true
+      },
+      {
+        "path": "/login",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "overflow": false,
+        "main": true,
+        "unnamedButtons": 0,
+        "startupScript": true
+      },
+      {
+        "path": "/login",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "overflow": false,
+        "main": true,
+        "unnamedButtons": 0,
+        "startupScript": true
+      },
+      {
+        "path": "/",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "width": 1280,
+        "overflow": false,
+        "main": true,
+        "unnamedButtons": 0,
+        "startupScript": false
+      },
+      {
+        "path": "/",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "overflow": false,
+        "main": true,
+        "unnamedButtons": 0,
+        "startupScript": false
+      },
+      {
+        "path": "/",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "overflow": false,
+        "main": true,
+        "unnamedButtons": 0,
+        "startupScript": false
+      }
+    ],
+    "consoleExceptions": 0,
+    "physicalDevicesTested": false,
+    "finishedAtUtc": "2026-11-16T19:50:11.291Z"
+  },
+  "finalProviderVerification": {
+    "web": {
+      "plan": "free",
+      "autoDeploy": "no",
+      "healthCheckPath": "/health",
+      "environmentUnchanged": true,
+      "repositoryIsMira": true,
+      "branch": "feature/mira-v3",
+      "deployment": "dep-dbtkgnbl550s73di9g5g",
+      "source": "68d22614593b7efe2bc3aee57ee4646fb7cdf1e7",
+      "deploymentStatus": "live"
+    },
+    "api": {
+      "plan": "free",
+      "autoDeploy": "no",
+      "healthCheckPath": "/ready",
+      "environmentUnchanged": true,
+      "repositoryIsMira": true,
+      "branch": "feature/mira-v3",
+      "deployment": "dep-dbrj24gn74is73fo7a4g",
+      "source": "caf4c8cd0c8debb641f6605b478a2f043e11f22f",
+      "deploymentStatus": "live"
+    }
+  },
+  "neonFinalMetadataCheck": {
+    "atUtc": "2026-11-16T19:55:01.990826+00:00",
+    "organizationPlan": "free",
+    "recoveryEndpointState": "idle",
+    "recoveryBranchPreserved": true,
+    "newResourcesCreated": false,
+    "mainDatabaseQueried": false
+  },
+  "ownedResourceCleanup": {
+    "edge-process-private.json": {
+      "ownedDebugPortClosed": true
+    },
+    "edge-responsive-process-private.json": {
+      "ownedDebugPortClosed": true
+    },
+    "recoveryArchiveUnchanged": true
+  },
+  "coldSuccessLoginServerLogs": [
+    {
+      "atUtc": "2026-11-16T19:47:45.441258825Z",
+      "method": "HEAD",
+      "http": 200,
+      "seconds": 0.788288
+    },
+    {
+      "atUtc": "2026-11-16T19:47:45.750649608Z",
+      "method": "GET",
+      "http": 200,
+      "seconds": 0.039818
+    },
+    {
+      "atUtc": "2026-11-16T19:48:12.44782058Z",
+      "method": "POST",
+      "http": 302,
+      "seconds": 25.985757
+    }
+  ],
+  "currentRemoteSecurityOperationChecks": 16,
+  "protectedPathsUnchangedSinceB19ef96": true,
+  "allSixCurrentApiCasesVerified": true,
+  "academicDeliveryReady": false,
+  "remainingConditions": [
+    "Written academic decisions including C06",
+    "Formal PR review",
+    "Physical devices and screen reader",
+    "Institutional load/availability and periodic backup operations"
+  ],
+  "noFullFunctionalE2eRerunInThisCorrection": true,
+  "documentationScope": "Current results are separate from the dated 50 functional public criteria and recovery tests; no new main database migration or native restore was executed.",
+  "sanitization": "Queries/fragments removed from recorded request paths; no JWT, cookies, passwords, environment values or business rows are published."
+}
