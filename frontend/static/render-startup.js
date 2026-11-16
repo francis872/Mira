@@ -9,7 +9,7 @@
     const timer = setTimeout(() => controller.abort(), 45000);
     fetch(target.href, {
         method: 'GET', mode: 'no-cors', credentials: 'omit',
-        redirect: 'error', cache: 'no-store', referrerPolicy: 'no-referrer',
+        redirect: 'follow', cache: 'no-store', referrerPolicy: 'no-referrer',
         signal: controller.signal,
     }).catch(() => {}).finally(() => clearTimeout(timer));
 })();
