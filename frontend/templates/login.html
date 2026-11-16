@@ -6,6 +6,7 @@
     <title>Acceso institucional — SAPIENS</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{ url_for('static', filename='mira.css') }}">
+    {% if api_startup_health_url %}<script src="{{ url_for('static', filename='render-startup.js') }}" data-api-health-url="{{ api_startup_health_url }}" defer></script>{% endif %}
 </head>
 <body class="login-page">
     <main class="login-shell">

@@ -4,7 +4,7 @@ import secrets
 import time
 import requests
 from markupsafe import Markup
-from urllib.parse import quote, urljoin
+from urllib.parse import quote, urljoin, urlsplit
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from seguridad import configure_session, register_security, SesionVencida
 from login_protection import configure_login_protection, client_origin, LoginOriginAuth
@@ -92,8 +92,14 @@ def error_message(resp, default):
 def inject_globals():
     section = request.path.strip("/").split("/", 1)[0]
     current_catalog = next((catalog for catalog in CATALOGS if catalog["path"] == section), None)
+    startup_url = None
+    if app.config.get('LOGIN_PLATFORM') == 'render':
+        parsed = urlsplit(API_URL)
+        if parsed.scheme == 'https' and parsed.hostname and not (parsed.username or parsed.password or parsed.query or parsed.fragment):
+            startup_url = urljoin(API_URL + '/', '../health')
     return {"swagger_url": SWAGGER_URL, "current_catalog": current_catalog,
-            "ods_categories": ("Social", "Económica", "Ambiental")}
+            "ods_categories": ("Social", "Económica", "Ambiental"),
+            "api_startup_health_url": startup_url}
 
 
 @app.errorhandler(400)

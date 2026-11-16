@@ -153,3 +153,30 @@ def test_readiness_stays_unavailable_when_api_cannot_wake(client, monkeypatch, r
     monkeypatch.setattr(frontend.requests, 'request', lambda *args, **kwargs: FakeResponse(503))
     response = client.get('/ready')
     assert response.status_code == 503 and response.json == {'status': 'unavailable'}
+
+
+def test_render_login_page_can_activate_only_public_health_from_browser(client, monkeypatch, render_profile):
+    monkeypatch.setattr(frontend, 'API_URL', 'https://api.example.invalid/api')
+    page = client.get('/login').get_data(as_text=True)
+    assert 'src="/static/render-startup.js"' in page
+    assert 'data-api-health-url="https://api.example.invalid/health"' in page
+    assert 'data-api-health-url="https://api.example.invalid/api/auth/login"' not in page
+
+
+@pytest.mark.parametrize('url', [
+    'https://user:isolated-private-value@api.example.invalid/api',
+    'https://api.example.invalid/api?key=isolated-private-value',
+    'https://api.example.invalid/api#isolated-private-value',
+    'http://api.example.invalid/api',
+])
+def test_non_public_configuration_never_becomes_a_browser_startup_target(client, monkeypatch, render_profile, url):
+    monkeypatch.setattr(frontend, 'API_URL', url)
+    page = client.get('/login').get_data(as_text=True)
+    assert 'render-startup.js' not in page and 'isolated-private-value' not in page
+
+
+@pytest.mark.parametrize('platform', ['vercel', None])
+def test_browser_startup_is_limited_to_render_profile(client, monkeypatch, platform):
+    monkeypatch.setitem(frontend.app.config, 'LOGIN_PLATFORM', platform)
+    monkeypatch.setattr(frontend, 'API_URL', 'https://api.example.invalid/api')
+    assert 'render-startup.js' not in client.get('/login').get_data(as_text=True)
