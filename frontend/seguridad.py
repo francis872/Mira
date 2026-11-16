@@ -73,7 +73,7 @@ def register_security(app, api_call, error_message):
 
     @app.before_request
     def protect_routes():
-        if request.endpoint in ("static", "login", "health", "ready") or request.endpoint is None:
+        if request.endpoint in ("static", "login", "registro", "health", "ready") or request.endpoint is None:
             return None
         if not session.get("token") or session.get("expires", 0) <= time.time():
             raise SesionVencida()
@@ -110,6 +110,21 @@ def register_security(app, api_call, error_message):
         return dict(current_user=user, can_write=bool(roles.intersection({"Administrador", "Coordinador"})),
                     can_delete="Administrador" in roles, is_admin="Administrador" in roles)
 
+    def finish_access(body, correo, registering=False):
+        try:
+            expires = datetime.fromisoformat(body["expiraEn"].replace("Z", "+00:00")).timestamp()
+            if expires <= time.time() or not isinstance(body["token"], str) or not body["token"] or not isinstance(body["usuario"], dict):
+                raise ValueError("Respuesta inválida")
+        except (ValueError, KeyError, TypeError):
+            return render_template("login.html", registering=registering, correo=correo, message="El servicio devolvió una respuesta inválida."), 502
+        session.clear()
+        # regenerate necesita una sesión no vacía para eliminar su identificador anterior.
+        session["token"] = body["token"]
+        session["user"] = body["usuario"]
+        session["expires"] = expires
+        app.session_interface.regenerate(session)
+        return redirect(url_for("index"))
+
     @app.route("/login", methods=["GET", "POST"])
     def login():
         if request.method in ("GET", "HEAD"):
@@ -120,20 +135,29 @@ def register_security(app, api_call, error_message):
             return render_template("login.html", correo=correo, message="El servicio no está disponible. Intente de nuevo."), 503
         if response.status_code != 200:
             return render_template("login.html", correo=correo, message=error_message(response, "No fue posible iniciar sesión.")), response.status_code
-        body = response.json()
-        try:
-            expires = datetime.fromisoformat(body["expiraEn"].replace("Z", "+00:00")).timestamp()
-            if expires <= time.time() or not isinstance(body["token"], str) or not isinstance(body["usuario"], dict):
-                raise ValueError("Respuesta inválida")
-        except (ValueError, KeyError, TypeError):
-            return render_template("login.html", correo=correo, message="El servicio devolvió una respuesta inválida."), 502
-        session.clear()
-        # regenerate necesita una sesión no vacía para eliminar su identificador anterior.
-        session["token"] = body["token"]
-        session["user"] = body["usuario"]
-        session["expires"] = expires
-        app.session_interface.regenerate(session)
-        return redirect(url_for("index"))
+        return finish_access(response.json(), correo)
+
+    @app.route("/registro", methods=["GET", "POST"])
+    def registro():
+        if request.method in ("GET", "HEAD"):
+            return render_template("login.html", registering=True)
+        correo = request.form.get("correo", "").strip()
+        password = request.form.get("password", "")
+        message = None
+        if password != request.form.get("confirm_password", ""):
+            message = "Las contraseñas no coinciden."
+        elif len(password) < 12 or len(password.encode("utf-8")) > 72:
+            message = "Use al menos 12 caracteres y como máximo 72 bytes UTF-8 para la contraseña."
+        if message:
+            return render_template("login.html", registering=True, correo=correo, message=message), 400
+        response = api_call("POST", "auth/registro", {"correo": correo, "password": password}, expect_list=False)
+        if response is None:
+            return render_template("login.html", registering=True, correo=correo,
+                                   message="No se pudo confirmar el registro. Intente iniciar sesión antes de crear la cuenta nuevamente."), 503
+        if response.status_code != 201:
+            message = "Ese correo ya tiene una cuenta. Puedes iniciar sesión." if response.status_code == 409 else error_message(response, "No fue posible crear la cuenta.")
+            return render_template("login.html", registering=True, correo=correo, message=message), response.status_code
+        return finish_access(response.json(), correo, registering=True)
 
     @app.post("/logout")
     def logout():

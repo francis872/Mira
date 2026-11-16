@@ -54,6 +54,21 @@ public sealed class AuthService(ICuentaRepository repository, PasswordService pa
         if (!verified || user is null || !user.Activo || !user.Roles.Intersect(RolesPermitidos).Any()) return null;
         return await GenerarJwt(user);
     }
+    public async Task<SesionRespuesta> Registrar(RegistroRequest request)
+    {
+        var correo = request.Correo.Trim().ToLowerInvariant();
+        var roles = await repository.Roles();
+        var investigador = roles.AsArray().SingleOrDefault(role => role?["nombre"]?.GetValue<string>() == "Investigador");
+        if (investigador?["id"]?.GetValue<int>() is not > 0)
+            throw new SeguridadValidationException("El registro no está disponible en este momento. Intente más tarde.");
+        // La rutina existente crea usuario y rol de forma atómica; una cuenta existente
+        // produce conflicto y nunca se sobrescribe ni se reactiva durante el registro.
+        await repository.Crear(correo, passwords.Hash(request.Password), [investigador["id"]!.GetValue<int>()]);
+        var user = await repository.Buscar(correo);
+        if (user is not { Activo: true } || !user.Roles.Contains("Investigador"))
+            throw new SeguridadValidationException("No fue posible completar el acceso. Intente iniciar sesión.");
+        return await GenerarJwt(user);
+    }
     public async Task<SesionRespuesta> GenerarJwt(Credencial user)
     {
         var now = DateTimeOffset.UtcNow;

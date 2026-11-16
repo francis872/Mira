@@ -1,10 +1,17 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MIRA.Api.Modelos;
 
 public sealed record LoginRequest(
     [Required, EmailAddress, MaxLength(254)] string Correo,
     [Required, MaxLength(128)] string Password);
+
+// El registro público nunca recibe roles, estado ni identificadores del cliente.
+[JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
+public sealed record RegistroRequest(
+    [Required, EmailAddress, MaxLength(254)] string Correo,
+    [Required, MinLength(12), MaxLength(128)] string Password);
 
 public sealed record CrearCuentaRequest(
     [Required, EmailAddress, MaxLength(254)] string Correo,

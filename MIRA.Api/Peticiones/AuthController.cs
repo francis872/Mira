@@ -20,6 +20,13 @@ public sealed class AuthController(AuthService service) : ControllerBase
         var result = await service.Login(request);
         return result is null ? Unauthorized(new { mensaje="Correo o contraseña incorrectos, o cuenta no disponible." }) : Ok(result);
     }
+    [HttpPost("registro"), AllowAnonymous, EnableRateLimiting("login")]
+    [ProducesResponseType<SesionRespuesta>(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+    public async Task<IActionResult> Registrar(RegistroRequest request) =>
+        StatusCode(StatusCodes.Status201Created, await service.Registrar(request));
     [HttpGet("me")]
     public IActionResult Me() => Ok(new { id=long.Parse(User.FindFirstValue("sub")!), correo=User.FindFirstValue("email"), roles=User.FindAll("role").Select(c => c.Value) });
     [HttpPost("logout")]

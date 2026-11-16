@@ -155,10 +155,11 @@ def _wake_render_api(deadline):
 def api_call(method, path, json_data=None, expect_list=None):
     """Función auxiliar para realizar llamadas seguras a la API REST."""
     url = f"{API_URL}/{path.lstrip('/')}"
-    login_auth = {'allow_redirects': False} if method == 'POST' and path == 'auth/login' else {}
+    credential_request = method == 'POST' and path in ('auth/login', 'auth/registro')
+    login_auth = {'allow_redirects': False} if credential_request else {}
     timeout = 8
-    render_login = method == 'POST' and path == 'auth/login' and app.config.get('LOGIN_PLATFORM') == 'render'
-    if method == 'POST' and path == 'auth/login' and app.config['LOGIN_FORWARDING_KEY']:
+    render_login = credential_request and app.config.get('LOGIN_PLATFORM') == 'render'
+    if credential_request and app.config['LOGIN_FORWARDING_KEY']:
         origin = client_origin(app.config['LOGIN_TRUSTED_PROXY_NETWORKS'])
         if app.config.get('LOGIN_PLATFORM') in ('vercel', 'render') and origin is None:
             return None
@@ -184,7 +185,7 @@ def api_call(method, path, json_data=None, expect_list=None):
         )
     except requests.exceptions.RequestException as error:
         app.logger.warning('api_request_failed operation=%s type=%s',
-            'login' if path == 'auth/login' else 'readiness' if path == '../ready' else 'data', type(error).__name__)
+            'login' if path == 'auth/login' else 'registration' if path == 'auth/registro' else 'readiness' if path == '../ready' else 'data', type(error).__name__)
         return None
     if response.status_code in (401, 403):
         try:
@@ -194,7 +195,7 @@ def api_call(method, path, json_data=None, expect_list=None):
             return None
         if not isinstance(error_body, dict):
             return None
-    if response.status_code == 401 and path != "auth/login":
+    if response.status_code == 401 and path not in ("auth/login", "auth/registro"):
         session.clear()
         raise SesionVencida()
     if response.status_code == 403:
