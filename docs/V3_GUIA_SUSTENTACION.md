@@ -1,5 +1,33 @@
 # Guía de sustentación MIRA V3
 
+## Recorrido actualizado tras recuperación funcional — 2026-11-23
+
+Usar [el informe A–L](SAPIENS_RECUPERACION_FUNCIONAL_2026-11-23.md), la [matriz](SAPIENS_REGRESION_FUNCIONAL.md) y la [evidencia](evidencias/functional-20261123/verificacion.json) para distinguir defectos comprobados, permisos correctos y pendientes. La cuenta institucional sigue siendo Investigador; no prometer edición con ese perfil.
+
+| Tiempo | Demostración y evidencia |
+|---|---|
+| 0–1 min | Abrir la URL oficial y acceder con la cuenta institucional. Registro público cerrado; contraseña siempre privada. |
+| 1–3 min | Investigación → Sedes → Ver registros → Ver detalles. Mostrar nombre, ciudad, código y grupos asociados; explicar los avisos de datos pendientes de validación sin borrar ni sustituirlos. |
+| 3–5 min | Abrir el grupo desde su sede; recorrer semilleros, integrantes y líneas. Mostrar enlaces descriptivos y estado histórico cuando corresponda. |
+| 5–7 min | En la **copia aislada**, usar Coordinador para crear/editar un registro marcado. Contrastar persistencia y regreso a la ficha. Mostrar que retirar requiere Administrador y que omitir hijos/vínculos se rechaza sin guardar cambios parciales. Nunca hacer esa prueba sobre datos académicos públicos. |
+| 7–8 min | Articulación e integrantes: filtrar, buscar y exportar. Explicar que la exportación contiene todos los resultados filtrados, no solo la página visible. |
+| 8–9 min | Mostrar `InvestigacionRepository.GuardarFicha/Actualizar`, el bloqueo del maestro y la transacción. Contrastar con `FunctionalRecoveryTests` y los 69 recorridos reales del navegador. |
+| 9–10 min | Estado real de despliegue, 511 registros preservados, matriz de 205 funciones y pendientes C06/revisión/datos. No declarar disponibilidad institucional continua por usar Free. |
+
+Preguntas técnicas para preparar:
+
+- **¿El rediseño borró el CRUD?** La comparación de las rutas, plantillas, servicio, SQL y política entre `da90f3a` y `250b461` está vacía. La cuenta de consulta explica la falta de escritura; la ausencia de detalles y los retiros indirectos sí fueron defectos comprobados y corregidos.
+- **¿Por qué un botón no basta para recuperar permisos?** Flask y ASP.NET validan la operación. La retirada de un hijo por PUT también exige autorización aunque no use DELETE. El permiso se toma de `User.IsInRole`, nunca de un campo enviado por el navegador.
+- **¿Cómo se evita guardar media ficha?** Se bloquea el maestro y se comprueban omisiones dentro de la misma transacción que invoca la rutina; un error o denegación revierte todos los cambios. Las pruebas contrastan el contenido antes/después.
+- **¿Se corrigieron los datos `BROWSER` renombrándolos?** No. Se preservan, se documenta su coincidencia con fixtures/importación y se señalan para validación. La atribución exacta de actor no se inventa; la depuración requiere decisión sobre IDs y dependencias.
+- **¿Existe CRUD de proyectos?** No en el inventario actual. No se añadió un módulo ficticio para satisfacer una etiqueta del pie; el texto se ajustó al alcance real.
+- **¿Qué demuestra la prueba de navegador?** Formularios y enlaces reales → Flask → API → PostgreSQL → interfaz, con verificación independiente de persistencia. El zoom y las capturas acreditan presentación, no sustituyen ese recorrido.
+- **¿Está resuelto C06 o aprobado el PR?** No. No hay decisión docente escrita; PR #7 permanece Draft y sin revisión formal. Actions está excluido por instrucción del propietario, sin convertir ejecuciones bloqueadas en aprobadas.
+
+El ensayo requiere preparar y comprobar el entorno local con antelación. La infraestructura Free puede despertar lentamente; esta intervención no repitió una prueba completa de suspensión de quince minutos ni certifica continuidad de servicio.
+
+---
+
 > **Actualización institucional del 23 de noviembre de 2026:** abrir exactamente [sapiens-usb.onrender.com/login](https://sapiens-usb.onrender.com/login). Ya no se demuestra registro público: se accede con una cuenta previamente autorizada. `AuthService.ProvisionarInstitucional` verifica o crea explícitamente desde el operador; el arranque normal no restablece credenciales. [Guía administrativa](SAPIENS_ADMINISTRACION.md), [informe de esta actualización](SAPIENS_INSTITUTIONAL_2026-11-23.md). La cuenta docente conserva Investigador y no recibe Administrador.
 
 > Antecedente del 2026-11-16, con registro público ya retirado: [**sapiens-usb.onrender.com**](https://sapiens-usb.onrender.com). Mostrar las pestañas **Iniciar sesión / Crear cuenta**, el diseño oscuro y una cuenta propia de demostración. El registro guarda bcrypt y asigna Investigador; no acredita afiliación institucional ni verifica el correo. [Evidencia nueva](evidencias/acceso-20261116/verificacion.json). Las comprobaciones de registro/roles/duplicados y la prueba PostgreSQL están en `tests/MIRA.Api.Tests/RegistroTests.cs`; CSRF y sesión web en `frontend/tests/test_registro.py`.

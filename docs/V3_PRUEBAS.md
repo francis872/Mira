@@ -1,5 +1,19 @@
 # Pruebas MIRA V3 — cierre de estabilización
 
+## Recuperación funcional — 2026-11-23
+
+La revisión posterior a Institutional Edition está documentada en [el informe A–L](SAPIENS_RECUPERACION_FUNCIONAL_2026-11-23.md), la [matriz de 205 funciones](SAPIENS_REGRESION_FUNCIONAL.md) y la [evidencia saneada](evidencias/functional-20261123/verificacion.json). Estos resultados distinguen la prueba funcional de una respuesta HTTP o captura visual.
+
+- **157 .NET**, **214 Flask** y **51 HTTP E2E** aprobadas contra PostgreSQL local restaurado, sin omisiones en las pasadas integradas finales.
+- **69 recorridos reales de Edge**, repetidos con el [verificador versionado](../scripts/functional-recovery/README.md): seis catálogos, once recursos, cinco puentes, ficha de grupo, reportes/exportaciones y cuentas. Crear/editar con Coordinador, consultar con Investigador y retirar fixtures con Administrador; cada escritura se contrasta con PostgreSQL y la interfaz.
+- Se comprueba el rechazo 403 de omisiones de semilleros y disciplinas/ODS sin derecho de retiro, con datos del maestro y dependientes intactos; Admin conserva la operación. Se mantienen pruebas de rollback de hijos ajenos y contratos V1/V2.
+- 35 combinaciones responsive, zoom real 200 %, cuatro rutas sin incidencias axe, paginación/recarga, estado sin coincidencias y validación de formularios requeridos. Revisión humana asistiva y dispositivos físicos pendientes.
+- Respaldo compatible verificado antes de restaurar 25 tablas/511 filas; **ningún CRUD académico de prueba en producción**. Las comprobaciones remotas son de consulta, permisos, configuración, continuidad de sesión y comparación de contenido. El estado real de los despliegues y sus IDs se registra en la evidencia; un commit en GitHub no acredita publicación por sí solo.
+
+Los intentos iniciales fallidos y su causa constan en el informe; no se sustituyen por un aprobado retrospectivo. La pasada sin configuración PostgreSQL omitió cinco pruebas; la pasada final las ejecutó. Otro intento con PostgreSQL encontró ACL de un temporal antiguo de Windows y se repitió con un temporal nuevo propio. No se cambió la seguridad de carpetas existentes.
+
+---
+
 ## Acceso institucional — 23 de noviembre de 2026
 
 La política vigente es aprovisionamiento administrativo y ausencia de registro público. [Informe de diagnóstico, pruebas y despliegue](SAPIENS_INSTITUTIONAL_2026-11-23.md), [administración](SAPIENS_ADMINISTRACION.md). Las secciones anteriores en el tiempo conservan sus resultados y no describen la política vigente.
