@@ -2,6 +2,7 @@
 from io import BytesIO
 from pathlib import Path
 from urllib.parse import urlencode
+import unicodedata
 from xml.sax.saxutils import escape
 from flask import Blueprint, render_template, request, send_file
 from openpyxl import Workbook
@@ -33,6 +34,12 @@ def display(value):
 
 def cells(rows,columns):
     return [[display(row.get(key)) for key,_ in columns] for row in rows]
+
+
+def searched(rows,columns):
+    def normalize(value):return ''.join(c for c in unicodedata.normalize('NFD',value).casefold() if not unicodedata.combining(c))
+    term=normalize(request.args.get('q','').strip())
+    return [row for row in rows if term in normalize(' '.join(display(row.get(key)) for key,_ in columns))] if term else rows
 
 
 def excel(rows,columns,title):
@@ -85,11 +92,12 @@ def register_reports(app,api_call,error_message):
             return None,(render_template('error.html',status=response.status_code,message=error_message(response,'No fue posible consultar el reporte.')),response.status_code)
         return response.json(),None
 
-    def articulation():
-        if set(request.args)-{'sede_id','linea_id'}:
+    def articulation(apply_search=False):
+        if set(request.args)-{'sede_id','linea_id','q','page'}:
             return None,(render_template('error.html',status=400,message='El filtro solicitado no está definido para este reporte.'),400)
         query=urlencode({api:request.args[web] for web,api in [('sede_id','sedeId'),('linea_id','lineaId')] if request.args.get(web)})
-        return call('articulacion'+('?' + query if query else ''),listed=True)
+        rows,error=call('articulacion'+('?' + query if query else ''),listed=True)
+        return (None,error) if error else (searched(rows,ARTICULATION_COLUMNS) if apply_search else rows,None)
 
     @bp.get('')
     def index():
@@ -101,12 +109,15 @@ def register_reports(app,api_call,error_message):
 
     @bp.get('/articulacion.xlsx')
     def articulation_excel():
-        rows,error=articulation()
+        rows,error=articulation(apply_search=True)
         if error:return error
         return send_file(excel(rows,ARTICULATION_COLUMNS,'Articulacion'),mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',as_attachment=True,download_name='articulacion-academica.xlsx')
 
-    def members(grupo_id):
-        return call('integrantes/'+str(grupo_id))
+    def members(grupo_id,apply_search=False):
+        data,error=call('integrantes/'+str(grupo_id))
+        if error:return None,error
+        if apply_search: data['integrantes']=searched(data['integrantes'],MEMBER_COLUMNS)
+        return data,None
 
     @bp.get('/grupos/<int:grupo_id>/integrantes')
     def member_list(grupo_id):
@@ -116,13 +127,13 @@ def register_reports(app,api_call,error_message):
 
     @bp.get('/grupos/<int:grupo_id>/integrantes.xlsx')
     def member_excel(grupo_id):
-        data,error=members(grupo_id)
+        data,error=members(grupo_id,apply_search=True)
         if error:return error
         return send_file(excel(data['integrantes'],MEMBER_COLUMNS,'Integrantes'),mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',as_attachment=True,download_name=f'integrantes-grupo-{grupo_id}.xlsx')
 
     @bp.get('/grupos/<int:grupo_id>/integrantes.pdf')
     def member_pdf(grupo_id):
-        data,error=members(grupo_id)
+        data,error=members(grupo_id,apply_search=True)
         if error:return error
         return send_file(pdf_members(data['integrantes'],'Integrantes · '+data['grupo']['nombre']),mimetype='application/pdf',as_attachment=True,download_name=f'integrantes-grupo-{grupo_id}.pdf')
 

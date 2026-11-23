@@ -7,6 +7,7 @@ from markupsafe import Markup
 from urllib.parse import quote, urljoin, urlsplit
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from seguridad import configure_session, register_security, SesionVencida
+from presentacion import return_input
 from login_protection import configure_login_protection, client_origin, LoginOriginAuth
 from observabilidad import configure_observability
 
@@ -60,7 +61,7 @@ def _csrf_token():
 
 app.jinja_env.globals["csrf_input"] = lambda: Markup(
     f'<input type="hidden" name="csrf_token" value="{_csrf_token()}">'
-)
+) + return_input()
 
 
 def _headers():
@@ -215,9 +216,17 @@ def api_call(method, path, json_data=None, expect_list=None):
 
 def list_items(resp):
     if resp is None or resp.status_code != 200:
-        flash("No fue posible cargar los datos. La información no está disponible; intente de nuevo.", "danger")
-        return []
+        raise CatalogUnavailable(resp.status_code if resp is not None else 503)
     return resp.json()
+
+
+class CatalogUnavailable(Exception):
+    def __init__(self,status): self.status=status
+
+
+@app.errorhandler(CatalogUnavailable)
+def catalog_unavailable(error):
+    return render_template('error.html',status=error.status,message='No fue posible cargar el catálogo. Sus registros no se han eliminado. Recargue la página para intentarlo de nuevo.'),error.status
 
 # =============================================================================
 # Dashboard Principal
@@ -621,6 +630,8 @@ register_investigacion(app, api_call, error_message)
 from reportes import register_reports
 register_reports(app, api_call, error_message)
 register_security(app, api_call, error_message)
+from consultas import register_consultas
+register_consultas(app, api_call, error_message)
 
 if __name__ == "__main__":
     if os.getenv("MIRA_ENV") == "production":

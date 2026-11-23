@@ -1,6 +1,7 @@
 """Forms for the confirmed research model. All foreign keys use real API options."""
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for, jsonify, session
 from urllib.parse import urlencode
+from presentacion import reference_maps
 
 
 def field(name, label, kind='text', maximum=None, optional=False, source=None, options=None, multiple=False):
@@ -82,6 +83,8 @@ def register_investigacion(app, api_call, error_message):
         return data
 
     def render_form(resource, spec, item=None, status=200):
+        if item is None:
+            item={f['name']:request.args.getlist(f['name']) if f['multiple'] else request.args[f['name']] for f in spec['fields'] if f['source'] and f['name'] in request.args}
         options, loaded = options_for(spec)
         summary, summary_ok = (None, True)
         if resource == 'semilleros' and item and item.get('id'):
@@ -122,6 +125,9 @@ def register_investigacion(app, api_call, error_message):
         rows, loaded = load('semilleros/buscar?'+query if query else resource)
         options, references_ok = options_for(spec)
         maps = {key: dict(values) for key,values in options.items()}
+        refs=call('GET','referencias/catalogos')
+        references=refs.json() if refs is not None and refs.status_code==200 else None
+        if isinstance(references,dict): maps.update(reference_maps(spec,references))
         teachers, teachers_ok = load('docentes') if resource == 'semilleros' else ([],True)
         return render_template('investigacion/list.html',resource=resource,spec=spec,items=rows,maps=maps,loaded=loaded and references_ok,page_title=spec['title'],filter_groups=options.get('grupo_id',[]),filter_teachers=[(row['id'],label(row)) for row in teachers],filter_group=group,filter_teacher=teacher,filters_loaded=references_ok and teachers_ok)
 
@@ -170,6 +176,8 @@ def register_investigacion(app, api_call, error_message):
     def group_form(record_id):
         spec = RESOURCES['grupos_investigacion']
         data = dict(grupo={},semilleros=[])
+        if not record_id and request.method=='GET':
+            data['grupo']={f['name']:request.args[f['name']] for f in spec['fields'] if f['source'] and f['name'] in request.args}
         status = 200
         if request.method == 'POST':
             names = request.form.getlist('detalle_nombre')
@@ -215,7 +223,7 @@ def register_investigacion(app, api_call, error_message):
     def associations(resource):
         spec = definition(resource,True)
         status = 200
-        data = {}
+        data = {f['name']:request.args.getlist(f['name']) if f['multiple'] else request.args[f['name']] for f in spec['fields'] if f['source'] and f['name'] in request.args}
         if request.method == 'POST':
             data = payload(spec)
             if resource in ('grupo_lineas','semillero_lineas'):
@@ -229,7 +237,10 @@ def register_investigacion(app, api_call, error_message):
             status = 400 if response is None else response.status_code
         options, loaded = options_for(spec)
         rows, rows_ok = load(resource)
-        return render_template('investigacion/asociaciones.html',resource=resource,spec=spec,item=data,items=rows,options=options,maps={key:dict(value) for key,value in options.items()},loaded=loaded and rows_ok,page_title=spec['title']),status
+        maps={key:dict(value) for key,value in options.items()}
+        refs=call('GET','referencias/catalogos')
+        if refs is not None and refs.status_code==200 and isinstance(refs.json(),dict): maps.update(reference_maps(spec,refs.json()))
+        return render_template('investigacion/asociaciones.html',resource=resource,spec=spec,item=data,items=rows,options=options,maps=maps,loaded=loaded and rows_ok,page_title=spec['title']),status
 
     @bp.post('/asociaciones/<resource>/retirar/<int:left>/<int:right>')
     def remove_association(resource,left,right):

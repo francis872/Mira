@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} · Detalles{% endblock %}
+{% block content %}
+<a href="{{ back_url }}" class="d-inline-block mb-3">Volver al listado</a>
+<div class="section-heading"><div><h1>{{ title }}</h1><p>Información del registro seleccionado.</p></div>{% if can_write and item.activo %}<a class="btn btn-primary" href="{{ edit_url }}">Editar</a>{% endif %}</div>
+{% if observacion_dato(catalog,item) %}<p class="alert alert-warning" role="status">{{ observacion_dato(catalog,item) }}</p>{% endif %}
+<section class="card card-custom"><div class="card-body p-4"><dl class="row mb-0">{% for name,label in fields %}<dt class="col-sm-4">{{ label }}</dt><dd class="col-sm-8 text-break">{{ item.get(name) if item.get(name) is not none and item.get(name) != '' else 'No registrado' }}</dd>{% endfor %}<dt class="col-sm-4">Estado</dt><dd class="col-sm-8">{{ 'Activo' if item.activo else 'Inactivo' }}</dd></dl></div></section>
+{% if can_delete and item.activo %}<button class="btn btn-outline-danger mt-3" type="button" data-bs-toggle="modal" data-bs-target="#retirar-detalle">Retirar registro</button>
+<div class="modal fade" id="retirar-detalle" tabindex="-1" aria-labelledby="titulo-retiro" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5" id="titulo-retiro">Confirmar retiro</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar confirmación"></button></div><div class="modal-body"><p>{{ item.get('nombre') or item.get('termino') or title }}</p><p>Se retirará el registro según las reglas existentes. Si hay una dependencia que lo impide, no se completará la operación.</p></div><div class="modal-footer"><button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button><form method="post" action="{{ remove_url }}">{{ csrf_input() }}<button type="submit" class="btn btn-danger">Confirmar retiro</button></form></div></div></div></div>{% endif %}
+{% endblock %}

@@ -18,7 +18,7 @@
         </h2>
         <p class="text-muted mb-0 small">Palabras clave estandarizadas en español e inglés con clave primaria textual</p>
     </div>
-    {% if can_write %}<a href="{{ url_for('termino_clave_new') }}" class="btn btn-warning text-dark">
+    {% if can_write %}<a href="{{ url_for('termino_clave_new',return_to=request.full_path.rstrip('?')) }}" class="btn btn-warning text-dark">
         {{ icon('circle-plus', 'me-1') }} Nuevo Término
     </a>{% endif %}
 </div>
@@ -31,7 +31,7 @@
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th class="ps-4">Término (Español / PK)</th>
+                        <th class="ps-4">Término en español</th>
                         <th>Equivalente en Inglés</th>
                         <th class="text-center" style="width: 120px;">Estado</th>
                         <th class="text-end pe-4" style="width: 180px;">Acciones</th>
@@ -59,12 +59,13 @@
                                 <span class="badge bg-secondary-subtle text-secondary px-2 py-1">Inactivo</span>
                             {% endif %}
                         </td>
-                        <td class="text-end pe-4">
-                            {% if can_write %}<a href="{{ url_for('termino_clave_edit', termino=item.termino) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
-                                {{ icon('edit', '') }}
+                        <td class="text-end pe-4" data-actions>
+                            <a class="btn btn-sm btn-outline-primary" data-detail-link href="{{ url_for('catalog_detail',catalog='termino_clave',record_key=item.termino,return_to=request.full_path.rstrip('?')) }}">Ver detalles</a>
+                            {% if can_write %}<a href="{{ url_for('termino_clave_edit', termino=item.termino,return_to=request.full_path.rstrip('?')) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
+                                {{ icon('edit', '') }} Editar
                             </a>{% endif %}
                             {% if can_delete %}<button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ loop.index }}" title="Eliminar" aria-label="Retirar registro">
-                                {{ icon('trash', '') }}
+                                {{ icon('trash', '') }} Retirar
                             </button>{% endif %}
 
                             <!-- Modal de Confirmación de Borrado Lógico -->

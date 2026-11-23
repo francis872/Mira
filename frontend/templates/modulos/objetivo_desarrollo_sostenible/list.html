@@ -18,7 +18,7 @@
         </h2>
         <p class="text-muted mb-0 small">Metas e iniciativas de desarrollo global asociadas a los proyectos</p>
     </div>
-    {% if can_write %}<a href="{{ url_for('ods_new') }}" class="btn btn-success">
+    {% if can_write %}<a href="{{ url_for('ods_new',return_to=request.full_path.rstrip('?')) }}" class="btn btn-success">
         {{ icon('circle-plus', 'me-1') }} Nuevo ODS
     </a>{% endif %}
 </div>
@@ -42,7 +42,7 @@
                     {% for item in items %}
                     <tr>
                         <td class="ps-4 fw-bold text-secondary">#{{ item.id }}</td>
-                        <td class="fw-semibold">{{ item.nombre }}</td>
+                        <td class="fw-semibold">{{ item.nombre }}{% if observacion_dato('objetivo_desarrollo_sostenible',item) %}<span class="d-block small text-warning-emphasis">Pendiente de validación institucional</span>{% endif %}</td>
                         <td>
                             <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1">
                                 {{ item.categoria }}
@@ -57,12 +57,13 @@
                                 <span class="badge bg-secondary-subtle text-secondary px-2 py-1">Inactivo</span>
                             {% endif %}
                         </td>
-                        <td class="text-end pe-4">
-                            {% if can_write %}<a href="{{ url_for('ods_edit', id=item.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
-                                {{ icon('edit', '') }}
+                        <td class="text-end pe-4" data-actions>
+                            <a class="btn btn-sm btn-outline-primary" data-detail-link href="{{ url_for('catalog_detail',catalog='objetivo_desarrollo_sostenible',record_key=item.id,return_to=request.full_path.rstrip('?')) }}">Ver detalles</a>
+                            {% if can_write %}<a href="{{ url_for('ods_edit', id=item.id,return_to=request.full_path.rstrip('?')) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
+                                {{ icon('edit', '') }} Editar
                             </a>{% endif %}
                             {% if can_delete %}<button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ item.id }}" title="Eliminar" aria-label="Retirar registro">
-                                {{ icon('trash', '') }}
+                                {{ icon('trash', '') }} Retirar
                             </button>{% endif %}
 
                             <!-- Modal de Confirmación de Borrado Lógico -->

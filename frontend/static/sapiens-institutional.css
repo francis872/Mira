@@ -20,7 +20,7 @@ h1,h2,h3,h4,h5,h6,input,select,textarea,button { font-family:inherit; }
 .sidebar-label { font-size:.65rem; color:#bcbcbc; margin-top:32px; }
 .mira-sidebar .nav-link { font-size:.82rem; padding:12px; border-radius:7px; color:#ddd; transition:background-color .15s,color .15s; }
 .mira-sidebar .nav-link:hover { background:#303030; color:#fff; }
-.mira-sidebar .nav-link[aria-current="page"] { background:#f1f1f1; color:#171717; box-shadow:none; }
+.mira-sidebar .nav-link[aria-current="page"] { background:#f1f1f1; color:#171717; box-shadow:none; transition:none; }
 .mira-sidebar :focus-visible { outline-color:#ddd; }
 .sidebar-school { font-size:.72rem; color:#ddd; }
 .sidebar-school small { color:#bcbcbc; }
@@ -85,6 +85,11 @@ main.container { margin-top:30px !important; }
 .form-status { background:#efefef; border-color:#ccc; color:#333; }
 
 /* Acceso: tipografía, espacios y dos superficies; sin gráficos ni altas públicas. */
+.list-pagination { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:12px 0; font-size:.85rem; }
+.profile-notice { padding:12px 16px; border:1px solid #d6d6d6; border-radius:8px; background:#fff; color:#525252; font-size:.85rem; }
+td[data-actions] { min-width:160px; }
+td[data-actions] .btn { margin:2px; }
+dl dd { margin-bottom:18px; }
 .institutional-page { min-height:100svh; display:flex; flex-direction:column; background:#f7f7f7; padding:0 48px; }
 .access-header, .access-footer { width:min(1120px,100%); margin-inline:auto; display:flex; align-items:center; justify-content:space-between; gap:20px; }
 .access-header { padding:35px 0; }

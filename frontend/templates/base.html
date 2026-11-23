@@ -92,6 +92,7 @@
 
     <!-- Main Container -->
     <main class="container my-4" id="main-content" tabindex="-1">
+        {% if current_user.correo and not can_write %}<p class="profile-notice">Tu perfil permite consultar detalles, relaciones y reportes. La institución puede asignar un perfil de gestión cuando corresponda.</p>{% endif %}
         <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -116,7 +117,7 @@
     </main>
 
     <footer class="workspace-footer">
-        <span><strong>SAPIENS</strong> · Gestión de proyectos académicos</span>
+        <span><strong>SAPIENS</strong> · Gestión académica y de investigación</span>
         <span>Universidad de San Buenaventura Medellín</span>
     </footer>
     </div>

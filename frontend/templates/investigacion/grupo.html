@@ -2,7 +2,7 @@
 {% from 'includes/icons.html' import icon %}
 {% from 'investigacion/_campos.html' import campos %}
 {% macro fila(row={}) %}
-<tr data-detail-row><td><input type="hidden" name="detalle_id" value="{{ row.get('id','') }}"><input class="form-control" name="detalle_nombre" aria-label="Nombre del semillero" value="{{ row.get('nombre','') }}" maxlength="200" required></td><td><textarea class="form-control" name="detalle_descripcion" aria-label="Descripción del semillero" rows="2">{{ row.get('descripcion') or '' }}</textarea></td><td><button class="btn btn-outline-danger btn-sm" type="button" data-remove-detail>Retirar renglón</button></td></tr>
+<tr data-detail-row><td><input type="hidden" name="detalle_id" value="{{ row.get('id','') }}"><input class="form-control" name="detalle_nombre" aria-label="Nombre del semillero" value="{{ row.get('nombre','') }}" maxlength="200" required></td><td><textarea class="form-control" name="detalle_descripcion" aria-label="Descripción del semillero" rows="2">{{ row.get('descripcion') or '' }}</textarea></td><td>{% if can_delete or not row.get('id') %}<button class="btn btn-outline-danger btn-sm" type="button" data-remove-detail>{{ 'Retirar renglón' if row.get('id') else 'Quitar renglón nuevo' }}</button>{% else %}<span class="small text-muted">El retiro requiere Administración.</span>{% endif %}</td></tr>
 {% endmacro %}
 {% block title %}Ficha de grupo{% endblock %}
 {% block content %}

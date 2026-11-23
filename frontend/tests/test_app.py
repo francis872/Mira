@@ -200,8 +200,11 @@ def test_dashboard_handles_invalid_api_payload(client, calls, body):
 @pytest.mark.parametrize("path", CATALOG_ROUTES)
 def test_list_reports_http_failure(client, calls, path):
     calls.responses[("GET", path.lstrip("/"))] = FakeResponse(503, None)
-    html = client.get(path).get_data(as_text=True)
-    assert "No fue posible cargar los datos" in html
+    response = client.get(path)
+    html = response.get_data(as_text=True)
+    assert response.status_code == 503
+    assert "Sus registros no se han eliminado" in html
+    assert "catalog-no-results" not in html
 
 
 def test_non_json_api_error_preserves_form_values(client, calls):

@@ -18,7 +18,7 @@
         </h2>
         <p class="text-muted mb-0 small">Sectores y entornos de aplicación práctica de los resultados de investigación</p>
     </div>
-    {% if can_write %}<a href="{{ url_for('area_aplicacion_new') }}" class="btn btn-primary">
+    {% if can_write %}<a href="{{ url_for('area_aplicacion_new',return_to=request.full_path.rstrip('?')) }}" class="btn btn-primary">
         {{ icon('circle-plus', 'me-1') }} Nueva Área de Aplicación
     </a>{% endif %}
 </div>
@@ -51,12 +51,13 @@
                                 <span class="badge bg-secondary-subtle text-secondary px-2 py-1">Inactivo</span>
                             {% endif %}
                         </td>
-                        <td class="text-end pe-4">
-                            {% if can_write %}<a href="{{ url_for('area_aplicacion_edit', id=item.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
-                                {{ icon('edit', '') }}
+                        <td class="text-end pe-4" data-actions>
+                            <a class="btn btn-sm btn-outline-primary" data-detail-link href="{{ url_for('catalog_detail',catalog='area_aplicacion',record_key=item.id,return_to=request.full_path.rstrip('?')) }}">Ver detalles</a>
+                            {% if can_write %}<a href="{{ url_for('area_aplicacion_edit', id=item.id,return_to=request.full_path.rstrip('?')) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar" aria-label="Editar registro">
+                                {{ icon('edit', '') }} Editar
                             </a>{% endif %}
                             {% if can_delete %}<button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ item.id }}" title="Eliminar" aria-label="Retirar registro">
-                                {{ icon('trash', '') }}
+                                {{ icon('trash', '') }} Retirar
                             </button>{% endif %}
 
                             <!-- Modal de Confirmación de Borrado Lógico -->

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Cuentas de acceso{% endblock %}
 {% block content %}
-<div class="page-heading"><div><span class="section-eyebrow">ADMINISTRACIÓN</span><h1>Cuentas de acceso</h1><p>Identidades de acceso a MIRA y permisos institucionales.</p></div></div>
+<div class="page-heading"><div><span class="section-eyebrow">ADMINISTRACIÓN</span><h1>Cuentas de acceso</h1><p>Identidades de acceso a SAPIENS y permisos institucionales.</p></div></div>
 <details class="card card-custom mb-4"><summary class="p-3">Crear una cuenta</summary><form class="p-4" method="post">
     {{ csrf_input() }}
     <label for="correo" class="form-label">Correo electrónico</label><input id="correo" class="form-control mb-3" name="correo" type="email" maxlength="254" autocomplete="off" required>
@@ -21,7 +21,7 @@
         <details><summary>Restablecer contraseña</summary><form method="post" action="{{ url_for('password_usuario', id=user.id) }}" class="py-3">{{ csrf_input() }}
         <label for="password-{{ user.id }}">Nueva contraseña de {{ user.correo }}</label><input class="form-control" id="password-{{ user.id }}" name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required>
         <button class="btn btn-mira mt-2" type="submit">Restablecer y revocar sesiones</button></form></details>{% endif %}
-    </td><td>{{ 'Activa' if user.activo else 'Inactiva' }}</td><td>{% if user.activo %}<form method="post" action="{{ url_for('inactivar_usuario', id=user.id) }}">{{ csrf_input() }}<button class="btn btn-outline-danger" type="submit">Inactivar <span class="visually-hidden">{{ user.correo }}</span></button></form>{% endif %}</td></tr>
+    </td><td>{{ 'Activa' if user.activo else 'Inactiva' }}</td><td data-actions><details><summary>Ver detalles</summary><dl><dt>Correo</dt><dd>{{ user.correo }}</dd><dt>Estado</dt><dd>{{ 'Activa' if user.activo else 'Inactiva' }}</dd><dt>Permisos</dt><dd>{% for role in user.roles %}{{ role.nombre }}{{ ', ' if not loop.last }}{% endfor %}</dd></dl></details>{% if user.activo %}<form method="post" action="{{ url_for('inactivar_usuario', id=user.id) }}">{{ csrf_input() }}<button class="btn btn-outline-danger" type="submit">Inactivar <span class="visually-hidden">{{ user.correo }}</span></button></form>{% endif %}</td></tr>
     {% else %}<tr><td colspan="3" class="p-4">No hay cuentas registradas.</td></tr>{% endfor %}</tbody>
 </table></div></div>
 {% endblock %}

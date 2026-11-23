@@ -87,8 +87,11 @@ def register_security(app, api_call, error_message):
         roles = set(session["user"].get("roles", []))
         if request.path.startswith("/usuarios") and "Administrador" not in roles:
             abort(403)
-        writing = request.method != "GET" or any(part in request.path.split("/") for part in ("nuevo", "editar", "ficha"))
-        deleting = bool(set(request.path.split("/")).intersection({"eliminar", "retirar"}))
+        endpoint = request.endpoint or ''
+        # Autorizar la operación de la ruta, no palabras que pueden ser una PK
+        # legítima (p. ej., un término llamado «editar» en una consulta).
+        writing = request.method not in ("GET", "HEAD") or endpoint in ('investigacion.new','investigacion.edit') or endpoint.endswith(('_new','_edit'))
+        deleting = endpoint.endswith('_delete') or endpoint in ('investigacion.remove','investigacion.remove_association')
         if deleting and "Administrador" not in roles:
             abort(403)
         if writing and not roles.intersection({"Administrador", "Coordinador"}):
