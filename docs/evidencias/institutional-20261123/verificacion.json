@@ -1,0 +1,2199 @@
+{
+  "verifiedAtUtc": "2026-11-23T20:09:52.825838+00:00",
+  "userFacingDate": "2026-11-23",
+  "timezone": "America/Bogota",
+  "repository": "https://github.com/francis872/Mira",
+  "branch": "feature/mira-v3",
+  "applicationCommit": "250b46129ec46c9fa430e955441f33bfac9a07e9",
+  "officialUrl": "https://sapiens-usb.onrender.com/login",
+  "sameOfficialUrl": true,
+  "newProductionServicesOrDatabases": 0,
+  "newMigrations": 0,
+  "deployments": [
+    {
+      "kind": "api",
+      "service": "srv-dbr6i3dckfvc73dc3hr0",
+      "deploy": "dep-dc29m888v5cc73c0g900",
+      "source": "250b46129ec46c9fa430e955441f33bfac9a07e9",
+      "status": "live"
+    },
+    {
+      "kind": "web",
+      "service": "srv-dbtp70tckfvc7393jn5g",
+      "deploy": "dep-dc29nf5g1s2s73dq4mv0",
+      "source": "250b46129ec46c9fa430e955441f33bfac9a07e9",
+      "status": "live"
+    }
+  ],
+  "configuration": {
+    "atUtc": "2026-11-23T20:08:51.055830+00:00",
+    "services": [
+      {
+        "kind": "web",
+        "id": "srv-dbtp70tckfvc7393jn5g",
+        "name": "sapiens-usb",
+        "url": "https://sapiens-usb.onrender.com",
+        "plan": "free",
+        "sameIdentityNameRootAndUrl": true,
+        "originalEnvironmentUnchanged": true,
+        "onlyAddedKeys": [
+          "SAPIENS_INITIAL_EMAIL",
+          "SAPIENS_INITIAL_PASSWORD",
+          "SAPIENS_INITIAL_ROLE"
+        ],
+        "autoDeploy": "no"
+      },
+      {
+        "kind": "api",
+        "id": "srv-dbr6i3dckfvc73dc3hr0",
+        "name": "sapiens-api-v1-v3-20261112",
+        "url": "https://sapiens-api-v1-v3-20261112.onrender.com",
+        "plan": "free",
+        "sameIdentityNameRootAndUrl": true,
+        "originalEnvironmentUnchanged": true,
+        "onlyAddedKeys": [],
+        "autoDeploy": "no"
+      }
+    ]
+  },
+  "neonPlan": {
+    "plan": "free",
+    "sameExistingOrganization": true
+  },
+  "initialAccountAudit": {
+    "normalizedMatches": 1,
+    "active": true,
+    "bcryptShapeValid": true,
+    "roles": [
+      "Investigador"
+    ]
+  },
+  "credentialValidation": {
+    "exists": true,
+    "active": true,
+    "passwordMatchesExisting": true
+  },
+  "institutionalAccount": {
+    "email": "sapiens@gmail.com",
+    "role": "Investigador",
+    "existingAccountReused": true,
+    "passwordReset": false,
+    "globalAdministratorGranted": false,
+    "initialSecretConfiguredPrivately": true
+  },
+  "build": {
+    "configuration": "Release",
+    "solution": "MIRA.sln",
+    "passed": true
+  },
+  "tests": {
+    "dotnetWithIsolatedPostgres16": {
+      "total": "156",
+      "executed": "156",
+      "passed": "156",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "flaskWithPostgres": {
+      "tests": 182,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "httpE2EIsolated": {
+      "tests": 51,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "localBrowser": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-23T19:50:09.987Z",
+    "scope": "Edge viewport/touch emulation",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "legacy signup routes disabled",
+      "keyboard navigation with visible focus",
+      "duplicate submit prevented; processing announced",
+      "administrative login preserved",
+      "search and empty state preserved across reload",
+      "dialog focus and Escape close",
+      "logout",
+      "institutional login and non-administrative permissions"
+    ],
+    "consoleExceptions": 0,
+    "keyboard": [
+      {
+        "tag": "A",
+        "id": "",
+        "label": null,
+        "outline": "solid",
+        "fieldFocus": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "label": "SAPIENS, acceso institucional",
+        "outline": "solid",
+        "fieldFocus": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "correo",
+        "label": null,
+        "outline": "none",
+        "fieldFocus": true
+      },
+      {
+        "tag": "INPUT",
+        "id": "password",
+        "label": null,
+        "outline": "none",
+        "fieldFocus": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Mostrar contraseña",
+        "outline": "solid",
+        "fieldFocus": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "label": null,
+        "outline": "solid",
+        "fieldFocus": false
+      }
+    ],
+    "doubleSubmission": {
+      "seen": [
+        false,
+        true
+      ],
+      "busy": true,
+      "restored": true
+    },
+    "finishedAtUtc": "2026-11-23T19:50:25.223Z"
+  },
+  "publicBrowser": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-23T20:04:11.806Z",
+    "scope": "Edge viewport/touch emulation",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/docentes",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "width": 320,
+        "outerWidth": 320,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "width": 768,
+        "outerWidth": 768,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 1024,
+          "height": 900,
+          "mobile": false
+        },
+        "width": 1024,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1440,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "width": 390,
+        "outerWidth": 390,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "legacy signup routes disabled",
+      "keyboard navigation with visible focus",
+      "duplicate submit prevented; processing announced",
+      "administrative login preserved",
+      "search and empty state preserved across reload",
+      "dialog focus and Escape close",
+      "logout",
+      "institutional login and non-administrative permissions"
+    ],
+    "consoleExceptions": 0,
+    "keyboard": [
+      {
+        "tag": "A",
+        "id": "",
+        "label": null,
+        "outline": "solid",
+        "fieldFocus": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "label": "SAPIENS, acceso institucional",
+        "outline": "solid",
+        "fieldFocus": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "correo",
+        "label": null,
+        "outline": "none",
+        "fieldFocus": true
+      },
+      {
+        "tag": "INPUT",
+        "id": "password",
+        "label": null,
+        "outline": "none",
+        "fieldFocus": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Mostrar contraseña",
+        "outline": "solid",
+        "fieldFocus": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "label": null,
+        "outline": "solid",
+        "fieldFocus": false
+      }
+    ],
+    "doubleSubmission": {
+      "seen": [
+        false,
+        true
+      ],
+      "busy": true,
+      "restored": true
+    },
+    "finishedAtUtc": "2026-11-23T20:05:26.741Z"
+  },
+  "zoom100": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-23T19:50:27.115Z",
+    "scope": "Real Edge page zoom; no viewport or DPR override",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1416,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1416,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 1416,
+        "outerWidth": 1440,
+        "dpr": 1,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "administrative login preserved",
+      "logout",
+      "institutional login and non-administrative permissions"
+    ],
+    "consoleExceptions": 0,
+    "finishedAtUtc": "2026-11-23T19:50:30.548Z"
+  },
+  "zoom200": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-23T19:50:32.539Z",
+    "scope": "Real Edge page zoom; no viewport or DPR override",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 708,
+        "outerWidth": 1440,
+        "dpr": 2,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 708,
+        "outerWidth": 1440,
+        "dpr": 2,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "mobile": false
+        },
+        "width": 708,
+        "outerWidth": 1440,
+        "dpr": 2,
+        "visualScale": 1,
+        "overflow": false,
+        "theme": "light",
+        "background": "rgb(247, 247, 247)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "administrative login preserved",
+      "logout",
+      "institutional login and non-administrative permissions"
+    ],
+    "consoleExceptions": 0,
+    "finishedAtUtc": "2026-11-23T19:50:36.070Z"
+  },
+  "apiVerification": {
+    "status": "passed",
+    "atUtc": "2026-11-23T20:01:34.460191+00:00",
+    "checks": [
+      {
+        "name": "API ready",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "public API registro removed",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "public API register removed",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "public API signup removed",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "public API provision-institutional removed",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "anonymous account provisioning rejected",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      },
+      {
+        "name": "missing token rejected",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      },
+      {
+        "name": "wrong password rejected",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      },
+      {
+        "name": "institutional credentials accepted",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "academic catalog available",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "institutional user denied administration",
+        "expectedHttp": 403,
+        "actualHttp": 403,
+        "passed": true
+      },
+      {
+        "name": "logout revokes token",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "revoked token rejected",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      }
+    ],
+    "integrity": {
+      "academicTables": 25,
+      "academicRows": 511,
+      "allAcademicFingerprintsUnchanged": true,
+      "schemaMigrationsUnchanged": true,
+      "institutionalIdentityAndHashUnchanged": true
+    }
+  },
+  "webVerification": {
+    "status": "passed",
+    "atUtc": "2026-11-23T20:03:59.065297+00:00",
+    "checks": [
+      {
+        "name": "official web /health",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "official web /ready",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "official web /login",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "HEAD login remains public",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "legacy web /registro disabled",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "legacy web /register disabled",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "legacy web /signup disabled",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "same predeployment session still opens home",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "reader denied account management",
+        "expectedHttp": 403,
+        "actualHttp": 403,
+        "passed": true
+      },
+      {
+        "name": "reader denied academic writes",
+        "expectedHttp": 403,
+        "actualHttp": 403,
+        "passed": true
+      },
+      {
+        "name": "closed registration also rejects POST",
+        "expectedHttp": 404,
+        "actualHttp": 404,
+        "passed": true
+      },
+      {
+        "name": "existing session logout",
+        "expectedHttp": 302,
+        "actualHttp": 302,
+        "passed": true
+      },
+      {
+        "name": "protected home closed after logout",
+        "expectedHttp": 302,
+        "actualHttp": 302,
+        "passed": true
+      }
+    ],
+    "sameSessionCookiePreserved": true,
+    "integrity": {
+      "academicTables": 25,
+      "academicRows": 511,
+      "allAcademicFingerprintsUnchanged": true,
+      "schemaMigrationsUnchanged": true,
+      "institutionalIdentityAndHashUnchanged": true
+    }
+  },
+  "backup": {
+    "atUtc": "2026-11-23T19:52:35.402284+00:00",
+    "pgDumpVersion": "16.16",
+    "bytes": 181976,
+    "sha256": "80ce3aa07d4576a1bfbb46a8cd67f8f5e7617dacae55cdf9611c8241cdd4bb18",
+    "customArchiveListingVerified": true,
+    "restorationVerified": true,
+    "scope": "Full existing Neon database; private archive excluded from Git; no source mutation"
+  },
+  "recovery": {
+    "status": "passed",
+    "restoredTo": "Exclusive local PostgreSQL 16; production unchanged",
+    "academicTablesVerified": 25,
+    "academicRowsVerified": 511,
+    "allAcademicFingerprintsMatchAudit": true,
+    "institutionalAccountPreserved": true,
+    "archiveSha256": "80ce3aa07d4576a1bfbb46a8cd67f8f5e7617dacae55cdf9611c8241cdd4bb18"
+  },
+  "pythonAudit": {
+    "date": "2026-11-23",
+    "source": "https://api.osv.dev/v1/querybatch",
+    "python": "3.14.2",
+    "platform": "Windows",
+    "packages": [
+      {
+        "name": "blinker",
+        "version": "1.9.0",
+        "advisories": []
+      },
+      {
+        "name": "cachelib",
+        "version": "0.13.0",
+        "advisories": []
+      },
+      {
+        "name": "certifi",
+        "version": "2026.10.18",
+        "advisories": []
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.4.4",
+        "advisories": []
+      },
+      {
+        "name": "click",
+        "version": "8.5.0",
+        "advisories": []
+      },
+      {
+        "name": "et-xmlfile",
+        "version": "2.0.0",
+        "advisories": []
+      },
+      {
+        "name": "flask",
+        "version": "3.1.3",
+        "advisories": []
+      },
+      {
+        "name": "flask-session",
+        "version": "0.8.0",
+        "advisories": []
+      },
+      {
+        "name": "gunicorn",
+        "version": "26.2.0",
+        "advisories": []
+      },
+      {
+        "name": "idna",
+        "version": "3.15",
+        "advisories": []
+      },
+      {
+        "name": "itsdangerous",
+        "version": "2.2.0",
+        "advisories": []
+      },
+      {
+        "name": "jinja2",
+        "version": "3.1.6",
+        "advisories": []
+      },
+      {
+        "name": "markupsafe",
+        "version": "3.0.4",
+        "advisories": []
+      },
+      {
+        "name": "msgspec",
+        "version": "0.22.0",
+        "advisories": []
+      },
+      {
+        "name": "openpyxl",
+        "version": "3.1.5",
+        "advisories": []
+      },
+      {
+        "name": "packaging",
+        "version": "26.3",
+        "advisories": []
+      },
+      {
+        "name": "pillow",
+        "version": "13.0.0",
+        "advisories": []
+      },
+      {
+        "name": "psycopg",
+        "version": "3.3.9",
+        "advisories": []
+      },
+      {
+        "name": "psycopg-binary",
+        "version": "3.3.9",
+        "advisories": []
+      },
+      {
+        "name": "python-dotenv",
+        "version": "1.2.2",
+        "advisories": []
+      },
+      {
+        "name": "reportlab",
+        "version": "5.1.0",
+        "advisories": []
+      },
+      {
+        "name": "requests",
+        "version": "2.33.0",
+        "advisories": []
+      },
+      {
+        "name": "typing-extensions",
+        "version": "4.15.0",
+        "advisories": []
+      },
+      {
+        "name": "urllib3",
+        "version": "2.8.0",
+        "advisories": []
+      },
+      {
+        "name": "werkzeug",
+        "version": "3.1.9",
+        "advisories": []
+      }
+    ],
+    "status": "passed"
+  },
+  "secretScan": {
+    "atUtc": "2026-11-23T20:09:52.614030+00:00",
+    "files": 470,
+    "knownPrivateValuesCompared": 32,
+    "matches": [],
+    "emptyOrNonJsonOptionalPrivateSourcesSkipped": 1,
+    "privateDirectoryIgnored": true,
+    "scope": "tracked and nonignored working tree; known live/provider/recovery/local values; not full git history"
+  },
+  "traceability": [
+    {
+      "requirement": "No public signup",
+      "files": [
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "frontend/seguridad.py",
+        "frontend/templates/login.html"
+      ],
+      "implementation": "Removed anonymous registration route/action/service/DTO and public controls",
+      "tests": [
+        "InstitutionalAccessTests.PublicAndLegacyRegistrationEndpointsDoNotExist",
+        "test_institutional_access.test_public_and_legacy_registration_are_gone"
+      ],
+      "evidence": [
+        "apiVerification",
+        "webVerification"
+      ]
+    },
+    {
+      "requirement": "Authorized institutional provisioning without reset on restart",
+      "files": [
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs",
+        "MIRA.Api/Program.cs",
+        "scripts/provision-institutional.ps1"
+      ],
+      "methods": [
+        "AuthService.ProvisionarInstitucional",
+        "CuentaRepository.Buscar/Crear/Restablecer",
+        "--provision-institutional",
+        "--reset-institutional-password"
+      ],
+      "tests": [
+        "InstitutionalAccessTests.RepeatProvisioningPreservesIdentityHashRolesAndSessions",
+        "InstitutionalAccessTests.RealPostgresProvisioningIsIdempotentAndExplicitResetRevokesLogin"
+      ],
+      "evidence": [
+        "credentialValidation",
+        "apiVerification.integrity",
+        "webVerification.integrity"
+      ]
+    },
+    {
+      "requirement": "Existing login, role checks and logout preserved",
+      "files": [
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Configuracion/SeguridadConfiguration.cs",
+        "frontend/seguridad.py"
+      ],
+      "methods": [
+        "AuthController.Login/Crear/Logout",
+        "PasswordService.Hash/Verify",
+        "AuthService.ValidarSesion",
+        "protect_routes"
+      ],
+      "tests": [
+        "SeguridadTests",
+        "SeguridadDatabaseTests",
+        "frontend/tests/test_seguridad.py"
+      ],
+      "evidence": [
+        "apiVerification",
+        "webVerification"
+      ]
+    },
+    {
+      "requirement": "Institutional design and navigation",
+      "files": [
+        "frontend/templates/base.html",
+        "frontend/templates/login.html",
+        "frontend/static/sapiens-institutional.css",
+        "frontend/static/auth.js",
+        "frontend/static/mira.js"
+      ],
+      "implementation": "Monochrome surfaces, shared typography, responsive navigation, double-submit guard, loading, persistent search",
+      "evidence": [
+        "localBrowser",
+        "publicBrowser",
+        "zoom100",
+        "zoom200"
+      ]
+    },
+    {
+      "requirement": "Preserve V1/V2 and existing production data",
+      "files": [
+        "database/migrations",
+        "tests/MIRA.Api.Tests",
+        "frontend/tests/e2e"
+      ],
+      "implementation": "No schema migration or academic business rule changes; isolated regressions and read-only production comparison",
+      "evidence": [
+        "tests",
+        "apiVerification.integrity",
+        "webVerification.integrity",
+        "recovery"
+      ]
+    },
+    {
+      "requirement": "Same deployment and URL",
+      "files": [
+        "deploy/render-neon-free.yaml.example",
+        "docs/SAPIENS_ADMINISTRACION.md"
+      ],
+      "implementation": "Pinned commit on existing API and official web service; previous deployments retained; no Blueprint sync",
+      "evidence": [
+        "configuration",
+        "deployments",
+        "webVerification"
+      ]
+    }
+  ],
+  "review": {
+    "pullRequest": "https://github.com/francis872/Mira/pull/7",
+    "draft": true,
+    "merged": false,
+    "formalReviews": 0,
+    "actionsRequiredByUser": false,
+    "C06WrittenDecision": false
+  },
+  "preservedFailedAttempts": [
+    "Initial table action contrast failed axe; CSS corrected and browser pass repeated",
+    "Dialog test expected exact short close label; selector corrected to existing accessible control",
+    "pg_dump 16.15 archive could not restore internal pg_attver metadata; original attempt retained, fresh 16.16 archive restored without SQL filtering"
+  ],
+  "limitations": [
+    "No human screen-reader or physical-device validation; Safari/iOS, virtual keyboard and password managers pending",
+    "No repeat of complete fifteen-minute Render suspension drill in this update",
+    "Free infrastructure availability and capacity not certified for continuous institutional operations",
+    "Existing C06 and V2 academic decisions and formal PR review remain pending",
+    "Known-secret scan covers current working tree, not every historical Git object; OSV scope is pinned Python packages, not operating system/images"
+  ],
+  "screenshots": [
+    "login-escritorio.png",
+    "login-movil.png"
+  ]
+}

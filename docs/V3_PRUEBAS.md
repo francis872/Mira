@@ -1,6 +1,23 @@
 # Pruebas MIRA V3 — cierre de estabilización
 
-## Registro y diseño oscuro — 16 de noviembre de 2026
+## Acceso institucional — 23 de noviembre de 2026
+
+La política vigente es aprovisionamiento administrativo y ausencia de registro público. [Informe de diagnóstico, pruebas y despliegue](SAPIENS_INSTITUTIONAL_2026-11-23.md), [administración](SAPIENS_ADMINISTRACION.md). Las secciones anteriores en el tiempo conservan sus resultados y no describen la política vigente.
+
+- `.NET`: **156 aprobadas, cero fallidas u omitidas**, con PostgreSQL 16 aislado y las quince migraciones. Incluye ausencia de endpoints públicos, 401/403 para alta no autorizada, bcrypt, correo normalizado, roles existentes, repetición sin reemplazar hash, reset explícito y revocación. La corrida inicial sin base tuvo 74 aprobadas y 37 omitidas; se distingue de la integración.
+- `Flask`: **182 aprobadas**, sin fallos ni omisiones, usando su base local de sesiones. La corrida inicial sin base tuvo 177 aprobadas y cinco omitidas. Se conservan login/CSRF/SID y navegación académica; las rutas antiguas de registro no llaman a la API.
+- `E2E HTTP`: **51/51 aprobadas** en la instalación local desechable, incluyendo los seis catálogos, investigación, fichas, reportes y validaciones originales. No se ejecutaron escrituras académicas automatizadas sobre producción.
+- Edge: **35 combinaciones de siete vistas y cinco anchos** (320, 390, 768, 1024 y 1440), más dos muestras repetidas para capturas finales. Teclado, foco, doble envío, procesamiento, búsqueda persistida, estado vacío y diálogo con Escape comprobados. Escaneo axe 4.10.3 en escritorio sin infracciones ni `incomplete` tras corregir el contraste de botones en tablas. No equivale a validación con un lector de pantalla humano.
+- Zoom real de página en Edge: 100 % y 200 %, manteniendo ventana externa de 1440; viewport CSS 1416 → 708, DPR 1 → 2 y escala visual 1. Login, inicio y tabla no desbordaron. No se confundió zoom con emulación de viewport.
+- Compilación Release de `MIRA.sln` aprobada. No hay migraciones nuevas ni cambios de contratos académicos. El respaldo actualizado con `pg_dump` 16.16 se restauró exclusivamente en PostgreSQL local; las 25 tablas y 511 registros académicos coinciden con la auditoría, y se conservó la cuenta institucional.
+
+Los primeros intentos visuales detectaron contraste insuficiente y una expectativa demasiado específica del instrumento para el nombre del botón de cierre; se corrigió CSS y el selector de prueba, respectivamente. El primer respaldo obtenido con clientes 16.15 no restauró en el servidor local por metadatos internos `pg_attver` del origen actualizado: se conservaron ese intento y su archivo, se usó el cliente oficial 16.16 y se volvió a comprobar la restauración sin editar el dump ni modificar Neon.
+
+Reproducción: `dotnet test tests/MIRA.Api.Tests --no-restore` con `MIRA_TEST_DB` exclusivamente local/desechable; `python -m pytest frontend/tests --ignore=frontend/tests/e2e -q` con esa base o `MIRA_SESSION_TEST_DSN`; las sesiones exigen prefijo seguro `mira_audit_`/`mira_ci_`. Para E2E, definir las variables `MIRA_E2E_*` con credenciales aisladas. Nunca introducir la contraseña institucional real en código de test o argumentos de proceso.
+
+Pendientes manuales: lector de pantalla humano, Safari/iOS y dispositivos físicos, gestores de contraseñas/teclados virtuales. No se repitió el ensayo de suspensión de quince minutos ni se certifica disponibilidad continua de Render Free. La comprobación remota y sus versiones se registran en el informe institucional cuando terminen.
+
+## Antecedente: registro público y diseño oscuro — 16 de noviembre de 2026
 
 URL actual: [sapiens-usb.onrender.com](https://sapiens-usb.onrender.com). [Resultados verificables y capturas](evidencias/acceso-20261116/verificacion.json).
 

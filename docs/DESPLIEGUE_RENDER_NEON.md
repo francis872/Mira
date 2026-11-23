@@ -1,6 +1,14 @@
 # SAPIENS: despliegue completo en Render y Neon
 
-## Acceso vigente: registro propio y diseño oscuro — 16 de noviembre de 2026
+## Versión vigente — Institutional Edition, 23 de noviembre de 2026
+
+URL inalterada: **https://sapiens-usb.onrender.com/login**. Mismo servicio web `srv-dbtp70tckfvc7393jn5g` y misma base Neon. El propietario autorizó también actualizar la API existente para retirar realmente el registro público.
+
+API `dep-dc29m888v5cc73c0g900` y web `dep-dc29nf5g1s2s73dq4mv0`, ambas `live`, fuente **`250b46129ec46c9fa430e955441f33bfac9a07e9`**. No se crearon ni renombraron servicios/dominios/bases. Se conservaron las variables anteriores y se configuró únicamente la información inicial institucional privada en el frontend; la cuenta ya existente y su hash no se cambiaron. Los recursos y la organización Neon siguen Free.
+
+Cuenta institucional provisionada, registro público retirado, diseño monocromático y 26 comprobaciones HTTP remotas aprobadas. La misma sesión/cookie previa continuó funcionando; 25 tablas/511 registros académicos y migraciones coinciden antes/después. Respaldo nuevo restaurado en PostgreSQL local. [Informe completo, límites y versiones](SAPIENS_INSTITUTIONAL_2026-11-23.md), [operación y recuperación](SAPIENS_ADMINISTRACION.md), [evidencia](evidencias/institutional-20261123/verificacion.json).
+
+## Antecedente: registro propio y diseño oscuro — 16 de noviembre de 2026
 
 **[Abrir SAPIENS: sapiens-usb.onrender.com](https://sapiens-usb.onrender.com)**. Es un subdominio gratuito del proveedor; no se compró ni se afirma propiedad de un dominio raíz. Se creó el frontend `srv-dbtp70tckfvc7393jn5g` en el mismo espacio de Render, plan **Free**, región Virginia, Docker y una instancia. El cambio de nombre del frontend anterior no alteró su URL: se restauró su nombre y se conservó actualizado como respaldo.
 

@@ -1,4 +1,4 @@
-# Perfil comprobado el 2026-11-13: dos servicios Render Free y Neon externo.
+# Perfil institucional del 2026-11-23: servicios existentes y Neon externo.
 # Ejemplo de configuracion, no una orden de despliegue. No crea bases ni discos.
 # Conservar secretos existentes al importar; revisar antes de sincronizar.
 # Las dos claves de forwarding deben coincidir entre si y ser independientes
@@ -34,7 +34,7 @@ services:
       - key: Jwt__Minutes
         value: "20"
   - type: web
-    name: sapiens-web-v1-v3-20261113
+    name: sapiens-usb
     runtime: docker
     repo: https://github.com/francis872/Mira
     branch: feature/mira-v3
