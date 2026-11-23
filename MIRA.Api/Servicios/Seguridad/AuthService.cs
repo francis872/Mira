@@ -54,20 +54,38 @@ public sealed class AuthService(ICuentaRepository repository, PasswordService pa
         if (!verified || user is null || !user.Activo || !user.Roles.Intersect(RolesPermitidos).Any()) return null;
         return await GenerarJwt(user);
     }
-    public async Task<SesionRespuesta> Registrar(RegistroRequest request)
+    // Operación explícita del operador; no se expone por HTTP ni se ejecuta al arrancar.
+    public async Task<Cuenta> ProvisionarInstitucional(string correo, string password, string role, bool resetPassword = false)
     {
-        var correo = request.Correo.Trim().ToLowerInvariant();
+        correo = correo.Trim().ToLowerInvariant();
+        if (!new System.ComponentModel.DataAnnotations.EmailAddressAttribute().IsValid(correo) || correo.Length > 254)
+            throw new SeguridadValidationException("Correo institucional inválido.");
+        if (role is not ("Investigador" or "Coordinador"))
+            throw new SeguridadValidationException("Seleccione un rol institucional existente sin privilegios de administrador: Investigador o Coordinador.");
+        if (password.Length < 12 || Encoding.UTF8.GetByteCount(password) > 72)
+            throw new SeguridadValidationException("Configure la contraseña privada institucional: mínimo 12 caracteres y máximo 72 bytes UTF-8.");
+        var existing = await repository.Buscar(correo);
+        if (existing is not null)
+        {
+            if (!existing.Activo || existing.Roles.Contains("Administrador") || !existing.Roles.Contains(role))
+                throw new SeguridadValidationException("La cuenta existente requiere revisión administrativa de estado y roles; no se modificó.");
+            if (resetPassword)
+                await repository.Restablecer(existing.Id, passwords.Hash(password));
+            else if (!passwords.Verify(password, existing.PasswordHash))
+                throw new SeguridadValidationException("La contraseña configurada no coincide con la cuenta existente. Use un restablecimiento institucional explícito si corresponde.");
+            return new(existing.Id, existing.Correo, existing.Activo, existing.Roles);
+        }
+        if (resetPassword)
+            throw new SeguridadValidationException("No existe una cuenta institucional para restablecer.");
         var roles = await repository.Roles();
-        var investigador = roles.AsArray().SingleOrDefault(role => role?["nombre"]?.GetValue<string>() == "Investigador");
-        if (investigador?["id"]?.GetValue<int>() is not > 0)
-            throw new SeguridadValidationException("El registro no está disponible en este momento. Intente más tarde.");
-        // La rutina existente crea usuario y rol de forma atómica; una cuenta existente
-        // produce conflicto y nunca se sobrescribe ni se reactiva durante el registro.
-        await repository.Crear(correo, passwords.Hash(request.Password), [investigador["id"]!.GetValue<int>()]);
+        var institutionalRole = roles.AsArray().SingleOrDefault(item => item?["nombre"]?.GetValue<string>() == role);
+        if (institutionalRole?["id"]?.GetValue<int>() is not > 0)
+            throw new SeguridadValidationException("El rol institucional no está activo; no se creó la cuenta.");
+        await repository.Crear(correo, passwords.Hash(password), [institutionalRole["id"]!.GetValue<int>()]);
         var user = await repository.Buscar(correo);
-        if (user is not { Activo: true } || !user.Roles.Contains("Investigador"))
-            throw new SeguridadValidationException("No fue posible completar el acceso. Intente iniciar sesión.");
-        return await GenerarJwt(user);
+        if (user is not { Activo: true } || !user.Roles.Contains(role))
+            throw new SeguridadValidationException("No se pudo confirmar la cuenta institucional.");
+        return new(user.Id, user.Correo, user.Activo, user.Roles);
     }
     public async Task<SesionRespuesta> GenerarJwt(Credencial user)
     {

@@ -27,7 +27,7 @@ public sealed class CuentaRepository(IDbConnectionFactory factory) : ICuentaRepo
     public async Task<Credencial?> Buscar(string correo)
     {
         using var db = factory.CreateConnection();
-        return await db.QuerySingleOrDefaultAsync<Credencial>($"SELECT {Columns} FROM usuario u WHERE u.correo=@correo", new { correo });
+        return await db.QuerySingleOrDefaultAsync<Credencial>($"SELECT {Columns} FROM usuario u WHERE lower(btrim(u.correo))=@correo", new { correo=correo.Trim().ToLowerInvariant() });
     }
     public async Task<Credencial?> Sesion(string jti, long id)
     {

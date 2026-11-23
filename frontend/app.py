@@ -155,7 +155,7 @@ def _wake_render_api(deadline):
 def api_call(method, path, json_data=None, expect_list=None):
     """Función auxiliar para realizar llamadas seguras a la API REST."""
     url = f"{API_URL}/{path.lstrip('/')}"
-    credential_request = method == 'POST' and path in ('auth/login', 'auth/registro')
+    credential_request = method == 'POST' and path == 'auth/login'
     login_auth = {'allow_redirects': False} if credential_request else {}
     timeout = 8
     render_login = credential_request and app.config.get('LOGIN_PLATFORM') == 'render'
@@ -185,7 +185,7 @@ def api_call(method, path, json_data=None, expect_list=None):
         )
     except requests.exceptions.RequestException as error:
         app.logger.warning('api_request_failed operation=%s type=%s',
-            'login' if path == 'auth/login' else 'registration' if path == 'auth/registro' else 'readiness' if path == '../ready' else 'data', type(error).__name__)
+            'login' if path == 'auth/login' else 'readiness' if path == '../ready' else 'data', type(error).__name__)
         return None
     if response.status_code in (401, 403):
         try:
@@ -195,7 +195,7 @@ def api_call(method, path, json_data=None, expect_list=None):
             return None
         if not isinstance(error_body, dict):
             return None
-    if response.status_code == 401 and path not in ("auth/login", "auth/registro"):
+    if response.status_code == 401 and path != 'auth/login':
         session.clear()
         raise SesionVencida()
     if response.status_code == 403:

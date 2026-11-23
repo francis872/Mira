@@ -75,6 +75,28 @@ var app = builder.Build();
 _ = app.Services.GetRequiredService<LoginOriginSettings>();
 // Validación de configuración local, sin abrir conexión ni publicar credenciales.
 if (app.Environment.IsProduction()) _ = app.Services.GetRequiredService<IDbConnectionFactory>();
+if (args.Contains("--provision-institutional") || args.Contains("--reset-institutional-password"))
+{
+    if (args.Contains("--provision-institutional") && args.Contains("--reset-institutional-password"))
+        throw new InvalidOperationException("Seleccione solo una operación institucional.");
+    using var scope = app.Services.CreateScope();
+    var auth = scope.ServiceProvider.GetRequiredService<MIRA.Api.Servicios.Seguridad.AuthService>();
+    try
+    {
+        await auth.ProvisionarInstitucional(
+            Environment.GetEnvironmentVariable("SAPIENS_INITIAL_EMAIL") ?? "sapiens@gmail.com",
+            Environment.GetEnvironmentVariable("SAPIENS_INITIAL_PASSWORD") ?? "",
+            Environment.GetEnvironmentVariable("SAPIENS_INITIAL_ROLE") ?? "Investigador",
+            resetPassword:args.Contains("--reset-institutional-password"));
+        Console.WriteLine("Cuenta institucional verificada. No se muestran credenciales.");
+    }
+    catch (MIRA.Api.Servicios.Seguridad.SeguridadValidationException error)
+    {
+        Console.Error.WriteLine(error.Message);
+        Environment.ExitCode = 1;
+    }
+    return;
+}
 if (args.Contains("--bootstrap-admin") || args.Contains("--reset-admin-password"))
 {
     using var scope = app.Services.CreateScope();

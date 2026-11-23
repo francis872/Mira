@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const empty = document.getElementById("catalog-no-results");
     const body = document.querySelector("table tbody");
     if (search && body) {
+        search.value = new URL(window.location.href).searchParams.get("q") || "";
         const rows = Array.from(body.rows).filter(row => row.cells.length > 1);
         const normalize = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
         const filter = () => {
@@ -27,11 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
             summary.textContent = `${visible} de ${rows.length} registros visibles`;
             empty.hidden = rows.length === 0 || visible > 0;
         };
-        search.addEventListener("input", filter);
+        search.addEventListener("input", () => {
+            filter();
+            const url = new URL(window.location.href);
+            if (search.value.trim()) url.searchParams.set("q", search.value.trim());
+            else url.searchParams.delete("q");
+            window.history.replaceState(null, "", url);
+        });
         filter();
     }
 
-    document.querySelectorAll('form[method="POST"]').forEach(form => {
+    document.querySelectorAll('form[method]').forEach(form => {
+        if (form.method.toLowerCase() !== 'post') return;
         form.addEventListener("submit", event => {
             if (form.dataset.submitting === "true") { event.preventDefault(); return; }
             if (!form.checkValidity()) return;
