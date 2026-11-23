@@ -7,6 +7,7 @@ namespace MIRA.Api.Servicios;
 
 public sealed class ValidacionInvestigacionException(string mensaje) : Exception(mensaje);
 public sealed class RecursoInvestigacionNoEncontradoException() : Exception;
+public sealed class OperacionInvestigacionNoAutorizadaException(string mensaje) : Exception(mensaje);
 
 public sealed class InvestigacionService(InvestigacionRepository repository)
 {
@@ -83,10 +84,10 @@ public sealed class InvestigacionService(InvestigacionRepository repository)
         var recurso = Recurso(nombre);
         return repository.Crear(recurso,Validar(recurso,datos));
     }
-    public Task<JsonNode?> Actualizar(string nombre, int id, JsonNode? datos)
+    public Task<JsonNode?> Actualizar(string nombre, int id, JsonNode? datos, bool puedeRetirar=false)
     {
         var recurso = Recurso(nombre,false);
-        return repository.Actualizar(recurso,id,Validar(recurso,datos));
+        return repository.Actualizar(recurso,id,Validar(recurso,datos),puedeRetirar);
     }
     public Task<bool> Eliminar(string nombre, int id, int? derecha = null) => repository.Eliminar(Recurso(nombre,derecha.HasValue),id,derecha);
     public Task<JsonNode?> Usuarios() => repository.Usuarios();
@@ -113,6 +114,8 @@ public sealed class InvestigacionService(InvestigacionRepository repository)
         return repository.FiltrarSemilleros(grupo,docente);
     }
     public Task<JsonNode?> OpcionesReportes() => repository.OpcionesReportes();
+    public Task<JsonNode?> ReferenciasDescriptivas() => repository.ReferenciasDescriptivas();
+    public Task<JsonNode?> Detalle(string recurso,int id) => repository.Detalle(Recurso(recurso,false),id);
     public Task<JsonNode?> LineasInactivas() => repository.LineasInactivas();
     public Task<JsonNode?> EstadoLinea(int id,EstadoLineaRequest request)
     {
@@ -125,7 +128,7 @@ public sealed class InvestigacionService(InvestigacionRepository repository)
         if(sede is <=0 || linea is <=0) throw new ValidacionInvestigacionException("Seleccione referencias válidas para filtrar el reporte.");
         return repository.ReporteArticulacion(sede,linea);
     }
-    public Task<JsonNode?> GuardarFicha(int? id, JsonNode? entrada)
+    public Task<JsonNode?> GuardarFicha(int? id, JsonNode? entrada, bool puedeRetirar = false)
     {
         if (entrada is not JsonObject datos || datos["semilleros"] is not JsonArray detalles ||
             datos.Any(p => p.Key is not ("grupo" or "semilleros")))
@@ -151,6 +154,6 @@ public sealed class InvestigacionService(InvestigacionRepository repository)
             }
             filas.Add(validado);
         }
-        return repository.GuardarFicha(id,new JsonObject { ["grupo"]=grupo,["semilleros"]=filas });
+        return repository.GuardarFicha(id,new JsonObject { ["grupo"]=grupo,["semilleros"]=filas },puedeRetirar);
     }
 }

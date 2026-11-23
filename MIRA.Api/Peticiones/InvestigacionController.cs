@@ -15,6 +15,10 @@ public sealed class InvestigacionController(InvestigacionService service) : Cont
 
     [HttpGet("referencias/usuarios")]
     public async Task<IActionResult> Usuarios() => Ok(await service.Usuarios());
+    [HttpGet("referencias/catalogos")]
+    public async Task<IActionResult> ReferenciasDescriptivas() => Ok(await service.ReferenciasDescriptivas());
+    [HttpGet("{recurso}/{id:int:min(1)}/detalle")]
+    public async Task<IActionResult> Detalle(string recurso,int id) => Resultado(await service.Detalle(recurso,id));
     [HttpPost("asociaciones/{recurso}/asignar")]
     public async Task<IActionResult> AsignarLineas(string recurso,AsignarLineasRequest datos) =>
         StatusCode(StatusCodes.Status201Created,new {asociaciones=await service.AsignarLineas(recurso,datos)});
@@ -42,11 +46,11 @@ public sealed class InvestigacionController(InvestigacionService service) : Cont
     [HttpPost("grupos/ficha")]
     public async Task<IActionResult> CrearFicha([FromBody] JsonNode datos)
     {
-        var creado = await service.GuardarFicha(null,datos);
+        var creado = await service.GuardarFicha(null,datos,User.IsInRole("Administrador"));
         return CreatedAtAction(nameof(Ficha), new { id=creado!["grupo"]!["id"]!.GetValue<int>() }, creado);
     }
     [HttpPut("grupos/ficha/{id:int:min(1)}")]
-    public async Task<IActionResult> ActualizarFicha(int id, [FromBody] JsonNode datos) => Resultado(await service.GuardarFicha(id,datos));
+    public async Task<IActionResult> ActualizarFicha(int id, [FromBody] JsonNode datos) => Resultado(await service.GuardarFicha(id,datos,User.IsInRole("Administrador")));
 
     [HttpGet("{recurso}")]
     public async Task<IActionResult> Listar(string recurso) => Ok(await service.Listar(recurso));
@@ -64,7 +68,7 @@ public sealed class InvestigacionController(InvestigacionService service) : Cont
             : CreatedAtAction(nameof(Obtener),new { recurso, id=creado!["id"]!.GetValue<int>() },creado);
     }
     [HttpPut("{recurso}/{id:int:min(1)}")]
-    public async Task<IActionResult> Actualizar(string recurso, int id, [FromBody] JsonNode datos) => Resultado(await service.Actualizar(recurso,id,datos));
+    public async Task<IActionResult> Actualizar(string recurso, int id, [FromBody] JsonNode datos) => Resultado(await service.Actualizar(recurso,id,datos,User.IsInRole("Administrador")));
     [HttpDelete("{recurso}/{id:int:min(1)}")]
     public async Task<IActionResult> Eliminar(string recurso, int id) => await service.Eliminar(recurso,id)
         ? Ok(new { mensaje="Registro retirado correctamente." }) : NotFound(new { mensaje="Registro no encontrado o inactivo." });
