@@ -11,6 +11,8 @@ state=json.loads(config_file.read_text(encoding='utf-8'))
 from psycopg.conninfo import conninfo_to_dict
 connection=conninfo_to_dict(state['dsn'])
 assert connection.get('host')=='127.0.0.1' and connection.get('dbname','').startswith('mira_audit_functional_')
+assert connection.get('hostaddr') in (None,'127.0.0.1') and not connection.get('service')
+assert all(isinstance(state[key],int) and 1<=state[key]<=65535 for key in ('apiport','webport'))
 assert state['env']['API_URL']==f"http://127.0.0.1:{state['apiport']}/api"
 state['personaName']='RECUPERACION Persona '+secrets.token_hex(6)
 with psycopg.connect(state['dsn']) as db:state['persona']=db.execute("INSERT INTO usuarios(nombre,correo,password_hash) VALUES (%s,%s,'NO_ES_CREDENCIAL') RETURNING id",(state['personaName'],'recovery-'+secrets.token_hex(8)+'@invalid.test')).fetchone()[0]

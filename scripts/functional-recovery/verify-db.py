@@ -5,6 +5,7 @@ s=json.loads(Path(os.environ['SAPIENS_RECOVERY_RUNTIME']).read_text(encoding='ut
 from psycopg.conninfo import conninfo_to_dict
 connection=conninfo_to_dict(s['dsn'])
 assert connection.get('host')=='127.0.0.1' and connection.get('dbname','').startswith('mira_audit_functional_')
+assert connection.get('hostaddr') in (None,'127.0.0.1') and not connection.get('service')
 body=json.loads(sys.argv[1]);table=body['table'];where=body['where'];expected=body.get('expected',{});absent=body.get('absent',False)
 allowed={'usuario','area_conocimiento','objetivo_desarrollo_sostenible','area_aplicacion','termino_clave','universidad','linea_investigacion','sedes','docentes','grupos_investigacion','semilleros','lineas_investigacion','grupo_docentes','semillero_tutores','areas_conocimiento','ods','areas_aplicacion','palabras_clave','grupo_lineas','semillero_lineas','linea_disciplinas','linea_ods','linea_aplicacion'}
 assert table in allowed and where

@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 const R=pathToFileURL(path.resolve(process.env.SAPIENS_RECOVERY_OUTPUT)+path.sep),config=JSON.parse(await readFile(process.env.SAPIENS_RECOVERY_RUNTIME,'utf8'));
 const web='http://127.0.0.1:'+config.webport,marker='RECUPERACION-'+Date.now().toString(36),report={status:'running',startedAtUtc:new Date().toISOString(),isolatedDatabase:process.env.SAPIENS_RECOVERY_DATABASE,productionWrites:false,flows:[],visual:[],consoleExceptions:0};
 assert(web.startsWith('http://127.0.0.1:'));
+assert(Number.isInteger(config.webport)&&config.webport>0&&config.webport<=65535);
 const target=await(await fetch('http://127.0.0.1:'+process.env.SAPIENS_EDGE_PORT+'/json/new?about:blank',{method:'PUT'})).json();
 const ws=new WebSocket(target.webSocketDebuggerUrl);await new Promise((r,j)=>{ws.onopen=r;ws.onerror=j;});
 let seq=0;const pending=new Map();
