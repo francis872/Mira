@@ -16,54 +16,38 @@ public class ObjetivoDesarrolloSostenibleRepository : IObjetivoDesarrolloSosteni
     public async Task<IEnumerable<ObjetivoDesarrolloSostenible>> GetAllActivosAsync()
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            SELECT id, nombre, categoria, activo 
-            FROM objetivo_desarrollo_sostenible 
-            WHERE activo = TRUE 
-            ORDER BY id;";
+        const string sql = "SELECT * FROM public.sp_listar_objetivo_desarrollo_sostenible();";
         return await connection.QueryAsync<ObjetivoDesarrolloSostenible>(sql);
     }
 
     public async Task<ObjetivoDesarrolloSostenible?> GetByIdAsync(int id)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            SELECT id, nombre, categoria, activo 
-            FROM objetivo_desarrollo_sostenible 
-            WHERE id = @Id AND activo = TRUE;";
+        const string sql = "SELECT * FROM public.sp_consultar_objetivo_desarrollo_sostenible(@Id);";
         return await connection.QueryFirstOrDefaultAsync<ObjetivoDesarrolloSostenible>(sql, new { Id = id });
     }
 
     public async Task<ObjetivoDesarrolloSostenible> CreateAsync(ObjetivoDesarrolloSostenible entity)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            INSERT INTO objetivo_desarrollo_sostenible (nombre, categoria, activo) 
-            VALUES (@Nombre, @Categoria, @Activo) 
-            RETURNING id, nombre, categoria, activo;";
+        const string sql = "SELECT * FROM public.sp_crear_objetivo_desarrollo_sostenible(@Nombre, @Categoria);";
         return await connection.QuerySingleAsync<ObjetivoDesarrolloSostenible>(sql, entity);
     }
 
     public async Task<bool> UpdateAsync(ObjetivoDesarrolloSostenible entity)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            UPDATE objetivo_desarrollo_sostenible 
-            SET nombre = @Nombre, categoria = @Categoria 
-            WHERE id = @Id AND activo = TRUE;";
-        var affected = await connection.ExecuteAsync(sql, entity);
-        return affected > 0;
+        const string sql = "SELECT public.sp_actualizar_objetivo_desarrollo_sostenible(@Id, @Nombre, @Categoria);";
+        var affected = await connection.QuerySingleAsync<bool>(sql, entity);
+        return affected;
     }
 
     public async Task<bool> SoftDeleteAsync(int id)
     {
         using var connection = _connectionFactory.CreateConnection();
-        const string sql = @"
-            UPDATE objetivo_desarrollo_sostenible 
-            SET activo = FALSE 
-            WHERE id = @Id AND activo = TRUE;";
-        var affected = await connection.ExecuteAsync(sql, new { Id = id });
-        return affected > 0;
+        const string sql = "SELECT public.sp_eliminar_objetivo_desarrollo_sostenible(@Id);";
+        var affected = await connection.QuerySingleAsync<bool>(sql, new { Id = id });
+        return affected;
     }
 }
 

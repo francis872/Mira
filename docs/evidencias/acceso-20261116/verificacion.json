@@ -1,0 +1,1152 @@
+{
+  "verifiedAtUtc": "2026-11-16T23:46:24.781125+00:00",
+  "repository": "https://github.com/francis872/Mira",
+  "branch": "feature/mira-v3",
+  "applicationCommit": "5b91bf559012338cd2224ebe93dbcea706fbe179",
+  "visualContrastCommit": "541a4591aeb2837cdbdc4b3ec277876ca41d18ee",
+  "publicUrl": "https://sapiens-usb.onrender.com",
+  "deployments": [
+    {
+      "kind": "web",
+      "service": "srv-dbtp70tckfvc7393jn5g",
+      "deploy": "dep-dbtp90d6e07s73apshqg",
+      "status": "live",
+      "source": "541a4591aeb2837cdbdc4b3ec277876ca41d18ee"
+    },
+    {
+      "kind": "legacy-web",
+      "service": "srv-dbrijl0ae00c73fpf0mg",
+      "deploy": "dep-dbtp90h42hec73ajn8hg",
+      "status": "live",
+      "source": "541a4591aeb2837cdbdc4b3ec277876ca41d18ee"
+    },
+    {
+      "kind": "api",
+      "service": "srv-dbr6i3dckfvc73dc3hr0",
+      "deploy": "dep-dbtp6grl550s738uec6g",
+      "status": "live",
+      "source": "5b91bf559012338cd2224ebe93dbcea706fbe179"
+    }
+  ],
+  "tests": {
+    "dotnetWithIsolatedPostgres16": {
+      "total": "150",
+      "executed": "150",
+      "passed": "150",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "flask": {
+      "collected": 181,
+      "passed": 176,
+      "skipped": 5,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "localBrowser": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-16T23:32:32.879Z",
+    "scope": "Edge headless; emulated viewport and touch",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/login",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "kind": "small-mobile",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/registro",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "small-mobile",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "show/hide password",
+      "password confirmation validation",
+      "existing account login",
+      "logout",
+      "self registration and automatic session",
+      "registered account denied administration",
+      "login with self-created account"
+    ],
+    "consoleExceptions": 0,
+    "finishedAtUtc": "2026-11-16T23:32:43.594Z"
+  },
+  "publicBrowserFunctional": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-16T23:39:41.628Z",
+    "scope": "Edge headless; emulated viewport and touch",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/login",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "kind": "small-mobile",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/registro",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "small-mobile",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "show/hide password",
+      "password confirmation validation",
+      "existing account login",
+      "logout",
+      "self registration and automatic session",
+      "registered account denied administration",
+      "login with self-created account"
+    ],
+    "consoleExceptions": 0,
+    "finishedAtUtc": "2026-11-16T23:40:30.626Z"
+  },
+  "publicBrowserFinalContrast": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-16T23:42:22.485Z",
+    "scope": "Edge headless; emulated viewport and touch",
+    "physicalDevicesTested": false,
+    "cases": [
+      {
+        "path": "/login",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/login",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/login",
+        "kind": "small-mobile",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/registro",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/registro",
+        "kind": "small-mobile",
+        "viewport": {
+          "width": 320,
+          "height": 740,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      },
+      {
+        "path": "/",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "mobile": false
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0,
+        "accessibility": {
+          "violations": [],
+          "incomplete": []
+        }
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "tablet",
+        "viewport": {
+          "width": 768,
+          "height": 1024,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      },
+      {
+        "path": "/universidad/nuevo",
+        "kind": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "mobile": true
+        },
+        "overflow": false,
+        "theme": "dark",
+        "background": "rgb(11, 17, 28)",
+        "unnamedButtons": 0,
+        "unlabeledInputs": 0
+      }
+    ],
+    "flows": [
+      "show/hide password",
+      "password confirmation validation",
+      "existing account login",
+      "logout"
+    ],
+    "consoleExceptions": 0,
+    "hoverButton": {
+      "foreground": "rgb(255, 255, 255)",
+      "background": "rgb(90, 108, 221)",
+      "contrast": 4.54,
+      "passed": true
+    },
+    "finishedAtUtc": "2026-11-16T23:42:52.988Z"
+  },
+  "remoteReadinessAndConfiguration": {
+    "status": "passed",
+    "checks": [
+      {
+        "name": "API ready",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "web /health",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "web /ready",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "web /login",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "web /registro",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "readonly HEAD /login",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "readonly HEAD /registro",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      }
+    ],
+    "atUtc": "2026-11-16T23:39:05.361314+00:00",
+    "configuration": [
+      {
+        "kind": "api",
+        "service": "srv-dbr6i3dckfvc73dc3hr0",
+        "plan": "free",
+        "ownerVerified": true,
+        "expectedEnvironmentMatches": true,
+        "autoDeploy": "no"
+      },
+      {
+        "kind": "legacy-web",
+        "service": "srv-dbrijl0ae00c73fpf0mg",
+        "plan": "free",
+        "ownerVerified": true,
+        "expectedEnvironmentMatches": true,
+        "autoDeploy": "no"
+      },
+      {
+        "kind": "web",
+        "service": "srv-dbtp70tckfvc7393jn5g",
+        "plan": "free",
+        "ownerVerified": true,
+        "expectedEnvironmentMatches": true,
+        "autoDeploy": "no"
+      }
+    ],
+    "neonPlan": "free"
+  },
+  "remotePersistenceAndSecurity": {
+    "status": "passed",
+    "checks": [
+      {
+        "name": "missing token",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      },
+      {
+        "name": "extra roles rejected",
+        "expectedHttp": 400,
+        "actualHttp": 400,
+        "passed": true
+      },
+      {
+        "name": "duplicate email",
+        "expectedHttp": 409,
+        "actualHttp": 409,
+        "passed": true
+      },
+      {
+        "name": "wrong password",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      },
+      {
+        "name": "self-created account API login",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "reader denied admin API",
+        "expectedHttp": 403,
+        "actualHttp": 403,
+        "passed": true
+      },
+      {
+        "name": "API session revoked",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "revoked token rejected",
+        "expectedHttp": 401,
+        "actualHttp": 401,
+        "passed": true
+      },
+      {
+        "name": "QA cleanup administrator authentication",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "inactivate only isolated QA account",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      },
+      {
+        "name": "close cleanup admin session",
+        "expectedHttp": 200,
+        "actualHttp": 200,
+        "passed": true
+      }
+    ],
+    "atUtc": "2026-11-16T23:41:05.940043+00:00",
+    "persistence": {
+      "oneAccountFound": true,
+      "bcryptCost12": true,
+      "plaintextAbsent": true,
+      "active": true,
+      "roles": [
+        "Investigador"
+      ],
+      "tlsVerifyFull": true,
+      "channelBindingRequired": true
+    },
+    "duplicatePreservedHash": true
+  },
+  "secretScan": {
+    "atUtc": "2026-11-16T23:46:24.559123+00:00",
+    "files": 463,
+    "knownPrivateValuesCompared": 32,
+    "matches": [],
+    "emptyOrNonJsonOptionalPrivateSourcesSkipped": 1,
+    "privateDirectoryIgnored": true,
+    "scope": "tracked and nonignored working tree; known live/provider/recovery/local values; not full git history"
+  },
+  "review": {
+    "pr": "https://github.com/francis872/Mira/pull/7",
+    "draft": true,
+    "merged": false,
+    "formalReviews": 0,
+    "actionsRequiredByUser": false,
+    "C06WrittenDecision": false
+  },
+  "traceability": [
+    {
+      "behavior": "Self registration, validation and restricted role",
+      "files": [
+        "MIRA.Api/Modelos/Seguridad.cs",
+        "MIRA.Api/Peticiones/AuthController.cs",
+        "MIRA.Api/Servicios/Seguridad/AuthService.cs",
+        "MIRA.Api/Repositorios/Seguridad/CuentaRepository.cs"
+      ],
+      "methods": [
+        "RegistroRequest",
+        "AuthController.Registrar",
+        "AuthService.Registrar",
+        "CuentaRepository.Roles/Crear/Buscar"
+      ],
+      "tests": "tests/MIRA.Api.Tests/RegistroTests.cs"
+    },
+    {
+      "behavior": "CSRF, confirmation, server session, duplicate handling",
+      "files": [
+        "frontend/seguridad.py",
+        "frontend/app.py"
+      ],
+      "methods": [
+        "registro",
+        "finish_access",
+        "api_call",
+        "verify_csrf"
+      ],
+      "tests": "frontend/tests/test_registro.py"
+    },
+    {
+      "behavior": "Dark UI, password visibility, responsive layout",
+      "files": [
+        "frontend/templates/login.html",
+        "frontend/templates/base.html",
+        "frontend/static/sapiens-dark.css",
+        "frontend/static/auth.js"
+      ],
+      "evidence": [
+        "localBrowser",
+        "publicBrowserFunctional",
+        "publicBrowserFinalContrast"
+      ]
+    }
+  ],
+  "limitations": [
+    "Physical devices, Safari/iOS, password managers, virtual keyboard and screen reader not tested",
+    "Three axe color-contrast incomplete results on gradients; no total accessibility certification",
+    "No email ownership verification or password recovery by email",
+    "Registration creates authentication accounts, not academic profiles or institutional affiliation",
+    "No new full Render suspension or Neon restore drill in this update; prior evidence retains its dates",
+    "Free plan quotas are shared; no institutional availability guarantee",
+    "Secret scan covers current worktree, not all Git history"
+  ],
+  "attemptsPreserved": [
+    "Windows restricted-token PostgreSQL start failed; authorized isolated native runs passed",
+    "Initial table contrast failed axe; corrected and repeated",
+    "Initial service rename left slug unchanged; original name restored",
+    "New frontend configuration transfer initially denied by automatic review; user explicitly authorized the three runtime secrets before creation",
+    "Initial new-URL DNS resolution failed; subsequent DNS, HTTPS and browser checks passed"
+  ],
+  "screenshots": [
+    "login-escritorio.png",
+    "registro-movil.png"
+  ]
+}

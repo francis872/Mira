@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-07T20:26:08.712328-05:00",
+  "status": "passed",
+  "yamlParsed": true,
+  "permissions": {
+    "contents": "read"
+  },
+  "jobsIndependent": true,
+  "actionShasPinned": true,
+  "keyScope": "Single quality Compose-validation step; no GITHUB_ENV/output or cross-job propagation",
+  "keyFreshAcrossRuns": true,
+  "checks": [
+    {
+      "case": "before-missing-key",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "maskCommands": 0,
+      "keyExposedOutsideRunnerControl": false,
+      "gunicornReached": false,
+      "compose": {
+        "keyPresent": false,
+        "keyBytes": 0,
+        "keyFingerprint": null,
+        "exitCode": 1
+      }
+    },
+    {
+      "case": "after-run-1",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "maskCommands": 1,
+      "keyExposedOutsideRunnerControl": false,
+      "gunicornReached": true,
+      "compose": {
+        "keyPresent": true,
+        "keyBytes": 64,
+        "keyFingerprint": "5b2d8946e4322577e4a9403f7ec5096a950e136dbd6bc0914e23f8abf7e9510c",
+        "exitCode": 0,
+        "sameKeyForApiAndFlask": true,
+        "onlyRequiredRecipients": true,
+        "independentFromJwt": true
+      }
+    },
+    {
+      "case": "after-run-2",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "maskCommands": 1,
+      "keyExposedOutsideRunnerControl": false,
+      "gunicornReached": true,
+      "compose": {
+        "keyPresent": true,
+        "keyBytes": 64,
+        "keyFingerprint": "037954d49fe8b9ff4d5829279ca69b4f83132536b0018f93c4eb5ce2993d7581",
+        "exitCode": 0,
+        "sameKeyForApiAndFlask": true,
+        "onlyRequiredRecipients": true,
+        "independentFromJwt": true
+      }
+    },
+    {
+      "case": "keygen-failure",
+      "exitCode": 12,
+      "expectedExitCode": 12,
+      "maskCommands": 0,
+      "keyExposedOutsideRunnerControl": false,
+      "gunicornReached": false
+    },
+    {
+      "case": "compose-failure",
+      "exitCode": 23,
+      "expectedExitCode": 23,
+      "maskCommands": 1,
+      "keyExposedOutsideRunnerControl": false,
+      "gunicornReached": false,
+      "compose": {
+        "keyPresent": true,
+        "keyBytes": 64,
+        "keyFingerprint": "88b4e6678b4bc1d88dd0f60955515890cffd027cdd347b82550980e976231065",
+        "exitCode": 23,
+        "forcedFailure": true
+      }
+    }
+  ],
+  "scope": "Exact Bash run block executed locally with Git Bash, real Docker Compose, isolated copied config/no private .env. Child wrappers inspect key propagation in memory; GitHub masking protocol consumed locally, not a remote-run proof.",
+  "noSecretValuesPersisted": true
+}

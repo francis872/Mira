@@ -1,0 +1,11 @@
+{
+  "sessionsFound": 1,
+  "checks": [
+    {
+      "oldSessionProtectedPage": 302,
+      "revokedOrExpired": true
+    }
+  ],
+  "credentialsPrinted": false,
+  "rawLogsPrivate": true
+}

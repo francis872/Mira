@@ -1,0 +1,8 @@
+{
+  "withoutRequiredKeyExit": 1,
+  "withProposedFixtureExit": 0,
+  "missingVariable": "LOGIN_FORWARDING_KEY",
+  "workflowModified": false,
+  "githubActionsExecuted": false,
+  "scope": "Local Compose validation only; private public-fixture environment, no service started"
+}

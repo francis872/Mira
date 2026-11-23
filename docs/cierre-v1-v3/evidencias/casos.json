@@ -1,0 +1,1290 @@
+{
+  "dotnet": [
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.EveryAdministrativeActionRequiresAdministrator(role: \"Coordinador\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.BadLoginIs401(email: \"test@invalid.test\", password: \"incorrecta\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=VerifyFull;Channel Binding=Prefer\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Investigador\", create: 403, delete: 403)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"XX000\", expected: InternalServerError)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.NewApplicationInstanceResetsInMemoryQuota",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.BcryptUsesSaltAndRejectsPlaintextAndWrongPassword",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.JwtSigningKeyCannotBeReusedForForwarding",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.NullsDatesAndEnumerationsAreValidated_AndPersonReferenceDoesNotExposeCredentials",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ConcurrentPasswordWorkIsBoundedAcrossOriginsAndAccounts",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"expired\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=Prefer\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Administrador\", create: 201, delete: 200)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.InvalidJsonContract_ReturnsSpanishValidation(payload: \"null\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 72, accepted: True)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.InactiveAndConcurrentDuplicateKeyword_ReturnsConflict",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=VerifyFull;Channel Binding=Require;Includ\"···)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 11, accepted: False)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.RoleMatrix(role: \"Coordinador\", create: 201, delete: 403)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.LoginRateLimitReturns429",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InactiveAccountAndRoleChangesInvalidateSession",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"body\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.UnknownRoleCannotLogin",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.UnknownEntitiesAndWritableFieldsAreRejected",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"malformed\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionRejectsUnverifiedTlsOrDetailedSqlErrors(options: \"SSL Mode=Require\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.SheetCreatesManyRowsThenRollsBackAllChangesWhenLastRowBelongsElsewhere",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.BadLoginIs401(email: \"unknown@invalid.test\", password: \"Password-test-2026!\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.InvalidReferenceAndInactiveParentTrigger_ReturnConflictWithoutInternals",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.OversizedLoginIsRejectedWithoutReadingAnUnboundedBody",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"22001\", expected: BadRequest)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.UnknownAndKnownIncorrectCredentialsHaveTheSameResponse",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"short\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23502\", expected: BadRequest)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23503\", expected: Conflict)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.DevelopmentWithoutConfiguredKeyAcceptsDirectLoginButNotOriginAssertions",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.AreaName_IsNormalizedByDatabaseTrigger_AndReturnedPersisted",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"22023\", expected: BadRequest)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"issuer\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.DuplicateKeyword_ReturnsConflict",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/objetivo_desarrollo_sostenible, IdKey = id, Table = objetivo_desarrollo_sostenible, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"expired\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.SwaggerDocumentsBearerAndAnonymousLogin",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.IndependentSignedOriginsKeepTheirQuota(production: True)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"audience\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.Login_Read_ForbiddenWrite_Logout_Revoked",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.InvalidJwtClaimsAre401(kind: \"signature\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.InvalidJsonContract_ReturnsSpanishValidation(payload: \"{\\\"nombre\\\":[]}\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ProductionConfigurationTests.ProductionAcceptsVerifiedTlsConfigurationWithoutConnecting",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ArbitraryIpHeadersCannotChangeUnsignedSocketPartition",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"signature\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 12, accepted: True)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"23505\", expected: Conflict)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.ErroresPersistenciaTests.Errors_AreTranslatedWithoutLeakingDetails(sqlState: \"unexpected\", expected: InternalServerError)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/area_aplicacion, IdKey = id, Table = area_aplicacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.AccountLimitAppliesAcrossDifferentAuthenticatedOriginsAndCasing",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.FullLifecycle_CreateReadListUpdateLogicalDelete(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.EveryAdministrativeActionRequiresAdministrator(role: \"Investigador\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.AllFiveBridges_AssignQueryDuplicateConflictAndRemove",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"future\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadDatabaseTests.RealDatabase_AccountsBcryptRolesRevocationAndPasswordMigration",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/universidad, IdKey = id, Table = universidad, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.IndependentSignedOriginsKeepTheirQuota(production: False)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.MissingResource_ReturnsNotFound(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.InvestigacionIntegrationTests.ElevenResources_AllFiveOperationsPersistAndFilterRemovedRows",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.PasswordBoundariesAreEnforced(length: 73, accepted: False)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.InvalidOriginAssertionsFailBeforeCredentialValidation(kind: \"duplicate\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.LoginProtectionTests.ProductionRequiresAnIndependentForwardingKey(key: \"REPLACE_WITH_AT_LEAST_32_RANDOM_BYTES\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.MissingOrInvalidTokenIs401(token: null)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.OversizedText_ReturnsBadRequest_OnCreateAndUpdate(catalog: Catalog { Route = /api/termino_clave, IdKey = termino, Table = termino_clave, MarkerColumn = termino, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.SeguridadTests.MissingOrInvalidTokenIs401(token: \"invalid-token\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/linea_investigacion, IdKey = id, Table = linea_investigacion, MarkerColumn = nombre, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    },
+    {
+      "name": "MIRA.Api.Tests.CatalogCrudRegressionTests.EmptyPayload_ReturnsBadRequest(catalog: Catalog { Route = /api/area_conocimiento, IdKey = id, Table = area_conocimiento, MarkerColumn = gran_area, Create = System.Func`2[System.String,System.Object], Update = System.Func`2[System.String,System.Object] })",
+      "outcome": "Passed"
+    }
+  ],
+  "flask": [
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_opens_with_authenticated_session",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_catalog_pages_open_with_authenticated_session[/area_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_catalog_pages_open_with_authenticated_session[/objetivo_desarrollo_sostenible]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_catalog_pages_open_with_authenticated_session[/area_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_catalog_pages_open_with_authenticated_session[/termino_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_catalog_pages_open_with_authenticated_session[/universidad]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_catalog_pages_open_with_authenticated_session[/linea_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_login_is_public_and_logout_requires_post",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_bearer_is_sent_only_from_server_to_api",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_navigation_has_session_and_logout_controls",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_create_preserves_contract_and_sends_bearer",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_update_and_logical_delete_reach_the_api",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_api_validation_error_is_shown_to_the_user",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_post_without_csrf_token_is_rejected_and_nothing_is_sent",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_post_with_wrong_csrf_token_is_rejected",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_every_rendered_form_embeds_the_csrf_token",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_session_cookie_is_httponly_and_samesite_strict",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_shows_real_counts_from_the_api",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_reports_unavailable_data_instead_of_inventing_numbers",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_states_honestly_what_is_pending",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_validation_message_survives_real_response_truthiness[/area_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_validation_message_survives_real_response_truthiness[/objetivo_desarrollo_sostenible]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_validation_message_survives_real_response_truthiness[/area_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_validation_message_survives_real_response_truthiness[/termino_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_validation_message_survives_real_response_truthiness[/universidad]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_validation_message_survives_real_response_truthiness[/linea_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_handles_invalid_api_payload[None]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_handles_invalid_api_payload[body1]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_dashboard_handles_invalid_api_payload[texto]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_list_reports_http_failure[/area_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_list_reports_http_failure[/objetivo_desarrollo_sostenible]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_list_reports_http_failure[/area_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_list_reports_http_failure[/termino_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_list_reports_http_failure[/universidad]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_list_reports_http_failure[/linea_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_non_json_api_error_preserves_form_values",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_unicode_csrf_is_rejected_without_api_call",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_app",
+      "name": "test_area_form_sends_original_value_for_database_normalization",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_architecture",
+      "name": "test_catalog_repositories_only_call_stored_routines",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[sedes]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[docentes]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[grupos_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[semilleros]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[lineas_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[grupo_docentes]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[semillero_tutores]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[areas_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[ods]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[areas_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_lists_and_forms_open_with_real_api_option_requests[palabras_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_bridge_lists_and_api_options[grupo_lineas]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_bridge_lists_and_api_options[semillero_lineas]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_bridge_lists_and_api_options[linea_disciplinas]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_bridge_lists_and_api_options[linea_ods]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_bridge_lists_and_api_options[linea_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_group_sends_master_and_all_details_in_one_request_without_parent_fields",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_reference_failure_disables_save_and_preserves_error_data",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_empty_sheet_explains_how_to_add_details_without_fake_inputs",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_populated_sheet_hides_empty_state_and_keeps_real_detail_inputs",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_duplicate_association_preserves_selection_and_is_escaped",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_group_rejects_misaligned_detail_collections_before_calling_api",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_investigacion",
+      "name": "test_research_does_not_add_authentication_or_writable_users",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_valid_forwarding_configuration[False]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_valid_forwarding_configuration[True]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_production_rejects_missing_weak_or_placeholder_key[]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_production_rejects_missing_weak_or_placeholder_key[short]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_production_rejects_missing_weak_or_placeholder_key[REPLACExxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_development_without_key_does_not_invent_a_trusted_origin",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_session_key_cannot_be_reused_for_forwarding",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_untrusted_peer_headers_cannot_change_origin[headers0]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_untrusted_peer_headers_cannot_change_origin[headers1]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_untrusted_peer_headers_cannot_change_origin[headers2]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_only_explicit_trusted_proxy_chain_is_used[192.0.2.99-192.0.2.99]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_only_explicit_trusted_proxy_chain_is_used[203.0.113.99, 198.51.100.10-198.51.100.10]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_only_explicit_trusted_proxy_chain_is_used[192.0.2.99, 10.0.0.2-192.0.2.99]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_only_explicit_trusted_proxy_chain_is_used[invalid-address-10.0.0.1]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_only_explicit_trusted_proxy_chain_is_used[-10.0.0.1]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_trusting_all_proxies_is_rejected",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_signer_binds_actual_body_and_ignores_incoming_assertion",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_login_protection",
+      "name": "test_api_call_attaches_auth_only_to_login_and_signs_socket_origin",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_production_requires_https_and_explicit_storage",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_production_rejects_placeholder_secret",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_production_rejects_plaintext_api",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_session_survives_app_restart_and_disappears_without_storage",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_secure_cookie_is_httponly_strict_and_not_jwt",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_health_is_anonymous_and_does_not_create_session",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_login_ignores_external_redirect",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_production",
+      "name": "test_gunicorn_uses_assigned_port_and_one_worker",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_anonymous_and_expired_sessions_redirect_to_login",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_login_rotates_identifier_and_never_exposes_jwt",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_login_error_and_csrf_are_preserved",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_backend_401_clears_local_session",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_read_only_identity_hides_mutations_and_denies_direct_routes",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_coordinator_cannot_delete_or_manage_users",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_logout_revokes_before_clearing_session",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_users_page_never_renders_password_hash",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_server_outage_during_logout_reports_revocation_uncertainty",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.test_seguridad",
+      "name": "test_backend_forbidden_is_not_rendered_as_success",
+      "outcome": "passed"
+    }
+  ],
+  "http": [
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_group_sheet_http_creates_edits_and_retires_multiple_details",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_resource_full_http_form_lifecycle[sedes]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_resource_full_http_form_lifecycle[ods]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_resource_full_http_form_lifecycle[palabras_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_semillero_independent_form_lifecycle_uses_group_selector",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_investigacion",
+      "name": "test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_root_opens_the_dashboard_directly",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_login_surface_and_protected_api",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_dashboard_counts_match_the_listing",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_lists_real_seed_data[area_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_lists_real_seed_data[area_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_lists_real_seed_data[termino_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_lists_real_seed_data[universidad]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_lists_real_seed_data[linea_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_create_update_inactivate_persist[area_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_create_update_inactivate_persist[area_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_create_update_inactivate_persist[termino_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_create_update_inactivate_persist[universidad]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_catalog_create_update_inactivate_persist[linea_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_duplicate_keyword_shows_conflict",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_unicode_csrf_is_rejected",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_oversized_form_preserves_data_and_explains_limit",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_area_form_uses_trigger_and_displays_persisted_value",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_post_without_csrf_token_is_rejected",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_injection_text_is_stored_as_data_and_escaped",
+      "outcome": "passed"
+    },
+    {
+      "class": "frontend.tests.e2e.test_local_platform",
+      "name": "test_session_cookie_flags",
+      "outcome": "passed"
+    }
+  ],
+  "dockerHttp": [
+    {
+      "name": "test_group_sheet_http_creates_edits_and_retires_multiple_details",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_resource_full_http_form_lifecycle[sedes]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_resource_full_http_form_lifecycle[lineas_investigacion]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_resource_full_http_form_lifecycle[areas_conocimiento]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_resource_full_http_form_lifecycle[ods]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_resource_full_http_form_lifecycle[areas_aplicacion]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_resource_full_http_form_lifecycle[palabras_clave]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[grupo_lineas-grupo_id-linea_id]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[semillero_lineas-semillero_id-linea_id]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_disciplinas-linea_id-disciplina_id]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_ods-linea_id-ods_id]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_all_bridge_forms_assign_reject_duplicate_and_remove[linea_aplicacion-linea_id-aplicacion_id]",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_docente_and_participation_forms_use_existing_person_and_real_reference_names",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_semillero_independent_form_lifecycle_uses_group_selector",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_research_csrf_blocks_writes_and_fk_conflict_is_spanish",
+      "className": "frontend.tests.e2e.test_investigacion",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_root_opens_the_dashboard_directly",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_login_surface_and_protected_api",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_dashboard_counts_match_the_listing",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_lists_real_seed_data[area_conocimiento]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_lists_real_seed_data[objetivo_desarrollo_sostenible]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_lists_real_seed_data[area_aplicacion]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_lists_real_seed_data[termino_clave]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_lists_real_seed_data[universidad]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_lists_real_seed_data[linea_investigacion]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_create_update_inactivate_persist[area_conocimiento]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_create_update_inactivate_persist[objetivo_desarrollo_sostenible]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_create_update_inactivate_persist[area_aplicacion]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_create_update_inactivate_persist[termino_clave]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_create_update_inactivate_persist[universidad]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_catalog_create_update_inactivate_persist[linea_investigacion]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[area_conocimiento]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[objetivo_desarrollo_sostenible]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[area_aplicacion]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[termino_clave]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[universidad]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_empty_form_shows_validation_error_and_creates_nothing[linea_investigacion]",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_duplicate_keyword_shows_conflict",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_unicode_csrf_is_rejected",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_oversized_form_preserves_data_and_explains_limit",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_area_form_uses_trigger_and_displays_persisted_value",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_post_without_csrf_token_is_rejected",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_injection_text_is_stored_as_data_and_escaped",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_session_cookie_flags",
+      "className": "frontend.tests.e2e.test_local_platform",
+      "outcome": "passed"
+    }
+  ]
+}

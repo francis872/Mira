@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-07T18:15:28.616471-05:00",
+  "head": "3105273af84e55a1e813e76f2acb92acc31caa94",
+  "sourceManifestSha256": "0bb433b0464dc205296bc9f2d657fe8b6cc49f91ac79c07146f043ba63ec1b6c",
+  "uncommittedChangesIncluded": true,
+  "dotnet": {
+    "total": 90,
+    "executed": 90,
+    "passed": 90,
+    "failed": 0,
+    "error": 0,
+    "timeout": 0,
+    "aborted": 0,
+    "inconclusive": 0,
+    "passedButRunAborted": 0,
+    "notRunnable": 0,
+    "notExecuted": 0,
+    "disconnected": 0,
+    "warning": 0,
+    "completed": 0,
+    "inProgress": 0,
+    "pending": 0
+  },
+  "suites": {
+    "flask": {
+      "total": 98,
+      "passed": 98,
+      "failed": 0,
+      "skipped": 0
+    },
+    "http": {
+      "total": 43,
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0
+    },
+    "dockerHttp": {
+      "total": 43,
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "sqlSuites": [
+    "database/tests/v2_catalogos_rutinas.sql",
+    "database/tests/v2_investigacion.sql",
+    "database/tests/v2_modelo_oficial.sql",
+    "database/tests/v2_usuarios_roles.sql",
+    "database/tests/v3_c06_nulabilidad.sql"
+  ],
+  "sqlSuitesExitCode": 0,
+  "nativeExitCode": 0,
+  "imageBuilds": {
+    "initialCachedBuilds": {
+      "finishedAt": "2026-11-07T18:03:39.5321656-05:00",
+      "frontendBuild": 0,
+      "apiBuild": 0
+    },
+    "finalNoCachePullBuilds": {
+      "startedAt": "2026-11-07T18:28:23.867167-05:00",
+      "noCache": true,
+      "pull": true,
+      "status": "passed",
+      "api-build-no-cache-retryExit": 0,
+      "frontend-build-no-cacheExit": 0,
+      "docker-frescoExit": 0,
+      "images-frescoExit": 0,
+      "production-smoke-frescoExit": 0,
+      "finishedAt": "2026-11-07T18:30:31.368451-05:00",
+      "dockerTests": 43,
+      "osvInventoryIdentical": true
+    }
+  },
+  "responsiveCombinations": 50,
+  "axeChecks": 18,
+  "axeViolations": 0,
+  "axeIncomplete": 0,
+  "keyboardGroups": 10,
+  "zoomChecks": 27,
+  "environment": {
+    "native": "Windows; .NET 10; Python 3.14; PostgreSQL 16.15; Edge/Chromium",
+    "containers": "Linux; Gunicorn; Python 3.11; PostgreSQL 16",
+    "realProductionValidated": false
+  },
+  "historicalTestsNotAddedToTotals": true,
+  "newTestsThisTask": 0,
+  "phase3AddedCases": {
+    "dotnet": 19,
+    "flask": 18
+  },
+  "privateRun": ".local/cierre-integral-20261107",
+  "rawEvidenceSha256": {
+    "dotnet/fase3.trx": "62b7d75ccb3edc2dd29a19cf20e72238cbe1b5b89487a8e3e727d854bdcd617e",
+    "flask-integrated.xml": "be5a382a509f374ef6eefd5b384eb162690674f97888f06b9251914bcb9a90c0",
+    "e2e.xml": "e988ea59fefc6138c605a1ffcee965ec3dd0534359ee67d867846d0a8fc2f65c",
+    "docker-e2e.xml": "97fd5440d7805619e770a204edccbb3b835aa6bbe2499a9dee679c9b06052f50",
+    "integrated.log": "2aa0b2c8c14e46be354c19cf97b0ce9c2b189750cec0468c587c565cdde4ab93",
+    "docker.log": "ce240454dd1f39be23cce3d76bb3e048f9b0e410a726dc01b604b17c059792b2",
+    "api-image-build.log": "41f5356110909856876ddf3feba65c92b0489d36d8975403ab0528604880ff20",
+    "frontend-image-build.log": "3a2ec92b7fc4619c3db38e526f53262a7260556d3f107458476506441697b244",
+    "docker-fresco-e2e.xml": "bebcccd254b85648ea3d3537844eebbc2f2b9af92f281806e595ad87aceee873",
+    "docker-fresco.log": "86a84024159d4ff2204effc905a318c1fb8dc25dcfefdb879ed9ba2bd2074f5f",
+    "api-build-no-cache-retry.log": "f5e4f70be94398c105cda6ba8cce9b0a3c647b060e5bf301061dc1c46b674f66",
+    "frontend-build-no-cache.log": "43e095986d619881f8e1e7cf2f68130b345f4177c4e26735ae560c75b785eefb",
+    "images-fresco.json": "1ce7fb25abe6fbc36b893bc8dca4a9c3a44009f73c7efe33ef9018f07835c9c5",
+    "production-smoke-fresco.json": "526f00b7d835ff92d48361e4fe6a8b666f324690515f49c8f678c2c022fe427a",
+    "fresh-build-status.json": "849bb53161251f02c143cff3e5ad9ea9b64345276b427a25d3a538d8df97576c"
+  },
+  "dockerImageTags": [
+    "mira-v3-api:cierre-fresco-20261107",
+    "mira-v3-frontend:cierre-fresco-20261107"
+  ],
+  "pythonFreshImageInventoryMatchesAudited18Distributions": true,
+  "toolingNotes": [
+    "Initial no-cache PowerShell wrapper stopped when native Docker progress on stderr was treated as a terminating error; retried with subprocess capture, no application changes.",
+    "Docker bootstrap emitted missing GSSAPI library diagnostics; bootstrap exit code and all 43 E2E/session checks passed. No system library or global network configuration was modified."
+  ]
+}

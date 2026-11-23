@@ -1,0 +1,888 @@
+{
+  "date": "2026-11-12",
+  "checks": [
+    {
+      "path": "/login",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 1
+    },
+    {
+      "path": "/login",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 1
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 27
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/usuarios",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/9",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/reportes/grupos/9/integrantes",
+      "width": 1440,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 27
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/usuarios",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/9",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/reportes/grupos/9/integrantes",
+      "width": 1024,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 27
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/usuarios",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/9",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/reportes/grupos/9/integrantes",
+      "width": 768,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 27
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/usuarios",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/9",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/reportes/grupos/9/integrantes",
+      "width": 640,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 27
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/usuarios",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/9",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/reportes/grupos/9/integrantes",
+      "width": 390,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 31
+    },
+    {
+      "path": "/universidad",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 35
+    },
+    {
+      "path": "/universidad/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 27
+    },
+    {
+      "path": "/investigacion/grupos_investigacion",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/asociaciones/grupo_lineas",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/usuarios",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/termino_clave/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/objetivo_desarrollo_sostenible/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/sedes/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/palabras_clave/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/nuevo",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 12
+    },
+    {
+      "path": "/investigacion/lineas_investigacion/inactivas",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/semilleros",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 14
+    },
+    {
+      "path": "/investigacion/reportes",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    },
+    {
+      "path": "/investigacion/grupos_investigacion/editar/9",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 13
+    },
+    {
+      "path": "/investigacion/reportes/grupos/9/integrantes",
+      "width": 320,
+      "overflow": false,
+      "unnamed": 0,
+      "main": true,
+      "icons": 11
+    }
+  ],
+  "consoleErrors": [],
+  "mobileNavigation": true,
+  "keyboardFocus": true
+}

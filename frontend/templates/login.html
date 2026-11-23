@@ -1,0 +1,44 @@
+{% from 'includes/icons.html' import icon %}
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Acceso institucional — SAPIENS</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mira.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sapiens-institutional.css') }}">
+    <script src="{{ url_for('static', filename='auth.js') }}" defer></script>
+    {% if api_startup_health_url %}<script src="{{ url_for('static', filename='render-startup.js') }}" data-api-health-url="{{ api_startup_health_url }}" defer></script>{% endif %}
+</head>
+<body class="institutional-page">
+    <a class="skip-link" href="#access-form">Saltar al formulario de acceso</a>
+    <header class="access-header"><a class="access-brand" href="{{ url_for('login') }}" aria-label="SAPIENS, acceso institucional"><span class="access-mark" aria-hidden="true">S</span><span>SAPIENS<small>PLATAFORMA ACADÉMICA INSTITUCIONAL</small></span></a><span class="access-edition">INSTITUTIONAL EDITION</span></header>
+    <main class="access-layout">
+        <section class="access-introduction" aria-label="Identidad institucional">
+            <p class="access-eyebrow">UN ESPACIO PARA EL CONOCIMIENTO</p>
+            <p class="access-statement">Investigar.<br>Conectar.<br>Trascender.</p>
+            <p class="access-description">La investigación de nuestra comunidad, en un entorno compartido.</p>
+            <div class="access-institution"><span class="institution-rule" aria-hidden="true"></span><p>Universidad de San Buenaventura<small>Medellín</small></p></div>
+        </section>
+        <section class="access-card" aria-labelledby="access-title">
+            <p class="access-eyebrow">ACCESO INSTITUCIONAL</p>
+            <h1 id="access-title">Bienvenido a SAPIENS</h1>
+            <p class="access-instructions">Accede a tu espacio académico con las credenciales proporcionadas por la institución.</p>
+            {% with messages = get_flashed_messages() %}{% for item in messages %}<p class="access-notice" role="status">{{ item }}</p>{% endfor %}{% endwith %}
+            {% if message %}<p class="access-error" role="alert" id="access-error">{{ icon('alert-circle') }}<span>{{ message }}</span></p>{% endif %}
+            <form id="access-form" method="post" action="{{ url_for('login') }}" {% if message %}aria-describedby="access-error"{% endif %}>
+                {{ csrf_input() }}
+                <label for="correo">Correo electrónico</label>
+                <div class="access-field"><input id="correo" name="correo" type="email" autocomplete="username" maxlength="254" value="{{ correo or '' }}" required></div>
+                <label for="password">Contraseña</label>
+                <div class="access-field access-password"><input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required><button class="password-toggle" type="button" data-password-toggle="password" aria-label="Mostrar contraseña" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                <button class="access-submit" type="submit"><span data-submit-label>Iniciar sesión</span>{{ icon('arrow-right') }}</button>
+                <p id="access-processing" role="status" aria-live="polite" hidden>Verificando acceso…</p>
+            </form>
+            <p class="access-reserved">{{ icon('lock') }} Acceso reservado a usuarios autorizados.</p>
+        </section>
+    </main>
+    <footer class="access-footer"><span>SAPIENS · Gestión de investigación</span><span>Universidad de San Buenaventura Medellín</span></footer>
+</body>
+</html>

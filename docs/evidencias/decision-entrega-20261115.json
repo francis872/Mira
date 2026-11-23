@@ -1,0 +1,25 @@
+{
+  "dateBogota": "2026-11-15",
+  "recordedAtUtc": "2026-11-15T18:56:55.099781+00:00",
+  "head": "24a50ce085dd403b1b8011a4950944833a9fbe19",
+  "branch": "feature/mira-v3",
+  "userDirections": {
+    "actionsRequired": false,
+    "teacherC06WrittenDecisionExists": false
+  },
+  "mergePerformed": false,
+  "remainingReviewConditions": [
+    "Formal review not approved",
+    "Automatic cold-start recovery not approved",
+    "C06 academic acceptance remains pending"
+  ],
+  "scope": {
+    "applicationChanged": false,
+    "schemaChanged": false,
+    "credentialsChanged": false,
+    "workflowChanged": false,
+    "failedChecksRelabeled": false,
+    "billingWorkStopped": true,
+    "documentationCommitMaySkipActions": true
+  }
+}

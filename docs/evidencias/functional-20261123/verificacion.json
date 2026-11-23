@@ -1,0 +1,1500 @@
+{
+  "verifiedAtUtc": "2026-11-23T21:43:41.254937+00:00",
+  "repository": "francis872/Mira",
+  "branch": "feature/mira-v3",
+  "applicationCommit": "ce5a293e762fa244999d7dee511e24cb93b8ef71",
+  "previousDeployedCommit": "250b46129ec46c9fa430e955441f33bfac9a07e9",
+  "officialUrl": "https://sapiens-usb.onrender.com/login",
+  "baseline": {
+    "academicTables": 25,
+    "academicRows": 511,
+    "foreignKeys": 22,
+    "migrations": 15
+  },
+  "productionAcademicTestWrites": false,
+  "newProductionServices": 0,
+  "newDatabases": 0,
+  "newMigrations": 0,
+  "backup": {
+    "sha256": "80ce3aa07d4576a1bfbb46a8cd67f8f5e7617dacae55cdf9611c8241cdd4bb18",
+    "currentAcademicBaselineMatchesBackup": true,
+    "productionUnchanged": true
+  },
+  "beforeBehavior": {
+    "sourceCommit": "250b461",
+    "restoredProductionCopy": true,
+    "roles": {
+      "Investigador": {
+        "listHttp": 200,
+        "rows": 3,
+        "emptyActionCells": 3,
+        "detailLinks": 0,
+        "createVisible": false,
+        "editVisible": false,
+        "retireVisible": false
+      },
+      "Coordinador": {
+        "listHttp": 200,
+        "rows": 3,
+        "emptyActionCells": 0,
+        "detailLinks": 0,
+        "createVisible": true,
+        "editVisible": true,
+        "retireVisible": false
+      },
+      "Administrador": {
+        "listHttp": 200,
+        "rows": 3,
+        "emptyActionCells": 0,
+        "detailLinks": 0,
+        "createVisible": true,
+        "editVisible": true,
+        "retireVisible": true
+      }
+    },
+    "coordinatorSheetRetirement": {
+      "updateHttp": 200,
+      "existingChildDeactivated": true,
+      "onlyIsolatedData": true
+    }
+  },
+  "tests": {
+    "dotnet": {
+      "total": "157",
+      "executed": "157",
+      "passed": "157",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "flaskPostgres": {
+      "tests": 214,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "httpE2E": {
+      "tests": 51,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "browser": {
+    "status": "passed",
+    "startedAtUtc": "2026-11-23T21:20:01.182Z",
+    "isolatedDatabase": "mira_audit_functional_after",
+    "productionWrites": false,
+    "flows": [
+      {
+        "resource": "area_conocimiento",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "objetivo_desarrollo_sostenible",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "area_aplicacion",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "termino_clave",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "universidad",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_investigacion",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "areas_conocimiento",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "ods",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "areas_aplicacion",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "palabras_clave",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "sedes",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "docentes",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "grupos_investigacion",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "semilleros",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "lineas_investigacion",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "grupo_docentes",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "semillero_tutores",
+        "role": "Coordinador",
+        "create": "UI → API → PostgreSQL → list → detail",
+        "edit": "form → API → PostgreSQL → same detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "grupo_lineas",
+        "role": "Coordinador",
+        "assign": "real UI form → API → PostgreSQL → descriptive detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "semillero_lineas",
+        "role": "Coordinador",
+        "assign": "real UI form → API → PostgreSQL → descriptive detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_disciplinas",
+        "role": "Coordinador",
+        "assign": "real UI form → API → PostgreSQL → descriptive detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_ods",
+        "role": "Coordinador",
+        "assign": "real UI form → API → PostgreSQL → descriptive detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_aplicacion",
+        "role": "Coordinador",
+        "assign": "real UI form → API → PostgreSQL → descriptive detail",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "ficha de grupo",
+        "role": "Coordinador",
+        "result": "master and existing children editable; no existing retirement; contextual child create preselected"
+      },
+      {
+        "resource": "area_conocimiento",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "objetivo_desarrollo_sostenible",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "area_aplicacion",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "termino_clave",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "universidad",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "linea_investigacion",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "areas_conocimiento",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "ods",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "areas_aplicacion",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "palabras_clave",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "sedes",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "docentes",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "grupos_investigacion",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "semilleros",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "lineas_investigacion",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "grupo_docentes",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "semillero_tutores",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "grupo_lineas",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "semillero_lineas",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "linea_disciplinas",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "linea_ods",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "linea_aplicacion",
+        "role": "Investigador",
+        "result": "list and actual details/relationships readable; write and retire absent"
+      },
+      {
+        "resource": "reports",
+        "role": "Investigador",
+        "result": "two real reports, names, sede/linea filters, search and three export files",
+        "exports": [
+          "xlsx",
+          "pdf"
+        ]
+      },
+      {
+        "resource": "cuentas",
+        "role": "Administrador",
+        "result": "create → edit email/roles → reset → inactivate through actual forms; persisted locally"
+      },
+      {
+        "resource": "linea_aplicacion",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_ods",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_disciplinas",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "semillero_lineas",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "grupo_lineas",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "semillero_tutores",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "grupo_docentes",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "lineas_investigacion",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "semilleros",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "grupos_investigacion",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "docentes",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "sedes",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "palabras_clave",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "areas_aplicacion",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "ods",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "areas_conocimiento",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "linea_investigacion",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "universidad",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "termino_clave",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "area_aplicacion",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "objetivo_desarrollo_sostenible",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      },
+      {
+        "resource": "area_conocimiento",
+        "role": "Administrador",
+        "retire": "confirmation → API → PostgreSQL → list",
+        "databaseAssertions": true
+      }
+    ],
+    "visual": [
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/113",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/113",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/113",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/113",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/113",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/reportes",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/area_conocimiento",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/area_conocimiento",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/area_conocimiento",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/area_conocimiento",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/area_conocimiento",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/semilleros/editar/95",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/semilleros/editar/95",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/semilleros/editar/95",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/semilleros/editar/95",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/semilleros/editar/95",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/editar/113",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/editar/113",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/editar/113",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/editar/113",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/editar/113",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/usuarios",
+        "width": 320,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/usuarios",
+        "width": 390,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/usuarios",
+        "width": 768,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/usuarios",
+        "width": 1024,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      },
+      {
+        "path": "/usuarios",
+        "width": 1440,
+        "overflow": false,
+        "theme": "light",
+        "unnamedButtons": 0,
+        "emptyActions": 0
+      }
+    ],
+    "consoleExceptions": 0,
+    "stage": "retire area_conocimiento",
+    "finishedAtUtc": "2026-11-23T21:23:46.891Z"
+  },
+  "supplemental": {
+    "mode": "checks",
+    "status": "passed",
+    "checks": [
+      "real client pagination, next page, reload persistence",
+      "no matches differs from empty source and API failure",
+      "inactive line has descriptive historical details",
+      "required fields stop incomplete form submission"
+    ],
+    "visual": [
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/101",
+        "violations": []
+      },
+      {
+        "path": "/investigacion/sedes/detalles/98",
+        "violations": []
+      },
+      {
+        "path": "/investigacion/reportes",
+        "violations": []
+      },
+      {
+        "path": "/investigacion/semilleros/nuevo",
+        "violations": []
+      }
+    ]
+  },
+  "realZoom200": {
+    "mode": "zoom200",
+    "status": "passed",
+    "checks": [
+      "actual Edge profile zoom 200 percent, without viewport emulation"
+    ],
+    "visual": [
+      {
+        "path": "/investigacion/sedes",
+        "innerWidth": 708,
+        "outerWidth": 1440,
+        "dpr": 2,
+        "overflow": false
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/101",
+        "innerWidth": 708,
+        "outerWidth": 1440,
+        "dpr": 2,
+        "overflow": false
+      },
+      {
+        "path": "/investigacion/reportes",
+        "innerWidth": 708,
+        "outerWidth": 1440,
+        "dpr": 2,
+        "overflow": false
+      }
+    ]
+  },
+  "exports": [
+    {
+      "fileType": "xlsx",
+      "report": "integrantes",
+      "headers": [
+        "Docente",
+        "Rol",
+        "Inicio",
+        "Fin",
+        "Vínculo activo"
+      ],
+      "dataRows": 1,
+      "readableNamesVerified": true,
+      "formulas": 0,
+      "sha256": "6ba6a28cee88388a2a7ac162e0cb03db16c36e759229149230e8e3a5e1e98327"
+    },
+    {
+      "fileType": "xlsx",
+      "report": "articulacion",
+      "headers": [
+        "Sede",
+        "Grupo",
+        "Semillero",
+        "Docente",
+        "Rol",
+        "Línea",
+        "ODS",
+        "Inicio",
+        "Fin",
+        "Grupo activo",
+        "Semillero activo",
+        "Línea activa",
+        "Vínculo activo"
+      ],
+      "dataRows": 4,
+      "readableNamesVerified": true,
+      "formulas": 0,
+      "sha256": "d4dce27d75ede33eef097aba34060be1aa545fb48c0b2e8240ccade18ca45330"
+    },
+    {
+      "fileType": "pdf",
+      "report": "integrantes",
+      "validSignatureAndTrailer": true,
+      "sha256": "2bdb315089a1f61b4acf781f47bdddd894fab33ac43fd1b22414a0f059cb4978"
+    }
+  ],
+  "pythonAudit": {
+    "date": "2026-11-23",
+    "source": "https://api.osv.dev/v1/querybatch",
+    "python": "3.14.2",
+    "platform": "Windows",
+    "packages": [
+      {
+        "name": "blinker",
+        "version": "1.9.0",
+        "advisories": []
+      },
+      {
+        "name": "cachelib",
+        "version": "0.13.0",
+        "advisories": []
+      },
+      {
+        "name": "certifi",
+        "version": "2026.10.18",
+        "advisories": []
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.4.4",
+        "advisories": []
+      },
+      {
+        "name": "click",
+        "version": "8.5.0",
+        "advisories": []
+      },
+      {
+        "name": "et-xmlfile",
+        "version": "2.0.0",
+        "advisories": []
+      },
+      {
+        "name": "flask",
+        "version": "3.1.3",
+        "advisories": []
+      },
+      {
+        "name": "flask-session",
+        "version": "0.8.0",
+        "advisories": []
+      },
+      {
+        "name": "gunicorn",
+        "version": "26.2.0",
+        "advisories": []
+      },
+      {
+        "name": "idna",
+        "version": "3.15",
+        "advisories": []
+      },
+      {
+        "name": "itsdangerous",
+        "version": "2.2.0",
+        "advisories": []
+      },
+      {
+        "name": "jinja2",
+        "version": "3.1.6",
+        "advisories": []
+      },
+      {
+        "name": "markupsafe",
+        "version": "3.0.4",
+        "advisories": []
+      },
+      {
+        "name": "msgspec",
+        "version": "0.22.0",
+        "advisories": []
+      },
+      {
+        "name": "openpyxl",
+        "version": "3.1.5",
+        "advisories": []
+      },
+      {
+        "name": "packaging",
+        "version": "26.3",
+        "advisories": []
+      },
+      {
+        "name": "pillow",
+        "version": "13.0.0",
+        "advisories": []
+      },
+      {
+        "name": "psycopg",
+        "version": "3.3.9",
+        "advisories": []
+      },
+      {
+        "name": "psycopg-binary",
+        "version": "3.3.9",
+        "advisories": []
+      },
+      {
+        "name": "python-dotenv",
+        "version": "1.2.2",
+        "advisories": []
+      },
+      {
+        "name": "reportlab",
+        "version": "5.1.0",
+        "advisories": []
+      },
+      {
+        "name": "requests",
+        "version": "2.33.0",
+        "advisories": []
+      },
+      {
+        "name": "typing-extensions",
+        "version": "4.15.0",
+        "advisories": []
+      },
+      {
+        "name": "urllib3",
+        "version": "2.8.0",
+        "advisories": []
+      },
+      {
+        "name": "werkzeug",
+        "version": "3.1.9",
+        "advisories": []
+      }
+    ],
+    "status": "passed"
+  },
+  "secretScan": {
+    "atUtc": "2026-11-23T21:44:20.398381+00:00",
+    "files": 488,
+    "knownPrivateValuesCompared": 44,
+    "matches": [],
+    "emptyOrNonJsonOptionalPrivateSourcesSkipped": 1,
+    "privateDirectoryIgnored": true,
+    "nonCredentialFixturesReviewed": 1,
+    "fixtureReviewReason": "Explicit academic SQL fixtures cannot pass PasswordService.Verify bcrypt-shape validation; six pre-existing test files reviewed",
+    "scope": "tracked and nonignored working tree; known live/provider/recovery/local values; not full git history"
+  },
+  "deployments": [
+    {
+      "kind": "api",
+      "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+      "deployId": "dep-dc2b0td6e07s73c14qjg",
+      "status": "live",
+      "commit": "ce5a293e762fa244999d7dee511e24cb93b8ef71",
+      "url": "https://sapiens-api-v1-v3-20261112.onrender.com",
+      "plan": "free",
+      "createdAt": "2026-11-23T21:30:30.028845Z",
+      "updatedAt": "2026-11-23T21:31:58.066546Z"
+    },
+    {
+      "kind": "web",
+      "serviceId": "srv-dbtp70tckfvc7393jn5g",
+      "deployId": "dep-dc2b3brrjlhs73ad1hi0",
+      "status": "live",
+      "commit": "ce5a293e762fa244999d7dee511e24cb93b8ef71",
+      "url": "https://sapiens-usb.onrender.com",
+      "plan": "free",
+      "createdAt": "2026-11-23T21:35:43.567696Z",
+      "updatedAt": "2026-11-23T21:36:07.836088Z"
+    }
+  ],
+  "productionVerification": {
+    "before": {
+      "atUtc": "2026-11-23T21:29:38.941964+00:00",
+      "stage": "before",
+      "checks": [
+        {
+          "kind": "web",
+          "serviceId": "srv-dbtp70tckfvc7393jn5g",
+          "sameConfiguration": true,
+          "plan": "free"
+        },
+        {
+          "kind": "api",
+          "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+          "sameConfiguration": true,
+          "plan": "free"
+        }
+      ],
+      "academicWrites": false,
+      "status": "passed",
+      "academicTables": 25,
+      "academicRows": 511,
+      "allAcademicFingerprintsUnchanged": true,
+      "institutionalAccountUnchanged": true
+    },
+    "api": {
+      "atUtc": "2026-11-23T21:34:20.984668+00:00",
+      "stage": "api",
+      "checks": [
+        {
+          "kind": "web",
+          "serviceId": "srv-dbtp70tckfvc7393jn5g",
+          "sameConfiguration": true,
+          "plan": "free"
+        },
+        {
+          "kind": "api",
+          "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+          "sameConfiguration": true,
+          "plan": "free"
+        },
+        {
+          "resource": "sedes",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "docentes",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "grupos_investigacion",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "semilleros",
+          "apiList": 200,
+          "apiDetail": "no active rows"
+        },
+        {
+          "resource": "lineas_investigacion",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "grupo_docentes",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "semillero_tutores",
+          "apiList": 200,
+          "apiDetail": "no active rows"
+        },
+        {
+          "resource": "areas_conocimiento",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "ods",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "areas_aplicacion",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "palabras_clave",
+          "apiList": 200,
+          "apiDetail": 200
+        }
+      ],
+      "academicWrites": false,
+      "status": "passed",
+      "academicTables": 25,
+      "academicRows": 511,
+      "allAcademicFingerprintsUnchanged": true,
+      "institutionalAccountUnchanged": true
+    },
+    "after": {
+      "atUtc": "2026-11-23T21:37:06.714866+00:00",
+      "stage": "after",
+      "checks": [
+        {
+          "kind": "web",
+          "serviceId": "srv-dbtp70tckfvc7393jn5g",
+          "sameConfiguration": true,
+          "plan": "free"
+        },
+        {
+          "kind": "api",
+          "serviceId": "srv-dbr6i3dckfvc73dc3hr0",
+          "sameConfiguration": true,
+          "plan": "free"
+        },
+        {
+          "resource": "sedes",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "docentes",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "grupos_investigacion",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "semilleros",
+          "apiList": 200,
+          "apiDetail": "no active rows"
+        },
+        {
+          "resource": "lineas_investigacion",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "grupo_docentes",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "semillero_tutores",
+          "apiList": 200,
+          "apiDetail": "no active rows"
+        },
+        {
+          "resource": "areas_conocimiento",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "ods",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "areas_aplicacion",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "palabras_clave",
+          "apiList": 200,
+          "apiDetail": 200
+        },
+        {
+          "resource": "sedes",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "docentes",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "grupos_investigacion",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "semilleros",
+          "webList": 200,
+          "webDetail": "no active rows",
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "lineas_investigacion",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "grupo_docentes",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "semillero_tutores",
+          "webList": 200,
+          "webDetail": "no active rows",
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "areas_conocimiento",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "ods",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "areas_aplicacion",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "resource": "palabras_clave",
+          "webList": 200,
+          "webDetail": 200,
+          "writerControlsAbsent": true
+        },
+        {
+          "catalog": "area_conocimiento",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "catalog": "objetivo_desarrollo_sostenible",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "catalog": "area_aplicacion",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "catalog": "termino_clave",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "catalog": "universidad",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "catalog": "linea_investigacion",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "association": "grupo_lineas",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "association": "semillero_lineas",
+          "webList": 200,
+          "webDetail": "no rows"
+        },
+        {
+          "association": "linea_disciplinas",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "association": "linea_ods",
+          "webList": 200,
+          "webDetail": 200
+        },
+        {
+          "association": "linea_aplicacion",
+          "webList": 200,
+          "webDetail": "no rows"
+        },
+        {
+          "path": "/usuarios",
+          "http": 403
+        },
+        {
+          "path": "/investigacion/sedes/nuevo",
+          "http": 403
+        },
+        {
+          "path": "/registro",
+          "http": 404
+        },
+        {
+          "path": "/register",
+          "http": 404
+        },
+        {
+          "path": "/signup",
+          "http": 404
+        },
+        {
+          "path": "/investigacion/reportes",
+          "http": 200
+        }
+      ],
+      "academicWrites": false,
+      "existingWebSessionContinued": true,
+      "sameOfficialUrl": true,
+      "status": "passed",
+      "academicTables": 25,
+      "academicRows": 511,
+      "allAcademicFingerprintsUnchanged": true,
+      "institutionalAccountUnchanged": true
+    }
+  },
+  "pr": {
+    "number": 7,
+    "draft": true,
+    "merged": false,
+    "formalReviews": 0,
+    "actionsRequiredByUser": false,
+    "C06WrittenDecision": false
+  },
+  "limitations": [
+    "Datos técnicos: coincidencia no implica invalidez; depuración no autorizada ni ejecutada",
+    "Dispositivos físicos, Safari/iOS y lector de pantalla humano pendientes",
+    "No se repitió ensayo completo de suspensión Render Free de quince minutos",
+    "No certifica disponibilidad institucional continua ni ausencia total de vulnerabilidades",
+    "El escaneo de secretos no cubre todos los objetos históricos Git"
+  ],
+  "preservedInitialFailures": [
+    "Wrong post-edit return target; corrected and full flow repeated",
+    "Nonexistent v2 bridge view; real table mapping corrected",
+    "Fixture teacher names not unique; verifier uses unique local persona",
+    "Modal focus assertion ran before transition completed; verifier waits for actual focus",
+    "Active navigation CSS transition contrast; transition removed and axe repeated",
+    "Windows prior pytest temp ACL; new owned temp enabled full 214 Flask tests",
+    "Transient Render DNS read failure; resumed same deployment without duplicating it"
+  ],
+  "publicBrowser": {
+    "status": "passed",
+    "productionAcademicWrites": false,
+    "cases": [
+      {
+        "path": "/investigacion/sedes",
+        "rows": 3,
+        "actions": [
+          "Ver detalles",
+          "Ver detalles",
+          "Ver detalles"
+        ],
+        "writers": 0
+      },
+      {
+        "path": "/investigacion/sedes/detalles/11",
+        "fixtureObservationVisible": true,
+        "realGroupRelationshipVisible": true
+      },
+      {
+        "path": "/investigacion/grupos_investigacion/detalles/9",
+        "actualRelationshipSectionsVisible": true
+      },
+      {
+        "path": "/investigacion/reportes",
+        "readableColumnsAndExport": true
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 320,
+        "overflow": false
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 390,
+        "overflow": false
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 768,
+        "overflow": false
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 1024,
+        "overflow": false
+      },
+      {
+        "path": "/investigacion/sedes",
+        "width": 1440,
+        "overflow": false
+      }
+    ],
+    "consoleExceptions": 0,
+    "atUtc": "2026-11-23T21:39:11.123Z"
+  },
+  "neonPlan": {
+    "atUtc": "2026-11-23T21:40:17.726798+00:00",
+    "projectId": "snowy-bonus-50718377",
+    "sameExistingOrganization": true,
+    "plan": "free",
+    "verified": true
+  },
+  "deliveryChecks": {
+    "matrixFunctions": 205,
+    "documentLinksChecked": true,
+    "applicationSourcesEqualDeployedCommit": true,
+    "additionalVerifierCommit": "143ce7b",
+    "newVerifierGuardsValidatedAgainstLocalRuntime": true
+  },
+  "sourceArtifactSha256": {
+    "frontend/consultas.py": "0980a86a1ea043fbc55b303652174b1129501e0a073f2fdbd28e077111779fb3",
+    "frontend/presentacion.py": "346e5f4775c1fffdda43b5c023de1cc763ca96abf879aa70f59989f28e0517c2",
+    "MIRA.Api/Repositorios/Investigacion/ConsultasInvestigacion.cs": "26e8c6c7fd509ab86dd59c68441b03ace6b87df6351621538bf456e598f68b6b",
+    "scripts/functional-recovery/verify-browser.mjs": "9083ec571938dc9a3565beb45880b602932fe0164e6aa398bf5c88425e7fd65f"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "clientDate": "2026-11-12",
+  "executedAt": "2026-11-13T01:11:24.727097+00:00",
+  "projectId": "snowy-bonus-50718377",
+  "database": "sapiens",
+  "newEmptyDatabase": true,
+  "migrations": [
+    {
+      "name": "001_v1_catalogos_tablas.sql",
+      "sha256": "7646b5ae793915fe4adbe1613064bdf2cbad25072846c2f29d2c0e4174eabebe"
+    },
+    {
+      "name": "002_v1_catalogos_datos_iniciales.sql",
+      "sha256": "44ea3a9af428eb861ec7e6ed4b805f9b11b1dba229db585f19db574e302be658"
+    },
+    {
+      "name": "003_v2_usuarios_roles.sql",
+      "sha256": "dbaace06230968c2fc67fd5b96e6fd49e4b01c1a2132c5a49d08431892133c7b"
+    },
+    {
+      "name": "004_v2_catalogos_rutinas.sql",
+      "sha256": "53715d35c70f419a6c3bd40090e0d549621e4b3927558b59a8c7a343bc33ae6b"
+    },
+    {
+      "name": "005_v2_area_aplicacion_trigger.sql",
+      "sha256": "2f397fd888a420d0cadc637824d7f3987f9ae8532b3edf4405aca694f8a08d09"
+    },
+    {
+      "name": "006_v2_modelo_oficial.sql",
+      "sha256": "9be09a8eb31677f94e5ae44b4a132bdb286df8fe47b2ccd7088b004b02ae21c1"
+    },
+    {
+      "name": "007_v2_rutinas_investigacion.sql",
+      "sha256": "802fd33efb0d3dbda352f9f8310a7a2f7306535ce6fce2635379e31889e71337"
+    },
+    {
+      "name": "008_v3_sesiones.sql",
+      "sha256": "8f9d7f29898e209822af9775550a1e8f6459564bee3c6e911299010ff89ad995"
+    },
+    {
+      "name": "009_v1_requisitos_originales.sql",
+      "sha256": "a2a43e9d873c1a7f98a21106a8293cc366aff020bbb6221aab14f5d1eba212b7"
+    },
+    {
+      "name": "010_v2_campos_y_articulaciones.sql",
+      "sha256": "79c4e008b68d8226b68aa8976f77ee339c773c6186b18e16df5ef2c1c48ac7a7"
+    },
+    {
+      "name": "011_v2_reportes_originales.sql",
+      "sha256": "2bb3ba72a38d080e5c683fc6d303bbbe5914e5e1dcf76c3836b4a9ad3df4a05a"
+    },
+    {
+      "name": "012_v2_minimos_linea.sql",
+      "sha256": "a99fb316050f8c2e4f86813b7370f97e9ab7e81b97e2c73def72d21223182d10"
+    },
+    {
+      "name": "013_v2_estado_linea.sql",
+      "sha256": "3146920eaa84771ba2e7163d43a152a0fb9ce0a28accc9e48191c8777ca5bed7"
+    },
+    {
+      "name": "014_v2_catalogo_ods_original.sql",
+      "sha256": "d10da215d3299531bc54534fa7514a6d022241809fc6f0f73ee69130182e13f8"
+    },
+    {
+      "name": "015_v3_sesion_web_compartida.sql",
+      "sha256": "af674d0254824164ce13ec5183890881c30b1b5b2657e6347ca44de6775e4dd2"
+    }
+  ],
+  "atomicUpgrade": true,
+  "tls": "Client VerifyFull + Channel Binding Require",
+  "runtimeRoleChecks": [
+    {
+      "role": "mira_api",
+      "tls": true,
+      "excessPrivilegeRejected": true,
+      "superuser": false,
+      "createDb": false,
+      "createRole": false
+    },
+    {
+      "role": "mira_web",
+      "tls": true,
+      "excessPrivilegeRejected": true,
+      "superuser": false,
+      "createDb": false,
+      "createRole": false
+    }
+  ],
+  "backupSha256": "7cba6987514d9241c0c0315112f715fea745b4d89e1502064cf4c00f0e262ef9",
+  "backupRestorationTest": "passed in new isolated local PostgreSQL16 database",
+  "credentialsPrinted": false,
+  "existingDatabasesModified": false
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-07T20:27:26.978739-05:00",
+  "status": "passed",
+  "scope": "Own PostgreSQL16 cluster, new upgrade/restore databases with fabricated records only",
+  "historicalMigrations": 8,
+  "newMigrations": [
+    "009_v1_requisitos_originales.sql",
+    "010_v2_campos_y_articulaciones.sql",
+    "011_v2_reportes_originales.sql",
+    "012_v2_minimos_linea.sql",
+    "013_v2_estado_linea.sql",
+    "014_v2_catalogo_ods_original.sql"
+  ],
+  "invalidLegacyV1RejectedAtomically": true,
+  "preflightFailurePreservedRows": true,
+  "noRowsLost": true,
+  "oldColumnsPreservedExceptDocumentedEconomicSpelling": true,
+  "legacyV2MissingValuesNotInvented": {
+    "sedes_sin_codigo": 1,
+    "palabras_sin_ingles": 2,
+    "lineas_sin_descripcion": 1
+  },
+  "legacyLineCompletedAtomically": true,
+  "restorationToNewEmptyDatabase": true,
+  "restoredRowsMatch": true,
+  "restoredV3SecurityDatabaseTest": "passed",
+  "backupSha256": "e28fab56445c6ba8142c7b8c3452736d990ef9e0c3377670fe1cb5d81c3ececc",
+  "rawBackupPrivate": true
+}

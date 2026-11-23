@@ -1,0 +1,30 @@
+# API únicamente. Frontend Flask en Vercel; PostgreSQL/sesiones en Neon.
+# Ejemplo sin secretos; no despliega por sí mismo.
+services:
+  - type: web
+    name: sapiens-api-v1-v3
+    runtime: docker
+    branch: feature/mira-v3
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    numInstances: 1
+    autoDeployTrigger: "off"
+    healthCheckPath: /ready
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: PORT
+        value: "10000"
+      - key: ConnectionStrings__PostgreSql
+        sync: false
+      - key: Jwt__Key
+        sync: false
+      - key: LoginProtection__ForwardingKey
+        sync: false
+      - key: Jwt__Issuer
+        value: MIRA
+      - key: Jwt__Audience
+        value: MIRA.Frontend
+      - key: Jwt__Minutes
+        value: "20"

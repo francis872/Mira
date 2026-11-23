@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-07",
+  "status": "passed",
+  "checks": [
+    {
+      "component": "api",
+      "production": true,
+      "port": 10000,
+      "health": 200,
+      "anonymousCatalog": 401,
+      "swagger": 404,
+      "databaseContacted": false
+    },
+    {
+      "component": "frontend",
+      "production": true,
+      "port": 10000,
+      "health": 200,
+      "login": 200,
+      "secureHttpOnlyStrictCookie": true,
+      "apiContacted": false
+    }
+  ],
+  "scope": "Docker local Production-mode startup over loopback HTTP; no Render, Neon, real TLS, login or persistence validation"
+}
